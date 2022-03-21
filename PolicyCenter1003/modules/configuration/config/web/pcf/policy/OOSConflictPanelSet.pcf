@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="OOSConflictPanelSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="rootNodeWrapper"
+      type="gw.api.tree.RowTreeRootNodeWrapper"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="new gw.plugin.diff.display.OOSConflictDisplay(policyPeriod, policyPeriod.OOSConflicts)"
+      name="oosConflictDisplay"
+      type="gw.plugin.diff.display.OOSConflictDisplay"/>
+    <Variable
+      initialValue="oosConflictDisplay.listConflicts()"
+      name="conflicts"
+      type="java.util.List&lt;gw.plugin.diff.display.OOSConflictDisplay.ConflictInfo&gt;"/>
+    <Verbatim
+      id="Message"
+      label="conflicts.Count == 0 ? DisplayKey.get(&quot;Web.Job.Conflict.None&quot;) : DisplayKey.get(&quot;Web.Job.Conflict.Instructions&quot;)"/>
+    <PanelRef>
+      <Toolbar>
+        <ToolbarButton
+          action="conflicts.each(\ conflict -&gt; { conflict.Node.DiffItem.ShouldOverride = true } )"
+          hideIfReadOnly="true"
+          id="OverrideAll"
+          label="DisplayKey.get(&quot;Web.Job.Conflict.OverrideAll&quot;)"/>
+        <ToolbarButton
+          action="conflicts.each( \ conflict -&gt; { conflict.Node.DiffItem.ShouldOverride = false })"
+          hideIfReadOnly="true"
+          id="OverrideNone"
+          label="DisplayKey.get(&quot;Web.Job.Conflict.OverrideNone&quot;)"/>
+      </Toolbar>
+      <ListViewPanel
+        disableUserCustomization="true"
+        id="ConflictTableLV"
+        stretch="true">
+        <RowIterator
+          editable="true"
+          elementName="conflictInfo"
+          id="Conflicts"
+          value="conflicts"
+          valueType="java.util.List&lt;gw.plugin.diff.display.OOSConflictDisplay.ConflictInfo&gt;">
+          <Variable
+            initialValue="conflictInfo.Node"
+            name="conflict"
+            type="gw.api.diff.node.IDiffItemTreeNode"/>
+          <Row>
+            <LinkCell
+              id="Context2">
+              <Link
+                icon="&quot;info&quot;"
+                iconType="svgFileName"
+                id="ContextLink"
+                tooltip="oosConflictDisplay.getToolTip(conflict)"/>
+            </LinkCell>
+            <TextCell
+              enableSort="false"
+              grow="true"
+              id="Description"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.Description&quot;)"
+              value="conflict.ConflictLabel"/>
+            <TextCell
+              enableSort="false"
+              grow="true"
+              id="NewValue"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.NewValue&quot;, policyPeriod.Job.DisplayType, policyPeriod.EditEffectiveDate.format(&quot;short&quot;))"
+              value="conflict.Value2"
+              wrapLabel="true"/>
+            <TextCell
+              enableSort="false"
+              fontColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+              grow="true"
+              id="ConflictValue"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.ConflictValue&quot;)"
+              value="conflictInfo.ConflictDisplay"/>
+            <TextCell
+              enableSort="false"
+              grow="true"
+              id="ConflictDate"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.ConflictDate&quot;)"
+              value="conflictInfo.ConflictEffDate"
+              wrap="false"/>
+            <BooleanRadioCell
+              align="left"
+              editable="true"
+              enableSort="false"
+              grow="true"
+              id="ShouldOverride"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.ShouldOverride&quot;)"
+              value="conflict.DiffItem.ShouldOverride"
+              wrap="false"
+              wrapLabel="true">
+              <PostOnChange/>
+            </BooleanRadioCell>
+          </Row>
+        </RowIterator>
+        <Row>
+          <LinkCell
+            colspan="6"
+            grow="true">
+            <Link
+              action="handleConflict()"
+              available="not conflicts.hasMatch(\ conflict -&gt; conflict.Node.DiffItem.ShouldOverride == null)"
+              confirmMessage="DisplayKey.get(&quot;Web.Job.Conflict.Done.Confirm&quot;)"
+              default="true"
+              hideIfReadOnly="true"
+              id="Done"
+              label="DisplayKey.get(&quot;Web.Job.Conflict.Done&quot;)"
+              styleClass="bigButton"/>
+          </LinkCell>
+        </Row>
+      </ListViewPanel>
+    </PanelRef>
+    <Code><![CDATA[function handleConflict() {
+  policyPeriod.mergeOOSChanges(conflicts.map( \ d -> d.Node.DiffItem).toTypedArray()); 
+  (CurrentLocation as pcf.api.Wizard).saveDraft()
+  conflicts = oosConflictDisplay.listConflicts()
+  rootNodeWrapper.rowTreeRootNode = gw.diff.tree.DiffTree.recalculateRootNodeForPolicyReview(policyPeriod)
+  
+  // Check if there are conflicts on other periods for SideBySide jobs and forward to appropriate page if that's the case
+  if (policyPeriod.Job.SideBySide and policyPeriod.Job.OOSJob) {
+    var otherActivePeriods = policyPeriod.Job.ActivePeriods.where(\p -> p!= policyPeriod)
+    var conflictedPeriod = otherActivePeriods.firstWhere(\pp -> pp.OOSConflicts.Count > 0)
+    if (null!=conflictedPeriod) {
+      gw.lob.common.SideBySideUtil.returnToSelectedPeriod(conflictedPeriod,jobWizardHelper)
+    }
+  }
+}]]></Code>
+  </PanelSet>
+</PCF>

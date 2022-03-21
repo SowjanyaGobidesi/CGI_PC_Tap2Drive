@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="SmartCommsTransactionType" desc="SmartComms Bulk Job Transaction Types">
+  <typecode
+    code="TRANSACTION_FILE"
+    desc="Used when you want to process a single input XML data file."
+    name="Transaction File"/>
+  <typecode
+    code="TRANSACTION_FOLDER"
+    desc="Used when you want to submit more than one input XML data file as one job"
+    name="Transaction Folder"/>
+</typelist>

@@ -1,0 +1,12 @@
+<typelist name="RateBookExportType" desc="A typelist of rate book export formats ">
+  <typecode
+    code="Excel"
+    desc="Excel File Format"
+    name="Excel"
+    priority="1"/>
+  <typecode
+    code="XML"
+    desc="Xml file format"
+    name="XML"
+    priority="2"/>
+</typelist>

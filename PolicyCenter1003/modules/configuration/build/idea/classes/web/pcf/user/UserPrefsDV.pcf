@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserPrefsDV">
+    <Require
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Require
+      name="userBase"
+      type="User"/>
+    <InputColumn>
+      <BooleanRadioInput
+        editable="true"
+        id="SendEmailOnActivityAssign"
+        label="DisplayKey.get(&quot;Web.UserPreferences.SendEmailOnActivityAssign&quot;)"
+        value="userPreferences.EmailOnActAssign"/>
+      <ConfirmPasswordInput
+        confirmLabel="DisplayKey.get(&quot;Web.UserPreferences.ConfirmPassword&quot;)"
+        editable="true"
+        id="Password"
+        label="DisplayKey.get(&quot;Web.UserPreferences.Password&quot;)"
+        oldPasswordLabel="DisplayKey.get(&quot;Web.UserPreferences.OldPassword&quot;)"
+        requireOldPassword="true"
+        value="userBase.Credential.Password"/>
+      <InputSetRef
+        def="UserPreferencesInputSet(userBase)"/>
+      <RangeInput
+        editable="true"
+        id="StartupPage"
+        label="DisplayKey.get(&quot;Web.UserPreferences.StartupPage&quot;)"
+        required="true"
+        value="userPreferences.StartupPage"
+        valueRange="getPossibleStartupPages(userBase)"
+        valueType="typekey.StartupPage"/>
+      <TextInput
+        editable="true"
+        id="MaxRecentAccounts"
+        label="DisplayKey.get(&quot;Web.UserPreferences.MaxRecentAccounts&quot;)"
+        value="userPreferences.MaxRecentAccounts"
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="MaxRecentPoliciesAndJobs"
+        label="DisplayKey.get(&quot;Web.UserPreferences.MaxRecentPoliciesAndJobs&quot;)"
+        value="userPreferences.MaxRecentPoliciesAndJobs "
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="MaxRecentContacts"
+        label="DisplayKey.get(&quot;Web.UserPreferences.MaxRecentContacts&quot;)"
+        value="userPreferences.MaxRecentContacts"
+        valueType="java.lang.Integer"/>
+    </InputColumn>
+    <Code><![CDATA[function getPossibleStartupPages(user : User) : java.util.List
+      {
+        var list : java.util.List = new java.util.ArrayList(StartupPage.getTypeKeys(false))
+
+        if(not(perm.Organization.search
+            or perm.System.orgviewagency
+            or perm.System.orgviewbasic
+            or perm.System.orgviewextmgt
+            or perm.System.prodcodeviewbasic
+            or perm.System.prodcodeviewprefuw
+          ))
+        {
+          list.remove( StartupPage.TC_ADMIN )
+        }
+
+        return list
+      }]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CoveragePatternSearchByLinePatternDV">
+    <Require
+      name="searchCriteria"
+      type="gw.productmodel.ClausePatternSearchCriteria"/>
+    <Require
+      name="policyLinePattern"
+      type="gw.api.productmodel.PolicyLinePattern"/>
+    <Variable
+      initialValue="policyLinePattern.CoverageCategories.toList()"
+      name="categories"
+      type="java.util.List&lt;gw.api.productmodel.CoverageCategory&gt;"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="CoverageCategory"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Coverage.SearchPage.NoneSelectedLabel&quot;)"
+        value="searchCriteria.CoverageCategory"
+        valueRange="categories"
+        valueType="gw.api.productmodel.CoverageCategory"/>
+      <TextInput
+        editable="true"
+        id="Keyword"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Keyword&quot;)"
+        value="searchCriteria.Keyword"/>
+      <RangeRadioInput
+        editable="true"
+        id="SearchType"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+        required="true"
+        value="searchCriteria.SearchType"
+        valueRange="getAvailableSearchTypes()"
+        valueType="typekey.CoveragePatternSearchType"
+        visible="searchCriteria.SearchType != CoveragePatternSearchType.TC_COVERAGE"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+    <Code><![CDATA[function getAvailableSearchTypes() : CoveragePatternSearchType[]{
+  return new CoveragePatternSearchType[]{CoveragePatternSearchType.TC_EXCLCOND, 
+    CoveragePatternSearchType.TC_CONDITION, CoveragePatternSearchType.TC_EXCLUSION}
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

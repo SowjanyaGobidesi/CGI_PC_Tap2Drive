@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  CreditCardType  ==================================================================== -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines available credit cards"
+  name="CreditCardIssuer">
+  <typecode
+    code="amex"
+    desc="American Express"
+    name="American Express"/>
+  <typecode
+    code="dinersclub"
+    desc="Diners Club"
+    name="Diners Club"/>
+  <typecode
+    code="discover"
+    desc="Discover"
+    name="Discover"/>
+  <typecode
+    code="mastercard"
+    desc="MasterCard"
+    name="MasterCard"/>
+  <typecode
+    code="visa"
+    desc="Visa"
+    name="Visa"/>
+</typelist>

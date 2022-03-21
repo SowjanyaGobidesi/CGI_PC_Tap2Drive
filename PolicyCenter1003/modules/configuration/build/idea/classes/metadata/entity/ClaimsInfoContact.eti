@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ClaimsInfoContact"
+  supertype="AccountContactRole">
+  <fulldescription><![CDATA[
+    A person at an insured entity, or a delegated company, who would be the
+    primary source of information to set up and update claims for an account or
+    underlying policy.
+
+  ]]></fulldescription>
+</subtype>

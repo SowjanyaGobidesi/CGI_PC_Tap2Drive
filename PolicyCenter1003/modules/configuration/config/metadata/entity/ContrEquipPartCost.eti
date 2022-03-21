@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- ===== IM Contr Equip / Part Costs ===== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Costs for inland marine contractors equipment part"
+  entity="ContrEquipPartCost"
+  supertype="IMTaxableCost">
+  <foreignkey
+    fkentity="ContractorsEquipPart"
+    name="ContractorsEquipPart"
+    nullok="false"/>
+</subtype>

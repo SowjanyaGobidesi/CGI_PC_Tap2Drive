@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwellingRF">
+  <Columns>
+    <Column
+      beanPath="HOPDwellingRF.Pattern.Name"
+      name="name"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[name]]></DisplayName>
+</Entity>

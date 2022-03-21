@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AdminProducerCodeSearchScreen">
+    <Require
+      name="producer"
+      type="Organization"/>
+    <Require
+      name="filter"
+      type="java.util.Set"/>
+    <Require
+      name="havingRoles"
+      type="boolean"/>
+    <Require
+      name="shouldCache"
+      type="boolean"/>
+    <Variable
+      initialValue="Organization.finder.findCarrierOrganization()"
+      name="carrier"
+      type="Organization"/>
+    <SearchPanel
+      cachingEnabled="shouldCache"
+      criteriaName="searchCriteria"
+      maxSearchResults="100"
+      resultsName="producerCodes"
+      search="searchCriteria.performSearch()"
+      searchCriteria="new gw.product.ProducerCodeSearchCriteria(producer)"
+      searchCriteriaType="gw.product.ProducerCodeSearchCriteria"
+      searchOnRefresh="false"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;ProducerCode&gt;">
+      <PanelRef
+        def="ProducerCodeSearchDV(searchCriteria)"/>
+      <PanelRef
+        def="AdminProducerCodeSearchLV(producerCodes, carrier, filter, havingRoles)"
+        editable="false">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </SearchPanel>
+  </Screen>
+</PCF>

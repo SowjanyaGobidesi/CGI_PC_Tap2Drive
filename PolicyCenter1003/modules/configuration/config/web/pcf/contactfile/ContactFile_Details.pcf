@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    id="ContactFile_Details"
+    infoBar="ContactFileInfoBar(contact)"
+    showUpLink="true"
+    startInEditMode="startEdit"
+    title="DisplayKey.get(&quot;Web.ContactFile.Details.Title&quot;)">
+    <LocationEntryPoint
+      signature="ContactFile_Details(contact : Contact)"/>
+    <LocationEntryPoint
+      signature="ContactFile_Details(contact: Contact, startEdit: boolean)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="false"
+      name="startEdit"
+      type="boolean"/>
+    <Screen
+      id="ContactFile_DetailsInternalScreen">
+      <Toolbar>
+        <EditButtons
+          editLabel="DisplayKey.get(&quot;Web.ContactFile.Details.EditContact&quot;)"/>
+      </Toolbar>
+      <PanelRef>
+        <CardViewPanel
+          id="InternalDetailsCardPanelCV">
+          <Card
+            id="AccountContactDetailsCard"
+            title="DisplayKey.get(&quot;Web.AccountContacts.AccountDetail&quot;)">
+            <PanelRow>
+              <PanelColumn>
+                <PanelRef
+                  def="AccountContactDV(contact,null)"/>
+              </PanelColumn>
+            </PanelRow>
+          </Card>
+          <Card
+            id="AddressesCard"
+            title="DisplayKey.get(&quot;Web.Contact.Addresses.Title&quot;)">
+            <PanelRef
+              def="AddressesPanelSet(contact,false,null,null)"/>
+          </Card>
+        </CardViewPanel>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

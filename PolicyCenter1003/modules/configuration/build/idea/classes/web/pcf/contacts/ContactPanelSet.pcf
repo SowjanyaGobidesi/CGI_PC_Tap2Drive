@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="ContactPanelSet">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="contact.PrimaryAddress"
+      name="address"
+      recalculateOnRefresh="true"
+      type="entity.Address"/>
+    <CardViewPanel
+      id="ContactCV">
+      <Card
+        id="ContactDetailCard"
+        title="DisplayKey.get(&quot;Web.AccountContacts.AccountDetail&quot;)">
+        <DetailViewPanel
+          id="ContactDV">
+          <InputColumn>
+            <InputSetRef
+              def="ContactNameInputSet(contact)"
+              mode="contact.Subtype.Code"
+              visible="contact != null"/>
+            <InputDivider/>
+            <InputSetRef
+              def="LinkedAddressInputSet(address, contact, null, null, CurrentLocation.InEditMode)"/>
+            <InputSetRef
+              def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(address, false, true))"
+              editable="address.LinkedAddress == null"
+              visible="contact != null"/>
+            <TypeKeyInput
+              editable="address.LinkedAddress == null"
+              id="AddressType"
+              label="DisplayKey.get(&quot;Web.AddressDetail.AddressType&quot;)"
+              required="true"
+              value="address.AddressType"
+              valueType="typekey.AddressType"/>
+            <TextInput
+              editable="address.LinkedAddress == null"
+              id="AddressDescription"
+              label="DisplayKey.get(&quot;Web.AddressDetail.Description&quot;)"
+              value="address.Description"/>
+            <InputSetRef
+              def="ContactCurrencyInputSet(contact, address, contact.New)"
+              editable="true"
+              id="ContactCurrency"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.AccountFile.Summary.OfficialIDs&quot;)"
+              visible="contact != null and contact.Subtype != typekey.Contact.TC_USERCONTACT"/>
+            <InputSetRef
+              def="OfficialIDInputSet(contact)"
+              mode="contact.Subtype"
+              visible="contact != null and contact.Subtype != typekey.Contact.TC_USERCONTACT"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </Card>
+      <Card
+        id="AddressesCard"
+        title="DisplayKey.get(&quot;Web.Contact.Addresses.Title&quot;)">
+        <PanelRef
+          def="AddressesPanelSet(contact,false, null, null)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </PanelSet>
+</PCF>

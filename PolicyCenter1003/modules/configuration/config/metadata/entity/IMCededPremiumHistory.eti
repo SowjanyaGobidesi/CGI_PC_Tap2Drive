@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An InlandMarine implementation of the RICededPremiumHistory delegate"
+  entity="IMCededPremiumHistory"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="imcededpremiumhistory"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumHistory"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    fkentity="IMCededPremium"
+    name="IMCededPremium"
+    nullok="false"/>
+</entity>

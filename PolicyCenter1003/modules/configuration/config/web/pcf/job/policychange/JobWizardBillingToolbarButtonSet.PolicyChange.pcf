@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="JobWizardBillingToolbarButtonSet"
+    mode="PolicyChange">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Variable
+      initialValue="job as PolicyChange"
+      name="policyChange"
+      type="PolicyChange"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      initialValue="policyPeriod.PolicyChangeProcess"
+      name="policyChangeProcess"
+      type="gw.job.PolicyChangeProcess"/>
+    <Variable
+      initialValue="new gw.lob.common.SideBySideUIHelper(policyPeriod, wizard, jobWizardHelper)"
+      name="sideBySideHelper"
+      type="gw.lob.common.SideBySideUIHelper"/>
+    <Variable
+      initialValue="(not policyPeriod.UWLockedAndNoOverride) and policyChangeProcess.canMakeNewVersion().Okay"
+      name="canPerformNewVersion"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="sideBySideHelper.canAttemptSideBySide()"
+      name="canPerformSideBySide"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.Job.hasMultiplePeriods()and policyPeriod.Job.SideBySide"
+      name="canViewSideBySide"
+      type="boolean"/>
+    <Variable
+      initialValue="policyChangeProcess.canBind().Okay"
+      name="canBind"
+      type="boolean"/>
+    <ToolbarButton
+      action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;uw_review_approved&quot;), &quot;UWApproval&quot;)"
+      id="Unlock"
+      label="DisplayKey.get('Job.Operation.ReleaseLock')"
+      shortcut="K"
+      visible="policyChangeProcess.canReleaseLock()"/>
+    <ToolbarButton
+      action="jobWizardHelper.invalidateIterators(); jobWizardHelper.requestQuote(policyPeriod, jobWizardHelper.getQuoteStep(policyPeriod))"
+      id="QuoteOrReview"
+      label="DisplayKey.get('Job.Operation.Quote')"
+      shortcut="Q"
+      visible="policyChangeProcess.canRequestQuote().Okay"/>
+    <ToolbarButton
+      action="wizard.saveDraft(); policyChangeProcess.edit(); jobWizardHelper.goToVisibleStep(policyPeriod)"
+      confirmMessage="DisplayKey.get('Job.Operation.Edit.Confirm')"
+      id="EditPolicy"
+      label="DisplayKey.get('Job.Operation.EditWorkOrder')"
+      shortcut="E"
+      visible="policyChangeProcess.canEdit().Okay"/>
+    <ToolbarButton
+      action="if (jobWizardHelper.revalidateModel()) {policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod) wizard.saveDraft()}"
+      hideIfReadOnly="true"
+      id="Draft"
+      label="DisplayKey.get('Button.SaveDraft')"
+      shortcut="S"/>
+    <ToolbarButton
+      action="HandlePreemptionPopup.push(wizard, jobWizardHelper, policyPeriod, true)"
+      id="HandlePreemptions"
+      label="DisplayKey.get('Job.Operation.HandlePreemption')"
+      shortcut="H"
+      visible="policyChangeProcess.canHandlePreemptions().Okay"/>
+    <ToolbarButton
+      action="if (jobWizardHelper.revalidateModel()) {policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod) jobWizardHelper.applyChangesToFutureBoundRenewal(policyPeriod)}"
+      confirmMessage="DisplayKey.get('Job.Operation.ApplyToRenewal.ConfirmBound')"
+      id="ApplyToBoundRenewal"
+      label="DisplayKey.get('Job.Operation.ApplyToRenewal')"
+      shortcut="L"
+      visible="policyPeriod.JobProcess.canApplyChangesToFutureBoundRenewal()"/>
+    <ToolbarButton
+      action="if (jobWizardHelper.revalidateModel()) {policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod) jobWizardHelper.applyChangesToFutureUnboundRenewal(policyPeriod)}"
+      confirmMessage="DisplayKey.get('Job.Operation.ApplyToRenewal.ConfirmUnbound')"
+      id="ApplyToUnboundRenewal"
+      label="DisplayKey.get('Job.Operation.ApplyToRenewal')"
+      shortcut="Y"
+      visible="policyPeriod.JobProcess.canApplyChangesToFutureUnboundRenewal()"/>
+    <ToolbarButton
+      id="Versions"
+      label="DisplayKey.get('Web.MultiQuoteWizardToolbar.Versions')"
+      showConfirmMessage="false"
+      visible="canPerformNewVersion or canPerformSideBySide or canViewSideBySide">
+      <MenuItem
+        action="jobWizardHelper.attemptNewVersion(policyPeriod, job)"
+        id="NewVersion"
+        label="sideBySideHelper.getVersionLabel()"
+        shortcut="V"
+        visible="canPerformNewVersion"/>
+      <MenuItem
+        action="sideBySideHelper.attemptSideBySide(2)"
+        id="SideBySide"
+        label="DisplayKey.get('Web.Job.SideBySide.Go')"
+        shortcut="X"
+        visible="canPerformSideBySide"/>
+      <MenuItem
+        action="jobWizardHelper.goToStep(&quot;SideBySide&quot;)"
+        id="ViewSideBySide"
+        label="DisplayKey.get('Web.Job.SideBySide.ViewSideBySide')"
+        visible="canViewSideBySide"/>
+    </ToolbarButton>
+    <ToolbarButton
+      action="jobWizardHelper.startIssueProcess(policyPeriod, policyPeriodBillingInstructionsManager)"
+      confirmMessage="DisplayKey.get('Job.Operation.IssuePolicy.Confirm')"
+      id="BindPolicyChange"
+      label="DisplayKey.get('Job.Operation.IssuePolicy')"
+      shortcut="I"
+      visible="canBind"/>
+    <ToolbarButton
+      action="jobWizardHelper.withdraw(policyPeriod); PolicyFileForward.go(policyPeriod.PolicyNumber);"
+      confirmMessage="DisplayKey.get('Job.Operation.Withdraw.Confirm')"
+      id="WithdrawJob"
+      label="DisplayKey.get('Job.Operation.Withdraw')"
+      shortcut="W"
+      visible="policyChangeProcess.canWithdraw().Okay"/>
+  </ToolbarButtonSet>
+</PCF>

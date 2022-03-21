@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="CPPRatingCumulPanelSet"
+    mode="scroll">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <PanelIterator
+      elementName="line"
+      id="eachline"
+      value="period.Lines"
+      valueType="entity.PolicyLine[]">
+      <IteratorSort
+        sortBy="line.Pattern.Priority"
+        sortOrder="1"/>
+      <PanelRef
+        def="RatingCumulDetailsPanelSet(period, jobWizardHelper, isEditable)"
+        mode="line.Pattern.PublicID">
+        <TitleBar
+          icon="line.Pattern.Icon"
+          iconType="svgFileName"
+          title="line.DisplayName"/>
+      </PanelRef>
+      <PanelDivider/>
+      <PanelDivider/>
+    </PanelIterator>
+  </PanelSet>
+</PCF>

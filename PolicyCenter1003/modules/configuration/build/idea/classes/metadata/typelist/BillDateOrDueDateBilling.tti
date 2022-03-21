@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Whether invoice dates are computed from a fixed bill date or from a fixed due date.  With BillDateBilling the bill date is specified and the due date is computed from the specified bill date. With DueDateBilling the due date is specified and the bill date is computed from the specified due date."
+  final="true"
+  name="BillDateOrDueDateBilling">
+  <typecode
+    code="BillDateBilling"
+    desc="Bill date billing"
+    name="Bill Date"
+    priority="1"/>
+  <typecode
+    code="DueDateBilling"
+    desc="Due date billing"
+    name="Due Date"
+    priority="2"/>
+</typelist>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="EffectivePeriodInputSet">
+    <Require
+      name="criteria"
+      type="gw.reinsurance.search.EffectivePeriodSearchCriteria"/>
+    <TypeKeyInput
+      editable="true"
+      id="PeriodType"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.EffectiveDate&quot;)"
+      value="criteria.PeriodType"
+      valueType="typekey.ContractEffectivePeriod">
+      <PostOnChange/>
+    </TypeKeyInput>
+    <InputSet
+      editable="criteria.PeriodType == TC_CUSTOM">
+      <DateInput
+        editable="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.From&quot;)"
+        value="criteria.From"/>
+      <DateInput
+        editable="true"
+        id="ExpirationDate"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.To&quot;)"
+        value="criteria.To"/>
+    </InputSet>
+  </InputSet>
+</PCF>

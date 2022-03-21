@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPDwellingUnderConstruction"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="2900"
+  public-id="zrjhog8dpqkb00hc4dtc7ljrukb"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

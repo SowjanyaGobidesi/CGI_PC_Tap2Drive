@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="BOPLocationsPanelSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.BOPLine.UnusedLocations"
+      name="unassignedAccountLocations"
+      recalculateOnRefresh="true"
+      type="entity.AccountLocation[]"/>
+    <PanelRef>
+      <Toolbar>
+        <IteratorButtons
+          addLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.CreateNewLocation&quot;)"
+          iterator="LocationsEdit_LV"
+          removeFlags="all removable"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="policyPeriod.PrimaryLocation = CheckedValue.Location"
+          flags="one canSetToPrimary"
+          id="setToPrimary"
+          iterator="LocationsEdit_LV"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.SetAsPrimary&quot;)"/>
+        <ToolbarButton
+          available="unassignedAccountLocations.Count &gt; 0"
+          hideIfReadOnly="true"
+          id="addLocationButton"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.AddExistingAccountLocation&quot;)">
+          <MenuItemIterator
+            elementName="unassignedAccountLocation"
+            id="UnassignedAccountLocationIterator"
+            value="unassignedAccountLocations"
+            valueType="entity.AccountLocation[]">
+            <IteratorSort
+              sortBy="unassignedAccountLocation.LocationNum"
+              sortOrder="1"/>
+            <MenuItem
+              action="BOPLocationPopup.push(unassignedAccountLocation, null, policyPeriod, openForEdit, true, jobWizardHelper)"
+              id="UnassignedAccountLocation"
+              label="unassignedAccountLocation"/>
+          </MenuItemIterator>
+        </ToolbarButton>
+        <ToolbarButton
+          action="unassignedAccountLocations.each(\al -&gt; policyPeriod.BOPLine.addToLineSpecificLocations(al))"
+          available="unassignedAccountLocations.Count &gt; 0"
+          hideIfReadOnly="true"
+          id="addAllLocationsButton"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.AddAllExistingAccountLocations&quot;)"/>
+      </Toolbar>
+      <ListDetailPanel
+        id="LocationsEdit_DP"
+        selectionName="selectedLocation"
+        selectionType="BOPLocation">
+        <ListViewPanel
+          id="LocationsEdit_LV">
+          <RowIterator
+            editable="true"
+            elementName="bopLocation"
+            hasCheckBoxes="true"
+            hideCheckBoxesIfReadOnly="true"
+            numEntriesRequired="1"
+            pickLocation="BOPLocationPopup.push(null, null, policyPeriod, openForEdit, true, jobWizardHelper)"
+            toRemove="policyPeriod.BOPLine.removeFromLineSpecificLocations(bopLocation)"
+            validationLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.Locations&quot;)"
+            value="policyPeriod.BOPLine.BOPLocations"
+            valueType="entity.BOPLocation[]">
+            <ToolbarFlag
+              condition="!bopLocation.Location.PrimaryLoc"
+              name="removable"/>
+            <ToolbarFlag
+              condition="!bopLocation.Location.PrimaryLoc"
+              name="canSetToPrimary"/>
+            <Row>
+              <!-- postOnChange is required on the Primary Location button to enable the
+restriction on removing the primary location -->
+              <RadioButtonCell
+                align="center"
+                id="PrimaryLocation"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.PrimaryLocation&quot;)"
+                radioButtonGroup="PrimaryLocation"
+                validationExpression="policyPeriod.PrimaryLocation != null ? null : DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.PrimaryLocationError.SelectAtleastOne&quot;)"
+                value="bopLocation.Location == policyPeriod.PrimaryLocation"/>
+              <TextCell
+                action="BOPLocationPopup.push(null, bopLocation, policyPeriod, openForEdit, true, jobWizardHelper)"
+                align="left"
+                id="Loc"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocNum&quot;)"
+                sortOrder="1"
+                value="bopLocation.Location.LocationNum"
+                valueType="java.lang.Integer"/>
+              <CheckBoxCell
+                id="NonSpecificLocation"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.NonSpecificLocation&quot;)"
+                value="bopLocation.Location.AccountLocation.NonSpecific"/>
+              <TextCell
+                align="left"
+                id="LocationCode"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationCode&quot;)"
+                value="bopLocation.Location.AccountLocation.LocationCode"/>
+              <TextCell
+                action="BOPLocationPopup.push(null, bopLocation, policyPeriod, openForEdit, true, jobWizardHelper)"
+                align="left"
+                id="LocationName"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationName&quot;)"
+                value="bopLocation.Location.AccountLocation.LocationName"/>
+              <TextCell
+                action="BOPLocationPopup.push(null, bopLocation, policyPeriod, openForEdit, true, jobWizardHelper)"
+                align="left"
+                id="Address"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.CompactAddress&quot;)"
+                value="bopLocation.Location.addressString(&quot;,&quot;, false, false)"/>
+              <BooleanRadioCell
+                id="InSync"
+                label="DisplayKey.get(&quot;Web.Account.Locations.IsSynchronized&quot;)"
+                value="bopLocation.Location.isUpToDate()"
+                visible="policyPeriod.Promoted"/>
+              <TypeKeyCell
+                align="left"
+                id="PreferredCoverageCurrency"
+                label="DisplayKey.get(&quot;Web.Policy.CoverableCurrency&quot;)"
+                value="bopLocation.PreferredCoverageCurrency"
+                valueType="typekey.Currency"
+                visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+        <PanelRef
+          available="selectedLocation != null"
+          def="PreferredCoverageCurrencyPanelSet(selectedLocation, false, jobWizardHelper)"
+          id="PreferredCoverageCurrencySelectorRef"
+          visible="selectedLocation != null"/>
+        <PanelRef
+          def="LocationDetailCV(selectedLocation.Location, false, policyPeriod.BOPLine.SupportsNonSpecificLocations)"
+          editable="false"
+          visible="policyPeriod.PolicyLocations.Count &gt; 0 and selectedLocation != null"/>
+      </ListDetailPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

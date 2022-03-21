@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A rate factor is a risk characteristic and its associated numeric value which might have an impact on premium. A common example of Rate Factors are the components of IRPM (individual risk premium modifier)."
+  effDatedBranchType="PolicyPeriod"
+  entity="BAJurisRateFactor"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  table="bajurisratefactor"
+  type="effdated">
+  <implementsEntity
+    name="RateFactor"/>
+  <implementsInterface
+    iface="gw.api.domain.RateFactorAdapter"
+    impl="gw.lob.ba.BAJurisdictionRateFactorAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.ba.BAJurisdictionRateFactorMatcher"/>
+  <foreignkey
+    desc="The modifier containing this rate factor"
+    fkentity="BAJurisModifier"
+    name="BAJurisModifier"
+    nullok="false"/>
+</entity>

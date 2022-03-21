@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    countsAsWork="false"
+    id="BALocationSummaryPopup"
+    title="DisplayKey.get(&quot;Web.Policy.BA.StateLocationSummary&quot;)">
+    <LocationEntryPoint
+      signature="BALocationSummaryPopup(baLine : BusinessAutoLine, selectedState : State)"/>
+    <Variable
+      name="baLine"
+      type="BusinessAutoLine"/>
+    <Variable
+      name="selectedState"
+      type="State"/>
+    <Screen
+      editable="false"
+      id="BALocationSummaryScreen">
+      <Toolbar/>
+      <!-- <PanelRef
+        id="BAStateCounts">
+        <TitleBar
+          title="selectedState"/>
+      </PanelRef> -->
+      <PanelRef>
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Policy.BA.StateLocations&quot;, selectedState.Description)"/>
+        <Toolbar/>
+        <ListDetailPanel
+          id="LocSummaryLDV"
+          selectionName="selectedLocation"
+          selectionType="PolicyLocation">
+          <PanelRef>
+            <Toolbar/>
+            <ListViewPanel
+              id="BALocationSummaryLV">
+              <RowIterator
+                editable="false"
+                elementName="polLocation"
+                value="baLine.getAllLocationsInState(selectedState)"
+                valueType="entity.PolicyLocation[]">
+                <Row>
+                  <TextCell
+                    align="left"
+                    id="Loc"
+                    label="DisplayKey.get(&quot;Web.Policy.BA.Locations&quot;)"
+                    sortOrder="1"
+                    value="DisplayKey.get(&quot;Web.Policy.BOP.Quote.Location.Title&quot;, polLocation.LocationNum, polLocation.CompactName)">
+                    <ColumnFooter>
+                      <TextCell
+                        bold="true"
+                        id="SummTotal"
+                        value="DisplayKey.get(&quot;Web.Policy.BA.SummaryTotals&quot;)"/>
+                    </ColumnFooter>
+                  </TextCell>
+                  <TextCell
+                    align="center"
+                    id="Territory"
+                    label="DisplayKey.get(&quot;Web.Policy.BA.TerritoryCode&quot;)"
+                    value="polLocation.TerritoryCodes[0].Code"
+                    wrapLabel="true"/>
+                  <TextCell
+                    align="right"
+                    id="VehCount"
+                    label="DisplayKey.get(&quot;Web.Policy.BA.Total.Vehicles&quot;)"
+                    value="baLine.Vehicles.countWhere( \ v -&gt; v.Location == polLocation)"
+                    valueType="java.lang.Integer">
+                    <ColumnFooter>
+                      <TextCell
+                        align="right"
+                        id="VehTotal"
+                        value="baLine.Vehicles.countWhere( \ v -&gt; v.Location.State == selectedState)"
+                        valueType="java.lang.Integer"/>
+                    </ColumnFooter>
+                  </TextCell>
+                  <!-- We can use this once the right listview filters are created
+                      action="BAVehicleSchedulePopup.push(baLine, null)"/> -->
+                  <TextCell
+                    align="right"
+                    id="PassengerCount"
+                    label="DisplayKey.get(&quot;Web.Policy.BA.Total.PrivatePassenger&quot;)"
+                    value="baLine.Vehicles.countWhere( \ v -&gt; v.Location == polLocation and v.VehicleType == TC_PP)"
+                    valueType="java.lang.Integer"
+                    wrapLabel="true">
+                    <ColumnFooter>
+                      <TextCell
+                        align="right"
+                        id="PassengerTotal"
+                        value="baLine.Vehicles.countWhere( \ v -&gt; v.Location.State == selectedState and v.VehicleType == TC_PP)"
+                        valueType="java.lang.Integer"/>
+                    </ColumnFooter>
+                  </TextCell>
+                  <TextCell
+                    align="right"
+                    id="TruckCount"
+                    label="DisplayKey.get(&quot;Web.Policy.BA.Total.Trucks&quot;)"
+                    value="baLine.Vehicles.countWhere( \ v -&gt; v.Location == polLocation and v.VehicleType == TC_COMMERCIAL)"
+                    valueType="java.lang.Integer"
+                    wrapLabel="true">
+                    <ColumnFooter>
+                      <TextCell
+                        align="right"
+                        id="TruckTotal"
+                        value="baLine.Vehicles.countWhere( \ v -&gt; v.Location.State == selectedState and v.VehicleType == TC_COMMERCIAL)"
+                        valueType="java.lang.Integer"/>
+                    </ColumnFooter>
+                  </TextCell>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </PanelRef>
+          <CardViewPanel>
+            <Card
+              id="VehicleScheduleCard"
+              title="DisplayKey.get(&quot;Web.Policy.BA.Vehicles&quot;)">
+              <PanelRef
+                editable="false">
+                <TitleBar
+                  title="DisplayKey.get(&quot;Web.Policy.BA.Review.VehicleSchedule&quot;)"/>
+                <DetailViewPanel
+                  id="BALocationVehicleSummaryDV">
+                  <InputColumn>
+                    <Label
+                      label="DisplayKey.get(&quot;Web.Policy.BOP.Quote.Location.Title&quot;, selectedLocation.LocationNum, selectedLocation.CompactName)"/>
+                    <ListViewInput
+                      labelAbove="true">
+                      <Toolbar/>
+                      <ListViewPanel
+                        id="VehicleScheduleLV">
+                        <RowIterator
+                          editable="false"
+                          elementName="bAVehicleEU"
+                          value="baLine.Vehicles.where(\ v -&gt; v.Location == selectedLocation)"
+                          valueType="entity.BusinessVehicle[]">
+                          <Row>
+                            <TextCell
+                              align="left"
+                              id="VehicleNumber"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.VehicleNumber&quot;)"
+                              sortBy="bAVehicleEU.VehicleNumber"
+                              sortOrder="1"
+                              value="bAVehicleEU.VehicleNumber"
+                              valueType="java.lang.Integer"/>
+                            <TextCell
+                              align="center"
+                              id="ClassCode"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.ClassCode&quot;)"
+                              value="bAVehicleEU.VehicleClassCode"/>
+                            <TypeKeyCell
+                              align="left"
+                              id="Type"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Type&quot;)"
+                              value="bAVehicleEU.VehicleType"
+                              valueType="typekey.VehicleType"/>
+                            <TextCell
+                              action="BAVehiclePopup.push(bAVehicleEU, baLine.Branch, false, true, null)"
+                              align="left"
+                              id="Vin"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Vin&quot;)"
+                              value="bAVehicleEU.Vin"/>
+                            <TextCell
+                              align="left"
+                              id="Year"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Year&quot;)"
+                              value="bAVehicleEU.Year"
+                              valueType="java.lang.Integer"/>
+                            <TextCell
+                              align="left"
+                              id="Make"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Make&quot;)"
+                              value="bAVehicleEU.Make"/>
+                            <TextCell
+                              align="left"
+                              id="Model"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Model&quot;)"
+                              value="bAVehicleEU.Model"/>
+                            <BooleanRadioCell
+                              id="PIP"
+                              label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.PipCovered&quot;)"
+                              value="bAVehicleEU.VehicleType == TC_PP or selectedLocation.State == TC_HI"
+                              visible="gw.api.domain.StateSet.get( gw.api.domain.StateSet.PIPSTATES ).contains(selectedLocation.State)"/>
+                            <TextCell
+                              align="center"
+                              id="Collision"
+                              label="DisplayKey.get(&quot;Web.Policy.BA.Collision&quot;)"
+                              value="(bAVehicleEU.BACollisionCovExists ? bAVehicleEU.BACollisionCov.BACollisionDeductTerm.DisplayValue : DisplayKey.get(&quot;Web.Policy.BA.Declined&quot;))"/>
+                            <TextCell
+                              align="center"
+                              id="Comprehensive"
+                              label="DisplayKey.get(&quot;Web.Policy.BA.Comprehensive&quot;)"
+                              value="(bAVehicleEU.BAComprehensiveCovExists ? bAVehicleEU.BAComprehensiveCov.BAComprehensiveDdctTerm.DisplayValue : DisplayKey.get(&quot;Web.Policy.BA.Declined&quot;))"/>
+                            <TextCell
+                              align="center"
+                              id="Specified"
+                              label="DisplayKey.get(&quot;Web.Policy.BA.Specified&quot;)"
+                              value="(bAVehicleEU.BASpecCausesLossCovExists ? bAVehicleEU.BASpecCausesLossCov.BASpecCausesLossDdctTerm.DisplayValue : DisplayKey.get(&quot;Web.Policy.BA.Declined&quot;))"
+                              wrapLabel="true"/>
+                            <TextCell
+                              align="center"
+                              id="Towing"
+                              label="DisplayKey.get(&quot;Web.Policy.BA.Towing&quot;)"
+                              value="(bAVehicleEU.BATowingLaborCovExists ? DisplayKey.get(&quot;Web.Policy.BA.Selected&quot;) : DisplayKey.get(&quot;Web.Policy.BA.Declined&quot;))"
+                              wrapLabel="true"/>
+                          </Row>
+                        </RowIterator>
+                      </ListViewPanel>
+                    </ListViewInput>
+                  </InputColumn>
+                </DetailViewPanel>
+              </PanelRef>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

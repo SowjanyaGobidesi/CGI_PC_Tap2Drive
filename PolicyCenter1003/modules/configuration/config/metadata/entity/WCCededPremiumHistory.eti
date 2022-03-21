@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Workers' Comp implementation of the RICededPremiumHistory delegate"
+  entity="WCCededPremiumHistory"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="wccededpremiumhistory"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumHistory"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    fkentity="WCCededPremium"
+    name="WCCededPremium"
+    nullok="false"/>
+</entity>

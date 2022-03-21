@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="handleArchiving()"
+    canEdit="true"
+    id="ArchiveSuspendResumePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Archive.Title&quot;)">
+    <LocationEntryPoint
+      signature="ArchiveSuspendResumePopup(policy : Policy)"/>
+    <Variable
+      name="policy"
+      type="Policy"/>
+    <Variable
+      initialValue="policy.DoNotArchive"
+      name="doNotArchiveStartingState"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="isDoNotArchiveChanged"
+      type="boolean"/>
+    <Variable
+      name="comment"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          updateVisible="isDoNotArchiveChanged"/>
+      </Toolbar>
+      <AlertBar
+        available="true"
+        id="currentlyArchivedTermsWarning"
+        label="DisplayKey.get(&quot;Web.Archive.CurrentArchivedTermsWarning&quot;)"
+        visible="policy.Periods.hasMatch(\ p -&gt; p.ArchiveState == ArchiveState.TC_ARCHIVED) and (not doNotArchiveStartingState) and isDoNotArchiveChanged"/>
+      <PanelRef>
+        <DetailViewPanel>
+          <InputColumn>
+            <Label
+              id="ArchiveEnabled"
+              label="DisplayKey.get(&quot;Web.Archive.ArchivingIsEnabled&quot;)"
+              visible="not doNotArchiveStartingState"/>
+            <CheckBoxInput
+              available="perm.System.archivedisable"
+              editable="true"
+              hideChildrenIfReadOnly="false"
+              id="DisableArchiving"
+              label="DisplayKey.get(&quot;Web.Archive.DisableArchiving&quot;)"
+              value="isDoNotArchiveChanged"
+              visible="not doNotArchiveStartingState">
+              <PostOnChange/>
+            </CheckBoxInput>
+            <Label
+              id="ArchiveDisabled"
+              label="DisplayKey.get(&quot;Web.Archive.ArchivingIsDisabled&quot;)"
+              visible="doNotArchiveStartingState"/>
+            <CheckBoxInput
+              available="perm.System.archivedisable"
+              editable="true"
+              hideChildrenIfReadOnly="false"
+              id="ResumeArchiving"
+              label="DisplayKey.get(&quot;Web.Archive.ResumeArchiving&quot;)"
+              value="isDoNotArchiveChanged"
+              visible="doNotArchiveStartingState">
+              <PostOnChange/>
+            </CheckBoxInput>
+            <TextInput
+              editable="true"
+              id="HistoryComment"
+              label="DisplayKey.get(&quot;Web.Archive.HistoryEventComment&quot;)"
+              value="comment"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <PanelRef>
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Archive.HistoryEventsHeading&quot;)"/>
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="event"
+            value="searchForArchiveHistory()"
+            valueType="gw.api.database.IQueryBeanResult&lt;entity.History&gt;">
+            <Row>
+              <TextCell
+                id="eventDate"
+                label="DisplayKey.get(&quot;Web.Archive.HistoryEventDate&quot;)"
+                sortDirection="descending"
+                sortOrder="1"
+                value="event.EventTimestamp"
+                valueType="java.util.Date"/>
+              <TextCell
+                id="eventType"
+                label="DisplayKey.get(&quot;Web.Archive.HistoryEventType&quot;)"
+                value="event.CustomType"
+                valueType="typekey.CustomHistoryType"/>
+              <TextCell
+                id="eventUser"
+                label="DisplayKey.get(&quot;Web.Archive.HistoryEventUser&quot;)"
+                value="event.User"
+                valueType="entity.User"/>
+              <TextCell
+                id="eventDesc"
+                label="DisplayKey.get(&quot;Web.Archive.HistoryEventComment&quot;)"
+                value="event.Description"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[function handleArchiving() {
+  if (isDoNotArchiveChanged) {
+  policy.setDoNotArchive(not doNotArchiveStartingState, \ -> comment)
+  }
+}
+
+function searchForArchiveHistory() : gw.api.database.IQueryBeanResult<entity.History> {
+  return new gw.history.CustomHistoryFinder().getAllPolicyArchiveHistory(policy)
+}]]></Code>
+  </Popup>
+</PCF>

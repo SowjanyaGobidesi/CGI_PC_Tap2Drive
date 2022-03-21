@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.FederatedData_dir
+
+uses gw.api.personaldata.purge.PersonalDataPurgeEvent
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+uses PersonalDataPurgeEvent#PERSONAL_DATA_PURGE_EVENT
+
+@gw.rules.RuleName("Personal Data Purge")
+internal class PersonalDataPurge {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.EventName == PERSONAL_DATA_PURGE_EVENT
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createPurgeMessage(messageContext)
+/*end00rule*/
+  }
+}

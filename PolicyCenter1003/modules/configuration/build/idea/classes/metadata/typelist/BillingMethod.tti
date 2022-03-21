@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Billing Method"
+  final="false"
+  name="BillingMethod">
+  <typecode
+    code="DirectBill"
+    desc="Direct Bill Billing Method"
+    name="Direct Bill"/>
+  <typecode
+    code="AgencyBill"
+    desc="Agency Bill Billing Method"
+    name="Agency Bill"/>
+  <typecode
+    code="ListBill"
+    desc="List Bill Billing Method"
+    name="List Bill"/>
+</typelist>

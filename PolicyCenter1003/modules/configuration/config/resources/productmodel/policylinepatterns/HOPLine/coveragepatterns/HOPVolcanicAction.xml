@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPVolcanicAction"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="3300"
+  public-id="z1bg07ii0pfa4cj02al1n88sgeb"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

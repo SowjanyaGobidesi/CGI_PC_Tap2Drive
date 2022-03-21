@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="GL Line level coverage scheduled item"
+  effDatedBranchType="PolicyPeriod"
+  entity="GLLineScheduleCovItem"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="gllineschedcovitem"
+  type="effdated">
+  <implementsEntity
+    name="GLScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.gl.GLLineScheduleCovItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.gl.GLLineScheduleCovItemCoverableAdapter"/>
+  <foreignkey
+    fkentity="GLLineScheduleCov"
+    name="Schedule"
+    nullok="false"/>
+  <onetoone
+    desc="The coverage that applies to this scheduled item."
+    fkentity="GLLineSchCovItemCov"
+    name="ScheduledItemClause"
+    nullok="true"/>
+</entity>

@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.FederatedData_dir
+
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("Activity")
+internal class Activity {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis Activity &&
+        (messageContext.EventName == entity.Activity.ACTIVITYADDED_EVENT
+            || messageContext.EventName == entity.Activity.ACTIVITYCHANGED_EVENT
+            || messageContext.EventName == entity.Activity.ACTIVITYREMOVED_EVENT)
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createActivityMessage(messageContext)
+/*end00rule*/
+  }
+}

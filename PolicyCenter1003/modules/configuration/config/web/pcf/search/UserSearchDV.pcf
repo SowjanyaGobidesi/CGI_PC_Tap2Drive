@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserSearchDV">
+    <Require
+      name="searchCriteria"
+      type="UserSearchCriteria"/>
+    <Require
+      name="organizationFixed"
+      type="Boolean"/>
+    <Require
+      name="userTypeFixed"
+      type="boolean"/>
+    <Variable
+      initialValue="User.util.CurrentUser.listAvailableRoles()"
+      name="roles"
+      type="entity.Role[]"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Username"
+        label="DisplayKey.get(&quot;Web.UserSearch.Username&quot;)"
+        value="searchCriteria.Username"/>
+      <InputSetRef
+        def="GlobalPersonNameInputSet(new gw.search.BasicNameOwner(new gw.globalization.ContactSearchCriteriaNameAdapter(searchCriteria.Contact)))"
+        id="ContactInputSet"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <InputSetRef
+        def="GlobalContactNameInputSet(new gw.search.GroupNameOwner(new gw.globalization.GroupNameToUserSearchAdapter(searchCriteria)))"
+        id="GroupNameInputSet"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <CheckBoxInput
+        editable="true"
+        id="NotInAnyGroup"
+        label="DisplayKey.get(&quot;Web.UserSearch.NotInAnyGroup&quot;)"
+        value="searchCriteria.NotInAnyGroup"/>
+      <TypeKeyInput
+        editable="not userTypeFixed"
+        id="UserType"
+        label="DisplayKey.get(&quot;Web.UserSearch.UserType&quot;)"
+        value="searchCriteria.UserType"
+        valueType="typekey.UserType"/>
+      <RangeInput
+        editable="true"
+        id="Role"
+        label="DisplayKey.get(&quot;Web.UserSearch.Role&quot;)"
+        value="searchCriteria.Role"
+        valueRange="roles"
+        valueType="entity.Role"/>
+      <TextInput
+        editable="true"
+        id="ProducerCode"
+        label="DisplayKey.get(&quot;Web.UserSearch.ProducerCode&quot;)"
+        value="searchCriteria.ProducerCode"/>
+      <OrgInput
+        editable="not User.util.CurrentUser.ExternalUser and not organizationFixed"
+        id="Organization"
+        label="DisplayKey.get(&quot;Web.Admin.Organization&quot;)"
+        pickLocation="OrganizationSearchPopup.push(null,true)"
+        value="searchCriteria.Organization"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

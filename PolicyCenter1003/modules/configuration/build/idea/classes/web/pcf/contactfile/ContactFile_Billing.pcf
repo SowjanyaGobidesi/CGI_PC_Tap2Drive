@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="ContactFile_Billing"
+    infoBar="ContactFileInfoBar(contact)"
+    title="DisplayKey.get(&quot;Web.ContactFile.Billing.Title&quot;)">
+    <LocationEntryPoint
+      signature="ContactFile_Billing(contact : Contact)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Screen>
+      <Variable
+        initialValue="contact.AssociationFinder.createTopLevelAccountToRolesMap()"
+        name="topLevelAccountToRolesMap"
+        type="java.util.Map&lt;String,String&gt;"/>
+      <Variable
+        initialValue="topLevelAccountToRolesMap.Count &lt;= gw.api.system.PCConfigParameters.BillingNumAccountWarningThreshold.Value"
+        name="renderListView"
+        type="boolean"/>
+      <Variable
+        initialValue="contact.AssociationFinder.findHeldAndBilledExternalAccounts(topLevelAccountToRolesMap)"
+        name="externalAccounts"
+        type="java.util.List&lt;gw.contact.ContactAssociationFinder.ExternalBillingAccount&gt;"/>
+      <AlertBar
+        action="renderListView = true"
+        allowDismiss="false"
+        id="billingConfirm"
+        label="DisplayKey.get(&quot;Web.ContactFile.Billing.ReturnLargeNumberOfAccountsWarning&quot;)"
+        showConfirmMessage="false"
+        visible="topLevelAccountToRolesMap.Count &gt; gw.api.system.PCConfigParameters.BillingNumAccountWarningThreshold.Value"/>
+      <PanelRef>
+        <Toolbar/>
+        <ListViewPanel
+          id="BillingAccountsLV"
+          visible="renderListView">
+          <RowIterator
+            editable="false"
+            elementName="externalAccount"
+            value="externalAccounts"
+            valueType="java.util.List&lt;gw.contact.ContactAssociationFinder.ExternalBillingAccount&gt;">
+            <Row>
+              <LinkCell
+                id="PolicyAccountLinkCell"
+                label="DisplayKey.get(&quot;Web.ContactFile.AccountHolder.Account&quot;)">
+                <Link
+                  action="AccountFileDoRetrievalForward.go(externalAccount.AccountNumber)"
+                  id="PolicyAccount"
+                  label="entity.Account.finder.findAccountByAccountNumber(externalAccount.AccountNumber).AccountHolderContact.DisplayName"
+                  tooltip="externalAccount.AccountNumber"/>
+              </LinkCell>
+              <TextCell
+                id="NextInvoiceDue"
+                label="DisplayKey.get('Web.Dashboard.Tile.Payments.NextInvoice')"
+                value="gw.api.web.dashboard.ui.payment.PaymentFormatter.formatNextInvoice(externalAccount.BillingAccountDisplayTotals.NextInvoice.NextInvoiceDate, externalAccount.BillingAccountDisplayTotals.NextInvoice.Invoices)"/>
+              <TextCell
+                id="LastPayment"
+                label="DisplayKey.get('Web.Dashboard.Tile.Payments.LastPayment')"
+                value="gw.api.web.dashboard.ui.payment.PaymentFormatter.formatLastPayment(externalAccount.BillingAccountDisplayTotals.LastPayment.Date, externalAccount.BillingAccountDisplayTotals.LastPayment.Amount)"/>
+              <TextCell
+                id="Role"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.Role&quot;)"
+                value="externalAccount.Roles"/>
+              <LinkCell
+                id="BillingAccountLinkCell"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.Account&quot;)">
+                <Link
+                  action="BCAccount.push(gw.api.system.PCConfigParameters.BillingSystemURL.Value, externalAccount.ExternalAccountNumber)"
+                  available="gw.api.system.PCConfigParameters.BillingSystemURL.Value.HasContent and perm.System.viewbillingsystem"
+                  id="BillingAccount"
+                  label="externalAccount.BillingAccountDisplayTotals.PrimaryPayer.Name"
+                  tooltip="externalAccount.ExternalAccountNumber"/>
+              </LinkCell>
+              <TextCell
+                fontColor="externalAccount.BillingAccountDisplayTotals.Delinquent ? gw.api.web.color.GWColor.THEME_ALERT_ERROR : null"
+                id="Status"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.Status&quot;)"
+                value="externalAccount.BillingAccountDisplayTotals.Delinquent ? DisplayKey.get(&quot;Web.Billing.Status.Delinquent&quot;) : DisplayKey.get(&quot;Web.Billing.Status.InGoodStanding&quot;)"/>
+              <MonetaryAmountCell
+                formatType="currency"
+                id="BilledOutstanding"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.BilledOutstanding&quot;)"
+                value="externalAccount.BillingAccountDisplayTotals.BilledOutstandingTotal.Total"/>
+              <MonetaryAmountCell
+                formatType="currency"
+                id="CurrentDue"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.CurrentDue&quot;)"
+                value="externalAccount.BillingAccountDisplayTotals.BilledOutstandingCurrent.Total"/>
+              <MonetaryAmountCell
+                formatType="currency"
+                id="PastDue"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.PastDue&quot;)"
+                value="externalAccount.BillingAccountDisplayTotals.BilledOutstandingPastDue.Total"/>
+              <MonetaryAmountCell
+                formatType="currency"
+                id="Unbilled"
+                label="DisplayKey.get(&quot;Web.ContactFile.Billing.Unbilled&quot;)"
+                value="externalAccount.BillingAccountDisplayTotals.UnbilledTotal.Total"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            align="right"
+            id="AccountBalancesConvertedAlert"
+            label="DisplayKey.get(&quot;Web.AccountFile.Billing.AmountsConvertedForReference&quot;)"
+            labelAbove="true"
+            labelStyleClass="inputLabel_em"
+            value="null"
+            valueType="java.lang.Object"
+            visible="externalAccounts*.BillingAccountDisplayTotals.hasMatch( \ totals -&gt; totals.AccountBalancesConverted)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.FederatedData_dir
+
+uses gw.api.web.desktop.data.JobDTO
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("Policy Period Changed")
+internal class PolicyPeriodChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis PolicyPeriod &&
+        messageContext.EventName == PolicyPeriod.POLICYPERIODCHANGED_EVENT &&
+        messageContext.Root.Selected &&
+        messageContext.Root.ChangedProperties.hasMatch(\changedField -> JobDTO.JOB_SELECTED_VERSION_FIELDS.contains(changedField))
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createJobMessage(messageContext)
+/*end00rule*/
+  }
+}

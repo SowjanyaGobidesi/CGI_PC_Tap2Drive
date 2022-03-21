@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="TeamSubmissionsScreen"
+    mode="default">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      name="pickedUser"
+      type="User"/>
+    <Variable
+      initialValue="teamModel.canViewSubmissions()"
+      name="canViewSubmissions"
+      type="boolean"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.Team.Submissions&quot;, teamModel.Label, teamModel.getDisplayMode(true), gw.api.domain.statistics.StatsWindowUtil.getSubmissionsWindow())"/>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.Team.JobCountToDisplayExceedsMax&quot;, gw.api.system.PCConfigParameters.TeamScreenTabVisibilityRowCountCutoff.Value, &quot;submissions&quot;, teamModel.Label)"
+      visible="not canViewSubmissions"/>
+    <PanelRef
+      def="TeamSubmissionsLV(teamModel)"
+      visible="canViewSubmissions">
+      <Toolbar
+        id="TeamSubmissionsToolbar">
+        <CheckedValuesToolbarButton
+          flags="all openWorkOrder"
+          id="ReassignmentButton"
+          iterator="TeamSubmissionsLV.SubmissionsIterator"
+          label="DisplayKey.get(&quot;Web.Team.Reassign&quot;)">
+          <CheckedValuesMenuItemIterator
+            elementName="typekeyMenuItem"
+            value="gw.assignment.AssignmentUtil.getMultipleAssignmentRoles(UserRoleConstraint.TC_JOBEXCLUSIVE)"
+            valueType="typekey.UserRole[]">
+            <CheckedValuesMenuItem
+              allCheckedRowsAction="AssignUserRoleOwnerPopup.push(CheckedValues.cast(Job), typekeyMenuItem )"
+              id="AssignmentMenuItem"
+              label="typekeyMenuItem.DisplayName"/>
+          </CheckedValuesMenuItemIterator>
+        </CheckedValuesToolbarButton>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

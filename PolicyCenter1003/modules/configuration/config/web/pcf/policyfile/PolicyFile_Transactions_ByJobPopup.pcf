@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="PolicyFile_Transactions_ByJobPopup"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Transactions_ByJobPopup(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar/>
+      <PanelIterator
+        elementName="pastPeriod"
+        value="findBoundOrCompletedPeriods( )"
+        valueType="entity.PolicyPeriod[]">
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              boldLabel="true"
+              id="JobDisplayType"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.Job&quot;)"
+              value="pastPeriod.Job.DisplayType"/>
+          </InputColumn>
+          <InputColumn>
+            <DateInput
+              boldLabel="true"
+              dateFormat="long"
+              id="EditEffectiveDate"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.EditEffectiveDate&quot;)"
+              required="pastPeriod.EditEffectiveDate != null"
+              timeFormat="long"
+              value="pastPeriod.EditEffectiveDate"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="txn"
+            pageSize="0"
+            value="findPostedTransactions(pastPeriod)"
+            valueType="entity.Transaction[]">
+            <IteratorSort
+              sortBy="txn.PostedDate"
+              sortOrder="1"/>
+            <IteratorSort
+              sortBy="txn.EffDate"
+              sortOrder="2"/>
+            <IteratorSort
+              sortBy="txn.ExpDate"
+              sortOrder="3"/>
+            <Row>
+              <DateCell
+                id="EffDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.EffDate&quot;)"
+                value="txn.EffDate"/>
+              <DateCell
+                id="ExpDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ExpireDate&quot;)"
+                value="txn.ExpDate"/>
+              <MonetaryAmountCell
+                id="TxnAmount"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.Amount&quot;)"
+                value="txn.AmountBilling"/>
+              <DateCell
+                id="PostedDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.PostedDate&quot;)"
+                value="txn.PostedDate"/>
+              <BooleanRadioCell
+                id="Written"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.Written&quot;)"
+                value="txn.Written"/>
+              <BooleanRadioCell
+                id="Charged"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.Charged&quot;)"
+                value="txn.Charged"/>
+              <BooleanRadioCell
+                id="ToBeAccrued"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ToBeAccrued&quot;)"
+                value="txn.ToBeAccrued"/>
+              <TextCell
+                id="Cost"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.Cost&quot;)"
+                value="txn.Cost"
+                valueType="entity.Cost"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelIterator>
+    </Screen>
+    <Code><![CDATA[
+function findBoundOrCompletedPeriods() : entity.PolicyPeriod[] {
+  return period.Policy.Periods.where(\p -> p.Status == TC_BOUND or p.Status == TC_AUDITCOMPLETE).orderBy(\p -> p.ID)?.toTypedArray()
+}
+
+function findPostedTransactions(jobPeriod : PolicyPeriod) : entity.Transaction[] {
+  return gw.api.domain.financials.TransactionFinder.instance.findPostedTransactions(jobPeriod)
+    .where(\t -> ((t as EffDated).BranchUntyped as PolicyPeriod) == jobPeriod)
+    .toTypedArray()
+}
+      
+    ]]></Code>
+  </Popup>
+</PCF>

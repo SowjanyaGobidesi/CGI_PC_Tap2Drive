@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A line of insurance (e.g. auto, property, etc.) and selected policy line level attributes (i.e. attributes necessary, but not sufficient to rate)"
+  effDatedBranchType="PolicyPeriod"
+  entity="PolicyLine"
+  exportable="true"
+  final="false"
+  loadable="false"
+  setterScriptability="hidden"
+  table="policyline"
+  type="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.lines.impl.PolicyLineInternalMethods"
+    impl="com.guidewire.pc.domain.policy.lines.impl.PolicyLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.lines.PolicyLinePublicMethods"
+    impl="com.guidewire.pc.domain.policy.lines.impl.PolicyLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.DoesNotValidateOnCommit"
+    impl="com.guidewire.pc.domain.policy.lines.impl.PolicyLineImpl"/>
+  <implementsInterface
+    iface="gw.api.policy.PolicyLineJavaMethods"
+    impl="com.guidewire.pc.domain.policy.lines.NoOpPolicyLineJavaMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.common.PolicyLineCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.common.PolicyLineMatcher"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.rating.RateflowMethods"
+    impl="gw.api.rating.RateflowMethodsImpl"/>
+  <implementsEntity
+    name="AnswerContainer"/>
+  <implementsInterface
+    iface="gw.api.domain.AnswerContainerAdapter"
+    impl="gw.question.PolicyLineAnswerContainerAdapter"/>
+  <column
+    default="0"
+    desc="The number of additional insureds. For Quick Quotes users enter just the number additional insureds instead of all the details"
+    name="NumAddInsured"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The pattern defining what kind of PolicyLine this is"
+    name="PatternCode"
+    nullok="false"
+    required="true"
+    setterScriptability="hidden"
+    type="patterncode"/>
+  <array
+    arrayentity="CoverageSymbolGroup"
+    cascadeDelete="true"
+    desc="Groups of coverage symbols on this policy line"
+    name="CoverageSymbolGroups"/>
+  <array
+    arrayentity="PolicyAddlInsured"
+    cascadeDelete="true"
+    name="AdditionalInsureds"/>
+  <array
+    arrayentity="PolicyLineAnswer"
+    cascadeDelete="true"
+    desc="Set of answers for this policyline."
+    name="LineAnswers"
+    owner="true"/>
+  <array
+    arrayentity="DiagnosticRatingWorksheet"
+    cascadeDelete="true"
+    desc="A list of DiagnosticRatingWorksheet entities related to this PolicyLine"
+    name="DiagnosticRatingWorksheets"
+    owner="true"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.policy.dbchecks.PolicyLineDBCheckBuilder"/>
+</entity>

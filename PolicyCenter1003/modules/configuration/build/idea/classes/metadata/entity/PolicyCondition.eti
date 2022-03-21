@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="PolicyCondition"
+  requiresType="effdated"
+  setterScriptability="hidden">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.PolicyConditionPublicMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.PolicyConditionImpl"/>
+  <implementsEntity
+    name="Clause"/>
+  <implementsInterface
+    iface="gw.api.domain.Clause"
+    impl="com.guidewire.pc.domain.coverage.impl.PolicyConditionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.impl.PolicyConditionInternalMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.PolicyConditionImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.PolicyConditionAdapter"/>
+  <column
+    desc="The pattern defining what kind of Condition this is"
+    name="PatternCode"
+    nullok="false"
+    required="true"
+    setterScriptability="hidden"
+    type="patterncode"/>
+  <column
+    desc="Internal field for storing the reference date of coverages on bound policy periods. Normally the ReferenceDate property should be used instead."
+    name="ReferenceDateInternal"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="datetime"/>
+  <typekey
+    desc="Currency associated with the policy condition"
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <fulldescription><![CDATA[A condition defines something about the insurance contract that is neither providing coverage nor excluding coverage.]]></fulldescription>
+</delegate>

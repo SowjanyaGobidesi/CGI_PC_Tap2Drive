@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CoveragePattern
+  codeIdentifier="HOPGolfCart"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingScheduleCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="5900"
+  public-id="z39i08pn1407l7i6bv5j2jk2jhb"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPGolfCartSched"
+      mostDescriptiveProperty="HOPGolfCartSchedMakeModel"
+      priority="0"
+      public-id="HOPGolfCartSched"
+      required="true"
+      scheduledItemType="HOPDwellScheduleCovItem">
+      <ScheduledItemClauseLinkages>
+        <ScheduledItemClauseLink
+          codeIdentifier="HOPGolfCartSchedCovLink"
+          linkedClausePattern="zdogeskkpv01dc9p8upk23dne09"
+          public-id="HOPGolfCartSchedCovLink"/>
+      </ScheduledItemClauseLinkages>
+      <ScheduledItemProperties>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPGolfCartSchedMakeModel"
+          column="StringCol1"
+          priority="0"
+          propertyName="MakeModel"
+          public-id="HOPGolfCartSchedMakeModel"
+          required="false"/>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPGolfCartSchedSerialNo"
+          column="StringCol2"
+          priority="10"
+          propertyName="SerialNo"
+          public-id="HOPGolfCartSchedSerialNo"
+          required="false"/>
+      </ScheduledItemProperties>
+    </ClauseSchedulePattern>
+  </Schedules>
+</CoveragePattern>

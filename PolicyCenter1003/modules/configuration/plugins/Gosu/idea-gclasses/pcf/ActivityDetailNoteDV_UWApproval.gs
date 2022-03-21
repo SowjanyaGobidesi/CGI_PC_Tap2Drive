@@ -1,0 +1,15 @@
+package pcf
+
+uses gw.api.locale.DisplayKey
+@javax.annotation.Generated("config/web/pcf/activity/ActivityDetailNoteDV.UWApproval.pcf", "", "com.guidewire.pcfgen.PCFClassGenerator")
+public class ActivityDetailNoteDV_UWApproval extends com.guidewire.pl.web.codegen.SectionBase {
+  function onEnter ($activity :  Activity, $note :  Note) : void {
+    __widgetOf(this, pcf.ActivityDetailNoteDV_UWApproval, SECTION_WIDGET_CLASS).setVariables(false, {$activity, $note})
+  }
+  
+  function refreshVariables ($activity :  Activity, $note :  Note) : void {
+    __widgetOf(this, pcf.ActivityDetailNoteDV_UWApproval, SECTION_WIDGET_CLASS).setVariables(true, {$activity, $note})
+  }
+  
+  
+}

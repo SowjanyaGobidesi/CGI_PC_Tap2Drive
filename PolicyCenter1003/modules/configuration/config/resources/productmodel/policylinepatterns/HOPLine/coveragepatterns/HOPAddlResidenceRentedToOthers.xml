@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConditionPattern
+  codeIdentifier="HOPAddlResidenceRentedToOthers"
+  conditionSubtype="HOPLineScheduleCond"
+  coverageCategory="z94j696j28oei0bkk2b3eaukjnb"
+  existence="Electable"
+  lookupTableName="HOPLineCond"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="600"
+  public-id="zfqj66u8ieogne2rpukobappaca"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPAddlResidenceRentedToOthersSched"
+      mostDescriptiveProperty="HOPAddlResidenceRentedToOthersSchedLocation"
+      priority="0"
+      public-id="HOPAddlResidenceRentedToOthersSched"
+      required="true"
+      scheduledItemType="HOPLineScheduleCondItem">
+      <ScheduledItemProperties>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPAddlResidenceRentedToOthersSchedLocation"
+          column="StringCol1"
+          priority="0"
+          propertyName="Location"
+          public-id="HOPAddlResidenceRentedToOthersSchedLocation"
+          required="false"/>
+      </ScheduledItemProperties>
+    </ClauseSchedulePattern>
+  </Schedules>
+</ConditionPattern>

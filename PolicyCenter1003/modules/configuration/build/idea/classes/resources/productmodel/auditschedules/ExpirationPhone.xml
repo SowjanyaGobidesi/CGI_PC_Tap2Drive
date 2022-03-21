@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SingleAuditSchedulePattern
+  auditMethod="Phone"
+  codeIdentifier="ExpirationPhone"
+  dueBusinessDayAdjustment="NextBusinessDay"
+  dueDelayAmount="30"
+  dueDelayDirection="After"
+  dueDelayUnit="CalendarDays"
+  initBusinessDayAdjustment="NextBusinessDay"
+  initDelayAmount="5"
+  initDelayDirection="Before"
+  initDelayUnit="CalendarDays"
+  public-id="ExpirationPhone"
+  type="FinalAudit"/>

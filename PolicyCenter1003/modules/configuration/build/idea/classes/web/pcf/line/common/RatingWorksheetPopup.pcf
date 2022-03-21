@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canVisit="gw.rating.worksheet.WorksheetUIHelper.canViewWorksheets(policyLine)"
+    id="RatingWorksheetPopup"
+    title="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.PopupTitle&quot;)">
+    <LocationEntryPoint
+      signature="RatingWorksheetPopup(policyLine : PolicyLine)"/>
+    <Variable
+      name="policyLine"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="false"
+      name="showConditionals"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.rating.worksheet.WorksheetUIHelper.getWorksheetRootNode(policyLine, showConditionals)"
+      name="rootNode"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <Screen>
+      <Toolbar>
+        <TreeButtons
+          expandVisible="gw.rating.worksheet.WorksheetUIHelper.getTreeSize(rootNode) &lt; 10000"
+          iterator="WorksheetTree"/>
+        <ToolbarButton
+          action="showConditionals = !showConditionals; rootNode = gw.rating.worksheet.WorksheetUIHelper.getWorksheetRootNode(policyLine, showConditionals)"
+          id="ShowHideConditionalsButton"
+          label="showConditionals ? DisplayKey.get(&quot;Button.Worksheet.HideConditionals&quot;) : DisplayKey.get(&quot;Button.Worksheet.ShowConditionals&quot;)"
+          tooltip="showConditionals ? DisplayKey.get(&quot;Button.Worksheet.ShowConditonals.Tooltip&quot;) : &quot;&quot;"/>
+        <ToolbarDivider/>
+        <ToolbarButtonSetRef>
+          <ToolbarButtonSet>
+            <ToolbarButton
+              download="true"
+              id="DownloadButton"
+              label="DisplayKey.get(&quot;Button.Worksheet.Download&quot;) "
+              tooltip="DisplayKey.get(&quot;Button.Worksheet.Download.Tooltip&quot;)">
+              <MenuItem
+                action="gw.rating.worksheet.WorksheetUIHelper.download(policyLine, showConditionals, gw.rating.worksheet.export.WorksheetExporter.FORMAT_CSV)"
+                download="true"
+                id="DownloadCSVMenuItem"
+                label="DisplayKey.get(&quot;Button.Worksheet.DownloadCSV&quot;)"
+                tooltip="DisplayKey.get(&quot;Button.Worksheet.DownloadCSV.Tooltip&quot;)"/>
+              <MenuItem
+                action="gw.rating.worksheet.WorksheetUIHelper.download(policyLine, showConditionals, gw.rating.worksheet.export.WorksheetExporter.FORMAT_HTML)"
+                download="true"
+                id="DownloadHTMLMenuItem"
+                label="DisplayKey.get(&quot;Button.Worksheet.DownloadHTML&quot;)"
+                tooltip="DisplayKey.get(&quot;Button.Worksheet.DownloadHTML.Tooltip&quot;)"/>
+            </ToolbarButton>
+          </ToolbarButtonSet>
+        </ToolbarButtonSetRef>
+      </Toolbar>
+      <ListViewPanel
+        alternateEntryStyle="false"
+        id="WorksheetLV">
+        <RowTree
+          containerLabel="node.Description"
+          containerLabelColspan="8"
+          containerType="gw.rating.worksheet.treenode.WorksheetTreeNodeContainer"
+          contentType="gw.rating.worksheet.treenode.WorksheetTreeNodeLeaf"
+          elementName="node"
+          id="WorksheetTree"
+          pageSize="0"
+          value="rootNode">
+          <Row
+            id="WorkSheetRow">
+            <TextCell
+              enableSort="false"
+              id="Instruction"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.Instruction&quot;)"
+              value="node.Instruction"/>
+            <TextCell
+              enableSort="false"
+              id="Result"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.Result&quot;)"
+              value="gw.rating.worksheet.WorksheetUIHelper.format(node.Result)"/>
+            <TextCell
+              align="center"
+              enableSort="false"
+              id="Op"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.Operator&quot;)"
+              value="node.Operator"/>
+            <TextCell
+              enableSort="false"
+              id="LeftParen"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.LeftParentheses&quot;)"
+              value="node.LeftParenthesesGroup"/>
+            <TextCell
+              enableSort="false"
+              id="Operand"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.Operand&quot;)"
+              value="node.Operand"/>
+            <TextCell
+              enableSort="false"
+              id="RightParen"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.RightParentheses&quot;)"
+              value="node.RightParenthesesGroup"/>
+            <TextCell
+              enableSort="false"
+              id="OperandValue"
+              label="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.OperandValue&quot;)"
+              value="node.OperandValue"
+              valueType="java.lang.Object"/>
+          </Row>
+        </RowTree>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

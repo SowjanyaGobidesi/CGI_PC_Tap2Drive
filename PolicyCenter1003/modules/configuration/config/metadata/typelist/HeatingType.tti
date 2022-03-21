@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of Heating"
+  name="HeatingType">
+  <typecode
+    code="electric"
+    desc="Electricity"
+    name="Electricity"
+    priority="5">
+  </typecode>
+  <typecode
+    code="gas"
+    desc="Gas"
+    name="Gas"
+    priority="10"/>
+  <typecode
+    code="oil"
+    desc="Heating Oil"
+    name="Oil"
+    priority="15">
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="40">
+  </typecode>
+</typelist>

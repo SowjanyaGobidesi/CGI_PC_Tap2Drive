@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="ResolverTransport">
+  <plugin-gosu
+    gosuclass="gw.plugin.multicluster.resolver.ResolverTransport"/>
+</plugin>

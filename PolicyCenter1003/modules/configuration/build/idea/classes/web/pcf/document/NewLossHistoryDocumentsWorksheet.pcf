@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    id="NewLossHistoryDocumentsWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.DocumentCreation.Title&quot;)"
+    title="DisplayKey.get(&quot;Web.DocumentCreation.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewLossHistoryDocumentsWorksheet(policyPeriod : PolicyPeriod)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.Policy.Account"
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      type="Policy"/>
+    <Variable
+      initialValue="policyPeriod.Job"
+      name="job"
+      type="Job"/>
+    <Variable
+      name="levels"
+      type="gw.api.domain.linkedobject.LinkedObjectContainer[]"
+      initialValue="gw.api.domain.linkedobject.LinkedObjectUtils.generateLevels(account,policy,job,null)"/>
+    <Variable
+      name="levelsVisible"
+      type="boolean"
+      initialValue="policy != null and (job == null or !(job typeis Submission) or (job as Submission).FullMode)"/>
+    <Variable
+      initialValue="new gw.api.web.document.DocumentPCContext('LossHistory', policyPeriod, TC_LOSS_HISTORY, levels, levelsVisible)"
+      name="documentApplicationContext"
+      type="gw.document.DocumentApplicationContext"/>
+    <ScreenRef
+      def="UploadDocumentScreen(documentApplicationContext)"/>
+  </Worksheet>
+</PCF>

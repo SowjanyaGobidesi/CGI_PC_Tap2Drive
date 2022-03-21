@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Indicates that two Addresses were merged, and which one replaces the other"
+  entity="AddressReplacement"
+  exportable="true"
+  final="true"
+  loadable="false"
+  platform="false"
+  table="addressreplacement"
+  type="retireable">
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.api.obfuscation.UnsupportedObfuscator"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+  <implementsEntity
+    name="Obfuscatable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    desc="The PublicID of the Address that was Merged into another"
+    exportable="false"
+    name="MergedPublicID"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    desc="The Address that replaced the merged Address"
+    fkentity="Address"
+    name="ReplacementAddress"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <index
+    desc="Ensures that there is only one entry per MergedPublicID."
+    name="addrreplacementu"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="MergedPublicID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

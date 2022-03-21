@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Dwellings for Homeowners Line"
+  displayName="Dwelling"
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPDwelling"
+  exportable="true"
+  loadable="false"
+  table="hopdwelling"
+  type="effdated">
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.hop.HOPDwellingAdditionalInterestContainerCoverableModifiableAdapter"/>
+  <implementsEntity
+    name="Modifiable"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifiableAdapter"
+    impl="gw.lob.hop.HOPDwellingAdditionalInterestContainerCoverableModifiableAdapter"/>
+  <implementsInterface
+    iface="gw.api.contact.AdditionalInterestContainer"
+    impl="gw.lob.hop.HOPDwellingAdditionalInterestContainerCoverableModifiableAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPDwellingMatcher"/>
+  <typekey
+    desc="The HO coverage form for this dwelling"
+    name="CoverageForm"
+    nullok="true"
+    typelist="HOPCoverageForm"/>
+  <foreignkey
+    exportable="true"
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="false"/>
+  <typekey
+    desc="Electrical Wiring Type"
+    name="WiringType"
+    nullok="true"
+    typelist="WiringType"/>
+  <column
+    desc="Flooding or landslide hazard?"
+    name="FloodingHazard"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Property within 300 ft of commercial or non-residential property?"
+    name="NearCommercial"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Distance to Fire Station"
+    name="DistanceToFireStation"
+    nullok="true"
+    type="positiveinteger"/>
+  <column
+    desc="Distance to Fire Hydrant"
+    name="DistanceToFireHydrant"
+    nullok="true"
+    type="positiveinteger"/>
+  <column
+    desc="Is the dwelling visible to neighbors"
+    name="VisibleToNeighbors"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is there a safety net?"
+    name="TrampolineSafetyNet"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Trampoline exists on property?"
+    name="TrampolineExists"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Sprinkler System Type"
+    name="SprinklerSystemType"
+    nullok="true"
+    typelist="SprinklerSystemType"/>
+  <column
+    desc="Number of roomers or boarders"
+    name="RoomerBoardersNumber"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <typekey
+    desc="Roof Material Classification"
+    name="RoofType"
+    nullok="true"
+    typelist="HOPRoofType"/>
+  <column
+    desc="Description of Roof Type for type Other"
+    name="RoofTypeDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <column
+    desc="Date of Roofing Upgrade"
+    name="RoofingUpgradeDate"
+    nullok="true"
+    type="year"/>
+  <typekey
+    desc="Residence Type"
+    name="ResidenceType"
+    nullok="true"
+    typelist="ResidenceType"/>
+  <monetaryamount
+    desc="Replacement Cost"
+    name="ReplacementCost"
+    nullok="true"/>
+  <typekey
+    desc="Location of fuel tank for Oil based heating"
+    name="PrimaryHeatingFuelTankLocation"
+    nullok="true"
+    typelist="FuelTankLocationType"/>
+  <typekey
+    desc="Location of fuel line for Oil based heating"
+    name="PrimaryHeatingFuelLineLocation"
+    nullok="true"
+    typelist="FuelLineLocationType"/>
+  <typekey
+    desc="Dwelling Heating Type"
+    name="PrimaryHeatingType"
+    nullok="true"
+    typelist="HeatingType"/>
+  <column
+    desc="Description of primary heating for type Other"
+    name="PrimaryHeatingDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <column
+    desc="Date of Plumbing Upgrade"
+    name="PlumbingUpgradeDate"
+    nullok="true"
+    type="year"/>
+  <column
+    desc="Description of plumbing for type Other"
+    name="PlumbingTypeDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <typekey
+    desc="Plumbing Type"
+    name="PlumbingType"
+    nullok="true"
+    typelist="PlumbingType"/>
+  <typekey
+    desc="How the dwelling is being occupied"
+    name="Occupancy"
+    nullok="true"
+    typelist="DwellingOccupancyType"/>
+  <column
+    desc="Description of water leakage"
+    name="KnownWaterLeakageDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="200"/>
+  </column>
+  <column
+    desc="Any water leakage"
+    name="KnownWaterLeakage"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date of Heating Upgrade"
+    name="HeatingUpgradeDate"
+    nullok="true"
+    type="year"/>
+  <typekey
+    desc="Garage type in dwelling"
+    name="GarageType"
+    nullok="true"
+    typelist="GarageType"/>
+  <typekey
+    desc="Foundation Type"
+    name="Foundation"
+    nullok="true"
+    typelist="FoundationType"/>
+  <column
+    desc="Number of woodstoves or fire places"
+    name="FireplaceOrWoodStovesNumber"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <typekey
+    desc="Fire alarm type"
+    name="FireAlarmType"
+    nullok="true"
+    typelist="FireAlarmType"/>
+  <typekey
+    desc="Electrical Type"
+    name="ElectricalType"
+    nullok="true"
+    typelist="BreakerType"/>
+  <column
+    desc="Date of Electrical System Upgrade"
+    name="ElectricalSystemUpgradeDate"
+    nullok="true"
+    type="year"/>
+  <typekey
+    desc="Dwelling Usage"
+    name="DwellingUsage"
+    nullok="true"
+    typelist="DwellingUsage"/>
+  <typekey
+    desc="Dwelling Location Type"
+    name="DwellingLocation"
+    nullok="true"
+    typelist="DwellingLocationType"/>
+  <column
+    desc="Do all the doors have Deadbolts"
+    name="Deadbolts"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Description of construction for type Other"
+    name="ConstructionTypeDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <typekey
+    desc="Dwelling Construction Type"
+    name="ConstructionType"
+    nullok="true"
+    typelist="HOPConstructionType"/>
+  <typekey
+    desc="Burglar Alarm Type"
+    name="BurglarAlarmType"
+    nullok="true"
+    typelist="BurglarAlarmType"/>
+  <array
+    arrayentity="HOPDwellingCov"
+    cascadeDelete="true"
+    desc="Coverages directly attached to the Dwelling"
+    name="Coverages"
+    owner="true"/>
+  <array
+    arrayentity="HOPDwellingExcl"
+    cascadeDelete="true"
+    desc="Exclusions directly attached to the Dwelling"
+    name="Exclusions"
+    owner="true"/>
+  <array
+    arrayentity="HOPDwellingCond"
+    cascadeDelete="true"
+    desc="Conditions directly attached to the Dwelling"
+    name="Conditions"
+    owner="true"/>
+  <array
+    arrayentity="HOPDwellingMod"
+    cascadeDelete="true"
+    desc="Modifiers directly attached to the Dwelling"
+    name="HOPDwellingMods"/>
+  <array
+    arrayentity="HOPDwellAddlInterest"
+    cascadeDelete="true"
+    desc="Third parties with an additional interest in the Dwelling"
+    name="AdditionalInterests"
+    owner="false"/>
+  <foreignkey
+    desc=""
+    fkentity="HOPCoveragePart"
+    name="HOPCoveragePart"
+    nullok="true"/>
+  <column
+    desc="Year Built"
+    name="YearBuilt"
+    nullok="true"
+    type="year"/>
+  <column
+    desc="How many fire extinguishers are on premises"
+    name="NumberOfFireExtinguishers"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc=" Number of units between firewall"
+    name="UnitsNumber"
+    nullok="true"
+    type="positiveinteger"/>
+  <column
+    desc=" Number of stories in the dwelling"
+    name="StoriesNumber"
+    nullok="true"
+    type="positiveinteger"/>
+  <typekey
+    desc="Smoke Alarms on Premises"
+    name="SmokeAlarm"
+    nullok="true"
+    typelist="SmokeAlarms"/>
+  <typekey
+    desc=" Secondary Heating Type"
+    name="SecondaryHeatingType"
+    nullok="true"
+    typelist="HeatingType"/>
+  <column
+    desc="Number of units to be insured"
+    name="InsuredUnits"
+    nullok="true"
+    type="positiveinteger"/>
+  <onetoone
+    cascadeDelete="true"
+    fkentity="HOPSwimmingPool"
+    name="SwimmingPool"
+    nullok="true"/>
+  <array
+    arrayentity="DwellingAnimal"
+    cascadeDelete="true"
+    desc="Animals in the dwelling premises"
+    name="DwellingAnimals"/>
+  <array
+    arrayentity="DwellingHazard"
+    cascadeDelete="true"
+    desc="Hazards in the dwelling premises"
+    name="DwellingHazards"/>
+</entity>

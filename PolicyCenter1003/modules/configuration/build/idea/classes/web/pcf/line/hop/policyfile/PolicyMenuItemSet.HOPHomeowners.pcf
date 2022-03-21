@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="PolicyMenuItemSet"
+    mode="HOPHomeowners">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <MenuItem
+      action="PolicyFile_PolicyInfo.go(period, asOfDate)"
+      id="PolicyMenuItemSet_PolicyInfo"
+      label="DisplayKey.get(&quot;Web.PolicyFile.PolicyInfo&quot;)"/>
+    <MenuItem
+      action="PolicyFile_HOPDwelling.go(period, asOfDate)"
+      id="HOPDwelling"
+      label="DisplayKey.get(&quot;Web.PolicyFile.HOP.PolicyFile_HOPDwelling&quot;)"/>
+    <MenuItem
+      action="PolicyFile_HOPDwellingConstruction.go(period, asOfDate)"
+      id="HOPDwellingConstruction"
+      label="DisplayKey.get(&quot;Web.PolicyFile.HOP.PolicyFile_HOPDwellingConstruction&quot;)"/>
+    <MenuItem
+      action="PolicyFile_HOPCoverages.go(period, asOfDate)"
+      id="HOPCoverages"
+      label="DisplayKey.get(&quot;Web.PolicyFile.HOP.PolicyFile_HOPCoverages&quot;)"/>
+    <MenuItem
+      action="PolicyFile_HOPModifiers.go(period, asOfDate)"
+      id="HOPModifiers"
+      label="DisplayKey.get(&quot;Web.PolicyFile.HOP.PolicyFile_HOPModifiers&quot;)"/>
+    <MenuItem
+      action="PolicyFile_Pricing.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Pricing"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Pricing&quot;)"/>
+    <MenuItem
+      action="PolicyFile_Forms_HOP.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Endorsements"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Endorsements&quot;)"/>
+  </MenuItemSet>
+</PCF>

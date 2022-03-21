@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Coinsurance percentage values"
+  final="false"
+  name="Coinsurance">
+  <typefilter
+    desc="Coinsurance values for Inland Marine"
+    name="IMCoinsuranceTypes"/>
+</typelist>

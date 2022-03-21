@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RatingTxDetailsPanelSet"
+    mode="IMLine">
+    <Require
+      name="thePeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="totalPremLabel"
+      type="String"/>
+    <Require
+      name="totalCostLabel"
+      type="String"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <PanelRef
+      visible="thePeriod.IMTransactions.HasElements">
+      <TitleBar
+        title="gw.api.productmodel.PolicyLinePatternLookup.getByPublicID(&quot;IMLine&quot;).DisplayName"
+        visible="thePeriod.MultiLine"/>
+      <PanelSet>
+        <PanelIterator
+          elementName="imPartSubtype"
+          value="(IMCoveragePart.Type as gw.entity.IEntityType).AllSubtypes*.SubtypeTypeKey"
+          valueType="gw.entity.TypeKey[]">
+          <IteratorSort
+            sortBy="imPartSubtype.DisplayName"
+            sortOrder="1"/>
+          <PanelRef
+            def="IMPartTxDetailsPanelSet(thePeriod)"
+            mode="imPartSubtype"/>
+        </PanelIterator>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

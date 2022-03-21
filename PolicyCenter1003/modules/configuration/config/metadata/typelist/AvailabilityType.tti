@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Availability Type"
+  final="false"
+  name="AvailabilityType">
+  <typecode
+    code="Available"
+    desc="Available"
+    name="Available"/>
+  <typecode
+    code="Unavailable"
+    desc="Not Available"
+    name="Unavailable"/>
+</typelist>

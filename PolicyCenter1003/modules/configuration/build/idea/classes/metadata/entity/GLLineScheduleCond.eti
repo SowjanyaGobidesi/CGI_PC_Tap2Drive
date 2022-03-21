@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="GL Line Condition with a schedule"
+  entity="GLLineScheduleCond"
+  final="false"
+  supertype="GeneralLiabilityCond">
+  <implementsInterface
+    iface="gw.api.domain.Schedule"
+    impl="gw.lob.gl.schedule.GLLineScheduleCondImpl"/>
+  <implementsEntity
+    name="ScheduleAutoNumberSequence"/>
+  <array
+    arrayentity="GLLineScheduleCondItem"
+    cascadeDelete="true"
+    desc="Scheduled Items"
+    name="GLLineScheduledItems"
+    setterScriptability="all"/>
+</subtype>

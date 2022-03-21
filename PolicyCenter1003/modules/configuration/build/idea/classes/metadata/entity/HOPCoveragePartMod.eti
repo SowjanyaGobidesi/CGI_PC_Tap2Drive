@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  displayName="HOP CoveragePart Modifier"
+  xmlns="http://guidewire.com/datamodel"
+  desc="A modifier for HOPCoveragePart"
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPCoveragePartMod"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="hopcoveragepartmod"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.hop.HOPCoveragePartModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPCoveragePartModifierMatcher"/>
+  <foreignkey
+    fkentity="HOPCoveragePart"
+    name="HOPCoveragePart"
+    nullok="false"/>
+  <array
+    arrayentity="HOPCoveragePartRF"
+    cascadeDelete="true"
+    desc="Individual components of the rating factor"
+    name="HOPCoveragePartRateFactors"
+    owner="false"/>
+</entity>

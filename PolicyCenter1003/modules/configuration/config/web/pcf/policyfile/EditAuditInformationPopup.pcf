@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="EditAuditInformationPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Audits.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditAuditInformationPopup(policyPeriod : PolicyPeriod, auditInformation : AuditInformation)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="auditInformation"
+      type="AuditInformation"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <DateInput
+            editable="true"
+            id="InitDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.InitDate&quot;)"
+            value="auditInformation.InitDate"/>
+          <DateInput
+            editable="true"
+            id="DueDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.DueDate&quot;)"
+            value="auditInformation.DueDate"/>
+          <TypeKeyInput
+            editable="true"
+            id="Method"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditMethod&quot;)"
+            value="auditInformation.AuditMethod"
+            valueType="typekey.AuditMethod"/>
+          <TypeKeyInput
+            editable="true"
+            filter="VALUES.where(\ f -&gt; f != TC_NO).toList()"
+            id="FinalAuditOption"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.FinalAuditOption&quot;)"
+            value="policyPeriod.FinalAuditOption"
+            valueType="typekey.FinalAuditOption"
+            visible="!policyPeriod.Archived and (auditInformation.IsFinalAudit and not policyPeriod.IsReportingPolicy)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

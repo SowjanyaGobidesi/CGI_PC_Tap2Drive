@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A CommercialProperty implementation of the RICededPremium delegate"
+  entity="CPCededPremium"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="cpcededpremium"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremium"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumAdapter"
+    impl="gw.reinsurance.ceding.CPCededPremiumAdapter"/>
+  <foreignkey
+    fkentity="CPCost"
+    name="CPCost"
+    nonEffDated="true"
+    nullok="false"/>
+  <array
+    arrayentity="CPCededPremiumTransaction"
+    cascadeDelete="true"
+    name="CedingTransactions"/>
+  <array
+    arrayentity="CPCededPremiumHistory"
+    cascadeDelete="true"
+    name="CedingHistory"/>
+</entity>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An attachment of a reinsurable risk to a reinsurance agreement."
+  entity="RIPolicyAttachment"
+  final="false"
+  loadable="false"
+  table="ripolicyattachment"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.RIPolicyAttachmentPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIPolicyAttachmentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.MergeableAdapter"
+    impl="gw.reinsurance.risk.RIPolicyAttachmentMergeableAdapter"/>
+  <foreignkey
+    desc="The attached reinsurance agreement"
+    fkentity="RIAgreement"
+    ignoreforevents="true"
+    name="Agreement"
+    nullok="false"/>
+  <foreignkey
+    desc="The attached reinsurance program"
+    fkentity="RIProgram"
+    ignoreforevents="true"
+    name="Program"
+    nullok="true"/>
+  <foreignkey
+    desc="The associated reinsurable risk."
+    fkentity="RIRisk"
+    name="Risk"
+    nullok="false"
+    setterScriptability="doesNotExist"/>
+</entity>

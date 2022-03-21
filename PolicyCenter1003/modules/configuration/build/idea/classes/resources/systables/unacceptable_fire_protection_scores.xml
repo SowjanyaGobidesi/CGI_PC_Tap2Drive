@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<import>
+  <UnacceptableFireProtectionScore public-id="pc:z39ier250d1k5c7s5djms7gb1q8">
+    <LineOfBusiness>CPLine</LineOfBusiness>
+    <Score>3</Score>
+  </UnacceptableFireProtectionScore>
+  <UnacceptableFireProtectionScore public-id="pc:z10gg6sgtlka23n4dhtmnkvn8fa">
+    <LineOfBusiness>CPLine</LineOfBusiness>
+    <Score>4</Score>
+  </UnacceptableFireProtectionScore>
+  <UnacceptableFireProtectionScore public-id="pc:zojja2qqksl813pr1p5ti2mjuha">
+    <LineOfBusiness>HOPLine</LineOfBusiness>
+    <Score>4</Score>
+  </UnacceptableFireProtectionScore>
+  <UnacceptableFireProtectionScore public-id="pc:zlcig62krn1ie1u9g6t9mcqlv2b">
+    <LineOfBusiness>CPLine</LineOfBusiness>
+    <Score>5</Score>
+  </UnacceptableFireProtectionScore>
+  <UnacceptableFireProtectionScore public-id="pc:zgaiqc7hte3f4cpbmao59i66p9b">
+    <LineOfBusiness>HOPLine</LineOfBusiness>
+    <Score>5</Score>
+  </UnacceptableFireProtectionScore>
+</import>

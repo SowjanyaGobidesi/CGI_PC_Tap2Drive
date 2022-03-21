@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="NotesLV"
+    stretch="true">
+    <ExposeIterator
+      valueType="entity.Note"
+      widget="NotesLV"/>
+    <Require
+      name="notes"
+      type="gw.api.database.IQueryBeanResult&lt;Note&gt;"/>
+    <Require
+      name="viewOnly"
+      type="boolean"/>
+    <Row
+      renderAsSmartHeader="true">
+      <TextCell
+        enableSort="false"
+        id="InfoHeader"
+        value="DisplayKey.get(&quot;Java.Note.Info&quot;)"
+        wrap="false"/>
+      <TextCell
+        bold="true"
+        enableSort="false"
+        grow="true"
+        id="DetailsHeader"
+        value="DisplayKey.get(&quot;Java.Note.Details&quot;)"/>
+    </Row>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="note"
+      value="notes"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Note&gt;">
+      <RowSetRef
+        def="NoteRowSet(note, viewOnly, null)"/>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

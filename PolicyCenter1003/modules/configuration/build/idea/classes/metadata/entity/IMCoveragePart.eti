@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Inland Marine Coverage Part"
+  effDatedBranchType="PolicyPeriod"
+  entity="IMCoveragePart"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="imcoveragepart"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.im.IMCoveragePartCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.im.IMCoveragePartMatcher"/>
+  <foreignkey
+    fkentity="InlandMarineLine"
+    name="InlandMarineLine"
+    nullok="false"/>
+</entity>

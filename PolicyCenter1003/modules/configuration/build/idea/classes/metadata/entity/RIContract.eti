@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="RIContract">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.RIContractPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIContractImpl"/>
+  <implementsEntity
+    name="SimpleEffDated"/>
+  <typekey
+    default="draft"
+    desc="Status of the contract"
+    name="Status"
+    nullok="false"
+    typelist="ContractStatus"/>
+  <typekey
+    desc="Currency associated with the RI contract"
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <fulldescription><![CDATA[Delegate for Reinsurance Agreement and Program.]]></fulldescription>
+</delegate>

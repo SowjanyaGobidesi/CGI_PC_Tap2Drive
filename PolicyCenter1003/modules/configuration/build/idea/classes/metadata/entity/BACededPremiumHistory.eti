@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A CommercialAuto implementation of the RICededPremiumHistory delegate"
+  entity="BACededPremiumHistory"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="bacededpremiumhistory"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumHistory"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    fkentity="BACededPremium"
+    name="BACededPremium"
+    nullok="false"/>
+</entity>

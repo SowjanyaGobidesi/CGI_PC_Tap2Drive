@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.guidewire.com/cc/import/cc_import.xsd">
+  <RiskClass public-id="wKgJGNrQTIMAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Backwaren</Description>
+    <Description language="en_US">Bakery Goods</Description>
+    <Description language="es">Artículos de panadería</Description>
+    <Description language="fr">Articles de boulangerie</Description>
+    <Description language="it">Prodotti da forno</Description>
+    <Description language="ja">パン製品</Description>
+    <Description language="nl">Bakkerswaren</Description>
+    <Description language="pt">Itens de padaria</Description>
+    <Description language="ru">Выпечка</Description>
+    <Description language="zh_CN">面包产品</Description>
+    <Hazard>28</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJAZCbrcAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Fleisch- und Geflügelmärkte</Description>
+    <Description language="en_US">Meat &amp; Poultry Markets</Description>
+    <Description language="es">Mercados de carnes rojas y de aves</Description>
+    <Description language="fr">Marchés de viande et de volailles</Description>
+    <Description language="it">Mercati di carne e pollame</Description>
+    <Description language="ja">食肉／鶏肉店</Description>
+    <Description language="nl">Markten voor vlees en gevogelte</Description>
+    <Description language="pt">Mercados de carne e frango</Description>
+    <Description language="ru">Рынки мяса и птицы</Description>
+    <Description language="zh_CN">肉类和家禽市场</Description>
+    <Hazard>56</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJCSS4hAAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Pharmaprodukte - nicht Herstellung</Description>
+    <Description language="en_US">Pharmaceuticals - Non-Manufacturing</Description>
+    <Description language="es">Farmacéutico - No fabricación</Description>
+    <Description language="fr">Produits pharmaceutiques : hors fabrication</Description>
+    <Description language="it">Prodotti farmaceutici - Esclusa produzione</Description>
+    <Description language="ja">薬剤 - 非製造</Description>
+    <Description language="nl">Geneesmiddelen: geen productie</Description>
+    <Description language="pt">Farmacêutica - exceto fabricantes</Description>
+    <Description language="ru">Фармацевтическая продукция – без связи с производством</Description>
+    <Description language="zh_CN">药剂 - 非制造</Description>
+    <Hazard>56</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJCUwASQAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Lebensmittelgeschäfte</Description>
+    <Description language="en_US">Grocery Stores</Description>
+    <Description language="es">Tiendas de alimentos</Description>
+    <Description language="fr">Epiceries</Description>
+    <Description language="it">Negozi di generi alimentari</Description>
+    <Description language="ja">食料雑貨販売店</Description>
+    <Description language="nl">Levensmiddelenwinkels</Description>
+    <Description language="pt">Mercearias</Description>
+    <Description language="ru">Продовольственные магазины</Description>
+    <Description language="zh_CN">杂货店</Description>
+    <Hazard>56</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJD6tMtMAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Meeresfrüchte</Description>
+    <Description language="en_US">Seafood</Description>
+    <Description language="es">Mariscos</Description>
+    <Description language="fr">Fruits de mer</Description>
+    <Description language="it">Frutti di mare</Description>
+    <Description language="ja">海産物</Description>
+    <Description language="nl">Schaal- en schelpdieren</Description>
+    <Description language="pt">Frutos do mar</Description>
+    <Description language="ru">Морепродукты</Description>
+    <Description language="zh_CN">海鲜</Description>
+    <Hazard>74</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJEoR76MAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Restaurants</Description>
+    <Description language="en_US">Restaurants</Description>
+    <Description language="es">Restaurantes</Description>
+    <Description language="fr">Restaurants</Description>
+    <Description language="it">Ristoranti</Description>
+    <Description language="ja">レストラン</Description>
+    <Description language="nl">Restaurants</Description>
+    <Description language="pt">Restaurantes</Description>
+    <Description language="ru">Рестораны</Description>
+    <Description language="zh_CN">餐馆</Description>
+    <Hazard>28</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJF7nAeoAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Delikatessen</Description>
+    <Description language="en_US">Delicatessens</Description>
+    <Description language="es">Especialidades</Description>
+    <Description language="fr">Charcuteries</Description>
+    <Description language="it">Specialità gastronomiche</Description>
+    <Description language="ja">デリカテッセン</Description>
+    <Description language="nl">Delicatessenwinkels</Description>
+    <Description language="pt">Delicatessens</Description>
+    <Description language="ru">Кулинария</Description>
+    <Description language="zh_CN">熟食</Description>
+    <Hazard>28</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJFV4d-AAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Molkereierzeugnisse, außer Speiseeis</Description>
+    <Description language="en_US">Dairy Products, excluding Ice Cream</Description>
+    <Description language="es">Productos lácteos, excluyendo helado</Description>
+    <Description language="fr">Produits laitiers, sauf crème glacée</Description>
+    <Description language="it">Prodotti lattiero-caseari, esclusi gelati</Description>
+    <Description language="ja">アイスクリーム以外の乳製品</Description>
+    <Description language="nl">Zuivelproducten, uitgezonderd ijs</Description>
+    <Description language="pt">Produtos laticínios, exceto sorvete</Description>
+    <Description language="ru">Молочные продукты, за исключением мороженого</Description>
+    <Description language="zh_CN">乳制品，不包括冰淇淋</Description>
+    <Hazard>56</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJGH2F8oAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Molkereierzeugnisse, einschließlich Speiseeis</Description>
+    <Description language="en_US">Dairy Products, including Ice Cream</Description>
+    <Description language="es">Productos lácteos, incluyendo helado</Description>
+    <Description language="fr">Produits laitiers, notamment crème glacée</Description>
+    <Description language="it">Prodotti lattiero-caseari, inclusi gelati</Description>
+    <Description language="ja">アイスクリームを含む乳製品</Description>
+    <Description language="nl">Zuivelproducten, inclusief ijs</Description>
+    <Description language="pt">Produtos laticínios, inclusive sorvete</Description>
+    <Description language="ru">Молочные продукты, включая мороженое</Description>
+    <Description language="zh_CN">乳制品，包括冰淇淋</Description>
+    <Hazard>74</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJIrL8IQAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Floristen</Description>
+    <Description language="en_US">Florists</Description>
+    <Description language="es">Florerías</Description>
+    <Description language="fr">Fleuristes</Description>
+    <Description language="it">Fioristi</Description>
+    <Description language="ja">生花販売</Description>
+    <Description language="nl">Bloemisten</Description>
+    <Description language="pt">Floristas</Description>
+    <Description language="ru">Флористы</Description>
+    <Description language="zh_CN">花店</Description>
+    <Hazard>74</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJIrOjAcAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Obst und Gemüse</Description>
+    <Description language="en_US">Fruits &amp; Vegetables</Description>
+    <Description language="es">Frutas y vegetales</Description>
+    <Description language="fr">Fruits et légumes</Description>
+    <Description language="it">Frutta e verdura</Description>
+    <Description language="ja">果物、野菜</Description>
+    <Description language="nl">Groenten en fruit</Description>
+    <Description language="pt">Frutas e legumes</Description>
+    <Description language="ru">Фрукты и овощи</Description>
+    <Description language="zh_CN">水果和蔬菜</Description>
+    <Hazard>28</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJJ3439MAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Gewächshäuser</Description>
+    <Description language="en_US">Greenhouses</Description>
+    <Description language="es">Invernaderos</Description>
+    <Description language="fr">Serres</Description>
+    <Description language="it">Serre</Description>
+    <Description language="ja">温室</Description>
+    <Description language="nl">Broeikassen</Description>
+    <Description language="pt">Estufas</Description>
+    <Description language="ru">Теплицы</Description>
+    <Description language="zh_CN">温室</Description>
+    <Hazard>74</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+  <RiskClass public-id="wKgJJMmOK3gAAAAA">
+    <CoveragePatternCode>BOPSpoilageCov</CoveragePatternCode>
+    <Description language="de">Käsegeschäfte</Description>
+    <Description language="en_US">Cheese Shops</Description>
+    <Description language="es">Tiendas de quesos</Description>
+    <Description language="fr">Fromageries</Description>
+    <Description language="it">Formaggerie</Description>
+    <Description language="ja">チーズ専門店</Description>
+    <Description language="nl">Kaaswinkels</Description>
+    <Description language="pt">Lojas de queijo</Description>
+    <Description language="ru">Магазины сыров</Description>
+    <Description language="zh_CN">奶酪店</Description>
+    <Hazard>28</Hazard>
+    <PolicyLinePatternCode>BOPLine</PolicyLinePatternCode>
+  </RiskClass>
+</import>

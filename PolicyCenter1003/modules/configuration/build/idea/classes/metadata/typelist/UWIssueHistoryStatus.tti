@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The historical status of an UW issue after some action affecting its approval."
+  name="UWIssueHistoryStatus">
+  <typecode
+    code="Created"
+    desc="The issue was created."
+    name="Created"/>
+  <typecode
+    code="Approved"
+    desc="The issue was approved."
+    name="Approved"/>
+  <typecode
+    code="Rejected"
+    desc="The issue was rejected."
+    name="Rejected"/>
+  <typecode
+    code="Reopened"
+    desc="The issue was reopened (without specifying an issue blocking point after)."
+    name="Reopened"/>
+  <typecode
+    code="Removed"
+    desc="The issue was removed (e.g., by the issue evaluation rules)."
+    name="Issue no longer applies"/>
+  <typecode
+    code="Expired"
+    desc="The issue approval expired."
+    name="Expired"/>
+</typelist>

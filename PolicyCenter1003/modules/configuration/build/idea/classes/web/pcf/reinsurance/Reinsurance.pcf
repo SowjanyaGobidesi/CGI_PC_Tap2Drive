@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.System.viewreinsuranceprogram"
+    id="Reinsurance"
+    menuActions="ReinsuranceMenuActions()"
+    title="DisplayKey.get(&quot;Web.TabBar.Reinsurance&quot;)">
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Reinsurance.Navigation.Agreements&quot;)"
+      location="AgreementSearchPage()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Reinsurance.Navigation.Programs&quot;)"
+      location="ProgramSearchPage()"/>
+  </LocationGroup>
+</PCF>

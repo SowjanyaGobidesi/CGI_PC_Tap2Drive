@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="GL Line level exclusion scheduled item"
+  effDatedBranchType="PolicyPeriod"
+  entity="GLLineScheduleExclItem"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="gllineschedexclitem"
+  type="effdated">
+  <implementsEntity
+    name="GLScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.gl.GLLineScheduleExclItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.gl.GLLineScheduleExclItemCoverableAdapter"/>
+  <foreignkey
+    fkentity="GLLineScheduleExcl"
+    name="Schedule"
+    nullok="false"/>
+</entity>

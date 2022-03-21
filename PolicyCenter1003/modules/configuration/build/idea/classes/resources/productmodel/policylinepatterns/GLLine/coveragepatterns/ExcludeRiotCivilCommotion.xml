@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="ExcludeRiotCivilCommotion"
+  coverageCategory="GLOther"
+  exclusionSubtype="GeneralLiabilityExcl"
+  existence="Electable"
+  lookupTableName="GLExcl"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="ExcludeRiotCivilCommotion"
+  referenceDateByType="DefinedObject">
+  <AvailabilityScript/>
+  <InitializeScript/>
+  <OnRemovalScript/>
+</ExclusionPattern>

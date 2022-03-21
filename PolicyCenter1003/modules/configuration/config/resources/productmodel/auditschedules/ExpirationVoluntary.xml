@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SingleAuditSchedulePattern
+  auditMethod="Voluntary"
+  codeIdentifier="ExpirationVoluntary"
+  dueBusinessDayAdjustment="NextBusinessDay"
+  dueDelayAmount="15"
+  dueDelayDirection="After"
+  dueDelayUnit="CalendarDays"
+  initBusinessDayAdjustment="NextBusinessDay"
+  initDelayAmount="5"
+  initDelayDirection="Before"
+  initDelayUnit="CalendarDays"
+  public-id="ExpirationVoluntary"
+  type="FinalAudit"/>

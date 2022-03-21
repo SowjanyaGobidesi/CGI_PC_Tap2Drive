@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="CP Location"
+  displayName="CP Location"
+  effDatedBranchType="PolicyPeriod"
+  entity="CPLocation"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="cplocation"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.domain.LineSpecificLocation"
+    impl="gw.lob.cp.CPSpecificLocation"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.cp.CPLocationEffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.cp.CPLocationMatcher"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.cp.CPLocationCoverableAdapter"/>
+  <column
+    desc="Principle operations and occupancy."
+    name="PrincipalOpsDesc"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="240"/>
+  </column>
+  <foreignkey
+    fkentity="CommercialPropertyLine"
+    name="CPLine"
+    nullok="false"/>
+  <foreignkey
+    desc="Location of business exposure, e.g., one or more buildings."
+    exportable="true"
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="false"
+    setterScriptability="all"/>
+  <array
+    arrayentity="CPLocationCov"
+    cascadeDelete="true"
+    desc="All coverages that apply directly to this location."
+    name="Coverages"
+    owner="true"/>
+  <array
+    arrayentity="CPBuilding"
+    cascadeDelete="true"
+    desc="Buildings on this location"
+    name="Buildings"
+    owner="false"/>
+</entity>

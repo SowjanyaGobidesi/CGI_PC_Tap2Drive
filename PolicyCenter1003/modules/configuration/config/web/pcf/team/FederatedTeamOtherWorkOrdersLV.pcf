@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="FederatedTeamOtherWorkOrdersLV">
+    <!-- "PolicyChanges" actually includes PolicyChanges, Reinstatements, Cancellations, Audits and Rewrites -->
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel as gw.api.web.team.PCFederatedTeamModel"
+      name="pcFederatedTeamModel"
+      type="gw.api.web.team.PCFederatedTeamModel"/>
+    <Variable
+      initialValue="pcFederatedTeamModel.OtherWorkOrders as gw.api.web.team.federated.TeamFederatedIteratorBackingData"
+      name="otherWorkOrders"
+      type="gw.api.web.team.federated.TeamFederatedIteratorBackingData"/>
+    <ExposeIterator
+      flags="openWorkOrder"
+      name="OtherWorkOrdersIterator"
+      valueType="gw.api.web.desktop.data.JobDTO"
+      widget="OtherWorkOrdersIterator"/>
+    <RowIterator
+      appendPageInfo="true"
+      checkBoxVisible="true"
+      editable="false"
+      elementName="job"
+      hasCheckBoxes="true"
+      id="OtherWorkOrdersIterator"
+      type="gw.api.web.desktop.data.otherworkorders.OtherWorkOrdersDTO"
+      value="otherWorkOrders"
+      valueType="gw.api.web.team.federated.TeamFederatedIteratorBackingData">
+      <ToolbarFilter
+        name="otherWorkOrdersFilter">
+        <ToolbarFilterOptionGroup
+          filters="new gw.api.web.team.federated.FederatedTeamViewOtherWorkOrderFilters().FilterOptions"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="job.CloseDate == null"
+        name="openWorkOrder"/>
+      <Row>
+        <TextCell
+          action="FederatedJobForward.push(job.JobNumber, job.AccountPublicId)"
+          enableSort="false"
+          id="Type"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Type&quot;)"
+          value="job.DisplayType"/>
+        <TextCell
+          enableSort="false"
+          id="Insured"
+          label="DisplayKey.get(&quot;Web.DesktopActivitiesLV.AccountHolder&quot;)"
+          value="job.ContactName"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.CreateDate&quot;)"
+          sortDirection="descending"
+          value="job.CreationDate"/>
+        <TextCell
+          action="FederatedJobForward.push(job.JobNumber, job.AccountPublicId)"
+          enableSort="false"
+          id="JobNumber"
+          label="DisplayKey.get(&quot;Web.DesktopWorkOrders.WorkOrderNumber&quot;)"
+          value="job.JobNumber"/>
+        <TextCell
+          enableSort="false"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Status&quot;)"
+          value="job.DisplayStatus"/>
+        <TextCell
+          id="Product"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Product&quot;)"
+          sortBy="job.PolicyProductCode"
+          value="job.PolicyProduct"/>
+        <TextCell
+          enableSort="false"
+          id="Underwriter"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Underwriter&quot;)"
+          value="job.UnderwriterDisplayName"/>
+        <TextCell
+          enableSort="false"
+          id="AssignedTo"
+          label="DisplayKey.get(&quot;Web.Team.LV.AssignedTo&quot;)"
+          value="job.AllAssigned"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

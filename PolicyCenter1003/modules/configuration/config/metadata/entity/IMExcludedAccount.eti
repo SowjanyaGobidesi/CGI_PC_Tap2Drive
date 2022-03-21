@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- ===== Financials ===== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Inland Marine Excluded Account for Account Receivable"
+  effDatedBranchType="PolicyPeriod"
+  entity="IMExcludedAccount"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="imexcludedaccount"
+  type="effdated">
+  <column
+    desc="Account Number"
+    name="AccountNumber"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Description"
+    name="Description"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="IMAccountsRecPart"
+    name="IMAccountsRecPart"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ContingencyJob"
+  desc="Join table from Contingency and Job"
+  table="contingencyjob"
+  type="retireable">
+  <foreignkey
+    fkentity="Contingency"
+    name="Contingency"
+    nullok="false"/>
+  <foreignkey
+    fkentity="Job"
+    name="Job"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+</entity>

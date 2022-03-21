@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  name="PolicyPeriodQuoteClonePlugin">
+  <plugin-gosu
+    disabled="true"
+    gosuclass="gw.plugin.clone.DefaultPolicyPeriodQuoteClonePlugin"/>
+</plugin>

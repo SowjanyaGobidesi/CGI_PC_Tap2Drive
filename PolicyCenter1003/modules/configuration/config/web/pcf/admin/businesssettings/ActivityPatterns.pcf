@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.actpatview"
+    id="ActivityPatterns"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.ActivityPatterns&quot;)">
+    <Variable
+      initialValue="Activity.finder.findActivityPatterns()"
+      name="activityPatterns"
+      type="gw.api.database.IQueryBeanResult&lt;ActivityPattern&gt;"/>
+    <Screen
+      id="ActivityPatternsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewActivityPattern.go()"
+          id="ActivityPatterns_NewActivityPatternButton"
+          label="DisplayKey.get(&quot;Web.Admin.NewActivityPattern&quot;)"
+          shortcut="A"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="deleteActivityPatterns(CheckedValues)"
+          flags="any activityPattern"
+          id="ActivityPatterns_DeleteButton"
+          iterator="ActivityPatternsLV.ActivityPatternsLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="L"/>
+      </Toolbar>
+      <PanelRef
+        def="ActivityPatternsLV(activityPatterns)"/>
+    </Screen>
+    <Code><![CDATA[function deleteActivityPatterns(CheckedValues : ActivityPattern[]) {
+  gw.api.admin.BaseAdminUtil.deleteActivityPatterns(CheckedValues)
+  activityPatterns = Activity.finder.findActivityPatterns()
+
+  
+}]]></Code>
+  </Page>
+</PCF>

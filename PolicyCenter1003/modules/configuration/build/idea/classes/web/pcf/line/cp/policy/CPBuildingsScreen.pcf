@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="CPBuildingsScreen">
+    <Require
+      name="cpLine"
+      type="CommercialPropertyLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="cpLine.UnusedLocations"
+      name="unusedLocations"
+      recalculateOnRefresh="true"
+      type="AccountLocation[]"/>
+    <Variable
+      initialValue="10"
+      name="maxLocNum"
+      type="int"/>
+    <Variable
+      initialValue="false"
+      name="allChecked"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.riskassessment.PolicyLocationsRiskAssessmentRequestor.isLocationsRiskAssessmentInProgress(cpLine.AssociatedPolicyPeriod)"
+      name="RiskEvaluationInProgress"
+      type="Boolean"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="cpLine.Branch.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(cpLine.Branch, cpLine.Branch.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(cpLine.Branch)"/>
+    <AlertBar
+      id="RiskEvaluationInProgressAlert"
+      label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.MultiLocationRiskEvalInProgressAlert&quot;)"
+      visible="RiskEvaluationInProgress"/>
+    <PanelRef
+      def="OOSEPanelSet(cpLine.Branch, jobWizardHelper)"/>
+    <PanelRef
+      def="CPBuildingsAndLocationsLV(cpLine, openForEdit, jobWizardHelper)">
+      <Toolbar>
+        <ToolbarButton
+          hideIfReadOnly="true"
+          id="addLocationsTB"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.AddLocation&quot;)"
+          visible="openForEdit">
+          <AddMenuItem
+            id="AddNewLocation"
+            iterator="CPBuildingsAndLocationsLV.CPBuildingsAndLocationsLV"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.CreateNewLocation&quot;)"
+            visible="openForEdit"/>
+          <MenuItem
+            id="addExistingLocations"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.ExistingLocation&quot;)">
+            <MenuItemIterator
+              elementName="unusedLocation"
+              id="UnusedLocationIterator"
+              value="gw.web.policy.LocationDisplayUtil.getLimitedNumberOfSortedLocations(unusedLocations, cpLine, maxLocNum)"
+              valueType="entity.AccountLocation[]">
+              <IteratorSort
+                sortBy="unusedLocation.LocationNum"
+                sortOrder="1"/>
+              <MenuItem
+                action="CPLocationPopup.push(cpLine, unusedLocation, openForEdit, true, jobWizardHelper)"
+                id="UnassignedAccountLocation"
+                label="unusedLocation.DisplayName"/>
+            </MenuItemIterator>
+            <MenuItem
+              action="MoreCPLocationsPopup.push(cpLine.Branch, unusedLocations, openForEdit)"
+              id="AddMoreLocations"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.MoreLocations&quot;)"
+              visible="unusedLocations.Count &gt; maxLocNum"/>
+          </MenuItem>
+        </ToolbarButton>
+        <IteratorButtons
+          addVisible="false"
+          iterator="CPBuildingsAndLocationsLV.CPBuildingsAndLocationsLV"
+          removeFlags="all removeAvailable"
+          removeLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.RemoveBuildings&quot;)"/>
+        <ToolbarButton
+          action="jobWizardHelper.validateAndSaveDraft(); CopyBuildingCoveragesPopup.push(cpLine.Branch)"
+          id="CopyBuildingCoveragesButton"
+          label="DisplayKey.get(&quot;Web.CopyPolicyData.CommercialProperty.Buildings.CopyCoverages&quot;)"
+          visible="openForEdit and cpLine.Branch.CanCopyCoverages and cpLine.CPLocations*.Buildings.Count &gt; 1"/>
+        <ToolbarButton
+          id="Spreadsheet"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Spreadsheet&quot;)"
+          visible="true">
+          <MenuItem
+            action="if (openForEdit) jobWizardHelper.validateAndSaveDraft(); ExcelExportPopup.push(cpLine)"
+            id="Export"
+            label="DisplayKey.get(&quot;Web.ExcelExport.ExportMenu&quot;)"/>
+          <MenuItem
+            action="jobWizardHelper.validateAndSaveDraft(); ExcelImportFilePopup.push(cpLine.Branch, jobWizardHelper)"
+            id="Import"
+            label="DisplayKey.get(&quot;Web.ExcelExport.ImportMenu&quot;)"
+            visible="openForEdit"/>
+        </ToolbarButton>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

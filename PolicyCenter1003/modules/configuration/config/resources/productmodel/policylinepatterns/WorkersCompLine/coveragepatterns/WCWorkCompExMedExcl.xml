@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="WCWorkCompExMedExcl"
+  coverageCategory="WorkersCompGrp"
+  exclusionSubtype="WorkersCompExcl"
+  existence="Electable"
+  lookupTableName="WCExcl"
+  owningEntityType="WorkersCompLine"
+  policyLinePattern="WorkersCompLine"
+  priority="-1"
+  public-id="WCWorkCompExMedExcl"
+  referenceDateByType="PolicyTerm"/>

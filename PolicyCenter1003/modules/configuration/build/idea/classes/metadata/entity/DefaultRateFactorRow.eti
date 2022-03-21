@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<!-- Default table to store rate factors -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="Default rate factors"
+  entity="DefaultRateFactorRow"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="defratefactors"
+  type="retireable">
+  <fulldescription><![CDATA[This default table which stores the factors used in rating calculations]]></fulldescription>
+  <foreignkey
+    desc="Logical rate table that contain the factors with these values"
+    fkentity="RateTable"
+    name="RateTable"
+    nullok="false"/>
+  <!-- Strings -->
+  <column
+    desc="String 1"
+    name="str1"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 2"
+    name="str2"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 3"
+    name="str3"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 4"
+    name="str4"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 5"
+    name="str5"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 6"
+    name="str6"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 7"
+    name="str7"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    desc="String 8"
+    name="str8"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <!-- Integers -->
+  <column
+    desc="Integer 1"
+    name="int1"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 2"
+    name="int2"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 3"
+    name="int3"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 4"
+    name="int4"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 5"
+    name="int5"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 6"
+    name="int6"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 7"
+    name="int7"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer 8"
+    name="int8"
+    nullok="true"
+    type="integer"/>
+  <!-- Decimals -->
+  <column
+    desc="Decimal 1"
+    name="dec1"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="Decimal 2"
+    name="dec2"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="Decimal 3"
+    name="dec3"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="Decimal 4"
+    name="dec4"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="Decimal 5"
+    name="dec5"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="Decimal 6"
+    name="dec6"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <!-- Booleans -->
+  <column
+    desc="Bit 1"
+    name="bit1"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Bit 2"
+    name="bit2"
+    nullok="true"
+    type="bit"/>
+  <!-- Dates -->
+  <column
+    desc="Date 1"
+    name="date1"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date 2"
+    name="date2"
+    nullok="true"
+    type="datetime"/>
+</entity>

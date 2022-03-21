@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="RuntimePropertiesPlugin">
+  <plugin-java
+    javaclass="com.guidewire.properties.RuntimePropertiesPlugin">
+    <param
+      name="externalPropertyLocation"
+      value="/tmp/guidewire/properties"/>
+  </plugin-java>
+</plugin>

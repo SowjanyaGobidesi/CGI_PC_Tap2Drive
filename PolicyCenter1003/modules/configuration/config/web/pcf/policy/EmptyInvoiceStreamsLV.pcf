@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EmptyInvoiceStreamsLV">
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <RowIterator
+      editable="true"
+      elementName="description"
+      value="policyPeriodBillingInstructionsManager.EmptyInvoiceStreamsDescriptions"
+      valueType="java.lang.String[]">
+      <Row>
+        <RadioButtonCell
+          editable="true"
+          id="NoInvoiceStream"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InstallmentsPlansLV.Select&quot;)"
+          radioButtonGroup="NoInvoiceStreamsGroup"
+          required="true"
+          value="true"/>
+        <TextCell
+          id="description"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.Description&quot;)"
+          value="description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

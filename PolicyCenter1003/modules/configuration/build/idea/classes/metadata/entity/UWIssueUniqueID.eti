@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A UWIssueUniqueID is an issue type/issue key pair, uniquely idenitifying a UWIssue."
+  entity="UWIssueUniqueID"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="uwissueuniqueid"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    desc="The unique key used to identify this issue."
+    name="IssueKey"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    columnName="IssueTypeID"
+    desc="What type of issue this is.  Used both to match up issues and to determine what authority grant is required in order to approve the issue."
+    fkentity="UWIssueType"
+    name="IssueType"
+    nullok="false"/>
+  <foreignkey
+    columnName="PolicyTermID"
+    desc="The PolicyTerm for which the corresponding issue was human-touched."
+    exportable="false"
+    fkentity="PolicyTerm"
+    name="PolicyTerm"
+    nullok="false"/>
+</entity>

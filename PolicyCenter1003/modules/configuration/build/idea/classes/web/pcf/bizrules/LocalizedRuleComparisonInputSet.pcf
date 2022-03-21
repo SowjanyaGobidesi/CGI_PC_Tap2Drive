@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="LocalizedRuleComparisonInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <Require
+      name="parameter"
+      type="gw.bizrules.provisioning.LocalizedRuleActionParameter"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, parameter.Label)"
+      id="ParamSectionLabel"/>
+    <InputIterator
+      elementName="langParam"
+      id="additionalLanguages"
+      value="parameter.AllLangParams"
+      valueType="gw.bizrules.provisioning.LocalizedRuleActionParameter.LangParam[]">
+      <InputSetRef
+        def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(langParam.ParameterName))"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

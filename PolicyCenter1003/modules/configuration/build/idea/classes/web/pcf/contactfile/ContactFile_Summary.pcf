@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="ContactFile_Summary"
+    canVisit="gw.api.web.dashboard.ui.DashboardParameters.AccountHolderSummaryPermissions.Instance.canVisitDashboard(contact)"
+    title="DisplayKey.get('Web.ContactFile.AccountHolderSummary.Title', contact.DisplayName)">
+    <LocationEntryPoint
+      signature="ContactFile_Summary(contact: Contact)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.DashboardParameters.AccountHolderSummaryPermissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.DashboardParameters.AccountHolderSummaryPermissions"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.billing.BillingSummaryHelper(contact)"
+      name="billingSummaryHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.web.dashboard.ui.billing.BillingSummaryHelper"/>
+    <Screen>
+      <AlertBar
+        id="MultipleCurrenciesWarning"
+        label="DisplayKey.get('Web.ContactFile.AccountHolder.MulticurrencyWarning')"
+        visible="billingSummaryHelper.HasNoErrors and billingSummaryHelper.BillingSummary.AggregatedMultipleCurrencies"/>
+      <ColumnDashboard
+        id="ContactFile_SummaryDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="ContactDetailsDetailViewTile(contact)"
+            visible="permissions.ContactDetail"/>
+          <TileRef
+            def="CurrentPoliciesListViewTile(contact)"
+            visible="permissions.CurrentPolicies"/>
+          <TileRef
+            def="OpenPolicyTransactionsListViewTile(contact)"
+            visible="permissions.OpenPolicyTransactions"/>
+          <TileRef
+            def="ClaimsListViewTile(contact)"
+            visible="permissions.Claims"/>
+        </DashboardColumn>
+        <DashboardColumn>
+          <TileRef
+            def="AccountHolderOverviewDetailViewTile(contact)"
+            visible="permissions.CustomerSummary"/>
+          <TileRef
+            def="BillingSummaryChartTile(billingSummaryHelper)"
+            visible="permissions.BillingSummary"/>
+          <TileRef
+            def="NotesDetailViewTile(gw.api.web.dashboard.ui.note.NoteHelper.forContact(contact))"
+            visible="permissions.Notes"/>
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

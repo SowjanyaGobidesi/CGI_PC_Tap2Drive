@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Radius Code"
+  final="false"
+  name="RadiusCode">
+  <typecode
+    code="200PlusMiles"
+    desc="200+ miles"
+    name="200+ miles"
+    priority="6"/>
+</typelist>

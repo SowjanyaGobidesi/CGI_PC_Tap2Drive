@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  desc="Jurisdiction Applicability Criteria "
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritJurisdiction"
+  table="appcritjurisdiction"
+  type="versionable">
+  <typekey
+    desc="Jurisdiction in a rule availability criteria"
+    name="Jurisdiction"
+    nullok="false"
+    typelist="Jurisdiction"/>
+  <foreignkey
+    desc="The associated rule"
+    fkentity="UWRule"
+    name="UWRule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="gw.bizrules.domain.impl.AppCritJurisdictionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="gw.bizrules.domain.impl.AppCritJurisdictionImpl"/>
+  <index
+    desc="Enforce uniqueness per state/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UWRule"/>
+    <indexcol
+      keyposition="2"
+      name="Jurisdiction"/>
+  </index>
+</entity>

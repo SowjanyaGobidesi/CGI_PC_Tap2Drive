@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A date which marks the beginning of a new rating period. During a rating period the basis amounts for basis-scalable exposures are typically constant."
+  effDatedBranchType="PolicyPeriod"
+  entity="RatingPeriodStartDate"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="ratingperiodstartdate"
+  type="effdated">
+  <column
+    desc="Date this rating period takes effect."
+    name="StartDate"
+    nullok="false"
+    setterScriptability="all"
+    type="datetime"/>
+  <typekey
+    desc="The type of RPSD (anniversary date, forced re-rate, etc)"
+    name="Type"
+    nullok="false"
+    typelist="RPSDType"/>
+  <foreignkey
+    columnName="WCJurisdictionID"
+    desc="The jurisdiction to which this rating period belongs."
+    fkentity="WCJurisdiction"
+    name="WCJurisdiction"
+    nullok="false"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.policy.lines.wc.dbchecks.RatingPeriodStartDateDBCheckBuilder"/>
+</entity>

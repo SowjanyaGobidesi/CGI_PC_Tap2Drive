@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <CardViewPanel
+    id="AccountContactCV">
+    <Require
+      name="acctContact"
+      type="AccountContact"/>
+    <Require
+      name="showAddressTools"
+      type="boolean"/>
+    <Require
+      name="showRolesTab"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin)"
+      name="contactConfigPlugin"
+      type="gw.plugin.contact.IContactConfigPlugin"/>
+    <Card
+      id="AccountContactDetailCard"
+      title="DisplayKey.get(&quot;Web.AccountContacts.AccountDetail&quot;)">
+      <PanelRow>
+        <PanelColumn>
+          <PanelRef
+            def="AccountContactDV(acctContact.Contact, acctContact.Account)"
+            editable="true">
+            <Toolbar
+              visible="perm.Account.edit( acctContact.Account )"/>
+          </PanelRef>
+        </PanelColumn>
+      </PanelRow>
+    </Card>
+    <Card
+      id="RolesCard"
+      title="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Roles&quot;)"
+      visible="showRolesTab">
+      <DetailViewPanel
+        id="ContactRolesDV">
+        <InputColumn>
+          <ListViewInput
+            labelAbove="true">
+            <Toolbar
+              visible="perm.Account.edit( acctContact.Account )">
+              <AddButton
+                hideIfReadOnly="true"
+                id="AddRoleButton"
+                iterator="ContactRolesLV"
+                label="DisplayKey.get(&quot;Web.Account.Contact.AddRole&quot;)"
+                visible="acctContact.Contact != null">
+                <AddMenuItemIterator
+                  elementName="roleType"
+                  value="acctContact.AvailableAccountContactRoleTypes.subtract({TC_ACCOUNTHOLDER}).toTypedArray()"
+                  valueType="typekey.AccountContactRole[]">
+                  <IteratorSort
+                    sortBy="roleType"
+                    sortOrder="1"/>
+                  <AddMenuItem
+                    id="RoleType"
+                    iterator="ContactRolesLV"
+                    label="contactConfigPlugin.getAccountContactRoleTypeDisplayName(roleType)"
+                    toCreateAndAdd="acctContact.addNewRole(roleType)"/>
+                </AddMenuItemIterator>
+              </AddButton>
+              <IteratorButtons
+                addVisible="false"
+                iterator="ContactRolesLV"
+                removeLabel="DisplayKey.get(&quot;Web.Account.Contact.RemoveRole&quot;)"/>
+            </Toolbar>
+            <ListViewPanel
+              editable="true"
+              id="ContactRolesLV">
+              <!-- Dummy toCreateAndAdd is needed to make Add button visible. It will never be called since it is only used by
+                default Add button and default Add button is not visible. Current action does nothing. -->
+              <RowIterator
+                checkBoxVisible="not (acctContactRole typeis AccountHolder)"
+                editable="true"
+                elementName="acctContactRole"
+                hasCheckBoxes="true"
+                hideCheckBoxesIfReadOnly="true"
+                startChecked="false"
+                toCreateAndAdd="dummyCreateAndAddAccountContactRole()"
+                toRemove="tryToRemoveRole(acctContactRole)"
+                value="acctContact.Roles"
+                valueType="entity.AccountContactRole[]">
+                <IteratorSort
+                  sortBy="(typeof acctContactRole).TypeInfo.DisplayName"
+                  sortOrder="1"/>
+                <Row
+                  editable="true">
+                  <TextCell
+                    id="ContactRole"
+                    label="DisplayKey.get(&quot;Web.AccountContactCV.Roles&quot;)"
+                    value="(typeof acctContactRole).TypeInfo.DisplayName"/>
+                  <ModalCellRef
+                    def="AccountContactDisplayCell(acctContactRole)"
+                    id="ContactAdditionalInfo"
+                    label="DisplayKey.get(&quot;Web.AccountContactCV.AdditionalInformation&quot;)"
+                    mode="acctContactRole.Subtype"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Card>
+    <Card
+      id="AddressesCard"
+      title="DisplayKey.get(&quot;Web.Contact.Addresses.Title&quot;)">
+      <PanelRef
+        def="AddressesPanelSet(acctContact.Contact, showAddressTools, acctContact.Account, null)">
+        <Toolbar
+          visible="acctContact.Account.Editable and perm.System.editaccountcontacts"/>
+      </PanelRef>
+    </Card>
+    <Card
+      hideIfEditable="true"
+      id="JobsCard"
+      title="DisplayKey.get(&quot;Web.AccountContacts.AssociatedJobs&quot;)">
+      <PanelRef
+        def="AccountFile_Contacts_WorkOrdersLV(acctContact)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.AccountContacts.AssociatedJobs&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Card>
+    <Card
+      hideIfEditable="true"
+      id="PoliciesCard"
+      title="DisplayKey.get(&quot;Web.AccountContacts.AssociatedPolicies&quot;)">
+      <PanelRef
+        def="AccountFile_Contacts_PoliciesLV(acctContact)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.AccountContacts.AssociatedPolicies&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Card>
+    <Code><![CDATA[function tryToRemoveRole(acRole : AccountContactRole) {
+ if (acRole.AccountContact.Roles.Count == 1) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.AccountContactCV.Error.CannotRemoveOnlyRole"))
+  }
+  if (not acRole.canRemove()) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.AccountContactCV.Error.CannotRemoveInUseRole", acRole))
+  }
+  
+  acRole.AccountContact.removeFromRoles(acRole)
+}
+
+function dummyCreateAndAddAccountContactRole() : AccountContactRole {
+  return null
+}]]></Code>
+  </CardViewPanel>
+</PCF>

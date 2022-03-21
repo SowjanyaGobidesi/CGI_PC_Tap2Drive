@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="RatedPeril" desc="Rated peril">
+  <typecode
+    code="fire"
+    desc="Fire"
+    name="Fire"
+    priority="10"/>
+  <typecode
+    code="lightning"
+    desc="lightning"
+    name="Lightning"
+    priority="20"/>
+  <typecode
+    code="windstormhail"
+    desc="Windstorm or hail"
+    name="Windstorm or Hail"
+    priority="30"/>
+  <typecode
+    code="explosion"
+    desc="Explosion"
+    name="Explosion"
+    priority="40"/>
+  <typecode
+    code="riotcommotion"
+    desc="Riot or civil commotion"
+    name="Riot or Civil Commotion"
+    priority="50"/>
+  <typecode
+    code="aircraft"
+    desc="Damage caused by aircraft"
+    name="Aircraft"
+    priority="60"/>
+  <typecode
+    code="vehicles"
+    desc="Damage cause by vehicles"
+    name="Vehicles"
+    priority="70"/>
+  <typecode
+    code="smoke"
+    desc="Smoke"
+    name="Smoke"
+    priority="80"/>
+  <typecode
+    code="vandalism"
+    desc="Vandalism"
+    name="Vandalism"
+    priority="90"/>
+  <typecode
+    code="theft"
+    desc="Theft"
+    name="Theft"
+    priority="100"/>
+  <typecode
+    code="volcanic"
+    desc="Volcanic action"
+    name="Volcanic Action"
+    priority="110"/>
+  <typecode
+    code="fallingobject"
+    desc="Falling object"
+    name="Falling Object"
+    priority="120"/>
+  <typecode
+    code="icesnow"
+    desc="Weight of ice, snow, or sleet"
+    name="Weight of Ice, Snow, or Sleet"
+    priority="130"/>
+  <typecode
+    code="water"
+    desc="Non-weather water"
+    name="Non-Weather Water"
+    priority="140"/>
+</typelist>

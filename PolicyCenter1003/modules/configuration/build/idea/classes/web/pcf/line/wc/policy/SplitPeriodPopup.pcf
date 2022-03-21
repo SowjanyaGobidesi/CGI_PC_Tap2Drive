@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- http://jira/jira/browse/CC-38105 -->
+  <Popup
+    beforeCommit="wcLine.addRPSD( splitDate, splitType, jurisdictions )"
+    canEdit="true"
+    countsAsWork="false"
+    id="SplitPeriodPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Policy.WC.SplitPeriod&quot;)">
+    <LocationEntryPoint
+      signature="SplitPeriodPopup(wcLine : productmodel.WorkersCompLine, jurisdictions : WCJurisdiction[])"/>
+    <Variable
+      name="wcLine"
+      type="productmodel.WorkersCompLine"/>
+    <Variable
+      name="jurisdictions"
+      type="WCJurisdiction[]"/>
+    <Variable
+      initialValue="wcLine.Branch.EditEffectiveDate"
+      name="splitDate"
+      type="java.util.Date"/>
+    <Variable
+      name="splitType"
+      type="RPSDType"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.Split&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <DateInput
+            editable="true"
+            id="SplitDate"
+            label="DisplayKey.get(&quot;Web.Policy.WC.SplitDate&quot;)"
+            requestValidationExpression="validateSplitDate(VALUE)"
+            required="true"
+            value="splitDate"/>
+          <RangeInput
+            editable="true"
+            id="splitType"
+            label="DisplayKey.get(&quot;Web.Policy.WC.SplitType&quot;)"
+            required="true"
+            value="splitType"
+            valueRange="{RPSDType.TC_FORCEDRERATING, RPSDType.TC_LATEMOD}"
+            valueType="typekey.RPSDType"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function validateSplitDate(date : java.util.Date) : String{
+  for(j in jurisdictions){
+    var dateTime = gw.api.util.DateUtil.mergeDateAndTime(date, wcLine.Branch.PeriodStart)
+    var error = j.canAddRPSD(dateTime)
+    if(error != null){
+      return error
+    }
+  }
+  return null
+}]]></Code>
+  </Popup>
+</PCF>

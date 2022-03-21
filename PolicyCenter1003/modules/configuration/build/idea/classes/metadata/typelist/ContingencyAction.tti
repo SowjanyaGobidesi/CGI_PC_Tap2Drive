@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="ContingencyAction"
+  name="ContingencyAction">
+  <typecode
+    code="ChangeRetroactively"
+    desc="Change policy retroactively"
+    name="Change policy retroactively"
+    priority="5">
+    <category
+      code="PolicyChange"
+      typelist="Job"/>
+    <category
+      code="flat"
+      typelist="CalculationMethod"/>
+  </typecode>
+  <typecode
+    code="ChangeRemainderOfTerm"
+    desc="Change policy for remainder of term"
+    name="Change policy for remainder of term"
+    priority="10">
+    <category
+      code="PolicyChange"
+      typelist="Job"/>
+    <category
+      code="prorata"
+      typelist="CalculationMethod"/>
+  </typecode>
+  <typecode
+    code="CancelRetroactively"
+    desc="Cancel retroactively"
+    name="Cancel retroactively"
+    priority="15">
+    <category
+      code="Cancellation"
+      typelist="Job"/>
+    <category
+      code="flat"
+      typelist="CalculationMethod"/>
+  </typecode>
+  <typecode
+    code="CancelRemainderOfTerm"
+    desc="Cancel remainder of term"
+    name="Cancel remainder of term"
+    priority="20">
+    <category
+      code="Cancellation"
+      typelist="Job"/>
+    <category
+      code="prorata"
+      typelist="CalculationMethod"/>
+  </typecode>
+  <typecode
+    code="CancelRewrite"
+    desc="Cancel / Rewrite"
+    name="Cancel / Rewrite"
+    priority="30">
+    <category
+      code="Cancellation"
+      typelist="Job"/>
+    <category
+      code="flat"
+      typelist="CalculationMethod"/>
+  </typecode>
+</typelist>

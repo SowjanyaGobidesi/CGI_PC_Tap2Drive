@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ListViewPanel
+    id="RateRoutineEntityInstructionLV"
+    validationExpression="helper.noneSelected() ? DisplayKey.get(&quot;Validation.Rating.RateRoutineDefinition.SelectInScopeItem&quot;) : null">
+    <Require
+      name="calcStep"
+      type="CalcStepDefinition"/>
+    <Require
+      name="inScopeUsages"
+      type="gw.rating.flow.util.InScopeUsage[]"/>
+    <Require
+      name="helper"
+      type="gw.pcf.rating.flow.RateRoutineEntityInstructionPopupHelper"/>
+    <RowIterator
+      editable="true"
+      elementName="inScopeUsage"
+      id="InScopeUsagesIterator"
+      pageSize="50"
+      value="inScopeUsages"
+      valueType="gw.rating.flow.util.InScopeUsage[]">
+      <Row>
+        <RadioButtonCell
+          action="calcStep.setInScopeValue(inScopeUsage.Path)"
+          editable="true"
+          enableSort="false"
+          hideChildrenIfReadOnly="false"
+          id="SelectRadio"
+          radioButtonGroup="InScopeUsagesGroup"
+          value="inScopeUsage.Path == calcStep.InScopeValue"
+          valueType="Boolean"/>
+        <TextCell
+          id="FieldName"
+          label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EntityPopup.FieldName&quot;)"
+          outputConversion="VALUE==null ? DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EntityPopup.ThisEntity&quot;) : VALUE"
+          value="inScopeUsage.UserFriendlyPath"/>
+        <LinkCell
+          label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EntityPopup.Type&quot;)">
+          <Link
+            id="FieldType"
+            label="inScopeUsage.UserFriendlyDataType"
+            styleClass="none"
+            tooltip="inScopeUsage.FeatureType.Name"/>
+        </LinkCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

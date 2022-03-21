@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NoteTemplateSearchDV">
+    <Require
+      name="noteTemplateSearchCriteria"
+      type="NoteTemplateSearchCriteria"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="Topic"
+        label="DisplayKey.get(&quot;Web.NoteTemplateSearch.Topic&quot;)"
+        value="noteTemplateSearchCriteria.Topic"
+        valueType="typekey.NoteTopicType"
+        visible="NoteTopicType.getTypeKeys( false ).Count &gt; 1"/>
+      <TypeKeyInput
+        editable="true"
+        id="Type"
+        label="DisplayKey.get(&quot;Web.NoteTemplateSearch.Type&quot;)"
+        value="noteTemplateSearchCriteria.Type"
+        valueType="typekey.NoteType"
+        visible="NoteType.getTypeKeys( false ).Count &gt; 1"/>
+      <TypeKeyInput
+        editable="true"
+        id="Language"
+        label="DisplayKey.get(&quot;Web.NoteTemplateSearch.Language&quot;)"
+        required="true"
+        value="noteTemplateSearchCriteria.Language"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+      <RangeInput
+        editable="true"
+        id="Product"
+        label="DisplayKey.get(&quot;Web.NoteTemplateSearch.Lob&quot;)"
+        optionLabel="gw.api.productmodel.ProductLookup.getByPublicID( VALUE ).DisplayName"
+        value="noteTemplateSearchCriteria.LOB"
+        valueRange="gw.api.productmodel.ProductLookup.getAll().map( \ p -&gt; p.PublicID  )"
+        valueType="java.lang.String"/>
+      <TextInput
+        editable="true"
+        id="Keywords"
+        label="DisplayKey.get(&quot;Web.NoteTemplateSearch.Keywords&quot;)"
+        value="noteTemplateSearchCriteria.Keywords"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

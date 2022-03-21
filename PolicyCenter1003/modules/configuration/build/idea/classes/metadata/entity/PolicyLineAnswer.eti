@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A merge table linking answers to a specific policyline. Specific to PolicyCenter."
+  effDatedBranchType="PolicyPeriod"
+  entity="PolicyLineAnswer"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="policylineanswer"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.question.PolicyLineAnswerMatcher"/>
+  <implementsEntity
+    name="PCAnswerDelegate"/>
+  <foreignkey
+    fkentity="PolicyLine"
+    name="PolicyLine"
+    nullok="false"/>
+</entity>

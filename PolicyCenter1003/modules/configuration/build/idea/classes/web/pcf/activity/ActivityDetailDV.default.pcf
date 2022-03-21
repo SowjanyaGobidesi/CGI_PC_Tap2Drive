@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ActivityDetailDV"
+    mode="default">
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Variable
+      initialValue="gw.api.util.SymbolTableUtil.populateSymbolProviderFromBeans(activity)"
+      name="symbolProvider"
+      type="gw.document.SimpleSymbolProvider"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ActivityDetail.ActivityInfo&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Subject"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Subject&quot;)"
+        required="true"
+        value="activity.Subject"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Description&quot;)"
+        numRows="3"
+        value="activity.Description"/>
+      <TypeKeyInput
+        editable="true"
+        id="Priority"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Priority&quot;)"
+        value="activity.Priority"
+        valueType="typekey.Priority"/>
+      <TypeKeyInput
+        id="Status"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Status&quot;)"
+        value="activity.Status"
+        valueType="typekey.ActivityStatus"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Mandatory"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Mandatory&quot;)"
+        value="activity.Mandatory"/>
+      <BooleanRadioInput
+        id="Recurring"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Recurring&quot;)"
+        value="activity.Recurring"/>
+      <DateInput
+        editable="true"
+        id="TargetDate"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.TargetDate&quot;)"
+        value="activity.TargetDate"/>
+      <DateInput
+        editable="true"
+        id="EscalationDate"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.EscalationDate&quot;)"
+        value="activity.EscalationDate"/>
+      <DocumentTemplateInput
+        conversionExpression="PickedValue.TemplateId"
+        editable="true"
+        freeInputEnabled="false"
+        id="DocumentTemplate"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.CreateDocument&quot;)"
+        pickLocation="DocumentTemplateSearchPopup.push(symbolProvider)"
+        value="activity.DocumentTemplate"
+        valueType="java.lang.String"
+        visible="not gw.document.DocumentsActionsUIHelper.DocumentProductionIntegrationEnabled"/>
+      <PickerInput
+        conversionExpression="PickedValue.Filename"
+        editable="true"
+        freeInputEnabled="false"
+        id="EmailTemplate"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.EmailTemplate&quot;)"
+        outputConversion="getEmailDisplayName(VALUE)"
+        pickLocation="PickEmailTemplatePopup.push(new gw.api.email.EmailTemplateSearchCriteria(symbolProvider.names()?.toTypedArray()))"
+        value="activity.EmailTemplate"
+        valueType="java.lang.String"/>
+      <TextInput
+        id="AssignedTo"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.AssignedTo&quot;)"
+        value="activity.AssignedTo"
+        valueType="java.lang.Object"/>
+    </InputColumn>
+    <Code><![CDATA[
+function getEmailDisplayName(templateFilename : String) : String {
+  if (templateFilename == null) {
+    return null
+  }
+  var ets = gw.plugin.Plugins.get(gw.plugin.email.IEmailTemplateSource)
+  return ets.getEmailTemplate(templateFilename).Name
+}
+
+
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

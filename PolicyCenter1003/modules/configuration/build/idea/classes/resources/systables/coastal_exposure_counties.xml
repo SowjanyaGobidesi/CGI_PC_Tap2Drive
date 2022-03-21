@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<import>
+  <CoastalExposureCounty public-id="pc:znsiqp8egn4ltdjv76ec29u9nsb">
+    <County>Colleton</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z0eikir4mi61hf296gkl0n387ua">
+    <County>Onslow</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zd2jmccke5mlp6nbetu56omugv8">
+    <County>New Hanover</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zn1j8hikug2pv8dh0s148ml8ul8">
+    <County>Perquimans</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z4rgkv9vjh20830lseg5tk5qi1b">
+    <County>Barkeley</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:za6h89p0gpp9ia4r5ua58q3b3r8">
+    <County>Hancock</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zs4ggv3kuiqqpf7o0dggtdeaqq9">
+    <County>Georgetown</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zk4hced4vluuq4q9693iket1kda">
+    <County>George</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zcjhggc3p16v25moc3uofd8o7ia">
+    <County>Pasquotank</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:ziihi982dtq3jd3slgkufshah09">
+    <County>Dare</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zr8js3va91qssfmp2vs1f79aom9">
+    <County>Charleston</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zjmgo9a3e0u4k3k95fjeul7lvga">
+    <County>Currituck</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zbdgs8h8kdaedbatai4g9sqv5q9">
+    <County>Pender</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zn1jmg0brsf6n4ijl9l7sb77248">
+    <County>Jones</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z7pgme0qcpg7k4jflciatqndh9a">
+    <County>Beaufort</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z2qico9b9l319d3fsson05q7n08">
+    <County>Baldwin</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>AL</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:ztrhqtdoje5u1d2nbjtvicmpu79">
+    <County>Pamlico</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zuejqioe3runp31kvpek6gilvqb">
+    <County>Mobile</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>AL</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:za5gue6o5k2o34svu6bjqam3p7b">
+    <County>Jasper</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z7his26t42p248mdpslet4uhk59">
+    <County>Stone</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zg2h8mtvi9ambb4b1e3nncn5vna">
+    <County>Glynn</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zadj4tg8pgpnj85o646dtmn05rb">
+    <County>Chowan</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zf4j2k0bottkc3jg2u4499v3e49">
+    <County>Camden</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zqniciddktarpcuj6tff963qp68">
+    <County>Liberty</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zu6j8ihtv2toc04o3lmh8i4vq8a">
+    <County>Tyrell</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zgbjspv7vtga7f77c2l9cuert99">
+    <County>Harrison</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zbpj24eag7r1qd6pj4df7ap8fn8">
+    <County>Carteret</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zlvj4tlnuk16o6p6b2pltfnrbeb">
+    <County>Jackson</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zmtga5kegc5m648di2qotf1jsi8">
+    <County>Henry</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zojikl6m17otc0qttds0ehqm07a">
+    <County>Washington</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z2ej4g5ls4a9tfsh8l31nu4ifsa">
+    <County>Pearl River</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>MS</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zq6ji6lf152a1637o926vmnboo8">
+    <County>Brunswick</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zsdhmmv0csemu8qelqe8umnhi49">
+    <County>Chatham</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zjsj89gr0sr3h71g5ojnobu9m5b">
+    <County>Mcintosh</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zvvha6ostsfor86peb22i74c09a">
+    <County>Camden</County>
+    <ExposureLevel>1</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zvpi685ks0m1735vih61cnvj838">
+    <County>Beaufort</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zp5j29rhiokeoe62f69sct7kc88">
+    <County>Bryant</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>GA</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:z99ge95c4il5s4ll87nc87k464b">
+    <County>Craven</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zb6jiho7funiofj10dpcbd6j3u8">
+    <County>Dorchester</County>
+    <ExposureLevel>2</ExposureLevel>
+    <State>SC</State>
+  </CoastalExposureCounty>
+  <CoastalExposureCounty public-id="pc:zcogk6dduimva3ojkkm9qumf3r9">
+    <County>Hyde</County>
+    <ExposureLevel>3</ExposureLevel>
+    <State>NC</State>
+  </CoastalExposureCounty>
+</import>

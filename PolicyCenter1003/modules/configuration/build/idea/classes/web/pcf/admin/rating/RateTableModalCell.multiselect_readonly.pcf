@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ModalCell
+    id="RateTableModalCell"
+    mode="multiselect_readonly">
+    <Require
+      name="cell"
+      type="gw.rating.rtm.domain.table.RateTableCell"/>
+    <Require
+      name="valueProvider"
+      type="gw.rating.rtm.valueprovider.RateTableCellValueProvider"/>
+    <Require
+      name="valueRequired"
+      type="boolean"/>
+    <Variable
+      initialValue="cell as gw.rating.rtm.domain.table.MultiSelectCell"
+      name="multiSelectCell"
+      type="gw.rating.rtm.domain.table.MultiSelectCell"/>
+    <FormatCell
+      id="FormatId">
+      <ContentInput>
+        <Link
+          id="LinkId"
+          label="multiSelectCell.displayMultiValueReadOnly(valueProvider)"
+          tooltip="multiSelectCell.displayMultiValue(valueProvider)"/>
+      </ContentInput>
+    </FormatCell>
+  </ModalCell>
+</PCF>

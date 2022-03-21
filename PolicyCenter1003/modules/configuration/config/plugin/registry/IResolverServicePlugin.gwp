@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IResolverServicePlugin"
+  name="IResolverServicePlugin">
+  <plugin-gosu
+    disabled="false"
+    gosuclass="gw.plugin.multicluster.resolver.v1.ResolverServicePlugin">
+    <param
+      name="HostUrl"
+      value="${ResolverHostUrl}"/>
+    <param
+      name="ClientId"
+      value="${ResolverClientId}"/>
+    <param
+      name="ClientSecret"
+      value="${ResolverClientSecret}"/>
+    <param
+      name="Scope"
+      value="${ResolverScope}"/>
+    <param
+      name="TokenUri"
+      value="${ResolverTokenUri}"/>
+  </plugin-gosu>
+</plugin>

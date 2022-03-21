@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="Policy_JobUsersLV">
+    <Require
+      name="job"
+      type="Job"/>
+    <RowIterator
+      editable="false"
+      elementName="assignment"
+      pageSize="0"
+      value="job.RoleAssignments"
+      valueType="entity.JobUserRoleAssignment[]">
+      <Row>
+        <TypeKeyCell
+          id="Role"
+          label="DisplayKey.get(&quot;Web.PolicyFile.JobUsers.Role&quot;)"
+          value="assignment.Role"
+          valueType="typekey.UserRole"/>
+        <AltUserCell
+          id="User"
+          label="DisplayKey.get(&quot;Web.PolicyFile.JobUsers.User&quot;)"
+          value="assignment.AssignedUser"/>
+        <AltGroupCell
+          id="Group"
+          label="DisplayKey.get(&quot;Web.PolicyFile.JobUsers.Group&quot;)"
+          value="assignment.AssignedGroup"/>
+        <TextCell
+          id="Phone"
+          label="DisplayKey.get(&quot;Web.PolicyFile.JobUsers.Phone&quot;)"
+          value="assignment.AssignedUser.Contact.PrimaryPhoneValue"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Referencess one Job referred to in a letter."
+  entity="JobLetter"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="jobletter"
+  type="joinarray">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="LetterID"
+    desc="The associated Letter."
+    exportable="false"
+    fkentity="Letter"
+    name="Letter"
+    nullok="false"/>
+  <foreignkey
+    columnName="JobID"
+    desc="The associated Job."
+    exportable="true"
+    fkentity="Job"
+    name="Job"
+    nullok="false"/>
+  <index
+    desc="Ensures the uniqueness of any given job/letter join."
+    name="jobletteru1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LetterID"/>
+    <indexcol
+      keyposition="2"
+      name="JobID"/>
+  </index>
+</entity>

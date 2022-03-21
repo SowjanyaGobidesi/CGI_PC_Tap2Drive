@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PAVehicleAdditionalCoveragesDV">
+    <Require
+      name="paLine"
+      type="PersonalAutoLine"/>
+    <Require
+      name="includedCoverageCategories"
+      type="String[]"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="paLine == null ? null : paLine.Vehicles"
+      name="vehicles"
+      type="entity.PersonalVehicle[]"/>
+    <InputColumn>
+      <InputSet
+        visible="vehicles.Count &gt; 0">
+        <InputIterator
+          elementName="vehicle"
+          id="VehiclesIterator"
+          value="vehicles"
+          valueType="entity.PersonalVehicle[]">
+          <HiddenInput
+            id="VehicleDisplayName"
+            value="vehicle.DisplayName"
+            valueType="java.lang.String"/>
+          <Label
+            label="vehicle.DisplayName"/>
+          <InputIterator
+            elementName="category"
+            id="categories"
+            value="includedCoverageCategories"
+            valueType="java.lang.String[]">
+            <InputSet>
+              <Variable
+                initialValue="paLine.Pattern.getCoverageCategoryByPublicId(category).coveragePatternsForEntity(PersonalVehicle).whereSelectedOrAvailable(vehicle, openForEdit)"
+                name="vehicleCoveragePatterns"
+                recalculateOnRefresh="true"
+                type="gw.api.productmodel.CoveragePattern[]"/>
+              <InputIterator
+                elementName="vehicleCoveragePattern"
+                forceRefreshDespiteChangedEntries="true"
+                id="VehicleCoveragesIterator"
+                value="vehicleCoveragePatterns"
+                valueType="gw.api.productmodel.CoveragePattern[]">
+                <InputSetRef
+                  def="CoverageInputSet(vehicleCoveragePattern, vehicle, openForEdit)"
+                  mode="vehicleCoveragePattern.PublicID"/>
+              </InputIterator>
+            </InputSet>
+          </InputIterator>
+        </InputIterator>
+      </InputSet>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- EXTERNAL TYPELISTS -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of charge will be stored in billing system"
+  final="false"
+  name="ChargePattern">
+  <typecode
+    code="Premium"
+    desc="Premium"
+    name="Premium"/>
+  <typecode
+    code="Taxes"
+    desc="Taxes"
+    name="Taxes"/>
+</typelist>

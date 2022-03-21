@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A taxable unit of price for a period of time, not to be broken up any further, for Personal Auto"
+  entity="PAGeneralPremium"
+  supertype="PATaxable"/>

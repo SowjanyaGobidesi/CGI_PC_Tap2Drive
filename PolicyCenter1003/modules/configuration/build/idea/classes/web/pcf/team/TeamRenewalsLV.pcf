@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="TeamRenewalsLV">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel as gw.api.web.team.PCDefaultTeamModel"
+      name="pcDefaultTeamModel"
+      type="gw.api.web.team.PCDefaultTeamModel"/>
+    <Variable
+      initialValue="pcDefaultTeamModel.Renewals as gw.api.database.IQueryBeanResult&lt;Renewal&gt;"
+      name="renewals"
+      type="gw.api.database.IQueryBeanResult&lt;Renewal&gt;"/>
+    <ExposeIterator
+      flags="openWorkOrder"
+      name="RenewalsIterator"
+      valueType="entity.Renewal"
+      widget="RenewalsIterator"/>
+    <RowIterator
+      appendPageInfo="true"
+      checkBoxVisible="true"
+      editable="false"
+      elementName="renewal"
+      hasCheckBoxes="true"
+      id="RenewalsIterator"
+      value="renewals"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Renewal&gt;">
+      <ToolbarFilter
+        name="renewalsFilter">
+        <ToolbarFilterOptionGroup
+          filters="new gw.api.web.team.TeamViewRenewalFilters().FilterOptions"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="renewal.CloseDate == null"
+        name="openWorkOrder"/>
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Insured"
+          label="DisplayKey.get(&quot;Web.DesktopActivitiesLV.AccountHolder&quot;)"
+          value="renewal.Policy.Account.AccountHolderContact.DisplayName"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.CreateDate&quot;)"
+          sortDirection="descending"
+          value="renewal.CreateTime"/>
+        <TextCell
+          enableSort="false"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Status&quot;)"
+          value="renewal.DisplayStatus"/>
+        <TextCell
+          action="JobForward.go(renewal)"
+          id="Product"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Product&quot;)"
+          sortBy="renewal.Policy.ProductCode"
+          value="renewal.Policy.Product"
+          valueType="gw.api.productmodel.Product"/>
+        <AltUserCell
+          enableSort="false"
+          id="Underwriter"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Underwriter&quot;)"
+          value="renewal.Underwriter"/>
+        <TextCell
+          enableSort="false"
+          id="AssignedTo"
+          label="DisplayKey.get(&quot;Web.Team.LV.AssignedTo&quot;)"
+          value="renewal.getAllAssigned()"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of batch processes"
+  name="BatchProcessType">
+  <typecode
+    code="PurgeTemporaryPolicyPeriods"
+    desc="Purge policy periods that are currently in a temporary state"
+    name="Purge Temporary Policy Periods">
+    <category
+      xmlns=""
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      xmlns=""
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="OpenPolicyException"
+    desc="Open Policy Exception Monitor"
+    name="Open Policy Exception"/>
+  <typecode
+    code="BoundPolicyException"
+    desc="Bound Policy Exception Monitor"
+    name="Bound Policy Exception"/>
+  <typecode
+    code="ClosedPolicyException"
+    desc="Closed Policy Exception Monitor"
+    name="Closed Policy Exception"/>
+  <typecode
+    code="PolicyRenewalStart"
+    desc="Policy Renewal Start monitor"
+    name="Policy Renewal Start"/>
+  <typecode
+    code="FormTextDataDelete"
+    desc="Deletes orphaned, purged, or archived FormTextData"
+    name="Form Text Data Delete"/>
+  <typecode
+    code="AuditTask"
+    desc="Audit task monitor"
+    name="AuditTask"/>
+  <typecode
+    code="OverduePremiumReport"
+    desc="Monitor for overdue premium reports"
+    name="Overdue Premium Report"/>
+  <typecode
+    code="TeamScreens"
+    desc="Collect summary counts for team screens"
+    name="TeamScreens"/>
+  <typecode
+    code="JobExpire"
+    desc="Automatic expiration of jobs if no conclusive action taken."
+    name="JobExpire"/>
+  <typecode
+    code="PremiumCeding"
+    desc="Reinsurance ceding of premium"
+    name="PremiumCeding"/>
+  <typecode
+    code="PolicyHoldJobEval"
+    desc="Evaluates jobs against the policy holds blocking it"
+    name="Policy Hold Job Evaluation"/>
+  <typecode
+    code="ActivityRetire"
+    desc="Retires canceled activities after configured time"
+    name="Retire Activities"/>
+  <typecode
+    code="ArchivePolicyTerm"
+    desc="Policy term archiving monitor"
+    name="Archive policy terms"/>
+  <typecode
+    code="RestorePolicyTerm"
+    desc="Policy term retrieval monitor"
+    name="Retrieve policy terms"/>
+  <typecode
+    code="ImpactTestingTestPrep"
+    desc="Prepares policy periods for impact testing"
+    name="Impact Testing Test Case Preparation"/>
+  <typecode
+    code="ImpactTestingTestRun"
+    desc="Runs the test periods through the rating algorithm"
+    name="Impact Testing Test Case Run"/>
+  <typecode
+    code="ImpactTestingExport"
+    desc="Exports the test periods to Excel"
+    name="Impact Testing Export"/>
+  <typecode
+    code="Purge"
+    desc="Purges Entities which are no longer needed"
+    name="Purge"/>
+  <typecode
+    code="PurgeOrphanedPolicyPeriod"
+    desc="Purges policy periods orphaned as a result of preemption"
+    name="Purge Orphaned Policy Periods"/>
+  <typecode
+    code="ResetPurgeStatusAndCheckDates"
+    desc="Reset purge status and purge/prune dates on Job"
+    name="Reset Purge Status and Check Dates"/>
+  <typecode
+    code="PurgeMessageHistory"
+    desc="Purges old messages from the message history table"
+    name="Purge Message History"/>
+  <typecode
+    code="PurgeWorksheets"
+    desc="purge worksheet containers"
+    name="Purge Worksheet Containers"/>
+  <typecode
+    code="ExtractWorksheets"
+    desc="extract worksheet data from WorksheetContainers"
+    name="Extract Worksheets"/>
+  <typecode
+    code="PurgeQuoteClones"
+    desc="Purge Quote Clones: Purge temporary clones of quoted policy periods"
+    name="Purge Quote Clones"/>
+  <typecode
+    code="AccountHolderCount"
+    desc="Adjust AccountHolderCount value on Contact"
+    name="AccountHolderCount"/>
+  <typecode
+    code="RateBookExport"
+    desc="Exports rate book to an Excel or XML file"
+    name="Rate Book Export">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="PurgeRateBookExportResult"
+    desc="Purges rate book export results after configured time"
+    name="Purge Rate Book Export Result">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="CreateUnmappedUWRules"
+    desc="Create a new UWRule for each unmapped UWIssueType for display in the UWRules UI"
+    name="Create UWRules for UWIssueTypes">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ProductModelPatternActivation"
+    desc="Activate product model patterns after product model rolling upgrade is completed."
+    name="Product Model Pattern Activation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="CleanupAccountContactRole"
+    desc="Delete retired AccountContactRole entitites and any associated AccountContactRoleReplacment entities."
+    name="Cleanup AccountContactRole table">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="CleanupETLPurgeRoot"
+    desc="Deletes records from ETLPurgedRoot table whose purge date exceeds threshold set by the KeepPurgedRootsForDays configuration parameter value"
+    name="Cleanup ETLPurgeRoot"
+    retired="true"></typecode>
+  <typecode
+    code="CleanupPurgedRootInfo"
+    desc="Delete records from PurgedRootInfo table whose purge date exceeds threshold set by the KeepPurgedRootsForDays configuration parameter value and PurgeType column has value PersonalData"
+    name="Cleanup PurgedRootInfo for personal data">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="FixJobGroupOnMovedPolicies"
+    desc="Fix JobGroup reference on Jobs associated with policies moved between accounts"
+    name="Fix JobGroup on moved policies">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="MakeUpperCaseUtilInCodeExpressionFragments"
+    desc="Look for occurrence of 'util' in CodeExpressionFragment.CodeText and GosuTemplateExpressionFragment.TemplateText and replace with 'Util'"
+    name="Turn util to Util in ExpressionFragments">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</internaltypelistextension>

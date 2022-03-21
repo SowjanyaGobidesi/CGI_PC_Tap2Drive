@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="ratingOverrideHelper.afterCommit(period, jobWizardHelper)"
+    beforeCommit="ratingOverrideHelper.beforeCommit(line, jobWizardHelper)"
+    canEdit="perm.System.editratingoverrides"
+    canVisit="perm.System.viewratingoverrides || perm.System.editratingoverrides"
+    countsAsWork="false"
+    id="RatingOverridePopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.Policy.RatingOverride.PopupTitle&quot;)">
+    <LocationEntryPoint
+      signature="RatingOverridePopup(period:PolicyPeriod, line:PolicyLine, jobWizardHelper:gw.api.web.job.JobWizardHelper, startInEditMode : boolean)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="line"
+      type="PolicyLine"/>
+    <Variable
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.web.line.common.RatingOverrideUIHelper()"
+      name="ratingOverrideHelper"
+      type="gw.web.line.common.RatingOverrideUIHelper"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Web.Policy.RatingOverride.Rerate&quot;)"/>
+        <ToolbarDivider
+          hideIfReadOnly="true"/>
+        <ToolbarButton
+          action="gw.web.line.common.RatingOverrideUIHelper.clearAllOverrides(line)"
+          available="gw.web.line.common.RatingOverrideUIHelper.hasAnyOverridableCosts(line)"
+          hideIfReadOnly="true"
+          id="ClearAllButton"
+          label="DisplayKey.get(&quot;Web.Policy.RatingOverride.ClearAll&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="RatingOverridePanelSet(period)"
+        mode="line.Pattern.PublicID"/>
+    </Screen>
+  </Popup>
+</PCF>

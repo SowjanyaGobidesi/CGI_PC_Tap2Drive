@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ListViewPanel
+    id="CopyCoverage_CopyToLV">
+    <Require
+      name="copyToVehicles"
+      type="PersonalVehicle[]"/>
+    <ExposeIterator
+      name="CopyToVehicleIterator"
+      valueType="PersonalVehicle"
+      widget="CopyToVehicleIterator"/>
+    <RowIterator
+      editable="true"
+      elementName="copyToVehicle"
+      hasCheckBoxes="true"
+      id="CopyToVehicleIterator"
+      pageSize="0"
+      value="copyToVehicles"
+      valueType="entity.PersonalVehicle[]">
+      <Row>
+        <TextCell
+          id="description"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.Description&quot;)"
+          value="copyToVehicle.DisplayName"/>
+        <TextCell
+          id="VehicleNumber"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.VehicleNumber&quot;)"
+          sortOrder="1"
+          value="copyToVehicle.VehicleNumber"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="vin"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.Vin&quot;)"
+          value="copyToVehicle.Vin"/>
+        <TextCell
+          id="comp"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.ComprehensiveCov&quot;)"
+          value="copyToVehicle.PAComprehensiveCov.PACompDeductibleTerm.Value != null ? copyToVehicle.PAComprehensiveCov.PACompDeductibleTerm.DisplayValue : DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.NotSelected&quot;)"/>
+        <TextCell
+          id="collision"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.Collision&quot;)"
+          value="copyToVehicle.PACollisionCov.PACollDeductibleTerm.Value != null ? copyToVehicle.PACollisionCov.PACollDeductibleTerm.DisplayValue : DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.NotSelected&quot;)"/>
+        <TextCell
+          id="towing"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.Towing&quot;)"
+          value="copyToVehicle.PATowingLaborCovExists ? DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Selected&quot;) : DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.NotSelected&quot;)"/>
+        <TextCell
+          id="rental"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Vehicle.Rental&quot;)"
+          value="copyToVehicle.PARentalCov.PARentalTerm.PackageValue.Description != null ? copyToVehicle.PARentalCov.PARentalTerm.PackageValue.Description : DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.NotSelected&quot;)"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

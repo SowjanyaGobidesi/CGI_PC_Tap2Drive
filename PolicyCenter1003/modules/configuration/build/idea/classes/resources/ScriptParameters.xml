@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<serialization
+   xmlns="http://guidewire.com/xml"
+   xmlns:tns="http://guidewire.com/xml"
+   xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+   xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance">
+  <script-parameters>
+    <ScriptParameterPack ParamName="EnableDisplayBasicSearchTab" ParamType="bit">
+      <ParamValue>true</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="HOPQuoteLevel1Indent" ParamType="integer">
+      <ParamValue>2</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="HOPQuoteLevel2Indent" ParamType="integer">
+      <ParamValue>4</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="HOPQuoteLevel3Indent" ParamType="integer">
+      <ParamValue>6</ParamValue>
+    </ScriptParameterPack>
+  </script-parameters>
+</serialization>

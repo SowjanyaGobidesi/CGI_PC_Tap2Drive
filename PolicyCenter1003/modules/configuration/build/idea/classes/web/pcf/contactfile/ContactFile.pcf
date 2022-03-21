@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    afterEnter="gw.api.web.util.SessionUtil.addToContactsList(contact)"
+    canVisit="true"
+    id="ContactFile"
+    menuActions="ContactFileMenuActions(contact)"
+    parent="ContactForward(contact)"
+    title="DisplayKey.get(&quot;Web.ContactFile.LocationGroup.Title&quot;, contact)">
+    <LocationEntryPoint
+      signature="ContactFile(contact : Contact)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <LocationRef
+      label="DisplayKey.get('Web.ContactFile.AccountHolderSummary')"
+      location="ContactFile_Summary(contact)"
+      shortcut="O"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.Details&quot;)"
+      location="ContactFile_Details(contact)"
+      shortcut="E"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.Accounts&quot;)"
+      location="ContactFile_Accounts(contact)"
+      shortcut="A"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.Policies&quot;)"
+      location="ContactFile_Policies(contact)"
+      shortcut="P"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.WorkOrders&quot;)"
+      location="ContactFile_WorkOrders(contact)"
+      shortcut="W"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.Claims&quot;)"
+      location="ContactFile_Claims(contact)"
+      shortcut="C"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ContactFile.Billing&quot;)"
+      location="ContactFile_Billing(contact)"
+      shortcut="B"/>
+  </LocationGroup>
+</PCF>

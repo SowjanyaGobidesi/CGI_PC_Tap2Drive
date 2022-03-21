@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    id="CreateDraftWorksheet"
+    canVisit="perm.Document.create"
+    canEdit="true"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get('Web.Document.Integration.DocumentCreation')"
+    title="DisplayKey.get('Web.Document.Integration.DocumentCreation.Title.Template', info.Template.Name, info.Title)">
+    <LocationEntryPoint
+      signature="CreateDraftWorksheet(info: gw.integration.document.production.web.DocumentProductionInfo)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="info"
+      type="gw.integration.document.production.web.DocumentProductionInfo"/>
+    <Variable
+      name="helper"
+      type="gw.integration.document.production.web.DocumentProductionUIHelper"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          id="CreateDraftButton"
+          action="helper.goInDraftEditWorksheet(CurrentLocation, info)"
+          label="DisplayKey.get('Web.Document.Integration.CreateDraft.Button.CreateDraft')"/>
+        <EditButtons
+          cancelVisible="true"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet>
+            <TextInput
+              editable="true"
+              id="DocumentName"
+              label="DisplayKey.get('Web.Document.Integration.CreateDraft.DocumentName')"
+              value="info.Name"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Worksheet>
+</PCF>

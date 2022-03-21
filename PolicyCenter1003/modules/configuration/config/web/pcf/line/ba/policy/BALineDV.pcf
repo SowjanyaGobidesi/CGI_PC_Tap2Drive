@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BALineDV">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="!(period.Job typeis PolicyChange)"
+        id="PolicyType"
+        label="DisplayKey.get(&quot;Web.Policy.BA.PolicyType&quot;)"
+        required="true"
+        value="period.BusinessAutoLine.PolicyType"
+        valueType="typekey.BAPolicyType"
+        visible="period.Reinstatement == null">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="!(period.Job typeis PolicyChange)"
+        id="Fleet"
+        label="DisplayKey.get(&quot;Web.Policy.BA.Fleet&quot;)"
+        required="true"
+        value="period.BusinessAutoLine.Fleet"
+        valueType="typekey.FleetType"
+        visible="period.Reinstatement == null"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

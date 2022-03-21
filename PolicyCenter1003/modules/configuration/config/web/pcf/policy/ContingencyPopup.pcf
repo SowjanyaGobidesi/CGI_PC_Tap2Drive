@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+    <Popup
+    canEdit="true"
+    id="ContingencyPopup"
+    title="DisplayKey.get('Web.Contingency.Contingency')">
+    <LocationEntryPoint
+      signature="ContingencyPopup(contingency : Contingency)"/>
+    <Variable
+      name="contingency"
+      recalculateOnRefresh="true"
+      type="Contingency"/>
+    <Variable
+      initialValue="contingency.QueryForActivities"
+      name="RefreshedActivities"
+      recalculateOnRefresh="true"
+      type="Activity[]"/>
+    <Variable
+      name="docActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="false"
+      name="includeHidden"
+      type="boolean"/>
+      <Screen>
+      <AlertBar
+        id="ContingencyPopup_DocumentStoreSuspendedWarning"
+        label="DisplayKey.get('Web.DocumentsLV.Button.Asynchronous.DocumentStoreDisabled')"
+        visible="docActionsHelper.ShowDocumentStoreSuspendedWarning"/>
+      <AlertBar
+        id="ContingencyPopup_IDCSNotEnabledAlertBar"
+        label="DisplayKey.get('Web.Contingency.Documents.DocumentManagementSystem.ContentPlugin.Disabled')"
+        visible="not docActionsHelper.ContentSourceEnabled"/>
+      <AlertBar
+        id="ContingencyPopup_IDCSDownAlertBar"
+        label="DisplayKey.get('Web.Contingency.Documents.DocumentManagementSystem.ContentPlugin.Unavailable')"
+        visible="docActionsHelper.ContentSourceEnabled and not docActionsHelper.DocumentContentServerAvailable"/>
+      <AlertBar
+        id="ContingencyPopup_IDMSDownAlertBar"
+        label="DisplayKey.get('Web.Contingency.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable')"
+        visible="docActionsHelper.ShowMetadataServerDownWarning"/>
+      <PanelRef
+        def="BaseContingencyInfoDV(contingency)"/>
+      <PanelRef>
+        <PanelRow>
+          <PanelColumn>
+            <PanelRef
+              def="DocumentsLV(contingency.queryDocuments(includeHidden), null, false)">
+              <TitleBar
+                title="DisplayKey.get('Web.Contingency.Documents')"/>
+              <Toolbar>
+                <ToolbarButton
+                  available="docActionsHelper.DocumentContentServerAvailable"
+                  id="ContigencyPopup_NewDocumentButton"
+                  label="DisplayKey.get('Web.DocumentsLV.Button.NewDocument')">
+                  <MenuItem
+                    action="NewDocumentsLinkedWorksheet.goInWorkspace(contingency.PolicyPeriod, contingency)"
+                    id="ContingencyNewDocumentMenuItemSet_Linked"
+                    label="DisplayKey.get('Web.AccountFile.NewDocuments.Linked')"/>
+                  <MenuItem
+                    action="docActionsHelper.goInNewDocumentFromTemplateWorksheet(contingency)"
+                    available="docActionsHelper.DocumentTemplateActionsAvailable"
+                    id="ContingencyNewDocumentMenuItemSet_Template"
+                    label="DisplayKey.get('Web.AccountFile.NewDocument.Template')"/>
+                </ToolbarButton>
+                <CheckedValuesToolbarButton
+                  allCheckedRowsAction="CheckedValues.each(\doc -&gt; { gw.api.web.document.DocumentsHelper.deleteDocument(doc); gw.api.web.document.DocumentsHelper.evictDeletedDocument(doc)})"
+                  available="docActionsHelper.DocumentContentServerAvailable"
+                  confirmMessage="DisplayKey.get('Web.DocumentsLV.Button.Delete.Confirm')"
+                  flags="all canDeleteDocument"
+                  id="ContigencyPopup_DeleteSelectedDocumentButton"
+                  iterator="DocumentsLV.DocumentsLV"
+                  label="DisplayKey.get('Web.DocumentsLV.Button.DeleteSelected')"
+                  tooltip="DisplayKey.get('Web.DocumentsLV.Button.DeleteSelected.Tooltip')"/>
+                <ToolbarButton
+                  action="null"
+                  available="gw.document.DocumentsActionsUIHelper.DocumentContentServerAvailable"
+                  id="ContigencyPopup_RefreshAsyncContent"
+                  label="DisplayKey.get('Web.DocumentsLV.Button.AsynchronousRefresh')"
+                  tooltip="DisplayKey.get('Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip')"
+                  visible="gw.document.DocumentsActionsUIHelper.isShowAsynchronousRefreshAction(contingency.Documents)"/>
+                <ToolbarButton
+                  action="includeHidden = true"
+                  id="ContigencyPopup_ShowHidden"
+                  label="DisplayKey.get('Web.DocumentsLV.Button.ShowHidden')"
+                  visible="not includeHidden"/>
+                <ToolbarButton
+                  action="includeHidden = false"
+                  id="ContigencyPopup_HideHidden"
+                  label="DisplayKey.get('Web.DocumentsLV.Button.HideHidden')"
+                  visible="includeHidden"/>
+              </Toolbar>
+            </PanelRef>
+            <PanelRef>
+              <TitleBar
+                title="DisplayKey.get('Web.Contingency.Notes')"/>
+              <Toolbar>
+                <ToolbarButton
+                  action="NewNoteWorksheet.goInWorkspace(null, contingency.CreateTime, contingency)"
+                  id="AddNoteButton"
+                  label="DisplayKey.get('Web.Contingency.AddNote')"/>
+              </Toolbar>
+              <ListViewPanel
+                id="ContingencyNotesLV">
+                <Variable
+                  initialValue="contingency.queryNotes().toTypedArray()"
+                  name="Notes"
+                  recalculateOnRefresh="true"
+                  type="Note[]"/>
+                <RowIterator
+                  editable="false"
+                  elementName="note"
+                  value="Notes"
+                  valueType="Note[]">
+                  <Row>
+                    <TextCell
+                      action="EditNotePopup.push(note, false)"
+                      id="Subject"
+                      label="DisplayKey.get('Web.Contingency.Note.Subject')"
+                      outputConversion="(VALUE != null) ? VALUE : DisplayKey.get('Web.Contingency.Note.NoSubject')"
+                      value="note.Subject"/>
+                    <DateCell
+                      id="DateAdded"
+                      label="DisplayKey.get('Web.Contingency.Note.Date')"
+                      value="note.AuthoringDate"/>
+                    <TextCell
+                      id="Author"
+                      label="DisplayKey.get('Web.Contingency.Note.Author')"
+                      value="note.Author.DisplayName"/>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </PanelRef>
+          </PanelColumn>
+          <PanelColumn>
+            <PanelRef
+              def="ContingencyActivitiesLV(RefreshedActivities.where(\elt -&gt; elt.Status != TC_COMPLETE), false)"
+              id="OpenActivityRef">
+              <TitleBar
+                title="DisplayKey.get('Web.Contingency.OpenActivities')"/>
+              <Toolbar
+                id="ActivityToolBar">
+                <ToolbarButton
+                  action="NewActivityWorksheet.goInWorkspace(contingency)"
+                  id="AddActivityButton"
+                  label="DisplayKey.get('Web.Contingency.AddActivity')"/>
+              </Toolbar>
+            </PanelRef>
+            <PanelRef
+              def="ContingencyActivitiesLV(RefreshedActivities.where(\elt -&gt; elt.Status == TC_COMPLETE), true)"
+              id="ClosedActivityRef">
+              <TitleBar
+                title="DisplayKey.get('Web.Contingency.PreviousActivities')"/>
+            </PanelRef>
+          </PanelColumn>
+        </PanelRow>
+      </PanelRef>
+    </Screen>
+    </Popup>
+</PCF>

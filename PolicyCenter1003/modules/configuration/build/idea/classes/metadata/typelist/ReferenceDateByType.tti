@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of reference dating"
+  final="false"
+  name="ReferenceDateByType">
+  <typecode
+    code="PolicyTerm"
+    desc="Reference dating is based on the policy term"
+    name="Policy Term"
+    priority="1"/>
+  <typecode
+    code="ApplicableObject"
+    desc="Reference dating is based on the applicable object"
+    name="Applicable Object"
+    priority="2"/>
+  <typecode
+    code="DefinedObject"
+    desc="Reference dating is based on the object the pattern defines"
+    name="Defined Object"
+    priority="3"/>
+</typelist>

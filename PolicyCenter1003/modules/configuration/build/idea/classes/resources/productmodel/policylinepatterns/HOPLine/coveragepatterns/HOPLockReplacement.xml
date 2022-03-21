@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPLockReplacement"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="2100"
+  public-id="z78h4sr6nki8ha99hku55rd4uaa"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="PAVehicleModifiersInputSet">
+    <Require
+      name="vehicle"
+      type="PersonalVehicle"/>
+    <Require
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Policy.PA.VehicleRateModifiers&quot;)"/>
+      <InputIterator
+        elementName="vehmodifier"
+        id="moditerator"
+        value="vehicle.PAVehicleModifiers"
+        valueType="entity.PAVehicleModifier[]">
+        <IteratorSort
+          sortBy="vehmodifier.Pattern.Priority"
+          sortOrder="1"/>
+        <!-- This input is here for testing purposes only -->
+        <HiddenInput
+          id="ModifierName"
+          value="vehmodifier.Pattern.Name"
+          valueType="java.lang.String"/>
+        <ModifierInput
+          editable="true"
+          id="vehmod"
+          label="vehmodifier.Pattern.DisplayName"
+          value="vehmodifier"
+          valueType="entity.PAVehicleModifier"/>
+      </InputIterator>
+  </InputSet>
+</PCF>

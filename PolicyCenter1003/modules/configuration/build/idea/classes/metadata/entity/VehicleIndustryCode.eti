@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The latter part (last 2 numbers) of a business vehicle class code. "
+  entity="VehicleIndustryCode"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="vehicleindustrycode"
+  type="retireable">
+  <column
+    desc="The vehicle industry Code"
+    name="Code"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="The vehicle industry"
+    name="Industry"
+    nullok="false"
+    typelist="VehicleIndustry"/>
+  <typekey
+    desc="The use of the vehicle for the industry"
+    name="IndustryUse"
+    nullok="false"
+    typelist="VehicleIndustryUse"/>
+  <index
+    desc="Ensures that Codes are unique among vehicle industry codes."
+    name="ccu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Code"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

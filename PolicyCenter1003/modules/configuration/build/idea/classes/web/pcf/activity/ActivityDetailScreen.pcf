@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="ActivityDetailScreen">
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Require
+      name="note"
+      type="Note"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.api.util.SymbolTableUtil.populateMapFromBeans(activity)"
+      name="symbolTable"
+      type="java.util.Map&lt;java.lang.String, java.lang.Object&gt;"/>
+    <Toolbar>
+      <ToolbarButtonSetRef
+        mode="activity.ActivityPattern.Type"
+        toolbarButtonSet="ActivityDetailToolbarButtonSet(activity, note, policyPeriod)"/>
+      <PickerToolbarButton
+        action="PickNoteTemplatePopup.push(gw.web.activity.ActivityDetailScreenUIHelper.createSearchCriteria(symbolTable))"
+        hideIfReadOnly="true"
+        id="NewNoteWorksheet_UseTemplateButton"
+        label="DisplayKey.get(&quot;Web.Note.UseTemplate&quot;)"
+        onPick="note.useTemplate( PickedValue, symbolTable )"/>
+      <ToolbarButton
+        action="NewDocumentFromTemplateWorksheet.goInWorkspace( activity, gw.web.activity.ActivityDetailScreenUIHelper.getDocContainer(activity), activity.DocumentTemplate) "
+        id="ActivityDetailToolbarButtons_DocumentButton"
+        label="DisplayKey.get('Web.ActivityDetail.Button.CreateDocument')"
+        visible="gw.web.activity.ActivityDetailScreenUIHelper.isDocumentButtonVisible(activity, false) "/>
+      <ToolbarButton
+        action="gw.document.DocumentsActionsUIHelper.goInNewDocumentFromTemplateWorksheet(activity) "
+        id="ActivityDetailToolbarButtons_ProductizedDocumentButton"
+        label="DisplayKey.get('Web.Document.Integration.ActivityDetail.Button.CreateDocumentFromTemplate')"
+        visible="gw.web.activity.ActivityDetailScreenUIHelper.isDocumentButtonVisible(activity, true) "/>
+      <ToolbarButton
+        action="EmailWorksheet.goInWorkspace( activity, gw.web.activity.ActivityDetailScreenUIHelper.getDocContainer(activity), activity.EmailTemplate)"
+        id="ActivityDetailToolbarButtons_CreateEmail"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Button.CreateEmail&quot;)"
+        visible="activity.EmailTemplate != null and perm.System.sendemail"/>
+      <ToolbarButton
+        action="gw.web.activity.ActivityDetailScreenUIHelper.viewActivityNotes(activity, policyPeriod)"
+        id="ActivityDetailToolbarButtons_ViewNotes"
+        label="DisplayKey.get(&quot;Web.ActivityDetail.Button.ViewNotes&quot;)"
+        shortcut="N"
+        visible="activity.canViewNotes(policyPeriod)"/>
+    </Toolbar>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.ActivityDetail.ActivityCanceled&quot;)"
+      visible="activity.Status == TC_CANCELED"/>
+    <PanelRow>
+      <PanelColumn
+        editable="perm.Activity.edit(activity)">
+        <PanelRef
+          def="ActivityDetailDV(activity)"
+          mode="activity.ActivityPattern.Type"/>
+      </PanelColumn>
+      <PanelColumn>
+        <PanelRef
+          def="ActivityDetailNoteDV(activity, note)"
+          visible="activity.Status == TC_OPEN and note != null"/>
+      </PanelColumn>
+    </PanelRow>
+  </Screen>
+</PCF>

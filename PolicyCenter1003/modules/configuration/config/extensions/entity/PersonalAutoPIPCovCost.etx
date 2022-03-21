@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="PersonalAutoPIPCovCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.pa.financials.PACostMethods" impl="gw.lob.pa.financials.PersonalAutoCovCostMethodsImpl"/>
+</extension>

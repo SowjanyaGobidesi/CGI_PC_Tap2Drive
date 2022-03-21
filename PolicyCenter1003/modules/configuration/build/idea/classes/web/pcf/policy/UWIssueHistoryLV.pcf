@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="canEdit"
+    id="UWIssueHistoryLV">
+    <Require
+      name="issue"
+      type="UWIssue"/>
+    <Require
+      name="approvalHistories"
+      type="UWIssueHistory[]"/>
+    <Require
+      name="canEdit"
+      type="boolean"/>
+    <RowIterator
+      editable="canEdit"
+      elementName="history"
+      pageSize="0"
+      value="approvalHistories.orderByDescending(\ h -&gt; h.CreateTimeOrNow)"
+      valueType="gw.util.IOrderedList&lt;entity.UWIssueHistory&gt;">
+      <Row
+        editable="history.New">
+        <TextCell
+          id="ResponsibleUser"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.ResponsibleUser&quot;)"
+          value="getResponsibleUser(history)"/>
+        <DateCell
+          id="HistoryCreateDate"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.HistoryCreateDate&quot;)"
+          value="history.CreateDate"/>
+        <DateCell
+          id="HistoryEffDate"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.HistoryEffDate&quot;)"
+          value="history.EffDate"/>
+        <TextCell
+          action="JobForward.go(history.PolicyPeriod.Job, history.PolicyPeriod)"
+          actionAvailable="history.PolicyPeriod.Job != issue.PolicyPeriod.Job and perm.Job.view(history.PolicyPeriod.Job)"
+          id="Job"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.Job&quot;)"
+          value="getJobDescription(history)"/>
+        <TextCell
+          enableSort="false"
+          id="ReferenceValue"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.ReferenceValue&quot;)"
+          value="history.FormattedReferenceValue"
+          visible="issue.IssueType.Comparator != TC_NONE"/>
+        <BooleanRadioCell
+          enableSort="false"
+          id="EditBeforeBind"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.EditBeforeBind&quot;)"
+          value="editBeforeBind(history)"/>
+        <TextCell
+          id="ThroughValue"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.Through&quot;)"
+          value="history.BlockingPoint.DisplayAsThroughValue"/>
+        <TextCell
+          id="InvalidFrom"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.InvalidFrom&quot;)"
+          value="history.InvalidFrom()"
+          valueType="String"/>
+        <TypeKeyCell
+          id="HistoryStatus"
+          label="DisplayKey.get(&quot;Web.UWIssue.UWIssueHistoryLV.Status&quot;)"
+          value="history.Status"
+          valueType="typekey.UWIssueHistoryStatus"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getJobDescription(history : UWIssueHistory) : String {
+  var period = history.PolicyPeriod
+  var job = period.Job
+  return (job.Periods.Count == 1) ?
+    DisplayKey.get("Web.UWIssue.UWIssueHistoryLV.Job.JobDescription", job.Subtype, job.JobNumber) :
+    DisplayKey.get("Web.UWIssue.UWIssueHistoryLV.Job.JobAndVersionDescription", job.Subtype, job.JobNumber, period.BranchName)
+}
+
+function editBeforeBind(history : UWIssueHistory) : Boolean {
+  return (history.Status == TC_APPROVED) ? history.EditBeforeBind : null
+}
+
+function getResponsibleUser(history : UWIssueHistory) : String {
+  var result = history.ResponsibleUser.DisplayName
+  if (history.AutomaticOperationCause != null) {
+    result = DisplayKey.get("Web.UWIssue.UWIssueHistoryLV.ResponsibleUser.Automated", result)
+  }
+  return result
+}]]></Code>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Note" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="Author.PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AuthoringDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="Body" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Confidential" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="Language" type="typekey.LanguageType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LoadCommandID" type="java.lang.Long" propertyInclusionType="NORMAL" xmlType="xs:long"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="SecurityType" type="typekey.NoteSecurityType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Subject" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Topic" type="typekey.NoteTopicType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

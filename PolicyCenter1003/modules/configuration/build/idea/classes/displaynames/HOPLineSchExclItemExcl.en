@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPLineSchExclItemExcl">
+  <Columns>
+    <Column
+      beanPath="HOPLineSchExclItemExcl.HOPLineScheduleExclItem.Schedule"
+      name="schedule"/>
+  </Columns>
+  <DisplayName>schedule.DisplayName</DisplayName>
+</Entity>

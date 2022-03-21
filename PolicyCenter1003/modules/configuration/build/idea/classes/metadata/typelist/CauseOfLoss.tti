@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Cause of Loss for a Coverage"
+  final="false"
+  name="CauseOfLoss"/>

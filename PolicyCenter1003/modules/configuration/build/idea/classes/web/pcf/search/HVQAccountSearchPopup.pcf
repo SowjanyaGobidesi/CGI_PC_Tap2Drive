@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="HVQAccountSearchPopup"
+    title="DisplayKey.get(&quot;Web.HVQAccountSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="HVQAccountSearchPopup(quoteStoreSummary : gw.quoting.QuoteSummarySearchResult)"/>
+    <Variable
+      name="quoteStoreSummary"
+      type="gw.quoting.QuoteSummarySearchResult"/>
+    <Screen>
+      <SearchPanel
+        classList="pc-search-full-width-panel"
+        criteriaName="searchCriteria"
+        maxSearchResults="100"
+        resultCachingEnabled="false"
+        resultsName="accountSummaries"
+        search="searchCriteria.performSearch()"
+        searchCriteria="new gw.account.AccountSearchCriteria() {:Secure = true, :RestrictiveMinimumSearchCriteriaForPersonName = true, :FirstNameExact = true, :LastNameExact = true, :CompanyNameExact = true} // clears the search criteria"
+        searchCriteriaType="gw.account.AccountSearchCriteria"
+        searchOnEnter="searchCriteria = gw.web.search.HVQSearchUIHelper.createAccountSearchCriteria(quoteStoreSummary); return true // initializes the search criteria with data from the quote"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;AccountSummary&gt;">
+        <PanelRef
+          def="AccountSearchDV(searchCriteria, null)"/>
+        <PanelRef
+          def="HVQAccountSearchResultsLV(accountSummaries, quoteStoreSummary.QuoteKey.PolicyQuoteID)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar>
+            <ToolbarButton
+              action="JobForward.go(new gw.web.search.HVQSearchUIHelper().getJobForReconstitutedPeriodOnNewAccount(quoteStoreSummary.QuoteKey.PolicyQuoteID))"
+              id="ReconstituteNewAccount"
+              label="DisplayKey.get(&quot;Web.HVQSearch.Results.CreateNewAccount&quot;)"
+              tooltip="DisplayKey.get(&quot;Web.HVQSearch.Results.CreateNewAccount.Tooltip&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

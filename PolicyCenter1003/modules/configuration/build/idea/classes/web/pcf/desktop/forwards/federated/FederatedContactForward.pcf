@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedContactForward">
+    <LocationEntryPoint
+      signature="FederatedContactForward(accountPublicId:java.lang.String, contactPublicId: java.lang.String)"/>
+    <Variable
+      name="accountPublicId"
+      type="java.lang.String"/>
+    <Variable
+      name="contactPublicId"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Contact.findContactByPublicId(contactPublicId)"
+      name="contactEntity"
+      type="Contact"/>
+    <ForwardCondition
+      action="ContactFile_Summary.go(contactEntity)"
+      condition="contactEntity != null and perm.System.viewaccountholderinfo and gw.pcf.contacts.ContactFileAccountHolderUIHelper.canViewAccountInfo(contactEntity)"/>
+    <ForwardCondition
+      action="ContactFile_Details.go(contactEntity)"
+      condition="contactEntity != null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.contactForward(accountPublicId, contactPublicId)"
+      condition="contactEntity == null"/>
+  </Forward>
+</PCF>

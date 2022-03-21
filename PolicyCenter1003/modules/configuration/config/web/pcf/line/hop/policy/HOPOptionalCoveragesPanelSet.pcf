@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="HOPOptionalCoveragesPanelSet">
+    <Require
+      name="hopLine"
+      type="productmodel.HOPLine"/>
+    <Require
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      name="HOPClausePanelSetHelper"
+      type="gw.web.line.hop.policy.HOPClausePanelSetHelper"/>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.PolicyLineOptionalCoverages&quot;)"/>
+      <DetailViewPanel>
+        <Variable
+          initialValue="HOPClausePanelSetHelper.getLineOptionalCoveragesPatterns(hopLine, openForEdit)"
+          name="liabilityCoveragePatterns"
+          recalculateOnRefresh="true"
+          type="gw.api.productmodel.CoveragePattern[]"/>
+        <InputColumn>
+          <InputIterator
+            elementName="coveragePattern"
+            id="liabilityCoveragePatternIterator"
+            value="liabilityCoveragePatterns"
+            valueType="gw.api.productmodel.CoveragePattern[]">
+            <IteratorSort
+              sortBy="coveragePattern.Priority"
+              sortOrder="1"/>
+            <InputSetRef
+              def="CoverageInputSet(coveragePattern, hopLine, openForEdit)"
+              mode="coveragePattern.CodeIdentifier"/>
+          </InputIterator>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.DwellingOptionalCoverages&quot;)"/>
+      <DetailViewPanel>
+        <Variable
+          initialValue="HOPClausePanelSetHelper.getDwellingOptionalCoveragesPatterns(dwelling, openForEdit)"
+          name="dwellingCoveragePatterns"
+          recalculateOnRefresh="true"
+          type="gw.api.productmodel.CoveragePattern[]"/>
+        <InputColumn>
+          <InputIterator
+            elementName="coveragePattern"
+            id="dwellingCoveragePatternIterator"
+            value="dwellingCoveragePatterns"
+            valueType="gw.api.productmodel.CoveragePattern[]">
+            <IteratorSort
+              sortBy="coveragePattern.Priority"
+              sortOrder="1"/>
+            <InputSetRef
+              def="CoverageInputSet(coveragePattern, dwelling, openForEdit)"
+              mode="coveragePattern.CodeIdentifier"/>
+          </InputIterator>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

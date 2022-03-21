@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="TeamRenewalsScreen"
+  mode="default">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel.canViewRenewals()"
+      name="canViewRenewals"
+      type="boolean"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.Team.Renewals&quot;, teamModel.Label, teamModel.getDisplayMode(true), gw.api.domain.statistics.StatsWindowUtil.getRenewalsWindow())"/>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.Team.JobCountToDisplayExceedsMax&quot;, gw.api.system.PCConfigParameters.TeamScreenTabVisibilityRowCountCutoff.Value, &quot;renewals&quot;, teamModel.Label)"
+      visible="not canViewRenewals"/>
+    <PanelRef
+      def="TeamRenewalsLV(teamModel)"
+      visible="canViewRenewals">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          flags="all openWorkOrder"
+          id="ReassignmentButton"
+          iterator="TeamRenewalsLV.RenewalsIterator"
+          label="DisplayKey.get(&quot;Web.Team.Reassign&quot;)"
+          visible="perm.System.userroleassignmentbulkassign">
+          <CheckedValuesMenuItemIterator
+            elementName="typekeyMenuItem"
+            value="gw.assignment.AssignmentUtil.getMultipleAssignmentRoles(UserRoleConstraint.TC_JOBEXCLUSIVE)"
+            valueType="typekey.UserRole[]">
+            <CheckedValuesMenuItem
+              allCheckedRowsAction="AssignUserRoleOwnerPopup.push(CheckedValues.cast(Job), typekeyMenuItem )"
+              id="AssignmentMenuItem"
+              label="typekeyMenuItem.DisplayName"/>
+          </CheckedValuesMenuItemIterator>
+        </CheckedValuesToolbarButton>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

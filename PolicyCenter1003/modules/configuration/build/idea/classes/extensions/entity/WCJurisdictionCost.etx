@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="WCJurisdictionCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.wc.financials.WCCostMethods" impl="gw.lob.wc.financials.WCJurisdictionCostMethodsImpl"/>
+</extension>

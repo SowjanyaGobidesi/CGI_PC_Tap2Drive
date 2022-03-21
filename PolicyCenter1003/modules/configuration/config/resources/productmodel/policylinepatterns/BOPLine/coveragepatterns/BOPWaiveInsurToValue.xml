@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="BOPWaiveInsurToValue"
+  conditionSubtype="BusinessOwnersCond"
+  coverageCategory="BOPPolicyOtherCat"
+  existence="Electable"
+  lookupTableName="BOPCond"
+  owningEntityType="BusinessOwnersLine"
+  policyLinePattern="BOPLine"
+  priority="-1"
+  public-id="BOPWaiveInsurToValue"
+  referenceDateByType="PolicyTerm"/>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  desc="Temporary entity for request level information being sent for risk assessments"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundPeriodRiskAssessmentTempStore"
+  table="outboundperiodtempstore"
+  type="editable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    desc="policy period associated with the risk assessment request"
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <array
+    arrayentity="OutboundLocationRiskAssessmentTempStore"
+    desc="list of locations associated with a single policy period that are being assessed for risk"
+    name="OutboundLocationRiskAssessmentTempStore"
+    owner="true"/>
+  <array
+    arrayentity="InboundPeriodRiskAssessmentErrorTempStore"
+    desc="request level errors encountered after OutboundLocationRiskAssessmentTempStores are sent to risk assessment service"
+    name="InboundPeriodRiskAssessmentErrorTempStore"
+    owner="true"/>
+</entity>

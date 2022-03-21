@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.Cost" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="ActualAdjRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="ActualAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="ActualBaseRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="ActualTermAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="ChargeGroup" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="ChargePattern" type="typekey.ChargePattern" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="CoverableName" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="EffectiveDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="ExpirationDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="Overridable" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="OverrideAdjRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="OverrideAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="OverrideAmountBilling" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="OverrideBaseRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="OverrideReason" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="OverrideSource" type="typekey.OverrideSourceType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="OverrideTermAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="OverrideTermAmountBilling" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StandardAdjRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="StandardAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StandardAmountBilling" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StandardBaseRate" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="StandardTermAmount" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StandardTermAmountBilling" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

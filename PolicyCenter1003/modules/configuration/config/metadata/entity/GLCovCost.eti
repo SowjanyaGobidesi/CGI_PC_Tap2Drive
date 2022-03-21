@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="The cost for a general liability coverage"
+  entity="GLCovCost"
+  supertype="GLCost">
+  <foreignkey
+    fkentity="GeneralLiabilityCov"
+    name="GeneralLiabilityCov"
+    nullok="false"/>
+</subtype>

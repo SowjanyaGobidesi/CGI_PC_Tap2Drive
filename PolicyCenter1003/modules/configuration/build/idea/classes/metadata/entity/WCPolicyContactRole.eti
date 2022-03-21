@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A PolicyContactRole specific to a WorkersComp policy line."
+  entity="WCPolicyContactRole"
+  supertype="PolicyContactRole">
+  <foreignkey
+    desc="The workers comp policy line this contact role is associated with."
+    fkentity="WorkersCompLine"
+    name="WorkersCompLine"
+    nullok="true"/>
+</subtype>

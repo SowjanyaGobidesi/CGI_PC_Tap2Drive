@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    disableUserCustomization="true"
+    id="ScheduleCoverageSummaryLV"
+    stretch="true">
+    <Require
+      name="schedules"
+      type="List&lt; gw.api.domain.Schedule &gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="schedule"
+      pageSize="0"
+      value="schedules"
+      valueType="java.util.List&lt; gw.api.domain.Schedule &gt;">
+      <IteratorSort
+        sortBy="(schedule as gw.api.domain.Clause).Pattern.CoverageCategory.Priority"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="(schedule as gw.api.domain.Clause).Pattern.CoverageCategory.PublicID"
+        sortOrder="2"/>
+      <IteratorSort
+        sortBy="(schedule as gw.api.domain.Clause).Pattern.Priority"
+        sortOrder="3"/>
+      <IteratorSort
+        sortBy="(schedule as gw.api.domain.Clause).Pattern.PublicID"
+        sortOrder="4"/>
+      <Row>
+        <TextCell
+          align="left"
+          bold="true"
+          enableSort="false"
+          grow="true"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverages.Description&quot;)"
+          value="schedule.ScheduleName"/>
+        <TextCell
+          align="right"
+          enableSort="false"
+          id="Empty"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverage.CovTermValue&quot;, &quot;&quot;)"
+          value="empty()"/>
+      </Row>
+      <RowIterator
+        editable="false"
+        elementName="scheduledItem"
+        pageSize="0"
+        value="schedule.ScheduledItems"
+        valueType="entity.ScheduledItem[]">
+        <IteratorSort
+          sortBy="schedule.getScheduledItemDescription(scheduledItem)"
+          sortOrder="1"/>
+        <Row>
+          <TextCell
+            align="left"
+            bold="true"
+            enableSort="false"
+            grow="true"
+            id="Description"
+            value="schedule.getScheduledItemDescription(scheduledItem)"/>
+          <TextCell
+            align="right"
+            enableSort="false"
+            id="Empty"
+            value="empty()"/>
+        </Row>
+        <RowIterator
+          editable="false"
+          elementName="covTerm"
+          pageSize="0"
+          value="scheduledItem.Clause.CovTerms"
+          valueType="gw.api.domain.covterm.CovTerm[]">
+          <IteratorSort
+            sortBy="covTerm.Pattern.Priority"
+            sortOrder="1"/>
+          <IteratorSort
+            sortBy="covTerm.Pattern.PublicID"
+            sortOrder="2"/>
+          <Row>
+            <TextCell
+              align="left"
+              enableSort="false"
+              grow="true"
+              id="Description"
+              value="covTerm.DisplayName"/>
+            <TextCell
+              align="right"
+              id="term"
+              value="covTerm.DisplayValue"
+              wrap="false"/>
+          </Row>
+        </RowIterator>
+      </RowIterator>
+    </RowIterator>
+    <Code><![CDATA[function empty(): String {
+  return ""
+}]]></Code>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="DwellingHazard">
+  <Columns>
+    <Column
+      beanPath="DwellingHazard.SpecificHazard.DisplayName"
+      name="specificHazard"/>
+    <Column
+      beanPath="DwellingHazard.HazardType.DisplayName"
+      name="type"/>
+  </Columns>
+  <DisplayName> gw.api.locale.DisplayKey.get("Web.Policy.HOP.HOPDwellingHazards.Display", specificHazard, type)</DisplayName>
+</Entity>

@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    countsAsWork="false"
+    id="BOPClassCodeSearchPopup"
+    returnType="BOPClassCode"
+    title="DisplayKey.get(&quot;Web.ClassCodeSearch&quot;)">
+    <LocationEntryPoint
+      signature="BOPClassCodeSearchPopup(bopLine : BOPLine, bopBuilding : BOPBuilding)"/>
+    <Variable
+      name="bopLine"
+      type="BOPLine"/>
+    <Variable
+      name="bopBuilding"
+      type="BOPBuilding"/>
+    <Variable
+      initialValue="(bopLine.Branch.Job.NewTerm) ? null : bopBuilding.BasedOn.ClassCode"
+      name="previousBOPClassCode"
+      type="BOPClassCode"/>
+    <Screen
+      id="BOPClassCodeSearchScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="bOPClassCodes"
+        search="searchCriteria.performSearch()"
+        searchCriteria="return createCriteria();"
+        searchCriteriaType="gw.lob.bop.BOPClassCodeSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;BOPClassCode&gt;">
+        <PanelRef>
+          <DetailViewPanel
+            id="BOPClassCodeSearchDV">
+            <InputColumn>
+              <TextInput
+                editable="true"
+                id="Code"
+                label="DisplayKey.get(&quot;Web.ClassCodeSearch.Code&quot;)"
+                required="false"
+                value="searchCriteria.Code"/>
+              <TextInput
+                editable="true"
+                id="Classification"
+                label="DisplayKey.get(&quot;Web.ClassCodeSearch.Classification&quot;)"
+                required="false"
+                value="searchCriteria.Classification"/>
+            </InputColumn>
+            <InputFooterSection>
+              <InputSetRef
+                def="SearchAndResetInputSet()"/>
+            </InputFooterSection>
+          </DetailViewPanel>
+        </PanelRef>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+          <ListViewPanel
+            id="ClassCodeSearchResultsLV"
+            stretch="true">
+            <RowIterator
+              appendPageInfo="true"
+              editable="false"
+              elementName="bOPClassCode"
+              pickValue="bOPClassCode"
+              value="bOPClassCodes"
+              valueType="gw.api.database.IQueryBeanResult&lt;entity.BOPClassCode&gt;">
+              <Row>
+                <TextCell
+                  id="Code"
+                  label="DisplayKey.get(&quot;Web.ClassCodeSearch.Code&quot;)"
+                  value="bOPClassCode.Code"
+                  wrap="false"/>
+                <TextCell
+                  align="left"
+                  grow="true"
+                  id="Classification"
+                  label="DisplayKey.get(&quot;Web.ClassCodeSearch.Classification&quot;)"
+                  value="bOPClassCode.Classification"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function createCriteria() : gw.lob.bop.BOPClassCodeSearchCriteria {
+  var criteria = new gw.lob.bop.BOPClassCodeSearchCriteria()
+  criteria.EffectiveAsOfDate = bopLine.getReferenceDateForCurrentJob(gw.api.util.JurisdictionMappingUtil.getJurisdiction(bopBuilding.BOPLocation.Location))
+  if (previousBOPClassCode != null) {
+    criteria.PreviousSelectedClassCode = previousBOPClassCode.Code
+  }
+  return criteria
+}]]></Code>
+  </Popup>
+</PCF>

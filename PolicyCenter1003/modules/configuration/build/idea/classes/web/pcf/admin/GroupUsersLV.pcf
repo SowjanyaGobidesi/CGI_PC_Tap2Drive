@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="GroupUsersLV">
+    <ExposeIterator
+      valueType="entity.GroupUser"
+      widget="GroupUsersLV"/>
+    <Require
+      name="group"
+      type="Group"/>
+    <Variable
+      initialValue="gw.web.admin.NewGroupUIHelper.prepopulatedOrganization(group)"
+      name="organization"
+      recalculateOnRefresh="true"
+      type="Organization"/>
+    <Variable
+      initialValue="organization.Carrier"
+      name="isCarrierOrg"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <RowIterator
+      checkBoxVisible="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+      conversionExpression="return gw.web.admin.NewGroupUIHelper.validateUser(PickedValue, group)"
+      editable="perm.GroupUser.edit"
+      elementName="groupUser"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      pickLocation="UserSearchPopup.push(organization, gw.web.admin.NewGroupUIHelper.getRequiredUserType(group))"
+      toAdd="groupUser.User.addToGroup(groupUser)"
+      toRemove="group.removeUser(groupUser.User)"
+      value="group.Users"
+      valueType="entity.GroupUser[]">
+      <Row>
+        <AltUserCell
+          action="UserDetailPage.go(groupUser.User)"
+          editable="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+          id="User"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.User&quot;)"
+          required="true"
+          unique="true"
+          value="groupUser.User">
+          <PostOnChange/>
+        </AltUserCell>
+        <CheckBoxCell
+          editable="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+          id="Member"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.Member&quot;)"
+          value="groupUser.Member"/>
+        <CheckBoxCell
+          editable="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+          id="Manager"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.Manager&quot;)"
+          value="groupUser.Manager"/>
+        <TypeKeyCell
+          align="left"
+          editable="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+          id="LoadFactorType"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.LoadFactorType&quot;)"
+          value="groupUser.LoadFactorType"
+          valueType="typekey.LoadFactorType"/>
+        <TextCell
+          align="left"
+          editable="not groupUser.User.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+          id="LoadFactor"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.LoadFactor&quot;)"
+          validationExpression="!(groupUser.LoadFactor &lt; 0 or groupUser.LoadFactor &gt; 100) ? null : DisplayKey.get(&quot;Web.Admin.GroupUsers.LoadFactor.OufOfRange&quot;)"
+          value="groupUser.LoadFactor"
+          valueType="java.lang.Integer"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

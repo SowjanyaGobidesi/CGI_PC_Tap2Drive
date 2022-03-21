@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <RowSet
+    id="StateCostRowSet"
+    mode="GL">
+    <Require
+      name="costWrapper"
+      type="gw.api.ui.CostWrapper"/>
+    <Variable
+      initialValue="costWrapper.Cost as GLCost"
+      name="aggCost"
+      type="entity.GLCost"/>
+    <Row
+      id="AggCostRow"
+      visible="not aggCost.ActualAmountBilling.IsZero">
+      <TextCell
+        align="right"
+        id="empty"
+        value="aggCost.Location.LocationNum"
+        valueType="java.lang.Integer"
+        wrap="false"/>
+      <TextCell
+        align="right"
+        id="ClassCode"
+        value="aggCost.Coverage.PatternCode"
+        wrap="false"/>
+      <TextCell
+        align="left"
+        grow="true"
+        id="Description"
+        value="aggCost.DisplayName"/>
+      <TextCell
+        align="right"
+        id="Basis"
+        value="aggCost.Basis == null or aggCost.Basis == 0 ? &quot;&quot; : aggCost.Basis.DisplayValue"
+        wrap="false"/>
+      <TextCell
+        align="right"
+        format="&quot;0.0000&quot;"
+        id="Rate"
+        value="aggCost.ActualAdjRate == 0 ? &quot;&quot; : aggCost.ActualAdjRate.DisplayValue"
+        wrap="false"/>
+      <MonetaryAmountCell
+        align="right"
+        formatType="currency"
+        id="TermAmount"
+        value="aggCost.ActualAmountBilling"
+        wrap="false"/>
+    </Row>
+  </RowSet>
+</PCF>

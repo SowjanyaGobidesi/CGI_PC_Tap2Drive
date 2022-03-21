@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="Admin.go()"
+    afterCommit="AdminProducerCodeDetail.go(producerCode)"
+    afterEnter="producerCode.syncWithBillingSystem()"
+    beforeCancel="producerCodeUIHelper.resetPlans()"
+    beforeCommit="producerCodeUIHelper.createCommissionPlans()"
+    canEdit="true"
+    canVisit="perm.ProducerCode.create"
+    id="NewProducerCode"
+    parent="Admin(User.util.CurrentUser.Organization)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewProducerCode&quot;)">
+    <LocationEntryPoint
+      signature="NewProducerCode()"/>
+    <Variable
+      initialValue="new ProducerCode()"
+      name="producerCode"
+      type="ProducerCode"/>
+    <Variable
+      initialValue="new gw.web.admin.ProducerCodeUIHelper(producerCode)"
+      name="producerCodeUIHelper"
+      type="gw.web.admin.ProducerCodeUIHelper"/>
+    <ScreenRef
+      def="ProducerCodeDetailScreen(producerCode, producerCodeUIHelper)"/>
+  </Page>
+</PCF>

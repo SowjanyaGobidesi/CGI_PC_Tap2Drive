@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A taxable unit of price for a period of time, not to be broken up any further, for a line-level Personal Auto coverage"
+  entity="PersonalAutoPIPCovCost"
+  supertype="PersonalAutoCovCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.pa.financials.PACostAdapter"/>
+  <typekey
+    desc="The type of PIP coverage where this cost applies"
+    name="PAPIPCovCostType"
+    nullok="false"
+    typelist="PAPIPCovCostType"/>
+</subtype>

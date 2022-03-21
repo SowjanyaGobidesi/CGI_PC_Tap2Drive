@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The lease period of a leased or a rented vehicle"
+  final="false"
+  name="LengthOfLease"/>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An entity that links two forms together"
+  effDatedBranchType="PolicyPeriod"
+  entity="FormEdgeTable"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="formedgetable"
+  type="effdated">
+  <foreignkey
+    desc="The form that is doing the replacing."
+    fkentity="Form"
+    name="OwningForm"
+    nullok="false"/>
+  <foreignkey
+    desc="The form that was replaced."
+    fkentity="Form"
+    name="TargetForm"
+    nullok="false"/>
+  <checkconstraint
+    desc="Both effective date and expiration date should always be set to null (indicating that the entity spans the whole period)."
+    predicate="(EffectiveDate IS NULL AND ExpirationDate IS NULL) OR ChangeType = (SELECT id FROM pctl_effdatedchangetype WHERE TYPECODE = 'merge_base')"/>
+  <fulldescription><![CDATA[
+    This entity exists because we don't currently support edge foreign keys between effdated entities.  This edge
+      table is used by the SupersededForms array on Form to link a new Form entity to the old Form that it is replacing.
+      An edge table is necessary to avoid circular references in the datamodel.
+  ]]></fulldescription>
+</entity>

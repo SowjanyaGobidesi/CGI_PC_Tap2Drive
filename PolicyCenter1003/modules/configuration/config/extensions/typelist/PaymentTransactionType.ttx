@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="PaymentTransactionType" desc="Payment Gateway Transaction Type">
+  <typecode
+    code="AUTHORIZE"
+    name="Authorization"
+    desc="Authorization"></typecode>
+  <typecode
+    code="SALE"
+    name="Sale"
+    desc="Sale"></typecode>
+  <typecode
+    code="INQUIRY"
+    name="Inquiry"
+    desc="Inquiry"></typecode>
+  <typecode
+    code="DELAYED_PAYMENT"
+    name="Delayed Payment"
+    desc="Delayed Payment"></typecode>
+  <typecode
+    code="CREDIT"
+    name="Credit"
+    desc="Credit"></typecode>
+  <typecode
+    code="DATA_UPLOAD"
+    name="Data Upload"
+    desc="Data Upload"></typecode>
+</typelistextension>

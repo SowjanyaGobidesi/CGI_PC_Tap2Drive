@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="Policy_ContactsScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.AccountContactRoleMap"
+      name="acctContactRoleMap"
+      type="java.util.Map&lt;entity.AccountContact, java.util.List&lt;entity.PolicyContactRole&gt;&gt;"/>
+    <TitleBar/>
+    <Toolbar/>
+    <ListDetailPanel
+      selectionName="selectedAccountContact"
+      selectionType="AccountContact">
+      <ListViewPanel
+        id="Policy_ContactsLV">
+        <RowIterator
+          editable="false"
+          elementName="accountContact"
+          value="acctContactRoleMap.keySet().toTypedArray()"
+          valueType="entity.AccountContact[]">
+          <IteratorSort
+            sortBy="accountContact.Contact.Name"
+            sortOrder="1"/>
+          <Row>
+            <TextCell
+              id="Name"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Contacts.Name&quot;)"
+              value="acctContactRoleMap.get(accountContact).first().DisplayName"/>
+            <TextCell
+              id="Roles"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Contacts.Roles&quot;)"
+              value="acctContactRoleMap.get(accountContact).map( \ p -&gt; (typeof p).TypeInfo.DisplayName ).join(&quot;, &quot;)"/>
+            <TextCell
+              id="Phone"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Contacts.Phone&quot;)"
+              value="accountContact.Contact.PrimaryPhoneValue"/>
+            <TextCell
+              id="Email"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Contacts.Email&quot;)"
+              value="accountContact.Contact.EmailAddress1"/>
+            <LinkCell
+              align="center"
+              id="GoToContact"
+              label="DisplayKey.get(&quot;Web.AccountContactsLV.GoToContact&quot;)">
+              <Link
+                action="ContactForward.go(accountContact.Contact)"
+                icon="&quot;view_detail&quot;"
+                iconType="svgFileName"
+                id="GoToContactButton"
+                label="DisplayKey.get(&quot;Web.AccountContactsLV.GoToContact&quot;)"/>
+            </LinkCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+      <CardViewPanel>
+        <Variable
+          initialValue="acctContactRoleMap.get(selectedAccountContact) == null ? null : acctContactRoleMap.get(selectedAccountContact).first()"
+          name="policyContactRole"
+          recalculateOnRefresh="true"
+          type="entity.PolicyContactRole"/>
+        <Card
+          id="PolicyContactDetailCard"
+          title="DisplayKey.get(&quot;Web.AccountContacts.AccountDetail&quot;)">
+          <PanelRef
+            def="PolicyContactDetailsDV(policyContactRole, false)"/>
+        </Card>
+        <Card
+          id="RolesCard"
+          title="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Roles&quot;)">
+          <PanelIterator
+            elementName="currentPolicyContactRole"
+            id="PolicyContactRoleIterator"
+            value="policyContactRole.Branch.PolicyContactRoles.where(\ pcr -&gt; pcr.AccountContactRole.AccountContact == policyContactRole.AccountContactRole.AccountContact)"
+            valueType="entity.PolicyContactRole[]">
+            <IteratorSort
+              sortBy="currentPolicyContactRole.Subtype.DisplayName"
+              sortOrder="1"/>
+            <PanelRef
+              def="PolicyContactRolePanelSet(currentPolicyContactRole)"
+              mode="currentPolicyContactRole.Subtype"/>
+          </PanelIterator>
+        </Card>
+        <Card
+          id="AddressesCard"
+          title="DisplayKey.get(&quot;Web.Contact.Addresses.Title&quot;)">
+          <PanelRef
+            def="AddressesPanelSet(selectedAccountContact.Contact,false,policyPeriod.Policy.Account, policyPeriod)"/>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </Screen>
+</PCF>

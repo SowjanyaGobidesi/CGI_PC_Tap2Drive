@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A subset of InvoiceStream fields which may be used to override the default fields of an InvoiceStream."
+  entity="InvoiceStreamOverrides"
+  exportable="true"
+  loadable="false"
+  table="invoicestreamoverrides"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    desc="Whether or not the account's invoice date(s) are the date the invoice is sent or due. If false the date is the date the invoice is sent (EventDate), If true the date is the date the invoice is due (PaymentDueDate)"
+    name="DueDateBilling"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The lead time for invoices in the stream."
+    name="LeadTimeDayCount"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Day of month for monthly periodicity or first day (of two) of the month for twice-per-month periodicity."
+    name="FirstDayOfMonth"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Second day (of two) of the month for twice-per-month invoicing."
+    name="SecondDayOfMonth"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="For Every Week payment plans, this is the day of the week that the invoice should fall on."
+    name="DayOfWeek"
+    nullok="true"
+    typelist="DayOfWeek"/>
+  <column
+    desc="An AnchorDate is the invoice day of month, invoice day of week, or every-other-week anchor date for an invoice stream."
+    name="AnchorDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="The Public ID of the payment instrument."
+    name="PaymentInstrumentID"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    desc="The associated policy period."
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+</entity>

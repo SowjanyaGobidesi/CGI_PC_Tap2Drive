@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="advancedEdit"
+    id="ValueProviderArgumentsInputSet"
+    mode="default">
+    <Require
+      name="valueProviderProxy"
+      type="gw.rating.rtm.valueprovider.CustomValueProviderData"/>
+    <Require
+      name="advancedEdit"
+      type="boolean"/>
+    <Require
+      name="columnDefinition"
+      type="RateTableColumn"/>
+    <TextInput
+      id="ValueProviderHelpText"
+      value="valueProviderProxy.ClassName == TC_TYPELISTVALUEPROVIDER ? &quot;&quot; : gw.rating.rtm.valueprovider.RateTableCellValueProviderFactory.getValueProvider(columnDefinition).ArgumentsHelpText"
+      visible="CurrentLocation.InEditMode and valueProviderProxy.ClassName != null"/>
+    <ListViewInput
+      id="ArgumentListView"
+      label="DisplayKey.get(&quot;Web.Rating.RateTableDefinition.Argument&quot;)"
+      visible="valueProviderProxy.ClassName != ValueProvider.TC_TYPELISTVALUEPROVIDER">
+      <Toolbar>
+        <IteratorButtons
+          iterator="ArgumentIterator"/>
+      </Toolbar>
+      <ListViewPanel>
+        <RowIterator
+          editable="true"
+          elementName="argument"
+          hideCheckBoxesIfReadOnly="true"
+          id="ArgumentIterator"
+          toCreateAndAdd="valueProviderProxy.addNewArgument()"
+          toRemove="valueProviderProxy.Arguments.remove(argument); valueProviderProxy.createValueProviderString()"
+          value="valueProviderProxy.Arguments"
+          valueType="java.util.List&lt;gw.rating.rtm.valueprovider.CustomValueProviderData.Argument&gt;">
+          <Row>
+            <TextCell
+              editable="true"
+              enableSort="false"
+              id="ArgumentValue"
+              required="false"
+              value="argument.Name">
+              <PostOnChange
+                onChange="valueProviderProxy.createValueProviderString()"/>
+            </TextCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

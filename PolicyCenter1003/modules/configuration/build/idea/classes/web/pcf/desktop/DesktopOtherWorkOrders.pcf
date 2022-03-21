@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- SA done -->
+  <Page
+    canVisit="perm.System.viewmypolicychanges"
+    id="DesktopOtherWorkOrders"
+    title="DisplayKey.get(&quot;Web.Dashboard.Tile.ChangeRequests&quot;)">
+    <LocationEntryPoint
+      signature="DesktopOtherWorkOrders()"/>
+    <Screen
+      id="DesktopOtherWorkOrdersScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Dashboard.Tile.ChangeRequests&quot;)"/>
+      <Toolbar/>
+      <PanelRef
+        def="DesktopOtherWorkOrdersLV()"
+        mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+    </Screen>
+  </Page>
+</PCF>

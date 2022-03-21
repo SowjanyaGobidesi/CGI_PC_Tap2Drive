@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="PCOfficialID">
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.personaldata.obfuscation.PCOfficialIDObfuscator"/>
+  <column-override
+    name="PatternCode">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </column-override>
+</extension>

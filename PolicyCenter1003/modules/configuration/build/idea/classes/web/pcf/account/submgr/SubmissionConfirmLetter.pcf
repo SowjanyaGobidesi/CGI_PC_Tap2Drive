@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="SubmissionManager.go(account)"
+    afterCommit="SubmissionLetterSuccess.go(account)"
+    beforeCommit="letter.addJobs( gw.job.SubmissionLetterHelper.getCheckedSubmissions() ); letter.createAndAttachDocument()"
+    canEdit="true"
+    canVisit="perm.Account.newSubmission(account)"
+    id="SubmissionConfirmLetter"
+    parent="SubmissionManager(account)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.SubmissionConfirmLetter&quot;)"
+    validateOnBundleCommit="false">
+    <LocationEntryPoint
+      signature="SubmissionConfirmLetter(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="initLetter()"
+      name="letter"
+      type="Letter"/>
+    <Screen
+      id="SubmissionConfirmLetterScreen">
+      <Variable
+        name="docActionsHelper"
+        type="gw.document.DocumentsActionsUIHelper"/>
+      <Toolbar
+        id="SubmissionConfirmLetterScreen_Toolbar">
+        <EditButtons
+          id="SubmissionConfirmLetterScreen_EditButtons"
+          updateLabel="DisplayKey.get(&quot;Web.SubmissionConfirmLetter.GenerateLetter&quot;)"
+          updateVisible="docActionsHelper.DocumentTemplateActionsAvailable"/>
+      </Toolbar>
+      <AlertBar
+        id="SubmissionConfirmLetterScreen_GenerateLetterUnavailable"
+        label="DisplayKey.get('Web.SubmissionConfirmLetter.GenerateLetter.Unavailable')"
+        visible="not docActionsHelper.DocumentTemplateActionsAvailable"/>
+      <PanelRef
+        def="SubmissionConfirmLetterDV(letter, account)"/>
+    </Screen>
+    <Code><![CDATA[function initLetter() : Letter {
+  var result = new Letter()
+  result.Type = TC_CONFIRMATION
+  return result
+}]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="LookupCreationPlugin"
+  name="LookupCreationPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.lookup.PCLookupTableCreationPlugin"/>
+</plugin>

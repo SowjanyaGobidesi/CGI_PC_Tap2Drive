@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Product
+  abbreviation="CA"
+  codeIdentifier="BusinessAuto"
+  daysUntilQuoteNeeded="7"
+  defaultTermType="Annual"
+  priority="25"
+  productAccountType="Any"
+  productType="Commercial"
+  public-id="BusinessAuto"
+  quoteRoundingLevel="0"
+  quoteRoundingMode="HALF_UP">
+  <AvailablePolicyTerms>
+    <AvailablePolicyTerm
+      codeIdentifier="wKgEXlkB_hsAAAAA"
+      public-id="wKgEXlkB_hsAAAAA"
+      termType="Other"/>
+    <AvailablePolicyTerm
+      codeIdentifier="wKgEXv3HUZcAAAAA"
+      public-id="wKgEXv3HUZcAAAAA"
+      termType="HalfYear"/>
+    <AvailablePolicyTerm
+      codeIdentifier="wKgEXnPx_7oAAAAA"
+      public-id="wKgEXnPx_7oAAAAA"
+      termType="Annual"/>
+  </AvailablePolicyTerms>
+  <DocTemplateRefs>
+    <DocTemplateRef
+      codeIdentifier="wKgEXtrtFMQAAAAA"
+      documentTemplateType="ReinstatementQuote"
+      public-id="wKgEXtrtFMQAAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXrsu8DQAAAAA"
+      documentTemplateType="Binder"
+      public-id="wKgEXrsu8DQAAAAA"
+      templateFile="SampleBinder.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXjlYcO4AAAAA"
+      documentTemplateType="CancellationQuote"
+      public-id="wKgEXjlYcO4AAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXnSqFvcAAAAA"
+      documentTemplateType="PolicyChangeQuote"
+      public-id="wKgEXnSqFvcAAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXgBF22MAAAAA"
+      documentTemplateType="RenewalQuote"
+      public-id="wKgEXgBF22MAAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXjq9CwsAAAAA"
+      documentTemplateType="SubmissionQuote"
+      public-id="wKgEXjq9CwsAAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="wKgEXmG0TuEAAAAA"
+      documentTemplateType="RewriteQuote"
+      public-id="wKgEXmG0TuEAAAAA"
+      templateFile="PolicyQuote.gosu.rtf"/>
+    <DocTemplateRef
+      codeIdentifier="zvcjmqrfe6qs6d51jjq1k72q3fb"
+      documentTemplateType="RewriteNewAccountQuote"
+      public-id="zvcjmqrfe6qs6d51jjq1k72q3fb"
+      templateFile="PolicyQuote.gosu.rtf"/>
+  </DocTemplateRefs>
+  <InitializeScript><![CDATA[
+//PolicyPeriod.PaymentOption="Agency"
+//PolicyPeriod.PaymentPlan="Annual0"
+//PolicyPeriod.Deposit="100"
+//PolicyPeriod.PaymentMethod="check"
+PolicyPeriod.DepositCollected = 0bd.ofCurrency(PolicyPeriod.PreferredSettlementCurrency)
+    
+  ]]></InitializeScript>
+  <ProductPolicyLinePatterns>
+    <ProductPolicyLinePattern
+      codeIdentifier="wKgEXvpucmYAAAAA"
+      policyLinePattern="BusinessAutoLine"
+      public-id="wKgEXvpucmYAAAAA"/>
+  </ProductPolicyLinePatterns>
+  <ProductQuestionSetPatterns>
+    <ProductQuestionSetPattern
+      codeIdentifier="wKgEXr3VNJsAAAAA"
+      public-id="wKgEXr3VNJsAAAAA"
+      questionSet="BABusinessAutoPreQualA"/>
+  </ProductQuestionSetPatterns>
+</Product>

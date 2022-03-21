@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="HOPLine">
+  <implementsInterface
+    iface="gw.api.policy.PolicyLineMethods"
+    impl="gw.lob.hop.HOPPolicyLineMethods"/>
+  <array
+    arrayentity="HOPCost"
+    cascadeDelete="true"
+    name="HOPCosts"/>
+  <array
+    arrayentity="HOPLineCov"
+    cascadeDelete="true"
+    desc="Line-level coverages for Homeowners"
+    name="HOPLineCoverages"
+    owner="true"/>
+  <array
+    arrayentity="HOPLineExcl"
+    cascadeDelete="true"
+    desc="Line-level exclusions for Homeowners"
+    name="HOPLineExclusions"
+    owner="true"/>
+  <array
+    arrayentity="HOPLineCond"
+    cascadeDelete="true"
+    desc="Line-level conditions for Homeowners"
+    name="HOPLineConditions"
+    owner="true"/>
+  <array
+    arrayentity="HOPLineMod"
+    cascadeDelete="true"
+    desc="Line-level modifiers for Homeowners"
+    name="HOPLineModifiers"
+    owner="false"/>
+  <array
+    arrayentity="HOPCoveragePart"
+    cascadeDelete="true"
+    desc="Coverage Parts for the HOP line"
+    name="HOPCoverageParts"
+    owner="true"/>
+</extension>

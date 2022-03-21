@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="Modification" desc="Modification to base premium">
+  <typecode
+    code="modification"
+    desc="Modification to base premium"
+    name="Modification"
+    priority="10"/>
+  <typecode
+    code="base"
+    desc="Base premium"
+    name="Base"
+    priority="20"/>
+</typelist>

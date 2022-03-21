@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="PolicyContactRolePanelSet"
+    mode="PolicyAddlInsured">
+    <Require
+      name="policyContactRole"
+      type="PolicyContactRole"/>
+    <Variable
+      initialValue="policyContactRole as PolicyAddlInsured"
+      name="policyAddlInsured"
+      type="entity.PolicyAddlInsured"/>
+    <PanelRef>
+      <TitleBar
+        id="AdditionalInsuredTitle"
+        title="DisplayKey.get(&quot;Web.Policy.AdditionalInsured&quot;)"/>
+      <ListViewPanel
+        id="AdditionalInsuredDetailsLV">
+        <RowIterator
+          canPick="false"
+          checkBoxVisible="false"
+          editable="true"
+          elementName="policyAddlInsuredDetail"
+          pageSize="0"
+          value="policyAddlInsured.PolicyAdditionalInsuredDetails"
+          valueType="entity.PolicyAddlInsuredDetail[]">
+          <Row>
+            <TypeKeyCell
+              editable="true"
+              id="AdditionalInsuredType"
+              label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.Type&quot;)"
+              required="true"
+              value="policyAddlInsuredDetail.AdditionalInsuredType"
+              valueType="typekey.AdditionalInsuredType"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

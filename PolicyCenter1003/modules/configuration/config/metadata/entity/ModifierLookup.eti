@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- ==============================================================================  OTHER                                                                           ============================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The modifier lookup type."
+  entity="ModifierLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="modifierlookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.ModifierLookupPublicMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.ModifierLookupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.productmodel.impl.ModifierLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.ModifierLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <implementsEntity
+    name="UWCompanyFilteredLookup"/>
+  <implementsEntity
+    name="PolicyLinePatternFilteredLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.DenormLookupInitialisable"
+    impl="com.guidewire.pc.domain.productmodel.impl.ModifierLookupImpl"/>
+  <column
+    name="ModifierPatternCode"
+    nullok="false"
+    type="patterncode"/>
+</entity>

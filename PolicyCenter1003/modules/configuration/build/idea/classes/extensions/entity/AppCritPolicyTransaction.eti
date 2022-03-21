@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  desc="PolicyTransaction Applicability Criteria entries"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritPolicyTransaction"
+  table="appcritpolicytransaction"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="gw.bizrules.domain.impl.AppCritPolicyTransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="gw.bizrules.domain.impl.AppCritPolicyTransactionImpl"/>
+  <foreignkey
+    desc="The associated rule"
+    fkentity="UWRule"
+    name="UWRule"
+    nullok="false"/>
+  <typekey
+    desc="Policy transaction in a rule availability criteria"
+    name="Job"
+    nullok="false"
+    typelist="Job"/>
+  <index
+    desc="Enforce uniqueness per state/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UWRule"/>
+    <indexcol
+      keyposition="2"
+      name="Job"/>
+  </index>
+</entity>

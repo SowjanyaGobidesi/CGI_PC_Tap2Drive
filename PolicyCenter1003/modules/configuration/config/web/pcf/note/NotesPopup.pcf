@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="NotesPopup"
+    title="DisplayKey.get('Web.NotesPopup.Title')">
+    <LocationEntryPoint
+      signature="NotesPopup(notes: entity.Note[])"/>
+    <Variable
+      name="notes"
+      type="entity.Note[]"/>
+    <Screen>
+      <ListViewPanel
+        id="NotesLV">
+        <Row
+          renderAsSmartHeader="true">
+          <TextCell
+            enableSort="false"
+            id="InfoHeader"
+            value="DisplayKey.get('Java.Note.Info')"/>
+          <TextCell
+            bold="true"
+            enableSort="false"
+            id="DetailsHeader"
+            value="DisplayKey.get('Java.Note.Details')"/>
+        </Row>
+        <RowIterator
+          editable="false"
+          elementName="note"
+          value="notes"
+          valueType="entity.Note[]">
+          <RowSetRef
+            def="NoteRowSet(note, true, null)"/>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

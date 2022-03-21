@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, thePeriod.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(refPeriod) and perm.System.pfilepricing"
+    id="PolicyFile_Pricing"
+    parent="PolicyFile(refPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Pricing&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Pricing(refPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="refPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="thePeriod.OpenForEdit"
+      name="isEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="refPeriod.PeriodDisplayStatus == DisplayKey.get(&quot;PolicyPeriod.PeriodDisplayStatus.Expired&quot;)"
+      name="isExpired"
+      type="boolean"/>
+    <Variable
+      initialValue="refPeriod.PeriodDisplayStatus == DisplayKey.get(&quot;PolicyPeriod.PeriodDisplayStatus.Scheduled&quot;)"
+      name="isScheduled"
+      type="boolean"/>
+    <Variable
+      initialValue="(isExpired or isScheduled) ? refPeriod : refPeriod.getSlice(asOfDate)"
+      name="thePeriod"
+      type="entity.PolicyPeriod"/>
+    <Screen
+      editable="false"
+      id="PolicyFile_PricingScreen">
+      <TitleBar/>
+      <Toolbar/>
+      <PanelRef
+        def="WarningsPanelSet(refPeriod.Policy.ContingencyWarningMessages)"/>
+      <PanelRef
+        def="CostOverridesWarningPanelSet(thePeriod)"/>
+      <PanelRef
+        def="PolicyFile_Quote_SummaryDV(thePeriod)"/>
+      <CardViewPanel>
+        <Card
+          id="PolicyFile_Pricing_CumulativeCard"
+          title="DisplayKey.get(&quot;Web.PolicyFile.Pricing.Cumulative&quot;)">
+          <PanelIterator
+            elementName="line"
+            id="cumul"
+            value="thePeriod.RepresentativePolicyLines"
+            valueType="entity.PolicyLine[]">
+            <PanelRef
+              def="RatingCumulDetailsPanelSet(thePeriod, null, isEditable)"
+              mode="line.Pattern.PublicID">
+              <TitleBar
+                title="line.Pattern as java.lang.String"
+                visible="thePeriod.RepresentativePolicyLines.length &gt; 1"/>
+            </PanelRef>
+          </PanelIterator>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

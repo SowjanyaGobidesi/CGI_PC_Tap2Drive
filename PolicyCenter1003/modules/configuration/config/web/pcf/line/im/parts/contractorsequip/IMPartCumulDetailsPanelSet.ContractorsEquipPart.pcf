@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMPartCumulDetailsPanelSet"
+    mode="ContractorsEquipPart">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Variable
+      initialValue="imLine.VersionList.IMCoverageParts.map( \ i -&gt; i.AllVersions.last() )"
+      name="covPartIterable"
+      type="java.util.List&lt;entity.IMCoveragePart&gt;"/>
+    <Variable
+      initialValue="covPartIterable.firstWhere(\ p -&gt; p typeis ContractorsEquipPart) as ContractorsEquipPart"
+      name="part"
+      type="entity.ContractorsEquipPart"/>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipments&quot;)"/>
+      <PanelSet>
+        <PanelRef
+          def="IMCostLV(part.VersionList.ContrEquipPartCovs.flatMap(\ c -&gt; c.Costs).flatMap(\ c -&gt; c.AllVersions).toList())"
+          visible="part.VersionList.ContrEquipPartCovs.flatMap(\ c -&gt; c.Costs).Count &gt; 0">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipment.EquipmentPartLevelCoverages&quot;)"/>
+        </PanelRef>
+        <PanelRef
+          visible="!part.VersionList.ContractorsEquipments.Empty">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipment.ScheduledEquipments&quot;)"/>
+          <PanelSet>
+            <PanelIterator
+              elementName="perEquipment"
+              id="perEquipmentPanelIter"
+              value="part.VersionList.ContractorsEquipments.map( \ i -&gt; i.AllVersions.last()).toTypedArray()"
+              valueType="entity.ContractorsEquipment[]">
+              <IteratorSort
+                sortBy="perEquipment.ContractorsEquipmentNumber"
+                sortOrder="1"/>
+              <PanelRef
+                def="IMCostLV(perEquipment.VersionList.Coverages.flatMap(\ c -&gt; c.Costs).flatMap(\ c -&gt;c.AllVersions).toList())">
+                <Verbatim
+                  label="perEquipment.DisplayName"/>
+              </PanelRef>
+            </PanelIterator>
+          </PanelSet>
+        </PanelRef>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

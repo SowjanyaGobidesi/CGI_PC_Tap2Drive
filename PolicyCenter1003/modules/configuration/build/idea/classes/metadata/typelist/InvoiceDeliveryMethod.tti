@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  InvoiceDeliveryMethod  ==================================================================== -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines how the invoice is sent"
+  name="InvoiceDeliveryMethod">
+  <typecode
+    code="email"
+    desc="Invoice is delivered by email"
+    name="Email"/>
+  <typecode
+    code="mail"
+    desc="Invoice is delivered by mail"
+    name="Mail"/>
+</typelist>

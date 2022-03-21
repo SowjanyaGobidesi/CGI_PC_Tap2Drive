@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="EditNoteDV">
+    <Require
+      name="note"
+      type="Note"/>
+    <Variable
+      initialValue="note.Contingency != null and note.Contingency.Policy.MostRecentBoundPeriodOnMostRecentTerm.Status == TC_BOUND"
+      name="showContingencyPolicy"
+      type="boolean"/>
+    <Variable
+      initialValue="note.Contingency != null and not showContingencyPolicy and note.Contingency.PolicyPeriod != null"
+      name="showContigencyJob"
+      type="boolean"/>
+    <InputColumn>
+      <TypeKeyInput
+        id="Topic"
+        label="DisplayKey.get(&quot;Web.NewNote.Topic&quot;)"
+        required="true"
+        value="note.Topic"
+        valueType="typekey.NoteTopicType"/>
+      <TextInput
+        editable="true"
+        id="Subject"
+        label="DisplayKey.get(&quot;Web.NewNote.Subject&quot;)"
+        value="note.Subject"/>
+      <TextInput
+        id="RelatedTo"
+        label="DisplayKey.get(&quot;Web.NewNote.RelatedTo&quot;)"
+        required="true"
+        value="entity.Note.getLevelDisplayString( note.Level )"
+        visible="true"/>
+      <TypeKeyInput
+        filter="note.hasCreatePermission(VALUE)"
+        id="SecurityLevel"
+        label="DisplayKey.get(&quot;Web.NewNote.SecurityLevel&quot;)"
+        required="true"
+        value="note.SecurityType"
+        valueType="typekey.NoteSecurityType"/>
+      <TextAreaInput
+        editable="true"
+        id="Text"
+        label="DisplayKey.get(&quot;Web.NewNote.Text&quot;)"
+        numRows="15"
+        required="true"
+        value="note.Body"/>
+      <ContentInput
+        labelAbove="true"
+        visible="showContingencyPolicy">
+        <Link
+          id="RelatedToContingencyPolicy"
+          label="DisplayKey.get('Web.Contingency.RelatedToContingency')"/>
+        <Link
+          action="ContingencyPopup.push(note.Contingency)"
+          available="not CurrentLocation.InEditMode"
+          id="TitleContingencyPolicy"
+          label="DisplayKey.get('Web.Contingency.TitleContingency', note.Contingency.Title)"/>
+        <Link
+          id="RelatedToPolicyContingency"
+          label="DisplayKey.get('Web.Contingency.OnPolicy')"/>
+        <Link
+          action="PolicyFile_Summary.push(note.Contingency.Policy.MostRecentBoundPeriodOnMostRecentTerm, java.util.Date.Today)"
+          available="not CurrentLocation.InEditMode"
+          id="RelatedToPolicyNumberContingency"
+          label="note.Contingency.PolicyNumberLabel"/>
+      </ContentInput>
+      <ContentInput
+        labelAbove="true"
+        visible="showContigencyJob">
+        <Link
+          id="RelatedToContingencyJob"
+          label="DisplayKey.get('Web.Contingency.RelatedToContingency')"/>
+        <Link
+          action="ContingencyPopup.push(note.Contingency)"
+          available="not CurrentLocation.InEditMode"
+          id="TitleContingencyJob"
+          label="DisplayKey.get('Web.Contingency.TitleContingency', note.Contingency.Title)"/>
+        <Link
+          id="RelatedToJobContingency"
+          label="note.Contingency.JobTypeLabel"/>
+        <Link
+          action="JobForward.go(note.Contingency.PolicyPeriod.Job)"
+          available="not CurrentLocation.InEditMode"
+          id="RelatedToJobNumberContingency"
+          label="note.Contingency.JobNumberLabel"/>
+      </ContentInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

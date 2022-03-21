@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    desc="Policy review panel for jobs that do not have OOS conflicts"
+    hideTabIfSingle="true"
+    id="ReviewSummaryCV"
+    mode="default">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Card
+      id="LineSummary"
+      title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.Card.Summary&quot;)">
+      <PanelIterator
+        elementName="line"
+        value="policyPeriod.Lines"
+        valueType="entity.PolicyLine[]">
+        <PanelRef
+          def="PolicyLineSummaryPanelSet(line, jobWizardHelper)"
+          mode="line.Pattern.CodeIdentifier">
+          <TitleBar
+            title="line.DisplayName"
+            visible="policyPeriod.Lines.Count &gt; 1"/>
+        </PanelRef>
+      </PanelIterator>
+    </Card>
+  </CardViewPanel>
+</PCF>

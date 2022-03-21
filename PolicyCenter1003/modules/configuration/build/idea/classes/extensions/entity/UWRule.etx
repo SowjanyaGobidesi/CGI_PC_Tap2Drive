@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="UWRule">
+  <column
+    columnName="StartDate"
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    columnName="EndDate"
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="AppCritJurisdiction"
+    name="Jurisdictions"
+    owner="true"/>
+  <array
+    arrayentity="AppCritPolicyTransaction"
+    name="PolicyTransactions"
+    owner="true"/>
+  <array
+    arrayentity="AppCritLineOfBusiness"
+    name="LinesOfBusiness"
+    owner="true"/>
+</extension>

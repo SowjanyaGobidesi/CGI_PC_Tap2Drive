@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    countsAsWork="false"
+    id="BillingAdjustmentPreviewPaymentsPopup"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.Policy.Payment.Schedule.Title', paymentPlanName)">
+    <LocationEntryPoint
+      signature="BillingAdjustmentPreviewPaymentsPopup(paymentPlanName : String, installmentsPreview : gw.plugin.billing.BillingPaymentsPreview, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="installmentsPreview"
+      type="gw.plugin.billing.BillingPaymentsPreview"/>
+    <Variable
+      name="paymentPlanName"
+      type="java.lang.String"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <ScreenRef
+      def="BillingAdjustmentPreviewPaymentsScreen(installmentsPreview, policyPeriod.Job)"/>
+  </Popup>
+</PCF>

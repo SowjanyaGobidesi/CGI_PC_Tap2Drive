@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.PolicyPeriod" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="NonPremiumCosts[]" type="entity.Cost" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.costmodel"/>
+    <include path="Notes[]" type="entity.Note" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.notemodel"/>
+    <include path="PersonalAutoLine.PALineCoverages[]" type="entity.PersonalAutoCov" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.quotingpersonalautocovmodel"/>
+    <include path="PersonalAutoLine.PolicyDrivers[]" type="entity.PolicyDriver" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.quotingpolicydrivermodel"/>
+    <include path="PersonalAutoLine.UWCompanyCode" type="typekey.UWCompanyCode" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="PersonalAutoLine.Vehicles[]" type="entity.PersonalVehicle" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.quotingpersonalvehiclemodel"/>
+    <include path="PolicyContactRoles[]" type="entity.PolicyContactRole" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.policycontactrolemodel"/>
+    <include path="PolicyLocations[]" type="entity.PolicyLocation" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.policylocationmodel"/>
+    <include path="ProducerCodeOfRecord.Code" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="RateAsOfDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="WrittenDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

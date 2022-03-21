@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    countsAsWork="false"
+    id="MessageSearch"
+    title="DisplayKey.get(&quot;Web.Admin.MessageSearch&quot;)">
+    <LocationEntryPoint
+      signature="MessageSearch()"/>
+    <Screen
+      id="MessageSearchScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="messages"
+        search="searchCriteria.performSearch()"
+        searchCriteria="createMessageSearchCriteria()"
+        searchCriteriaType="gw.system.messaging.MessageSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Message&gt;">
+        <PanelRef
+          def="MessageSearchDV(searchCriteria)"/>
+        <PanelRef
+          def="MessageResultsLV(messages)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Admin.MessageSearch.Results&quot;)"/>
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="gw.api.admin.MessagingUtil.retryRetryableMessages(CheckedValues)"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.MessageSearch.RetryConfirm&quot;)"
+              flags="all retryableMessage"
+              id="RetryButton"
+              iterator="MessageResultsLV.MessageResultsLV"
+              label="DisplayKey.get(&quot;Button.Retry&quot;)"
+              shortcut="Y"
+              tooltip="DisplayKey.get(&quot;Button.Retry.Tooltip&quot;)"
+              visible="perm.System.retrymessage"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="CheckedValues.each( \ message -&gt; message.skip() )"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.MessageSearch.SkipConfirm&quot;)"
+              id="SkipButton"
+              iterator="MessageResultsLV.MessageResultsLV"
+              label="DisplayKey.get(&quot;Button.SkipBlocking&quot;)"
+              shortcut="P"
+              tooltip="DisplayKey.get(&quot;Button.SkipBlocking.Tooltip&quot;)"
+              visible="perm.System.skipmessage"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function createMessageSearchCriteria() : gw.system.messaging.MessageSearchCriteria {
+        var criteria = new gw.system.messaging.MessageSearchCriteria()
+        criteria.MessageStatus = MessageSearchStatus.TC_UNFINISHED
+        return criteria
+      }]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    id="PaymentGatewayEntryPoint"
+    location="PaymentGatewayForward(result, reference, responseMessage, amount, orginalTransactionID)">
+    <EntryPointParameter
+      locationParam="result"
+      optional="true"
+      type="String"
+      urlParam="RESULT"/>
+    <EntryPointParameter
+      locationParam="reference"
+      optional="true"
+      type="String"
+      urlParam="PNREF"/>
+    <EntryPointParameter
+      locationParam="responseMessage"
+      optional="true"
+      type="String"
+      urlParam="RESPMSG"/>
+    <EntryPointParameter
+      locationParam="amount"
+      optional="true"
+      type="String"
+      urlParam="AMT"/>
+    <EntryPointParameter
+      locationParam="orginalTransactionID"
+      optional="true"
+      type="String"
+      urlParam="ORIGID"/>
+  </EntryPoint>
+</PCF>

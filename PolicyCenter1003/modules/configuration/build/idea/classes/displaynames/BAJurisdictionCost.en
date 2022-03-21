@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="BAJurisdictionCost">
+  <Columns>
+    <Column
+      beanPath="BAJurisdictionCost.BAJurisdictionCostType"
+      name="type"/>
+    <Column
+      beanPath="BAJurisdictionCost.Jurisdiction.State"
+      name="state"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.BAJurisdictionCost", state.Code, type)
+    
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  final="true"
+  xmlns="http://guidewire.com/typelists" name="DocumentBindingType" desc="">
+  <typecode
+    code="EARLY"
+    desc="Payload for document creation is generated immediately"
+    name="EARLY"/>
+  <typecode
+    code="EARLY_DEFERRED"
+    desc="Payload for the document creation is generated immediately but asynchronously"
+    name="EARLY_DEFERRED"/>
+  <typecode
+    code="LATE"
+    desc="Payload for document creation is not generated until the request for that document is issued"
+    name="LATE"/>
+</typelist>

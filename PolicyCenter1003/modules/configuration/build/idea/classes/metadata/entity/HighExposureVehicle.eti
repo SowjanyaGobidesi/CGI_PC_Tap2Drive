@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HighExposureVehicle"
+  desc="High Exposure Vehicles"
+  table="highexposurevehicle"
+  type="retireable"
+  exportable="true">
+  <column
+    name="VehicleMake"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    name="VehicleModel"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    name="Year"
+    nullok="false"
+    type="year"/>
+</entity>

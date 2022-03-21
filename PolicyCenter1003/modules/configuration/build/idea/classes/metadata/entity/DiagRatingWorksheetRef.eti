@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A foreign key reference that relates to a diagnostic rating worksheet"
+  effDatedBranchType="PolicyPeriod"
+  entity="DiagRatingWorksheetRef"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="diagratingworksheetref"
+  type="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.rating.worksheet.DiagRatingWorksheetRefPublicMethods"
+    impl="com.guidewire.pc.domain.rating.worksheet.impl.DiagRatingWorksheetRefImpl"/>
+  <!-- Key and ForeignKey are both (long, IType) pairs.
+    Would love to use a key object here (so it is updated on rekey) but I'm not allowed.
+    Instead, persist the fields individually, and manage them via a virtual property on the Impl class. -->
+  <column
+    desc="Key value of referenced entity"
+    getterScriptability="hidden"
+    name="ReferencedID"
+    nullok="true"
+    setterScriptability="hidden"
+    type="longint"/>
+  <column
+    desc="Type name of referenced entity"
+    getterScriptability="hidden"
+    name="ReferencedType"
+    nullok="true"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="DiagnosticRatingWorksheet"
+    name="Worksheet"
+    nullok="false"/>
+</entity>

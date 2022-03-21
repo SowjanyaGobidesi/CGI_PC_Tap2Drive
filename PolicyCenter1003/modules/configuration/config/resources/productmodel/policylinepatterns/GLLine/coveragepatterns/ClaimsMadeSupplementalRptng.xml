@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="ClaimsMadeSupplementalRptng"
+  conditionSubtype="GeneralLiabilityCond"
+  coverageCategory="GLClaimsMade"
+  existence="Electable"
+  lookupTableName="GLCond"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="ClaimsMadeSupplementalRptng"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <TypekeyCovTermPattern
+      codeIdentifier="SupplementalReportingType"
+      coverageColumn="ChoiceTerm1"
+      lookupTableName="GLCovTerm"
+      priority="100"
+      public-id="SupplementalReportingType"
+      required="true"
+      typelist="TypeOfSupplementalRpting"/>
+  </CovTerms>
+</ConditionPattern>

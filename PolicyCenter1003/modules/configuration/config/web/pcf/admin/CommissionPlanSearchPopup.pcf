@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="CommissionPlanSearchPopup"
+    returnType="java.lang.String"
+    title="DisplayKey.get(&quot;Web.CommissionPlanSearchPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="CommissionPlanSearchPopup(tier : Tier, unselectablePlanNames : String[])"/>
+    <Variable
+      name="tier"
+      type="Tier"/>
+    <Variable
+      name="unselectablePlanNames"
+      type="String[]"/>
+    <Screen>
+      <SearchPanel
+        criteriaName="commissionPlanSearchCriteria"
+        resultsName="commissionPlans"
+        search="commissionPlanSearchCriteria.doSearch()"
+        searchCriteria="new gw.plugin.billing.CommissionPlanSearchCriteria(tier)"
+        searchCriteriaType="gw.plugin.billing.CommissionPlanSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.plugin.billing.CommissionPlanSummary[]">
+        <DetailViewPanel
+          editable="true">
+          <InputColumn>
+            <InputSet
+              editable="true"
+              visible="true">
+              <TextInput
+                editable="true"
+                id="nameInput"
+                label="DisplayKey.get(&quot;Web.CommissionPlanSearchPopup.Name&quot;)"
+                value="commissionPlanSearchCriteria.CommissionPlanName"/>
+            </InputSet>
+          </InputColumn>
+          <InputFooterSection>
+            <InputSetRef
+              def="SearchOnlyInputSet()"/>
+          </InputFooterSection>
+        </DetailViewPanel>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <ListViewPanel
+            id="CommissionPlanSearchResultsLV">
+            <RowIterator
+              appendPageInfo="true"
+              canPick=" not unselectablePlanNames.contains(commissionPlan.Name)"
+              editable="false"
+              elementName="commissionPlan"
+              pickValue="commissionPlan.Id"
+              value="commissionPlans"
+              valueType="gw.plugin.billing.CommissionPlanSummary[]">
+              <ToolbarFlag
+                name="organization"/>
+              <Row>
+                <TextCell
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.CommissionPlanSearchPopup.Name&quot;)"
+                  sortOrder="1"
+                  value="commissionPlan.Name"/>
+                <TextCell
+                  id="CommissionPlanCurrencies"
+                  label="DisplayKey.get(&quot;Web.CommissionPlanSearchPopup.Currency&quot;)"
+                  value="commissionPlan.Currencies*.DisplayName.join(&quot;, &quot;)"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

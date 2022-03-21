@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  displayName="Dwelling Hazard"
+  effDatedBranchType="PolicyPeriod"
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="DwellingHazard"
+  desc="Dwelling Hazard"
+  table="dwellinghazard"
+  type="effdated">
+  <typekey desc="Specific Hazard" name="SpecificHazard" nullok="true" typelist="SpecificHazard"/>
+  <typekey desc="Hazard Type" name="HazardType" nullok="true" typelist="HazardType"></typekey>
+  <column desc="Additional information or comments" name="AdditionalInformation" nullok="true" type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <foreignkey fkentity="HOPDwelling" name="HOPDwelling" nullok="false"/>
+</entity>

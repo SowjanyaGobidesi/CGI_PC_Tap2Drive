@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="CoveragePartType">
+  <typecode
+    code="hoprental"
+    desc="Rental"
+    name="Rental"
+    priority="30">
+    <category
+      code="HOPLine"
+      typelist="PolicyLine"/>
+  </typecode>
+  <typecode
+    code="hopcondo"
+    desc="Condominium"
+    name="Condominium"
+    priority="20">
+    <category
+      code="HOPLine"
+      typelist="PolicyLine"/>
+  </typecode>
+  <typecode
+    code="hopdwelling"
+    desc="Dwelling"
+    name="Dwelling"
+    priority="10">
+    <category
+      code="HOPLine"
+      typelist="PolicyLine"/>
+  </typecode>
+  <typefilter
+    desc="HOP coverage part types"
+    name="HOPCoveragePartType">
+    <include
+      code="hoprental"/>
+    <include
+      code="hopcondo"/>
+    <include
+      code="hopdwelling"/>
+  </typefilter>
+</internaltypelistextension>

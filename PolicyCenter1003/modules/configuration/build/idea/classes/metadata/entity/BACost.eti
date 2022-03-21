@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A Commercial Auto unit of price for a period of time that should not be broken up any further."
+  effDatedBranchType="PolicyPeriod"
+  entity="BACost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="bacost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.ba.financials.BACostAdapter"/>
+  <typekey
+    desc="The order in which this cost was rated."
+    name="RatedOrder"
+    nullok="false"
+    typelist="BARatedOrderType"/>
+  <foreignkey
+    fkentity="BusinessAutoLine"
+    name="BusinessAutoLine"
+    nullok="false"/>
+  <foreignkey
+    desc="The Business Vehicle related to the this Cost"
+    fkentity="BusinessVehicle"
+    name="BusinessVehicle"
+    nullok="true"/>
+  <foreignkey
+    desc="The Jurisdiction related to the this Cost"
+    fkentity="BAJurisdiction"
+    name="Jurisdiction"
+    nullok="true"/>
+  <array
+    arrayentity="BATransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

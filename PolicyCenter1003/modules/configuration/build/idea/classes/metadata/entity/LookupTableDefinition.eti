@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  desc="The table holds metadata information for a lookup table"
+  entity="LookupTableDefinition"
+  loadable="false"
+  table="lookuptabledefinition"
+  type="editable">
+  <column
+    desc="The lookup table code"
+    name="TableCode"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The logical name of the lookup table. Note: The lookup table data is stored in a separate physical table"
+    name="TableName"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Description of the lookup data that is stored by this table"
+    name="TableDesc"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="LookupTableInputColumn"
+    desc="The list of column definitions for this matching operation"
+    name="Inputs"
+    owner="true"/>
+  <onetoone
+    fkentity="LookupTableOutputColumn"
+    desc="The factor definition for this lookup table"
+    name="Output"
+    nullok="true"
+    owner="true"/>
+  <column
+    desc="Entity Name for the entity backed lookup table. If not entity backed, it should be Null."
+    name="EntityName"
+    nullok="true"
+    type="shorttext"/>
+  <index
+    desc="Index for search by TableCode and ensure the uniqueness of lookup table definitions."
+    name="TableCodeIdx"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TableCode"/>
+  </index>
+  <column
+    default="false"
+    desc="Indicates that this lookup table is for an existence lookup"
+    name="Existence"
+    nullok="false"
+    type="bit"/>
+</entity>

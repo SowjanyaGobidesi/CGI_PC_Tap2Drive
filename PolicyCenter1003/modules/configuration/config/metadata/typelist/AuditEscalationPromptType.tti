@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of escalation prompt"
+  name="AuditEscalationPromptType">
+  <typecode
+    code="DueDate"
+    desc="Due Date"
+    name="Due Date"/>
+  <typecode
+    code="AuditPeriodEndDate"
+    desc="Audit Period End Date"
+    name="Audit Period End Date"/>
+  <typecode
+    code="FirstEscalationDate"
+    desc="First Escalation Date"
+    name="First Escalation Date"/>
+  <typefilter
+    desc="First Escalation Prompt types"
+    name="FirstEscalationPrompt">
+    <include
+      code="AuditPeriodEndDate"/>
+    <include
+      code="DueDate"/>
+  </typefilter>
+  <typefilter
+    desc="Second Escalation Prompt types"
+    name="SecondEscalationPrompt">
+    <include
+      code="AuditPeriodEndDate"/>
+    <include
+      code="DueDate"/>
+    <include
+      code="FirstEscalationDate"/>
+  </typefilter>
+</typelist>

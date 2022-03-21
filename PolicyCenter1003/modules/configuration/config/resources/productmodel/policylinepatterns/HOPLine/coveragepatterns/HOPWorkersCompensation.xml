@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPWorkersCompensation"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="ThirdParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="5700"
+  public-id="zrcjqe5k1gu1ic8sbend4tpb1gb"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

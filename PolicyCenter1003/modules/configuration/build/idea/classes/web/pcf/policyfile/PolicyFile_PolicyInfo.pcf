@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, period.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(period) and perm.System.pfiledetails"
+    id="PolicyFile_PolicyInfo"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.PolicyInfo&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_PolicyInfo(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen
+      id="PolicyFile_PolicyInfoScreen">
+      <TitleBar/>
+      <Toolbar/>
+      <PanelRef
+        def="WarningsPanelSet(period.Policy.ContingencyWarningMessages)"/>
+      <PanelRef
+        def="PolicyFile_PolicyInfoDV(period)"/>
+    </Screen>
+  </Page>
+</PCF>

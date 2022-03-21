@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    countsAsWork="false"
+    id="UWBlockProgressIssuesPopup"
+    title="DisplayKey.get(&quot;Web.Job.Warning.UWIssue.ApprovalRequired&quot;)">
+    <LocationEntryPoint
+      signature="UWBlockProgressIssuesPopup(policyPeriod : PolicyPeriod, jobWizardHelper : gw.api.web.job.JobWizardHelper, blockingPoint : UWIssueBlockingPoint, blockingIssues : entity.UWIssue[])"/>
+    <LocationEntryPoint
+      signature="UWBlockProgressIssuesPopup(policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="blockingIssues"
+      type="entity.UWIssue[]"/>
+    <Variable
+      name="blockingPoint"
+      type="UWIssueBlockingPoint"/>
+    <Screen
+      id="IssuesScreen">
+      <TitleBar
+        id="PreQuoteIssueTitle"
+        title="gw.web.admin.UWBlockProgressIssuesPopupUIHelper.titleForBlockingPoint(blockingPoint)"/>
+      <Toolbar>
+        <ToolbarButton
+          action="jobWizardHelper.goToRiskAnalysisStep(policyPeriod.Job)"
+          available="not policyPeriod.PolicyTerm.CheckArchived"
+          id="DetailsButton"
+          label="DisplayKey.get(&quot;Web.Job.Warning.UWIssue.Details&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="ApproveDV">
+        <InputColumn>
+          <Label
+            label="gw.web.admin.UWBlockProgressIssuesPopupUIHelper.headerForBlockingPoint(blockingPoint)"/>
+          <InputIterator
+            elementName="issue"
+            id="issues"
+            value="blockingIssues.partition(\ u -&gt; u.ShortDescription ).Values.toTypedArray()"
+            valueType="java.util.List&lt;entity.UWIssue&gt;[]">
+            <TextInput
+              id="ShortDescriptionAndSize"
+              outputConversion="gw.web.admin.UWBlockProgressIssuesPopupUIHelper.descriptionAndCount(VALUE)"
+              required="false"
+              value="issue"
+              valueType="java.util.List&lt;entity.UWIssue&gt;"/>
+          </InputIterator>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="PersonalVehicleCovCost">
+  <Columns>
+    <Column
+      beanPath="PersonalVehicleCovCost.PersonalVehicleCov"
+      name="Pattern"/>
+    <Column
+      beanPath="PersonalVehicleCovCost.PersonalVehicleCov.PersonalVehicle"
+      name="Vehicle"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("Web.Financials.CostDisplayName.CoverageOn", Pattern.Pattern, Vehicle)
+  ]]></DisplayName>
+</Entity>

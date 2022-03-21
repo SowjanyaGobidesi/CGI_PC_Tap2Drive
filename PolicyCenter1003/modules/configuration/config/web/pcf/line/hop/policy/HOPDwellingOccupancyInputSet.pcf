@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="HOPDwellingOccupancyInputSet">
+    <Require
+      name="openForEdit"
+      type="java.lang.Boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="dwelling"
+      type="entity.HOPDwelling"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingOccupancy.Name&quot;)"/>
+    <TypeKeyInput
+      editable="true"
+      id="DwellingUsageType"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingOccupancy.DwellingUsageType&quot;)"
+      value="dwelling.DwellingUsage"
+      valueType="typekey.DwellingUsage"/>
+    <TypeKeyInput
+      editable="true"
+      id="DwellingOccupancyType"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingOccupancy.DwellingOccupancyType&quot;)"
+      value="dwelling.Occupancy"
+      valueType="typekey.DwellingOccupancyType"/>
+    <TextInput
+      editable="true"
+      id="NumberOfRoomers"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingOccupancy.NumberOfRoomers&quot;)"
+      value="dwelling.RoomerBoardersNumber"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

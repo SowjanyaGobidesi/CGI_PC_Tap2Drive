@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The external group to producer code availability relationship."
+  entity="GroupProducerCode"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="groupproducercode"
+  type="joinarray">
+  <foreignkey
+    columnName="GroupID"
+    desc="The associated Group."
+    fkentity="Group"
+    name="Group"
+    nullok="false"/>
+  <foreignkey
+    columnName="ProducerCodeID"
+    desc="The ProducerCode."
+    exportable="true"
+    fkentity="ProducerCode"
+    name="ProducerCode"
+    nullok="false"/>
+  <index
+    desc="Ensures that the Group/ProducerCode join rows are unique."
+    name="grouppcodeu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="GroupID"/>
+    <indexcol
+      keyposition="2"
+      name="ProducerCodeID"/>
+  </index>
+</entity>

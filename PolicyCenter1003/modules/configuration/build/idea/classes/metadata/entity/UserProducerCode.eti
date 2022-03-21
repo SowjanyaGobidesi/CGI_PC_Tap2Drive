@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The relationship between a user and its producer codes and associated roles."
+  entity="UserProducerCode"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="userproducercode"
+  type="joinarray">
+  <foreignkey
+    columnName="UserID"
+    desc="The associated User."
+    fkentity="User"
+    name="User"
+    nullok="false"/>
+  <foreignkey
+    columnName="ProducerCodeID"
+    desc="The ProducerCode."
+    fkentity="ProducerCode"
+    name="ProducerCode"
+    nullok="false"/>
+  <foreignkey
+    columnName="RoleID"
+    desc="Security role granted to the user producer code."
+    fkentity="Role"
+    name="Role"
+    nullok="false"/>
+  <index
+    desc="Ensures uniqueness among user/producercode/role combinations."
+    name="userpcodeu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UserID"/>
+    <indexcol
+      keyposition="2"
+      name="ProducerCodeID"/>
+    <indexcol
+      keyposition="3"
+      name="RoleID"/>
+  </index>
+</entity>

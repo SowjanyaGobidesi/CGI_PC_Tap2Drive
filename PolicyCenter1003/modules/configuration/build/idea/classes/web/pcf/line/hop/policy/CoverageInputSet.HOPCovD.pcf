@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CoverageInputSet"
+    mode="HOPCovD">
+    <Require
+      name="coveragePattern"
+      type="gw.api.productmodel.ClausePattern"/>
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="coverable as HOPDwelling"
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Variable
+      initialValue="dwelling.HOPCoveragePart"
+      name="coveragePart"
+      type="HOPCoveragePart"/>
+    <Variable
+      name="HOPCoverageInputSetHelper"
+      type="gw.web.line.hop.policy.HOPCoverageInputSetHelper"/>
+    <HiddenInput
+      id="CovPatternDisplayName"
+      value="coveragePattern.DisplayName"
+      valueType="java.lang.String"/>
+    <InputGroup
+      allowToggle="coveragePattern.allowToggle(coverable)"
+      alwaysShowCheckbox="true"
+      childrenVisible="coverable.getCoverageConditionOrExclusion(coveragePattern) != null"
+      id="CovPatternInputGroup"
+      label="coveragePattern.DisplayName"
+      onToggle="coverable.setCoverageConditionOrExclusionExists(coveragePattern, VALUE)">
+      <RangeInput
+        editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovD.HOPCovDLimitTerm)"
+        id="HOPCovDLimit"
+        label="dwelling.HOPCovD.HOPCovDLimitTerm.DisplayName"
+        required="dwelling.HOPCovD.HOPCovDLimitTerm.Pattern.Required"
+        value="dwelling.HOPCovD.HOPCovDLimitTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovD.HOPCovDLimitTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovDLimitType&gt;"
+        visible="dwelling.HOPCovD.HasHOPCovDLimitTerm">
+        <PostOnChange
+          deferUpdate="false"
+          onChange="HOPCoverageInputSetHelper.onCovDLimitChange(dwelling)"/>
+      </RangeInput>
+      <TextInput
+        id="HOPCovDDirectLimit"
+        inputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertFromString(VALUE)"
+        label="dwelling.HOPCovD.HOPCovDDirectLimitTerm.DisplayName"
+        outputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertToString(VALUE)"
+        required="dwelling.HOPCovD.HOPCovDDirectLimitTerm.Pattern.Required"
+        validationExpression="gw.pcf.coverage.CovTermDirectInputSetHelper.validate(dwelling.HOPCovD.HOPCovDDirectLimitTerm)"
+        value="dwelling.HOPCovD.HOPCovDDirectLimitTerm.Value"
+        valueType="java.math.BigDecimal"
+        visible="dwelling.HOPCovD.HasHOPCovDDirectLimitTerm"/>
+      <BooleanRadioInput
+        editable="openForEdit"
+        id="HOPCovDLossOfRent"
+        label="dwelling.HOPCovD.HOPCovDLossOfRentTerm.DisplayName"
+        required="dwelling.HOPCovD.HOPCovDLossOfRentTerm.Pattern.Required"
+        value="dwelling.HOPCovD.HOPCovDLossOfRentTerm.Value"
+        visible="dwelling.HOPCovD.HasHOPCovDLossOfRentTerm"/>
+      <RangeInput
+        editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovD.HOPCovDProhibitedUseTerm)"
+        id="HOPCovDProhibitedUse"
+        label="dwelling.HOPCovD.HOPCovDProhibitedUseTerm.DisplayName"
+        required="dwelling.HOPCovD.HOPCovDProhibitedUseTerm.Pattern.Required"
+        value="dwelling.HOPCovD.HOPCovDProhibitedUseTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovD.HOPCovDProhibitedUseTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovDProhibitedUseType&gt;"
+        visible="dwelling.HOPCovD.HasHOPCovDProhibitedUseTerm">
+        <PostOnChange/>
+      </RangeInput>
+      <PostOnChange/>
+    </InputGroup>
+  </InputSet>
+</PCF>

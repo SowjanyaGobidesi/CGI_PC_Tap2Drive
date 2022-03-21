@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="PolicyFile_DraftPeriodError"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.DraftPeriodError&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_DraftPeriodError(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="policyPeriod.Policy.Jobs"
+      name="jobs"
+      recalculateOnRefresh="true"
+      type="entity.Job[]"/>
+    <Screen
+      id="PolicyFile_DraftPeriodErrorScreen">
+      <TitleBar/>
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.PolicyFile.DraftPeriodError.Message&quot;)"
+        warning="true"/>
+    </Screen>
+  </Page>
+</PCF>

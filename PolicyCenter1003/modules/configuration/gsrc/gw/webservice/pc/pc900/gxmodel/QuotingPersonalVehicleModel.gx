@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.PersonalVehicle" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="CostNew" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Coverages[]" type="entity.PersonalVehicleCov" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.quotingpersonalvehiclecovmodel"/>
+    <include path="EffectiveDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="ExpirationDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="GarageLocation" type="entity.PolicyLocation" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.policylocationmodel"/>
+    <include path="LeaseOrRent" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="LengthOfLease" type="typekey.LengthOfLease" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LicensePlate" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LicenseState" type="typekey.State" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Make" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Model" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="PrimaryUse" type="typekey.VehiclePrimaryUse" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StatedValue" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="VehicleNumber" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="VehicleType" type="typekey.VehicleType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Vin" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Year" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+  </includes>
+</gx-model>

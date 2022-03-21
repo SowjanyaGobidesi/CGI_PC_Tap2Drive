@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.searchactivities"
+    countsAsWork="false"
+    id="ActivitySearch"
+    title="DisplayKey.get(&quot;Web.ActivitySearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="ActivitySearch()"/>
+    <LocationEntryPoint
+      signature="ActivitySearch(activityStatus : ActivityStatus)"/>
+    <LocationEntryPoint
+      signature="ActivitySearch(user : User, activityStatus : ActivityStatus)"/>
+    <Variable
+      name="user"
+      type="User"/>
+    <Variable
+      name="activityStatus"
+      type="ActivityStatus"/>
+    <Screen
+      id="ActivitySearchScreen">
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultsName="searchResult"
+        search="searchCriteria.performSearch()"
+        searchCriteria="var c = new gw.activity.ActivitySearchCriteria(); c.SearchedActivityStatus = activityStatus; c.SearchedAssignedUser = user; return c;"
+        searchCriteriaType="gw.activity.ActivitySearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Activity&gt;">
+        <PanelRef
+          def="ActivitySearchDV(searchCriteria)"/>
+        <PanelRef
+          def="ActivitiesSearchLV(searchResult, searchCriteria.PolicyNumber)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.ActivitySearch.Results&quot;)"/>
+          <Toolbar>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions( &quot;ActivitiesSearchLV&quot; )"
+              id="PrintMe"
+              label="DisplayKey.get(&quot;Web.PolicySearch.Export&quot;)"/>
+            <ToolbarDivider/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.web.activity.ActivityAssignmentPopup(CheckedValues, gw.assignment.AssignmentUtil.DefaultUser))"
+              flags="all canAssignActivity"
+              id="ActivitySearch_AssignButton"
+              iterator="ActivitiesSearchLV.ActivitiesSearchLV"
+              label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Assign&quot;)"
+              shortcut="A"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="gw.api.web.activity.ActivityUtil.skipActivities(CheckedValues)"
+              flags="all canSkipActivity"
+              id="ActivitySearch_SkipButton"
+              iterator="ActivitiesSearchLV.ActivitiesSearchLV"
+              label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Skip&quot;)"
+              shortcut="I"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="gw.api.web.activity.ActivityUtil.completeActivities(CheckedValues)"
+              flags="all canCompleteActivity"
+              id="ActivitySearch_CompleteButton"
+              iterator="ActivitiesSearchLV.ActivitiesSearchLV"
+              label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Complete&quot;)"
+              shortcut="O"/>
+            <ToolbarDivider/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

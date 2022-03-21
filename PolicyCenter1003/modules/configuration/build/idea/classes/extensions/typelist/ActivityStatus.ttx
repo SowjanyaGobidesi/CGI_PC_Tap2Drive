@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="ActivityStatus" desc="The status of the activity">
+  <typefilter
+    desc="accounts that has activities with these activity statuses should not be withdrawn"
+    name="RetainAccount">
+    <include
+      code="open"/>
+  </typefilter>
+</typelistextension>

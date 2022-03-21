@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="WorkItem to update Contact.AccountHolderCount"
+  entity="AccountHolderCountWorkItem"
+  loadable="false"
+  table="acctholdercountworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <column
+    desc="The ID of the Contact to be updated."
+    name="Contact"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="index to speed up prevention of duplicate work items"
+    expectedtobecovering="true"
+    name="AcctHldrWrkItmIdx"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Contact"/>
+    <indexcol
+      keyposition="2"
+      name="ID"/>
+  </index>
+  <index
+    desc="index for counting totals (available, failed, checked out work items)"
+    name="AcctHldrWrkItmIdx2">
+    <indexcol
+      keyposition="1"
+      name="Status"/>
+  </index>
+</entity>

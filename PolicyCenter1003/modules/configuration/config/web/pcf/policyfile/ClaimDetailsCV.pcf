@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <CardViewPanel
+    id="ClaimDetailsCV">
+    <Require
+      name="selectedClaim"
+      type="Claim"/>
+    <Require
+      name="showPolicyNumberAndType"
+      type="boolean"/>
+    <Variable
+      initialValue="selectedClaim == null ? null : gw.api.web.claim.ClaimUtil.getClaimDetail(selectedClaim)"
+      name="claimDetail"
+      recalculateOnRefresh="true"
+      type="ClaimDetail"/>
+    <Card
+      id="DetailsTitleCard"
+      title="DisplayKey.get(&quot;Web.Claims.DetailsTitle&quot;)">
+      <PanelRef
+        def="ClaimDetailsDV(claimDetail, showPolicyNumberAndType)"
+        editable="false"
+        visible="selectedClaim != null">
+        <Toolbar>
+          <ToolbarButton
+            action="giveClaimPermissionsAndGoToViewClaim()"
+            icon="&quot;new_window&quot;"
+            iconType="svgFileName"
+            id="viewInCC"
+            label="DisplayKey.get(&quot;Web.Claims.ViewInCC&quot;)"
+            visible="claimDetail == null ? false : claimDetail.ClaimLinkAvailable"/>
+        </Toolbar>
+      </PanelRef>
+    </Card>
+    <Code><![CDATA[function giveClaimPermissionsAndGoToViewClaim() {
+  gw.api.web.claim.ClaimUtil.giveClaimPermissions(claimDetail)
+  ViewClaim.push(gw.api.system.PCConfigParameters.ClaimSystemURL.Value, claimDetail.Claim.ClaimNumber)
+}]]></Code>
+  </CardViewPanel>
+</PCF>

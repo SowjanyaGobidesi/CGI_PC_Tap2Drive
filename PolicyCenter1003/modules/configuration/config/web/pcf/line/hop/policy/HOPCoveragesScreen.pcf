@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="HOPCoveragesScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.HOPLine.HOPDwellings?.first()"
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <CardViewPanel>
+      <Card
+        id="HOPMainCoverages"
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.MainCoverages&quot;)">
+        <PanelRef
+          def="HOPMainCoveragesPanelSet(policyPeriod.HOPLine, dwelling, openForEdit)"/>
+      </Card>
+      <Card
+        id="HOPAdditionalCoverages"
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.AdditionalCoverages&quot;)">
+        <PanelRef
+          def="HOPAdditionalCoveragesPanelSet(policyPeriod.HOPLine, dwelling, openForEdit)"/>
+      </Card>
+      <Card
+        id="HOPOptionalCoverages"
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.OptionalCoverages&quot;)">
+        <PanelRef
+          def="HOPOptionalCoveragesPanelSet(policyPeriod.HOPLine, dwelling, openForEdit)"/>
+      </Card>
+      <Card
+        id="HOPConditionsAndExclusions"
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.ConditionsAndExclusions&quot;)">
+        <PanelRef
+          def="HOPConditionsAndExclusionsPanelSet(policyPeriod.HOPLine, dwelling, openForEdit)"/>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

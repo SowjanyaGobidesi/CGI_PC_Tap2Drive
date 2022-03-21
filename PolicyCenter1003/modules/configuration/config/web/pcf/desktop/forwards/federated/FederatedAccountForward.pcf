@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedAccountForward">
+    <LocationEntryPoint
+      signature="FederatedAccountForward(accountPublicId: java.lang.String, accountNumber: java.lang.String)"/>
+    <Variable
+      name="accountPublicId"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Account.finder.findAccountByPublicId(accountPublicId)"
+      name="accountEntity"
+      type="entity.Account"/>
+    <Variable
+      name="accountNumber"
+      type="java.lang.String"/>
+    <ForwardCondition
+      action="pcf.AccountFileDoRetrievalForward.go( accountEntity.AccountNumber)"
+      condition="accountEntity != null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.accountForward(accountPublicId, accountNumber)"
+      condition="accountEntity == null"/>
+  </Forward>
+</PCF>

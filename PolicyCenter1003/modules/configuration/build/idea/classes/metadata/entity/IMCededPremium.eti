@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An InlandMarine implementation of the RICededPremium delegate"
+  entity="IMCededPremium"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="imcededpremium"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremium"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumAdapter"
+    impl="gw.reinsurance.ceding.IMCededPremiumAdapter"/>
+  <foreignkey
+    fkentity="IMCost"
+    name="IMCost"
+    nonEffDated="true"
+    nullok="false"/>
+  <array
+    arrayentity="IMCededPremiumTransaction"
+    cascadeDelete="true"
+    name="CedingTransactions"/>
+  <array
+    arrayentity="IMCededPremiumHistory"
+    cascadeDelete="true"
+    name="CedingHistory"/>
+</entity>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.PeriodAnswer" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="BooleanAnswer" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="ChoiceAnswerCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="DateAnswer" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="IntegerAnswer" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="QuestionCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="TextAnswer" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

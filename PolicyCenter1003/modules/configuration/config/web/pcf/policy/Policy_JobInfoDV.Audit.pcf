@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="Policy_JobInfoDV"
+    mode="Audit">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <InputColumn>
+      <DateInput
+        id="AuditPeriodStartDate"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditPeriodStartDate&quot;)"
+        value="(job as Audit).AuditInformation.AuditPeriodStartDate"/>
+      <DateInput
+        id="AuditPeriodEndDate"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditPeriodEndDate&quot;)"
+        value="(job as Audit).AuditInformation.AuditPeriodEndDate"/>
+      <DateInput
+        id="AuditInitiationDate"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.ProcessStartDate&quot;)"
+        value="(job as Audit).AuditInformation.InitDate"/>
+      <DateInput
+        id="AuditDueDate"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.DueDate&quot;)"
+        value="(job as Audit).AuditInformation.DueDate"/>
+      <DateInput
+        id="CloseDate"
+        label="DisplayKey.get(&quot;Web.Job.CloseDate&quot;)"
+        value="job.CloseDate"/>
+      <TypeKeyInput
+        id="AuditMethod"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditMethod&quot;)"
+        value="(job as Audit).AuditInformation.AuditMethod"
+        valueType="typekey.AuditMethod"/>
+      <TypeKeyInput
+        id="ActualAuditMethod"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.ActualAuditMethod&quot;)"
+        value="(job as Audit).AuditInformation.ActualAuditMethod"
+        valueType="typekey.AuditMethod"/>
+      <TypeKeyInput
+        id="Type"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditType&quot;)"
+        value="(job as Audit).AuditInformation.AuditScheduleType"
+        valueType="typekey.AuditScheduleType"/>
+      <TextInput
+        id="Status"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditStatus&quot;)"
+        value="(job as Audit).AuditInformation.DisplayStatus"/>
+      <TypeKeyInput
+        id="RevisionType"
+        label="DisplayKey.get(&quot;Web.PolicyFile.Audits.RevisionType&quot;)"
+        value="(job as Audit).AuditInformation.RevisionType"
+        valueType="typekey.RevisionType"
+        visible="(job as Audit).AuditInformation.IsRevision || (job as Audit).AuditInformation.IsReversal"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Job.FileLinks.Title&quot;)"
+        visible="true"/>
+      <TextInput
+        action="JobForward.go(job)"
+        id="JobFile"
+        value="DisplayKey.get(&quot;Web.Job.JobFile&quot;)"
+        visible="job.Viewable"/>
+      <InputSetRef
+        def="Policy_JobDetailsInputSet(job)"
+        mode="job.Subtype"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

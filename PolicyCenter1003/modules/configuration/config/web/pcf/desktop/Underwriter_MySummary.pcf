@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions.Instance.Any &amp;&amp; !gw.api.web.desktop.data.FederatedDataUIHelper.IsFederated"
+    id="Underwriter_MySummary"
+    title="DisplayKey.get('Web.Dashboard.Underwriter.Title')">
+    <LocationEntryPoint
+      signature="Underwriter_MySummary(user: User)"/>
+    <Variable
+      name="user"
+      type="User"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions"/>
+    <Screen>
+      <ColumnDashboard
+        id="UnderwriterMySummaryDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="OverviewDetailViewTile(user)"
+            visible="permissions.AnyJobsOrActivities"/>
+          <TileRef
+            def="MyActivitiesListViewTile()"
+            visible="permissions.Activities"/>
+          <TileRef
+            def="MySubmissionsListViewTile(user)"
+            visible="permissions.Submissions"/>
+          <TileRef
+            def="MyRenewalListViewTile(user)"
+            visible="permissions.Renewals"/>
+          <TileRef
+            def="ChangeRequestsListViewTile(user)"
+            visible="permissions.Other"/>
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="BurglarAlarmType" desc="Burglar Alarm Type">
+  <typecode
+    code="police"
+    desc="Connected to Police Station"
+    name="Police Station"
+    priority="40"/>
+  <typecode
+    code="central"
+    desc="Connected to Central Station"
+    name="Central Station"
+    priority="30"/>
+  <typecode
+    code="local"
+    desc="Local"
+    name="Local"
+    priority="20"/>
+  <typecode
+    code="none"
+    desc="None"
+    name="None"
+    priority="10"/>
+</typelist>

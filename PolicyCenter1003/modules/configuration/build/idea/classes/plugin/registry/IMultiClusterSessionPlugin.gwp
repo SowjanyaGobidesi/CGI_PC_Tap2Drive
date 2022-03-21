@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IMultiClusterSessionPlugin"
+  name="IMultiClusterSessionPlugin">
+  <plugin-gosu
+    disabled="true"
+    gosuclass="gw.plugin.multicluster.multiclustersession.v1.UserMultiClusterSessionPlugin">
+    <param
+      name="HostUrl"
+      value="${UnsavedWorkHostUrl}"/>
+    <param
+      name="ClientId"
+      value="${UnsavedWorkClientId}"/>
+    <param
+      name="ClientSecret"
+      value="${UnsavedWorkClientSecret}"/>
+    <param
+      name="Scope"
+      value="${UnsavedWorkScope}"/>
+    <param
+      name="TokenUri"
+      value="${UnsavedWorkTokenUri}"/>
+    <param
+      name="CacheExpirationTime"
+      value="${UnsavedWorkCacheExpirationTime}"/>
+  </plugin-gosu>
+</plugin>
+

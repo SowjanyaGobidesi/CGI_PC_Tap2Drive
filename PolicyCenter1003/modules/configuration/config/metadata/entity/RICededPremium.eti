@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="RICededPremium">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.RICededPremiumPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RICededPremiumImpl"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumAdapter"/>
+  <implementsEntity
+    name="SimpleEffDated"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Risk number, copied from the Reinsurable"
+    name="RiskNumber"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Effective date of the associated risk"
+    name="RiskDate"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    desc="The policy term to which this ceding applies"
+    fkentity="PolicyTerm"
+    name="PolicyTerm"
+    nullok="false"/>
+  <fulldescription><![CDATA[
+      A delegate for RICededPremium, which is essentially a join entity between the
+      reinsured risk (RIRisk), the Cost that is ceding to that risk, and the
+      individual cedings that are given over to the multiple agreements which may
+      reinsure the risk.   The entities other than RIRisk are delegates that are
+      implemented by entities which are specific to a line of business.
+  ]]></fulldescription>
+</delegate>

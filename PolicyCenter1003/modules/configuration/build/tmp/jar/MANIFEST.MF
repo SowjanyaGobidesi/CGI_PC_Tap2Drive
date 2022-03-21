@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Contains-Sources: true
+Maven-Coordinates: PolicyCenter1003.modules:configuration:jar::10.0.3
+

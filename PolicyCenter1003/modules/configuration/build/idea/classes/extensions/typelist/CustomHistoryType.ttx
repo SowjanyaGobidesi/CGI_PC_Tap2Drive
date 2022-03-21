@@ -1,0 +1,3 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="CustomHistoryType" desc="Custom history event types, used to support once-only execution of rules">
+</typelistextension>

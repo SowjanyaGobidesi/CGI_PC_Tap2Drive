@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="BindSummaryDV"
+    mode="Installments">
+    <Require
+      name="thePeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Require
+      name="isMidtermChange"
+      type="boolean"/>
+    <InputColumn>
+      <InputSetRef
+        def="PremiumSummaryInputSet(policyPeriodBillingInstructionsManager, thePeriod, isMidtermChange)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="PaymentsSummaryInputSet(policyPeriodBillingInstructionsManager, thePeriod)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="InvoiceStreamInputSet(policyPeriodBillingInstructionsManager, thePeriod)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

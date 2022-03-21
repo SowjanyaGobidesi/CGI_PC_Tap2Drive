@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="RoleDetailScreen">
+    <Require
+      name="role"
+      type="Role"/>
+    <Toolbar>
+      <EditButtons
+        editVisible="perm.Role.edit"/>
+    </Toolbar>
+    <CardViewPanel>
+      <Card
+        id="RoleDetail_RolesCard"
+        title="DisplayKey.get(&quot;Web.Admin.RoleDetail.Roles&quot;)">
+        <PanelRef
+          def="RoleDetailDV(role)"/>
+        <PanelRef
+          def="LocalizedValuesDV(role, { &quot;Name&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;Web.Admin.RoleDetailDV.Name&quot;), DisplayKey.get(&quot;Web.Admin.RoleDetailDV.Description&quot;)})"/>
+      </Card>
+      <Card
+        id="RoleDetail_UsersCard"
+        title="DisplayKey.get(&quot;Web.Admin.RoleDetail.Users&quot;)"
+        visible="role.RoleType == null or role.RoleType == TC_USER or role.RoleType == TC_USERPRODUCERCODE">
+        <PanelRef
+          def="RoleUsersLV(role)"
+          editable="perm.User.grantroles">
+          <Toolbar>
+            <IteratorButtons
+              iterator="RoleUsersLV.RoleUsersLV"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="RoleDetail_ProducerCodesCard"
+        title="DisplayKey.get(&quot;Web.Admin.RoleDetail.ProducerCodes&quot;)"
+        visible="role.RoleType == null or role.RoleType == TC_PRODUCERCODE or role.RoleType == TC_USERPRODUCERCODE">
+        <PanelRef
+          def="RoleProducerCodesLV(role)">
+          <Toolbar>
+            <IteratorButtons
+              iterator="RoleProducerCodesLV.RoleProducerCodesLV"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

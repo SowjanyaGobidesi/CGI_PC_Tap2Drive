@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.AccountLocation" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="AddressBookUID" type="java.lang.String" propertyInclusionType="KEY" xmlType="xs:string"/>
+    <include path="AddressLine1" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AddressLine1Kanji" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AddressLine2" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AddressLine2Kanji" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AddressLine3" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AddressType" type="typekey.AddressType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="CEDEX" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="CEDEXBureau" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="City" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="CityKanji" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Country" type="typekey.Country" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="County" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Description" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="EmployeeCount" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="GeocodeStatus" type="typekey.GeocodeStatus" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Latitude" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="LocationCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LocationName" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LocationNum" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="Longitude" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="NonSpecific" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="Phone" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="PostalCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="State" type="typekey.State" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="ValidUntil" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+  </includes>
+</gx-model>

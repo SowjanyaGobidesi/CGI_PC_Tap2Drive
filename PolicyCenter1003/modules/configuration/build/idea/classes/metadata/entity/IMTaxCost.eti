@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Tax costs for inland marine"
+  entity="IMTaxCost"
+  supertype="IMCost"/>

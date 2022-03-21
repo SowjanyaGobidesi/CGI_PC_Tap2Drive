@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="DesktopAssignableQueuesScreen"
+    mode="default">
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.DesktopAssignableQueues&quot;)"/>
+    <Toolbar>
+      <ToolbarButton
+        action="gw.api.web.assignment.AssignableQueueUtil.assignFirstActivity(CurrentLocation)"
+        available="!gw.api.web.assignment.AssignableQueueUtil.isSelectedQueueEmpty(CurrentLocation)"
+        id="AssignFirstButton"
+        label="DisplayKey.get(&quot;Web.DesktopAssignableQueues.AssignFirstToMe&quot;)"
+        shortcut="A"/>
+      <CheckedValuesToolbarButton
+        allCheckedRowsAction="gw.api.web.assignment.AssignableQueueUtil.assignActivitiesFromQueue(CheckedValues)"
+        flags="any assignableActivity"
+        id="AssignSelectedButton"
+        iterator="DesktopAssignableQueuesLV.DesktopAssignableQueuesLV"
+        label="DisplayKey.get(&quot;Web.DesktopAssignableQueues.AssignSelectedToMe&quot;)"
+        shortcut="S"
+        visible="perm.Activity.pickfromqueue"/>
+      <ToolbarDivider/>
+    </Toolbar>
+    <PanelRef
+      def="DesktopAssignableQueuesLV()"/>
+  </Screen>
+</PCF>

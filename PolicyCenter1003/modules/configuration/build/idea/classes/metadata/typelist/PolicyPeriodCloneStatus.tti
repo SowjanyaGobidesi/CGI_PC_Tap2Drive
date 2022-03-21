@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="TemporaryCloneStatus"
+  name="PolicyPeriodCloneStatus">
+  <typecode
+    code="Unprocessed"
+    desc="Policy Period is freshly cloned, and nothing has been done to it."
+    name="Unprocessed"/>
+  <typecode
+    code="Purgeable"
+    desc="This cloned policy period has been processed and is now ready to be purged"
+    name="Purgeable"/>
+</typelist>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="editScreen"
+    id="ReinstatementWizard_PaymentScreen">
+    <Require
+      name="reinstatement"
+      type="Reinstatement"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="editScreen"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardBillingToolbarButtonSet(policyPeriod, reinstatement, jobWizardHelper, policyPeriodBillingInstructionsManager)"/>
+    </Toolbar>
+    <PanelRef
+      def="WarningsPanelSet(policyPeriod.getWizardWarningMessages())"/>
+    <PanelRef
+      def="BindSummaryDV(policyPeriod, policyPeriodBillingInstructionsManager, true)"
+      mode="policyPeriodBillingInstructionsManager.PaymentMethodChoice"/>
+    <PanelRef
+      def="BillingAdjustmentsPanelSet(policyPeriod, policyPeriodBillingInstructionsManager)"
+      mode="policyPeriodBillingInstructionsManager.midtermEditMode(editScreen)"/>
+    <PanelRef
+      def="AuditAdjustmentsDV(policyPeriod, policyPeriodBillingInstructionsManager)"
+      mode="policyPeriodBillingInstructionsManager.midtermAuditEditMode(editScreen)"/>
+  </Screen>
+</PCF>

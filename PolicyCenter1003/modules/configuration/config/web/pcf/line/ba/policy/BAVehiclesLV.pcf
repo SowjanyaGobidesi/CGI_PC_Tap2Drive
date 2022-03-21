@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BAVehiclesLV">
+    <ExposeIterator
+      valueType="entity.BusinessVehicle"
+      widget="BAVehiclesLV"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="baLine"
+      type="BusinessAutoLine"/>
+    <Require
+      name="showCheckbox"
+      type="boolean"/>
+    <RowIterator
+      checkBoxVisible="showCheckbox"
+      editable="false"
+      elementName="vehicle"
+      hasCheckBoxes="true"
+      pickLocation="BAVehiclePopup.push(null, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+      toRemove="baLine.removeVehicle(vehicle)"
+      value="baLine.Vehicles"
+      valueType="entity.BusinessVehicle[]">
+      <Row>
+        <TextCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="VehicleNumber"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.VehicleNumber&quot;)"
+          sortBy="vehicle.VehicleNumber"
+          sortOrder="1"
+          value="vehicle.VehicleNumber"
+          valueType="java.lang.Integer"/>
+        <TypeKeyCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="Type"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Type&quot;)"
+          value="vehicle.VehicleType"
+          valueType="typekey.VehicleType"
+          wrap="true"/>
+        <RangeCell
+          id="EULocationInput"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationName&quot;)"
+          value="vehicle.Location"
+          valueRange="policyPeriod.PolicyLocations"
+          valueType="entity.PolicyLocation"
+          wrap="true"/>
+        <TextCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="Year"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Year&quot;)"
+          value="vehicle.Year"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="Make"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Make&quot;)"
+          value="vehicle.Make"
+          wrap="true"/>
+        <TextCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="Model"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Model&quot;)"
+          value="vehicle.Model"
+          wrap="true"/>
+        <TypeKeyCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="BodyType"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.BodyType&quot;)"
+          value="vehicle.BodyType"
+          valueType="typekey.BodyType"
+          wrap="true"/>
+        <TextCell
+          action="BAVehiclePopup.push(vehicle, policyPeriod, openForEdit, true, new gw.api.web.job.JobWizardHelper(CurrentLocation))"
+          align="left"
+          id="Vin"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Vin&quot;)"
+          value="vehicle.Vin"/>
+        <TypeKeyCell
+          align="center"
+          id="PreferredCoverageCurrency"
+          label="DisplayKey.get(&quot;Web.Policy.CoverableCurrency&quot;)"
+          value="vehicle.PreferredCoverageCurrency"
+          valueType="typekey.Currency"
+          visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

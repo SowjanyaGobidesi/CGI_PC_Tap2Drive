@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="ProducerCodeSearchScreen">
+    <Require
+      name="producer"
+      type="Organization"/>
+    <Require
+      name="usedFor"
+      type="ProducerStatusUse"/>
+    <Require
+      name="checkUserSecurityZone"
+      type="boolean"/>
+    <Require
+      name="cacheEnabled"
+      type="boolean"/>
+    <Variable
+      initialValue="Organization.finder.findCarrierOrganization()"
+      name="carrier"
+      type="Organization"/>
+    <SearchPanel
+      cachingEnabled="cacheEnabled"
+      criteriaName="searchCriteria"
+      maxSearchResults="100"
+      resultsName="producerCodes"
+      search="searchCriteria.performSearch()"
+      searchCriteria="new gw.product.ProducerCodeSearchCriteria(producer, checkUserSecurityZone, usedFor, true)"
+      searchCriteriaType="gw.product.ProducerCodeSearchCriteria"
+      searchOnRefresh="false"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;ProducerCode&gt;">
+      <PanelRef
+        def="ProducerCodeSearchDV(searchCriteria)"/>
+      <PanelRef
+        def="ProducerCodeSearchLV(producerCodes, carrier)"
+        editable="false">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions( &quot;ProducerCodeSearchLV&quot; )"
+            id="PrintMe"
+            label="DisplayKey.get(&quot;Web.PolicySearch.Export&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+  </Screen>
+</PCF>

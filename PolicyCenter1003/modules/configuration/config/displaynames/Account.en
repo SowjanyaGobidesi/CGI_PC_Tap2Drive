@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Entity
+  name="Account">
+  <Columns>
+    <Column
+      beanPath="Account.AccountNumber"
+      name="number"/>
+  </Columns>
+  <DisplayName><![CDATA[
+number
+    
+  ]]></DisplayName>
+  <DisplayName
+    type="Validation"><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.Account.Validation", number)
+    
+  ]]></DisplayName>
+</Entity>

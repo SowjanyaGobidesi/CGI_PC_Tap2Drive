@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<import>
+  <QuestionSetLookup public-id="zh0hcemjkceua1gddmg0ivg60aa">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <IndustryCode/>
+    <JobType>Submission</JobType>
+    <PolicyLinePatternCode/>
+    <QuestionSetCode>zb1go3dkc0ug60vr34tkr2mrlja</QuestionSetCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionSetLookup>
+  <QuestionLookup public-id="ze9hsph4qrbs10g6pucrsid3ih8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>zs0jcta2h5mcie9ns377rrt21g8</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="zp6iq7b2ijtbudjno5nlc4b1u2a">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>zjqio2gooe0615dg0mvgd88tgt8</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="ze4jkkd9djrtn016qd0oo6volj9">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>z3mhefuaq5uicb9h0eocc9s7lub</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="zsgii4l5693os77rsg2ho9k8fs8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>zdchmvck782i4ff9hns7tjvj1l9</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="zqqiqt275i8p527qsksi4ol9ibb">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>z6qjsfb42cljq9ttoakqikniuta</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="zfoi2ffkoqo1ne4shb4l79tmqrb">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>z2ag0ome5ced27pad0n2ot1nipa</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="za7ia4118e561fiiv4ophph93da">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>z4tgaut5hjokgc1nok6pmgfcev9</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionLookup public-id="zmfiau28m7pr32u1a8ne8djmo7a">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <QuestionCode>zgljk87n8pn0o5qmjud65it4l38</QuestionCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionLookup>
+  <QuestionSetLookup public-id="zf7iccn77un4p7fsplcde7dcat8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <IndustryCode/>
+    <JobType>RewriteNewAccount</JobType>
+    <PolicyLinePatternCode/>
+    <QuestionSetCode>zb1go3dkc0ug60vr34tkr2mrlja</QuestionSetCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+  </QuestionSetLookup>
+</import>

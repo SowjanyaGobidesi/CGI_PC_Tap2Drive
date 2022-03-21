@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    countsAsWork="false"
+    id="GLClassCodeSearchPopup"
+    returnType="GLClassCode"
+    title="DisplayKey.get(&quot;Web.ClassCodeSearch&quot;)">
+    <LocationEntryPoint
+      signature="GLClassCodeSearchPopup(glLine : GLLine)"/>
+    <LocationEntryPoint
+      signature="GLClassCodeSearchPopup(glLine : GLLine, glExposure : GLExposure)"/>
+    <Variable
+      name="glLine"
+      type="GLLine"/>
+    <Variable
+      name="glExposure"
+      type="GLExposure"/>
+    <Variable
+      initialValue="(glLine.Branch.Job.NewTerm) ? null : glExposure.BasedOn.ClassCode"
+      name="previousGLClassCode"
+      type="GLClassCode"/>
+    <Screen
+      id="GLClassCodeSearchScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="gLClassCodes"
+        search="searchCriteria.performSearch()"
+        searchCriteria="return createCriteria();"
+        searchCriteriaType="gw.lob.gl.GLClassCodeSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;GLClassCode&gt;">
+        <PanelRef>
+          <DetailViewPanel
+            id="GLClassCodeSearchDV">
+            <InputColumn>
+              <TextInput
+                editable="true"
+                id="Code"
+                label="DisplayKey.get(&quot;Web.ClassCodeSearch.Code&quot;)"
+                required="false"
+                value="searchCriteria.Code"/>
+              <TextInput
+                editable="true"
+                id="Classification"
+                label="DisplayKey.get(&quot;Web.ClassCodeSearch.Classification&quot;)"
+                required="false"
+                value="searchCriteria.Classification"/>
+            </InputColumn>
+            <InputFooterSection>
+              <InputSetRef
+                def="SearchAndResetInputSet()"/>
+            </InputFooterSection>
+          </DetailViewPanel>
+        </PanelRef>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+          <ListViewPanel
+            id="ClassCodeSearchResultsLV"
+            stretch="true">
+            <RowIterator
+              appendPageInfo="true"
+              editable="false"
+              elementName="gLClassCode"
+              pickValue="gLClassCode"
+              value="gLClassCodes"
+              valueType="gw.api.database.IQueryBeanResult&lt;entity.GLClassCode&gt;">
+              <Row>
+                <TextCell
+                  id="Code"
+                  label="DisplayKey.get(&quot;Web.ClassCodeSearch.Code&quot;)"
+                  value="gLClassCode.Code"
+                  wrap="false"/>
+                <TextCell
+                  align="left"
+                  grow="true"
+                  id="Classification"
+                  label="DisplayKey.get(&quot;Web.ClassCodeSearch.Classification&quot;)"
+                  value="gLClassCode.Classification"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function createCriteria() : gw.lob.gl.GLClassCodeSearchCriteria {
+  var criteria = new gw.lob.gl.GLClassCodeSearchCriteria()
+  criteria.EffectiveAsOfDate = glLine.getReferenceDateForCurrentJob(gw.api.util.JurisdictionMappingUtil.getJurisdiction(glExposure.LocationWM))
+  if (previousGLClassCode != null) {
+    criteria.PreviousSelectedClassCode = previousGLClassCode.Code
+  }
+  return criteria
+}]]></Code>
+  </Popup>
+</PCF>

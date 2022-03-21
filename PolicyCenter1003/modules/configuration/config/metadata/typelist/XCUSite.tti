@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="XCUSite"
+  name="XCUSite">
+  <typecode
+    code="Operation"
+    desc="Operation"
+    name="Operation"
+    priority="2"/>
+  <typecode
+    code="Location"
+    desc="Location"
+    name="Location"
+    priority="1"/>
+</typelist>

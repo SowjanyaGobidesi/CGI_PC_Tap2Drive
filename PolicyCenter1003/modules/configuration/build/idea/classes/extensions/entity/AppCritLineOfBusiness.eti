@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  desc="LineOfBusiness Applicability Criteria entries"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritLineOfBusiness"
+  table="appcritlineofbusiness"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="gw.bizrules.domain.impl.AppCritLineOfBusinessImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="gw.bizrules.domain.impl.AppCritLineOfBusinessImpl"/>
+  <foreignkey
+    desc="The associated rule"
+    fkentity="UWRule"
+    name="UWRule"
+    nullok="false"/>
+  <typekey
+    desc="Line of Business in a rule availability criteria"
+    name="PolicyLine"
+    nullok="false"
+    typelist="PolicyLine"/>
+  <index
+    desc="Enforce uniqueness per state/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UWRule"/>
+    <indexcol
+      keyposition="2"
+      name="PolicyLine"/>
+  </index>
+</entity>

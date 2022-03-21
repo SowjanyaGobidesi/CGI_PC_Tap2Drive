@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="perm.Rule.edit(importEntry.ImportedVersion.Rule)"
+    desc="Popup that creates and edits an UWRule merge version derived either from the existing or importing version of a rule."
+    id="UWRuleEditPopup"
+    returnType="RuleImportTaskEntry"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;BizRules.Import.Comparison.Edit.Title&quot;, importEntry.NewHeadVersion.Rule.Name)">
+    <LocationEntryPoint
+      signature="UWRuleEditPopup(importEntry : RuleImportTaskEntry, importHelper : gw.bizrules.pcf.RuleExportImportPageHelper, chosenSide : RuleImportSide)"/>
+    <Variable
+      name="importEntry"
+      type="RuleImportTaskEntry"/>
+    <Variable
+      name="importHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Variable
+      name="chosenSide"
+      type="RuleImportSide"/>
+    <Variable
+      initialValue="importHelper.getNewDraftVersionFrom(importEntry, chosenSide)"
+      name="ruleVersion"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RulePageController(ruleVersion, {}, CurrentLocation, gw.bizrules.pcf.RuleConditionLineHolder.SWITCHABLE_LINE_EXPRESSION_MODES_SUPERSET)"
+      name="rulePageController"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="RuleEditPopupToolbarButtonSet()"/>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="ConditionValidationToolbarButtonSet(rulePageController)"/>
+      </Toolbar>
+      <PanelRef
+        def="UWRulePanelSet(ruleVersion, false, rulePageController)"/>
+    </Screen>
+  </Popup>
+</PCF>

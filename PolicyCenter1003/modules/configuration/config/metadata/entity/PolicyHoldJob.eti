@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Contains a policy hold and job pair, indicating the last time the job was evaluated against the policy hold."
+  entity="PolicyHoldJob"
+  exportable="true"
+  final="true"
+  loadable="false"
+  platform="false"
+  table="policyholdjob"
+  type="versionable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    desc="The last time this job was evaluated against this policy hold."
+    name="LastEvalTime"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    columnName="PolicyHoldID"
+    desc="A foreign key to the policy hold."
+    fkentity="PolicyHold"
+    name="PolicyHold"
+    nullok="false"/>
+  <foreignkey
+    columnName="JobID"
+    desc="A foreign key to the job."
+    fkentity="Job"
+    name="Job"
+    nullok="false"/>
+  <foreignkey
+    columnName="PeriodID"
+    desc="A foreign key to the period."
+    fkentity="PolicyPeriod"
+    name="Period"
+    nullok="true"/>
+  <index
+    desc="Ensures that this table holds at most 1 row per policy hold, job, and period."
+    name="policyholdjobu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="JobID"/>
+    <indexcol
+      keyposition="2"
+      name="PolicyHoldID"/>
+    <indexcol
+      keyposition="3"
+      name="PeriodID"/>
+  </index>
+</entity>

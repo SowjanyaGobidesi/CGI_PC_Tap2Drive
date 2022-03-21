@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    alternateEntryStyle="false"
+    disableUserCustomization="true"
+    id="BACoverageTxLV"
+    stretch="true">
+    <Require
+      name="txs"
+      type="java.util.List&lt;entity.BATransaction&gt;"/>
+    <Require
+      name="addStateToCoverageName"
+      type="boolean"/>
+    <Variable
+      initialValue="txs.AnyProrated"
+      name="prorated"
+      type="boolean"/>
+    <RowIterator
+      editable="false"
+      elementName="tx"
+      pageSize="0"
+      value="txs?.toTypedArray()"
+      valueType="entity.BATransaction[]">
+      <Variable
+        initialValue="tx.BACost"
+        name="theCost"
+        type="entity.BACost"/>
+      <IteratorSort
+        sortBy="tx.BACost.Coverage.Pattern.Priority"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="tx.EffDate"
+        sortOrder="2"/>
+      <IteratorSort
+        sortBy="tx.BACost.ID"
+        sortOrder="3"/>
+      <Row
+        useTitleStyle="true">
+        <TextCell
+          bold="true"
+          enableSort="false"
+          footerLabel="DisplayKey.get(&quot;Web.Policy.BA.Subtotal&quot;)"
+          grow="true"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverages.Description&quot;)"
+          value="getCovDescription(theCost.Coverage, theCost)"
+          wrap="true"/>
+        <TextCell
+          enableSort="false"
+          id="CovTerm"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverage.CovTermValue&quot;, &quot;&quot;)"
+          value="empty"/>
+        <MonetaryAmountCell
+          align="right"
+          enableSort="false"
+          formatType="currency"
+          id="TermAmount"
+          label="DisplayKey.get(&quot;Web.SubmissionWizard.Quote.WC.Amount&quot;)"
+          value="theCost.ActualTermAmountBilling"
+          visible="prorated"
+          wrap="false"/>
+        <DateCell
+          align="right"
+          enableSort="false"
+          id="EffDate"
+          label="DisplayKey.get(&quot;Web.Quote.CumulDetail.Default.PeriodStart&quot;)"
+          value="tx.EffDate"
+          visible="prorated"
+          wrap="false"/>
+        <DateCell
+          align="right"
+          enableSort="false"
+          id="ExpDate"
+          label="DisplayKey.get(&quot;Web.Quote.CumulDetail.Default.PeriodEnd&quot;)"
+          value="tx.ExpDate"
+          visible="prorated"
+          wrap="false"/>
+        <TextCell
+          align="right"
+          enableSort="false"
+          id="Proration"
+          label="DisplayKey.get(&quot;Web.SubmissionWizard.Quote.WC.Prorata&quot;)"
+          value="gw.api.util.StringUtil.formatNumber(tx.Proration, &quot;#0.0000&quot;)"
+          visible="prorated"
+          wrap="false"/>
+        <MonetaryAmountCell
+          align="right"
+          enableSort="false"
+          footerSumValue="tx.AmountBilling"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;Web.Policy.BA.Premium&quot;)"
+          value="tx.AmountBilling"
+          wrap="false"/>
+      </Row>
+      <RowIterator
+        editable="false"
+        elementName="covTerm"
+        pageSize="0"
+        value="theCost.Coverage.CovTerms"
+        valueType="gw.api.domain.covterm.CovTerm[]">
+        <IteratorSort
+          sortBy="covTerm.Pattern.Priority"
+          sortOrder="1"/>
+        <IteratorSort
+          sortBy="covTerm.Pattern.PublicID"
+          sortOrder="2"/>
+        <Row>
+          <TextCell
+            enableSort="false"
+            grow="true"
+            id="Description"
+            value="covTerm.DisplayName"
+            wrap="true"/>
+          <TextCell
+            align="right"
+            id="CovTermValue"
+            value="covTerm.DisplayValue"
+            wrap="false"/>
+          <TextCell
+            id="TermAmount"
+            value="empty"
+            visible="prorated"/>
+          <TextCell
+            id="EffDate"
+            value="empty"
+            visible="prorated"/>
+          <TextCell
+            id="ExpDate"
+            value="empty"
+            visible="prorated"/>
+          <TextCell
+            id="Proration"
+            value="empty"
+            visible="prorated"/>
+          <TextCell
+            enableSort="false"
+            id="Amount"
+            value="empty"/>
+        </Row>
+      </RowIterator>
+    </RowIterator>
+    <Code><![CDATA[property get empty() : String { return "" }
+function getCovDescription(coverage : Coverage, cost : BACost) : String {
+  var covName : String
+  if (addStateToCoverageName) {
+    covName = coverage.Pattern.DisplayName + " - " + cost.State.Description
+  } else {
+    covName = coverage.Pattern.DisplayName
+  }
+  if (covName.contains("PIP") ) {
+    return covName + " - " + (cost as BAStateCovVehiclePIPCost).BAStateCovPIPCostType.DisplayName
+  } else if (cost typeis BALineCovNonownedCost) {
+    return covName + " - " + cost.BANonOwnedLiabCovCostType.Description
+  } else {
+    return covName
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

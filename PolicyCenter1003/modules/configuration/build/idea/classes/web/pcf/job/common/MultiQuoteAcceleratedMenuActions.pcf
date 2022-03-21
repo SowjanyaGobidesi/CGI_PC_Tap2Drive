@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <AcceleratedMenuActions
+    id="MultiQuoteAcceleratedMenuActions">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="job.ActivePeriods"
+      name="periodList"
+      recalculateOnRefresh="true"
+      type="entity.PolicyPeriod[]"/>
+    <Link
+      action="jobWizardHelper.setPeriodToView(ArgValue)"
+      argInitialValue="policyPeriod"
+      argOptionLabel="getLabel(VALUE)"
+      argRange="periodList"
+      argType="PolicyPeriod"
+      available="!jobWizardHelper.isInPicker() and !jobWizardHelper.hasActiveWorksheet()"
+      id="PolicyPeriodSelector"
+      performActionOnArgChange="true"
+      recalculateArgOnRefresh="true"
+      visible="job.hasMultiplePeriods() &amp;&amp; job.SelectedVersion.Status != PolicyPeriodStatus.TC_BOUND"/>
+    <Code><![CDATA[function getLabel(VALUE : PolicyPeriod) : String {
+  if (VALUE.Job.SelectedVersion == VALUE) {
+    return DisplayKey.get("Web.PolicyPeriod.SelectedMarker") + " " +
+           DisplayKey.get("Web.PolicyPeriod.Version", VALUE.BranchName, VALUE.Status)
+  } else {
+    return DisplayKey.get("Web.PolicyPeriod.Version", VALUE.BranchName, VALUE.Status)
+  }
+}]]></Code>
+  </AcceleratedMenuActions>
+</PCF>

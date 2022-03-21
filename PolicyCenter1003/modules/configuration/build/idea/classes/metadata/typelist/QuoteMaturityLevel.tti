@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="QuoteMaturityLevel"
+  desc="The various states a policy period can be in with more mature states having higher priorities">
+  <typecode
+    code="unrated"
+    desc="Period has no rating information"
+    name="Unrated"
+    priority="0"/>
+  <typecode
+    code="rated"
+    desc="Period is rated"
+    name="Rated"
+    priority="10"/>
+  <typecode
+    code="quoted"
+    desc="Period is quoted"
+    name="Quoted"
+    priority="20"/>
+</typelist>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPLineScheduleExcl"
+  desc="HOP Line exclusion with a schedule"
+  supertype="HOPLineExcl">
+  <implementsInterface
+    iface="gw.api.domain.Schedule"
+    impl="gw.lob.hop.schedule.HOPLineScheduleExclImpl"/>
+  <implementsEntity
+    name="ScheduleAutoNumberSequence"/>
+  <array
+    arrayentity="HOPLineScheduleExclItem"
+    cascadeDelete="true"
+    desc="Scheduled Items"
+    name="HOPLineScheduledItems"/>
+</subtype>

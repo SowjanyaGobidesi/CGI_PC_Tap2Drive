@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="AsyncQuoteValidationScreen">
+  <Toolbar>
+    <ToolbarButton
+      action="CurrentLocation.cancel()"
+      id="AsyncQuoteValidationScreen_ClearButton"
+      label="DisplayKey.get(&quot;Button.Clear&quot;)"/>
+  </Toolbar>
+  <Messages
+    groupScope="true"
+    id="grpMsgs"/>
+  </Screen>
+</PCF>

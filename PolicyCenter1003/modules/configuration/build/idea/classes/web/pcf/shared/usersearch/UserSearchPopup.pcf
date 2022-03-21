@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="UserSearchPopup"
+    returnType="User"
+    title="DisplayKey.get(&quot;Web.Admin.UserSearchPopup&quot;)">
+    <LocationEntryPoint
+      signature="UserSearchPopup()"/>
+    <LocationEntryPoint
+      signature="UserSearchPopup(organization : Organization)"/>
+    <LocationEntryPoint
+      signature="UserSearchPopup(organization : Organization, userType : UserType)"/>
+    <Variable
+      initialValue="null"
+      name="organization"
+      type="Organization"/>
+    <Variable
+      name="userType"
+      type="UserType"/>
+    <Screen
+      id="UserSearchPopupScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="users"
+        search="searchCriteria.validateAndSearch()"
+        searchCriteria="gw.web.admin.UserUIHelper.createSearchCriteria(organization, userType)"
+        searchCriteriaType="entity.UserSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;User&gt;">
+        <PanelRef
+          def="UserSearchDV(searchCriteria, organization != null, userType != null)"/>
+        <PanelRef
+          def="UserSearchResultsLV(users)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

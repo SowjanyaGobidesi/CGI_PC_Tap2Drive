@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="LocalPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.LocalTesting&quot;)">
+    <LocationEntryPoint
+      signature="LocalPopup(eTFs : String[][])"/>
+    <Variable
+      name="eTFs"
+      type="String[][]"/>
+    <Variable
+      initialValue="10000"
+      name="amount"
+      type="double"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="null"
+          id="recalculate"
+          label="DisplayKey.get(&quot;Web.LocalTesting.Recalculate&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="amount"
+            label="DisplayKey.get(&quot;Web.LocalTesting.Amount&quot;)"
+            value="amount"
+            valueType="java.lang.Double">
+            <PostOnChange/>
+          </TextInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="eTF"
+          value="eTFs"
+          valueType="java.lang.String[][]">
+          <Row>
+            <TextCell
+              id="name"
+              value="eTF[0]"/>
+            <TextCell
+              id="symbol"
+              value="eTF[1]"/>
+            <TextCell
+              id="class"
+              value="eTF[2]"/>
+            <TextCell
+              id="allocation"
+              value="eTF[3] + &quot;%&quot;"/>
+            <TextCell
+              footerSumValue="percentage(amount, eTF[3])"
+              formatType="exactNumber"
+              helpText="eTF[3]"
+              id="level1"
+              label="DisplayKey.get(&quot;Web.LocalTesting.level1&quot;)"
+              value="percentage(amount, eTF[3])"
+              valueType="java.math.BigDecimal"/>
+            <TextCell
+              footerSumValue="percentage(amount, eTF[4])"
+              formatType="exactNumber"
+              helpText="eTF[3]"
+              id="level4"
+              label="DisplayKey.get(&quot;Web.LocalTesting.level4&quot;)"
+              value="percentage(amount, eTF[4])"
+              valueType="java.math.BigDecimal"/>
+            <TextCell
+              footerSumValue="percentage(amount, eTF[5])"
+              id="level2"
+              label="DisplayKey.get(&quot;Web.LocalTesting.level2&quot;)"
+              value="percentage(amount, eTF[5])"
+              valueType="java.math.BigDecimal"/>
+            <TextCell
+              footerSumValue="percentage(amount, eTF[6])"
+              id="level3"
+              label="DisplayKey.get(&quot;Web.LocalTesting.level3&quot;)"
+              value="percentage(amount, eTF[6])"
+              valueType="java.math.BigDecimal"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function percentage(total : double, percentage : String) : java.math.BigDecimal{
+  return java.math.BigDecimal.valueOf( total ).multiply( new java.math.BigDecimal(percentage) ).divide( 100 )
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  AccountType  ==================================================================== -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Special handling for a Policy Change."
+  name="SpecialHandling">
+  <typecode
+    code="billimmediately"
+    desc="Bill Immediately"
+    name="Bill Immediately"/>
+  <typecode
+    code="billonnext"
+    desc="Bill on Next Invoice"
+    name="Bill on Next Invoice"/>
+  <typecode
+    code="holdforaudit"
+    desc="Holds all charges on this billing instruction for Final Audit"
+    name="Hold for Final Audit"/>
+  <typecode
+    code="holdforauditall"
+    desc="Holds all unbilled items on the policy period for Final Audit"
+    name="Hold for Final Audit (All Unbilled Items)"/>
+</typelist>

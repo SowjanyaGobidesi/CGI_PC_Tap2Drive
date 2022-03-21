@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<import>
+  <ConditionLookup public-id="z74jumd10uu988ismff5ht4kheb">
+    <Availability>Available</Availability>
+    <ConditionPatternCode>zn2jq51fencbp7a30cd7hqkjno8</ConditionPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ConditionLookup>
+  <CovTermLookup public-id="z38gc8ina88515blpmn665pq69b">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zkvhk7lnoo8su13ajcc6gkhhf2a</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermLookup>
+  <CovTermLookup public-id="zm7jam4k0n0ll8hfaa8s6dhpqo8">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>z63goqjrjffocdg578vnp3lsiga</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermLookup>
+</import>

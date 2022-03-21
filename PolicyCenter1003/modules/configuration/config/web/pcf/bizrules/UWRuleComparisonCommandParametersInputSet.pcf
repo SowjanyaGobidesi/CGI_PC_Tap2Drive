@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="UWRuleComparisonCommandParametersInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_ISSUE_KEY))"
+      id="IssueKey"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_VALUE))"
+      id="Value"/>
+    <InputSetRef
+      def="LocalizedRuleComparisonInputSet(controller, commandDefinitionDiff, gw.bizrules.provisioning.AddUWIssueRuleAction.SHORT_DESC_PARAMS)"
+      id="ShortDesc"/>
+    <InputSetRef
+      def="LocalizedRuleComparisonInputSet(controller, commandDefinitionDiff, gw.bizrules.provisioning.AddUWIssueRuleAction.LONG_DESC_PARAMS)"
+      id="LongDesc"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_EVAL_CONTEXT))"
+      id="EvalContext"/>
+  </InputSet>
+</PCF>

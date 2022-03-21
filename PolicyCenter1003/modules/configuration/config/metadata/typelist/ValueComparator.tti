@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Ways of comparing values of a common types"
+  name="ValueComparator">
+  <typecode
+    code="None"
+    desc="Value used to indicate that a given issue type has no associated value."
+    name="None"
+    priority="10"/>
+  <typecode
+    code="Any"
+    desc="Value used to indicate that an authority grant is not contingent on a particular value."
+    name="Any"
+    priority="20"
+    retired="true"/>
+  <typecode
+    code="Numeric_LE"
+    desc="Value used to indicate that the issue value should be treated as a BigDecimal and must be less or equal to than the approval or grant value."
+    name="At most"
+    priority="30"/>
+  <typecode
+    code="Numeric_GE"
+    desc="Value used to indicate that the issue value should be treated as a BigDecimal and must be greater than or equal to the approval or grant value."
+    name="At least"
+    priority="40"/>
+  <typecode
+    code="Monetary_LE"
+    desc="Value used to indicate that the issue value should be treated as a MonetaryAmount and must be less than or equal to the approval or grant value."
+    name="At most (monetary)"
+    priority="50">
+    <category
+      code="MonetaryAmount"
+      typelist="ValueFormatterType"/>
+  </typecode>
+  <typecode
+    code="Monetary_GE"
+    desc="Value used to indicate that the issue value should be treated as a MonetaryAmount and must be greater than or equal to the approval or grant value."
+    name="At least (monetary)"
+    priority="60">
+    <category
+      code="MonetaryAmount"
+      typelist="ValueFormatterType"/>
+  </typecode>
+  <typecode
+    code="State_Set"
+    desc="Value used to indicate that the issue value should be treated as a (possibly-exclusive) set of States and the issue value must be contained (or not contained) within that set."
+    name="In set"
+    priority="70">
+    <category
+      code="StateSet"
+      typelist="ValueFormatterType"/>
+  </typecode>
+  <typefilter
+    desc="Any is not an allowed type for a UWIssueType, it is only allowed as a uw_authority_grant type"
+    name="Allowed_UWIssueType"
+    includeAll="true">
+    <exclude
+      code="Any"/>
+  </typefilter>
+</typelist>

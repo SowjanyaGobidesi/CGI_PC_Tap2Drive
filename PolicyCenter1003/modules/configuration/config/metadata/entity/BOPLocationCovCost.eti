@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A taxable unit of price for a period of time, not to be broken up any further, for a Business Owners location coverage"
+  entity="BOPLocationCovCost"
+  supertype="BOPCoveragePremium">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.bop.financials.BOPCostAdapter"/>
+  <foreignkey
+    fkentity="BOPLocationCov"
+    name="BOPLocationCov"
+    nullok="false"/>
+</subtype>

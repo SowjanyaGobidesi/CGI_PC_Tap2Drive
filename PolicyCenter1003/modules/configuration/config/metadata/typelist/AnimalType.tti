@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="AnimalType" desc="Animal Type">
+  <typecode
+    code="Dog"
+    desc="Dog"
+    name="Dog"
+    priority="10">
+  </typecode>
+  <typecode
+    code="Exotic"
+    desc="Exotic"
+    name="Exotic"
+    priority="20">
+  </typecode>
+  <typecode
+    code="Other"
+    desc="Other"
+    name="Other"
+    priority="90">
+  </typecode>
+</typelist>

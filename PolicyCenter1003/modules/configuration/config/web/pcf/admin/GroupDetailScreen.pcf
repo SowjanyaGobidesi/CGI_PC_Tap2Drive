@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="GroupDetailScreen">
+    <Require
+      name="group"
+      type="Group"/>
+    <Variable
+      initialValue="AssignableQueue.finder.findVisibleQueuesForUser(User.util.CurrentUser) as gw.api.database.IQueryBeanResult&lt;AssignableQueue&gt;"
+      name="assignableQueues"
+      type="gw.api.database.IQueryBeanResult&lt;AssignableQueue&gt;"/>
+    <Toolbar>
+      <EditButtons/>
+      <ToolbarButton
+        action="gw.api.admin.BaseAdminUtil.deleteGroup(group); Admin.go()"
+        available="group.SafeToDelete"
+        confirmMessage="DisplayKey.get(&quot;Web.Admin.GroupDetail.DeleteConfirm&quot;)"
+        hideIfEditable="true"
+        id="GroupDetailScreen_BasicCard_DeleteButton"
+        label="DisplayKey.get(&quot;Button.Delete&quot;)"
+        visible="perm.Group.delete"/>
+    </Toolbar>
+    <CardViewPanel>
+      <Card
+        id="GroupDetail_BasicCard"
+        title="DisplayKey.get(&quot;Web.Admin.GroupDetail.Basic&quot;)">
+        <PanelRef
+          def="GroupDetailDV(group)"/>
+        <PanelRef
+          def="LocalizedValuesDV(group, { &quot;Name&quot;, &quot;Description&quot; }, { DisplayKey.get(&quot;Web.Admin.GroupDetail.BasicDV.Name&quot;),DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Description&quot;) })"/>
+      </Card>
+      <Card
+        id="GroupDetail_UserCard"
+        title="DisplayKey.get(&quot;Web.Admin.GroupDetail.BasicDV.Users&quot;)"
+        visible="(null != group.Organization)">
+        <PanelRef
+          def="GroupUsersLV(group)">
+          <Toolbar>
+            <IteratorButtons
+              addVisible="perm.GroupUser.create"
+              iterator="GroupUsersLV.GroupUsersLV"
+              removeVisible="perm.GroupUser.delete"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="GroupDetail_ProducerCodesCard"
+        title="DisplayKey.get(&quot;Web.Admin.GroupDetail.ProducerCodes&quot;)"
+        visible="(null != group.Organization) and (group.Organization.Producer)">
+        <PanelRef
+          def="GroupDetail_ProducerCodesLV(group)"
+          editable="true">
+          <Toolbar/>
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Admin.GroupDetail.ProducerCodesLabel&quot;)"/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="GroupDetail_QueuesCard"
+        title="DisplayKey.get(&quot;Web.Admin.GroupDetail.Queues&quot;)">
+        <PanelRef
+          def="GroupQueuesLV(group)">
+          <Toolbar>
+            <IteratorButtons
+              iterator="GroupQueuesLV.GroupQueuesLV"
+              removeShortcut="E"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="GroupDetail_RegionsCard"
+        shortcut="I"
+        title="DisplayKey.get(&quot;Web.Admin.GroupDetail.Regions&quot;)">
+        <PanelRef
+          def="GroupRegionLV(group)">
+          <Toolbar>
+            <IteratorButtons
+              iterator="GroupRegionLV.GroupRegionLV"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

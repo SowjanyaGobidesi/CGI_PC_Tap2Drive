@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  displayName="Dwelling Modifier"
+  xmlns="http://guidewire.com/datamodel"
+  desc="A modifier for Dwelling"
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPDwellingMod"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="hopdwellingmod"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.hop.HOPDwellingModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPDwellingModifierMatcher"/>
+  <foreignkey
+    fkentity="HOPDwelling"
+    name="HOPDwelling"
+    nullok="false"/>
+  <array
+    arrayentity="HOPDwellingRF"
+    cascadeDelete="true"
+    desc="Individual components of the rating factor"
+    name="HOPDwellingRateFactors"
+    owner="false"/>
+  <array
+    arrayentity="HOPDwellingModifierCost"
+    cascadeDelete="true"
+    name="HOPDwellingModifierCosts"
+    owner="false"/>
+</entity>

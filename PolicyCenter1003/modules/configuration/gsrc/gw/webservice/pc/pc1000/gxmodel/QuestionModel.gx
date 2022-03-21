@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<gx-model type="gw.api.productmodel.Question" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="CorrectAnswer" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="DefaultAnswer" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="FailureMessage" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Filters[].Answer" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Priority" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="QuestionType" type="typekey.QuestionType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Required" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="Text" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

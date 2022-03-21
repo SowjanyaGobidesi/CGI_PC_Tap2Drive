@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    id="PolicyContactListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.Contacts')"
+    viewMoreAction="PolicyFile_Contacts.push(policyPeriod, asOfDate)"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="contactHelper.ViewMoreVisible">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="Date"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.contact.ContactHelper.forPolicyPeriod(policyPeriod)"
+      name="contactHelper"
+      type="gw.api.web.dashboard.ui.contact.ContactHelper"/>    
+    <RowIterator
+      editable="false"
+      elementName="contact"
+      value="contactHelper.Contacts"
+      valueType="gw.api.web.dashboard.ui.contact.ContactHelper.AccountContactWithRole[]">
+      <Row>
+        <TextCell
+          action="contactHelper.goToContact(contact)"
+          enableSort="false"
+          grow="true"
+          id="Name"
+          label="DisplayKey.get('Web.Dashboard.Tile.Contacts.Name')"
+          value="contact.DisplayName"/>
+        <TextCell
+          enableSort="false"
+          grow="true"
+          id="Roles"
+          label="DisplayKey.get('Web.Dashboard.Tile.Contacts.Roles')"
+          value="contact.Roles"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

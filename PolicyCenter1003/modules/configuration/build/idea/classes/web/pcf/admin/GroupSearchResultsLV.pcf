@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- ListView that displays the results of a Group search. The group name is a hyperlink
+    that navigates to the GroupDetailPage. -->
+  <ListViewPanel
+    id="GroupSearchResultsLV"
+    stretch="true">
+    <Require
+      name="groupList"
+      type="gw.api.database.IQueryBeanResult&lt;Group&gt;"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="group"
+      value="groupList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Group&gt;">
+      <Row>
+        <AltGroupCell
+          action="GroupDetailPage.go(group)"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.GroupSearchResults.Name&quot;)"
+          sortOrder="1"
+          value="group"
+          wrap="false"/>
+        <AltGroupCell
+          action="GroupDetailPage.go(group.Parent)"
+          available="group.Parent != null and group.Parent.GroupType != TC_ROOT"
+          id="Parent"
+          label="DisplayKey.get(&quot;Web.Admin.GroupSearchResults.Parent&quot;)"
+          value="group.Parent"
+          wrap="false"/>
+        <TextCell
+          action="OrganizationDetail.go(group.Organization)"
+          grow="true"
+          id="Organization"
+          label="DisplayKey.get(&quot;Web.Admin.GroupSearchResults.Organization&quot;)"
+          value="group.Organization"
+          valueType="entity.Organization"
+          wrap="true"/>
+        <TypeKeyCell
+          grow="true"
+          id="Type"
+          label="DisplayKey.get(&quot;Web.Admin.GroupSearchResults.Type&quot;)"
+          value="group.GroupType"
+          valueType="typekey.GroupType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

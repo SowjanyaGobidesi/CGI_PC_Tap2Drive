@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="StateDrivenLookup">
+  <typekey
+    desc="The state for which this lookup applies, or null if the lookup is not restricted by state"
+    name="State"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <fulldescription><![CDATA[Delegate for availability lookup entities where State is an optional restriction.]]></fulldescription>
+</delegate>

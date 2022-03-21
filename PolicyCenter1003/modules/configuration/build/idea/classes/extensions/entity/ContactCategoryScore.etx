@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactCategoryScore">
+  <foreignkey-override
+    name="Contact">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </foreignkey-override>
+  <typekey-override
+    name="ReviewCategory">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <column-override
+    name="Score">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+</extension>

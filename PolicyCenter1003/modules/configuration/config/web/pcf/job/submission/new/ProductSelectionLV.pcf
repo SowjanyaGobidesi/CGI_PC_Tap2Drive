@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ProductSelectionLV">
+    <Require
+      name="productOffers"
+      type="ProductSelection[]"/>
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="producerSelection"
+      type="ProducerSelection"/>
+    <Require
+      name="createSingle"
+      type="boolean"/>
+    <Require
+      name="quoteType"
+      type="QuoteType"/>
+    <Require
+      name="uiHelper"
+      type="gw.web.job.submission.NewSubmissionUIHelper"/>
+    <Variable
+      initialValue="false"
+      name="createMultiple"
+      type="boolean"/>
+    <RowIterator
+      editable="true"
+      elementName="productOffer"
+      value="productOffers"
+      valueType="entity.ProductSelection[]">
+      <Row>
+        <LinkCell
+          align="center"
+          id="Select"
+          visible="createSingle">
+          <Link
+            action="gw.web.job.submission.NewSubmissionUtil.createOneSubmission(productOffer, producerSelection, account, quoteType)  "
+            available="uiHelper.isProductOfferSelectable(account, productOffer)"
+            id="addSubmission"
+            label="DisplayKey.get(&quot;Web.Submission.Products.Select&quot;)"
+            styleClass="miniButton"
+            visible="productOffer.ProductSelectionStatus == TC_AVAILABLE || productOffer.ProductSelectionStatus == TC_AUTODECLINED"/>
+        </LinkCell>
+        <RangeCell
+          align="left"
+          available="uiHelper.isProductOfferSelectable(account, productOffer)"
+          desc="f"
+          editable="true"
+          id="NumToCreate"
+          label="DisplayKey.get(&quot;Web.Submission.Products.NumberToCreate&quot;)"
+          value="productOffer.NumToCreate"
+          valueRange="gw.web.job.submission.NewSubmissionUtil.makeNumberRange(productOffer.MaxCreate)"
+          valueType="java.lang.Integer"
+          valueVisible="productOffer.ProductSelectionStatus == TC_AVAILABLE || productOffer.ProductSelectionStatus == TC_AUTODECLINED"
+          visible="!createSingle"/>
+        <TextCell
+          align="left"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.SubmissionManagerLV.Name&quot;)"
+          value="productOffer.Product.Name"/>
+        <TextCell
+          align="left"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.SubmissionManagerLV.Description&quot;)"
+          value="productOffer.Product.Description"/>
+        <TypeKeyCell
+          align="left"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.SubmissionManagerLV.Status&quot;)"
+          value="productOffer.ProductSelectionStatus"
+          valueType="typekey.ProductSelectionStatus"/>
+        <TextCell
+          align="left"
+          id="MaxCreate"
+          label="DisplayKey.get(&quot;Web.Submission.Products.MaxToCreate&quot;)"
+          value="productOffer.MaxCreate"
+          valueType="java.lang.Integer"
+          visible="!createSingle"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

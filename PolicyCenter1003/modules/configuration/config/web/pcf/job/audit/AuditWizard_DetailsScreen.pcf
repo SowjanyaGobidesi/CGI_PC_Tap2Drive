@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="policyPeriod.Status == PolicyPeriodStatus.TC_DRAFT"
+    id="AuditWizard_DetailsScreen">
+    <Require
+      name="audit"
+      type="Audit"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="typekey.Job.TC_AUDIT"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, audit, jobWizardHelper)"/>
+      <ToolbarButton
+        action="jobWizardHelper.requestQuote( policyPeriod, &quot;Premiums&quot; )"
+        id="Quote"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Quote&quot;)"
+        shortcut="Q"
+        visible="gw.web.job.JobUIHelper.showQuoteButton(policyPeriod)"/>
+      <ToolbarButton
+        action="jobWizardHelper.startAsyncQuoteProcess(policyPeriod)"
+        confirmMessage="DisplayKey.get(&quot;Job.Operation.QuoteAsync.Confirm&quot;)"
+        id="QuoteAsync"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Quote&quot;)"
+        shortcut="Q"
+        visible="gw.web.job.JobUIHelper.showAsyncQuoteButton(policyPeriod)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+    <PanelRef
+      def="WarningsPanelSet(policyPeriod.getAuditWizardWarningMessages())"/>
+    <PanelRef
+      def="AuditDetailsPanelSet(policyPeriod)"
+      editable="policyPeriod.OpenForEdit"
+      mode="policyPeriod.Policy.Product.PublicID"/>
+  </Screen>
+</PCF>

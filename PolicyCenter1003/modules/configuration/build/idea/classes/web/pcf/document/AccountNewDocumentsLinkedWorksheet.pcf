@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.Document.create"
+    id="AccountNewDocumentsLinkedWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.DocumentCreation.Title&quot;)"
+    title="DisplayKey.get(&quot;Web.DocumentCreation.Title&quot;)">
+    <LocationEntryPoint
+      signature="AccountNewDocumentsLinkedWorksheet(account : Account)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      name="levels"
+      type="gw.api.domain.linkedobject.LinkedObjectContainer[]"
+      initialValue="gw.api.domain.linkedobject.LinkedObjectUtils.generateLevels(account,null,null,null)"/>
+    <Variable
+      name="levelsVisible"
+      type="boolean"
+      initialValue="true"/>
+    <Variable
+      initialValue="new gw.api.web.document.DocumentPCContext(account, null, levels, levelsVisible)"
+      name="documentApplicationContext"
+      type="gw.document.DocumentApplicationContext"/>
+    <ScreenRef
+      def="UploadDocumentScreen(documentApplicationContext)"/>
+  </Worksheet>
+</PCF>

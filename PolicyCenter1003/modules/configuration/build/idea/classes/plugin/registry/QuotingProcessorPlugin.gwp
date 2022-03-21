@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="QuotingProcessorPlugin"
+  name="QuotingProcessorPlugin">
+  <plugin-gosu
+    gosuclass="gw.webservice.pc.pc900.quoting.HVQuotingProcessorPlugin"/>
+</plugin>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="Admin.go()"
+    afterCommit="UserDetailPage.go(user)"
+    canEdit="true"
+    canVisit="perm.User.create"
+    id="NewUser"
+    parent="Admin(entity.User.util.CurrentUser.Organization)"
+    showUpLink="true"
+    startEditing="user.Credential = new Credential(); user.initPreferences()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewUser&quot;)">
+    <LocationEntryPoint
+      signature="NewUser()"/>
+    <Variable
+      initialValue="new gw.api.web.admin.NewUserHelper()"
+      name="pageHelper"
+      type="gw.api.web.admin.NewUserHelper"/>
+    <Variable
+      initialValue="pageHelper.createUser()"
+      name="user"
+      type="User"/>
+    <ScreenRef
+      def="UserDetailScreen(user)"/>
+  </Page>
+</PCF>

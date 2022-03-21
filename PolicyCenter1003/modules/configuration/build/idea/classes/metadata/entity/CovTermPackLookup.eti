@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- ==============================================================================  COVERAGE TERM PACKAGES  ============================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The base coverage term availability lookup type."
+  entity="CovTermPackLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="covtermpacklookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.productmodel.impl.CovTermPackLookupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.CovTermPackLookupPublicMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.CovTermPackLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.CovTermPackLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="CovTermPatternFilteredLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.DenormLookupInitialisable"
+    impl="com.guidewire.pc.domain.productmodel.impl.CovTermPackLookupImpl"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <implementsEntity
+    name="UWCompanyFilteredLookup"/>
+  <implementsEntity
+    name="CurrencyFilteredLookup"/>
+  <!-- referenced object -->
+  <column
+    name="CovTermPackCode"
+    nullok="false"
+    type="patterncode"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.productmodel.dbcheck.CovTermPackLookupDBCheckBuilder"/>
+  <index
+    desc="Speeds lookup queries against this table."
+    name="covlookup">
+    <indexcol
+      keyposition="1"
+      name="Subtype"/>
+    <indexcol
+      keyposition="2"
+      name="CovTermPatternCode"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="StartEffectiveDate"/>
+    <indexcol
+      keyposition="5"
+      name="Currency"/>
+    <indexcol
+      keyposition="6"
+      name="State"/>
+    <indexcol
+      keyposition="7"
+      name="EndEffectiveDate"/>
+  </index>
+</entity>

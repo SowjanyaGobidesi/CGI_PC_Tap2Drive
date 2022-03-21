@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A unit of price for a period of time, not to be broken up any further, for a Workers' Comp jurisdiction"
+  entity="WCJurisdictionCost"
+  supertype="WCCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.wc.financials.WCCostAdapter"/>
+  <column
+    desc="The statistic code for classifying premiums and surcharges that are not attributable to a specific employment class code, such as experience modification, premium for increased employer liability limits, expense constant, taxes, etc."
+    name="StatCode"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    name="WCJurisdictionCostType"
+    nullok="false"
+    typelist="WCJurisdictionCostType"/>
+  <foreignkey
+    fkentity="WCJurisdiction"
+    name="WCJurisdiction"
+    nullok="false"/>
+</subtype>

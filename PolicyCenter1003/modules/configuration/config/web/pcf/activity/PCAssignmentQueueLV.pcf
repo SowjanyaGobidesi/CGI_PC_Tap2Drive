@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="PCAssignmentQueueLV">
+    <Require
+      name="queues"
+      type="gw.api.database.IQueryBeanResult&lt;AssignableQueue&gt;"/>
+    <RowIterator
+      editable="true"
+      elementName="queue"
+      pickValue="queue"
+      selectLabel="DisplayKey.get(&quot;Button.Assign&quot;)"
+      value="queues"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.AssignableQueue&gt;">
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.Name&quot;)"
+          sortOrder="1"
+          value="queue"
+          valueType="entity.AssignableQueue"/>
+        <AltGroupCell
+          id="Group"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.Group&quot;)"
+          value="queue.Group"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.Description&quot;)"
+          value="queue.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

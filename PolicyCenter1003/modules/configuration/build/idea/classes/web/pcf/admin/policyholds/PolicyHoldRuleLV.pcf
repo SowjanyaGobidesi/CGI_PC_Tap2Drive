@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="PolicyHoldRuleLV">
+    <ExposeIterator
+      valueType="entity.PolicyHoldRule"
+      widget="PolicyHoldRuleLV"/>
+    <Require
+      name="policyHold"
+      type="PolicyHold"/>
+    <Variable
+      initialValue="gw.api.productmodel.PolicyLinePatternLookup.All.toTypedArray()"
+      name="linePatterns"
+      type="gw.api.productmodel.PolicyLinePattern[]"/>
+    <RowIterator
+      canPick="false"
+      checkBoxVisible="perm.System.polholdcreate and perm.System.polholdelete"
+      editable="true"
+      elementName="holdRule"
+      hideCheckBoxesIfReadOnly="true"
+      toCreateAndAdd="policyHold.createAndAddRule()"
+      toRemove="policyHold.removeFromRules(holdRule)"
+      value="policyHold.Rules"
+      valueType="entity.PolicyHoldRule[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="PolicyLine"
+          label="DisplayKey.get(&quot;Web.Admin.PolicyHold.PolicyLine&quot;)"
+          value="holdRule.PolicyLineType"
+          valueType="typekey.PolicyLine">
+          <PostOnChange
+            onChange="holdRule.CovPattern = null"/>
+        </TypeKeyCell>
+        <TypeKeyCell
+          editable="true"
+          id="Job"
+          label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Job&quot;)"
+          value="holdRule.JobType"
+          valueType="typekey.Job"/>
+        <TypeKeyCell
+          editable="true"
+          filter="filterJobDateTypeByPolicyHoldType(VALUE)"
+          id="JobDateType"
+          label="DisplayKey.get(&quot;Web.Admin.PolicyHold.JobDateType&quot;)"
+          value="holdRule.JobDateType"
+          valueType="typekey.JobDateType"/>
+        <PickerCell
+          available="holdRule.PolicyLineType != null"
+          editable="true"
+          freeInputEnabled="false"
+          id="Coverage"
+          label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Coverage&quot;)"
+          pickLocation="CovPatternSearchPopup.push(holdRule.PolicyLineType, holdRule.getMatchingLinePattern(linePatterns))"
+          value="holdRule.CovPattern"
+          valueType="gw.api.productmodel.CoveragePattern"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function filterJobDateTypeByPolicyHoldType(VALUE : typekey.JobDateType) : boolean {
+  if (policyHold.HoldType != null) {
+    return VALUE.hasCategory(policyHold.HoldType)
+  } else {
+    return false
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

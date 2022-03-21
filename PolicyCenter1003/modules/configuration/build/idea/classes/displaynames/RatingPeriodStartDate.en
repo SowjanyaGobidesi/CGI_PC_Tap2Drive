@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="RatingPeriodStartDate">
+  <Columns>
+    <Column
+      beanPath="RatingPeriodStartDate.StartDate"
+      name="StartDate"/>
+    <Column
+      beanPath="RatingPeriodStartDate.Type"
+      name="Type"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.RatingPeriodStartDate", StartDate, Type)
+    
+  ]]></DisplayName>
+</Entity>

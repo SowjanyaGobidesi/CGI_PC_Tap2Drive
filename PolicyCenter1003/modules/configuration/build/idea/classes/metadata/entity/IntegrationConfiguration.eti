@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  desc="Integration configuration is an abstract type that represents integrations related parameters. Subtype this entity for saving/caching parameter related to specific integration type."
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="IntegrationConfiguration"
+  table="integrationconfiguration"
+  type="retireable"></entity>

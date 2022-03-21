@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressShortInputSet">
+    <Require
+      name="address"
+      type="Address"/>
+    <Variable
+      initialValue="new gw.pcf.policysummary.PolicyInfoAddressOwner(new gw.api.address.AddressAutofillableDelegate(address), true)"
+      name="addressOwner"
+      type="gw.api.address.AddressOwner"/>
+    <InputSetRef
+      def="GlobalAddressInputSet(addressOwner)"
+      id="globalAddressContainer"
+      mode="addressOwner.SelectedMode"
+      widgets="globalAddressContainer"/>
+    <TypeKeyInput
+      id="AddressType"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.AddressType&quot;)"
+      value="address.AddressType"
+      valueType="typekey.AddressType"/>
+    <TextInput
+      editable="true"
+      id="AddressDescription"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.Description&quot;)"
+      value="address.Description"/>
+  </InputSet>
+</PCF>

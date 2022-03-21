@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="UWInterventionClassificationCode"
+  desc="UW Intervention Classification Codes"
+  table="uwinterventioncode"
+  type="retireable"
+  exportable="true">
+  <column
+    desc="The Class Indicator for the class code"
+    name="ClassIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The building Class Code to be flagged for intervention"
+    name="Code"
+    nullok="false"
+    type="shorttext"/>
+  <implementsEntity
+    name="SimpleEffDated"/>
+</entity>

@@ -1,0 +1,5 @@
+taptodrive.pc.taptodriverequest-1.0
+taptodrive.pc.taptodriveresponse-1.0
+taptodrive.pc.taptodrivepolicydriverrequest-1.0
+taptodrive.pc.taptodrivepolicyrequest-1.0
+taptodrive.pc.taptodriveenrollrequest-1.0

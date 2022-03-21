@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="step.setStepToAssignmentNewVariable()"
+    canEdit="true"
+    id="RateRoutineNewVariablePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.NewVariable&quot;)">
+    <LocationEntryPoint
+      signature="RateRoutineNewVariablePopup(step : CalcStepDefinition, costDataUsages : java.util.List&lt;gw.rating.flow.util.InScopeUsage&gt; )"/>
+    <Variable
+      name="step"
+      recalculateOnRefresh="true"
+      type="CalcStepDefinition"/>
+    <Variable
+      name="costDataUsages"
+      type="java.util.List&lt;gw.rating.flow.util.InScopeUsage&gt;"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.commit();"
+          id="RateRoutineNewVariableEditUpdate"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="RateRoutineNewVarialbeEditCancel"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            helpText="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.NewVariableHelpText&quot;)"
+            id="NewVariableTextInput"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.NewVariable&quot;)"
+            required="true"
+            validationExpression="gw.pcf.rating.flow.RateRoutinePopupHelper.variableValidationExpression(step, costDataUsages)"
+            value="step.StoreLocation"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

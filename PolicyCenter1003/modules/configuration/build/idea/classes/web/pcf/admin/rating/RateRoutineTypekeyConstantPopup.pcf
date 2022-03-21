@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="valueDelegate.clearDependentValues()"
+    afterEnter="gw.pcf.rating.flow.RateRoutinePopupHelper.afterEnterTypeKeyConstantPopup(valueDelegate, preSelectedTypeKey, helper.IsMultiSelect);"
+    canEdit="true"
+    id="RateRoutineTypekeyConstantPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EditTypelistConstantOperand&quot;)">
+    <LocationEntryPoint
+      signature="RateRoutineTypekeyConstantPopup(valueDelegate : CalcStepValueDelegate)"/>
+    <LocationEntryPoint
+      signature="RateRoutineTypekeyConstantPopup(valueDelegate : CalcStepValueDelegate, preSelectedTypeKey : String)"/>
+    <Variable
+      name="valueDelegate"
+      recalculateOnRefresh="true"
+      type="CalcStepValueDelegate"/>
+    <Variable
+      name="preSelectedTypeKey"
+      type="String"/>
+    <Variable
+      initialValue="new gw.pcf.rating.rateroutine.RateRoutineTypekeyConstantUIHelper(valueDelegate, CurrentLocation)"
+      name="helper"
+      type="gw.pcf.rating.rateroutine.RateRoutineTypekeyConstantUIHelper"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="helper.commitPopup()"
+          id="RateRoutineConstantEditUpdate"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="RateRoutineConstantEditCancel"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Usage"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Usage&quot;)"
+            value="gw.pcf.rating.flow.RateRoutineUsageHelper.getValueDelegateUsage(valueDelegate)"/>
+          <RangeInput
+            editable="preSelectedTypeKey == null"
+            id="TypekeyPulldown"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.TypelistConstantPopup.TypelistLabel&quot;)"
+            optionLabel="VALUE.remove(&quot;typekey.&quot;)"
+            required="true"
+            value="valueDelegate.TypeDeclaration"
+            valueRange="gw.rating.rtm.util.RatingUIUtil.getAllTypekeyNames()"
+            valueType="java.lang.String">
+            <PostOnChange/>
+          </RangeInput>
+          <RangeInput
+            editable="(valueDelegate.TypeDeclaration != null)"
+            id="TypekeyConstantValue"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.TypelistConstantPopup.ValueLabel&quot;)"
+            required="not helper.IsMultiSelect"
+            value="valueDelegate.ConstantValue"
+            valueRange="gw.rating.rtm.util.RatingUIUtil.getTypekeysForTypelist(valueDelegate.TypeDeclaration)"
+            valueType="java.lang.String"
+            visible="not helper.IsMultiSelect"/>
+          <CheckBoxGroupInput
+            editable="(valueDelegate.TypeDeclaration != null)"
+            id="multipleTypekeys"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.TypelistConstantPopup.ValueLabel&quot;)"
+            numRows="15"
+            required="helper.IsMultiSelect"
+            value="(valueDelegate as CalcStepDefinitionOperand).TypelistCollection"
+            valueRange="gw.rating.rtm.util.RatingUIUtil.getTypekeysForTypelist(valueDelegate.TypeDeclaration)"
+            valueType="gw.entity.TypeKey[]"
+            visible="helper.IsMultiSelect"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

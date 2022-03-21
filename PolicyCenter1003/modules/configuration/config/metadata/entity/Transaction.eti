@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Transaction"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.financials.TransactionPublicMethods"
+    impl="com.guidewire.pc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.financials.impl.TransactionInternalMethods"
+    impl="com.guidewire.pc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.TransactionAdapter"/>
+  <monetaryamount
+    amountColumnName="Amount"
+    desc="The transaction amount for the effective time [EffDate, ExpDate)."
+    name="Amount"
+    nullok="false"/>
+  <monetaryamount
+    amountColumnName="AmountBilling"
+    desc="The transaction amount for the effective time [EffDate, ExpDate)."
+    name="AmountBilling"
+    nullok="false"/>
+  <column
+    desc="The date on which the transaction becomes effective."
+    name="EffDate"
+    nullok="false"
+    type="dateonly"/>
+  <column
+    desc="The date on which the transaction expires."
+    name="ExpDate"
+    nullok="false"
+    type="dateonly"/>
+  <column
+    default="true"
+    desc="Whether or not this transaction amount should be counted in written premium calculations."
+    name="Written"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="true"
+    desc="Whether or not this transaction amount should be charged."
+    name="Charged"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="true"
+    desc="Whether or not this transaction amount should be included in earned premium accrual calculations."
+    name="ToBeAccrued"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The date on which the transaction was posted.  For transactions that haven't yet been posted, this field will be null.  Otherwise, it will be equal to the date on which the job was bound or (in the case of audits) completed."
+    name="PostedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date on which (for accounting purposes) the premium is considered as written."
+    name="WrittenDate"
+    nullok="true"
+    type="dateonly"/>
+  <foreignkey
+    fkentity="PolicyFXRate"
+    name="PolicyFXRate"
+    nonEffDated="true"
+    nullok="true">
+    <tag
+      name="ExcludeFromNonRevisionedOwner"/>
+  </foreignkey>
+  <fulldescription><![CDATA[
+    A delegate representing a particular transaction that should not be broken up any further.
+  ]]></fulldescription>
+</delegate>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserProfileDV">
+    <Require
+      name="user"
+      type="User"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.UserProfileDV.UserProfile&quot;)"/>
+      <TextInput
+        editable="true"
+        id="EmployeeNumber"
+        label="DisplayKey.get(&quot;Web.Admin.UserProfileDV.EmployeeNumber&quot;)"
+        value="user.Contact.EmployeeNumber"/>
+      <BooleanRadioInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="UseOrganizationAddress"
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.UseOrganizationAddress&quot;)"
+        value="user.UseOrgAddress"
+        visible="user.ExternalUser">
+        <PostOnChange
+          onChange="user.maybeSetContactInfo()"/>
+      </BooleanRadioInput>
+      <InputSet
+        editable="!user.UseOrgAddress"
+        visible="true">
+        <InputSetRef
+          def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(user.Contact.PrimaryAddress, false, true))"/>
+      </InputSet>
+      <TypeKeyInput
+        editable="true"
+        id="PrimaryPhone"
+        label="DisplayKey.get(&quot;Web.Admin.UserProfileDV.PrimaryPhone&quot;)"
+        value="user.Contact.PrimaryPhone"
+        valueType="typekey.PrimaryPhoneType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#HomePhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.HomePhone&quot;)))"
+        editable="true"
+        id="HomePhone"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#WorkPhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.WorkPhone&quot;)))"
+        id="WorkPhone"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Person#CellPhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.CellPhone&quot;)))"
+        editable="true"
+        id="CellPhone"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#FaxPhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.FaxPhone&quot;)))"
+        editable="true"
+        id="FaxPhone"/>
+      <TextInput
+        editable="true"
+        id="EmailAddress1"
+        label="DisplayKey.get(&quot;Web.Admin.UserProfileDV.EmailAddress1&quot;)"
+        value="user.Contact.EmailAddress1"/>
+      <TextInput
+        editable="true"
+        id="EmailAddress2"
+        label="DisplayKey.get(&quot;Web.Admin.UserProfileDV.EmailAddress2&quot;)"
+        value="user.Contact.EmailAddress2"/>
+      <InputSetRef
+        def="UserPreferencesInputSet(user)"
+        id="GlobalizationPreferences"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

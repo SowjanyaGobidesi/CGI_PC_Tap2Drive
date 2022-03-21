@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="agreement.updateInclusion(risk, inclusion)"
+    canEdit="true"
+    id="AttachmentInclusionPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Reinsurance.Attachment.InclusionPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="AttachmentInclusionPopup(agreement : RIAgreement, risk : RIRisk)"/>
+    <Variable
+      name="agreement"
+      type="RIAgreement"/>
+    <Variable
+      name="risk"
+      type="RIRisk"/>
+    <Variable
+      initialValue="agreement.getInclusion(risk)"
+      name="inclusion"
+      type="typekey.RIAttachmentInclusionType"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TypeKeyInput
+            editable="true"
+            id="Inclusion"
+            label="DisplayKey.get(&quot;Web.Reinsurance.Attachment.Inclusion&quot;)"
+            required="true"
+            value="inclusion"
+            valueType="typekey.RIAttachmentInclusionType"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    id="ReinsuranceMenuActions">
+    <MenuItem
+      id="NewTreatyMenuAction"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.NewTitle&quot;)"
+      shortcut="T">
+      <MenuItemIterator
+        elementName="treatyType"
+        value="typekey.RIAgreement.getTypeKeys(false).where(\ r -&gt; r.hasCategory(typekey.ArrangementType.TC_TREATY) )"
+        valueType="java.util.List&lt;typekey.RIAgreement&gt;">
+        <MenuItem
+          action="NewAgreementPage.go(treatyType)"
+          id="NewTreatyMenuItem"
+          label="DisplayKey.get(&quot;Web.Reinsurance.New&quot;, treatyType)"/>
+      </MenuItemIterator>
+    </MenuItem>
+    <MenuItem
+      id="NewFacAgreementMenuItem"
+      label="DisplayKey.get(&quot;Web.Reinsurance.FacAgreement.NewTitle&quot;)"
+      shortcut="F">
+      <MenuItemIterator
+        elementName="facAgreementType"
+        value="typekey.RIAgreement.getTypeKeys(false).where(\ r -&gt; r.hasCategory(typekey.ArrangementType.TC_FACULTATIVE) )"
+        valueType="java.util.List&lt;typekey.RIAgreement&gt;">
+        <MenuItem
+          action="NewAgreementPage.go(facAgreementType)"
+          id="NewFacMenuAction"
+          label="DisplayKey.get(&quot;Web.Reinsurance.New&quot;, facAgreementType)"/>
+      </MenuItemIterator>
+    </MenuItem>
+    <MenuItem
+      action="NewProgramPage.go()"
+      id="NewProgram"
+      label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram&quot;)"/>
+  </MenuActions>
+</PCF>

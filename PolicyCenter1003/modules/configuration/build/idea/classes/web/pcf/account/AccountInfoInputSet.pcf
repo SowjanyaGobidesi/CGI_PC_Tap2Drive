@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AccountInfoInputSet">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; period.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="openForEditInit.get()"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <Variable
+      initialValue="gw.web.account.AccountInfoInputSetUIHelper .getInitialValueForOfficalIDsUpdated(period,  CurrentLocation.InEditMode)"
+      name="officialIDsUpdated"
+      type="boolean"/>
+    <Variable
+      initialValue="period.PrimaryNamedInsured"
+      name="primaryNamedInsured"
+      recalculateOnRefresh="true"
+      type="PolicyPriNamedInsured"/>
+    <Variable
+      initialValue="gw.api.util.JurisdictionMappingUtil.getJurisdiction(period.PolicyAddress.Address)"
+      name="referenceState"
+      recalculateOnRefresh="true"
+      type="Jurisdiction"/>
+    <Variable
+      initialValue="referenceState != null ? period.getReferenceDateForCurrentJob(referenceState) : period.EditEffectiveDate"
+      name="referenceDate"
+      recalculateOnRefresh="true"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="period.Job.NewTerm ? null : primaryNamedInsured.BasedOn.IndustryCode"
+      name="previousIndustryCode"
+      type="IndustryCode"/>
+    <!-- The primary named insured -->
+    <TextInput
+      boldLabel="true"
+      id="PrimaryNamedInsuredLabel"
+      label="DisplayKey.get(&quot;Web.Policy.Account.PrimaryInsured&quot;)"
+      value="&quot;&quot;"
+      visible="not openForEdit"/>
+    <TextInput
+      boldLabel="true"
+      hideChildrenIfReadOnly="false"
+      id="ChangePrimaryNamedInsuredButton"
+      label="DisplayKey.get(&quot;Web.Policy.Account.PrimaryInsured&quot;)"
+      value="DisplayKey.get(&quot;Web.Policy.Account.PrimaryInsured.ChangeTo&quot;)"
+      visible="openForEdit">
+      <MenuItem
+        action="if ( gw.web.account.AccountInfoInputSetUIHelper .canChangePrimaryNamedInsured(period, primaryNamedInsured)){ NewPrimaryNamedInsuredPopup.push(period, typekey.ContactType.TC_COMPANY) }"
+        id="AdditionalNamedCompanyAdder"
+        label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, typekey.ContactType.TC_COMPANY)"
+        visible="period.Policy.Product.isContactTypeSuitableForProductAccountType(Company)"/>
+      <MenuItem
+        action="if( gw.web.account.AccountInfoInputSetUIHelper .canChangePrimaryNamedInsured(period, primaryNamedInsured)){ NewPrimaryNamedInsuredPopup.push(period, typekey.ContactType.TC_PERSON) }"
+        id="AdditionalNamedPersonAdder"
+        label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, typekey.ContactType.TC_PERSON)"
+        visible="period.Policy.Product.isContactTypeSuitableForProductAccountType(Person)"/>
+      <PickerMenuItem
+        action="ContactSearchPopup.push(TC_NAMEDINSURED, period.Policy.Product)"
+        id="PrimaryNamedInsuredABContactAdder"
+        label="DisplayKey.get(&quot;Web.Button.FromAddressBook&quot;)"
+        onPick="gw.web.account.AccountInfoInputSetUIHelper .changePrimaryNamedInsured(period, primaryNamedInsured, PickedValue)"
+        visible="not period.Promoted"/>
+      <MenuItem
+        id="OtherExistingContact"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.ExistingContact&quot;)"
+        subMenuOnDemand="true">
+        <MenuItemIterator
+          elementName="unassignedContact"
+          id="UnassignedContactIterator"
+          value="gw.web.account.AccountInfoInputSetUIHelper.getOtherContacts(period)"
+          valueType="entity.AccountContactView[]">
+          <IteratorSort
+            sortBy="unassignedContact.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="gw.web.account.AccountInfoInputSetUIHelper .changeToExistingContact(period, primaryNamedInsured, unassignedContact.AccountContact.Contact); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, entity.PolicyAddlNamedInsured)"
+            id="UnassignedContact"
+            label="unassignedContact"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </TextInput>
+    <TextInput
+      action="EditPolicyContactRolePopup.push(primaryNamedInsured, openForEdit)"
+      id="Name"
+      label="DisplayKey.get(&quot;Web.Policy.Account.Applicant.Name&quot;)"
+      value="primaryNamedInsured.DisplayName"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(primaryNamedInsured.AccountContactRole.AccountContact.Contact, Contact#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone&quot;) , false))"
+      editable="true"
+      id="Phone"/>
+    <TextInput
+      boldLabel="true"
+      hideChildrenIfReadOnly="false"
+      id="ChangePolicyAddressButton"
+      label="DisplayKey.get(&quot;Web.Policy.Address&quot;)"
+      value="DisplayKey.get(&quot;Web.Policy.Account.PrimaryInsured.ChangeTo&quot;)"
+      visible="openForEdit">
+      <MenuItem
+        id="OtherExistingAddress"
+        label="DisplayKey.get(&quot;Web.Policy.ExistingAddress&quot;)">
+        <MenuItemIterator
+          elementName="pniAddress"
+          id="pniAddressMenuItemIterator"
+          value="period.PolicyAddressCandidates"
+          valueType="entity.Address[]">
+          <IteratorSort
+            sortBy="pniAddress.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="period.changePolicyAddressTo(pniAddress)"
+            id="pniAddressMenuItem"
+            label="pniAddress"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        action="EditPolicyAddressPopup.push(period, true)"
+        id="AddAddressMenuItem"
+        label="DisplayKey.get(&quot;Web.Policy.NewAddress&quot;)"/>
+      <MenuItem
+        action="gw.web.account.AccountInfoInputSetUIHelper .openEditAddressPopup(period)"
+        id="EditPolicyAddressMenuItem"
+        label="DisplayKey.get(&quot;Web.Policy.EditCurrentAddress&quot;)"/>
+    </TextInput>
+    <InputSetRef
+      def="PolicyAddressDisplayInputSet(period, not openForEdit)"
+      editable="false"/>
+    <!-- Official IDs -->
+    <Label
+      label="DisplayKey.get(&quot;Web.AccountFile.Summary.OfficialIDs&quot;)"/>
+    <InputSetRef
+      def="PolicyOfficialIDInputSet(primaryNamedInsured)"
+      mode="primaryNamedInsured.AccountContactRole.AccountContact.ContactType.Code"/>
+    <!-- Industry Code -->
+    <IndustryCodeInput
+      domain="typekey.IndustryCodeType.TC_SIC"
+      editable="true"
+      id="IndustryCode"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.NamedInsured.IndustryCode&quot;)"
+      pickLocation="IndustryCodeSearchPopup.push(typekey.IndustryCodeType.TC_SIC, referenceDate, previousIndustryCode)"
+      previousCode="previousIndustryCode.Code"
+      referenceDate="referenceDate"
+      required="primaryNamedInsured.Branch.HasWorkersComp"
+      value="primaryNamedInsured.IndustryCode"
+      visible="primaryNamedInsured.Branch.Policy.Product.isContactTypeSuitableForProductAccountType(Company)"/>
+    <InputSet
+      id="CommercialInputSet"
+      visible="period.Policy.Product.Commercial">
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Policy.Account.WC.BusinessDescription&quot;)"/>
+      <BooleanRadioInput
+        editable="true"
+        id="AssignedRisk"
+        label="DisplayKey.get(&quot;Web.Policy.Account.WC.AssignedRisk&quot;)"
+        value="period.AssignedRisk"
+        visible="period.HasWorkersComp"/>
+      <TextInput
+        editable="period.Policy.Account.Editable"
+        id="YearBusinessStarted"
+        label="DisplayKey.get(&quot;Web.Policy.Account.WC.YearBusinessStarted&quot;)"
+        value="period.Policy.Account.YearBusinessStarted"
+        valueType="java.lang.Integer"/>
+      <TextAreaInput
+        editable="period.Policy.Account.Editable"
+        id="BusOps"
+        label="DisplayKey.get(&quot;Web.Policy.Account.WC.BusOps&quot;)"
+        numRows="6"
+        value="period.Policy.Account.BusOpsDesc"/>
+    </InputSet>
+    <!-- Organization Type -->
+    <InputSet
+      visible="period.Policy.Product.isContactTypeSuitableForProductAccountType(Company)">
+      <InputDivider/>
+      <TypeKeyInput
+        editable="period.Policy.Account.Editable"
+        id="OrganizationType"
+        label="DisplayKey.get(&quot;Web.Policy.Account.OrganizationType&quot;)"
+        required="true"
+        value="period.Policy.Account.AccountOrgType"
+        valueType="typekey.AccountOrgType"/>
+      <TextInput
+        editable="period.Policy.Account.Editable"
+        id="OrganizationTypeOtherDescription"
+        label="DisplayKey.get(&quot;Web.Policy.Account.OrganizationTypeOtherDescription&quot;)"
+        required="true"
+        value="period.Policy.Account.OtherOrgTypeDescription"
+        visible="period.Policy.Account.AccountOrgType == TC_OTHER"/>
+    </InputSet>
+  </InputSet>
+</PCF>

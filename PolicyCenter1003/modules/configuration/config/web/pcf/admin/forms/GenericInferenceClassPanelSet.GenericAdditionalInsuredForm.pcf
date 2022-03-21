@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="GenericInferenceClassPanelSet"
+    mode="GenericAdditionalInsuredForm">
+    <Require
+      name="formPattern"
+      type="FormPattern"/>
+    <PanelRef
+      def="FormPatternAdditionalInsuredValuesPanelSet(formPattern)"/>
+  </PanelSet>
+</PCF>

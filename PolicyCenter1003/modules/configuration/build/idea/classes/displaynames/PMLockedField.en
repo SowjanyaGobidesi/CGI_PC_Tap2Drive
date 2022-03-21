@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="PMLockedField">
+  <Columns>
+    <Column
+      beanPath="PMLockedField.FieldName"
+      name="name"/>
+    <Column
+      beanPath="PMLockedField.FieldValue"
+      name="value"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.PMLockedField", name, value)
+    
+  ]]></DisplayName>
+</Entity>

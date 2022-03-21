@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<entity
+  displayName="Swimming Pool"
+  effDatedBranchType="PolicyPeriod"
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPSwimmingPool"
+  desc="Swimming Pool"
+  table="hopswimmingpool"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPSwimmingPoolMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <column
+    desc="Additional information"
+    name="AdditionalInformation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Is there a fence around the property"
+    name="ApprovedFence"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is there a diving board"
+    name="DivingBoard"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is there a slide"
+    name="Slide"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    default="AboveGround"
+    desc="Swimming Pool Type"
+    name="PoolType"
+    nullok="false"
+    typelist="HOPSwimmingPoolType"/>
+  <foreignkey
+    fkentity="HOPDwelling"
+    name="HOPDwelling"
+    nullok="false"/>
+</entity>

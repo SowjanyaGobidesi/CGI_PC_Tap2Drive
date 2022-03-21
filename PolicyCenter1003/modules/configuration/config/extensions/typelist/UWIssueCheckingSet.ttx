@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Sets of UWIssues which are generated (or re-generated) at the same time. When rule sets are run for a checking set, an issue which is not regenerated is assumed to no longer apply."
+  name="UWIssueCheckingSet">
+  <typecode
+    code="UWHold"
+    desc="Created for underwriting holds"
+    name="Underwriting Hold"
+    priority="1100">
+    <category
+      code="UWHold"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="RegulatoryHold"
+    desc="Created for regulatory holds"
+    name="Regulatory Hold"
+    priority="1200">
+    <category
+      code="RegulatoryHold"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="MVR"
+    desc="Checks at PreQuote and PreBind for MVR issues"
+    name="MVR Issues"
+    priority="1300">
+    <category
+      code="MVR"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Reinsurance"
+    desc="Checks for reinsurance issues, done at each stage after PreQuote"
+    name="Reinsurance"
+    priority="1400">
+    <category
+      code="Reinsurance"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typefilter
+    desc="Policy Holds Type Filter"
+    name="PolicyHoldsTypeFilter">
+    <include
+      code="UWHold"/>
+    <include
+      code="RegulatoryHold"/>
+  </typefilter>
+</typelistextension>

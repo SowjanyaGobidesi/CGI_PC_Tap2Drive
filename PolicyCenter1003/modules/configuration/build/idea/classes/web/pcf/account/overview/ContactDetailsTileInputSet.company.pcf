@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <TileInputSet
+    id="ContactDetailsTileInputSet"
+    mode="company">
+    <Require
+      name="accountDetailsTileHelper"
+      type="gw.api.web.dashboard.ui.account.AccountDetailHelper"/>
+    <Variable
+      initialValue="accountDetailsTileHelper.Account"
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="(account.AccountHolderContact as Company)"
+      name="company"
+      type="Company"/>
+    <TextInput
+      id="FEIN"
+      label="DisplayKey.get('Web.Dashboard.Tile.AccountDetails.FEIN')"
+      value="company.FEINOfficialID"/>
+    <TextInput
+      id="OrganizationType"
+      label="DisplayKey.get('Web.Dashboard.Tile.AccountDetails.OrganizationType')"
+      value="account.AccountOrgType.DisplayName"/>
+    <TextInput
+      id="IndustryCode"
+      label="DisplayKey.get('Web.Dashboard.Tile.AccountDetails.IndustryCode')"
+      value="account.IndustryCode.DisplayName"/>
+    <TextInput
+      id="BusinessDescription"
+      label="DisplayKey.get('Web.Dashboard.Tile.AccountDetails.BusinessDescription')"
+      value="account.BusOpsDesc"/>
+  </TileInputSet>
+</PCF>

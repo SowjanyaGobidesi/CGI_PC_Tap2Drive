@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PreferredCurrencyInputSet"
+    visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.JobWizard.PreferredCurrency.Title&quot;)"/>
+    <TypeKeyInput
+      confirmMessage="DisplayKey.get(&quot;Web.MultiCurrency.ChangePreferredCoverageCurrencyWarning&quot;)"
+      editable="policyPeriod.Job.isNewTerm()"
+      id="PreferredCoverageCurrency"
+      label="DisplayKey.get(&quot;Web.JobWizard.PreferredCurrency.Coverage&quot;)"
+      required="true"
+      showConfirmMessage="true"
+      value="policyPeriod.PreferredCoverageCurrency"
+      valueType="typekey.Currency"/>
+    <TypeKeyInput
+      confirmMessage="DisplayKey.get(&quot;Web.MultiCurrency.ChangePreferredSettlementCurrencyWarning&quot;)"
+      editable="policyPeriod.Job.isNewTerm()"
+      id="PreferredSettlementCurrency"
+      label="DisplayKey.get(&quot;Web.JobWizard.PreferredCurrency.Settlement&quot;)"
+      requestValidationExpression="not policyPeriod.Job.UpFrontPayments.allMatch(\upfp -&gt; upfp.Amount_cur == VALUE) ? DisplayKey.get(&quot;Web.MultiCurrency.ChangePreferredSettlementCurrencyWithPayment.Error&quot;) : null"
+      required="true"
+      showConfirmMessage="true"
+      value="policyPeriod.PreferredSettlementCurrency"
+      valueType="typekey.Currency">
+      <PostOnChange
+        onChange="policyPeriod.preferredSettlementCurrencyUpdated()"/>
+    </TypeKeyInput>
+    <Code><![CDATA[property get AllPossibleCoverageCurrencies() : Currency[] {
+  var result = policyPeriod.Lines*.Pattern.flatMap(\p -> p.AvailableCoverageCurrencies*.Currency).toSet()
+  return result.toTypedArray()
+}]]></Code>
+  </InputSet>
+</PCF>

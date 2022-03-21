@@ -1,0 +1,22 @@
+package rules.Validation.ProducerCodeValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ProducerCode should have a role")
+internal class ProducerCodeshouldhavearole {
+  static function doCondition(producerCode : entity.ProducerCode) : boolean {
+    
+/*start00rule*/
+return producerCode.ProducerCodeRoles.Count == 0
+/*end00rule*/
+
+  }
+
+  static function doAction(producerCode : entity.ProducerCode, actions : gw.rules.Action) {
+
+/*start00rule*/
+producerCode.rejectField("ProducerCodeRoles", null, null, TC_LOADSAVE, DisplayKey.get("Validation.ProducerCode.NoRoles", producerCode.Code))
+/*end00rule*/
+
+  }
+}

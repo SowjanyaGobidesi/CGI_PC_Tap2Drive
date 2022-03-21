@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConditionPattern
+  codeIdentifier="HOPOtherMembersOfHousehold"
+  conditionSubtype="HOPLineScheduleCond"
+  coverageCategory="z94j696j28oei0bkk2b3eaukjnb"
+  existence="Electable"
+  lookupTableName="HOPLineCond"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="500"
+  public-id="zbtjeorlj3icresdsmqolgac40b"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPOtherMembersOfHouseholdSched"
+      mostDescriptiveProperty="HOPOtherMembersOfHouseholdSchedNameOfPerson"
+      priority="0"
+      public-id="HOPOtherMembersOfHouseholdSched"
+      required="true"
+      scheduledItemType="HOPLineScheduleCondItem">
+      <ScheduledItemProperties>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPOtherMembersOfHouseholdSchedNameOfPerson"
+          column="StringCol1"
+          priority="0"
+          propertyName="NameOfPerson"
+          public-id="HOPOtherMembersOfHouseholdSchedNameOfPerson"
+          required="false"/>
+      </ScheduledItemProperties>
+    </ClauseSchedulePattern>
+  </Schedules>
+</ConditionPattern>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Result for an impact test case"
+  entity="ImpactTestCaseResult"
+  exportable="false"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="impacttestcaseresult"
+  type="retireable">
+  <column
+    desc="Complete flag"
+    name="Complete"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Impact test result data"
+    name="Data"
+    nullok="true"
+    type="blob"/>
+  <column
+    default="0"
+    name="CompletionPercentage"
+    nullok="false"
+    type="percentage"/>
+</entity>

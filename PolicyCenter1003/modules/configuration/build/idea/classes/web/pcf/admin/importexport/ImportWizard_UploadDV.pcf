@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ImportWizard_UploadDV">
+    <Require
+      name="pcImportDataInfo"
+      type="gw.api.admin.PCImportDataInfo"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.ImportWizard.UploadDV.Message&quot;)"/>
+      <FileInput
+        editable="true"
+        id="File"
+        labelAbove="true"
+        validationExpression="pcImportDataInfo.File != null ? null : DisplayKey.get(&quot;Web.Admin.ImportWizard.UploadDV.FileNotSpecifiedMessage&quot;)"
+        value="pcImportDataInfo.File"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.ImportWizard.UploadDV.NoConflictsMessage&quot;)"
+        visible="pcImportDataInfo.File != null and pcImportDataInfo.NumConflicts == 0"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.ImportWizard.UploadDV.ConflictsMessage&quot;, pcImportDataInfo.NumConflicts)"
+        visible="pcImportDataInfo.NumConflicts &gt; 0"/>
+      <RangeInput
+        editable="true"
+        id="Resolution"
+        label="DisplayKey.get(&quot;Web.Admin.ImportWizard.UploadDV.ResolutionStrategy&quot;)"
+        value="pcImportDataInfo.ResolutionStrategy"
+        valueRange="pcImportDataInfo.ResolutionOptions"
+        valueType="gw.api.admin.PCImportDataInfo.ResolutionOption"
+        visible="pcImportDataInfo.NumConflicts &gt; 0">
+        <PostOnChange/>
+      </RangeInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

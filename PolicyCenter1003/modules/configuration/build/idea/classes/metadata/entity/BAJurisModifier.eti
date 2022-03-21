@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A modifier for Commercial Auto Jurisdictions"
+  effDatedBranchType="PolicyPeriod"
+  entity="BAJurisModifier"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="bajurismodifier"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.ba.BAJurisdictionModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.ba.BAJurisdictionModifierMatcher"/>
+  <foreignkey
+    desc="The jurisdiction for which this modifier applies"
+    fkentity="BAJurisdiction"
+    name="Jurisdiction"
+    nullok="false"/>
+  <array
+    arrayentity="BAJurisRateFactor"
+    cascadeDelete="true"
+    desc="Individual components of the rating factor"
+    name="BAJurisRateFactors"
+    owner="false"/>
+</entity>

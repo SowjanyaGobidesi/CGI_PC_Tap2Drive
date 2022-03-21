@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<subtype
+  desc="Configurations for Smart Communications integration"
+  xmlns="http://guidewire.com/datamodel"
+  entity="SmartCommsConfiguration"
+  supertype="IntegrationConfiguration">
+  <column
+    desc="Username for Smart Communications"
+    name="Username"
+    nullok="false"
+    type="shorttext">
+  </column>
+  <column
+    desc="Smart Communications correspondence service URL"
+    name="CorrespondenceServiceURL"
+    nullok="false"
+    type="longtext">
+  </column>
+  <column
+    desc="Smart Communications Job service URL"
+    name="JobServiceURL"
+    nullok="false"
+    type="longtext">
+  </column>
+  <column
+    desc="Smart Communications cached document retrieval URL"
+    name="DocumentRetrievalURL"
+    nullok="false"
+    type="longtext">
+  </column>
+  <column
+    desc="Consumer key"
+    name="ConsumerKey"
+    nullok="false"
+    type="shorttext">
+  </column>
+  <column
+    desc="Consumer Secret"
+    name="ConsumerSecret"
+    nullok="false"
+    type="shorttext">
+  </column>
+  <column
+    desc="Smart Communications Template Selector ID (also known as a batchConfigResId)"
+    name="TemplateSelectorID"
+    nullok="false"
+    type="shorttext">
+  </column>
+  <column
+    desc="Smart Communications hostname"
+    name="Hostname"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="TemplateID for email"
+    name="EmailTemplateID"
+    nullok="true"
+    type="shorttext">
+  </column>
+  <column
+    desc="Smart Communications appliance hostname"
+    name="ApplianceHostname"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Smart Communications appliance storage location"
+    name="ApplianceStorageLocation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Smart Communications appliance input folder"
+    name="ApplianceInputFolder"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="Smart Communications appliance output folder"
+    name="ApplianceOutputFolder"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="Smart Communications appliance logs folder"
+    name="ApplianceLogsFolder"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="Smart Communications appliance queue"
+    name="ApplianceQueue"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Bulk Job Name"
+    name="BulkJobName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="BulkServiceURL"
+    nullok="true"
+    type="longtext"/>
+  <column
+    name="BulkTransactionType"
+    nullok="true"
+    type="shorttext"/>
+</subtype>

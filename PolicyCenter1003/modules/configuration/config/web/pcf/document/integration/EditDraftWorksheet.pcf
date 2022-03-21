@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    id="EditDraftWorksheet"
+    canVisit="perm.Document.create"
+    canEdit="true"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get('Web.Document.Integration.DocumentCreation')"
+    title="DisplayKey.get('Web.Document.Integration.DocumentCreation.Title.Template', info.Template.Name, info.Title)">
+    <LocationEntryPoint
+      signature="EditDraftWorksheet(info: gw.integration.document.production.web.DocumentProductionInfo)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="info"
+      type="gw.integration.document.production.web.DocumentProductionInfo"/>
+    <Variable
+      name="helper"
+      type="gw.integration.document.production.web.DocumentProductionUIHelper"/>
+    <Variable
+      initialValue="info.createDocument()"
+      name="document"
+      type="Document"/>
+    <Variable initialValue="''" name="finalizeTrigger" type="String"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="javascript:finalizeDocument();"
+          id="CreateDocumentButton"
+          label="DisplayKey.get('Web.Document.Integration.CreateDocument.Button.CreateDocument')"/>
+        <ToolbarButton
+          confirmMessage="DisplayKey.get('Web.Document.Integration.CreateDocument.Message.Confirm')"
+          id="CancelDocumentButton"
+          action="CurrentLocation.cancel()"
+          label="DisplayKey.get('Web.Document.Integration.CreateDocument.Button.Cancel')"/>
+      </Toolbar>
+      <AlertBar
+        allowDismiss="false"
+        id="WarningMessage"
+        label="DisplayKey.get('Web.Document.Integration.CreateDocument.Message.Warning')"/>
+      <TemplatePanel
+        renderCall="gw.integration.document.production.web.DraftEditor.render(__writer, '${DraftDocumentStorage}', info.retrieveDraftDocument(document), '${finalizeAction}')">
+        <ReferencedWidget
+          widget="DraftDocumentStorage"/>
+        <ReferencedWidget
+          widget="finalizeAction"/>
+      </TemplatePanel>
+      <DetailViewPanel>
+        <InputColumn>
+          <HiddenInput
+            editable="true"
+            id="DraftDocumentStorage"
+            value="document.DraftDocument.Content"
+            valueType="String">
+            <PostOnChange
+              deferUpdate="false"/>
+          </HiddenInput>
+          <!-- "curious trick" to invoke a server action from javascript. -->
+          <HiddenInput
+            editable="true"
+            id="finalizeAction"
+            value="finalizeTrigger"
+            valueType="String">
+            <PostOnChange
+              deferUpdate="false"
+              onChange="helper.finalizeDocument(CurrentLocation, info, document)"/>
+          </HiddenInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Worksheet>
+</PCF>

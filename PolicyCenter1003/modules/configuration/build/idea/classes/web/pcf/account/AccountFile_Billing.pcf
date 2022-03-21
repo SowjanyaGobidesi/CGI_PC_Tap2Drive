@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    infoBar="AccountFileInfoBar(account)"
+    canEdit="perm.Account.edit( account )"
+    canVisit="perm.Account.view(account) and perm.System.accountbilling"
+    id="AccountFile_Billing"
+    onResume="billingSummary = gw.web.account.AccountBillingUIHelper.retrieveBillingSummary({accountNumber}, account.PreferredSettlementCurrency)"
+    title="DisplayKey.get(&quot;Web.AccountFile.Billing.Title&quot;)"
+    validationParameter="account">
+    <LocationEntryPoint
+      signature="AccountFile_Billing(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="account.AccountNumber"
+      name="accountNumber"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="gw.web.account.AccountBillingUIHelper.retrieveBillingSummary({accountNumber}, account.PreferredSettlementCurrency)"
+      name="billingSummary"
+      type="gw.plugin.billing.BCAccountBillingDisplayTotals"/>
+    <ScreenRef
+      def="Account_BillingScreen(account, accountNumber, billingSummary)"/>
+  </Page>
+</PCF>

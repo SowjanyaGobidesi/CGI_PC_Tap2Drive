@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="HOPModifiersInputSet">
+    <Require
+      name="modifiers"
+      type="Modifier[]"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="modifiers.where(\elt -&gt; elt.DataType == ModifierDataType.TC_TYPEKEY).mapToKeyAndValue(\modifier -&gt; modifier.TypeList, \modifier -&gt; gw.util.TypekeyUtil.getTypeList(modifier.TypeList))"
+      name="typeListMap"
+      type="Map&lt;String, gw.entity.ITypeList&gt;"/>
+    <InputIterator
+      elementName="hopmodifier"
+      id="moditerator"
+      value="modifiers"
+      valueType="Modifier[]">
+      <IteratorSort
+        sortBy="hopmodifier.Pattern.Priority"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="hopmodifier.Pattern.Name"
+        sortOrder="2"/>
+      <ModifierInput
+        editable="true"
+        id="hopmod"
+        label="hopmodifier.Pattern.DisplayName"
+        value="hopmodifier"
+        valueType="entity.Modifier"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

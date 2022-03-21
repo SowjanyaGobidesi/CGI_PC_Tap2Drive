@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of rating to use"
+  final="false"
+  name="RateType">
+  <typecode
+    code="Class"
+    desc="Lookup table rate for this type of building"
+    name="Class"
+    priority="0"/>
+  <typecode
+    code="Specific"
+    desc="Specific rate that applies only to a particular building as determined by physical inspection of the property"
+    name="Specific"
+    priority="1"/>
+</typelist>

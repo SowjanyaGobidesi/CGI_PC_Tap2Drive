@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="LookupTableColumn">
+  <Columns>
+    <Column
+      beanPath="LookupTableColumn.ColumnName"
+      name="DisplayName"/>
+  </Columns>
+  <DisplayName>DisplayName </DisplayName>
+</Entity>

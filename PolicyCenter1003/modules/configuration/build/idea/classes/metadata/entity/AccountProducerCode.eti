@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  AccountProducerCode  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A producer code for the account."
+  entity="AccountProducerCode"
+  exportable="true"
+  loadable="false"
+  platform="false"
+  table="accountproducercode"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="AccountID"
+    desc="The account on which this is a contact."
+    fkentity="Account"
+    name="Account"
+    nullok="false">
+  </foreignkey>
+  <foreignkey
+    columnName="ProducerCodeID"
+    desc="The producer code."
+    fkentity="ProducerCode"
+    name="ProducerCode"
+    nullok="false">
+  </foreignkey>
+  <index
+    desc="Account ProducerCode association uniqueness constraint and look-up index."
+    expectedtobecovering="true"
+    name="AccountProdCodeMap"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AccountID"/>
+    <indexcol
+      keyposition="2"
+      name="ProducerCodeID"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+  <events/>
+</entity>

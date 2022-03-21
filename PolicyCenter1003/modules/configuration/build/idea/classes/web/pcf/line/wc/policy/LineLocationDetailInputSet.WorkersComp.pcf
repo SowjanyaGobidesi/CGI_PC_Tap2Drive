@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="LineLocationDetailInputSet"
+    mode="WorkersComp">
+    <Require
+      name="polLocation"
+      type="PolicyLocation"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="polLocation.LocationNamedInsuredCandidates"
+      name="candidates"
+      recalculateOnRefresh="true"
+      type="entity.PolicyNamedInsured[]"/>
+    <Variable
+      initialValue="polLocation.Branch.Job.NewTerm ? null : polLocation.BasedOn.IndustryCode"
+      name="previousIndustryCode"
+      type="IndustryCode"/>
+    <Variable
+      initialValue=" polLocation.State == null ? polLocation.Branch.EditEffectiveDate : polLocation.Branch.getReferenceDateForCurrentJob(gw.api.util.JurisdictionMappingUtil.getJurisdiction(polLocation))"
+      name="referenceDate"
+      type="java.util.Date"/>
+    <!-- Change LocationNamedInsured -->
+    <TextInput
+      hideChildrenIfReadOnly="false"
+      id="ChangeLocationNamedInsuredLabel"
+      label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.NamedInsured&quot;)"
+      value="polLocation.SingleLocationNamedInsured"
+      valueType="entity.PolicyNamedInsured"
+      visible="!openForEdit"/>
+    <TextInput
+      hideChildrenIfReadOnly="false"
+      id="ChangeLocationNamedInsuredButton"
+      label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.NamedInsured&quot;)"
+      value="polLocation.SingleLocationNamedInsured"
+      valueType="entity.PolicyNamedInsured"
+      visible="openForEdit">
+      <MenuItemIterator
+        elementName="polNamedInsured"
+        value="candidates"
+        valueType="entity.PolicyNamedInsured[]">
+        <IteratorSort
+          sortBy="polNamedInsured.DisplayName"
+          sortOrder="1"/>
+        <MenuItem
+          action="polLocation.SingleLocationNamedInsured = polNamedInsured"
+          id="ExistingPolicyNamedInsured"
+          label="polNamedInsured"/>
+      </MenuItemIterator>
+      <MenuItem
+        action="polLocation.SingleLocationNamedInsured = null"
+        id="Remove"
+        label="DisplayKey.get(&quot;Web.Generic.Remove&quot;)"
+        visible="polLocation.SingleLocationNamedInsured != null"/>
+    </TextInput>
+    <!-- Other stuff -->
+    <TextInput
+      editable="true"
+      id="EmployeeCount"
+      label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.EmployeeCount&quot;)"
+      value="polLocation.EmployeeCount"
+      valueType="java.lang.Integer">
+      <PostOnChange
+        onChange="polLocation.syncQuestions()"/>
+    </TextInput>
+    <IndustryCodeInput
+      domain="typekey.IndustryCodeType.TC_SIC"
+      editable="true"
+      id="IndustryCode"
+      label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.IndustryCode&quot;)"
+      pickLocation="IndustryCodeSearchPopup.push(typekey.IndustryCodeType.TC_SIC, referenceDate, previousIndustryCode)"
+      previousCode="previousIndustryCode.Code"
+      referenceDate="referenceDate"
+      value="polLocation.IndustryCode"/>
+  </InputSet>
+</PCF>

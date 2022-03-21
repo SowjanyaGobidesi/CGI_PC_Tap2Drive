@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwellAddlInterest">
+  <Columns>
+    <Column
+      beanPath="HOPDwellAddlInterest.PolicyAddlInterest.DisplayName"
+      name="name"/>
+  </Columns>
+  <DisplayName>name</DisplayName>
+</Entity>

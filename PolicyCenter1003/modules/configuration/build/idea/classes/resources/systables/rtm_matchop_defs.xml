@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MatchOpDefinition.xsd">
+  <RateTableMatchOpDefinition public-id="rtm:ExactMatchOpDef">
+    <AllowedParameterTypes>Integer,Decimal,Date,Boolean,String</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.ExactMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>ExactMatch</OpCode>
+    <OpDesc>Exact match of two values.</OpDesc>
+    <OpName language="de">Genaue Übereinstimmung</OpName>
+    <OpName language="en_US">Exact Match</OpName>
+    <OpName language="es">Coincidencia exacta</OpName>
+    <OpName language="fr">Correspondance exacte</OpName>
+    <OpName language="it">Corrispondenza esatta</OpName>
+    <OpName language="ja">完全一致</OpName>
+    <OpName language="nl">Exacte match</OpName>
+    <OpName language="pt">Correspondência exata</OpName>
+    <OpName language="ru">Точное совпадение</OpName>
+    <OpName language="zh_CN">完全匹配</OpName>
+    <SortOrder>0</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:RangeMatchOpDefMaxExcl">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.RangeMatchOpMaxExclFactory</ImplClass>
+    <NumberOfParameters>2</NumberOfParameters>
+    <OpCode>RangeMatchMaxExcl</OpCode>
+    <OpDesc>Matches a value in a numeric range with min value included and max value excluded, i.e. [min,max)</OpDesc>
+    <OpName language="de">Bereichsübereinstimmung mit Maximum exkludiert</OpName>
+    <OpName language="en_US">Range Match with Excluded Max</OpName>
+    <OpName language="es">Coincidencia de rango con máxima excluida</OpName>
+    <OpName language="fr">Correspondance de plage avec maximum exclu</OpName>
+    <OpName language="it">Corrispondenza dell'intervallo con massimo escluso</OpName>
+    <OpName language="ja">範囲一致（最大値は除外）</OpName>
+    <OpName language="nl">Match bereik met uitgesloten maximum</OpName>
+    <OpName language="pt">Correspondência de intervalos com máximo excluído</OpName>
+    <OpName language="ru">Совпадение диапазона с исключенным максимумом</OpName>
+    <OpName language="zh_CN">排除最大值的范围匹配</OpName>
+    <SortOrder>1</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:RangeMatchOpDefMaxIncl">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.RangeMatchOpMaxInclFactory</ImplClass>
+    <NumberOfParameters>2</NumberOfParameters>
+    <OpCode>RangeMatchMaxIncl</OpCode>
+    <OpDesc>Matches a value in a numeric range with both min and max values included, i.e. [min,max]</OpDesc>
+    <OpName language="de">Bereichsübereinstimmung mit Maximum inkludiert</OpName>
+    <OpName language="en_US">Range Match with Included Max</OpName>
+    <OpName language="es">Coincidencia de rango con máxima incluida</OpName>
+    <OpName language="fr">Correspondance de plage avec maximum inclus</OpName>
+    <OpName language="it">Corrispondenza dell'intervallo con massimo incluso</OpName>
+    <OpName language="ja">範囲一致（最大値を含む）</OpName>
+    <OpName language="nl">Match bereik met opgenomen maximum</OpName>
+    <OpName language="pt">Correspondência de intervalos com máximo incluído</OpName>
+    <OpName language="ru">Совпадение диапазона с включенным максимумом</OpName>
+    <OpName language="zh_CN">包括最大值的范围匹配</OpName>
+    <SortOrder>2</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:LongestSubstringMatchOpDef">
+    <AllowedParameterTypes>String</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.LongestSubstringMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>LongestSubstringMatch</OpCode>
+    <OpDesc>Matches the value which is the longest initial substring of the target</OpDesc>
+    <OpName language="de">Längste Zeichenfolgenübereinstimmung</OpName>
+    <OpName language="en_US">Longest Substring Match</OpName>
+    <OpName language="es">Coincidencia de subcadena más larga</OpName>
+    <OpName language="fr">Correspondance avec la sous-chaîne la plus longue</OpName>
+    <OpName language="it">Corrispondenza sottostringa massima</OpName>
+    <OpName language="ja">最長の部分文字列の一致</OpName>
+    <OpName language="nl">Match langste substring</OpName>
+    <OpName language="pt">Correspondência da subcadeia de caracteres mais longa</OpName>
+    <OpName language="ru">Совпадение самой длинной подстроки</OpName>
+    <OpName language="zh_CN">最长子字符串匹配</OpName>
+    <SortOrder>3</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:GreaterThanOrEqualMatchOpDef">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.LessThanOrEqualMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>GreaterThanOrEqual</OpCode>
+    <OpDesc>Matches row values greater than or equal the input</OpDesc>
+    <OpName language="de">Größer als oder gleich [Zeile &gt;= Eingabe] (veraltet)</OpName>
+    <OpName language="en_US">Greater Than Or Equal [Row &gt;= Input] (Deprecated)</OpName>
+    <OpName language="es">Mayor o igual a [Fila &gt;= Entrada] (desaprobado)</OpName>
+    <OpName language="fr">Supérieur ou égal à [Ligne &gt;= Entrée] (Déprécié)</OpName>
+    <OpName language="it">Maggiore di o uguale a [Riga &gt;= Input] (Obsoleto)</OpName>
+    <OpName language="ja">次の値以上［行 &gt;= 入力］（非推奨）</OpName>
+    <OpName language="nl">Groter dan of gelijk aan [rij &gt;= invoer] (afgekeurd)</OpName>
+    <OpName language="pt">Maior ou igual [linha &gt;= entrada] (preterido)</OpName>
+    <OpName language="ru">Больше или равно [Строка &gt;= Ввод] (Устаревший)</OpName>
+    <OpName language="zh_CN">大于或等于 [行&gt;=输入]（已不建议使用）</OpName>
+    <Deprecated>true</Deprecated>
+    <SortOrder>100</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:GreaterThanMatchOpDef">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.GreaterThanMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>GreaterThan</OpCode>
+    <OpDesc>Match greatest row where input is greater than row value.</OpDesc>
+    <OpName language="de">Größer als Übereinstimmung</OpName>
+    <OpName language="en_US">Greater Than Match</OpName>
+    <OpName language="es">Mayor que la coincidencia</OpName>
+    <OpName language="fr">Correspondance supérieure à</OpName>
+    <OpName language="it">Maggiore della corrispondenza</OpName>
+    <OpName language="ja">一致する値より大きい</OpName>
+    <OpName language="nl">Match groter dan</OpName>
+    <OpName language="pt">Correspondência de maior que</OpName>
+    <OpName language="ru">Совпадение "Больше"</OpName>
+    <OpName language="zh_CN">大于匹配</OpName>
+    <SortOrder>5</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:GreaterOrEqualMatchOpDefV2">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.GreaterThanOrEqualMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>GreaterThanOrEqualV2</OpCode>
+    <OpDesc>Match greatest where input is greater than or equal to row value.</OpDesc>
+    <OpName language="de">Größer als Übereinstimmung oder gleich Übereinstimmung</OpName>
+    <OpName language="en_US">Greater Than Or Equal Match</OpName>
+    <OpName language="es">Mayor o igual a la coincidencia</OpName>
+    <OpName language="fr">Correspondance supérieure ou égale à</OpName>
+    <OpName language="it">Maggiore della o uguale alla corrispondenza</OpName>
+    <OpName language="ja">一致する値以上</OpName>
+    <OpName language="nl">Match groter dan of gelijk aan</OpName>
+    <OpName language="pt">Correspondência de maior que ou igual a</OpName>
+    <OpName language="ru">Совпадение "Больше или равно"</OpName>
+    <OpName language="zh_CN">大于或等于匹配</OpName>
+    <SortOrder>4</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:LessThanOrEqualMatchOpDef">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.GreaterThanOrEqualMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>LessThanOrEqual</OpCode>
+    <OpDesc>Matches row values less than or equal to the input</OpDesc>
+    <OpName language="de">Größer als oder gleich [Zeile &lt;= Eingabe] (veraltet)</OpName>
+    <OpName language="en_US">Greater Than Or Equal [Row &lt;= Input] (Deprecated)</OpName>
+    <OpName language="es">Mayor o igual a [Fila &lt;= Entrada] (desaprobado)</OpName>
+    <OpName language="fr">Supérieur ou égal à [Ligne &lt;= Entrée] (Déprécié)</OpName>
+    <OpName language="it">Maggiore di o uguale a [Riga &lt;= Input] (Obsoleto)</OpName>
+    <OpName language="ja">次の値以上［行 &lt;= 入力］（非推奨）</OpName>
+    <OpName language="nl">Groter dan of gelijk aan [rij &lt;= invoer] (afgekeurd)</OpName>
+    <OpName language="pt">Maior ou igual [linha &lt;= entrada] (preterido)</OpName>
+    <OpName language="ru">Больше или равно [Строка &lt;= Ввод] (Устаревший)</OpName>
+    <OpName language="zh_CN">大于或等于 [行&lt;=输入]（已不建议使用）</OpName>
+    <Deprecated>true</Deprecated>
+    <SortOrder>101</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:LessThanMatchOpDef">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.LessThanMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>LessThan</OpCode>
+    <OpDesc>Match least row where input is less than row value.</OpDesc>
+    <OpName language="de">Kleiner als Übereinstimmung</OpName>
+    <OpName language="en_US">Less Than Match</OpName>
+    <OpName language="es">Menor que la coincidencia</OpName>
+    <OpName language="fr">Correspondance inférieure à</OpName>
+    <OpName language="it">Minore della corrispondenza</OpName>
+    <OpName language="ja">一致する値未満</OpName>
+    <OpName language="nl">Match kleiner dan</OpName>
+    <OpName language="pt">Correspondência de menor que</OpName>
+    <OpName language="ru">Совпадение "Меньше"</OpName>
+    <OpName language="zh_CN">小于匹配</OpName>
+    <SortOrder>7</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="rtm:LessOrEqualMatchOpDefV2">
+    <AllowedParameterTypes>Integer,Decimal,Date</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.LessThanOrEqualMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>LessThanOrEqualV2</OpCode>
+    <OpDesc>Match least row where input is less than or equal to row value.</OpDesc>
+    <OpName language="de">Kleiner als Übereinstimmung oder gleich Übereinstimmung</OpName>
+    <OpName language="en_US">Less Than Or Equal Match</OpName>
+    <OpName language="es">Menor o igual a la coincidencia</OpName>
+    <OpName language="fr">Correspondance inférieure ou égale à</OpName>
+    <OpName language="it">Minore della o uguale alla corrispondenza</OpName>
+    <OpName language="ja">一致する値以下</OpName>
+    <OpName language="nl">Match groter dan of gelijk aan</OpName>
+    <OpName language="pt">Correspondência de menor que ou igual a</OpName>
+    <OpName language="ru">Совпадение "Меньше или равно"</OpName>
+    <OpName language="zh_CN">小于或等于匹配</OpName>
+    <SortOrder>6</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="InterpolateWithRelaxMatchOpDef">
+    <AllowedParameterTypes>Integer, Decimal</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.InterpolateWithRelaxMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>InterpolateWithRelax</OpCode>
+    <OpDesc>Interpolates factors based on two matching rows that surround the match value.  Rows can come from different stages of relaxation.</OpDesc>
+    <OpName language="de">Interpolation - mit Relax</OpName>
+    <OpName language="en_US">Interpolation - with Relax</OpName>
+    <OpName language="es">Interpolación: con descanso</OpName>
+    <OpName language="fr">Interpolation - Avec assouplissement</OpName>
+    <OpName language="it">Interpolazione, con pausa</OpName>
+    <OpName language="ja">補間（緩和あり）</OpName>
+    <OpName language="nl">Interpolatie: met relax</OpName>
+    <OpName language="pt">Interpolação - com relaxamento</OpName>
+    <OpName language="ru">Интерполяция - с ослаблением</OpName>
+    <OpName language="zh_CN">插值-带近似</OpName>
+    <SortOrder>8</SortOrder>
+  </RateTableMatchOpDefinition>
+  <RateTableMatchOpDefinition public-id="zvni89apo8pjh3ofce930m677qb">
+    <AllowedParameterTypes>Integer, Decimal</AllowedParameterTypes>
+    <ImplClass>gw.rating.rtm.matchop.InterpolatedMatchOpFactory</ImplClass>
+    <NumberOfParameters>1</NumberOfParameters>
+    <OpCode>Interpolate</OpCode>
+    <OpDesc>Interpolates factors based on two matching rows that surround the match value</OpDesc>
+    <OpName language="de">Interpolation - ohne Relax</OpName>
+    <OpName language="en_US">Interpolation - no Relax</OpName>
+    <OpName language="es">Interpolación: sin descanso</OpName>
+    <OpName language="fr">Interpolation - Sans assouplissement</OpName>
+    <OpName language="it">Interpolazione, senza pausa</OpName>
+    <OpName language="ja">補間（緩和なし）</OpName>
+    <OpName language="nl">Interpolatie: zonder relax</OpName>
+    <OpName language="pt">Interpolação - sem relaxamento</OpName>
+    <OpName language="ru">Интерполяция - без ослабления</OpName>
+    <OpName language="zh_CN">插值-无近似</OpName>
+    <SortOrder>9</SortOrder>
+  </RateTableMatchOpDefinition>
+</import>

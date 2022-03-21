@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BOPLocationsLV">
+    <Require
+      name="bopLine"
+      type="BusinessOwnersLine"/>
+    <Variable
+      initialValue="bopLine.Branch"
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <RowIterator
+      editable="false"
+      elementName="bopLocation"
+      hideCheckBoxesIfReadOnly="true"
+      value="bopLine.BOPLocations"
+      valueType="entity.BOPLocation[]">
+      <Row>
+        <RadioButtonCell
+          action="policyPeriod.PrimaryLocation = bopLocation.Location"
+          align="center"
+          id="PrimaryLocation"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.PrimaryLocation&quot;)"
+          radioButtonGroup="PrimaryLocation"
+          value="bopLocation.Location == policyPeriod.PrimaryLocation"/>
+        <TextCell
+          align="left"
+          id="LocNum"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocNum&quot;)"
+          sortOrder="1"
+          value="bopLocation.Location.LocationNum"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          align="left"
+          id="LocationName"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationName&quot;)"
+          value="bopLocation.Location.AccountLocation.LocationName"/>
+        <TextCell
+          align="left"
+          id="Address"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.Address&quot;)"
+          value="bopLocation.Location.addressString(&quot;,&quot;, false, false)"
+          wrap="true"/>
+        <TextCell
+          align="left"
+          id="LocationPreferredCoverageCurrency"
+          label="DisplayKey.get(&quot;Web.Policy.CoverableCurrency&quot;)"
+          value="bopLocation.PreferredCoverageCurrency"
+          valueType="typekey.Currency"
+          visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

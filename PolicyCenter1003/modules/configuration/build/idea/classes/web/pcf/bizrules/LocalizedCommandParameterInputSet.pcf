@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="LocalizedCommandParameterInputSet">
+  <Require
+    name="commandDefinition"
+    type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Require
+      name="parameter"
+      type="gw.bizrules.provisioning.LocalizedRuleActionParameter"/>
+    <Label
+      label="parameter.Label"/>
+    <InputIterator
+      elementName="langParam"
+      id="additionalLanguages"
+      value="parameter.AllLangParams"
+      valueType="gw.bizrules.provisioning.LocalizedRuleActionParameter.LangParam[]">
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(langParam.ParameterName))"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

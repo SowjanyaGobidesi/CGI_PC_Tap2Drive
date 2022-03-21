@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    canVisit="perm.Activity.view(activity)"
+    id="ActivityForward"
+    onBeforeForward="gw.api.web.activity.ActivityUtil.markActivityAsViewed(activity)">
+    <LocationEntryPoint
+      signature="ActivityForward(activity : Activity, policyPeriod : PolicyPeriod)"/>
+    <LocationEntryPoint
+      signature="ActivityForward(activity : Activity)"/>
+    <LocationEntryPoint
+      signature="ActivityForward(activity : Activity, policyNumber : String)"/>
+    <Variable
+      name="activity"
+      type="Activity"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="policyNumber"
+      type="String"/>
+    <Variable
+      initialValue="activity.Job"
+      name="job"
+      recalculateOnRefresh="true"
+      type="entity.Job"/>
+    <Variable
+      initialValue="activity.AccountContact"
+      name="accountContact"
+      type="entity.AccountContact"/>
+    <Variable
+      initialValue="getActivityPolicy()"
+      name="activityPolicy"
+      type="java.lang.Object"/>
+    <ForwardCondition
+      action="AccountFile_Contacts.go(activity.Account); EditAccountContactPopup.push(accountContact, true); ContactActivityDetailWorksheet.goInWorkspace(activity, accountContact)"
+      condition="accountContact != null"/>
+    <ForwardCondition
+      action="AccountFileForward.go(activity.Account); ActivityDetailWorksheet.goInWorkspace(activity)"
+      condition="job == null and activityPolicy == null"/>
+    <ForwardCondition
+      action="JobForward.go(job, activity); ActivityDetailWorksheet.goInWorkspace(activity, policyPeriod)"
+      condition="job != null and policyPeriod != null and activity.AssociatedPeriod == null"/>
+    <ForwardCondition
+      action="JobForward.go(job, activity.AssociatedPeriod, activity); ActivityDetailWorksheet.goInWorkspace(activity, activity.AssociatedPeriod)"
+      condition="job != null and policyPeriod != null and activity.AssociatedPeriod != null"/>
+    <ForwardCondition
+      action="PolicyFileForward.go(policyNumber); ActivityDetailWorksheet.goInWorkspace(activity)"
+      condition="job == null and activityPolicy != null and policyNumber != null"/>
+    <ForwardCondition
+      action="PolicyFileForward.go(policyPeriod.PolicyNumber, policyPeriod.EditEffectiveDate); ActivityDetailWorksheet.goInWorkspace(activity, policyPeriod)"
+      condition="job == null and activityPolicy != null and policyNumber == null"/>
+    <ForwardCondition
+      action="AccountFileForward.go(activity.Account); ActivityDetailWorksheet.goInWorkspace(activity)"/>
+    <Code><![CDATA[function getActivityPolicy() : Policy {
+  if (policyPeriod == null and activity.Policy != null ) {
+    policyPeriod = Policy.finder.findMostRecentBoundPeriodByPolicy(activity.Policy)
+  }
+  if(policyPeriod == null){
+    policyPeriod = activity.PolicyPeriod
+  }
+  return activity.Policy
+}]]></Code>
+  </Forward>
+</PCF>

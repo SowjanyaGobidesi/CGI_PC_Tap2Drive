@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedPolicyForward">
+    <LocationEntryPoint
+      signature="FederatedPolicyForward(policyPublicId: java.lang.String, policyNumber: java.lang.String)"/>
+    <Variable
+      name="policyPublicId"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Policy.finder.findPolicyByPublicId(policyPublicId)"
+      name="policyEntity"
+      type="entity.Policy"/>
+    <Variable
+      name="policyNumber"
+      type="java.lang.String"/>
+    <ForwardCondition
+      action="pcf.PolicyFileForward.go(policyNumber)"
+      condition="policyEntity != null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.policyForward(policyPublicId, policyNumber)"
+      condition="policyEntity == null"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Referenceable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.archiving.impl.ReferenceableInternalMethods"
+    impl="com.guidewire.pc.domain.archiving.impl.ReferenceableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.archiving.ReferenceablePublicMethods"
+    impl="com.guidewire.pc.domain.archiving.impl.ReferenceableImpl"/>
+  <column
+    default="false"
+    desc="Whether or not this entity is Referenced."
+    exportable="false"
+    ignoreforevents="true"
+    name="Referenced"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="bit"/>
+  <fulldescription><![CDATA[
+    Delegate that can be implemented by any entity that wants to track references.
+  ]]></fulldescription>
+</delegate>

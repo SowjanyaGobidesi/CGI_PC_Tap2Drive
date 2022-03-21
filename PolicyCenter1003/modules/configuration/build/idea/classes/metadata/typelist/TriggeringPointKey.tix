@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="TriggeringPointKey" desc="Unique key identifying a TriggeringPoint, used when invoking Business Rules">
+  <typecode
+    code="PreQuote"
+    desc="Triggers before Quote"
+    name="PreQuote">
+    <category code="UWRule" typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PreRateRelease"
+    desc="Triggers at PreRateRelease"
+    name="PreRateRelease">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PreQuoteRelease"
+    desc="Triggers at PreQuoteRelease"
+    name="PreQuoteRelease">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PreBind"
+    desc="Triggers at PreBind"
+    name="PreBind">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PreIssuance"
+    desc="Triggers at PreIssuance"
+    name="PreIssuance">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="Referral"
+    desc="Triggers at Referral"
+    name="Referral">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="Question"
+    desc="Triggers at Questions"
+    name="Question">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="Renewal"
+    desc="Triggers at Renewal"
+    name="Renewal">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="Manual"
+    desc="Triggers at Manual"
+    name="Manual">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="Upgrade"
+    desc="Triggers at Upgrade"
+    name="Upgrade">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="All"
+    desc="Triggers at every blocking point"
+    name="All">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PolicyRenewalAPI"
+    desc="Triggers at PolicyRenewalAPI"
+    name="PolicyRenewalAPI">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+</internaltypelistextension>

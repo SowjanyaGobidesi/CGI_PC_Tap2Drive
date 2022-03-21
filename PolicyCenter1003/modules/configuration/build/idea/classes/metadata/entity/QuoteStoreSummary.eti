@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  QuoteStoreSummary  ====================================================== -->
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Encapsulates the &quot;summary&quot; or &quot;header&quot; fields needed to display the results of a HVQ Quote PolicyPeriod search."
+  entity="QuoteStoreSummary"
+  extendable="true"
+  primaryEntity="PolicyPeriod">
+  <viewEntityColumn
+    desc="A unique ID associated with PolicyPeriod quote"
+    name="QuoteIdentifier"
+    path="QuoteIdentifier"/>
+  <viewEntityColumn
+    desc="Primary email address of Primary Named Insured contact"
+    name="EmailAddress"
+    path="PNIContactDenorm.EmailAddress1"/>
+  <viewEntityColumn
+    desc="Display name of the Primary Named Insured contact"
+    name="Name"
+    path="PrimaryInsuredName"/>
+  <viewEntityColumn
+    desc="Work phone of Primary Named Insured contact"
+    name="WorkPhone"
+    path="PNIContactDenorm.WorkPhone"/>
+  <viewEntityLink
+    name="Contact"
+    path="PNIContactDenorm"/>
+  <viewEntityColumn
+    desc="The SubmissionNumber of the Submission of the PolicyPeriod"
+    name="SubmissionNumber"
+    path="Job.JobNumber"/>
+</viewEntity>

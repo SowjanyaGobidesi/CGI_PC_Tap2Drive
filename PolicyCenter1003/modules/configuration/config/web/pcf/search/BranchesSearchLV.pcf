@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BranchesSearchLV">
+    <Require
+      name="branches"
+      type="gw.api.database.IQueryBeanResult&lt;Group&gt;"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="branch"
+      pickValue="branch"
+      value="branches"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Group&gt;">
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.BranchesSearch.BranchName&quot;)"
+          value="branch.Name"/>
+        <TextCell
+          id="BranchCode"
+          label="DisplayKey.get(&quot;Web.BranchesSearch.BranchCode&quot;)"
+          value="branch.BranchCode"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

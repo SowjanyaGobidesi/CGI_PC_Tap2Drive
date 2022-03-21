@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FormPatternSearchScreen">
+    <SearchPanel
+      classList="pc-search-full-width-panel"
+      criteriaName="searchCriteria"
+      resultsName="formPatterns"
+      search="searchCriteria.performSearch()"
+      searchCriteria="new gw.forms.FormPatternSearchCriteria()"
+      searchCriteriaType="gw.forms.FormPatternSearchCriteria"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;FormPattern&gt;">
+      <PanelRef
+        def="FormPatternSearchDV(searchCriteria)"/>
+      <PanelRef
+        def="FormPatternSearchResultsLV(formPatterns)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            action="NewFormPattern.go()"
+            id="AddButton"
+            label="DisplayKey.get(&quot;Button.Add&quot;)"
+            shortcut="A"
+            visible="perm.System.formpatcreate"/>
+          <CheckedValuesToolbarButton
+            checkedRowAction="NewFormPattern.go(CheckedValue)"
+            flags="one formPattern"
+            id="DuplicateButton"
+            iterator="FormPatternSearchResultsLV.FormPatternSearchResultsLV"
+            label="DisplayKey.get(&quot;Button.Duplicate&quot;)"
+            shortcut="U"
+            visible="perm.System.formpatcreate"/>
+          <RemoveButton
+            flags="any formPattern"
+            id="DeleteButton"
+            iterator="FormPatternSearchResultsLV.FormPatternSearchResultsLV"
+            label="DisplayKey.get(&quot;Button.Delete&quot;)"
+            shortcut="L"
+            visible="perm.System.formpatdelete and not isProductionMode()"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+    <Code><![CDATA[function isProductionMode() : boolean {
+  return not gw.api.system.PLDependenciesGateway.getServerMode().isDev()
+}
+]]></Code>
+  </Screen>
+</PCF>

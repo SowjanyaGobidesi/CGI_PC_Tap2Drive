@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="OwnerOfficer"
+  supertype="AccountContactRole">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="Title"
+    name="RelationshipTitle"
+    nullok="true"
+    typefilter="OwnerOfficerRelationship"
+    typelist="Relationship"/>
+  <fulldescription><![CDATA[
+    A person who has a meaningful equity/ownership interest in an insured
+    business entity.
+
+  ]]></fulldescription>
+</subtype>

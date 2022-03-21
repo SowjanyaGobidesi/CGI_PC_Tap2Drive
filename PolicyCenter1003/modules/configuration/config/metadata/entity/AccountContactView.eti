@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="AccountContact View."
+  entity="AccountContactView"
+  exportable="true"
+  extendable="true"
+  primaryEntity="AccountContact">
+  <viewEntityLink
+    name="AccountContact"
+    path="ID"/>
+  <viewEntityName
+    name="ContactDisplayName"
+    path="Contact"/>
+  <viewEntityTypekey
+    name="ContactSubtype"
+    path="Contact.Subtype"/>
+</viewEntity>

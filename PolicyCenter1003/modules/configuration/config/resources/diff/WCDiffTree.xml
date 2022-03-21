@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<DiffTree
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/difftree.xsd">
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyInfo')"
+    sortorder="1">
+    <RootProperties
+      includefromtype="PolicyPeriod"
+      sortorder="1"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyPriNamedInsured', ENTITY.DisplayName)"
+      sortorder="2"
+      type="PolicyPriNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlNamedInsured', ENTITY.DisplayName)"
+      sortorder="3"
+      type="PolicyAddlNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyBillingContact', ENTITY.DisplayName)"
+      sortorder="4"
+      type="PolicyBillingContact"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddress', ENTITY.AddressType)"
+      sortorder="5"
+      type="PolicyAddress"/>
+    <RootProperties
+      includefromtype="EffectiveDatedFields"
+      sortorder="6"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Locations')"
+    sortorder="2">
+    <RootEntity
+      type="PolicyLocation">
+      <Properties
+        includefromtype="PolicyLocation"
+        parentpath="ENTITY"
+        sortorder="1"/>
+      <Entity
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.LocationNamedInsured', ENTITY.DisplayName)"
+        parentpath="ENTITY.Location"
+        sortorder="2"
+        type="LocationNamedInsured"/>
+    </RootEntity>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.Clauses')"
+    sortorder="3">
+    <RootEntity
+      sortorder="1"
+      type="WorkersCompCov"/>
+    <RootEntity
+      sortorder="2"
+      type="WorkersCompExcl"/>
+    <RootEntity
+      sortorder="3"
+      type="WorkersCompCond"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.Jurisdictions')"
+    sortorder="4">
+    <RootEntity
+      type="WCJurisdiction">
+      <Properties
+        includefromtype="WCJurisdiction"
+        parentpath="ENTITY">
+        <PropertyDisplay
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.AnniversaryDate')"
+          propertyname="AnniversaryDateInternal"
+          sortorder="1"/>
+      </Properties>
+      <SubSection
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmployees')"
+        sortorder="2">
+        <Entity
+          parentpath="ENTITY.Jurisdiction"
+          showadds="false"
+          showremoves="false"
+          type="WCCoveredEmployee">
+          <Properties
+            includefromtype="WCCoveredEmployee"
+            parentpath="ENTITY">
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.Basis')"
+              propertyname="BasisAmount"
+              sortorder="1"
+              value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmpValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.IfAny')"
+              propertyname="IfAnyExposure"
+              sortorder="2"
+              value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmpValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.NumEmployees')"
+              propertyname="NumEmployees"
+              sortorder="3"
+              value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmpValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.GovLaw')"
+              propertyname="SpecialCov"
+              sortorder="4"
+              value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmpValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+          </Properties>
+        </Entity>
+        <Entity
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.CoveredEmployee', ENTITY.DisplayName, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"
+          parentpath="ENTITY.Jurisdiction"
+          showchanges="false"
+          type="WCCoveredEmployee"/>
+      </SubSection>
+      <SubSection
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Coverages')"
+        sortorder="3">
+        <Entity
+          parentpath="ENTITY.WCJurisdiction"
+          showadds="false"
+          showremoves="false"
+          type="WCStateCov">
+          <Properties
+            includefromtype="WCStateCov"
+            parentpath="ENTITY">
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.Deductible')"
+              propertyname="ChoiceTerm1"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.DeductibleValue', ENTITY.getCovTerm(gw.api.upgrade.PCCoercions.makeProductModel&lt;gw.api.productmodel.CovTermPattern&gt;(&quot;WCDeductible&quot;)).DisplayValue, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat) : &quot;&quot;"/>
+          </Properties>
+        </Entity>
+        <Entity
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.WCStateCov', ENTITY.DisplayName, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"
+          parentpath="ENTITY.WCJurisdiction"
+          showchanges="false"
+          type="WCStateCov"/>
+      </SubSection>
+      <SubSection
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Modifiers')"
+        sortorder="4">
+        <Entity
+          parentpath="ENTITY.WCJurisdiction"
+          showadds="false"
+          showremoves="false"
+          type="WCModifier">
+          <Properties
+            includefromtype="WCModifier"
+            parentpath="ENTITY">
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.RateModifier')"
+              propertyname="RateModifier"
+              sortorder="1"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.RateModifierValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat) : &quot;&quot;"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.DateModifier')"
+              propertyname="DateModifier"
+              sortorder="2"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.DateModifierValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat): &quot;&quot;"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.TypeKeyModifier')"
+              propertyname="TypeKeyModifier"
+              sortorder="3"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.TypeKeyModifierValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat): &quot;&quot;"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.BooleanModifier')"
+              propertyname="BooleanModifier"
+              sortorder="4"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.BooleanModifierValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat): &quot;&quot;"/>
+            <PropertyDisplay
+              label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.ValueFinal')"
+              propertyname="ValueFinal"
+              sortorder="5"
+              value="VALUE != null ? gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.ValueFinalValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat): &quot;&quot;"/>
+            <ExcludedProperty
+              propertyname="Eligible"/>
+          </Properties>
+        </Entity>
+        <Entity
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.WCModifier', ENTITY.DisplayName, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"
+          parentpath="ENTITY.WCJurisdiction"
+          showchanges="false"
+          type="WCModifier"/>
+      </SubSection>
+    </RootEntity>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.WCOptions')"
+    sortorder="5">
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.OwnerOfficer', ENTITY.DisplayName)"
+      sortorder="1"
+      type="PolicyOwnerOfficer"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.LaborClient', ENTITY.DisplayName)"
+      sortorder="2"
+      type="PolicyLaborClient"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.LaborContractor', ENTITY.DisplayName)"
+      sortorder="3"
+      type="PolicyLaborContractor"/>
+    <RootEntity
+      label="ENTITY typeis PolicyLaborClient ?                                             gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.LaborClient', ENTITY.DisplayName) :                                             gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.LaborContractor', ENTITY.DisplayName)"
+      showadds="false"
+      showremoves="false"
+      sortorder="4"
+      type="WCLaborContact">
+      <Properties
+        includefromtype="WCLaborContactDetail"
+        parentpath="ENTITY.WCLaborContact"
+        sortorder="5"/>
+    </RootEntity>
+    <Section
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.ExcludedWorkplace')"
+      sortorder="6">
+      <RootEntity
+        type="WCExcludedWorkplace"/>
+    </Section>
+    <Section
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.FederalLiability')"
+      sortorder="7">
+      <RootEntity
+        type="WCFedCoveredEmployee"/>
+    </Section>
+    <Section
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.WaiverSubro')"
+      sortorder="8">
+      <RootEntity
+        type="WCWaiverOfSubro"/>
+    </Section>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.InclusionPerson', ENTITY.DisplayName)"
+      sortorder="9"
+      type="InclusionPerson"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.RetrospectiveRating', ENTITY.DisplayName)"
+      sortorder="10"
+      type="WCRetrospectiveRatingPlan"/>
+    <Section
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.AircraftSeat')"
+      sortorder="11">
+      <RootEntity
+        type="WCAircraftSeat"/>
+    </Section>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.WC.ParticipatingPlan', ENTITY.DisplayName)"
+      sortorder="12"
+      type="WCParticipatingPlan"/>
+    <RootProperties
+      includefromtype="entity.WorkersCompLine"
+      sortorder="13">
+      <ExcludedProperty
+        propertyname="ParticipatingPlan"/>
+    </RootProperties>
+  </Section>
+</DiffTree>

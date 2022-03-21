@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="ExludeXCULocationHazard"
+  coverageCategory="GLDesignated"
+  exclusionSubtype="GeneralLiabilityExcl"
+  existence="Electable"
+  lookupTableName="GLExcl"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="ExludeXCULocationHazard"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <GenericCovTermPattern
+      codeIdentifier="XCUHazardDesc"
+      coverageColumn="StringTerm1"
+      lookupTableName="GLCovTerm"
+      priority="-1"
+      public-id="XCUHazardDesc"
+      required="true"/>
+    <TypekeyCovTermPattern
+      codeIdentifier="XCULocOps"
+      coverageColumn="ChoiceTerm1"
+      lookupTableName="GLCovTerm"
+      priority="99"
+      public-id="XCULocOps"
+      required="true"
+      typelist="DesignateSitesOps"/>
+  </CovTerms>
+</ExclusionPattern>

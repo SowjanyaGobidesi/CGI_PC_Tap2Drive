@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuTree
+    id="TeamMenuTree">
+    <Variable
+      initialValue="new gw.api.web.team.TeamTreeNode()"
+      name="rootModel"
+      type="gw.api.web.team.TeamTreeNode"/>
+    <TreeView
+      elementLabel="teamModel.Label"
+      elementName="teamModel"
+      elementType="gw.api.team.TeamModel"
+      id="TeamTreeView"
+      onClickElement="TeamForward.go(CurrentLocation.getId(), teamModel)"
+      value="rootModel"/>
+  </MenuTree>
+</PCF>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.searchpols"
+    countsAsWork="false"
+    id="PolicySearch"
+    title="DisplayKey.get(&quot;Web.PolicySearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="PolicySearch()"/>
+    <LocationEntryPoint
+      signature="PolicySearch(errorMessage : String)"/>
+    <Variable
+      name="errorMessage"
+      type="String"/>
+    <Variable
+      initialValue="gw.web.ErrorConduit.addRequestScopedErrorMessagePassThrough(errorMessage)"
+      name="placeholderUsedToTriggerPassThroughMethod"
+      recalculateOnRefresh="true"
+      type="String"/>
+    <ScreenRef
+      def="PolicySearchScreen()"/>
+  </Page>
+</PCF>

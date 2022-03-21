@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="OutboundLocationRiskAssessmentTempStore">
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.api.obfuscation.UnsupportedObfuscator"/>
+  <implementsEntity
+    name="AddressAutofillable"/>
+  <implementsEntity
+    name="Obfuscatable"/>
+  <column
+    name="PolicyLocationName"
+    nullok="true"
+    type="shorttext"/>
+</extension>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IFederatedDataPlugin"
+  name="IFederatedDataPlugin">
+  <plugin-gosu
+    disabled="false"
+    gosuclass="gw.plugin.multicluster.federateddata.v1.FederatedDataPlugin">
+    <param
+      name="HostUrl"
+      value="${FederatedDataHostUrl}"/>
+    <param
+      name="ClientId"
+      value="${FederatedClientId}"/>
+    <param
+      name="ClientSecret"
+      value="${FederatedClientSecret}"/>
+    <param
+      name="Scope"
+      value="${FederatedScope}"/>
+    <param
+      name="TokenUri"
+      value="${FederatedTokenUri}"/>
+  </plugin-gosu>
+</plugin>

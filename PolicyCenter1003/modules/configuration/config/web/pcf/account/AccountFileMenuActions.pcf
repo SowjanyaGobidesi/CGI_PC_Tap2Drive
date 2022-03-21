@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    flatten="true"
+    id="AccountFileMenuActions">
+    <Require
+      name="account"
+      type="Account"/>
+    <MenuItem
+      id="AccountFileMenuActions_Create"
+      label="DisplayKey.get(&quot;Web.AccountFile.Create&quot;)"
+      shortcut="C"
+      visible="perm.Account.edit(account)">
+      <MenuItem
+        action="NewAccountNoteWorksheet.goInWorkspace(account)"
+        id="AccountFileMenuActions_NewNote"
+        label="DisplayKey.get(&quot;Web.AccountFile.NewNote&quot;)"
+        shortcut="N"
+        visible="perm.Note.create and account.AccountStatus != AccountStatus.TC_WITHDRAWN"/>
+      <MenuItem
+        id="AccountFileMenuActions_NewDocument"
+        label="DisplayKey.get(&quot;Web.AccountFile.NewDocument&quot;)"
+        shortcut="O"
+        visible="perm.Document.create and account.AccountStatus != AccountStatus.TC_WITHDRAWN and gw.document.DocumentsActionsUIHelper.DocumentContentServerAvailable">
+        <MenuItemSetRef
+          def="AccountNewDocumentMenuItemSet(account)"/>
+      </MenuItem>
+      <MenuItem
+        action="EmailWorksheet.goInWorkspace(account)"
+        id="AccountFileMenuActions_NewEmail"
+        label="DisplayKey.get(&quot;Web.AccountFile.NewEmail&quot;)"
+        shortcut="N"
+        visible="account.AccountStatus != AccountStatus.TC_WITHDRAWN"/>
+      <MenuItem
+        action="NewSubmission.go(account)"
+        id="AccountFileMenuActions_NewSubmission"
+        label="DisplayKey.get(&quot;Web.AccountFile.NewSubmission&quot;)"
+        shortcut="B"
+        visible="account.NewSubmissionVisible"/>
+      <MenuItem
+        id="AccountFileMenuActions_NewActivity"
+        label="DisplayKey.get(&quot;Web.AccountFile.NewActivity&quot;)"
+        shortcut="A"
+        visible="perm.System.actcreate and account.AccountStatus != AccountStatus.TC_WITHDRAWN">
+        <MenuItemSetRef
+          def="NewActivityMenuItemSet(account, null, null)"/>
+      </MenuItem>
+    </MenuItem>
+    <MenuItemDivider/>
+    <MenuItem
+      action="updateAccountStatusAndCommit(AccountStatus.TC_WITHDRAWN)"
+      id="AccountFileMenuActions_WithdrawAccount"
+      label="DisplayKey.get(&quot;Web.Account.Status.WithdrawAccount&quot;)"
+      visible="account.AccountStatus == AccountStatus.TC_PENDING and perm.Account.withdraw(account)"/>
+    <MenuItem
+      action="updateAccountStatusAndCommit(AccountStatus.TC_PENDING)"
+      id="AccountFileMenuActions_ReopenAccount"
+      label="DisplayKey.get(&quot;Web.Account.Status.ReopenAccount&quot;)"
+      visible="account.AccountStatus == AccountStatus.TC_WITHDRAWN and perm.Account.reopen(account)"/>
+    <MenuItem
+      action="AccountFile_AccountSearch.go(account, gw.account.AccountSearchReason.MovePolicies)"
+      id="AccountFileMenuActions_MovePolicies"
+      label="DisplayKey.get(&quot;Web.AccountFile.MovePolicies&quot;)"
+      visible="perm.Account.movePolicies(account) and !account.Locked and account.AccountStatus != AccountStatus.TC_WITHDRAWN"/>
+    <MenuItem
+      action="AccountFile_AccountSearch.go(account, gw.account.AccountSearchReason.RewritePolicies)"
+      id="AccountFileMenuActions_RewritePolicies"
+      label="DisplayKey.get(&quot;Web.AccountFile.RewritePolicies&quot;)"
+      visible="perm.Account.rewritePolicies(account) and !account.Locked and account.AccountStatus != AccountStatus.TC_WITHDRAWN"/>
+    <MenuItem
+      action="AccountFile_AccountSearch.go(account, gw.account.AccountSearchReason.MergeAccounts)"
+      id="AccountFileMenuActions_MergeAccounts"
+      label="DisplayKey.get(&quot;Web.AccountFile.MergeAccounts.MergeAccount&quot;)"
+      visible="perm.Account.mergeAccounts(account) and !account.Locked and account.AccountStatus != AccountStatus.TC_WITHDRAWN"/>
+    <Code><![CDATA[function updateAccountStatusAndCommit(newStatus : AccountStatus) {
+  gw.transaction.Transaction.runWithNewBundle(\ bundle -> {
+    var localAccount = bundle.add(account)
+    localAccount.AccountStatus = newStatus
+  })
+}]]></Code>
+  </MenuActions>
+</PCF>

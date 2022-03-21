@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ModalCell
+    id="CPPPreferredCoverageCurrency"
+    mode="false">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <TextCell
+      id="NAPreferredCoverageCurrency"
+      value="DisplayKey.get(&quot;Web.MultiCurrency.CurrencyDoesNotApply&quot;)"
+      valueVisible="policyLine != null"/>
+  </ModalCell>
+</PCF>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="policyAddlInsured.resetContactAndRoles(duplicateContactsPopupHelper.existingPCContactWithABContactMatch)"
+    canEdit="true"
+    countsAsWork="false"
+    id="NewAdditionalInsuredPopup"
+    returnType="PolicyAddlInsuredDetail"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Contact.NewContact&quot;, entity.PolicyAddlInsured.Type.TypeInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="NewAdditionalInsuredPopup(line: PolicyLine, contactType: typekey.ContactType)"/>
+    <Variable
+      name="line"
+      type="PolicyLine"/>
+    <Variable
+      name="contactType"
+      type="typekey.ContactType"/>
+    <Variable
+      initialValue="line.addNewAdditionalInsuredDetailOfContactType(contactType)"
+      name="policyAddlInsuredDetail"
+      type="entity.PolicyAddlInsuredDetail"/>
+    <Variable
+      initialValue="policyAddlInsuredDetail.PolicyAddlInsured"
+      name="policyAddlInsured"
+      type="entity.PolicyAddlInsured"/>
+    <Variable
+      initialValue="policyAddlInsured.AccountContactRole.AccountContact.Contact"
+      name="contact"
+      type="entity.Contact"/>
+    <Variable
+      initialValue="line.AdditionalInsureds.map(\pd -&gt; pd.AccountContactRole.AccountContact.Contact)"
+      name="existingContacts"
+      type="Contact[]"/>
+    <Variable
+      initialValue="new gw.pcf.duplicatecontacts.DuplicateContactsPopupHelper(contact, existingContacts)"
+      name="duplicateContactsPopupHelper"
+      type="gw.pcf.duplicatecontacts.DuplicateContactsPopupHelper"/>
+    <Screen
+      editable="true"
+      id="ContactDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="duplicateContactsPopupHelper.checkForDuplicatesOrUpdate(\ -&gt; CurrentLocation.pickValueAndCommit(policyAddlInsuredDetail))"
+          id="ForceDupCheckUpdate"
+          label="DisplayKey.get(&quot;Button.OK&quot;)"
+          visible="duplicateContactsPopupHelper.ShowButton"/>
+        <EditButtons
+          pickValue="policyAddlInsuredDetail"
+          updateVisible="not duplicateContactsPopupHelper.ShowButton"/>
+        <ToolbarButton
+          action="duplicateContactsPopupHelper.push()"
+          id="CheckForDuplicates"
+          label="DisplayKey.get(&quot;Web.Contact.CheckForDuplicates&quot;)"
+          visible="duplicateContactsPopupHelper.ShowButton"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="AdditionalInsuredInfoDV">
+        <InputColumn>
+          <TypeKeyInput
+            editable="true"
+            id="Type"
+            label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.Type&quot;)"
+            required="true"
+            value="policyAddlInsuredDetail.AdditionalInsuredType"
+            valueType="typekey.AdditionalInsuredType"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="NewPolicyContactRoleDetailsCV(policyAddlInsured, false)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  displayName="Homeowners Modifier"
+  xmlns="http://guidewire.com/datamodel"
+  desc="A modifier for Homeowners"
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPLineMod"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="hoplinemod"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.hop.HOPLineModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPLineModifierMatcher"/>
+  <foreignkey
+    fkentity="HOPLine"
+    name="HOPLine"
+    nullok="false"/>
+  <array
+    arrayentity="HOPLineRF"
+    cascadeDelete="true"
+    desc="Individual components of the rating factor"
+    name="HOPLineRateFactors"
+    owner="false"/>
+  <array
+    arrayentity="HOPLineModifierCost"
+    cascadeDelete="true"
+    name="HOPLineModifierCosts"
+    owner="false"/>
+</entity>

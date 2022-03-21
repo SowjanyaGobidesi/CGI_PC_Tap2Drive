@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="LegalVenue">
+  <typekey-override
+    name="VenueType">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+</extension>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AccountContactDV">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <Require
+      name="anAccount"
+      type="Account"/>
+    <Variable
+      initialValue="CurrentLocation.InEditMode"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="contact.PrimaryAddress"
+      name="selectedAddress"
+      recalculateOnRefresh="true"
+      type="entity.Address"/>
+    <InputColumn>
+      <InputSetRef
+        def="ContactNameInputSet(contact)"
+        mode="contact.Subtype.Code"
+        visible="contact != null"/>
+      <InputDivider/>
+      <InputSetRef
+        def="LinkedAddressInputSet(selectedAddress, contact, null, anAccount, openForEdit)"/>
+      <InputSetRef
+        def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(selectedAddress, false, true))"
+        editable="selectedAddress.LinkedAddress == null"
+        visible="contact != null"/>
+      <TypeKeyInput
+        editable="selectedAddress.LinkedAddress == null"
+        id="AddressType"
+        label="DisplayKey.get(&quot;Web.AddressDetail.AddressType&quot;)"
+        required="true"
+        value="contact.PrimaryAddress.AddressType"
+        valueType="typekey.AddressType"
+        visible="contact != null"/>
+      <TextInput
+        editable="selectedAddress.LinkedAddress == null"
+        id="AddressDescription"
+        label="DisplayKey.get(&quot;Web.AddressDetail.Description&quot;)"
+        value="contact.PrimaryAddress.Description"
+        visible="contact != null"/>
+      <InputSetRef
+        def="ContactCurrencyInputSet(contact, selectedAddress, contact.New)"
+        editable="true"
+        id="ContactCurrency"/>
+      <InputDivider/>
+      <InputSet
+        id="LicenseInputSet"
+        visible="contact typeis Person">
+        <TextInput
+          editable="true"
+          id="LicenseNumber"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LicenseNumber&quot;)"
+          required="false"
+          value="(contact as Person).LicenseNumber"/>
+        <TypeKeyInput
+          editable="true"
+          id="LicenseState"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LicenseState&quot;)"
+          required="false"
+          value="(contact as Person).LicenseState"
+          valueType="typekey.Jurisdiction"/>
+        <InputDivider/>
+      </InputSet>
+      <Label
+        label="DisplayKey.get(&quot;Web.AccountFile.Summary.OfficialIDs&quot;)"
+        visible="contact != null"/>
+      <InputSetRef
+        def="OfficialIDInputSet(contact)"
+        mode="contact.Subtype"
+        visible="contact != null"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

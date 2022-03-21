@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="UWRulesPlugin"
+  name="UWRulesPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.bizrules.impl.UWRulesPluginImpl"/>
+</plugin>

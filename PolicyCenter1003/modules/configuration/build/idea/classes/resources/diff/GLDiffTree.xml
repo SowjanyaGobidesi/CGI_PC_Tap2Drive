@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<DiffTree
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/difftree.xsd">
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyInfo')"
+    sortorder="1">
+    <RootProperties
+      includefromtype="PolicyPeriod"
+      sortorder="1"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyPriNamedInsured', ENTITY.DisplayName)"
+      sortorder="2"
+      type="PolicyPriNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlNamedInsured', ENTITY.DisplayName)"
+      sortorder="3"
+      type="PolicyAddlNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyBillingContact', ENTITY.DisplayName)"
+      sortorder="6"
+      type="PolicyBillingContact"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddress', ENTITY.AddressType)"
+      sortorder="7"
+      type="PolicyAddress"/>
+    <RootProperties
+      includefromtype="EffectiveDatedFields"
+      sortorder="8"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Locations')"
+    sortorder="2">
+    <RootEntity
+      type="PolicyLocation"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.Exposures')"
+    sortorder="3">
+    <RootEntity
+      showadds="false"
+      showchanges="false"
+      showremoves="false"
+      type="PolicyLocation">
+      <Entity
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.Exposure', ENTITY.ClassCode.Code, ENTITY.ClassCode.Classification)"
+        parentpath="ENTITY.Location"
+        showadds="false"
+        showremoves="false"
+        type="GLExposure">
+        <Properties
+          includefromtype="GLExposure"
+          parentpath="ENTITY">
+          <PropertyDisplay
+            label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.Basis')"
+            propertyname="ScalableBasisAmount"
+            value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.BasisValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+          <PropertyDisplay
+            label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.Basis')"
+            propertyname="FixedBasisAmount"
+            value="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.BasisValue', VALUE, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"/>
+        </Properties>
+      </Entity>
+      <Entity
+        label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.ExposureDisplay', ENTITY.ClassCode.Code, ENTITY.ClassCode.Classification, ENTITY.EffectiveDate.ShortFormat, ENTITY.ExpirationDate.ShortFormat)"
+        parentpath="ENTITY.Location"
+        showchanges="false"
+        type="GLExposure"/>
+    </RootEntity>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.GL.Clauses')"
+    sortorder="4">
+    <RootEntity
+      sortorder="1"
+      type="GeneralLiabilityCov"/>
+    <RootEntity
+      type="GLLineScheduleCov">
+      <Entity
+        parentpath="ENTITY.Schedule"
+        type="GLLineScheduleCovItem">
+        <Entity
+          parentpath="ENTITY.GLLineScheduleCovItem"
+          type="GLLineSchCovItemCov"/>
+      </Entity>
+    </RootEntity>
+    <RootEntity
+      sortorder="2"
+      type="GeneralLiabilityCond"/>
+    <RootEntity
+      type="GLLineScheduleCond">
+      <Entity
+        parentpath="ENTITY.Schedule"
+        type="GLLineScheduleCondItem"/>
+    </RootEntity>
+    <RootEntity
+      sortorder="3"
+      type="GeneralLiabilityExcl"/>
+    <RootEntity
+      type="GLLineScheduleExcl">
+      <Entity
+        parentpath="ENTITY.Schedule"
+        type="GLLineScheduleExclItem"/>
+    </RootEntity>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlInsured', ENTITY.DisplayName)"
+      sortorder="4"
+      type="PolicyAddlInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlInsuredDetail', ENTITY.DisplayName, ENTITY.AdditionalInsuredType)"
+      sortorder="5"
+      type="PolicyAddlInsuredDetail"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Modifiers')"
+    sortorder="5">
+    <RootEntity
+      type="GLModifier">
+      <Entity
+        parentpath="ENTITY.GLModifier"
+        type="GLRateFactor"/>
+    </RootEntity>
+  </Section>
+</DiffTree>

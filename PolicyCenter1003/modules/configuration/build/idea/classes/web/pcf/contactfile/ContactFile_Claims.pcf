@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.contactclaims"
+    id="ContactFile_Claims"
+    infoBar="ContactFileInfoBar(contact)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.ContactFile.Claims.Title&quot;)">
+    <LocationEntryPoint
+      signature="ContactFile_Claims(contact: Contact)"/>
+    <LocationEntryPoint
+      signature="ContactFile_Claims(contact: Contact, searchOnEnter: boolean)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Variable
+      name="searchOnEnter"
+      type="boolean"/>
+    <Screen
+      id="ContactFile_ClaimScreen">
+      <SearchPanel
+        criteriaName="claimSearchCriteria"
+        resultsName="claimSet"
+        search="claimSearchCriteria.performSearch()"
+        searchCriteria="contact.NewClaimSearchCriteria"
+        searchCriteriaType="gw.losshistory.ClaimSearchCriteria"
+        searchOnEnter="searchOnEnter"
+        searchResultsType="ClaimSet">
+        <DetailViewPanel>
+          <InputColumn>
+            <DateCriterionChoiceInput
+              editable="true"
+              id="DateRangeForClaimSearch"
+              label="DisplayKey.get(&quot;Web.ContactFile.Claims.ClaimSearch.Date&quot;)"
+              required="false"
+              value="claimSearchCriteria.DateCriteria"
+              valueType="entity.DateCriteria"/>
+          </InputColumn>
+          <InputFooterSection>
+            <InputSetRef
+              def="SearchAndResetInputSet()"/>
+          </InputFooterSection>
+        </DetailViewPanel>
+        <ListDetailPanel
+          lockWhileEditing="true"
+          selectionName="selectedClaim"
+          selectionType="Claim">
+          <PanelRef
+            def="ContactClaimsLV(claimSet.Claims, contact.PreferredSettlementCurrency)">
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimDetailsCV(selectedClaim,false)"
+            editable="false"
+            visible="selectedClaim != null"/>
+        </ListDetailPanel>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

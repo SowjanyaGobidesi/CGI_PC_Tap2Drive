@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    infoBar="AccountFileInfoBar(account)"
+    canVisit="perm.Account.view(account) and perm.System.accountdocs"
+    countsAsWork="false"
+    handlesValidationIssue="VALUE typeis entity.Document"
+    id="AccountFile_Documents"
+    title="DisplayKey.get(&quot;Web.AccountFile.Documents.Title&quot;)"
+    validationParameter="account">
+    <LocationEntryPoint
+      signature="AccountFile_Documents(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <ScreenRef
+      def="DocumentsScreen(account, not perm.Account.edit(account))"/>
+  </Page>
+</PCF>

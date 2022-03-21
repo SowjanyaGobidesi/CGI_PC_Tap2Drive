@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- ============================================================================================================  Non-final typelists  ============================================================================================================ -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Non-Renewal Reason Codes"
+  final="false"
+  name="NonRenewalCode"/>

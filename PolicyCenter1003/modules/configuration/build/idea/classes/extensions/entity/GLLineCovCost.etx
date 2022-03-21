@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="GLLineCovCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.gl.financials.GLCostMethods" impl="gw.lob.gl.financials.GLLineCovCostMethodsImpl"/>
+</extension>

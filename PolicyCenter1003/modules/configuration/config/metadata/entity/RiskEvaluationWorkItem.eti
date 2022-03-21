@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RiskEvaluationWorkItem"
+  desc="Work Item for support of asynchronous risk evaluation"
+  table="riskevaluationworkitem"
+  type="keyable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <foreignkey
+    desc="If set, this user will get a notification when work item finishes."
+    fkentity="User"
+    name="RequestingUser"
+    nullok="true"/>
+  <implementsEntity
+    name="WorkItem"/>
+</entity>

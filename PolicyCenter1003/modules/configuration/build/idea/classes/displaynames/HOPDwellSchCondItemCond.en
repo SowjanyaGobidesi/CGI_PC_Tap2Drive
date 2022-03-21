@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwellSchCondItemCond">
+  <Columns>
+    <Column
+      beanPath="HOPDwellSchCondItemCond.HOPDwellScheduleCondItem.Schedule"
+      name="schedule"/>
+  </Columns>
+  <DisplayName>schedule.DisplayName</DisplayName>
+</Entity>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPTransaction">
+  <Columns>
+    <Column
+      beanPath="HOPTransaction.HOPCost"
+      name="cost"/>
+  </Columns>
+  <DisplayName><![CDATA[cost]]></DisplayName>
+</Entity>

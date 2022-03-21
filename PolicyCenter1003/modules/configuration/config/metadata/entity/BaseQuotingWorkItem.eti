@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  desc="WorkItem to asynchronously quote or rate PolicyPeriod"
+  xmlns="http://guidewire.com/datamodel"
+  entity="BaseQuotingWorkItem"
+  table="basequotingworkitem"
+  type="keyable"
+  loadable="false"
+  extendable="true"
+  final="false">
+  <implementsEntity
+    name="WorkItem"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="UserID"
+    desc="User for which we will generate the quote"
+    fkentity="User"
+    name="RequestingUser"
+    nullok="false"/>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    desc="The PolicyPeriod to quote"
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+</entity>

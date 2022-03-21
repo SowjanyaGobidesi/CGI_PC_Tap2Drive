@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="helper.initPopup()"
+    canEdit="true"
+    id="RateRoutineFunctionPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EditRateFunctionOperand&quot;)">
+    <LocationEntryPoint
+      signature="RateRoutineFunctionPopup(operand : CalcStepDefinitionOperand)"/>
+    <LocationEntryPoint
+      signature="RateRoutineFunctionPopup(operand : CalcStepDefinitionOperand, targetDataTypes : java.util.Set&lt;gw.lang.reflect.IType&gt;)"/>
+    <LocationEntryPoint
+      signature="RateRoutineFunctionPopup(operand : CalcStepDefinitionOperand, targetDataTypes : java.util.Set&lt;gw.lang.reflect.IType&gt;, paramInScopeUsageMap : java.util.Map&lt;CalcRoutineParamName,java.util.List&lt;gw.rating.flow.util.InScopeUsage&gt;&gt;)"/>
+    <Variable
+      name="operand"
+      recalculateOnRefresh="true"
+      type="CalcStepDefinitionOperand"/>
+    <Variable
+      initialValue="{}"
+      name="paramInScopeUsageMap"
+      type="java.util.Map&lt;CalcRoutineParamName,java.util.List&lt;gw.rating.flow.util.InScopeUsage&gt;&gt;"/>
+    <Variable
+      name="targetDataTypes"
+      type="java.util.Set&lt;gw.lang.reflect.IType&gt;"/>
+    <Variable
+      initialValue="new gw.pcf.rating.flow.RateRoutineFunctionPopupHelper(CurrentLocation, operand)"
+      name="helper"
+      type="gw.pcf.rating.flow.RateRoutineFunctionPopupHelper"/>
+    <Variable
+      initialValue="operand.CalcStep.getAllExistingVariableNames(true)"
+      name="availLocalVariables"
+      type="java.util.List&lt;gw.rating.flow.LocalVariable&gt;"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="helper.commitFunctionChanges()"
+          id="RateRoutineFunctionEditUpdate"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="RateRoutineFunctionEditCancel"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Usage"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.FunctionPopup.Usage&quot;)"
+            value="helper.getFunctionUsage()"/>
+          <RangeInput
+            editable="true"
+            id="Functions"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Functions&quot;)"
+            optionLabel="helper.formatFunctionName( VALUE )"
+            required="true"
+            value="operand.FunctionName"
+            valueRange="helper.getFunctionNames(targetDataTypes != null ? targetDataTypes : {})"
+            valueType="java.lang.String">
+            <PostOnChange
+              onChange="gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, entity.CalcStepDefinitionArgument); operand.resetParameterNameAndTypeForRateFunction()"/>
+          </RangeInput>
+          <ContentInput>
+            <Link
+              id="Returns"
+              label="helper.getFunctionReturnType()"
+              retainScrollPosition="true"
+              styleClass="none"
+              tooltip="helper.getReturnType()"/>
+          </ContentInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef>
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.FunctionPopup.Arguments&quot;)"/>
+        <ListViewPanel
+          visible="operand.OperandType == CalcStepOperandType.TC_RATEFUNC">
+          <RowIterator
+            editable="true"
+            elementName="rateRoutineParam"
+            id="ArgSourcesForRateFunction"
+            pageSize="0"
+            value="operand.ArgumentSources"
+            valueType="entity.CalcStepDefinitionArgument[]"
+            visible="operand.FunctionName != null">
+            <Row>
+              <TextCell
+                enableSort="false"
+                id="rateRoutineParam"
+                label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.FunctionPopup.ParameterName&quot;)"
+                required="false"
+                value="rateRoutineParam.Parameter"/>
+              <LinkCell
+                label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.FunctionPopup.Type&quot;)">
+                <Link
+                  id="rateRoutineParamType"
+                  label="helper.getParamTypeRelativeName(rateRoutineParam)"
+                  styleClass="none"
+                  tooltip="helper.getParamType(rateRoutineParam)"/>
+              </LinkCell>
+              <TextCell
+                editable="helper.sourceValueEditable(rateRoutineParam)"
+                enableSort="false"
+                hideChildrenIfReadOnly="false"
+                id="Operand"
+                label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.FunctionPopup.Source&quot;)"
+                required="true"
+                validationExpression="gw.pcf.rating.flow.RateRoutinePopupHelper.untypedConstantValidationExpression(rateRoutineParam)"
+                value="rateRoutineParam.ArgumentSource">
+                <PostOnChange
+                  onChange="rateRoutineParam.OverrideSource = true"/>
+                <MenuItemSetRef
+                  def="RatingFunctionArgumentsMenuItemSet(operand.FunctionName, rateRoutineParam, paramInScopeUsageMap,operand.CalcStep.CalcRoutineDefinition.PolicyLinePatternCode,availLocalVariables)"
+                  mode="&quot;default&quot;"/>
+              </TextCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

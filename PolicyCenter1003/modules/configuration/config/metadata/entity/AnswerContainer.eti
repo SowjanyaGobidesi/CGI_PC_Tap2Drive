@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="AnswerContainer">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.question.impl.AnswerContainerInternalMethods"
+    impl="com.guidewire.pc.domain.question.impl.AnswerContainerImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.question.AnswerContainerPublicMethods"
+    impl="com.guidewire.pc.domain.question.impl.AnswerContainerImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.AnswerContainerAbstractDomainMethods"/>
+  <implementsInterface
+    iface="gw.api.domain.AnswerContainerAdapter"/>
+  <fulldescription><![CDATA[A delegate for entities that hold answers to questions.]]></fulldescription>
+</delegate>

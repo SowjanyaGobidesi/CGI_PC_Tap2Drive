@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserDetailDV">
+    <Require
+      name="user"
+      type="User"/>
+    <Require
+      name="canChangeOrganization"
+      type="boolean"/>
+    <Variable
+      initialValue="entity.User.util.CurrentUser"
+      name="currentUser"
+      type="entity.User"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.UserDetail.Locked&quot;)"
+        visible="user.Credential.LockDate != null"/>
+      <InputSetRef
+        def="UserDetailInputSet(user, new gw.contact.ContactNameNoSummaryOwner(new gw.api.name.PersonNameDelegate(user.Contact)))"
+        id="UserDetailCommons"/>
+      <BooleanRadioInput
+        confirmMessage="DisplayKey.get(&quot;Web.Admin.UserDetail.SwitchIntAndExtMsg&quot;)"
+        editable="not currentUser.ExternalUser and canChangeOrganization"
+        id="ExternalUser"
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.ExternalUser&quot;)"
+        showConfirmMessage="user.AllGroupUsersAsArray.HasElements or user.Producer != null"
+        value="user.ExternalUser"
+        visible="perm.System.useredittype">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <OrgInput
+        action="OrganizationDetail.go(user.Organization)"
+        actionAvailable="user.Organization != null"
+        editable="not currentUser.ExternalUser"
+        id="Organization"
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Organization&quot;)"
+        pickLocation="OrganizationSearchPopup.push(false)"
+        required="true"
+        value="user.OrganizationWithUpdate"
+        visible="user.ExternalUser and canChangeOrganization">
+        <PostOnChange/>
+      </OrgInput>
+      <RangeInput
+        editable="true"
+        id="UserType"
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.UserType&quot;)"
+        required="true"
+        value="user.UserType"
+        valueRange="user.AvailableTypes"
+        valueType="typekey.UserType">
+        <PostOnChange/>
+      </RangeInput>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.ContactInformation&quot;)"/>
+      <TextInput
+        editable="true"
+        id="EmployeeNumber"
+        label="DisplayKey.get(&quot;Web.Admin.ContactDetailDV.EmployeeNumber&quot;)"
+        value="user.Contact.EmployeeNumber"/>
+      <BooleanRadioInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="UseOrganizationAddress"
+        label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.UseOrganizationAddress&quot;)"
+        value="user.UseOrgAddress">
+        <PostOnChange
+          onChange="user.maybeSetContactInfo()"/>
+      </BooleanRadioInput>
+      <InputSetRef
+        def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(user.Contact.PrimaryAddress, false, true))"
+        visible="not user.UseOrgAddress and user.Contact != null"/>
+      <TypeKeyInput
+        editable="true"
+        id="AddressType"
+        label="DisplayKey.get(&quot;Web.AddressDetail.AddressType&quot;)"
+        required="true"
+        value="user.Contact.PrimaryAddress.AddressType"
+        valueType="typekey.AddressType"
+        visible="not user.UseOrgAddress and user.Contact != null"/>
+      <TextInput
+        editable="true"
+        id="AddressDescription"
+        label="DisplayKey.get(&quot;Web.AddressDetail.Description&quot;)"
+        value="user.Contact.PrimaryAddress.Description"
+        visible="not user.UseOrgAddress and user.Contact != null"/>
+      <TypeKeyInput
+        editable="true"
+        id="PrimaryPhone"
+        label="DisplayKey.get(&quot;Web.Admin.ContactDetailDV.PrimaryPhone&quot;)"
+        required="true"
+        value="user.Contact.PrimaryPhone"
+        valueType="typekey.PrimaryPhoneType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#HomePhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.HomePhone&quot;), user.Contact.PrimaryPhone == TC_HOME))"
+        editable="true"
+        id="HomePhone"
+        visible="user.Contact.PrimaryPhone == TC_HOME"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#WorkPhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.WorkPhone&quot;), user.Contact.PrimaryPhone == TC_WORK))"
+        editable="true"
+        id="WorkPhone"
+        visible="user.Contact.PrimaryPhone == TC_WORK"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Person#CellPhone), DisplayKey.get(&quot;Web.Admin.UserProfileDV.CellPhone&quot;), user.Contact.PrimaryPhone == TC_MOBILE))"
+        editable="true"
+        id="CellPhone"
+        visible="user.Contact.PrimaryPhone == TC_MOBILE"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate(user.Contact, Contact#FaxPhone), DisplayKey.get(&quot;Web.Admin.ContactDetailDV.Fax&quot;), false))"
+        editable="true"
+        id="Fax"/>
+      <TextInput
+        editable="true"
+        id="Email"
+        label="DisplayKey.get(&quot;Web.Admin.ContactDetailDV.Email&quot;)"
+        required="false"
+        value="user.Contact.EmailAddress1"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

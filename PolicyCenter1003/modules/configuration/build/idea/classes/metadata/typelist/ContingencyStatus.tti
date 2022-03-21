@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="ContingencyStatus"
+  name="ContingencyStatus">
+  <typecode
+    code="Pending"
+    desc="This contingency is pending completion"
+    name="Pending"
+    priority="5"/>
+  <typecode
+    code="Resolved"
+    desc="This contingency has been resolved"
+    name="Resolved"
+    priority="10"/>
+  <typecode
+    code="Waived"
+    desc="This contingency has been waived"
+    name="Waived"
+    priority="15"/>
+  <typecode
+    code="Failed"
+    desc="The conditions of this contigency not met by the due date"
+    name="Failed"
+    priority="20"/>
+  <typefilter desc="List of statuses that will be considered as outstanding status during archiving" name="OutstandingStatuses">
+    <include code="Pending"/>
+  </typefilter>
+  <typecode
+    code="Action_Initiated"
+    desc="The action associated with the contingency has been initiated by the HandleUnresolvedContingencyWorkQueue"
+    name="Action Initiated"
+    priority="25"/>
+</typelist>

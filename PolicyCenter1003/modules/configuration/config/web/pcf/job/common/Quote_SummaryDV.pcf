@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="false"
+    id="Quote_SummaryDV">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.TransactionCostRPT"
+      name="transactionSum"
+      recalculateOnRefresh="true"
+      type="gw.pl.currency.MonetaryAmount"/>
+    <InputColumn>
+      <InputSet>
+        <TextInput
+          boldLabel="true"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;Web.Quote.PolicyNumber&quot;)"
+          value="policyPeriod.PolicyNumberDisplayString"
+          visible="not policyPeriod.Job?.createsNewPolicy()"/>
+        <TextInput
+          boldLabel="true"
+          id="JobNumber"
+          label="JobNumberLabel"
+          value="policyPeriod.Job.JobNumber"
+          visible="JobNumberLabel.length &gt; 0"/>
+        <TextInput
+          boldLabel="true"
+          id="PolicyPeriod"
+          label="DisplayKey.get(&quot;Web.Job.Policy.Period.PolicyPeriod&quot;)"
+          value="gw.api.util.StringUtil.formatDate(policyPeriod.PeriodStart,&quot;short&quot;) + &quot; - &quot; + gw.api.util.StringUtil.formatDate(policyPeriod.PeriodEnd,&quot;short&quot;)"/>
+        <TextInput
+          boldLabel="true"
+          id="Insured"
+          label="DisplayKey.get(&quot;Web.Quote.Insured&quot;)"
+          value="policyPeriod.PrimaryNamedInsured.DisplayName"/>
+        <InputSetRef
+          def="PolicyAddressDisplayInputSet(policyPeriod, true)"
+          id="PolicyAddress"/>
+      </InputSet>
+      <TextInput
+        boldLabel="true"
+        id="UWCompany"
+        label="DisplayKey.get(&quot;Web.Quote.UWCompany&quot;)"
+        value="policyPeriod.UWCompany"
+        valueType="entity.UWCompany"
+        visible="perm.Role.view"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSet>
+        <DateInput
+          align="right"
+          boldLabel="true"
+          id="transaction"
+          label="DisplayKey.get(&quot;Web.Quote.PeriodEffectiveDate&quot;)"
+          value="policyPeriod.EditEffectiveDate"
+          visible="not policyPeriod.Job?.createsNewPolicy()"/>
+        <TextInput
+          align="right"
+          boldLabel="true"
+          id="TransactionDescription"
+          label="DisplayKey.get(&quot;Web.Quote.TransactionDescription&quot;)"
+          value="policyPeriod.Job.Description"
+          visible="policyPeriod.Job.Description.length &gt; 0"/>
+        <MonetaryAmountInput
+          align="right"
+          boldLabel="true"
+          formatType="currency"
+          id="TotalPremium"
+          label="DisplayKey.get(&quot;Web.Quote.TotalPremLabel.Total&quot;)"
+          value="policyPeriod.TotalPremiumRPT"/>
+        <MonetaryAmountInput
+          align="right"
+          boldLabel="true"
+          formatType="currency"
+          id="Taxes"
+          label="DisplayKey.get(&quot;Web.Quote.PremiumSummary.Taxes&quot;)"
+          value="policyPeriod.TaxAndSurchargesRPT"/>
+        <MonetaryAmountInput
+          align="right"
+          boldLabel="true"
+          formatType="currency"
+          id="TotalCost"
+          label="DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Total&quot;)"
+          value="policyPeriod.TotalCostRPT"/>
+      </InputSet>
+      <MonetaryAmountInput
+        align="right"
+        boldLabel="true"
+        formatType="currency"
+        id="ChangeInCost"
+        label="DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Change&quot;)"
+        value="transactionSum"
+        visible="ShowCostChange"/>
+      <TextInput
+        align="right"
+        boldLabel="true"
+        id="HeldSubjectToFinalAudit"
+        label="DisplayKey.get(&quot;Web.Quote.PremiumSummary.HeldSubjectToAudit&quot;)"
+        labelStyleClass="warning"
+        value="&quot;&quot;"
+        visible="policyPeriod.JobProcess.BillingSubjectToFinalAudit"/>
+    </InputColumn>
+    <Code><![CDATA[
+property get JobNumberLabel() : String
+{
+  if ( policyPeriod.Job typeis Submission ) return DisplayKey.get("Web.SubmissionWizard.Quote.SubmissionNo")
+  if ( policyPeriod.Job typeis Renewal )    return DisplayKey.get("Web.RenewalWizard.Quote.RenewalNo")
+  return null
+}
+
+property get ShowCostChange() : boolean
+{
+  return (policyPeriod.Job typeis Issuance)
+      or (policyPeriod.Job typeis PolicyChange)
+      or (policyPeriod.Job typeis Cancellation)
+      or (policyPeriod.Job typeis Reinstatement)
+}
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BADriversLV">
+    <ExposeIterator
+      valueType="entity.CommercialDriver"
+      widget="BADriversLV"/>
+    <Require
+      name="thisBusinessAutoLine"
+      type="BusinessAutoLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <RowIterator
+      editable="true"
+      elementName="driver"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toRemove="thisBusinessAutoLine.removeFromDrivers(driver)"
+      value="thisBusinessAutoLine.Drivers"
+      valueType="entity.CommercialDriver[]">
+      <Row>
+        <TextCell
+          action="BADriverPopup.push(driver, thisBusinessAutoLine.Branch, openForEdit, false)"
+          align="left"
+          id="LastName"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LastName&quot;)"
+          sortBy="driver.LastName"
+          sortOrder="1"
+          value="driver.LastName"/>
+        <TextCell
+          action="BADriverPopup.push(driver, thisBusinessAutoLine.Branch, openForEdit, false)"
+          align="left"
+          id="FirstName"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.FirstName&quot;)"
+          value="driver.FirstName"/>
+        <TypeKeyCell
+          action="BADriverPopup.push(driver, thisBusinessAutoLine.Branch, openForEdit, false)"
+          align="left"
+          id="YearsExperience"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.YearsExperience&quot;)"
+          value="driver.YearsExperience"
+          valueType="typekey.DriverExperience"/>
+        <TypeKeyCell
+          action="BADriverPopup.push(driver, thisBusinessAutoLine.Branch, openForEdit, false)"
+          align="left"
+          id="LicenseState"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LicenseState&quot;)"
+          value="driver.LicenseState"
+          valueType="typekey.State"/>
+        <DateCell
+          action="BADriverPopup.push(driver, thisBusinessAutoLine.Branch, openForEdit, false)"
+          align="left"
+          id="HireDate"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.HireDate&quot;)"
+          value="driver.HireDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

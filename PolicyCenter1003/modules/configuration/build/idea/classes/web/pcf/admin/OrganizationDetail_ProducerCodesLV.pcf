@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="OrganizationDetail_ProducerCodesLV">
+    <Require
+      name="organization"
+      type="Organization"/>
+    <Variable
+      initialValue="organization.RootGroup"
+      name="group"
+      type="Group"/>
+    <RowIterator
+      editable="false"
+      elementName="producerCode"
+      toCreateAndAdd="group.createAndAttachProducerCode()"
+      value="group.ProducerCodes"
+      valueType="entity.ProducerCode[]">
+      <Variable
+        initialValue="group.hasProducerCode(producerCode)"
+        name="avail"
+        type="boolean"/>
+      <Row>
+        <TextCell
+          action="AdminProducerCodeDetail.go(producerCode)"
+          id="Code"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.ProducerCodesLV.Code&quot;)"
+          value="producerCode.Code"/>
+        <TextCell
+          id="Desc"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.ProducerCodesLV.Description&quot;)"
+          value="producerCode.Description"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.ProducerCodesLV.Status&quot;)"
+          value="producerCode.ProducerStatus"
+          valueType="typekey.ProducerStatus"/>
+        <AltGroupCell
+          action="GroupDetailPage.go(producerCode.Branch)"
+          available="producerCode.Branch != null and producerCode.Branch.GroupType != TC_ROOT"
+          id="Branch"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.ProducerCodesLV.Branch&quot;)"
+          value="producerCode.Branch"/>
+        <AltUserCell
+          action="UserDetailPage.go(producerCode.PreferredUnderwriter)"
+          available="producerCode.PreferredUnderwriter != null"
+          id="PreferredUnderwriter"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.ProducerCodesLV.PreferredUnderwriter&quot;)"
+          value="producerCode.PreferredUnderwriter"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

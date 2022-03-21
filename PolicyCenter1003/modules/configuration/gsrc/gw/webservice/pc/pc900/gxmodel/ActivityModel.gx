@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.Activity" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="AssignmentDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="Command" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Description" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="DocumentTemplate" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="EmailTemplate" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="EndDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="ExternallyOwned" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="LogicalName" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Mandatory" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="Priority" type="typekey.Priority" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Recurring" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="ShortSubject" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Subject" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="TargetDate" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+  </includes>
+</gx-model>

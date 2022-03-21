@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  ClassCode Basis ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Measurement basis associated with a classcode (e.g. per 100 payroll; 1000 sales; 100 sqft area)"
+  entity="ClassCodeBasis"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="classcodebasis"
+  type="retireable">
+  <column
+    desc="Name of the Basis Type"
+    name="Name"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="false"
+      tableName="classbasis_name"/>
+  </column>
+  <column
+    desc="Code number of the Basis Type"
+    name="Code"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Description"
+    name="Description"
+    nullok="false"
+    type="mediumtext">
+    <localization
+      nullok="false"
+      tableName="classbasis_desc"/>
+  </column>
+  <column
+    desc="Rating Factor Multiplier"
+    name="RateFactor"
+    nullok="false"
+    type="rate"/>
+  <column
+    default="false"
+    desc="Defines whether the basis is considered a fixed number (like square feet of office space) or a variable (auditable) value that will only be known after the policy period is completed (like total sales or total payroll). True indicates a variable value. The system will treat variable values differently from fixed values. Most notably, when splitting an exposure in General Liability or Workers Comp, the system will divide variable amounts pro rata between the 2 split pieces (i.e. dividing payroll between the 2 date ranges). For a fixed basis, the system will copy the same basis to both split pieces (i.e. the office space is usually the same size during both date ranges)."
+    name="Auditable"
+    nullok="false"
+    type="bit"/>
+  <!-- Enforce code number uniqueness -->
+  <index
+    desc="Ensures that Code values are unique among classcode bases."
+    name="icu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Code"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

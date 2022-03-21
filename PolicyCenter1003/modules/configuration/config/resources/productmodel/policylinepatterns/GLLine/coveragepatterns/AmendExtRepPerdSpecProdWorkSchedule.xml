@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="AmendExtRepPerdSpecProdWorkSchedule"
+  conditionSubtype="GLLineScheduleCond"
+  coverageCategory="GLDesignated"
+  existence="Electable"
+  lookupTableName="GLCond"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="29"
+  public-id="AmendExtRepPerdSpecProdWorkSchedule"
+  referenceDateByType="DefinedObject">
+  <AvailabilityScript/>
+  <ExistenceScript/>
+  <InitializeScript/>
+  <OnRemovalScript/>
+</ConditionPattern>

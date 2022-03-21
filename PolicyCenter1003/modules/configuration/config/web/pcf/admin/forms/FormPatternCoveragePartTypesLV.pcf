@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="FormPatternCoveragePartTypesLV">
+    <ExposeIterator
+      valueType="typekey.CoveragePartType"
+      widget="FormPatternCoveragePartTypesLV"/>
+    <Require
+      name="formPattern"
+      type="FormPattern"/>
+    <RowIterator
+      editable="true"
+      elementName="coveragePartType"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      id="coveragePartTypes"
+      pageSize="0"
+      toRemove="formPattern.removeCoveragePartType(coveragePartType)"
+      value="formPattern.CoveragePartTypes"
+      valueType="typekey.CoveragePartType[]">
+      <ToolbarFlag
+        name="job"/>
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.CoveragePartTypesPanelSet.Type&quot;)"
+          value="coveragePartType.DisplayName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

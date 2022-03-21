@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    editable="false"
+    id="PolicyLineSummaryPanelSet"
+    mode="HOPLine">
+    <Require
+      name="line"
+      type="PolicyLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="line as HOPLine"
+      name="hopline"
+      type="HOPLine"/>
+    <Variable
+      initialValue="new gw.web.line.hop.policy.HOPCoverageCategoryHelper(hopline)"
+      name="helper"
+      type="gw.web.line.hop.policy.HOPCoverageCategoryHelper"/>
+    <PanelRef
+      def="CoveragePartSelectionDV(hopline.Branch)"
+      mode="hopline.AssociatedPolicyPeriod.Policy.Product.CodeIdentifier">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.PolicyDetails&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.SectionICoverages, hopline)"
+      id="SectionICoverageLV">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.HOP.Quote.SectionICoverages.Line.Title&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.SectionIICoverages, hopline)"
+      id="SectionIICoverageLV">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.HOP.Quote.SectionIICoverages.Line.Title&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.AdditionalCoverages, hopline)"
+      id="AdditionalCoverageLV">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.AdditionalCoverages&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.OptionalCoverages, hopline)"
+      id="OptionalCoverageLV">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.OptionalCoverages&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.Exclusions, hopline)"
+      id="ExclusionSummaryLV"
+      visible="not helper.Exclusions.Empty">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.Coverages.Exclusions&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="CoverageSummaryLV(helper.PolicyConditions, hopline)"
+      id="ConditionSummaryLV"
+      visible="not helper.PolicyConditions.Empty">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.Coverages.PolicyConditions&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="ModifierSummaryLV(helper.Modifiers)"
+      id="HOPModifierSummaryLV"
+      visible="not helper.Modifiers.IsEmpty">
+      <Verbatim label="DisplayKey.get(&quot;Web.Policy.Coverages.Modifiers&quot;)"/>
+    </PanelRef>
+  </PanelSet>
+</PCF>

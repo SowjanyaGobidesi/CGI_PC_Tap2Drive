@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links addresses, i.e. addresses of all family members"
+  displayName="Linked Address"
+  entity="LinkedAddress"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="linkedaddress"
+  type="retireable">
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.contact.dbchecks.LinkedAddressDBCheckBuilder"/>
+  <array
+    arrayentity="Address"
+    cascadeDelete="false"
+    desc="The linked group of addresses"
+    name="Addresses"
+    owner="false"/>
+</entity>

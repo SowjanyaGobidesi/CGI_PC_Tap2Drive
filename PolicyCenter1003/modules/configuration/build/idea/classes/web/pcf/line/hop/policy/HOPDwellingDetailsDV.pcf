@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="HOPDwellingDetailsDV">
+    <Require
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="java.lang.Boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.HOPLine"
+      name="line"
+      type="entity.HOPLine"/>
+    <Variable
+      initialValue="line.HOPDwellings.single()"
+      name="dwelling"
+      type="entity.HOPDwelling"/>
+    <InputColumn>
+      <InputSetRef
+        def="HOPDwellingInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="HOPDwellingOccupancyInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="HOPDwellingProtectionInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="HOPDwellingHazardsInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+      <InputSetRef
+        def="HOPDwellingAnimalsInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="HOPSwimmingPoolInputSet(openForEdit, jobWizardHelper, dwelling)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

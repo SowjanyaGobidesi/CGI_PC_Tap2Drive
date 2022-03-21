@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<subtype
+  desc="WorkItem to apply the pending account contact role updates"
+  xmlns="http://guidewire.com/datamodel"
+  entity="PendingAccountContactRoleUpdatesWorkItem"
+  supertype="PendingUpdatesWorkItem">
+  <implementsInterface
+    iface="gw.account.PendingUpdates"
+    impl="gw.account.PendingAccountContactRoleUpdatesWorkItemAdapter"/>
+</subtype>

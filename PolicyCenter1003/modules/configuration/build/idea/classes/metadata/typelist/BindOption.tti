@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Indicates what type of binding was used for the submission"
+  final="true"
+  name="BindOption">
+  <typecode
+    code="BindOnly"
+    desc="Bind Only"
+    name="BindOnly"/>
+  <typecode
+    code="BindAndIssue"
+    desc="Bind and Issue"
+    name="BindAndIssue"/>
+</typelist>

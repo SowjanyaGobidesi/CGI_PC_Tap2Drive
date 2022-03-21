@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="ContractorsEquipPollutionCleanup"
+  coverageCategory="ContractorsEquipPartCategory"
+  coverageSubtype="ContrEquipPartCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="ContrEquipPartCov"
+  owningEntityType="ContractorsEquipPart"
+  policyLinePattern="IMLine"
+  priority="70"
+  public-id="ContractorsEquipPollutionCleanup"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    id="NewNoteWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.NewNote.Tab&quot;)"
+    title="DisplayKey.get(&quot;Web.NewNote.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewNoteWorksheet(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <LocationEntryPoint
+      signature="NewNoteWorksheet(policyPeriod : PolicyPeriod, asOfDate : java.util.Date, jobContainer : Job)"/>
+    <LocationEntryPoint
+      signature="NewNoteWorksheet(policyPeriod : PolicyPeriod, asOfDate : java.util.Date, contingency : Contingency)"/>
+    <Scope
+      location="PolicyFile(policyPeriod, asOfDate)"/>
+    <Scope
+      location="JobForward(job)"/>
+    <Scope
+      location="ContingencyPopup(contingency)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="jobContainer"
+      type="Job"/>
+    <Variable
+      initialValue="policyPeriod.Policy.Account"
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="(policyPeriod.Job != null and not policyPeriod.Job.Complete) ? policyPeriod.Job : null"
+      name="job"
+      type="Job"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      name="contingency"
+      type="Contingency"/>
+    <Variable
+      initialValue="gw.note.NewNoteHelper.forPolicy(account, policyPeriod, job, contingency)"
+      name="newNoteHelper"
+      type="gw.note.NewNoteHelper"/>
+    <ScreenRef
+      def="NewNoteScreen(newNoteHelper)"/>
+  </Worksheet>
+</PCF>

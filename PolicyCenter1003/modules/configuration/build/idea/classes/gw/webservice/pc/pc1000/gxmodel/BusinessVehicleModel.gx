@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<gx-model type="entity.BusinessVehicle" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="CostNew" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Coverages[]" type="entity.BusinessVehicleCov" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc1000.gxmodel.clausemodel"/>
+    <include path="Experience" type="typekey.CombinedDriverExp" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Industry" type="typekey.VehicleIndustry" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="IndustryUse" type="typekey.VehicleIndustryUse" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LeaseOrRent" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="LengthOfLease" type="typekey.LengthOfLease" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LicensePlate" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LicenseState" type="typekey.State" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Location.LocationNum" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="Make" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Model" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="PrimaryUse" type="typekey.VehiclePrimaryUse" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="StatedValue" type="gw.pl.currency.MonetaryAmount" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="VehicleClassCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="VehicleCondition" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="VehicleNumber" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="VehicleRadius" type="typekey.RadiusCode" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="VehicleSizeClass" type="typekey.VehicleSizeClass" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="VehicleType" type="typekey.VehicleType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Vin" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Year" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="YearPurchased" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+  </includes>
+</gx-model>

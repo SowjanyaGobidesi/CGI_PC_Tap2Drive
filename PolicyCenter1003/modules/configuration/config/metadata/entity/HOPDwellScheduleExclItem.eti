@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  desc="HOP Dwelling level exclusion scheduled item"
+  effDatedBranchType="PolicyPeriod"
+  loadable="false"
+  exportable="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPDwellScheduleExclItem"
+  table="hopdwellscheduleexclitem"
+  type="effdated">
+  <implementsEntity
+    name="HOPScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.hop.schedule.HOPDwellScheduleExclItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.hop.schedule.HOPDwellScheduleExclItemCoverableAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPDwellScheduleExclItemMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    fkentity="HOPDwellingScheduleExcl"
+    name="Schedule"
+    nullok="false"/>
+  <onetoone
+    cascadeDelete="true"
+    desc="The exclusion that applies to this scheduled item"
+    fkentity="HOPDwellSchExclItemExcl"
+    name="ScheduledItemClause"
+    nullok="true"/>
+</entity>

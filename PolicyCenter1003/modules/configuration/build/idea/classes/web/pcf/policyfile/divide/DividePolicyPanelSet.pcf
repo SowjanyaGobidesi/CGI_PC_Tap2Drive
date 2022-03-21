@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="DividePolicyPanelSet">
+    <Require
+      name="periodToDivide"
+      type="PolicyPeriod"/>
+    <Require
+      name="dividePolicySelection"
+      type="gw.product.DividePolicySelection"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          id="AccountSelection"
+          label="DisplayKey.get(&quot;Web.NewSubmission.AccountSelection&quot;)"/>
+        <PickerInput
+          conversionExpression="Account.checkedFindByNumber(PickedValue.AccountNumber, \ a -&gt; perm.Account.newSubmission(a))"
+          editable="true"
+          id="Account"
+          inputConversion="Account.checkedFindByNumber(VALUE, \ a -&gt; perm.Account.newSubmission(a))"
+          label="DisplayKey.get(&quot;Web.DesktopAccounts.AccountNumber&quot;)"
+          onPick="handleAccountChange()"
+          pickLocation="AccountSearchPopup.push(periodToDivide.Policy.Account)"
+          required="true"
+          value="dividePolicySelection.ProducerSelection.Account"
+          valueType="entity.Account">
+          <PostOnChange
+            onChange="handleAccountChange()"/>
+        </PickerInput>
+        <TextInput
+          action="AccountFileDoRetrievalForward.go(dividePolicySelection.ProducerSelection.Account.AccountNumber)"
+          id="AccountName"
+          label="DisplayKey.get(&quot;Web.DesktopAccounts.Name&quot;)"
+          value="dividePolicySelection.ProducerSelection.Account.AccountHolder.AccountContact"
+          valueType="entity.AccountContact"
+          visible="dividePolicySelection.ProducerSelection.Account != null"/>
+        <Label
+          label="DisplayKey.get(&quot;Web.SplitPolicy.SubmissionDetails&quot;)"/>
+        <TypeKeyInput
+          editable="true"
+          id="QuoteType"
+          label="DisplayKey.get(&quot;Web.Submission.Products.QuoteType&quot;)"
+          required="true"
+          value="dividePolicySelection.QuoteType"
+          valueType="typekey.QuoteType"/>
+        <DateInput
+          editable="true"
+          id="DefaultPPEffDate"
+          label="DisplayKey.get(&quot;Web.NewSubmission.DefaultPPEffDate&quot;)"
+          required="true"
+          value="dividePolicySelection.ProducerSelection.DefaultPPEffDate"/>
+        <RangeInput
+          editable="true"
+          id="PrimaryNamedInsuredCandidate"
+          label="DisplayKey.get(&quot;Web.SplitPolicy.PrimaryNamedInsured&quot;)"
+          required="true"
+          sortValueRange="false"
+          value="dividePolicySelection.PrimaryNamedInsuredCandidate"
+          valueRange="pniCandidates()"
+          valueType="entity.AccountContact"
+          visible="dividePolicySelection.ProducerSelection.Account != null"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelDivider/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.SplitPolicy.CopierInstructions&quot;)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <CardViewPanel>
+      <CardIterator
+        elementName="line"
+        id="Lines"
+        value="periodToDivide.Lines"
+        valueType="entity.PolicyLine[]">
+        <Card
+          id="LineCard"
+          title="line.DisplayName">
+          <PanelRef
+            def="CopyPolicyDV(dividePolicySelection.Copier)"
+            mode="line.PatternCode"/>
+          <DetailViewPanel>
+            <InputColumn>
+              <HiddenInput
+                desc="&quot;Hidden input used for testing.&quot;"
+                id="PolicyLine"
+                value="line.PatternCode"
+                valueType="java.lang.String"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </Card>
+      </CardIterator>
+    </CardViewPanel>
+    <Code><![CDATA[function pniCandidates() : AccountContact[] {
+  var result : java.util.List<AccountContact> = new java.util.ArrayList<AccountContact>()
+  if (dividePolicySelection.ProducerSelection.Account != null and periodToDivide.Policy.Product != null){
+    result = dividePolicySelection.ProducerSelection.Account.findPolicyNamedInsuredCandidates(periodToDivide.Policy.Product).toList().orderBy(\ ac -> ac.DisplayName)
+  }
+  return result.toTypedArray()
+}
+
+function handleAccountChange() {
+  try {
+    dividePolicySelection.handleAccountChange()
+  } catch (ise : java.lang.IllegalStateException) {  // might occur because of product unavailability
+    throw new gw.api.util.DisplayableException(ise.LocalizedMessage)
+  }
+}]]></Code>
+  </PanelSet>
+</PCF>

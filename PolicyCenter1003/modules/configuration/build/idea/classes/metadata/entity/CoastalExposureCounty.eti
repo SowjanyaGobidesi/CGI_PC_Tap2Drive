@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="CoastalExposureCounty"
+  desc="Coastal Exposure Counties"
+  table="coastalexposurecounty"
+  type="retireable"
+  exportable="true">
+  <typekey
+    name="State"
+    nullok="false"
+    typelist="State"/>
+  <column
+    name="County"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    name="ExposureLevel"
+    nullok="false"
+    type="integer"/>
+</entity>

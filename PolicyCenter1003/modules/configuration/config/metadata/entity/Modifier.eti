@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Modifier"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.ModifierPublicMethods"
+    impl="com.guidewire.pc.domain.policy.impl.ModifierImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAbstractDomainMethods"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.impl.ModifierInternalMethods"
+    impl="com.guidewire.pc.domain.policy.impl.ModifierImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"/>
+  <fulldescription><![CDATA[Modifiers capture information relevant to the pricing of a policy that is not necessarily tied to a specific coverable or coverage.]]></fulldescription>
+  <column
+    desc="Boolean modifier"
+    name="BooleanModifier"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date modifier"
+    name="DateModifier"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether this modifier is eligible or not"
+    name="Eligible"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Additional comment to justify the value of this modifier"
+    name="Justification"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The pattern defining what kind of Modifier this is"
+    name="PatternCode"
+    nullok="false"
+    setterScriptability="hidden"
+    type="patterncode"/>
+  <column
+    desc="Rate modifier. Use the setRateWithinLimits method to set value within min/max limits."
+    name="RateModifier"
+    nullok="true"
+    setterScriptability="all"
+    type="rate"/>
+  <column
+    desc="Internal field for storing the reference date of modifiers on bound policy periods. Normally the ReferenceDate property should be used instead."
+    name="ReferenceDateInternal"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="datetime"/>
+  <column
+    desc="Typekey modifier"
+    name="TypeKeyModifier"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="true"
+    desc="Whether this modifier's value is final or not"
+    name="ValueFinal"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="The state to attach rating information to."
+    name="State"
+    nullok="false"
+    typelist="Jurisdiction"/>
+</delegate>

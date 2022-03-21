@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="DocumentMetadataEditDV"
+    mode="email_sent">
+    <Require
+      name="documentDetailsApplicationHelper"
+      type="gw.document.DocumentDetailsApplicationHelper"/>
+    <Require
+      name="fromTemplate"
+      type="boolean"/>
+    <Variable
+      name="documentMetadataPCHelper"
+      type="gw.api.web.document.DocumentMetadataPCHelper"
+      initialValue="documentDetailsApplicationHelper as gw.api.web.document.DocumentMetadataPCHelper"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.DocumentDetails.EmailSent&quot;)"/>
+      <TextInput
+        id="Author"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.From&quot;)"
+        value="documentMetadataPCHelper.Author"/>
+      <TextInput
+        id="Recipient"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.To&quot;)"
+        value="documentMetadataPCHelper.Recipient"/>
+      <TextInput
+        id="Name"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.Subject&quot;)"
+        required="true"
+        value="documentMetadataPCHelper.Name"/>
+      <DateInput
+        id="CreateTime"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DateCreated&quot;)"
+        value="documentMetadataPCHelper.CreateTime"/>
+      <RangeInput
+        id="Language"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.Language&quot;)"
+        value="documentMetadataPCHelper.Language"
+        valueRange="LanguageType.getTypeKeys( false )"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DocumentInfo&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DocumentMetadata.Description&quot;)"
+        value="documentMetadataPCHelper.Description"/>
+      <TypeKeyInput
+        editable="true"
+        id="SecurityType"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DocumentMetadata.SecurityType&quot;)"
+        value="documentMetadataPCHelper.SecurityType"
+        valueType="typekey.DocumentSecurityType"/>
+      <TypeKeyInput
+        editable="true"
+        id="Section"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DocumentMetadata.Section&quot;)"
+        value="documentMetadataPCHelper.Section"
+        valueType="typekey.DocumentSection"
+        visible="DocumentSection.getTypeKeys( false ).Count &gt; 1"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Hidden"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.DocumentMetadata.Obsolete&quot;)"
+        value="documentMetadataPCHelper.Obsolete"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

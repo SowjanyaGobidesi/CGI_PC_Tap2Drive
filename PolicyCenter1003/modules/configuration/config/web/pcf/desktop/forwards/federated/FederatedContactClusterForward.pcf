@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedContactClusterForward">
+    <LocationEntryPoint
+      signature="FederatedContactClusterForward(contactPublicId: java.lang.String, shardId: java.lang.String)"/>
+    <Variable
+      name="contactPublicId"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Contact.findContactByPublicId(contactPublicId)"
+      name="contactEntity"
+      type="Contact"/>
+    <Variable
+      name="shardId"
+      type="java.lang.String"/>
+    <ForwardCondition
+      action="ContactFile_Details.go(contactEntity)"
+      condition="contactEntity != null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.contactClusterForward(contactPublicId, shardId)"
+      condition="contactEntity == null"/>
+  </Forward>
+</PCF>

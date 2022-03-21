@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="AdditionalInterest"
+  supertype="AccountContactRole">
+  <fulldescription><![CDATA[
+    A person or company with a financial interest in an object (e.g., building,
+    vehicle, piece of equipment) protected by the policy.
+
+  ]]></fulldescription>
+</subtype>

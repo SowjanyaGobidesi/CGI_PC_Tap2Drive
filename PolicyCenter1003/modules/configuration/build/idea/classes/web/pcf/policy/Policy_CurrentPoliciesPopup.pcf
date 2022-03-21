@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="Policy_CurrentPoliciesPopup"
+    title="DisplayKey.get('Web.Policy.CurrentPolicyTerms.Title')">
+    <LocationEntryPoint
+      signature="Policy_CurrentPoliciesPopup(account: Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <ScreenRef
+      def="Policy_CurrentPoliciesScreen(account)"
+      id="CurrentPoliciesScreen"/>
+  </Popup>
+</PCF>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCovTermLookup public-id="zq8j2g2aocuthfuacbsccr6v658">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>SC</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="z97iada86v17u136gro0j44i72b">
+    <Availability>Unavailable</Availability>
+    <CovTermPatternCode>zfvimq6hie4hr27sr3r4gfu8pnb</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>SC</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zfhhui3k98tih05q7oskb0vhg4b">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>SC</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zk2go6afpah055dp55llp39rmk8">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>SC</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zlnjc2pm9fq3e3pn9ms65h4fglb">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zpbhoiumut2dk7dsff5ao5nro59</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>SC</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+</import>

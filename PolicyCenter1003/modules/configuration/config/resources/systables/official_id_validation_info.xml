@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.guidewire.com/cc/import/cc_import.xsd">
+  <OfficialIDValidationInfo public-id="wKgHGQYajzwAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>CA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGR+/b2kAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{6}</IDFormat>
+    <IDFormatError language="de">6 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">6 digits</IDFormatError>
+    <IDFormatError language="es">6 dígitos</IDFormatError>
+    <IDFormatError language="fr">6 chiffres</IDFormatError>
+    <IDFormatError language="it">6 cifre</IDFormatError>
+    <IDFormatError language="ja">6 桁の数字</IDFormatError>
+    <IDFormatError language="nl">6 cijfers</IDFormatError>
+    <IDFormatError language="pt">6 dígitos</IDFormatError>
+    <IDFormatError language="ru">6 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">6位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NY</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGRc1YJEAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NC</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGTSWfL0AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGTqBpZoAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>PA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGW2NnKAAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{6}</IDFormat>
+    <IDFormatError language="de">6 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">6 digits</IDFormatError>
+    <IDFormatError language="es">6 dígitos</IDFormatError>
+    <IDFormatError language="fr">6 chiffres</IDFormatError>
+    <IDFormatError language="it">6 cifre</IDFormatError>
+    <IDFormatError language="ja">6 桁の数字</IDFormatError>
+    <IDFormatError language="nl">6 cijfers</IDFormatError>
+    <IDFormatError language="pt">6 dígitos</IDFormatError>
+    <IDFormatError language="ru">6 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">6位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NJ</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGY8KlHAAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGc3HajsAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>DE</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgHGcMtBl8AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>WI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgJLrhT3jgAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQH1YPgAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>LA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQbylagAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>IN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQcm2VAAAAAA">
+    <EffectiveDate>1993-06-28 00:00:00.000</EffectiveDate>
+    <ExpirationDate>2002-02-08 00:00:00.000</ExpirationDate>
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryaudit</OfficialIdRequiredType>
+    <State>MN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQdSF4oAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>WI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQhIOOgAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>HI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQucZiIAAAAA">
+    <EffectiveDate>1999-06-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>CO</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURQyl-hoAAAAA">
+    <EffectiveDate>1997-08-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>ID</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURRF8K0MAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>UT</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURRPoCtcAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>AZ</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURRYCcqAAAAAA">
+    <EffectiveDate>1993-12-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate>2000-05-04 00:00:00.000</ExpirationDate>
+    <IDFormat>[A-Z0-9][0-9]{9}</IDFormat>
+    <IDFormatError language="de">Buchstabe oder Ziffer gefolgt von 9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">letter or digit followed by 9 digits</IDFormatError>
+    <IDFormatError language="es">letra o dígito seguido de 9 dígitos</IDFormatError>
+    <IDFormatError language="fr">lettre ou chiffre suivi par 9 chiffres</IDFormatError>
+    <IDFormatError language="it">lettera o cifra seguita da 9 cifre</IDFormatError>
+    <IDFormatError language="ja">文字または数字の後に 9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">letter of cijfer, gevolgd door 9 cijfers</IDFormatError>
+    <IDFormatError language="pt">letra ou dígito seguido de 9 dígitos</IDFormatError>
+    <IDFormatError language="ru">буква или цифра, после которой идет 9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">字母或数字，后跟9位数字</IDFormatError>
+    <OfficialIDType>DOLID</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>HI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURRdDsTYAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NE</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURRp3PEcAAAAA">
+    <EffectiveDate>2006-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{12}</IDFormat>
+    <IDFormatError language="de">12 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">12 digits</IDFormatError>
+    <IDFormatError language="es">12 dígitos</IDFormatError>
+    <IDFormatError language="fr">12 chiffres</IDFormatError>
+    <IDFormatError language="it">12 cifre</IDFormatError>
+    <IDFormatError language="ja">12 桁の数字</IDFormatError>
+    <IDFormatError language="nl">12 cijfers</IDFormatError>
+    <IDFormatError language="pt">12 dígitos</IDFormatError>
+    <IDFormatError language="ru">12 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">12位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURScKGVYAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>AL</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURSmc5VoAAAAA">
+    <EffectiveDate>2001-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>NV</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURTd9Nj8AAAAA">
+    <EffectiveDate>1998-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate>1998-06-15 00:00:00.000</ExpirationDate>
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryaudit</OfficialIdRequiredType>
+    <State>IN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURTgCJegAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MD</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURTo-PD4AAAAA">
+    <EffectiveDate>1990-10-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[A-Z0-9]{8}[A-Z][A-Z0-9]</IDFormat>
+    <IDFormatError language="de">8 Buchstaben oder Ziffern, gefolgt von einem Buchstaben, gefolgt von einem Buchstaben oder einer Ziffer</IDFormatError>
+    <IDFormatError language="en_US">8 letters or digits followed by a letter followed by a letter or digit</IDFormatError>
+    <IDFormatError language="es">8 letras o dígitos seguidos por una letra seguida por una letra o dígito</IDFormatError>
+    <IDFormatError language="fr">8 lettres ou chiffres suivis par une lettre suivie d'une lettre ou d'un chiffre</IDFormatError>
+    <IDFormatError language="it">8 lettere o cifre seguite da una lettera seguita da una lettera o cifra</IDFormatError>
+    <IDFormatError language="ja">8 文字または 8 桁の数字の後に 1 文字、次に 1 文字または 1 桁の数字</IDFormatError>
+    <IDFormatError language="nl">8 letters of cijfers, gevolgd door een letter of gevolgd door een letter of cijfer</IDFormatError>
+    <IDFormatError language="pt">8 letras ou dígitos seguidos de uma letra seguida de uma letra ou um dígito</IDFormatError>
+    <IDFormatError language="ru">8 букв или цифр, после которых идет буква или цифра</IDFormatError>
+    <IDFormatError language="zh_CN">8个字母或8位数字，后跟一个字母，再后面是一个字母或一位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>KY</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURU88-eoAAAAA">
+    <EffectiveDate>1998-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>UT</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURUDdbp0AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>WI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURUPHjZ0AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>WV</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURUYYJiYAAAAA">
+    <EffectiveDate>1998-06-15 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>IN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURUZQakAAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>DC</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURUv5o58AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>KS</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURVfc5cQAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>GA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURWJci0oAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>CO</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURWN3EvwAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>IA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURWbDF3kAAAAA">
+    <EffectiveDate>2004-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STAX</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>RI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURX-UhQ8AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>WA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURXD4fPoAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>SD</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURXDbxIgAAAAA">
+    <EffectiveDate>1999-07-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{12}</IDFormat>
+    <IDFormatError language="de">12 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">12 digits</IDFormatError>
+    <IDFormatError language="es">12 dígitos</IDFormatError>
+    <IDFormatError language="fr">12 chiffres</IDFormatError>
+    <IDFormatError language="it">12 cifre</IDFormatError>
+    <IDFormatError language="ja">12 桁の数字</IDFormatError>
+    <IDFormatError language="nl">12 cijfers</IDFormatError>
+    <IDFormatError language="pt">12 dígitos</IDFormatError>
+    <IDFormatError language="ru">12 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">12位数字</IDFormatError>
+    <OfficialIDType>STAX</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NJ</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURYZPpNwAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>OK</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURZ1zoswAAAAA">
+    <EffectiveDate>2002-02-08 00:00:00.000</EffectiveDate>
+    <ExpirationDate>2006-01-01 00:00:00.000</ExpirationDate>
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURa51rzgAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>AR</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURaD3ep8AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NV</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURaD6qA8AAAAA">
+    <EffectiveDate>1994-08-12 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>NM</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURaFA-8IAAAAA">
+    <EffectiveDate>1998-11-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{10}</IDFormat>
+    <IDFormatError language="de">10 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">10 digits</IDFormatError>
+    <IDFormatError language="es">10 dígitos</IDFormatError>
+    <IDFormatError language="fr">10 chiffres</IDFormatError>
+    <IDFormatError language="it">10 cifre</IDFormatError>
+    <IDFormatError language="ja">10 桁の数字</IDFormatError>
+    <IDFormatError language="nl">10 cijfers</IDFormatError>
+    <IDFormatError language="pt">10 dígitos</IDFormatError>
+    <IDFormatError language="ru">10 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">10位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryaudit</OfficialIdRequiredType>
+    <State>ME</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURaQX8sEAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>IL</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURaU9smMAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>FL</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURbJuU30AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>VT</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURbSbt34AAAAA">
+    <EffectiveDate>1998-10-23 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>NY</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURbXQCc8AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MS</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURciaoHMAAAAA">
+    <EffectiveDate>1997-04-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate>1999-06-01 00:00:00.000</ExpirationDate>
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>CO</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURcocvKoAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NH</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURcszggQAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>TN</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURd7IlzcAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>CT</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURdNhGQAAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>VA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURdY2UCUAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>NM</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURdmWwkMAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>SC</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURe99Y-wAAAAA">
+    <EffectiveDate>2000-05-04 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[A-Z0-9][0-9]{9}</IDFormat>
+    <IDFormatError language="de">Buchstabe oder Ziffer gefolgt von 9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">letter or digit followed by 9 digits</IDFormatError>
+    <IDFormatError language="es">letra o dígito seguido de 9 dígitos</IDFormatError>
+    <IDFormatError language="fr">lettre ou chiffre suivi par 9 chiffres</IDFormatError>
+    <IDFormatError language="it">lettera o cifra seguita da 9 cifre</IDFormatError>
+    <IDFormatError language="ja">文字または数字の後に 9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">letter of cijfer, gevolgd door 9 cijfers</IDFormatError>
+    <IDFormatError language="pt">letra ou dígito seguido de 9 dígitos</IDFormatError>
+    <IDFormatError language="ru">буква или цифра, после которой идет 9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">字母或数字，后跟9位数字</IDFormatError>
+    <OfficialIDType>DOLID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>HI</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgUReM96WAAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>AK</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfADsVIAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MO</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfSn7E0AAAAA">
+    <EffectiveDate>1993-12-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate>1998-10-23 00:00:00.000</ExpirationDate>
+    <IDFormat>[0-9]{7}</IDFormat>
+    <IDFormatError language="de">7 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">7 digits</IDFormatError>
+    <IDFormatError language="es">7 dígitos</IDFormatError>
+    <IDFormatError language="fr">7 chiffres</IDFormatError>
+    <IDFormatError language="it">7 cifre</IDFormatError>
+    <IDFormatError language="ja">7 桁の数字</IDFormatError>
+    <IDFormatError language="nl">7 cijfers</IDFormatError>
+    <IDFormatError language="pt">7 dígitos</IDFormatError>
+    <IDFormatError language="ru">7 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">7位数字</IDFormatError>
+    <OfficialIDType>STUN</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryaudit</OfficialIdRequiredType>
+    <State>NY</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfXAwiIAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>MT</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURf_fLVIAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{3}-[0-9]{4}</IDFormat>
+    <IDFormatError language="de">xxx-xxxx</IDFormatError>
+    <IDFormatError language="en_US">xxx-xxxx</IDFormatError>
+    <IDFormatError language="es">xxx-xxxx</IDFormatError>
+    <IDFormatError language="fr">xxx-xxxx</IDFormatError>
+    <IDFormatError language="it">xxx-xxxx</IDFormatError>
+    <IDFormatError language="ja">xxx-xxxx</IDFormatError>
+    <IDFormatError language="nl">xxx-xxxx</IDFormatError>
+    <IDFormatError language="pt">xxx-xxxx</IDFormatError>
+    <IDFormatError language="ru">xxx-xxxx</IDFormatError>
+    <IDFormatError language="zh_CN">xxx-xxxx</IDFormatError>
+    <OfficialIDType>STAX</OfficialIDType>
+    <OfficialIdRequiredType>optional</OfficialIdRequiredType>
+    <State>CA</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfeLq6sAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>KY</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfghx2kAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>ID</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfn4SJgAAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>TX</State>
+  </OfficialIDValidationInfo>
+  <OfficialIDValidationInfo public-id="wKgURfuTYl0AAAAA">
+    <EffectiveDate>2000-01-01 00:00:00.000</EffectiveDate>
+    <ExpirationDate />
+    <IDFormat>[0-9]{9}</IDFormat>
+    <IDFormatError language="de">9 Ziffern</IDFormatError>
+    <IDFormatError language="en_US">9 digits</IDFormatError>
+    <IDFormatError language="es">9 dígitos</IDFormatError>
+    <IDFormatError language="fr">9 chiffres</IDFormatError>
+    <IDFormatError language="it">9 cifre</IDFormatError>
+    <IDFormatError language="ja">9 桁の数字</IDFormatError>
+    <IDFormatError language="nl">9 cijfers</IDFormatError>
+    <IDFormatError language="pt">9 dígitos</IDFormatError>
+    <IDFormatError language="ru">9 цифр</IDFormatError>
+    <IDFormatError language="zh_CN">9位数字</IDFormatError>
+    <OfficialIDType>BureauID</OfficialIDType>
+    <OfficialIdRequiredType>mandatoryissue</OfficialIdRequiredType>
+    <State>RI</State>
+  </OfficialIDValidationInfo>
+</import>

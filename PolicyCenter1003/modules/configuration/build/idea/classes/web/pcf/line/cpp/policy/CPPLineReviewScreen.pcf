@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="false"
+    id="CPPLineReviewScreen">
+    <Require
+      name="line"
+      type="PolicyLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="line.Branch.Job"
+      name="job"
+      type="entity.Job"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(line.Branch, job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(line.Branch)"/>
+    <PanelRef
+      def="CPPLineReviewSummaryDV(line)"/>
+    <CardViewPanel
+      hideTabIfSingle="true"
+      id="ReviewSummaryCV">
+      <Card
+        id="LineSummary"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.Card.Summary&quot;)">
+        <PanelRef
+          def="PolicyLineSummaryPanelSet(line, jobWizardHelper)"
+          mode="line.Pattern.PublicID"/>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

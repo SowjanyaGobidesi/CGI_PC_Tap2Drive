@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Issuance Job  ==================================================================== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Issuance process object relating to one or more versions of a policy"
+  displayName="Issuance"
+  entity="Issuance"
+  supertype="Job">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.IssuancePublicMethods"
+    impl="com.guidewire.pc.domain.job.impl.IssuanceImpl"/>
+</subtype>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="State tax costs for Commercial Property"
+  entity="CPStateTaxCost"
+  supertype="CPCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.cp.financials.CPCostAdapter"/>
+  <typekey
+    desc="Jurisdiction tax that applies"
+    name="TaxState"
+    nullok="false"
+    typelist="Jurisdiction"/>
+</subtype>

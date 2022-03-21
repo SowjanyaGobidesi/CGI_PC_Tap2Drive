@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A role that an contact has played on an account or its policies."
+  entity="AccountContactRole"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="accountcontactrole"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.account.impl.AccountContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pc.domain.account.impl.AccountContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.account.AccountContactRolePublicMethods"
+    impl="com.guidewire.pc.domain.account.impl.AccountContactRoleImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.account.AccountContactRoleMergeableImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.archiving.MergeableReferenceable"
+    impl="gw.account.AccountContactRoleMergeableReferenceableImpl"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.LogicalMatcher"
+    impl="gw.account.AccountContactRoleMatcher"/>
+  <implementsInterface
+    iface="gw.api.domain.account.AccountContactRoleMethods"
+    impl="gw.api.domain.account.AccountContactRoleMethodsDefaultImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="Referenceable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.archiving.impl.ReferenceableInternalMethods"
+    impl="com.guidewire.pc.domain.account.impl.AccountContactRoleImpl"/>
+  <foreignkey
+    desc="The account contact that plays this role."
+    fkentity="AccountContact"
+    name="AccountContact"
+    nullok="false"/>
+  <array
+    arrayentity="AccountContactRoleReplacement"
+    cascadeDelete="true"
+    desc="The roles that this AccountContactRole has replaced through merges"
+    exportable="false"
+    name="Replaces"
+    setterScriptability="hidden"/>
+  <index
+    desc="Ensures that an AccountContact has only one role of a specific subtype."
+    name="acctcontsubtypeu"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AccountContact"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+  </index>
+</entity>

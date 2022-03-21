@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="VehicleClassCodeSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.api.domain.VehicleClassCodeSearchCriteria"/>
+    <Require
+      name="businessAutoLine"
+      type="BusinessAutoLine"/>
+    <InputColumn>
+      <TypeKeyInput
+        id="Type"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Type&quot;)"
+        value="searchCriteria.VehicleType"
+        valueType="typekey.VehicleType"/>
+      <TypeKeyInput
+        id="Fleet"
+        label="DisplayKey.get(&quot;Web.Policy.BA.Fleet&quot;)"
+        value="businessAutoLine.Fleet"
+        valueType="typekey.FleetType"/>
+      <TypeKeyInput
+        editable="true"
+        id="YearsExperience"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.YearsExperience&quot;)"
+        value="searchCriteria.Experience"
+        valueType="typekey.CombinedDriverExp"
+        visible="searchCriteria.VehicleType==TC_PP and businessAutoLine.Fleet!=TC_FLEET "/>
+      <TypeKeyInput
+        editable="true"
+        id="SizeClass"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.SizeClass&quot;)"
+        value="searchCriteria.SizeClass"
+        valueType="typekey.VehicleSizeClass"
+        visible="(searchCriteria.VehicleType==TC_PUBLICTRANSPORT or searchCriteria.VehicleType==TC_COMMERCIAL)"/>
+      <TypeKeyInput
+        editable="true"
+        id="PrimaryUse"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.PrimaryUse&quot;)"
+        value="searchCriteria.PrimaryUse"
+        valueType="typekey.VehiclePrimaryUse"
+        visible="searchCriteria.VehicleType!=TC_PP"/>
+      <TypeKeyInput
+        editable="true"
+        filter="(searchCriteria.VehicleType != null) ? VALUE.hasCategory(searchCriteria.VehicleType) : true"
+        id="Radius"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Radius&quot;)"
+        value="searchCriteria.Radius"
+        valueType="typekey.RadiusCode"
+        visible="!(searchCriteria.VehicleType==TC_SPECIAL or (searchCriteria.VehicleType==TC_PP and businessAutoLine.Fleet==TC_FLEET))">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="Industry"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Industry&quot;)"
+        value="searchCriteria.Industry"
+        valueType="typekey.VehicleIndustry"
+        visible="searchCriteria.VehicleType==TC_COMMERCIAL and searchCriteria.Radius != TC_200PLUSMILES"/>
+      <TypeKeyInput
+        editable="true"
+        id="IndustryUse"
+        label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.IndustryUse&quot;)"
+        value="searchCriteria.IndustryUse"
+        valueType="typekey.VehicleIndustryUse"
+        visible="searchCriteria.VehicleType==TC_COMMERCIAL and searchCriteria.Radius != TC_200PLUSMILES"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

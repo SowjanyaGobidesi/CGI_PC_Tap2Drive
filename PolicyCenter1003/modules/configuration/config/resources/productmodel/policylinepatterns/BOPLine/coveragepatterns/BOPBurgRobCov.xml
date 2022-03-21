@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="BOPBurgRobCov"
+  coverageCategory="BOPCrimeCat"
+  coverageSubtype="BOPLocationCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="BOPLocationCov"
+  owningEntityType="BOPLocation"
+  policyLinePattern="BOPLine"
+  priority="-1"
+  public-id="BOPBurgRobCov"
+  rICoverageGroupType="Property"
+  referenceDateByType="DefinedObject">
+  <AvailabilityScript><![CDATA[
+var line = BOPLocation.BOPLine as productmodel.BOPLine
+return line.BOPPropertyCov.BOPPropertyCovCauseOfLossTerm.Value == TC_STANDARD
+    
+  ]]></AvailabilityScript>
+  <InitializeScript/>
+  <OnRemovalScript/>
+  <CovTerms>
+    <DirectCovTermPattern
+      aggregationModel="po"
+      codeIdentifier="BOPBurgRobLim"
+      coverageColumn="DirectTerm1"
+      lookupTableName="BOPLocationCovTerm"
+      modelType="Limit"
+      priority="-1"
+      public-id="BOPBurgRobLim"
+      required="true"
+      restrictionModel="prp"
+      valueType="money">
+      <AvailabilityScript/>
+      <LimitsSet>
+        <CovTermLimits
+          codeIdentifier="BOPBurgRobLimusd"
+          currency="usd"
+          defaultValue="1000"
+          minVal="1000"
+          public-id="BOPBurgRobLimusd"/>
+      </LimitsSet>
+    </DirectCovTermPattern>
+  </CovTerms>
+</CoveragePattern>

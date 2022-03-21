@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RateRoutineSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.rating.rtm.query.RateRoutineSearchCriteria"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="PolicyLine"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.PolicyLine&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Rating.Filter.MatchAll&quot;)"
+        optionLabel="searchCriteria.policyLineCodeToDescription(VALUE)"
+        value="searchCriteria.PolicyLine"
+        valueRange="gw.rating.rtm.util.ProductModelUtils.getAllPolicyLinesForSearch()"
+        valueType="java.lang.String"/>
+      <TextInput
+        editable="true"
+        id="Code"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Code&quot;)"
+        value="searchCriteria.RoutineCode"/>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Name&quot;)"
+        value="searchCriteria.RoutineName"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

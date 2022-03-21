@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="RiskAssessmentErrorType" desc="categories of risk assessment errors">
+  <typecode
+    code="Request"
+    desc="an error at the request level when sending single or multiple locations to be assessed"
+    name="Request"/>
+  <typecode
+    code="Location"
+    desc="error associated with the risk assessment of a single location"
+    name="Location"/>
+</typelist>

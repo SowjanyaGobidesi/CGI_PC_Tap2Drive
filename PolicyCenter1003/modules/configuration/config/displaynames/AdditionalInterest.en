@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Entity
+  name="AdditionalInterest">
+  <Columns/>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("entity.AdditionalInterest")
+    
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Account.newSubmission(account)"
+    id="SubmissionLetterSuccess"
+    parent="SubmissionManager(account)"
+    title="DisplayKey.get(&quot;Web.SubmissionLetterSuccess&quot;)">
+    <LocationEntryPoint
+      signature="SubmissionLetterSuccess(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="Job.finder.findSelectedSubmissionsByAccount(account).toTypedArray()"
+      name="submissions"
+      recalculateOnRefresh="true"
+      type="Submission[]"/>
+    <Variable
+      initialValue="not submissions.toList().hasMatch(\ Sub -> (Sub.hasUnsentLetter()))"
+      name="lettersSent"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.job.SubmissionLetterHelper.getSubmissionLettertypes(submissions)"
+      name="submissionLettertypes"
+      type="java.util.Set&lt;String&gt;"/>
+    <Screen
+      id="SubmissionLetterSuccessScreen">
+      <Toolbar/>
+      <Verbatim
+        id="resultText"
+        label="lettersSent ? DisplayKey.get(&quot;Web.SubmissionLetterSuccess.Success&quot;) : DisplayKey.get(&quot;Web.SubmissionLetterSuccess.Unsure&quot;)"/>
+      <PanelRef
+        def="SubmissionLetterSuccessDV(account)"/>
+      <PanelRef
+        def="SubmissionLetterSuccessLV(account)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.SubmissionLetterSuccessLV.Title&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            action="SubmissionConfirmLetter.go(account)"
+            id="SubmissionLetterSuccess_SendConfirmLetterButton"
+            label="DisplayKey.get(&quot;Web.SubmissionLetterSuccess.SendConfirmLetter&quot;)"
+            visible="gw.job.SubmissionLetterHelper.canSendLetterType(submissionLettertypes, LetterType.TC_CONFIRMATION, submissions)"/>
+          <ToolbarButton
+            action="SubmissionRejectLetter.go(TC_DECLINATION, account)"
+            id="SubmissionLetterSuccess_SendDeclineLetterButton"
+            label="DisplayKey.get(&quot;Web.SubmissionLetterSuccess.SendDeclineLetter&quot;)"
+            visible="gw.job.SubmissionLetterHelper.canSendLetterType(submissionLettertypes, LetterType.TC_DECLINATION, submissions)"/>
+          <ToolbarButton
+            action="SubmissionRejectLetter.go(TC_NOTTAKENACK, account)"
+            id="SubmissionLetterSuccess_SendNotTakenLetterButton"
+            label="DisplayKey.get(&quot;Web.SubmissionLetterSuccess.SendNotTakenLetter&quot;)"
+            visible="gw.job.SubmissionLetterHelper.canSendLetterType(submissionLettertypes, LetterType.TC_NOTTAKENACK, submissions)"/>
+          <ToolbarButton
+            action="null"
+            id="SubmissionLetterSuccess_RefreshButton"
+            label="DisplayKey.get(&quot;Button.Refresh&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+      <PanelRef
+        def="SubmissionLetterSuccessEmailLV(account)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.SubmissionLetterSuccessEmailLV.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

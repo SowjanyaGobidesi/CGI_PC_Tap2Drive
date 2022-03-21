@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="OfficialID that has an fk to an OfficialIDPattern."
+  entity="PCOfficialID"
+  final="false"
+  supertype="OfficialID">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.contact.impl.PCOfficialIDInternalMethods"
+    impl="com.guidewire.pc.domain.contact.impl.PCOfficialIDImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.contact.PCOfficialIDPublicMethods"
+    impl="com.guidewire.pc.domain.contact.impl.PCOfficialIDImpl"/>
+  <column
+    desc="The pattern defining what kind of OfficialID this is"
+    name="PatternCode"
+    nullok="false"
+    setterScriptability="hidden"
+    type="patterncode"/>
+</subtype>

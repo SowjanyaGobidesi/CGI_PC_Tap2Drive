@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPLineScheduleExcl">
+  <Columns>
+    <Column
+      beanPath="HOPLineScheduleExcl.Pattern"
+      name="pattern"/>
+  </Columns>
+  <DisplayName>pattern</DisplayName>
+</Entity>

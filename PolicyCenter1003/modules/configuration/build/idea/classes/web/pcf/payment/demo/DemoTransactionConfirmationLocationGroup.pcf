@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="DemoTransactionConfirmationLocationGroup"
+    title="DisplayKey.get('Web.UpFrontPayment.Demo.DemoTransactionConfirmationTitle')">
+    <LocationEntryPoint
+      signature="DemoTransactionConfirmationLocationGroup(reference : String, address : String, amount : java.math.BigDecimal)"/>
+    <Variable
+      name="reference"
+      type="String"/>
+    <Variable
+      name="amount"
+      type="java.math.BigDecimal"/>
+    <Variable
+      name="address"
+      type="String"/>
+    <LocationRef
+      location="DemoTransactionConfirmationPage(reference, address, amount)"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    id="PolicyFile_CPBlanket"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Blankets&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_CPBlanket(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <ScreenRef
+      def="PolicyFile_CPBlanketScreen(period.CPLine, false)"
+      id="PolicyFile_CPBlanketScreen"/>
+  </Page>
+</PCF>

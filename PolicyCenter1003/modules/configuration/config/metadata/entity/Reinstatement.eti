@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Reinstatement process"
+  displayName="Reinstatement"
+  entity="Reinstatement"
+  supertype="Job">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.ReinstatementPublicMethods"
+    impl="com.guidewire.pc.domain.job.impl.ReinstatementImpl"/>
+  <typekey
+    desc="Reinstate reason codes"
+    name="ReinstateCode"
+    nullok="true"
+    typelist="ReinstateCode"/>
+  <events/>
+</subtype>

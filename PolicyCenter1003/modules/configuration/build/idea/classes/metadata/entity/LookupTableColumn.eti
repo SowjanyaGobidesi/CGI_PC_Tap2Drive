@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  desc="Holds metadata about a column (parameter or factor)"
+  entity="LookupTableColumn"
+  loadable="false"
+  platform="false"
+  table="lookuptablecolumn"
+  type="editable">
+  <column
+    desc="The name of a column in a lookup table"
+    name="ColumnName"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The label of a column to be displayed in the UI"
+    name="ColumnLabel"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    columnName="Definition"
+    desc="Lookup table definition for a parameter"
+    fkentity="LookupTableDefinition"
+    name="Definition"
+    nullok="false"/>
+  <column
+    desc="string value of IType"
+    name="DataType"
+    nullok="false"
+    type="shorttext"/>
+  <index
+    desc="Index ensuring the uniqueness of lookup table parameter/factor definitions per table."
+    name="LTColU1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ColumnName"/>
+    <indexcol
+      keyposition="2"
+      name="Definition"/>
+  </index>
+</entity>

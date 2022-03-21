@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BOPLinePropertyDV">
+    <Require
+      name="policyline"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="policyline as BOPLine"
+      name="bopLine"
+      type="productmodel.BOPLine"/>
+    <Variable
+      initialValue="bopLine.Pattern.getCoverageCategoryByPublicId(&quot;BOPPropertyRequiredCat&quot;)"
+      name="bopPropertyRequiredCat"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="bopPropertyRequiredCat.coveragePatternsForEntity(BusinessOwnersLine).whereSelectedOrAvailable(bopLine, CurrentLocation.InEditMode)"
+      name="bopPropertyRequiredCatCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="BlanketType"
+        label="DisplayKey.get(&quot;Web.Policy.BOP.BlanketType&quot;)"
+        required="true"
+        value="bopLine.BlanketType"
+        valueType="typekey.BlanketType"/>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="BOPPropertyRequiredCatIterator"
+        value="bopPropertyRequiredCatCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, bopLine, true)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

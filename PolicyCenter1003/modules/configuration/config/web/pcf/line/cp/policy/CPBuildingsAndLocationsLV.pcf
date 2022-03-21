@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    alternateEntryStyle="false"
+    id="CPBuildingsAndLocationsLV"
+    stretch="false">
+    <ExposeIterator
+      flags="removeAvailable"
+      valueType="entity.CPLocation"
+      widget="CPBuildingsAndLocationsLV"/>
+    <Require
+      name="cpLine"
+      type="CommercialPropertyLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="10"
+      name="maxUnusedBuildings"
+      type="int"/>
+    <Row
+      useTitleStyle="true">
+      <TextCell
+        align="center"
+        id="ActionsHeader"
+        value="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.Actions&quot;)"
+        visible="openForEdit"
+        wrap="false"/>
+      <TextCell
+        align="left"
+        id="BuildingDescHeader"
+        value="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.Building.Description&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="LastRiskAssessmentEvaluationHeader"
+        value="DisplayKey.get('Web.Policy.LocationContainer.Location.LastSpotlightEvaluation')"
+        visible="gw.api.system.PCConfigParameters.RiskAssessmentIntegrationEnabled.Value"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="BuildingLimitHeader"
+        value="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BuildingLimit&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="BuildingBPPHeader"
+        value="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BuildingBPPLimit&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="BusIncomeHeader"
+        value="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BusinessIncomeLimit&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="ExtraExpenseHeader"
+        value="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.ExtraExpenseLimit&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="center"
+        id="CoverageCurrency"
+        value="DisplayKey.get(&quot;Web.Policy.CoverableCurrency&quot;)"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"
+        wrap="false"/>
+    </Row>
+    <RowIterator
+      checkBoxVisible="false"
+      editable="true"
+      elementName="cpLocation"
+      hideCheckBoxesIfReadOnly="true"
+      numEntriesRequired="0"
+      pageSize="5"
+      pickLocation="CPLocationPopup.push(cpLine, true, true, jobWizardHelper)"
+      toRemove="cpLine.removeFromLineSpecificLocations(cpLocation)"
+      validationLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.Locations&quot;)"
+      value="cpLine.CPLocations"
+      valueType="entity.CPLocation[]">
+      <Variable
+        initialValue="cpLocation.UnusedBuildings"
+        name="unusedBuildings"
+        type="entity.Building[]"/>
+      <IteratorSort
+        sortBy="cpLocation.Location.LocationNum"
+        sortOrder="1"/>
+      <Row
+        useArchivedStyle="false"
+        useTitleStyle="true">
+        <TextCell
+          align="center"
+          hideChildrenIfReadOnly="false"
+          id="Actions"
+          value="&quot;&quot;"
+          visible="openForEdit">
+          <MenuItem
+            id="AddBuilding"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.AddBuilding&quot;)"
+            visible="openForEdit">
+            <MenuItem
+              action="CPBuildingPopup.push(cpLine, cpLocation, openForEdit, jobWizardHelper)"
+              id="AddNewBuilding"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.CreateNewBuilding&quot;)"/>
+            <MenuItem
+              id="AddExistingBuildings"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.ExistingBuilding&quot;)">
+              <MenuItemIterator
+                elementName="unusedBuilding"
+                id="UnusedBuildingIterator"
+                value="getLimitedNumberOfSortedUnusedBuildings(unusedBuildings, maxUnusedBuildings)"
+                valueType="entity.Building[]">
+                <IteratorSort
+                  sortBy="unusedBuilding.BuildingNum"
+                  sortOrder="1"/>
+                <MenuItem
+                  action="CPBuildingPopup.push(cpLine, cpLocation, unusedBuilding, openForEdit, jobWizardHelper)"
+                  id="UnassignedBuilding"
+                  label="unusedBuilding.DisplayName"/>
+              </MenuItemIterator>
+              <MenuItem
+                action="MoreCPBuildingsPopup.push(cpLocation, unusedBuildings, openForEdit)"
+                id="AddMoreBuildings"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.MoreBuildings&quot;)"
+                visible="unusedBuildings.Count &gt; maxUnusedBuildings"/>
+            </MenuItem>
+          </MenuItem>
+          <MenuItem
+            action="cpLine.removeFromLineSpecificLocations( cpLocation )"
+            confirmMessage="DisplayKey.get(&quot;Web.Policy.LocationContainer.RemoveLocationConfirmMsg&quot;)"
+            id="RemoveLocation"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.RemoveLocation&quot;)"
+            visible="openForEdit and not cpLocation.Location.PrimaryLoc"/>
+          <MenuItem
+            action="cpLine.Branch.PrimaryLocation = cpLocation.Location"
+            id="SetPrimaryLocation"
+            label="DisplayKey.get(&quot;Web.Policy.CP.Location.SetAsPrimary&quot;)"
+            showConfirmMessage="false"
+            visible="openForEdit and not cpLocation.Location.PrimaryLoc"/>
+        </TextCell>
+        <TextCell
+          action="CPLocationPopup.push(cpLocation, openForEdit, true, jobWizardHelper)"
+          align="left"
+          grow="true"
+          id="LocationName"
+          value="cpLocation.Location.PrimaryLoc ? DisplayKey.get(&quot;Web.Policy.CP.Location.MarkPrimary&quot;, cpLocation.DisplayName) : cpLocation.DisplayName"/>
+        <FormatCell
+          align="left"
+          colspan="6"
+          id="RiskAssessmentEvaluation"
+          wrap="false">
+          <ContentInput>
+            <Link
+              id="LastRiskAssessmentEvaluation"
+              label="cpLocation.PolicyLocation.LatestLocationRiskAssessment.FormattedAssessmentDate ?: DisplayKey.get('Web.Policy.LocationContainer.Location.RiskAssessment.NoEvaluationDate')"
+              visible="gw.api.system.PCConfigParameters.RiskAssessmentIntegrationEnabled.Value and cpLocation.Location.Branch.Policy.Product.Commercial"/>
+              <Link
+              icon="&quot;warning&quot;"
+              iconColor="gw.api.web.color.GWColor.THEME_ALERT_WARNING"
+              iconType="svgFileName"
+              id="LastRiskAssessmentIsStaleIcon"
+              tooltip="DisplayKey.get('Web.Policy.LocationContainer.Location.RiskAssessmentResultIsStale')"
+              visible="cpLocation.PolicyLocation.LatestLocationRiskAssessment.IsRiskAssessmentStale"/>
+          </ContentInput>
+        </FormatCell>
+      </Row>
+      <RowIterator
+        checkBoxVisible="openForEdit"
+        editable="true"
+        elementName="building"
+        hasCheckBoxes="true"
+        id="buildingIterator"
+        pageSize="0"
+        toRemove="cpLocation.removeFromLineSpecificBuildings(building)"
+        value="cpLocation.Buildings"
+        valueType="entity.CPBuilding[]">
+        <IteratorSort
+          sortBy="building.Building.BuildingNum"
+          sortOrder="1"/>
+        <!-- Need a toolbar flag to control the "Remove" button explicitly in a nested LV -->
+        <ToolbarFlag
+          name="removeAvailable"/>
+        <Row>
+          <EmptyCell
+            id="spacerCellForActionsCell"
+            visible="openForEdit"/>
+          <TextCell
+            action="CPBuildingPopup.push(cpLine, building, openForEdit, jobWizardHelper)"
+            align="left"
+            grow="true"
+            id="BuildingDescription"
+            value="building"
+            valueType="entity.CPBuilding"/>
+          <EmptyCell
+            id="spacerCellForLastRiskAssessmentEvaluation"
+            visible="gw.api.system.PCConfigParameters.RiskAssessmentIntegrationEnabled.Value and cpLocation.Location.Branch.Policy.Product.Commercial"/>
+          <TextCell
+            align="right"
+            id="BldgLimit"
+            value="building.CPBldgCov.CPBldgCovLimitTerm.DisplayValue"
+            wrap="false"/>
+          <TextCell
+            align="right"
+            id="BusPersPropLimit"
+            value="building.CPBPPCov.CPBPPCovLimitTerm.DisplayValue"
+            wrap="false"/>
+          <TextCell
+            align="right"
+            id="BusIncome"
+            value="building.BusIncomeLimitSumDisplay"
+            wrap="false"/>
+          <TextCell
+            align="right"
+            id="ExtraExpense"
+            value="building.CPBldgExtraExpenseCov.CPBldgExtraExpenseCovLimitTerm.DisplayValue"
+            wrap="false"/>
+          <TypeKeyCell
+            align="left"
+            id="BuildingCoverageCurrency"
+            value="building.PreferredCoverageCurrency"
+            valueType="typekey.Currency"
+            visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"
+            wrap="false"/>
+        </Row>
+      </RowIterator>
+    </RowIterator>
+    <Code><![CDATA[function getLimitedNumberOfSortedUnusedBuildings(buildings : Building[], numBuildings : int) : Building[] {
+  if (buildings.Count <= 1) {
+    // nothing to sort!
+    return buildings
+  }
+  var sortedBuildings = buildings.toList().sortBy(\ building -> building.BuildingNum)
+  if (sortedBuildings.Count > numBuildings) {
+    sortedBuildings = sortedBuildings.subList(0, numBuildings)
+  }
+  return sortedBuildings.toTypedArray()
+}]]></Code>
+  </ListViewPanel>
+</PCF>

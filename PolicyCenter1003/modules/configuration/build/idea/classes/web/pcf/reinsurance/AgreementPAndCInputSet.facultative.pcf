@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AgreementPAndCInputSet"
+    mode="facultative">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <Variable
+      initialValue="agreement as Facultative"
+      name="fac"
+      type="entity.Facultative"/>
+    <MonetaryAmountInput
+      currency="fac.FacultativeCurrency"
+      editable="not fac.FlatPremiumAdjusted"
+      formatType="currency"
+      id="CededPremium"
+      label="DisplayKey.get(&quot;Web.Reinsurance.FacAgreement.Premium&quot;)"
+      required="agreement typeis NonProportionalRIAgreement"
+      value="fac.CededPremium"/>
+    <ContentInput>
+      <Link
+        action="fac.FlatPremiumAdjusted = true"
+        hideIfReadOnly="true"
+        id="AdjustFlatPremium"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AdjustFlatPremium&quot;)"
+        styleClass="miniButton"
+        visible="not fac.FlatPremiumAdjusted"/>
+      <Link
+        action="fac.FlatPremiumAdjusted = false"
+        hideIfReadOnly="true"
+        id="SetFlatPremium"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.SetFlatPremium&quot;)"
+        styleClass="miniButton"
+        visible="fac.FlatPremiumAdjusted"/>
+    </ContentInput>
+    <TextInput
+      editable="true"
+      format="DisplayKey.get(&quot;Web.Reinsurance.PercentageDisplayFormat&quot;)"
+      id="Markup"
+      label="DisplayKey.get(&quot;Web.Reinsurance.FacAgreement.Markup&quot;)"
+      required="true"
+      value="fac.MarkUp"
+      valueType="java.math.BigDecimal"
+      visible="agreement typeis NonProportionalRIAgreement"/>
+    <MonetaryAmountInput
+      currency="fac.FacultativeCurrency"
+      formatType="currency"
+      id="TotalCost"
+      label="DisplayKey.get(&quot;Web.Reinsurance.FacAgreement.TotalCost&quot;)"
+      required="true"
+      value="fac.TotalCost"
+      visible="agreement typeis NonProportionalRIAgreement"/>
+  </InputSet>
+</PCF>

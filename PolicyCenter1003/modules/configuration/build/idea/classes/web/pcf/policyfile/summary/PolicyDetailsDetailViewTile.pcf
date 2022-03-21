@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewTile
+    id="PolicyDetailsDetailViewTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails')">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.policy.IPolicyPlugin).canStartReinstatement(period) == null"
+      name="canStartReinstatement"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.pcf.policyfile.StartRewriteMenuItemSetUIHelper(period)"
+      name="uiHelper"
+      type="gw.pcf.policyfile.StartRewriteMenuItemSetUIHelper"/>
+    <Variable
+      initialValue="uiHelper.getInForcePeriod()"
+      name="inForcePeriod"
+      recalculateOnRefresh="true"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.policy.PolicyDetailHelper(period)"
+      name="detailHelper"
+      type="gw.api.web.dashboard.ui.policy.PolicyDetailHelper"/>
+    <TileActions
+      dropdownButtonLabel="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.NewTransaction')">
+      <TileAction
+        action="gw.web.policyfile.PolicyFileMenuActionsUIHelper.startIssuance(period, CurrentLocation)"
+        id="IssueSubmission"
+        label="DisplayKey.get('Web.PolicyFile.IssuePolicy')"
+        visible="perm.PolicyPeriod.issue(period) and period.Policy.canStartIssuance() == null and not period.Archived"/>
+      <TileAction
+        action="StartPolicyChange.go(period)"
+        id="ChangePolicy"
+        label="DisplayKey.get('Web.PolicyFile.ChangePolicy')"
+        visible="perm.PolicyPeriod.change(period) and period.Policy.Issued and not period.Archived"/>
+      <TileAction
+        action="StartCancellation.go(period)"
+        id="CancelPolicy"
+        label="DisplayKey.get('Web.PolicyFile.CancelPolicy')"
+        visible="perm.PolicyPeriod.cancel(period) and period.CancellationDate != period.PeriodStart and not period.Archived"/>
+      <TileActionIterator
+        elementName="cancellationJob"
+        id="RescindCancellation"
+        value="gw.web.policyfile.PolicyFileMenuActionsUIHelper.getRescindableCancellations(period)"
+        valueType="entity.Cancellation[]">
+        <TileAction
+          action="JobForward.go(cancellationJob, cancellationJob.PolicyPeriod)"
+          id="item"
+          label="DisplayKey.get('Web.PolicyFile.RescindCancellationFull', gw.web.policyfile.PolicyFileMenuActionsUIHelper.getCancellationLabel(cancellationJob))"
+          visible="perm.System.cancelrescind and not period.Archived"/>
+      </TileActionIterator>
+      <TileAction
+        action="gw.web.policyfile.PolicyFileMenuActionsUIHelper.startReinstatement(period, CurrentLocation)"
+        id="ReinstatePolicy"
+        label="DisplayKey.get('Web.PolicyFile.ReinstatePolicy')"
+        visible="perm.PolicyPeriod.reinstate(period) and canStartReinstatement and not period.Archived"/>
+      <TileAction
+        action="uiHelper.startRewrite(TC_REWRITEFULLTERM, inForcePeriod, CurrentLocation)"
+        id="RewriteFullTerm"
+        label="DisplayKey.get('Web.PolicyFile.StartRewrite.FullTerm')"
+        visible="uiHelper.CanRewriteFullTerm(inForcePeriod) and not period.Archived"/>
+      <TileAction
+        action="uiHelper.startRewrite(TC_REWRITEREMAINDEROFTERM, inForcePeriod, CurrentLocation)"
+        id="RewriteRemainderOfTerm"
+        label="DisplayKey.get('Web.PolicyFile.StartRewrite.RemainderOfTerm')"
+        visible="uiHelper.CanRewriteRemainderOfTermTerm(inForcePeriod) and not period.Archived"/>
+      <TileAction
+        action="uiHelper.startRewrite(TC_REWRITENEWTERM, inForcePeriod, CurrentLocation)"
+        id="RewriteNewTerm"
+        label="DisplayKey.get('Web.PolicyFile.StartRewrite.NewTerm')"
+        visible="uiHelper.canRewriteNewTerm(inForcePeriod) and not period.Archived"/>
+      <TileAction
+        action="gw.web.policyfile.PolicyFileMenuActionsUIHelper.startRenewal(period, CurrentLocation)"
+        id="RenewPolicy"
+        label="DisplayKey.get('Web.PolicyFile.RenewPolicy')"
+        visible="perm.PolicyPeriod.renew(period) and period.Policy.canStartRenewal() == null and not period.Archived"/>
+      <TileAction
+        action="RequestRestorePopup.push(period.PolicyTerm)"
+        id="RequestRestoreButton"
+        label="DisplayKey.get('Web.Archive.RequestRestoreButton')"
+        visible="period.Archived and perm.PolicyPeriod.restorefromarchive"/>
+    </TileActions>
+    <BadgeProperties
+      backgroundColor="gw.api.web.color.GWColor.THEME_TIER_1"
+      text="period.Archived ? DisplayKey.get('Web.Archive.Archived') : period.PeriodDisplayStatus"/>
+    <TileInputColumn>
+      <TextInput
+        id="PolicyNumber"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.PolicyNumber')"
+        value="period.PolicyNumberDisplayString"/>
+      <TextInput
+        id="Product"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.Product')"
+        value="period.Policy.Product"
+        valueType="gw.api.productmodel.Product"/>
+      <TextInput
+        id="Offering"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.Offering')"
+        value="period.Offering"
+        valueType="gw.api.productmodel.Offering"
+        visible="period.Policy.Product.Offerings.HasElements"/>
+      <TextInput
+        id="NameWhenArchived"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.PrimaryNamedInsured')"
+        value="period.PrimaryInsuredName"
+        visible="period.Archived"/>
+      <TextInput
+        action="ContactForward.go(period.PrimaryNamedInsured.AccountContactRole.AccountContact.Contact)"
+        id="PrimaryNamedInsured"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.PrimaryNamedInsured')"
+        value="period.PrimaryNamedInsured"
+        visible="not period.Archived"
+        valueType="entity.PolicyPriNamedInsured"/>
+      <TextInput
+        id="Underwriter"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.Underwriter')"
+        value="period.Policy.getUserRoleAssignmentByRole(TC_UNDERWRITER).AssignedUser"
+        valueType="entity.User"/>
+      <TextInput
+        id="UnderwritingCompany"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.UnderwritingCompany')"
+        value="period.UWCompany"
+        valueType="entity.UWCompany"/>
+      <InputDivider
+        id="SourceDivider"
+        visible="detailHelper.SourceDividerVisible"/>
+      <TextInput
+        action="AccountFileForward.go(period.Policy.MovedPolicySourceAccount)"
+        available="gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance.canSeeAccount(period.Policy.MovedPolicySourceAccount)"
+        id="SourceAccount"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.SourceAccount')"
+        value="period.Policy.MovedPolicySourceAccount.AccountNumber"
+        visible="period.Policy.MovedPolicySourceAccount != null"/>
+      <TextInput
+        action="pcf.PolicyFileForward.go(period.Policy.RewrittenToNewAccountSource.Periods.first().PolicyNumber)"
+        actionAvailable="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions.Instance.canSeePolicy(period.Policy.RewrittenToNewAccountSource.Periods.first())"
+        id="RewrittenSourcePolicy"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.SourcePolicy')"
+        value="detailHelper.SourcePolicyValue"
+        visible="period.Policy.RewrittenToNewAccountSource != null"/>
+      <TextInput
+        action="pcf.PolicyFileForward.go(period.Policy.RewrittenToNewAccountDestination.Periods.first().PolicyNumber)"
+        actionAvailable="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions.Instance.canSeePolicy(period.Policy.RewrittenToNewAccountDestination.Periods.first())"
+        id="RewrittenTargetPolicy"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.RewrittenPolicy')"
+        value="detailHelper.TargetPolicyValue"
+        visible="period.Policy.RewrittenToNewAccountDestination.BoundPeriods.HasElements"/>
+      <TextInput
+        action="pcf.PolicyFileForward.go(period.Policy.DividedSourcePolicy.LatestBoundPeriod.PolicyNumber)"
+        id="SplitSourcePolicy"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.DividedSourcePolicy')"
+        value="detailHelper.SplitSourcePolicyValue"
+        visible="period.Policy.DividedSourcePolicy != null"/>
+      <Label
+        id="PreRenewalDirectionLabel"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.PreRenewal')"
+        visible="period.PolicyTerm.PreRenewalDirection != null"/>
+      <TextInput
+        action="PreRenewalDirectionPage.go(period, period.Policy, asOfDate)"
+        id="PreRenewalDirection"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.PreRenewalDirection')"
+        value="period.PolicyTerm.PreRenewalDirection"
+        valueType="typekey.PreRenewalDirection"
+        visible="period.PolicyTerm.PreRenewalDirection != null"/>
+    </TileInputColumn>
+    <TileInputColumn>
+      <DateInput
+        dateFormat="short"
+        id="EffectiveDate"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.EffectiveDate')"
+        value="period.PeriodStart"/>
+      <DateInput
+        dateFormat="short"
+        id="ExpirationDate"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.ExpirationDate')"
+        value="period.PeriodEnd"/>
+      <TextInput
+        id="TermNumber"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.TermNumber')"
+        value="period.TermNumber"
+        valueType="Integer"/>
+      <DateInput
+        dateFormat="short"
+        id="IssueDate"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.FirstIssuedDate')"
+        value="period.Policy.IssueDate"
+        visible="period.Policy.IssueDate != null"/>
+      <TextInput
+        id="CancellationReason"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.CancellationReason')"
+        value="period.Cancellation.CancelReasonCode.DisplayName"
+        valueType="String"
+        visible="period.Canceled"/>
+      <DateInput
+        dateFormat="short"
+        id="CancellationDate"
+        label="DisplayKey.get('Web.Dashboard.Tile.PolicyDetails.CancellationEffDate')"
+        value="period.CancellationDate"
+        visible="period.Canceled"/>
+    </TileInputColumn>
+  </DetailViewTile>
+</PCF>

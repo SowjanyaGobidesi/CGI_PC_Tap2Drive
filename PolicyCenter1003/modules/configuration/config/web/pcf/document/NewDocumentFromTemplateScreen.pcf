@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="NewDocumentFromTemplateScreen">
+    <Require
+      name="DocumentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Variable
+      name="levels"
+      type="gw.api.domain.linkedobject.LinkedObjectContainer[]"
+      initialValue="gw.api.domain.linkedobject.LinkedObjectUtils.generateLevels(account, policyPeriod == null ? null : policyPeriod.Policy, job, null)"/>
+    <Variable
+      name="levelsVisible"
+      type="boolean"
+      initialValue="job == null or !(job typeis Submission) or (job as Submission).FullMode"/>
+    <Variable
+      name="documentPCContext"
+      type="gw.api.web.document.DocumentPCContext"
+      initialValue="new gw.api.web.document.DocumentPCContext(null, null, levels, levelsVisible)"/>
+    <Variable
+      name="documentDetailsApplicationHelper"
+      type="gw.document.DocumentDetailsApplicationHelper"
+      initialValue="new gw.api.web.document.DocumentMetadataPCHelper(new Document[] {DocumentCreationInfo.Document}, levels, levelsVisible)
+        as gw.document.DocumentDetailsApplicationHelper"/>
+    <Toolbar>
+      <ToolbarButtonSetRef
+        toolbarButtonSet="DocumentCreationToolbarButtonSet(documentPCContext,DocumentCreationInfo)"/>
+    </Toolbar>
+    <PanelRow>
+      <PanelColumn>
+        <PanelRef
+          def="NewTemplateDocumentDV(documentPCContext, DocumentCreationInfo, DocumentCreationInfo.Document, account, policyPeriod, job, activity)"
+          widgets="NewDocumentFromTemplateScreen"/>
+      </PanelColumn>
+      <PanelColumn>
+        <PanelRef
+          def="DocumentDetailsEditDVPanelSet(documentDetailsApplicationHelper, true)"/>
+      </PanelColumn>
+    </PanelRow>
+  </Screen>
+</PCF>

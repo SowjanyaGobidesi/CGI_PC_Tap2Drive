@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="RateRoutines.go(rateroutine)"
+    afterCommit="RateRoutines.go(rateroutine)"
+    canEdit="false"
+    id="RateRoutineDetail"
+    parent="RateRoutines(rateroutine)"
+    title="rateroutine.Name">
+    <LocationEntryPoint
+      signature="RateRoutineDetail(rateroutine : CalcRoutineDefinition)"/>
+    <LocationEntryPoint
+      signature="RateRoutineDetail(rateroutine : CalcRoutineDefinition, displayImportMessage : boolean)"/>
+    <LocationEntryPoint
+      signature="RateRoutineDetail(rateroutine : CalcRoutineDefinition, rateBook : RateBook)"/>
+    <Variable
+      name="rateroutine"
+      recalculateOnRefresh="true"
+      type="CalcRoutineDefinition"/>
+    <Variable
+      initialValue="false"
+      name="displayImportMessage"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.pcf.rating.rateroutine.RateRoutineDetailUIHelper(rateroutine)"
+      name="rateRoutineDetailUI"
+      type="gw.pcf.rating.rateroutine.RateRoutineDetailUIHelper"/>
+    <Variable
+      initialValue="not rateRoutineDetailUI.performValidation()"
+      name="hasValidationError"
+      type="boolean"/>
+    <Variable
+      name="rateBook"
+      type="RateBook"/>
+    <ScreenRef
+      def="RateRoutineDetailsScreen(rateroutine, rateBook)"/>
+  </Page>
+</PCF>

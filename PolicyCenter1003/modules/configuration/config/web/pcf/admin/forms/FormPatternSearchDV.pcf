@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="FormPatternSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.forms.FormPatternSearchCriteria"/>
+    <Variable
+      initialValue="new gw.pcf.UniqueProductDisplayNameMaker()"
+      name="uniqueProductDisplayNameMaker"
+      type="gw.pcf.UniqueProductDisplayNameMaker"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="FormNumber"
+        label="DisplayKey.get(&quot;Web.FormPatternSearch.FormNumber&quot;)"
+        value="searchCriteria.FormNumber"/>
+      <TextInput
+        editable="true"
+        id="FormName"
+        label="DisplayKey.get(&quot;Web.FormPatternSearch.FormName&quot;)"
+        value="searchCriteria.FormName"/>
+      <RangeInput
+        editable="true"
+        id="Product"
+        label="DisplayKey.get(&quot;Web.FormPatternSearch.Product&quot;)"
+        optionLabel="uniqueProductDisplayNameMaker.make(VALUE)"
+        value="searchCriteria.Product"
+        valueRange="uniqueProductDisplayNameMaker.Products"
+        valueType="gw.api.productmodel.Product"/>
+      <TextInput
+        editable="true"
+        id="GroupCode"
+        label="DisplayKey.get(&quot;Web.FormPatternSearch.GroupCode&quot;)"
+        value="searchCriteria.GroupCode"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="UWRuleAvailability" desc="Underwriting rule availability options">
+  <typecode
+    code="All"
+    desc="All"
+    name="All"/>
+  <typecode
+    code="Available"
+    desc="Available"
+    name="Available"/>
+  <typecode
+    code="Unavailable"
+    desc="Unavailable"
+    name="Unavailable"/>
+  <typecode
+    code="Valid"
+    desc="Rules passing validation"
+    name="Passing Validation"/>
+  <typecode
+    code="Invalid"
+    desc="Rules that fail validation"
+    name="Failing Validation"/>
+</typelist>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BOPLiabilityDV">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="policyLine as BOPLine"
+      name="bopLine"
+      type="productmodel.BOPLine"/>
+    <Variable
+      initialValue="bopLine.Pattern.getCoverageCategoryByPublicId(&quot;BOPLiabilityCat&quot;)"
+      name="bopLiabilityCat"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="bopLine.Pattern.getCoverageCategoryByPublicId(&quot;BOPProgramCat&quot;)"
+      name="bopProgramCat"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="bopLiabilityCat.coveragePatternsForEntity(BusinessOwnersLine).whereSelectedOrAvailable(bopLine, CurrentLocation.InEditMode)"
+      name="bopLiabilityCatCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <Variable
+      initialValue="bopProgramCat.coveragePatternsForEntity(BusinessOwnersLine).whereSelectedOrAvailable(bopLine, CurrentLocation.InEditMode)"
+      name="bopProgramCatCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <InputColumn>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="BOPLiabilityCatIterator"
+        value="bopLiabilityCatCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, bopLine, true)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="BOPRequiredProgramCovs"
+        value="bopProgramCatCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, bopLine, true)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

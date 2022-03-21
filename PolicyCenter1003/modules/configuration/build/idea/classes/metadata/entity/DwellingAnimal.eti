@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<entity
+  displayName="Dwelling Animal"
+  effDatedBranchType="PolicyPeriod"
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="DwellingAnimal"
+  desc="Dwelling Animal"
+  table="dwellinganimal"
+  type="effdated">
+  <typekey desc="Animal Type" name="AnimalType" nullok="true" typelist="AnimalType"/>
+  <typekey desc="Animal Breed" name="AnimalBreed" nullok="true" typelist="AnimalBreed">
+    <keyfilters>
+      <keyfilter name="AnimalType"/>
+    </keyfilters>
+  </typekey>
+  <column desc="Animal Bite History" name="AnimalBiteHistory" nullok="true" type="bit"/>
+  <foreignkey fkentity="HOPDwelling" name="HOPDwelling" nullok="false"/>
+  <column desc="Additional information or comments" name="AdditionalInformation" nullok="true" type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+</entity>

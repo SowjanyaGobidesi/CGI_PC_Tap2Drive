@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.Modifier" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="BooleanModifier" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="DateModifier" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="Eligible" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="Justification" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="PatternCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="RateFactors[]" type="entity.RateFactor" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.ratefactormodel"/>
+    <include path="RateModifier" type="java.math.BigDecimal" propertyInclusionType="NORMAL" xmlType="xs:decimal"/>
+    <include path="State" type="typekey.Jurisdiction" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="TypeKeyModifier" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="ValueFinal" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+  </includes>
+</gx-model>

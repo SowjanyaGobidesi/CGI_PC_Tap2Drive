@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<gx-model type="entity.PolicyPeriod" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include
+      path="PolicyAddress"
+      type="entity.PolicyAddress"
+      propertyInclusionType="NORMAL"
+      model="gw.integration.document.production.gxmodel.policy.policyaddressmodel">
+      <label>BasicPolicyModel</label>
+    </include>
+    <include
+      path="PolicyNumber"
+      type="java.lang.String"
+      xmlType="xs:string"
+      propertyInclusionType="NORMAL">
+      <label>BasicPolicyModel</label>
+      <label>BasicDocumentModel</label>
+    </include>
+    <include
+      path="PrimaryInsuredName"
+      type="java.lang.String"
+      xmlType="xs:string"
+      propertyInclusionType="NORMAL">
+      <label>BasicPolicyModel</label>
+    </include>
+  </includes>
+</gx-model>

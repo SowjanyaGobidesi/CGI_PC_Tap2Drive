@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="The ratring factor lookup."
+  entity="RateFactorLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="ratingfactorlookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.productmodel.impl.RateFactorLookupImpl"/>
+  <implementsInterface
+    iface="gw.pc.productmodel.entity.RateFactorLookup"
+    impl="com.guidewire.pc.domain.productmodel.impl.RateFactorLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.RateFactorLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="PolicyLinePatternFilteredLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.DenormLookupInitialisable"
+    impl="com.guidewire.pc.domain.productmodel.impl.RateFactorLookupImpl"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <implementsEntity
+    name="UWCompanyFilteredLookup"/>
+  <!-- referenced object -->
+  <column
+    name="RateFactorPatternCode"
+    nullok="false"
+    type="patterncode"/>
+</entity>

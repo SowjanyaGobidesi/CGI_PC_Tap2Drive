@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="RateBookPreloadPlugin"
+  name="RateBookPreloadPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.rateflow.RateBookPreloadPluginImpl"/>
+</plugin>

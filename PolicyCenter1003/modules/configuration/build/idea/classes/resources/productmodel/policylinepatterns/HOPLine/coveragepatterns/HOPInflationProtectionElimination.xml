@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="HOPInflationProtectionElimination"
+  coverageCategory="z1hhgd8n6nji0albb2m28ahhbq9"
+  exclusionSubtype="HOPDwellingExcl"
+  existence="Electable"
+  lookupTableName="HOPDwellingExcl"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="900"
+  public-id="zv9hkqn0g5ita45pblmg1kbd5fa"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</ExclusionPattern>

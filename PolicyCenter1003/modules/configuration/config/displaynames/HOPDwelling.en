@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwelling">
+  <Columns>
+    <Column
+      beanPath="HOPDwelling.Location.AddressLine1"
+      name="address1"
+      sortOrder="1"/>
+    <Column
+      beanPath="HOPDwelling.Location.City"
+      name="city"
+      sortOrder="2"/>
+    <Column
+      beanPath="HOPDwelling.Location.State"
+      name="state"
+      sortOrder="3"/>
+    <Column
+      beanPath="HOPDwelling.Location.AccountLocation.LocationName"
+      name="name"
+      sortOrder="4"/>
+    <Column
+      beanPath="HOPDwelling.Location.AddressLine1KanjiInternal"
+      name="address1Kanji"
+      sortOrder="5"/>
+    <Column
+      beanPath="HOPDwelling.Location.CityKanjiInternal"
+      name="cityKanji"
+      sortOrder="6"/>
+  </Columns>
+  <DisplayName><![CDATA[
+    /**
+     * This is built for address internationalization.  See AddressFormatter and usages.
+     */
+    var aFormat = new gw.api.address.AddressFormatter()
+    aFormat.AddressLine1      = address1
+    aFormat.City              = city
+    aFormat.State             = state
+    aFormat.AddressLine1Kanji = address1Kanji
+    aFormat.CityKanji         = cityKanji
+
+    return gw.api.locale.DisplayKey.get("EntityName.HOPDwellingAddress", aFormat.addressString(",", false, false))
+  ]]></DisplayName>
+</Entity>

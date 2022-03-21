@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="SimpleEffDated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.SimpleEffDatedPublicMethods"
+    impl="com.guidewire.pc.domain.product.impl.SimpleEffDatedImpl"/>
+  <column
+    createhistogram="true"
+    desc="Effective date of this row."
+    name="EffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    createhistogram="true"
+    desc="Expiration date of this row or NULL in the database if this row never expires."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="EffectiveDate"
+    operator="LT"
+    secondcolumnname="ExpirationDate"/>
+  <fulldescription><![CDATA[Delegate that can be implemented for things that have effective and expiration dates but are not revisioned.]]></fulldescription>
+</delegate>

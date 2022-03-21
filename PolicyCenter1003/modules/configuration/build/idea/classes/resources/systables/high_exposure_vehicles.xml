@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<import>
+  <HighExposureVehicle public-id="pc:zkcio40tantsk17fedfril28an8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 GTB</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zniis1kueqgi4fvotpi3aelt6ib">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 Spider</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zlfhc9uod1icv0dtvr8n7o7invb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 Spider</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zl8j8coh3lmli056ial18ilujo8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 Spider</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z7bhea7ff4fqg336boo9bglq5rb">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zt9hqie42h8thani5k4tsr8h4l8">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2013</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zquiart0vlpvifedmoiorj30hu9">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2013</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zeijk4tm779s4ahvro5mds75lqa">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>F12 Berlinetta</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zirhmf8e4lsnt73t4rf84miv4c9">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>California T</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z4uj8cm4k7egv6nqtja0233149b">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2012</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zqajus431j54879g6d4de5i3dvb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2012</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zs9h4ck8gstsg2akt1hd8h18p59">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 Spider</VehicleModel>
+    <Year>2013</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z06juev13bjvl621b06hdfas4lb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zb4jsf8f2rmtu49j2phn95aqcc8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>F12 tdf</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z10ji0p3dnfsq1a3smfqbc2br3b">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 GTB</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zbihkknhf1i2fddp4m65a1pbpda">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>LaFerarri</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zppj007vq9pkm3jd253v2bkion8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>LaFerarri</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zheiof3k6i3s97crn3lpc5m5t6a">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>California T</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zrmioog74ffhc1bctj03kk31ppb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>F12 tdf</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z9kg25vj8fl8h9ptmr092jlr869">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Huracan</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zqgjkhveqljo9acmtchep134efa">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>LaFerarri</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z52i6m1q8meec3s0ufrusgqb7sb">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Centanario</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zsmicid7sjjihcke4n5bf2q8198">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Huracan</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z38gks70akev6d9r7hquf8c0vma">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z64g45g10c9bbdn3elakcqjdsra">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2011</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z2hh4kdj29nunai39u6qs46p4j9">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2010</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zh9g8m9ijgvbl9537ttld5a8cl9">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>LaFerarri</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:ztahct0pl85e2dcvieo826t2qlb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 GTB</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z5ag4lt5j03i9795tl61sngdu0b">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Huracan</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z47gstotrfrds11r7h27nq6rtlb">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2011</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:ztmioh03he3gs5ogoh9o7uk81kb">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>California T</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zmrg697fqprt6cjqdt8gc3he31b">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>F12 tdf</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z44hav8d8suahbur6rru7up10g9">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z27hsg2migsls6t9daavtt7qhc9">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2016</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zhnhig1f43nm43vk9sbo9du3t8a">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>F12 tdf</VehicleModel>
+    <Year>2015</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z1qgo2q7o8b2seap6gh5plh82jb">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z1dgo6vs07af41nqbavq1igeor8">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Huracan</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zo8jui1a6ek573d0ld94fhvku39">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>GTC4 Lusso</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zcgioc67tv3qp74p60ec4fpr5t8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>LaFerarri</VehicleModel>
+    <Year>2013</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:z5mgkacns3d8r8hqslfaj918re8">
+    <VehicleMake>Ferarri</VehicleMake>
+    <VehicleModel>488 Spider</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zg2iuaams4g0q0d19vh755plfpa">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Centanario</VehicleModel>
+    <Year>2017</Year>
+  </HighExposureVehicle>
+  <HighExposureVehicle public-id="pc:zjii2jmjigi8r7cvigi9p4bka1a">
+    <VehicleMake>Lamborghini</VehicleMake>
+    <VehicleModel>Aventador</VehicleModel>
+    <Year>2014</Year>
+  </HighExposureVehicle>
+</import>

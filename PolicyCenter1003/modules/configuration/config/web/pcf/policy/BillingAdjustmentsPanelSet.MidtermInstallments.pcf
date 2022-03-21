@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    classList="pc-full-width"
+    id="BillingAdjustmentsPanelSet"
+    mode="MidtermInstallments">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <PanelRow
+      id="BillingPanel">
+      <PanelColumn>
+        <DetailViewPanel>
+          <InputColumn>
+            <Label
+              id="BillingIssuanceOptions"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.BillingIssuanceOptions&quot;)"
+              visible="policyPeriodBillingInstructionsManager.OverridingBillingAllocationAvailable"/>
+            <CheckBoxInput
+              editable="perm.PolicyPeriod.overridebilling"
+              id="OverrideBillingAllocation"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.OverrideBillingAllocation&quot;)"
+              value="policyPeriod.OverrideBillingAllocation"
+              visible="policyPeriodBillingInstructionsManager.OverridingBillingAllocationAvailable">
+              <PostOnChange/>
+            </CheckBoxInput>
+            <TextInput
+              editable="perm.PolicyPeriod.overridebilling"
+              formatType="percentagePoints"
+              id="BillImmediately"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.BillImmediately&quot;)"
+              value="policyPeriod.BillImmediatelyPercentage"
+              valueType="java.math.BigDecimal"
+              visible="policyPeriodBillingInstructionsManager.OverridingBillingAllocationAvailable and policyPeriod.OverrideBillingAllocation"/>
+            <RangeInput
+              editable="perm.PolicyPeriod.overridebilling and policyPeriod.OverrideBillingAllocation"
+              id="AllocationOfRemainder"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.AllocationOfRemainder&quot;)"
+              required="false"
+              value="policyPeriod.AllocationOfRemainder"
+              valueRange="typekey.BillingRemainderAllocate.getTypeKeys( true )"
+              valueType="typekey.BillingRemainderAllocate"
+              visible="policyPeriodBillingInstructionsManager.OverridingBillingAllocationAvailable and policyPeriod.OverrideBillingAllocation"/>
+            <Label
+              id="SpecialHandling"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.OverrideChangeInCostBilling&quot;)"
+              visible="perm.PolicyPeriod.overridebilling and policyPeriodBillingInstructionsManager.SpecialHandlingAvailable"/>
+            <RangeInput
+              editable="true"
+              id="SpecialHandlingOption"
+              label="DisplayKey.get(&quot;Web.Policy.Payment.MidtermChange.SelectSpecialHandlingOptions&quot;)"
+              value="policyPeriod.SpecialHandling"
+              valueRange="policyPeriod.AvailableSpecialHandlingTypes"
+              valueType="typekey.SpecialHandling"
+              visible="perm.PolicyPeriod.overridebilling and policyPeriodBillingInstructionsManager.SpecialHandlingAvailable">
+              <PostOnChange
+                onChange="policyPeriodBillingInstructionsManager.synchronizeAfterCommit(CurrentLocation)"/>
+            </RangeInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+    <PanelRow
+      id="PaymentSchedulePanel">
+      <PanelColumn
+        classList="pc-full-width-column">
+        <DetailViewPanel>
+          <InputColumn>
+            <InputDivider/>
+            <Label
+              label="DisplayKey.get(&quot;Web.Policy.Payment.Schedule&quot;)"/>
+            <ListViewInput
+              def="BillingAdjustmentsInstallmentsLV(policyPeriod, policyPeriodBillingInstructionsManager.MaybeGetInstallmentPlanAsArray, policyPeriodBillingInstructionsManager)"
+              editable="false"
+              labelAbove="true"
+              visible="policyPeriod.InstallmentsPlanSelected">
+              <Toolbar/>
+            </ListViewInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+  </PanelSet>
+</PCF>

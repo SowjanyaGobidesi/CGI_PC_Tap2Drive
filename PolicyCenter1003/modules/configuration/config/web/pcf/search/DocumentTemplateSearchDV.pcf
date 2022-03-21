@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="DocumentTemplateSearchDV">
+    <Require
+      name="documentTemplateSearchCriteria"
+      type="DocumentTemplateSearchCriteria"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="DocumentType"
+        label="DisplayKey.get(&quot;Web.DocumentTemplateSearch.DocumentType&quot;)"
+        required="false"
+        value="documentTemplateSearchCriteria.Type"
+        valueType="typekey.DocumentType"/>
+      <TypeKeyInput
+        editable="true"
+        id="Language"
+        label="DisplayKey.get(&quot;Web.DocumentTemplateSearch.Language&quot;)"
+        required="false"
+        value="documentTemplateSearchCriteria.Language"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+      <TextInput
+        editable="true"
+        id="Keywords"
+        label="DisplayKey.get(&quot;Web.DocumentTemplateSearch.Keywords&quot;)"
+        required="false"
+        value="documentTemplateSearchCriteria.Keywords"/>
+      <DateInput
+        editable="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;Web.DocumentTemplateSearch.EffectiveDate&quot;)"
+        required="false"
+        value="documentTemplateSearchCriteria.effectivedate"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

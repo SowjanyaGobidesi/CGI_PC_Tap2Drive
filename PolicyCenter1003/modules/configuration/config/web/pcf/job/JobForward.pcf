@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    canVisit="job.Viewable"
+    desc="Complex forward that determines what page to go to for a given job"
+    id="JobForward"
+    onBeforeForward="gw.api.web.util.SessionUtil.addPoliciesToList(job)"
+    parent="PolicyForward()">
+    <LocationEntryPoint
+      signature="JobForward(job : Job)"/>
+    <LocationEntryPoint
+      signature="JobForward(job : Job, policyPeriod : PolicyPeriod)"/>
+    <LocationEntryPoint
+      signature="JobForward(job : Job, policyPeriod : PolicyPeriod, wizardStep : String)"/>
+    <LocationEntryPoint
+      signature="JobForward(job : Job, activity : Activity)"/>
+    <LocationEntryPoint
+      signature="JobForward(job : Job, policyPeriod : PolicyPeriod, activity : Activity)"/>
+    <Variable
+      name="job"
+      type="Job"/>
+    <Variable
+      initialValue="job.LatestPeriod"
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="null"
+      name="wizardStep"
+      type="String"/>
+    <Variable
+      name="activity"
+      type="Activity"/>
+    <Variable
+      name="jobUIHelper"
+      type="gw.web.job.JobUIHelper"/>
+    <ForwardCondition
+      action="ArchivedLocationGroup.go(policyPeriod)"
+      condition="policyPeriod.PolicyTerm.CheckArchived"/>
+    <ForwardCondition
+      action="jobUIHelper.goToSubmissionWizard(job as Submission, policyPeriod, wizardStep, activity)"
+      condition="job typeis Submission"/>
+    <ForwardCondition
+      action="jobUIHelper.goToIssuanceWizard(job as Issuance, policyPeriod, activity)"
+      condition="job typeis Issuance"/>
+    <ForwardCondition
+      action="jobUIHelper.goToPolicyChangeWizard(job as PolicyChange, policyPeriod, activity)"
+      condition="job typeis PolicyChange"/>
+    <ForwardCondition
+      action="jobUIHelper.goToRenewalWizard(job as Renewal, policyPeriod, wizardStep, activity)"
+      condition="job typeis Renewal"/>
+    <ForwardCondition
+      action="jobUIHelper.goToAuditWizard(job as Audit, policyPeriod, activity)"
+      condition="job typeis Audit"/>
+    <ForwardCondition
+      action="jobUIHelper.goToCancellationWizard(job as Cancellation, policyPeriod, activity)"
+      condition="job typeis Cancellation"/>
+    <ForwardCondition
+      action="jobUIHelper.goToReinstatementWizard(job as Reinstatement, policyPeriod, activity)"
+      condition="job typeis Reinstatement"/>
+    <ForwardCondition
+      action="jobUIHelper.goToRewriteWizard(job as Rewrite, policyPeriod, wizardStep, activity)"
+      condition="job typeis Rewrite"/>
+    <ForwardCondition
+      action="jobUIHelper.goToRewriteNewAccountWizard(job as RewriteNewAccount, policyPeriod, wizardStep, activity)"
+      condition="job typeis RewriteNewAccount"/>
+  </Forward>
+</PCF>

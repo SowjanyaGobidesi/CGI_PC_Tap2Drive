@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<gx-model type="gw.api.productmodel.CovTermPattern" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="Description" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Name" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Priority" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="RefCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Required" type="boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+  </includes>
+</gx-model>

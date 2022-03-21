@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="MotorVehicleRecordSummary"
+    selectionName="selectedDriver"
+    selectionType="PolicyDriver">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <ListViewPanel>
+      <Variable
+        initialValue="policyPeriod.PersonalAutoLine.PolicyDrivers"
+        name="policyDrivers"
+        type="entity.PolicyDriver[]"/>
+      <RowIterator
+        editable="false"
+        elementName="policyDriver"
+        id="policyDriverIterator"
+        pageSize="0"
+        value="policyDrivers"
+        valueType="entity.PolicyDriver[]">
+        <Variable
+          initialValue="policyDriver.AccountContactRole.AccountContact.Contact as Person"
+          name="policyDriverPerson"
+          recalculateOnRefresh="true"
+          type="entity.Person"/>
+        <Variable
+          initialValue="policyDriver.PolicyDriverMVR.OrderStatus == typekey.MVRStatus.TC_RECEIVED"
+          name="mvrReceived"
+          recalculateOnRefresh="true"
+          type="boolean"/>
+        <Row>
+          <TextCell
+            id="Name"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Name&quot;)"
+            value="policyDriver.DisplayName"/>
+          <TypeKeyCell
+            id="Gender"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Gender&quot;)"
+            value="policyDriverPerson.Gender"
+            valueType="typekey.GenderType"/>
+          <TextCell
+            align="right"
+            id="Age"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Age&quot;)"
+            value="policyDriverPerson.DateOfBirth != null ? String.valueOf(policyDriverPerson.Age) : &quot;&quot;"/>
+          <TypeKeyCell
+            id="LicenseState"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.LicenseState&quot;)"
+            value="policyDriver.LicenseState"
+            valueType="typekey.Jurisdiction"/>
+          <TextCell
+            id="MVRStatus"
+            label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.MVRStatus&quot;)"
+            value="policyDriver.MVROrderStatus"/>
+          <DateCell
+            id="MVRDate"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.ReportDate&quot;)"
+            value="mvrReceived ? policyDriver.PolicyDriverMVR.StatusDate : null"/>
+          <TextCell
+            id="NumAccidents"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.NumberOfAccidents&quot;)"
+            value="policyDriver.PolicyDriverMVR.NumberOfAccidents"
+            valueType="java.lang.Integer"/>
+          <TextCell
+            id="NumViolations"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.NumberOfViolations&quot;)"
+            value="policyDriver.PolicyDriverMVR.NumberOfViolations"
+            valueType="java.lang.Integer"/>
+          <TextCell
+            id="Points"
+            label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Points&quot;)"
+            value="policyDriver.PolicyDriverMVR.Points"
+            valueType="java.lang.Integer"/>
+          <TextCell
+            align="center"
+            id="DoNotOrderMVR"
+            label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.DoNotOrderMVR&quot;)"
+            required="true"
+            value="policyDriver.DoNotOrderMVRDisplay"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+    <CardViewPanel
+      hideTabIfSingle="true">
+      <Variable
+        initialValue="selectedDriver.PolicyDriverMVR != null ? selectedDriver.PolicyDriverMVR.getMVRDetails() : null"
+        name="selectedDriverRecentMVROrder"
+        recalculateOnRefresh="true"
+        type="gw.api.motorvehiclerecord.IMVROrder"/>
+      <Card
+        id="MVRDetails"
+        title="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.MVRReportDetails&quot;)">
+        <DetailViewPanel>
+          <InputColumn>
+            <InputSet>
+              <Label
+                label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.NoRecordsOnFile&quot;)"
+                visible="mvrUnavailable(selectedDriverRecentMVROrder)"/>
+              <ButtonInput
+                action="DriverMVRInfoPopup.push({selectedDriverRecentMVROrder})"
+                available="mvrAvailable(selectedDriverRecentMVROrder)"
+                id="MVRReportButton"
+                value="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.MVRReportDetails&quot;)"/>
+            </InputSet>
+          </InputColumn>
+        </DetailViewPanel>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[function mvrUnavailable(mvrOrder : gw.api.motorvehiclerecord.IMVROrder) : boolean {
+  return mvrOrder.OrderStatus == typekey.MVRStatus.TC_ORDERED
+}
+
+function mvrAvailable(mvrOrder : gw.api.motorvehiclerecord.IMVROrder) : boolean {
+  return mvrOrder.OrderStatus == typekey.MVRStatus.TC_RECEIVED
+}]]></Code>
+  </ListDetailPanel>
+</PCF>

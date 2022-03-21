@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewmyaccounts"
+    id="DesktopAccounts"
+    title="DisplayKey.get(&quot;Web.DesktopAccounts&quot;)">
+    <LocationEntryPoint
+      signature="DesktopAccounts()"/>
+    <Screen
+      id="DesktopAccountsScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.DesktopAccounts&quot;)"/>
+      <Toolbar/>
+      <PanelRef
+        def="DesktopAccountsLV()"
+        mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+    </Screen>
+  </Page>
+</PCF>

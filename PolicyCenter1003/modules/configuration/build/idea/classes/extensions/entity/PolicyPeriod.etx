@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="PolicyPeriod">
+  <!-- Line-specific transaction arrays.  Since the lines could be removed in a multi-line policy, but still need transactions generated
+       in order to refund money for that line, we can't rely on attaching the transactions to the line or on getting the transactions
+       off of the line.-->
+  <monetaryamount
+    amountColumnName="DepositCollected"
+    amountRange="nonnegative"
+    deprecated="true"
+    desc="The deposit amount collected"
+    name="DepositCollected"
+    nullok="true"/>
+  <array arrayentity="BATransaction"
+         name="BATransactions"
+         owner="true"/>
+  <array arrayentity="BOPTransaction"
+         name="BOPTransactions"
+         owner="true"/>
+  <array arrayentity="CPTransaction"
+         name="CPTransactions"
+         owner="true"/>
+  <array arrayentity="GLTransaction"
+         name="GLTransactions"
+         owner="true"/>
+  <array arrayentity="IMTransaction"
+         name="IMTransactions"
+         owner="true"/>
+  <array arrayentity="PATransaction"
+         name="PATransactions"
+         owner="true"/>
+  <array arrayentity="WCTransaction"
+         name="WCTransactions"
+         owner="true"/>
+  <array arrayentity="HOPTransaction" 
+         name="HOPTransactions"
+         owner="true"/>
+  <!-- Insert transaction arrays for additional lines here -->
+  <index desc="Performance index to address problems with consistency checks on policy periods." name="PPPerf1" unique="true">
+    <indexcol keyposition="1" name="ID"/>
+    <indexcol keyposition="2" name="PeriodStart"/>
+    <indexcol keyposition="3" name="PeriodEnd"/>
+  </index>
+  <index desc="Performance index to address problems with consistency checks on policy periods linked to policies." name="PPPerf2" unique="true" expectedtobecovering="true">
+    <indexcol keyposition="1" name="PolicyID"/>
+    <indexcol keyposition="2" name="Retired"/>
+    <indexcol keyposition="3" name="ID"/>
+  </index>
+</extension>

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="JobWizardToolbarButtonSet"
+    mode="Rewrite">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      initialValue="job as Rewrite"
+      name="rewrite"
+      recalculateOnRefresh="true"
+      type="Rewrite"/>
+    <Variable
+      initialValue="policyPeriod.RewriteProcess"
+      name="rewriteProcess"
+      type="gw.job.RewriteProcess"/>
+    <Variable
+      initialValue="gw.web.job.JobUIHelper.getQuoteType(policyPeriod)"
+      name="quoteType"
+      recalculateOnRefresh="true"
+      type="gw.web.job.JobUIHelper.QuoteType"/>
+    <Variable
+      initialValue="new gw.lob.common.SideBySideUIHelper(policyPeriod, wizard, jobWizardHelper)"
+      name="sideBySideHelper"
+      type="gw.lob.common.SideBySideUIHelper"/>
+    <Variable
+      initialValue="(not policyPeriod.UWLockedAndNoOverride) and rewriteProcess.canMakeNewVersion().Okay "
+      name="canPerformNewVersion"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="sideBySideHelper.canAttemptSideBySide()"
+      name="canPerformSideBySide"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.Job.hasMultiplePeriods()and policyPeriod.Job.SideBySide"
+      name="canViewSideBySide"
+      type="boolean"/>
+    <ToolbarButton
+      action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;uw_review_approved&quot;),&quot;UWApproval&quot;)"
+      id="Unlock"
+      label="DisplayKey.get(&quot;Job.Operation.ReleaseLock&quot;)"
+      shortcut="K"
+      visible="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod) and rewriteProcess.canReleaseLock()"/>
+    <ToolbarButtonSetRef
+      mode="quoteType"
+      toolbarButtonSet="QuoteTypeToolbarButtonSet(policyPeriod, jobWizardHelper)"
+      visible="quoteType != null"></ToolbarButtonSetRef>
+    <ToolbarButton
+      action="rewriteProcess.edit(); wizard.saveDraft(); jobWizardHelper.goToVisibleStep(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.Edit.Confirm&quot;)"
+      id="EditPolicy"
+      label="DisplayKey.get(&quot;Job.Operation.EditWorkOrder&quot;)"
+      shortcut="E"
+      visible="rewriteProcess.canEdit().Okay"/>
+    <ToolbarButton
+      action="wizard.saveDraft()"
+      hideIfReadOnly="true"
+      id="Draft"
+      label="DisplayKey.get(&quot;Button.SaveDraft&quot;)"
+      shortcut="S"/>
+    <ToolbarButton
+      id="Versions"
+      label="DisplayKey.get(&quot;Web.MultiQuoteWizardToolbar.Versions&quot;)"
+      showConfirmMessage="false"
+      visible="canPerformNewVersion or canPerformSideBySide or canViewSideBySide">
+      <MenuItem
+        action="jobWizardHelper.attemptNewVersion(policyPeriod, job)"
+        id="NewVersion"
+        label="sideBySideHelper.getVersionLabel()"
+        shortcut="V"
+        visible="canPerformNewVersion"/>
+      <MenuItem
+        action="sideBySideHelper.attemptSideBySide(2)"
+        id="SideBySide"
+        label="DisplayKey.get(&quot;Web.Job.SideBySide.Go&quot;)"
+        shortcut="X"
+        visible="canPerformSideBySide"/>
+      <MenuItem
+        action="jobWizardHelper.goToStep(&quot;SideBySide&quot;)"
+        id="ViewSideBySide"
+        label="DisplayKey.get(&quot;Web.Job.SideBySide.ViewSideBySide&quot;)"
+        visible="canViewSideBySide"/>
+    </ToolbarButton>
+    <ToolbarButton
+      action="jobWizardHelper.requestIssueJob(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.IssuePolicy.Confirm&quot;)"
+      id="BindRewrite"
+      label="DisplayKey.get(&quot;Job.Operation.IssuePolicy&quot;)"
+      shortcut="I"
+      visible="rewriteProcess.canRewrite().Okay"/>
+    <ToolbarButton
+      action="jobWizardHelper.withdraw(policyPeriod); PolicyFileForward.go(policyPeriod.PolicyNumber);"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.Withdraw.Confirm&quot;)"
+      id="WithdrawJob"
+      label="DisplayKey.get(&quot;Job.Operation.Withdraw&quot;)"
+      shortcut="W"
+      visible="rewriteProcess.canWithdraw().Okay"/>
+  </ToolbarButtonSet>
+</PCF>

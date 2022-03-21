@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="WorkItem to asynchronously quote PolicyPeriod"
+  displayName="AsyncQuotingWorkItem"
+  entity="AsyncQuotingWorkItem"
+  supertype="BaseQuotingWorkItem">
+</subtype>

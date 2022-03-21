@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AssignableQueueDetailDV">
+    <Require
+      name="assignableQueue"
+      type="AssignableQueue"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.AssignableQueueDetailDV.AssignableQueue&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Admin.AssignableQueueDetailDV.Name&quot;)"
+        required="true"
+        value="assignableQueue.Name"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Admin.AssignableQueueDetailDV.Description&quot;)"
+        value="assignableQueue.Description"/>
+      <BooleanRadioInput
+        editable="true"
+        id="SubGroupVisible"
+        label="DisplayKey.get(&quot;Web.Admin.AssignableQueueDetailDV.SubGroupVisible&quot;)"
+        required="true"
+        value="assignableQueue.SubGroupVisible"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

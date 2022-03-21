@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="LookupTableDefinition">
+  <Columns>
+    <Column
+      beanPath="LookupTableDefinition.TableName"
+      name="TableName"/>
+    <Column
+      beanPath="LookupTableDefinition.TableCode"
+      name="TableCode"/>
+  </Columns>
+  <DisplayName>TableName + " (" + TableCode + ")" </DisplayName>
+</Entity>

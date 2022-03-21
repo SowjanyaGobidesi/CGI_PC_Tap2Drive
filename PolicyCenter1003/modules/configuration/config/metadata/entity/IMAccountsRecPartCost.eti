@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- ===== IM Accounts Receivable Part Costs ===== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Costs for inland marine accounts receivable part"
+  entity="IMAccountsRecPartCost"
+  supertype="IMTaxableCost">
+  <foreignkey
+    fkentity="IMAccountsRecPart"
+    name="IMAccountsRecPart"
+    nullok="false"/>
+</subtype>

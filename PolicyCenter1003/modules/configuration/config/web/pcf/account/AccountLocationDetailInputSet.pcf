@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AccountLocationDetailInputSet">
+    <Require
+      name="accountLocation"
+      type="AccountLocation"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;city&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="cityhandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;county&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="countyhandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;postalcode&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="pchandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <BooleanRadioInput
+      editable="accountLocation.New"
+      id="NonSpecificLocation"
+      label="DisplayKey.get(&quot;Web.Account.Locations.LocationIsNonSpecific&quot;)"
+      required="true"
+      value="accountLocation.NonSpecific">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="true"
+      id="LocationCode"
+      label="DisplayKey.get(&quot;Web.Account.Locations.LocationCode&quot;)"
+      value="accountLocation.LocationCode"/>
+    <TextInput
+      editable="true"
+      id="LocationName"
+      label="DisplayKey.get(&quot;Web.Account.Locations.LocationName&quot;)"
+      value="accountLocation.LocationName"/>
+    <InputSetRef
+      def="AddressInputSet(new gw.pcf.accountlocation.AccountLocationAddressOwner(accountLocation))"
+      mode="accountLocation.CountryCode"/>
+    <TextInput
+      editable="true"
+      id="AddressDescription"
+      label="DisplayKey.get(&quot;Web.Account.Locations.Description&quot;)"
+      value="accountLocation.Description"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.EntityPhoneDelegate(accountLocation, accountLocation#Phone), DisplayKey.get(&quot;Web.Account.Locations.Phone&quot;)))"
+      editable="true"
+      id="Phone"/>
+    <TextInput
+      editable="true"
+      id="EmployeeCount"
+      label="DisplayKey.get(&quot;Web.Account.Locations.EmployeeCount&quot;)"
+      value="accountLocation.EmployeeCount"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

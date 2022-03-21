@@ -1,0 +1,18 @@
+package rules.EventMessage.EventFired_dir.Resolver_dir
+
+uses gw.plugin.multicluster.resolver.ResolverMessageCreationUtil
+
+@gw.rules.RuleName("Purge Policy")
+internal class PurgePolicy {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis Policy && messageContext.EventName == entity.Policy.POLICYPURGED_EVENT
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    ResolverMessageCreationUtil.createPurgeMessage(messageContext)
+/*end00rule*/
+  }
+}

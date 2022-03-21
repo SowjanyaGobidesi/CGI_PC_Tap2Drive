@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="contingency for policy"
+  entity="Contingency"
+  loadable="false"
+  table="contingency"
+  type="retireable">
+  <column
+    desc="title for contingency"
+    name="Title"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="description for contingency"
+    name="Description"
+    nullok="false"
+    type="text"/>
+  <column
+    desc="Due Date"
+    name="DueDate"
+    nullok="false"
+    type="datetime"/>
+  <typekey
+    desc="Contingency status"
+    name="Status"
+    nullok="false"
+    typelist="ContingencyStatus"/>
+  <foreignkey
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+  <foreignkey
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="true" />
+  <typekey
+    desc="The action that will be taken if this contingency is not resolved successfully"
+    name="Action"
+    nullok="false"
+    typelist="ContingencyAction"/>
+  <foreignkey
+    columnName="CloseUserID"
+    desc="The user who closed the Contingency"
+    fkentity="User"
+    name="CloseUser"
+    nullok="true"/>
+  <column
+    desc="The date when the Contingency was closed"
+    name="CloseDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="date when action will be initiated if contingency is still unresolved"
+    name="ActionStartDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    default="false"
+    desc="true if action has started"
+    name="ActionStarted"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="Activity"
+    desc="Activities associated with this Contingency"
+    name="Activities"/>
+  <array
+    arrayentity="Note"
+    deprecated="true"
+    desc="Use Contingency.queryNotes instead. Usage of this property gives access to all Notes without respect user permissions"
+    name="Notes"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.note.NoteContainer"
+    impl="com.guidewire.pc.domain.policy.impl.ContingencyImpl"/>
+  <array
+    arrayentity="Document"
+    deprecated="true"
+    desc="Use Contingency.queryDocuments(includeHidden) instead. Usage of this property gives access to all Documents without respect user permissions"
+    name="Documents"/>
+  <implementsInterface
+    iface="gw.api.domain.document.DocumentContainer"
+    impl="com.guidewire.pc.domain.policy.impl.ContingencyImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <array
+    arrayentity="ContingencyJob"
+    name="ContingencyJobs"/>
+</entity>

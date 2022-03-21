@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <JobWizard
+    acceleratedMenuActions="MultiQuoteAcceleratedMenuActions(issuance, policyPeriod, jobWizardHelper)"
+    canEdit="(not issuance.Complete) and perm.Issuance.edit(issuance)"
+    canVisit="perm.Issuance.view(issuance)"
+    desc="The main Wizard for submitting a Policy."
+    id="IssuanceWizard"
+    independentStepsTitle="DisplayKey.get(&quot;Web.PolicyFile.ToolsMenuTitle&quot;)"
+    independentStepsTitleIcon="&quot;tools_nav&quot;"
+    independentStepsTitleIconType="svgFileName"
+    infoBar="JobWizardInfoBar(issuance, policyPeriod)"
+    initialStep="jobWizardHelper.getInitialWizardStepId( policyPeriod )"
+    isDraftOnEnter="true"
+    jobType="Issuance"
+    menuActions="WizardMenuActions(jobWizardHelper,issuance,policyPeriod)"
+    onConcurrentDataChange="CurrentLocation.cancel(); JobForward.go(issuance)"
+    parent="JobForward(issuance)"
+    subtitle="policyPeriod.Status.DisplayName"
+    title="DisplayKey.get(&quot;Web.IssuanceWizard.Title&quot;, issuance.JobNumber)">
+    <LocationEntryPoint
+      signature="IssuanceWizard(issuance : Issuance, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="issuance"
+      type="Issuance"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; policyPeriod.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="openForEditInit.get()"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Variable
+      initialValue="policy.Account"
+      name="account"
+      recalculateOnRefresh="true"
+      type="entity.Account"/>
+    <Variable
+      initialValue="policy.Product.PublicID"
+      name="productCode"
+      type="String"/>
+    <Variable
+      initialValue="new gw.api.web.job.JobWizardHelper(CurrentLocation)"
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="!policyPeriod.Promoted and perm.Issuance.edit(issuance)"
+      name="billingPageEditable"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.billing.PolicyPeriodBillingInstructionsManager()"
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <JobWizardStep
+      beforeSave="gw.policy.PolicyPeriodValidation.validateOfferingAnswers(policyPeriod)"
+      id="Offering"
+      onEnter="if (openForEdit) { gw.web.productmodel.ProductModelSyncIssuesHandler.syncOffering(policyPeriod, jobWizardHelper );                                                  gw.web.productmodel.ProductModelSyncIssuesHandler.syncQuestions({policyPeriod}, jobWizardHelper )}"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod); if (openForEdit) {                     gw.web.productmodel.ProductModelSyncIssuesHandler.syncPolicyTerm(policyPeriod, jobWizardHelper);                     gw.web.productmodel.ProductModelSyncIssuesHandler.syncPolicyLines(jobWizardHelper)               }"
+      save="openForEdit"
+      screen="OfferingScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.Offerings&quot;)"
+      visible="policy.Product.Offerings.Count &gt; 0"/>
+    <WizardStepGroup
+      id="LOBWizardStepGroup"
+      label="DisplayKey.get(&quot;Web.Wizard.LineWizardStepGroup&quot;)">
+      <JobWizardStep
+        id="PolicyInfo"
+        onEnter="if (openForEdit) { gw.web.productmodel.ProductModelSyncIssuesHandler.syncPolicyTerm(policyPeriod, jobWizardHelper) }"
+        onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+        save="openForEdit"
+        screen="IssuanceWizard_PolicyInfoScreen(issuance, policyPeriod, openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.PolicyInfo&quot;)"/>
+      <WizardStepSetRef
+        def="LineWizardStepSet(issuance, policyPeriod, jobWizardHelper, openForEdit)"
+        mode="productCode"/>
+    </WizardStepGroup>
+    <JobWizardStep
+      id="RiskAnalysis"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="openForEdit"
+      screen="Job_RiskAnalysisScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.Job.Policy.RiskAnalysis&quot;)"
+      visible="perm.System.viewriskevalissues or perm.System.viewriskpriorpolicies or perm.System.viewriskclaims or perm.System.viewriskpriorlosses"/>
+    <JobWizardStep
+      id="PolicyReview"
+      onEnter="policyPeriod.AllAccountSyncables.each(\ a -&gt; a.prepareForDiff())"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="IssuanceWizard_PolicyReviewScreen(issuance, policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.PolicyReview&quot;)"/>
+    <JobWizardStep
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewQuote"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="IssuanceWizard_QuoteScreen(issuance, policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.ViewQuote&quot;)"
+      visible="!policyPeriod.MultiLine"/>
+    <JobWizardStep
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewMultiLineQuote"
+      mode="productCode"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="IssuanceWizard_MultiLine_QuoteScreen(issuance, policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.ViewQuote&quot;)"
+      visible="policyPeriod.MultiLine"/>
+    <JobWizardStep
+      available="policyPeriod.JobProcess.canViewForms()"
+      id="Forms"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="openForEdit"
+      screen="FormsScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.PolicyLines.Forms&quot;)"/>
+    <JobWizardStep
+      allowFinish="false"
+      available="policyPeriod.JobProcess.canViewBillingInfo()"
+      beforeSave="policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod)"
+      id="BillingInfo"
+      onEnter="policyPeriodBillingInstructionsManager.populateFromPolicyPeriod(policyPeriod)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="(!policyPeriod.Promoted) and perm.Issuance.edit(issuance)"
+      screen="IssuanceWizard_PaymentScreen(issuance, policyPeriod, billingPageEditable, jobWizardHelper, policyPeriodBillingInstructionsManager)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.Payment&quot;)"/>
+    <WizardStepSetRef
+      def="JobWizardToolsMenuWizardStepSet(jobWizardHelper, policyPeriod)"/>
+  </JobWizard>
+</PCF>

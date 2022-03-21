@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPExclusionLookup"
+  desc="An availability lookup for HOP exclusion patterns."
+  supertype="ExclusionLookup">
+  <typekey
+    name="CoveragePartType"
+    nullok="true"
+    typefilter="HOPCoveragePartType"
+    typelist="CoveragePartType"/>
+  <typekey
+    name="HOPCoverageForm"
+    nullok="true"
+    typelist="HOPCoverageForm"/>
+</subtype>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="AccountHolder"
+  supertype="AccountContactRole">
+  <implementsInterface
+    iface="gw.pc.account.entity.AccountHolder"
+    impl="com.guidewire.pc.domain.account.impl.AccountHolderImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.account.impl.AccountHolderInternal"
+    impl="com.guidewire.pc.domain.account.impl.AccountHolderImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pc.domain.account.impl.AccountHolderImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.account.impl.AccountHolderImpl"/>
+  <fulldescription><![CDATA[
+    A company or person which requires one or more insurance products.
+
+  ]]></fulldescription>
+</subtype>

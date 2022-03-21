@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links location and answer references - answers are persisted text responses to questions in the location ui. Specific to PolicyCenter."
+  effDatedBranchType="PolicyPeriod"
+  entity="LocationAnswer"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="locationanswer"
+  type="effdated">
+  <implementsEntity
+    name="PCAnswerDelegate"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.question.LocationAnswerMatcher"/>
+  <foreignkey
+    fkentity="PolicyLocation"
+    name="PolicyLocation"
+    nullok="false"/>
+</entity>

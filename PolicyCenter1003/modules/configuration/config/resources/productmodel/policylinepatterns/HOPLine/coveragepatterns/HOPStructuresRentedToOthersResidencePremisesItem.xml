@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPStructuresRentedToOthersResidencePremisesItem"
+  coverageCategory="z1agog6qchb3edjifpa79drhgn9"
+  coverageSubtype="HOPDwellSchCovItemCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellScheduleItemCov"
+  owningEntityType="HOPDwellScheduleCovItem"
+  policyLinePattern="HOPLine"
+  priority="6700"
+  public-id="zcgjavp5vcr21558v9bucnfqj0b"
+  referenceDateByType="PolicyTerm">
+  <CovTerms>
+    <DirectCovTermPattern
+      aggregationModel="po"
+      codeIdentifier="HOPStructuresRentedToOthersResidencePremisesItemLimit"
+      coverageColumn="DirectTerm1"
+      lookupTableName="HOPDwellScheduleItemCovTerm"
+      modelType="Limit"
+      priority="100"
+      public-id="zfui0ffmtkk791n0hi96k2njjr9"
+      required="true"
+      restrictionModel="prp"
+      valueType="money">
+      <LimitsSet/>
+    </DirectCovTermPattern>
+  </CovTerms>
+  <Schedules/>
+</CoveragePattern>

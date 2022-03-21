@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ScheduledItemCovTermInput"
+    mode="Package">
+    <Require
+      name="covTerm"
+      type="gw.api.domain.covterm.CovTerm"/>
+    <Variable
+      initialValue="covTerm as gw.api.domain.covterm.PackageCovTerm"
+      name="packageCovTerm"
+      type="gw.api.domain.covterm.PackageCovTerm"/>
+    <RangeCell
+      editable="true"
+      id="TermValue"
+      required="packageCovTerm.Pattern.Required"
+      value="(packageCovTerm as gw.api.domain.covterm.PackageCovTerm&lt;gw.api.domain.covterm.PackageCovTerm&lt;gw.api.domain.covterm.PackageCovTerm&gt;&gt;).PackageValue"
+      valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(packageCovTerm as gw.api.domain.covterm.PackageCovTerm, true)"
+      valueType="gw.api.productmodel.CovTermPack&lt;gw.api.domain.covterm.PackageCovTerm&lt;gw.api.domain.covterm.PackageCovTerm&gt;&gt;"/>
+  </ModalCell>
+</PCF>

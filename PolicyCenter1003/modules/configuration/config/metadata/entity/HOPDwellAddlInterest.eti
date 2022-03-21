@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<subtype
+  displayName="Dwelling Additional Interest"
+  xmlns="http://guidewire.com/datamodel"
+  desc="An additional interest on a homeowner's dwelling"
+  entity="HOPDwellAddlInterest"
+  supertype="AddlInterestDetail">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPDwellAddlInterestMatcher"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.lob.hop.HOPDwellAddlInterestMergeableImpl"/>
+  <column
+    desc="Description of additional interest"
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Effective date for additional interest"
+    name="AddlIntEffDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Expiration date for additional interest"
+    name="AddlIntExpDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    fkentity="HOPDwelling"
+    name="HOPDwelling"
+    nullok="false"/>
+</subtype>

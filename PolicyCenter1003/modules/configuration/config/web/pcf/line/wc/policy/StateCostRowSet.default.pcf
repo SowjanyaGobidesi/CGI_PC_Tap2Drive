@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <RowSet
+    id="StateCostRowSet"
+    mode="default">
+    <Require
+      name="costWrapper"
+      type="gw.api.ui.CostWrapper"/>
+    <Variable
+      initialValue="costWrapper.Cost as WCCost"
+      name="aggCost"
+      type="entity.WCCost"/>
+    <Row
+      id="AggCostRow"
+      visible="costWrapper.Visible">
+      <TextCell
+        align="right"
+        id="LocNumber"
+        value="costWrapper.LocNumber"
+        valueType="java.lang.Integer"
+        wrap="false"/>
+      <TextCell
+        align="right"
+        id="ClassCode"
+        value="aggCost.ClassCode"
+        wrap="false"/>
+      <TextCell
+        align="left"
+        grow="true"
+        id="Description"
+        value="aggCost.Description"/>
+      <TextCell
+        align="right"
+        id="Basis"
+        value="aggCost.Basis == null or aggCost.Basis == 0 ? &quot;&quot; : aggCost.Basis.DisplayValue"
+        wrap="false"/>
+      <TextCell
+        align="right"
+        format="&quot;0.0000&quot;"
+        id="Rate"
+        value="aggCost.ActualAdjRate.DisplayValue"
+        wrap="false"/>
+      <MonetaryAmountCell
+        align="right"
+        formatType="currency"
+        id="TermAmount"
+        value="aggCost.ActualAmountBilling"
+        wrap="false"/>
+    </Row>
+  </RowSet>
+</PCF>

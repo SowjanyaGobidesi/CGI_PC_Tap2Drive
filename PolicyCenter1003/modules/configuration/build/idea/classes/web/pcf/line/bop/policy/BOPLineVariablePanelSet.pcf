@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="BOPLineVariablePanelSet">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="policyLine as BOPLine"
+      name="bopLine"
+      type="productmodel.BOPLine"/>
+    <Variable
+      initialValue="bopLine.Pattern.getCoverageCategoryByPublicId(&quot;BOPContractorCat&quot;)"
+      name="bopContractorCat"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="bopLine.Pattern.getCoverageCategoryByPublicId(&quot;BOPGuestCovCat&quot;)"
+      name="bopGuestCovCat"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <DetailViewPanel
+      id="BOPMotelCovsDV"
+      visible="bopLine.SmallBusinessType == TC_MOTEL">
+      <Variable
+        initialValue="bopGuestCovCat.coveragePatternsForEntity(BusinessOwnersLine).whereSelectedOrAvailable(bopLine, CurrentLocation.InEditMode)"
+        name="bopGuestCovCatCoveragePatterns"
+        recalculateOnRefresh="true"
+        type="gw.api.productmodel.CoveragePattern[]"/>
+      <InputColumn>
+        <InputIterator
+          elementName="coveragePattern"
+          forceRefreshDespiteChangedEntries="true"
+          id="BOPGuestCovs"
+          value="bopGuestCovCatCoveragePatterns"
+          valueType="gw.api.productmodel.CoveragePattern[]">
+          <InputSetRef
+            def="CoverageInputSet(coveragePattern, bopLine, true)"
+            mode="coveragePattern.PublicID"/>
+        </InputIterator>
+      </InputColumn>
+    </DetailViewPanel>
+    <DetailViewPanel
+      id="BOPContractorCovsDV"
+      visible="bopLine.SmallBusinessType == TC_CONTRACTOR or bopLine.SmallBusinessType==TC_CONTRACTOR_LAND">
+      <Variable
+        initialValue="bopContractorCat.coveragePatternsForEntity(BusinessOwnersLine).whereSelectedOrAvailable(bopLine, CurrentLocation.InEditMode)"
+        name="bopContractorCatCoveragePatterns"
+        recalculateOnRefresh="true"
+        type="gw.api.productmodel.CoveragePattern[]"/>
+      <InputColumn>
+        <InputIterator
+          elementName="coveragePattern"
+          forceRefreshDespiteChangedEntries="true"
+          id="BOPContractorCovs"
+          value="bopContractorCatCoveragePatterns"
+          valueType="gw.api.productmodel.CoveragePattern[]">
+          <InputSetRef
+            def="CoverageInputSet(coveragePattern, bopLine, true)"
+            mode="coveragePattern.PublicID"/>
+        </InputIterator>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

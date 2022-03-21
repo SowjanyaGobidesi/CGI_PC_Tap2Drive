@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ScheduledItemColumnInput"
+    mode="ForeignKey">
+    <Require
+      name="schedulePropertyInfo"
+      type="gw.api.productmodel.SchedulePropertyInfo"/>
+    <Require
+      name="scheduledItem"
+      type="ScheduledItem"/>
+    <Variable
+      initialValue="schedulePropertyInfo.createValueProvider(scheduledItem) as gw.api.productmodel.SchedulePropertyValueProvider&lt;KeyableBean&gt;"
+      name="valueProvider"
+      type="gw.api.productmodel.SchedulePropertyValueProvider&lt;KeyableBean&gt;"/>
+    <RangeCell
+      editable="true"
+      id="RangeValue"
+      required="schedulePropertyInfo.Required"
+      value="valueProvider.Value"
+      valueRange="gw.api.upgrade.Coercions.makeArray&lt;entity.KeyableBean&gt;(schedulePropertyInfo.ValueRange)"
+      valueType="entity.KeyableBean"/>
+  </ModalCell>
+</PCF>

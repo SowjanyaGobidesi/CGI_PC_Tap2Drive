@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="Lookupable"
+  name="Lookupable">
+  <plugin-gosu
+    gosuclass="gw.plugin.lookup.impl.PCSystemTableLookupPlugin"/>
+</plugin>

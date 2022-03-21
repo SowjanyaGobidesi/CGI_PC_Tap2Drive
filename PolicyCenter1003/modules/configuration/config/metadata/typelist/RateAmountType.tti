@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of credit or debit that the cost represents."
+  final="false"
+  name="RateAmountType">
+  <typecode
+    code="StdPremium"
+    desc="A standard premium."
+    name="Standard premium"
+    priority="1"/>
+  <typecode
+    code="NonstdPremium"
+    desc="A non-standard premium."
+    name="Non-standard Premium"
+    priority="2"/>
+  <typecode
+    code="TaxSurcharge"
+    desc="A tax or surcharge."
+    name="Tax or surcharge"
+    priority="3"/>
+  <typefilter
+    desc="Taxes and Surcharges. This filter groups additional tax and surcharge RateAmountTypes that a customer may want to add. The filter is used in PolicyPeriodImpl#getTaxAndSurcharges() to filter costs that are taxes and surcharges"
+    name="TaxesAndSurcharges">
+    <include
+      code="TaxSurcharge"/>
+  </typefilter>
+</typelist>

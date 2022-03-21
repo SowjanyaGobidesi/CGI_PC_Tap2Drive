@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A relationship between two accounts."
+  entity="AccountAccount"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="accountaccount"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.account.impl.AccountAccountInternal"
+    impl="com.guidewire.pc.domain.account.impl.AccountAccountImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.account.AccountAccountPublicMethods"
+    impl="com.guidewire.pc.domain.account.impl.AccountAccountImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <typekey
+    desc="The type of relationship from the perspective of the source account."
+    name="RelationshipType"
+    nullok="false"
+    typelist="AccountRelationshipType"/>
+  <foreignkey
+    desc="The source account in the relationship."
+    fkentity="Account"
+    name="SourceAccount"
+    nullok="false">
+  </foreignkey>
+  <foreignkey
+    desc="The target account in the relationship."
+    fkentity="Account"
+    name="TargetAccount"
+    nullok="false">
+  </foreignkey>
+</entity>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="Job" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.api.job.JobMethods" impl="gw.api.job.JobMethodsDefaultImpl"/>
+  <column-override
+    name="JobNumber"
+    supportsLinguisticSearch="true">
+  </column-override>
+  <index
+    name="JobNumberSearch" desc="Index for search by job number denorm"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="JobNumberDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="SubType"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+</extension>

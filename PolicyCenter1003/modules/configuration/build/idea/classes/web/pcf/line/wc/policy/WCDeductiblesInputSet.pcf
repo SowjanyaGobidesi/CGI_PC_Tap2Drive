@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="WCDeductiblesInputSet">
+    <Require
+      name="jurisdiction"
+      type="WCJurisdiction"/>
+    <Variable
+      initialValue="gw.api.productmodel.ClausePatternLookup.getCoveragePatternByPublicID(&quot;WCWorkCompDeductCov&quot;)"
+      name="deductibleCoveragePattern"
+      type="gw.api.productmodel.CoveragePattern"/>
+    <Variable
+      initialValue="gw.api.productmodel.CovTermPatternLookup.getByPublicID(&quot;WCDeductible&quot;)"
+      name="deductibleTermPattern"
+      type="gw.api.productmodel.CovTermPattern"/>
+    <Variable
+      initialValue="gw.web.line.wc.policy.WCDeductiblesInputSetUIHelper.getIndexes(jurisdiction)"
+      name="indexes"
+      recalculateOnRefresh="true"
+      type="java.lang.Integer[]"/>
+    <Variable
+      initialValue="gw.web.line.wc.policy.WCDeductiblesInputSetUIHelper.getDeductibleTerms(jurisdiction)"
+      name="deductibleTerms"
+      recalculateOnRefresh="true"
+      type="productmodel.PackageWCDeductibleType[]"/>
+    <Label
+      label="deductibleCoveragePattern.DisplayName"/>
+    <InputIterator
+      elementName="i"
+      value="indexes"
+      valueType="java.lang.Integer[]">
+      <RangeInput
+        editable="true"
+        id="StateSpecificDeductible"
+        label="gw.web.line.wc.policy.WCDeductiblesInputSetUIHelper.getLabel(jurisdiction, deductibleTermPattern, i)"
+        value="deductibleTerms[i].PackageValue"
+        valueRange="deductibleTerms[i].AvailablePackageCovTermValues"
+        valueType="gw.api.productmodel.CovTermPack&lt;productmodel.PackageWCDeductibleType&gt;"/>
+    </InputIterator>
+    <InputDivider/>
+  </InputSet>
+</PCF>

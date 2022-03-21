@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RateBookExportResult"
+  desc="Entity to persist the result of rate book export"
+  table="ratebookexportresult"
+  type="editable">
+  <column
+    desc="Exported rate book data as ExportType(Excel or XML) compressed in GZIP file format"
+    name="Data"
+    nullok="true"
+    type="blob"/>
+  <column
+    default="0"
+    desc="Indicates the completion percentage of the rate book export"
+    name="CompletionPercentage"
+    nullok="false"
+    type="percentage"/>
+  <column
+    default="false"
+    desc="Indicates if the export failed"
+    name="ExportFailed"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="Indicates the type of export"
+    name="ExportType"
+    nullok="false"
+    typelist="RateBookExportType"/>
+  <foreignkey
+    desc="The rate book this result belongs to"
+    fkentity="RateBook"
+    name="RateBook"
+    nullok="false"
+    soapnullok="false"/>
+  <index
+    desc="Index to ensure the uniqueness of a rate book export result"
+    name="RBERU1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RateBook"/>
+    <indexcol
+      keyposition="2"
+      name="ExportType"/>
+  </index>
+</entity>

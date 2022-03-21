@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Payment Method"
+  final="false"
+  name="PaymentMethod">
+  <typecode
+    code="Installments"
+    desc="Payment Plan"
+    name="Payment Plan"/>
+  <typecode
+    code="ReportingPlan"
+    desc="Reporting plan"
+    name="Reporting Plan"/>
+</typelist>

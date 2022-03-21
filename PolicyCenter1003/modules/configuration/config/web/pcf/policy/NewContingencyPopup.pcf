@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCommit="contingency.Bundle.commit()"
+    canEdit="true"
+    id="NewContingencyPopup"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.Contingency.NewContingency')">
+    <LocationEntryPoint
+      signature="NewContingencyPopup(contingencyCreator : gw.api.contingency.ContingencyCreator)"/>
+    <Variable
+      name="contingencyCreator"
+      type="gw.api.contingency.ContingencyCreator"/>
+    <Variable
+      initialValue="contingencyCreator.createContingency()"
+      name="contingency"
+      type="Contingency"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get('Web.Policy.EvaluationIssues.Ok')"/>
+      </Toolbar>
+      <PanelRef
+        def="BaseContingencyInfoDV(contingency)"/>
+    </Screen>
+  </Popup>
+</PCF>

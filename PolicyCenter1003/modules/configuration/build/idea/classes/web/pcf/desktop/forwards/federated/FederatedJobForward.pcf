@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedJobForward">
+    <LocationEntryPoint
+      signature="FederatedJobForward(jobNumber:java.lang.String, accountPublicId: java.lang.String)"/>
+    <Variable
+      name="jobNumber"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Job.finder.findJobByJobNumber(jobNumber)"
+      name="jobEntity"
+      type="entity.Job"/>
+    <Variable
+      name="accountPublicId"
+      type="java.lang.String"/>
+    <ForwardCondition
+      action="JobForward.go(jobEntity)"
+      condition="jobEntity!=null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.jobForward(accountPublicId, jobNumber)"
+      condition="jobEntity==null"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="AccountFile_Summary"
+    canVisit="gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance.canVisitDashboard(account)"
+    title="DisplayKey.get('Web.AccountFile.Overview.Title', account.AccountHolderContactNameAndNick)">
+    <LocationEntryPoint
+      signature="AccountFile_Summary(account: Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.claims.LossRatioHelper.forAccount(account)"
+      name="lossRatioHelper"
+      type="gw.api.web.dashboard.ui.claims.LossRatioHelper"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.billing.BillingSummaryHelper(account)"
+      name="billingSummaryHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.web.dashboard.ui.billing.BillingSummaryHelper"/>
+    <Screen>
+      <AlertBar
+        allowDismiss="true"
+        id="LossRatioAlert"
+        label="lossRatioHelper.ErrorMessage"
+        visible="lossRatioHelper.ErrorMessage != null"/>
+      <AlertBar
+        id="MultipleCurrenciesWarning"
+        label="DisplayKey.get('Web.AccountFile.Summary.MulticurrencyWarning')"
+        visible="billingSummaryHelper.HasNoErrors and billingSummaryHelper.BillingSummary.AggregatedMultipleCurrencies"/>
+      <ColumnDashboard
+        id="AccountSummaryDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="AccountDetailsDetailViewTile(account)"
+            visible="permissions.AccountDetails"/>
+          <TileRef
+            def="CurrentActivitiesAccountListViewTile(account)"
+            visible="permissions.CurrentAccountActivities"/>
+          <TileRef
+            def="CurrentPolicyTermsListViewTile(account, lossRatioHelper)"
+            id="CurrentPoliciesTileLV"
+            visible="permissions.CurrentPolicies"/>
+          <TileRef
+            def="OpenPolicyTransactionsAccountListViewTile(account)"
+            visible="permissions.OpenPolicyTransactions"/>
+          <TileRef
+            def="ClaimsAccountListViewTile(account)"
+            visible="permissions.Claims"/>
+        </DashboardColumn>
+        <DashboardColumn>
+          <TileRef
+            def="AccountOverviewDetailViewTile(account, lossRatioHelper)"
+            visible="permissions.AccountSummary"/>
+          <TileRef
+            def="BillingSummaryChartTile(billingSummaryHelper)"
+            visible="permissions.BillingSummary"/>
+          <TileRef
+            def="AccountContactListViewTile(account)"
+            visible="permissions.Contact"/>
+          <TileRef
+            def="ProducersListViewTile(account)"
+            visible="permissions.Contact"/>
+          <TileRef
+            def="LocationsListViewTile(account)"
+            visible="permissions.Locations"/>
+          <TileRef
+            def="RelatedAccountsListViewTile(account)"
+            visible="permissions.RelatedAccounts"/>
+          <TileRef
+            def="NotesDetailViewTile(gw.api.web.dashboard.ui.note.NoteHelper.forAccount(account))"
+            visible="permissions.canSeeNotes(account)"/>
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

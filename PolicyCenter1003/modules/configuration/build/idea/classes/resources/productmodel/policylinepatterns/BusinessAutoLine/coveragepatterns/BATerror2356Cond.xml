@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="BATerror2356Cond"
+  conditionSubtype="BAStateCond"
+  coverageCategory="BAPTerrorismGrp"
+  existence="Electable"
+  lookupTableName="BAStateCond"
+  owningEntityType="BAJurisdiction"
+  policyLinePattern="BusinessAutoLine"
+  priority="10"
+  public-id="BATerror2356Cond"
+  referenceDateByType="DefinedObject"/>

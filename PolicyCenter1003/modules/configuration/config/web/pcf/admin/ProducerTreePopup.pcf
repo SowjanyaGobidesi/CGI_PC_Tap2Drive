@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="ProducerTreePopup"
+    returnType="User"
+    title="DisplayKey.get(&quot;Web.Admin.BrowseProducers&quot;)">
+    <LocationEntryPoint
+      signature="ProducerTreePopup(organizationView : Organization)"/>
+    <Variable
+      name="organizationView"
+      type="Organization"/>
+    <Screen
+      id="ProducerTreePopupScreen">
+      <Toolbar/>
+      <TreeViewPanel
+        id="ProducerTreePopup">
+        <Variable
+          initialValue="gw.api.admin.ProducerPickerOrganizationTreeNode.createNode(organizationView)"
+          name="organization"
+          type="gw.api.admin.ProducerPickerOrganizationTreeNode"/>
+        <TreeView
+          canClickElement="element typeis User"
+          elementLabel="element"
+          elementName="element"
+          id="ProducerTreePopupPicker"
+          onClickElement="CurrentLocation.pickValueAndCommit(element as User)"
+          value="organization"/>
+      </TreeViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

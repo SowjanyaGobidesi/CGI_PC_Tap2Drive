@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Entity
+  name="PolicyRisk">
+  <Columns/>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("EntityName.PolicyRisk")]]></DisplayName>
+</Entity>

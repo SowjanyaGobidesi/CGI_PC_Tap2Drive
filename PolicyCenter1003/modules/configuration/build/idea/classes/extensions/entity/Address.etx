@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Address">
+  <column-override name="Description">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override name="ValidUntil">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <typekey-override name="AddressType">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <column-override name="SpatialPoint">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <foreignkey-override name="LinkedAddress">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </foreignkey-override>
+</extension>

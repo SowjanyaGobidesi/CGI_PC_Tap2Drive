@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../app-pc/pcf.xsd">
+  <PanelSet
+    id="DocumentDetailsEditLVPanelSet">
+    <Require
+      name="DocumentApplicationContext"
+      type="gw.document.DocumentApplicationContext"/>
+    <Require
+      name="DocumentCreationInfos"
+      type="java.util.Collection&lt;gw.document.DocumentCreationInfo&gt;"/>
+    <Expose
+      name="DocumentDetailsEditLV"
+      widget="DocumentMetadataEditLV.DocumentMetadataEditLV"/>
+    <ExposeIterator
+      name="DocumentCreationInfoIterator"
+      valueType="gw.document.DocumentCreationInfo"
+      widget="DocumentMetadataEditLV.DocumentCreationInfoIterator"/>
+    <PanelRef def="DocumentMetadataEditLV(DocumentApplicationContext,DocumentCreationInfos)"
+      mode="(DocumentApplicationContext as gw.api.web.document.DocumentPCContext).PCFMode"/>
+  </PanelSet>
+</PCF>

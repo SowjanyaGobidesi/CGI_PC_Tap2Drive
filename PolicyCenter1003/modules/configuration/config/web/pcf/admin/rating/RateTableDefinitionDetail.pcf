@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.rating.rtm.validation.RateTableDefinitionValidation.validatePostEnter(tableDefinition)"
+    beforeCommit="gw.rating.rtm.validation.RateTableDefinitionValidation.validateRateTableDefinition(tableDefinition)"
+    beforeValidate="gw.web.rating.RateTableDefinitionUIHelper.canUpdateDefinition(tableDefinition, rateTablesUsingDefinition, errorStatus)"
+    canEdit="true"
+    canVisit="perm.System.ratebookview"
+    id="RateTableDefinitionDetail"
+    parent="RateTableDefinitions()"
+    showUpLink="true"
+    title="tableDefinition.TableName">
+    <LocationEntryPoint
+      signature="RateTableDefinitionDetail(tableDefinition : RateTableDefinition)"/>
+    <Variable
+      name="tableDefinition"
+      type="RateTableDefinition"/>
+    <Variable
+      initialValue="tableDefinition.tablesUsingDefinition()"
+      name="rateTablesUsingDefinition"
+      type="List&lt;RateTable&gt;"/>
+    <Variable
+      initialValue="new gw.web.rating.RateTableDefinitionUIHelper.ErrorStatus() {:ErrorFound = false}"
+      name="errorStatus"
+      type="gw.web.rating.RateTableDefinitionUIHelper.ErrorStatus"/>
+    <ScreenRef
+      def="RateTableDefinitionDetailsScreen(tableDefinition, errorStatus.ErrorFound)"/>
+  </Page>
+</PCF>

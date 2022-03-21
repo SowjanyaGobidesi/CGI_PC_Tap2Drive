@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  desc="Issue found during an asynchronous quote"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AsyncQuoteIssue"
+  table="asyncquoteissue"
+  type="versionable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    desc="The PolicyPeriod this issue belongs to"
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <typekey
+    name="IssueType"
+    nullok="false"
+    typelist="AsyncQuoteIssueType"/>
+  <column
+    desc="Description of the asynchronous quote issue"
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    default="0"
+    desc="A sequence number that indicates the order in which the issue was created.  Unique for a specific set of Issues within PolicyPeriod."
+    name="IssueSequence"
+    nullok="true"
+    type="integer"/>
+</entity>

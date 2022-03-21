@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="SubmissionManager.go(account)"
+    afterCommit="SubmissionLetterSuccess.go(account)"
+    beforeCommit="letter.addJobs( gw.job.SubmissionLetterHelper.getCheckedSubmissions() ); letter.createAndAttachDocument()"
+    canEdit="true"
+    canVisit="perm.Account.newSubmission(account)"
+    id="SubmissionRejectLetter"
+    parent="SubmissionManager(account)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.SubmissionRejectLetter&quot;)"
+    validateOnBundleCommit="false">
+    <LocationEntryPoint
+      signature="SubmissionRejectLetter(letterType : LetterType, account : Account)"/>
+    <Variable
+      name="letterType"
+      type="LetterType"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="initLetter()"
+      name="letter"
+      type="Letter"/>
+    <Screen
+      id="SubmissionRejectLetterScreen">
+      <Variable
+        name="docActionsHelper"
+        type="gw.document.DocumentsActionsUIHelper"/>
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.SubmissionRejectLetter.GenerateLetter&quot;)"
+          updateVisible="docActionsHelper.DocumentTemplateActionsAvailable"/>
+      </Toolbar>
+      <AlertBar
+        id="SubmissionConfirmLetterScreen_GenerateLetterUnavailable"
+        label="DisplayKey.get('Web.SubmissionRejectLetter.GenerateLetter.Unavailable')"
+        visible="not docActionsHelper.DocumentTemplateActionsAvailable"/>
+      <PanelRef
+        def="SubmissionRejectLetterDV(account, letter)"/>
+    </Screen>
+    <Code><![CDATA[function initLetter() : Letter {
+        var result = new Letter()
+        result.Type = letterType
+        return result
+      }]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  desc="Temporary entity for saving reinsurable data sent to risk assessment service"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundReinsurableRiskAssessmentTempStore"
+  table="outboundreinsurratempstore"
+  type="editable">
+  <typekey
+    desc="Coverage group type for reinsurance"
+    name="CoverageGroup"
+    nullok="false"
+    typelist="RICoverageGroupType"/>
+  <monetaryamount
+    desc="Total insured value for reinsurance"
+    name="TotalInsuredValue"
+    nullok="false"/>
+  <foreignkey
+    columnName="OutboundRATempStore"
+    fkentity="OutboundLocationRiskAssessmentTempStore"
+    name="OutboundLocationRiskAssessmentTempStore"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+</entity>

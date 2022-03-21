@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    flatten="true"
+    id="ContactFileMenuActions">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <MenuItem
+      id="ContactFileMenuActions_Create"
+      label="DisplayKey.get(&quot;Web.ContactFile.Create&quot;)">
+      <MenuItem
+        action="CreateAccountForContact.go(contact, false)"
+        id="ContactFileMenuActions_NewAccount"
+        label="DisplayKey.get(&quot;Web.CreateNewAccountFromContact&quot;)"/>
+    </MenuItem>
+  </MenuActions>
+</PCF>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UWIssueCommandDefinitionDV">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Require
+      name="helper"
+      type="gw.web.bizrules.UWRulePanelSetHelper"/>
+    <Require
+      name="interactiveWidgets"
+      type="gw.web.bizrules.UWRuleInteractiveWidgetSet"/>
+    <Variable
+      initialValue="controller.FirstCommandDefinitionHolder"
+      name="commandDefinition"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <InputColumn>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_ISSUE_KEY))"
+        id="IssueKey"/>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_VALUE))"
+        id="Value"
+        visible="interactiveWidgets.ValueParameter.Visible"/>
+      <InputDivider/>
+      <InputSetRef
+        def="LocalizedCommandParameterInputSet(commandDefinition, gw.bizrules.provisioning.AddUWIssueRuleAction.SHORT_DESC_PARAMS)"
+        id="ShortDesc"/>
+      <InputDivider/>
+      <InputSetRef
+        def="LocalizedCommandParameterInputSet(commandDefinition, gw.bizrules.provisioning.AddUWIssueRuleAction.LONG_DESC_PARAMS)"
+        id="LongDesc"/>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_EVAL_CONTEXT))"
+        id="EvalContext"
+        visible="commandDefinition.getParameterHolder(gw.bizrules.provisioning.AddUWIssueRuleAction.PARAM_EVAL_CONTEXT).UIConfig.Visible"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

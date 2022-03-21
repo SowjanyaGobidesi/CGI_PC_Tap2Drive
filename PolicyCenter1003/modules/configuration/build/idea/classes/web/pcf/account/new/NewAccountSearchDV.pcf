@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewAccountSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.account.AccountSearchCriteria"/>
+    <Variable
+      initialValue="new gw.globalization.AccountSearchCriteriaAdapter(searchCriteria)"
+      name="accountSearchAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.AccountSearchCriteriaAdapter"/>
+    <Variable
+      initialValue="new gw.globalization.AccountAddressSearchAdapter(searchCriteria)"
+      name="addrAreaAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.AccountAddressSearchAdapter"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.AccountSearch.ApplicantInfo&quot;)"/>
+      <InputSetRef
+        def="GlobalContactNameInputSet(new gw.search.BasicNameOwner(accountSearchAdapter))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <CheckBoxInput
+        editable="true"
+        id="CompanyNameExact"
+        label="DisplayKey.get(&quot;Web.AccountSearch.CompanyNameExactMatch&quot;)"
+        required="false"
+        value="searchCriteria.CompanyNameExact"/>
+      <InputSetRef
+        def="GlobalPersonNameInputSet(new gw.search.BasicNameOwner(accountSearchAdapter))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <CheckBoxInput
+        editable="true"
+        id="FirstNameExact"
+        label="DisplayKey.get(&quot;Web.AccountSearch.FirstNameExactMatch&quot;)"
+        required="false"
+        value="searchCriteria.FirstNameExact"/>
+      <CheckBoxInput
+        editable="true"
+        id="LastNameExact"
+        label="DisplayKey.get(&quot;Web.AccountSearch.LastNameExactMatch&quot;)"
+        required="false"
+        value="searchCriteria.LastNameExact"/>
+      <InputSetRef
+        def="AddressOwnerAddressInputSet(new gw.pcf.contacts.NewAccountAddressAreaOwner(addrAreaAdapter))"
+        mode="gw.pcf.AccountSearchHelper.getCountry(searchCriteria)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,28 @@
+package rules.Validation.UWIssueTypeValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("Verify Value Offset Currency")
+internal class VerifyValueOffsetCurrency {
+  static function doCondition(uWIssueType   :   entity.UWIssueType) : boolean {
+/*start00rule*/
+return uWIssueType.Comparator != null and uWIssueType.Comparator != ValueComparator.TC_NONE
+/*end00rule*/
+}
+
+  static function doAction(uWIssueType   :   entity.UWIssueType, actions : gw.rules.Action) {
+/*start00rule*/
+// Ensure that if an assignment type is selected a valid offset currency is also defined
+var comparison = uWIssueType.Comparator
+var assignmentType = uWIssueType.DefaultValueAssignmentType
+var offsetCurrency = uWIssueType.DefaultValueOffsetCurrency
+var offsetAmount = uWIssueType.DefaultValueOffsetAmount
+if ((comparison == TC_MONETARY_GE or comparison == TC_MONETARY_LE) and assignmentType == TC_OFFSETAMOUNT and
+    offsetAmount != null and offsetCurrency == null) {
+  uWIssueType.rejectField("DefaultValueOffsetCurrency",
+      ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("UWIssueType.Error.InvalidValueOffsetCurrency"),
+      null, null)
+} 
+/*end00rule*/
+  }
+}

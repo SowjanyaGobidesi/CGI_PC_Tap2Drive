@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="GroupDetailInputSet">
+    <Require
+      name="group"
+      type="Group"/>
+    <Require
+      name="isSupervisorRequired"
+      type="boolean"/>
+    <Require
+      name="existingUsers"
+      type="List&lt;User&gt;"/>
+    <Variable
+      initialValue="(User.util.CurrentUser as User).findAvailableSecurityZones()"
+      name="allSecurityZones"
+      type="gw.api.database.IQueryBeanResult&lt;SecurityZone&gt;"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Group&quot;)"/>
+    <TextAreaInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Description&quot;)"
+      numRows="2"
+      value="group.Description"/>
+    <InputDivider/>
+    <AltUserInput
+      action="UserDetailPage.go(group.Supervisor)"
+      actionAvailable="group.Supervisor != null and User.util.CurrentUser.isInternalUserOrBelongsToOrganization(group.Supervisor.Organization)"
+      editable="true"
+      id="Supervisor"
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Supervisor&quot;)"
+      required="isSupervisorRequired"
+      validationExpression="(group.Organization.Carrier and group.Supervisor.ExternalUser) ? DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Supervisor.ValidationError&quot;) : null"
+      value="group.Supervisor">
+      <MenuItem
+        id="SelectUsers"
+        label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.ExistingUsers&quot;)">
+        <MenuItemIterator
+          elementName="user"
+          id="UserIterator"
+          value="existingUsers.subtract( {group.Supervisor} ).toTypedArray()"
+          valueType="entity.User[]">
+          <IteratorSort
+            sortBy="user.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="group.Supervisor = user"
+            id="UserMenuItem"
+            label="user.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </AltUserInput>
+    <RangeInput
+      editable="not User.util.CurrentUser.ExternalUser"
+      id="SecurityZone"
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.SecurityZone&quot;)"
+      required="true"
+      value="group.SecurityZone"
+      valueRange="allSecurityZones"
+      valueType="entity.SecurityZone"/>
+    <TextInput
+      editable="not User.util.CurrentUser.ExternalUser"
+      id="BranchCode"
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.BranchCode&quot;)"
+      required="true"
+      value="group.BranchCode"
+      visible="group.GroupType == TC_BRANCHUW"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Assignment&quot;)"/>
+    <TextInput
+      editable="true"
+      id="LoadFactor"
+      label="DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Assignment.LoadFactor&quot;)"
+      required="true"
+      validationExpression="!(group.LoadFactor &lt; 0 or group.LoadFactor &gt; 100)              ? null : DisplayKey.get(&quot;Web.Admin.GroupDetailInputSet.Assignment.LoadFactor.OutOfRange&quot;)"
+      value="group.LoadFactor"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,6 @@
+
+NonRenewalExplanationPatterns
+type,data-set,entityid,code,body,effectivedate,expirationdate
+NonRenewalExplanationPattern,0,sample_nr:1,${AdminData.NonRenewalExplanationPattern.Code.NotOffered},${AdminData.NonRenewalExplanationPattern.Body.NotOffered},1/1/2005
+NonRenewalExplanationPattern,0,sample_nr:2,${AdminData.NonRenewalExplanationPattern.Code.HighLoss},${AdminData.NonRenewalExplanationPattern.Body.HighLoss},1/1/2005
+NonRenewalExplanationPattern,0,sample_nr:3,${AdminData.NonRenewalExplanationPattern.Code.InsuredRequest},${AdminData.NonRenewalExplanationPattern.Body.InsuredRequest},1/1/2005

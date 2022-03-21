@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="CopyCoveragesPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Title&quot;)">
+    <LocationEntryPoint
+      signature="CopyCoveragesPopup(period : PolicyPeriod)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="period.PersonalAutoLine.Vehicles"
+      name="pAVehicles"
+      type="PersonalVehicle[]"/>
+    <Variable
+      initialValue="null"
+      name="copyFromVehicle"
+      type="PersonalVehicle"/>
+    <Variable
+      initialValue="pAVehicles.where(\ p -&gt; p.ID != copyFromVehicle.ID)"
+      name="copyToVehicles"
+      recalculateOnRefresh="true"
+      type="entity.PersonalVehicle[]"/>
+    <Screen>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="copyFromVehicle.copyCoverages(CheckedValues); CurrentLocation.commit()"
+          id="copyCoverage"
+          iterator="CopyCoverage_CopyToLV.CopyToVehicleIterator"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Copy&quot;)"/>
+        <ToolbarButton
+          action="copyFromVehicle.copyCoverages(copyToVehicles); CurrentLocation.commit()"
+          available="copyFromVehicle != null"
+          id="copyAllCoverages"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.CopyAll&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="cancelCopyCoverages"
+          label="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.Cancel&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        id="CopyFromPR">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.CopyFrom.Title&quot;)"/>
+        <DetailViewPanel
+          id="selectFromVehicleDV">
+          <InputColumn>
+            <RangeInput
+              available="true"
+              editable="true"
+              hideChildrenIfReadOnly="false"
+              id="copyFrom"
+              label="DisplayKey.get(&quot;Web.CopyPolicyData.PersonalAuto.CopyCoverages.CopyFromVehicle&quot;)"
+              value="copyFromVehicle"
+              valueRange="pAVehicles"
+              valueType="entity.PersonalVehicle"
+              visible="true">
+              <PostOnChange/>
+            </RangeInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <PanelRef
+        def="PersonalAuto_VehicleCoverageDetailDV(copyFromVehicle, false)"
+        editable="false"
+        id="CoveragesPanel"/>
+      <PanelRef
+        def="CopyCoverage_CopyToLV(pAVehicles.where(\ p -&gt; p.ID != copyFromVehicle.ID))"
+        visible="copyFromVehicle != null">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.PolicyLine.CopyCoverages.CopyTo.Title&quot;)"/>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

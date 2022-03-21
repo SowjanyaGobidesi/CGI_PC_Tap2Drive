@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<import>
+  <ModifierMinMaxLookup
+    codeIdentifier="zhmhqp6dr6pdeanbuo4limf4h78"
+    modifierPatternCode="PASafetyBonusDiscount"
+    public-id="zhmhqp6dr6pdeanbuo4limf4h78">
+    <Maximum>0</Maximum>
+    <Minimum>-0.2</Minimum>
+    <State>NY</State>
+  </ModifierMinMaxLookup>
+</import>

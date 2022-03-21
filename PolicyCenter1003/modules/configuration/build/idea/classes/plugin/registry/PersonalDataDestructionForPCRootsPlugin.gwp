@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="PersonalDataDestructionForPCRootsPlugin"
+  name="PersonalDataDestructionForPCRootsPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.personaldata.PCPersonalDataDestructionPlugin"/>
+</plugin>

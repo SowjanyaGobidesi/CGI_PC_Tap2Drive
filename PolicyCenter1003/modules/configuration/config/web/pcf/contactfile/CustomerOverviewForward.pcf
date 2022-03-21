@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    canVisit="true"
+    id="CustomerOverviewForward">
+    <LocationEntryPoint
+      signature="CustomerOverviewForward(PublicID : String, Phone: String)"/>
+    <Variable
+      name="PublicID"
+      type="String"/>
+    <Variable
+      name="Phone"
+      type="String"/>
+    <Variable
+      initialValue="new gw.api.contact.ContactUtil()"
+      name="util"
+      type="gw.api.contact.ContactUtil"/>
+    <Variable
+      name="contact"
+      type="Contact"
+      initialValue="util.getContactByPublicID(PublicID)"/>
+    <Variable
+      initialValue="util.getContactsSearchCriteria(Phone)"
+      name="searchCriteria"
+      type="ContactSearchCriteria"/>
+    <Variable
+      name="contacts"
+      type="Collection&lt;Contact&gt;"
+      initialValue="util.getContactsByPhoneNumber(Phone)"/>
+    <ForwardCondition
+      action="ContactFile_Summary.go(contact)"
+      condition="contact != null and gw.pcf.contacts.ContactFileAccountHolderUIHelper.canViewAccountInfo(contact)"/>
+    <ForwardCondition
+      action="ContactFile_Details.go(contact)"
+      condition="contact != null"/>
+    <ForwardCondition
+      action="ContactFile_Summary.go(contacts.first())"
+      condition="contacts.Count == 1 and gw.pcf.contacts.ContactFileAccountHolderUIHelper.canViewAccountInfo(contacts.first())"/>
+    <ForwardCondition
+      action="ContactFile_Details.go(contacts.first())"
+      condition="contacts.Count == 1"/>
+    <ForwardCondition
+      action="ContactSearch.go(searchCriteria, true)"
+      condition="contacts.Count &gt; 1"/>
+    <ForwardCondition
+      action="ContactSearch.go(searchCriteria, false)"/>
+  </Forward>
+</PCF>

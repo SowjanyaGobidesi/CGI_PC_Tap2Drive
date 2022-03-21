@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="GeneralLiabilityScreen">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.GLLine"
+      name="glLine"
+      type="productmodel.GLLine"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+    <PanelRef
+      def="PreferredCoverageCurrencyPanelSet(glLine, openForEdit, jobWizardHelper)"
+      id="PreferredCoverageCurrencySelectorRef"/>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <CardViewPanel>
+      <Card
+        id="GeneralLiability_IncludedCard"
+        title="DisplayKey.get(&quot;Web.LineWizard.StandardCoverages&quot;)">
+        <PanelRef
+          available="policyPeriod.getLineExists(glLine.Pattern)"
+          def="PolicyLineDV(glLine, jobWizardHelper)"
+          mode="glLine.Pattern.PublicID"/>
+      </Card>
+      <Card
+        id="GeneralLiability_AdditionalCoveragesCard"
+        title="DisplayKey.get(&quot;Web.LineWizard.AdditionalCoverages&quot;)">
+        <PanelRef
+          def="AdditionalCoveragesPanelSet(glLine, new String[]{&quot;GLGroup&quot;}, false)"/>
+      </Card>
+      <Card
+        id="ExclusionsAndConditionsCard"
+        title="DisplayKey.get(&quot;Web.LineWizard.ExclusionsAndConditions&quot;)">
+        <PanelRef
+          def="AdditionalExclusionsAndConditionsPanelSet(glLine, glLine.getAdditionalCoverageCategories() , true)"/>
+      </Card>
+      <Card
+        id="GeneralLiability_AdditionalInsuredCard"
+        title="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured&quot;)">
+        <PanelRef
+          def="AdditionalInsuredsDV(glLine, openForEdit, true, false)"/>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

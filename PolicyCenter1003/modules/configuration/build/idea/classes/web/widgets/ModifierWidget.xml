@@ -1,0 +1,12 @@
+<WidgetTemplate name="ModifierWidget" inputWidgetName="ModifierInput" cellWidgetName="ModifierCell">
+  <BooleanRadioValue editable="true" value="#{value}.BooleanModifier" id="BooleanModifier" valueType="java.lang.Boolean"
+    visible="#{value}.DataType == TC_BOOLEAN"/>
+  <DateValue editable="true" value="#{value}.DateModifier" id="DateModifier" valueType="java.util.Date"
+    visible="#{value}.DataType == TC_DATE"/>
+  <TextValue editable="true" value="#{value}.RateWithinLimits" id="RateModifier" valueType="java.math.BigDecimal"
+    visible="#{value}.DataType == TC_RATE"/>
+  <!-- Need to use ExpressionRangeValue instead of TypeKeyValue since "TypeKeyModifier" actually returns a string, and not an actual TypeKey. -->
+  <ExpressionRangeValue editable="true" value="#{value}.TypeKeyModifier" id="TypeKeyModifier" valueType="java.lang.String"
+    visible="#{value}.DataType == TC_TYPEKEY"
+    valueRange="gw.pcf.ModifierWidgetHelper.modifierTypeKeyValues(#{value})"/>
+</WidgetTemplate>

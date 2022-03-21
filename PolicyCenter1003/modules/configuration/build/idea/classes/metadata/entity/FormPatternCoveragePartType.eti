@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  desc="A coverage part type value associated with a form pattern coverable."
+  exportable="true"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="FormPatternCoveragePartType"
+  table="formpatterncovparttype"
+  type="retireable">
+  <foreignkey
+    desc="The form pattern containing this coverage part type"
+    fkentity="FormPattern"
+    name="FormPattern"
+    nullok="false"/>
+  <typekey
+    desc="The coverage part type"
+    name="CoveragePartType"
+    nullok="false"
+    typelist="CoveragePartType"/>
+</entity>

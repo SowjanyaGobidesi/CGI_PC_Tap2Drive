@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<import>
+  <ModifierLookup public-id="ziehkjf7opmqc64uukhkdh1muf8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <ModifierPatternCode>zqcisamlb456q8o5equhlmca90b</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ModifierLookup>
+  <HOPModifierLookup public-id="z5ei2leuua7tg075fobujjmcks9">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <HOPCoverageForm/>
+    <JobType/>
+    <ModifierPatternCode>zjrho19gofsj58fgvrjlc1o5129</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPModifierLookup>
+  <ModifierLookup public-id="zhthcje31r2r5d6btmn90toghua">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <ModifierPatternCode>z82jagipbks2rdann4rpl7ch868</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ModifierLookup>
+  <ModifierLookup public-id="z8mjqtcrosejeaitmm3d3852fd8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <ModifierPatternCode>z4nh6obrqg3sn66uoq2aibv8lda</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ModifierLookup>
+  <HOPModifierLookup public-id="zgqgunvgfhhk6b3vmrsj54k9jib">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <HOPCoverageForm/>
+    <JobType/>
+    <ModifierPatternCode>zmljqlpj6gtlrdabjea6kutpp89</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPModifierLookup>
+  <ModifierLookup public-id="z52i4lmgrma5n8pi0gstj3r20e8">
+    <Availability>Available</Availability>
+    <EndEffectiveDate/>
+    <JobType/>
+    <ModifierPatternCode>zl5i6nnk3bauv2kljqr1t1vk7r8</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ModifierLookup>
+  <HOPModifierLookup public-id="zf2jef7gbq2o25i6egqu2pjon09">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <HOPCoverageForm/>
+    <JobType/>
+    <ModifierPatternCode>ztbgirc0rbjc63ihfcvlh2pa66b</ModifierPatternCode>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2000-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPModifierLookup>
+</import>

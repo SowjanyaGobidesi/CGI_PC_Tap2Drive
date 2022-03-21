@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    id="ImpactTestingPolicyPeriodOverviewPopup"
+    title="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodSummaryPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="ImpactTestingPolicyPeriodOverviewPopup(impactPeriod : ImpactTestingPolicyPeriod, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="impactPeriod"
+      type="ImpactTestingPolicyPeriod"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Screen>
+      <PanelRef
+        def="ImpactTestingPolicyPeriodSummaryPanelSet(impactPeriod)"/>
+      <PanelRef
+        def="Quote_SummaryDV(policyPeriod)">
+        <TitleBar
+          title="policyPeriod == impactPeriod.BaselinePeriod ? DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodSummary.BaselineOverview&quot;) : DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodSummary.TestPeriodOverview&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="RatingCumulDetailsPanelSet(policyPeriod, null, false)"
+        mode="policyPeriod.RepresentativePolicyLines.first().Pattern.PublicID"/>
+    </Screen>
+  </Popup>
+</PCF>

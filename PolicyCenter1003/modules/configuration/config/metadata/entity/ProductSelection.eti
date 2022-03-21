@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a single product offered through the Submission Manager as a result of Name Clearance.  Includes the status of the product."
+  entity="ProductSelection"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.ProductSelectionPublicMethods"
+    impl="com.guidewire.pc.domain.product.impl.ProductSelectionImpl"/>
+  <column
+    desc="What Product is being offered"
+    name="ProductCode"
+    nullok="false"
+    type="patterncode"/>
+  <column
+    default="1"
+    desc="Number of Submissions to create from this offer at once"
+    name="NumToCreate"
+    nullok="false"
+    type="integer"/>
+  <column
+    default="1"
+    desc="Maximum number of Submissions that can be created from this offer at once"
+    name="MaxCreate"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    desc="Status of the offer"
+    name="ProductSelectionStatus"
+    nullok="false"
+    typelist="ProductSelectionStatus"/>
+  <typekey
+    desc="Reason for making the offer"
+    name="ProductSelectionReason"
+    nullok="true"
+    typelist="ProductSelectionReason">
+    <keyfilters>
+      <keyfilter
+        name="ProductSelectionStatus"/>
+    </keyfilters>
+  </typekey>
+</nonPersistentEntity>

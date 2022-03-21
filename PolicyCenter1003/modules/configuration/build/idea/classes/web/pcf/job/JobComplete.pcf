@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="JobComplete"
+    infoBar="JobWizardInfoBar(job, policyPeriod)"
+    parent="WizardExit()"
+    title="policyPeriod.JobCompletionTitle">
+    <LocationEntryPoint
+      signature="JobComplete(job : Job, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="job"
+      type="Job"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.document.DocumentProduction()"
+      name="documentProduction"
+      type="gw.document.DocumentProduction"/>
+    <Screen
+      id="JobCompleteScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="policyPeriod.printDocument(&quot;Binder&quot;, &quot;Binder&quot;, gw.api.web.document.DocumentsHelper.PrintQuoteParameters)"
+          download="true"
+          id="CreateBinder"
+          label="DisplayKey.get(&quot;Web.JobComplete.Binder.Print&quot;)"
+          visible="job typeis Submission and policyPeriod.Status == TC_BOUND and not policyPeriod.Policy.Issued"/>
+      </Toolbar>
+      <Verbatim
+        id="Message"
+        label="policyPeriod.JobCompletionMessage"/>
+      <PanelRef
+        def="JobCompleteDV(job, policyPeriod)"/>
+    </Screen>
+  </Page>
+</PCF>

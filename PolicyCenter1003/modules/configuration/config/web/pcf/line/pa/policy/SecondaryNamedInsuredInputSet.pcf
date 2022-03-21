@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="SecondaryNamedInsuredInputSet"
+    visible="period.Policy.Product.Personal">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; period.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="openForEditInit.get()"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <InputDivider/>
+    <TextInput
+      action="EditPolicyContactRolePopup.push(period.SecondaryNamedInsured, openForEdit)"
+      actionAvailable="period.SecondaryNamedInsured != null"
+      boldLabel="true"
+      id="ChangeSecondaryNamedInsuredLabel"
+      label="DisplayKey.get(&quot;Web.Policy.Account.SecondaryInsured&quot;)"
+      value="SecondaryNamedInsuredDisplayName"
+      visible="not openForEdit"/>
+    <TextInput
+      action="EditPolicyContactRolePopup.push(period.SecondaryNamedInsured, openForEdit)"
+      actionAvailable="period.SecondaryNamedInsured != null"
+      available="period.Active"
+      boldLabel="true"
+      hideChildrenIfReadOnly="false"
+      id="ChangeSecondaryNamedInsuredButton"
+      label="DisplayKey.get(&quot;Web.Policy.Account.SecondaryInsured&quot;)"
+      value="SecondaryNamedInsuredDisplayName"
+      visible="openForEdit">
+      <MenuItem
+        action="NewSecondaryNamedInsuredPopup.push(period)"
+        id="AdditionalNamedPersonAdder"
+        label="DisplayKey.get(&quot;Web.ContactDetail.NewPerson&quot;)"
+        visible="not period.Promoted"/>
+      <PickerMenuItem
+        action="ContactSearchPopup.push(TC_NAMEDINSURED, period.Policy.Product)"
+        id="SecondaryNamedInsuredABContactAdder"
+        label="DisplayKey.get(&quot;Web.Button.FromAddressBook&quot;)"
+        onPick="period.changeSecondaryNamedInsuredTo(PickedValue)"
+        visible="not period.Promoted"/>
+      <MenuItem
+        id="ExistingNamedInsured"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.ExistingContact&quot;)"
+        subMenuOnDemand="true"
+        visible="!period.Promoted ">
+        <MenuItemIterator
+          elementName="unassignedAccountContact"
+          id="UnassignedAccountContactIterator"
+          value="period.SecondaryNamedInsuredCandidates"
+          valueType="entity.AccountContact[]">
+          <IteratorSort
+            sortBy="unassignedAccountContact.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="period.changeSecondaryNamedInsuredTo(unassignedAccountContact.Contact)"
+            id="UnassignedAccountContact"
+            label="unassignedAccountContact"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        action="period.removePolicyNamedInsured(period.SecondaryNamedInsured)"
+        id="RemoveSecondaryNamedInsured"
+        label="DisplayKey.get(&quot;Web.Policy.PA.PolicyInfo.RemoveSecondaryNamedInsured&quot;)"
+        visible="!period.Promoted and period.SecondaryNamedInsured != null"/>
+    </TextInput>
+    <Code><![CDATA[property get SecondaryNamedInsuredDisplayName() : String {
+  return period.SecondaryNamedInsured == null ? " " : period.SecondaryNamedInsured.DisplayName  // specifically return " " because letting it return null leaves a one space link
+}]]></Code>
+  </InputSet>
+</PCF>

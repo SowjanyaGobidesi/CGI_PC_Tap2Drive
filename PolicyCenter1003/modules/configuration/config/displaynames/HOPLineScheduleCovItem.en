@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPLineScheduleCovItem">
+  <Columns>
+    <Column
+      beanPath="HOPLineScheduleCovItem.Schedule"
+      name="pattern"/>
+  </Columns>
+  <DisplayName><![CDATA[pattern.DisplayName]]></DisplayName>
+</Entity>

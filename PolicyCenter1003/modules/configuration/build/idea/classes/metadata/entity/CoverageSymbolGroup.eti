@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  CovTerm entities (terms of a coverage)  ====================================================================  =========================  COVERAGESYMBOL TABLES      ========================= -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="One group of CoverageSymbols on a given PolicyLine"
+  effDatedBranchType="PolicyPeriod"
+  entity="CoverageSymbolGroup"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="covsymbolgrp"
+  type="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.CoverageSymbolGroupPublicMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageSymbolGroupImpl"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.coverage.CoverageSymbolGroupCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.coverage.CoverageSymbolGroupMatcher"/>
+  <column
+    desc="The pattern defining what kind of CoverageSymbolGroup this is"
+    name="PatternCode"
+    nullok="false"
+    setterScriptability="hidden"
+    type="patterncode"/>
+  <foreignkey
+    fkentity="PolicyLine"
+    name="PolicyLine"
+    nullok="false"/>
+  <array
+    arrayentity="CoverageSymbol"
+    cascadeDelete="true"
+    desc="The symbols belonging to this group"
+    name="CoverageSymbols"
+    owner="false"/>
+</entity>

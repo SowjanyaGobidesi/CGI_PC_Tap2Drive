@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="OrganizationUsersLV">
+    <Require
+      name="organization"
+      type="Organization"/>
+    <Variable
+      initialValue="organization.AllUsers"
+      name="allUsers"
+      type="gw.api.database.IQueryBeanResult&lt;User&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="user"
+      value="allUsers"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.User&gt;">
+      <Row>
+        <AltUserCell
+          action="UserDetailPage.go(user)"
+          id="User"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationUsers.User&quot;)"
+          value="user"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

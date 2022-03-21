@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<import>
+  <HOPExclusionLookup public-id="ze6j8up9glgl4d8gn9h74i0tt18">
+    <Availability>Available</Availability>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <ExclusionPatternCode>z5cisimhgo3869grkj5kijck6n8</ExclusionPatternCode>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPExclusionLookup>
+</import>

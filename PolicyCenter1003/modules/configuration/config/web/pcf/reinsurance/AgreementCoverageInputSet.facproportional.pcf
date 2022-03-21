@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AgreementCoverageInputSet"
+    mode="facproportional">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <TextInput
+      editable="true"
+      format="DisplayKey.get(&quot;Web.Reinsurance.PercentageDisplayFormat&quot;)"
+      id="CededShare"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CededShare&quot;)"
+      validationExpression="((agreement.AmountOfCoverage == null and agreement.CededShare == null) or (agreement.AmountOfCoverage != null and agreement.CededShare != null)) ? DisplayKey.get(&quot;Web.Reinsurance.Agreement.Validate.FacPropRequiresCededShareOrAmount&quot;) : null"
+      value="agreement.CededShare"
+      valueType="java.math.BigDecimal">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="agreement.updateAmountOfCoverageCeded()"/>
+    </TextInput>
+    <MonetaryAmountInput
+      currency="agreement.Currency"
+      editable="true"
+      formatType="currency"
+      id="AmountOfCoverage"
+      label="DisplayKey.get(&quot;Web.Reinsurance.FacAgreement.AmountCeded&quot;)"
+      value="agreement.AmountOfCoverage"/>
+  </InputSet>
+</PCF>

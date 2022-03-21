@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPCovPartSchExclItemExcl">
+  <Columns>
+    <Column
+      beanPath="HOPCovPartSchExclItemExcl.HOPCovPartSchExclItem.Schedule"
+      name="schedule"/>
+  </Columns>
+  <DisplayName>schedule.DisplayName</DisplayName>
+</Entity>

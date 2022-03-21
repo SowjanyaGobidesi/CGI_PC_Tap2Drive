@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.FederatedData_dir
+
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("AccountUserRoleAssignment")
+internal class AccountUserRoleAssignment {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis AccountUserRoleAssignment &&
+        (messageContext.EventName == AccountUserRoleAssignment.ACCOUNTUSERROLEASSIGNMENTADDED_EVENT
+            || messageContext.EventName == AccountUserRoleAssignment.ACCOUNTUSERROLEASSIGNMENTCHANGED_EVENT
+            || messageContext.EventName == AccountUserRoleAssignment.ACCOUNTUSERROLEASSIGNMENTREMOVED_EVENT)
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createAccountUserRoleAssignmentMessage(messageContext)
+/*end00rule*/
+  }
+}

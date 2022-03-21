@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A unit of price for a period of time, not to be broken up any further, for a Workers' Comp employee coverage"
+  entity="WCCovEmpCost"
+  supertype="WCCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.wc.financials.WCCostAdapter"/>
+  <foreignkey
+    fkentity="WCCoveredEmployee"
+    name="WCCoveredEmployee"
+    nullok="false"/>
+  <foreignkey
+    fkentity="WorkersCompCov"
+    name="WorkersCompCov"
+    nullok="false"/>
+</subtype>

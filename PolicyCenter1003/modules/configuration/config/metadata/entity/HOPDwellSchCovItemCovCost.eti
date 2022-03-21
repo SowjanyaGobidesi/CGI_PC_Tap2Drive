@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPDwellSchCovItemCovCost"
+  desc="Cost for HOP Dwelling coverage scheduled items with coverage terms"
+  supertype="HOPCost">
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.hop.financials.HOPCostAdapter"/>
+  <foreignkey
+    exportable="true"
+    fkentity="HOPDwellSchCovItemCov"
+    name="HOPDwellSchCovItemCov"
+    nullok="false"/>
+</subtype>

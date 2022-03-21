@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCommit="DocumentDetailsPopup.push(document, editMetadata)"
+    canEdit="perm.Document.edit(document)"
+    id="DocumentDetailsPopup"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(document : Document)"/>
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(document : Document, viewOnly : boolean)"/>
+    <Variable
+      name="document"
+      type="entity.Document"/>
+    <Variable
+      initialValue="false"
+      name="viewOnly"
+      type="boolean"/>
+    <Variable
+      name="levels"
+      type="gw.api.domain.linkedobject.LinkedObjectContainer[]"
+      initialValue="gw.api.domain.linkedobject.LinkedObjectUtils.generateLevels(document.Account, document.Policy, document.Job, null)"/>
+    <Variable
+      name="levelsVisible"
+      type="boolean"
+      initialValue="document.Job == null or !(document.Job typeis Submission) or (document.Job as Submission).FullMode"/>
+    <Variable
+      name="documentDetailsApplicationHelper"
+      type="gw.document.DocumentDetailsApplicationHelper"
+      initialValue="new gw.api.web.document.DocumentMetadataPCHelper(new Document[] {document}, levels, levelsVisible)
+        as gw.document.DocumentDetailsApplicationHelper"/>
+    <Variable
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="true"
+      name="editMetadata"
+      type="boolean"/>
+    <Screen
+      id="DocumentDetailsScreen">
+      <AlertBar
+        id="DocumentStoreDestinationDisabledWarning"
+        label="DisplayKey.get(&quot;Web.DocumentsLV.Button.Asynchronous.DocumentStoreDisabled&quot;)"
+        visible="documentsActionsHelper.ShowDocumentStoreSuspendedWarning and document.PendingDocUID != null"/>
+      <AlertBar
+        id="ContentlessNoActionsText"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.ContentActionsDisabled&quot;)"
+        visible="!document.DMS"/>
+      <PanelRef>
+        <Toolbar>
+          <EditButtons
+            editVisible="editMetadata and perm.Document.edit(document) and document.PendingDocUID == null"/>
+        </Toolbar>
+        <DetailViewPanel>
+          <InputColumn>
+            <ContentInput
+              labelAbove="true">
+              <Link
+                action="document.downloadContent()"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, document) and document.DocumentMimeTypeAllowed"
+                download="attachment"
+                icon="&quot;document_download&quot;"
+                iconType="svgFileName"
+                id="DownloadLink"
+                styleClass="none"
+                tooltip="document.DocumentMimeTypeAllowed ? DisplayKey.get('Web.Policy.Documents.Document.ViewAndEdit.Download.Tooltip') : DisplayKey.get('Web.DocumentsLV.Button.DownloadNotAllowed.Tooltip')"
+                visible="editMetadata and documentsActionsHelper.isDownloadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, document)"/>
+              <Link
+                action="UploadDocumentContentPopup.push(document)"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, document)"
+                icon="&quot;document_upload&quot;"
+                iconType="svgFileName"
+                id="UploadLink"
+                styleClass="none"
+                tooltip="DisplayKey.get('Web.Policy.Documents.Document.ViewAndEdit.Upload.Tooltip')"
+                visible="editMetadata and documentsActionsHelper.isUploadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, document)"/>
+            </ContentInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <PanelRef
+        def="DocumentMetadataEditDV(documentDetailsApplicationHelper, false)"
+        mode="document.Type"/>
+    </Screen>
+  </Popup>
+</PCF>

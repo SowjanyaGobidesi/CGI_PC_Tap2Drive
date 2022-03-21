@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><internalExtension xmlns="http://guidewire.com/datamodel" entityName="GroupSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.community.impl.GroupSearchCriteriaCoreExtMethods"
+    impl="com.guidewire.pc.domain.community.impl.GroupSearchCriteriaCoreExtMethodsImpl"/>
+  <column desc="The code that identifies an internal carrier group as a branch." name="ProducerCode" nullok="true" type="shorttext"/>
+  <!-- relocated from branch search -->
+  <column desc="The branch name." name="BranchName" nullok="true" type="varchar">
+    <columnParam name="size" value="100"/>
+  </column>
+  <column desc="The branch code." name="BranchCode" nullok="true" type="shorttext"/>
+</internalExtension>

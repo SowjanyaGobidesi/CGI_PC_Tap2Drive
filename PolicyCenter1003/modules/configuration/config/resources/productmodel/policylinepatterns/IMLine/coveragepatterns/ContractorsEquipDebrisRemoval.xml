@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="ContractorsEquipDebrisRemoval"
+  coverageCategory="ContractorsEquipPartCategory"
+  coverageSubtype="ContrEquipPartCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="ContrEquipPartCov"
+  owningEntityType="ContractorsEquipPart"
+  policyLinePattern="IMLine"
+  priority="60"
+  public-id="ContractorsEquipDebrisRemoval"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewTemplateDocumentDV">
+    <Require
+      name="documentPCContext"
+      type="gw.api.web.document.DocumentPCContext"/>
+    <Require
+      name="documentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Require
+      name="document"
+      type="Document"/>
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Variable
+      initialValue="document.Language"
+      name="language"
+      type="LanguageType"/>
+    <Variable
+      name="Step3Label"
+      type="String"
+      initialValue="DisplayKey.get(&quot;Java.Document.Creation.Template.Step3&quot;)"/>
+    <Variable
+      name="languageType"
+      type="LanguageType"/>
+    <Variable
+      name="initialized"
+      type="boolean"
+      initialValue="return initDV()"/>
+    <ReferencedWidget
+      widget="DocumentCreationScreen"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.DocumentCreation.DocumentContents.Header&quot;)"/>
+      <Label
+        label="DisplayKey.get(&quot;Java.Document.Creation.Template.Step1&quot;)"/>
+      <DocumentTemplateInput
+        clearEnabled="false"
+        editable="documentPCContext.DocumentCreationReadOnly"
+        freeInputEnabled="false"
+        id="TemplatePicker"
+        label="DisplayKey.get(&quot;Java.Document.Creation.Template&quot;)"
+        onPick="documentPCContext.resetTemplateBasedInfo(documentCreationInfo, documentCreationInfo.DocumentTemplateDescriptor); documentCreationInfo.evaluateDynamicWidgets()"
+        pickLocation="DocumentTemplateSearchPopup.push(policyPeriod, account, documentCreationInfo)"
+        required="true"
+        value="documentCreationInfo.DocumentTemplateDescriptor"
+        valueType="gw.plugin.document.IDocumentTemplateDescriptor"/>
+      <TypeKeyInput
+        editable="documentPCContext.DocumentCreationReadOnly"
+        id="Language"
+        label="DisplayKey.get(&quot;Web.DocumentTemplateSearch.Language&quot;)"
+        required="false"
+        value="languageType"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1 and activity.DocumentTemplate != null">
+        <PostOnChange
+          deferUpdate="false"
+          onChange="changeLanguage()"/>
+      </TypeKeyInput>
+      <InputSet
+        visible="documentCreationInfo.DocumentTemplateDescriptor != null">
+        <Label
+          label="DisplayKey.get(&quot;Java.Document.Creation.Template.Step2&quot;)"/>
+        <InputSetRef
+          def="DocumentTemplateContextObjectIteratorInputSet(documentPCContext, documentCreationInfo)"
+          mode="documentCreationInfo.DocumentTemplateDescriptor.TemplateId"
+          widgets="DocumentCreationScreen"/>
+        <InputSetRef
+          def="DocumentCreationInputSet(documentPCContext,documentCreationInfo,Step3Label)"
+          widgets="DocumentCreationScreen"/>
+      </InputSet>
+    </InputColumn>
+    <Code><![CDATA[uses gw.document.SimpleSymbol
+
+uses gw.api.web.document.DocumentsHelper
+      uses gw.api.util.LocaleUtil
+
+      function initDV(): boolean {
+        documentCreationInfo.addSymbols({
+          // Full set of symbols available to Template Descriptors in earlier versions of PC
+          // Included for backwards compatibility and can likely be pruned
+          "DocumentCreationInfo"->documentCreationInfo,
+          "document"->document,
+          "language"->language,
+          // The following are added with explicit types to facilitate
+          // null-safe access within template descriptor Gosu expressions.
+          // Otherwise, null values would be mapped to the Object type.
+          "account"->new SimpleSymbol(Account,account),
+          "policyPeriod"->new SimpleSymbol(PolicyPeriod,policyPeriod),
+          "job"->new SimpleSymbol(Job,job),
+          "activity"->new SimpleSymbol(Activity,activity)
+        })
+        if (documentCreationInfo.DocumentTemplateDescriptor != null) {
+          documentCreationInfo.evaluateDynamicWidgets()
+        }
+        return true
+      }
+
+      function changeLanguage() {
+        documentPCContext.resetTemplateBasedInfo(documentCreationInfo,
+          DocumentsHelper.fetchDocumentTemplate(documentCreationInfo.DocumentTemplateDescriptor.TemplateId,
+            LocaleUtil.toLanguage(languageType), CurrentLocation))
+        documentCreationInfo.evaluateDynamicWidgets()
+      }]]></Code>
+  </DetailViewPanel>
+</PCF>

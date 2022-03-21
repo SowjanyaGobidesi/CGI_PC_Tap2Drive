@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="TypeOfSupplementalRpting"
+  name="TypeOfSupplementalRpting">
+  <typecode
+    code="Broad"
+    desc="Broad"
+    name="Broad"
+    priority="2"/>
+  <typecode
+    code="Detail"
+    desc="Detail"
+    name="Detail"
+    priority="1"/>
+</typelist>

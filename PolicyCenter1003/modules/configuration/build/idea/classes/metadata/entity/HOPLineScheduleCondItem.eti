@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  effDatedBranchType="PolicyPeriod"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPLineScheduleCondItem"
+  desc="HOP Line level condition scheduled item"
+  table="hoplinescheduleconditem"
+  type="effdated"
+  exportable="true"
+  final="false">
+  <implementsEntity
+    name="HOPScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.hop.schedule.HOPLineScheduleCondItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.hop.schedule.HOPLineScheduleCondItemCoverableAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPLineScheduleCondItemMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    fkentity="HOPLineScheduleCond"
+    name="Schedule"
+    nullok="false"/>
+  <onetoone
+    cascadeDelete="true"
+    desc="The condition that applies to this scheduled item"
+    fkentity="HOPLineSchCondItemCond"
+    name="ScheduledItemClause"
+    nullok="true"/>
+</entity>

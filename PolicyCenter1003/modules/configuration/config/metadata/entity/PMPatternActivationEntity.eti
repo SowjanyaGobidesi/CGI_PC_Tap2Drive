@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  desc="Marker which represents ProductModelPattern activation"
+  xmlns="http://guidewire.com/datamodel"
+  entity="PMPatternActivationEntity"
+  table="pmpatternactivationentity"
+  type="nonkeyable"
+  extendable="false"
+  loadable="false">
+  <column
+    desc="Product model pattern type"
+    name="PatternEntityType"
+    nullok="false"
+    required="true"
+    type="shorttext"/>
+  <column
+    desc="ProductModelPattern publicID"
+    name="PatternPublicID"
+    nullok="false"
+    required="true"
+    type="publicid"/>
+  <column
+    desc="Activation timestamp"
+    name="ActivationTimestamp"
+    nullok="false"
+    required="true"
+    type="datetime"/>
+  <index
+    desc="Unique index for product model pattern activation timestamp"
+    name="pmpatunique1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PatternEntityType"/>
+    <indexcol
+      keyposition="2"
+      name="PatternPublicID"/>
+  </index>
+</entity>

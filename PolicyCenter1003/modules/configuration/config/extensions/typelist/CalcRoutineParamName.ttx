@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Used for defining the parameter names that can be set in a calculation parameter set"
+  name="CalcRoutineParamName">
+  <typecode
+    code="vehicle"
+    desc="Vehicle"
+    name="Vehicle"/>
+  <typecode
+    code="papipnj"
+    desc="PA PIP New Jersey Coverage"
+    name="PIPNJCoverage"/>
+  <typecode
+    code="building"
+    desc="Building"
+    name="Building"/>
+  <typecode
+    code="cpbldgcov"
+    desc="CP Building Coverage"
+    name="CPBldgCoverage"/>
+  <typecode
+    code="cpbppcov"
+    desc="CP Business Personal Property Coverage"
+    name="CPBPPCoverage"/>
+  <typecode
+    code="cpdeductfactorname"
+    desc="CP Deductible Factor Name"
+    name="CPDeductibleFactorName"/>
+  <typecode
+    code="driverassignmentinfo"
+    desc="Driver Assignment Information"
+    name="DriverAssignmentInfo"/>
+  <typecode
+    code="assigneddriver"
+    desc="Assigned Driver"
+    name="AssignedDriver"/>
+  <typecode
+    code="currentdriver"
+    desc="Current Driver"
+    name="CurrentDriver"/>
+  <typecode
+    code="proratedpremiumtotal"
+    desc="The total prorated premium amount"
+    name="ProratedPremiumTotal"/>
+  <typecode
+    code="hopbasepremiuminfo"
+    desc="HOP Base Premium Information"
+    name="HOPBasePremiumInfo"/>
+  <typecode
+    code="hopdwelling"
+    desc="HOP Dwelling"
+    name="HOPDwelling"/>
+  <typecode
+    code="hopcoveragepart"
+    desc="HOP Coverage Part"
+    name="HOPCoveragePart"/>
+  <typecode
+    code="hopmodifierbasis"
+    desc="HOP Basis to be used for Rating Modification"
+    name="HOP Modifier Basis"/>
+  <typecode
+    code="hopmodifier"
+    desc="HOP Modifier Code to be used in Modifier Rate lookup"
+    name="HOP Modifier Code"/>
+  <typecode
+    code="hopmodifiervalue"
+    desc="HOP Modifier Value to be used in Modifier Rate lookup"
+    name="HOP Modifier Value"/>
+</typelistextension>

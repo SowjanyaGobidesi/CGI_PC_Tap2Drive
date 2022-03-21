@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCoverageLookup public-id="zjpgcejigrpl2331rpgs2guojm9">
+    <Availability>Available</Availability>
+    <CoveragePatternCode>zdogeskkpv01dc9p8upk23dne09</CoveragePatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCoverageLookup>
+  <HOPCovTermLookup public-id="zujhup6rug9it1vh3mv91ceipma">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zetg68o4lcajf1nt9frdn77ogmb</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zc8he6pkm8ai0cdm4bg4lagv9a9">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>z0pjsih9gkurgbh648e992svj88</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+</import>

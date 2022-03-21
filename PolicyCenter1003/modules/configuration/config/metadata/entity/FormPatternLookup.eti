@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A lookup entity specifying conditions under which a particular form is attached to a policy."
+  entity="FormPatternLookup"
+  exportable="true"
+  loadable="false"
+  table="formpatternlookup"
+  type="retireable">
+  <column
+    desc="The first day, inclusive, the rule is effective"
+    name="StartEffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The last day, exclusive, the rule is effective"
+    name="EndEffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Specifies whether this lookup is an inclusion or exclusion for the FormPattern whose availability is being computed"
+    name="Availability"
+    nullok="false"
+    typelist="AvailabilityType"/>
+  <typekey
+    desc="The jurisdiction for which this lookup applies, or null if the lookup is not restricted by jurisdiction"
+    name="Jurisdiction"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="The underwriting company for which this lookup applies, or null if the lookup is not restricted by underwriting company"
+    name="UWCompanyCode"
+    nullok="true"
+    typelist="UWCompanyCode"/>
+  <foreignkey
+    desc="The form pattern containing this lookup"
+    fkentity="FormPattern"
+    name="FormPattern"
+    nullok="false"/>
+  <datetimeordering
+    firstcolumnname="StartEffectiveDate"
+    operator="LE"
+    secondcolumnname="EndEffectiveDate"/>
+</entity>

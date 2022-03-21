@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="PolicyPeriodSummary">
+  <Columns>
+    <Column
+      beanPath="PolicyPeriodSummary.PolicyNumber"
+      name="policyNumber"/>
+    <Column
+      beanPath="PolicyPeriodSummary.PeriodStart"
+      name="effDate"/>
+    <Column
+      beanPath="PolicyPeriodSummary.PeriodEnd"
+      name="expDate"/>
+    <Column
+      beanPath="PolicyPeriodSummary.Job"
+      name="job"/>
+  </Columns>
+  <DisplayName><![CDATA[gw.api.locale.DisplayKey.get("EntityName.PolicyPeriod", policyNumber, effDate == null ? gw.api.locale.DisplayKey.get("Java.Null") : effDate.format("short"), expDate == null ? gw.api.locale.DisplayKey.get("Java.Null") : expDate.format("short"), job)]]></DisplayName>
+</Entity>

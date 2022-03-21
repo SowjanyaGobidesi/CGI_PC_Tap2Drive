@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    disableUserCustomization="true"
+    id="HOPTotalCostLV"
+    stretch="true">
+    <Require
+      name="allCosts"
+      type="List&lt;HOPCost&gt;"/>
+    <Variable
+      initialValue="allCosts.AnyProrated"
+      name="proRatedCosts"
+      type="boolean"/>
+    <Row>
+      <TextCell
+        bold="true"
+        grow="true"
+        id="Subtotal"
+        value="DisplayKey.get(&quot;Web.Policy.HOP.HOPQuoteScreen.Total&quot;)"
+        wrap="false"/>
+      <TextCell
+        align="right"
+        bold="true"
+        formatType="currency"
+        id="TotalAmt"
+        value="allCosts.ActualAmountSum"
+        valueType="gw.pl.currency.MonetaryAmount"
+        wrap="false"/>
+    </Row>
+  </ListViewPanel>
+</PCF>

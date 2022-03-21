@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    id="ProducersListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.Producers')"
+    viewMoreAction="ProducersPopup.push(account)"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="producerHelper.ViewMoreVisible">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.account.ProducerHelper(account, gw.api.web.dashboard.ui.DashboardParameters.ListViewLimitShort)"
+      name="producerHelper"
+      type="gw.api.web.dashboard.ui.account.ProducerHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="producerCode"
+      value="producerHelper.ProducerCodes"
+      valueType="entity.AccountProducerCode[]">
+      <IteratorSort
+        sortBy="producerCode.ProducerCode.Organization.DisplayName"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="producerCode.ProducerCode.Code"
+        sortOrder="2"/>
+      <Row>
+        <TextCell
+          enableSort="false"
+          grow="true"
+          id="Name"
+          label="DisplayKey.get('Web.Dashboard.Tile.Producers.Name')"
+          value="producerCode.ProducerCode.Organization.DisplayName"/>
+        <TextCell
+          enableSort="false"
+          grow="true"
+          id="Code"
+          label="DisplayKey.get('Web.Dashboard.Tile.Producers.Code')"
+          value="producerCode.ProducerCode.Code"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

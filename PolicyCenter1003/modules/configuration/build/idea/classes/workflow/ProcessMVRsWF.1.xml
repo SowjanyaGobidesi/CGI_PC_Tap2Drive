@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow
+  language=""
+  subtype="ProcessMVRsWF"
+  version="1">
+  <Context/>
+  <Start
+    firstStep="BeforeOrder"><![CDATA[uses gw.api.system.PCLoggerCategory
+
+    PCLoggerCategory.MVR_WORKFLOW.info("start new workflow")]]></Start>
+  <Outcome
+    desc="Done"
+    id="Done"
+    layoutid="28714143">
+    <StepLocalization
+      locale="zh_CN"
+      name="完成"/>
+    <StepLocalization
+      locale="de"
+      name="Fertig"/>
+    <StepLocalization
+      locale="es"
+      name="Listo"/>
+    <StepLocalization
+      locale="pt"
+      name="Concluído"/>
+    <StepLocalization
+      locale="fr"
+      name="Terminé"/>
+    <StepLocalization
+      locale="ru"
+      name="Выполнено"/>
+    <StepLocalization
+      locale="ja"
+      name="完了"/>
+    <StepLocalization
+      locale="it"
+      name="Fine"/>
+    <StepLocalization
+      locale="nl"
+      name="Gereed"/>
+  </Outcome>
+  <AutoStep
+    desc="Short Wait"
+    id="ShortWait"
+    layoutid="18818826">
+    <Enter/>
+    <Exit><![CDATA[Workflow.shortWait()]]></Exit>
+    <Go
+      desc=""
+      id="CheckMVRStatus"
+      layoutid="31134873"
+      nextStep="SecondCheckMVRStatus"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="短暂等待"/>
+    <StepLocalization
+      locale="de"
+      name="Kurze Wartezeit"/>
+    <StepLocalization
+      locale="es"
+      name="Espera breve"/>
+    <StepLocalization
+      locale="pt"
+      name="Breve espera"/>
+    <StepLocalization
+      locale="fr"
+      name="Attente courte"/>
+    <StepLocalization
+      locale="ru"
+      name="Краткое ожидание"/>
+    <StepLocalization
+      locale="ja"
+      name="短期間の待機"/>
+    <StepLocalization
+      locale="it"
+      name="Attesa breve"/>
+    <StepLocalization
+      locale="nl"
+      name="Kort wachten"/>
+  </AutoStep>
+  <AutoStep
+    desc="Second Check MVR Status"
+    id="SecondCheckMVRStatus"
+    layoutid="24240915">
+    <Enter><![CDATA[Workflow.checkMVRStatus()]]></Enter>
+    <Go
+      desc=""
+      id="GetMVRsData"
+      if="Workflow.anyMVRsReady()"
+      layoutid="25271702"
+      nextStep="SecondGetMVRData"/>
+    <Go
+      desc=""
+      id="2ndWait"
+      if=""
+      layoutid="10520239"
+      nextStep="Wait"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="第二次检查汽车驾驶记录状态"/>
+    <StepLocalization
+      locale="de"
+      name="Zweite Prüfung MVR-Status"/>
+    <StepLocalization
+      locale="es"
+      name="Segunda comprobación de estado MVR"/>
+    <StepLocalization
+      locale="pt"
+      name="Segunda verificação do status do registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Deuxième vérification de l'état Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Вторая проверка статуса досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MVR ステータスの 2 回目のチェック"/>
+    <StepLocalization
+      locale="it"
+      name="Seconda verifica stato MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="Tweede controle status CRB-uittreksel"/>
+  </AutoStep>
+  <ManualStep
+    desc="Wait"
+    id="Wait"
+    layoutid="33488071">
+    <Timeout
+      desc=""
+      id="CheckMVRStatus"
+      layoutid="20456960"
+      nextStep="SecondCheckMVRStatus"
+      timeDelta="2h"/>
+    <Trigger
+      desc=""
+      id="Cancel"
+      layoutid="26583257"
+      nextStep="ThirdCheckMVRStatus"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="等待"/>
+    <StepLocalization
+      locale="de"
+      name="Warten"/>
+    <StepLocalization
+      locale="es"
+      name="Esperar"/>
+    <StepLocalization
+      locale="pt"
+      name="Espera"/>
+    <StepLocalization
+      locale="fr"
+      name="Attendre"/>
+    <StepLocalization
+      locale="ru"
+      name="Ожидание"/>
+    <StepLocalization
+      locale="ja"
+      name="待機"/>
+    <StepLocalization
+      locale="it"
+      name="Attendi"/>
+    <StepLocalization
+      locale="nl"
+      name="Wachten"/>
+  </ManualStep>
+  <AutoStep
+    desc="store MVR Data"
+    id="SecondGetMVRData"
+    layoutid="19387083">
+    <Enter><![CDATA[Workflow.getMVRData()]]></Enter>
+    <Go
+      desc=""
+      id="CreateActivity"
+      if="Workflow.receivedAllMVRs()"
+      layoutid="3227795"
+      nextStep="CreateActivityReceived"/>
+    <Go
+      desc=""
+      id="Wait"
+      layoutid="6707638"
+      nextStep="Wait"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="存储汽车驾驶记录数据"/>
+    <StepLocalization
+      locale="de"
+      name="MVR-Daten speichern"/>
+    <StepLocalization
+      locale="es"
+      name="almacenar datos MVR"/>
+    <StepLocalization
+      locale="pt"
+      name="armazenar dados de registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Stocker les données Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="хранить данные досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MVR データの保存"/>
+    <StepLocalization
+      locale="it"
+      name="memorizza dati MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="CRB-gegevens opslaan"/>
+  </AutoStep>
+  <AutoStep
+    desc="Create Activity Received"
+    id="CreateActivityReceived"
+    layoutid="10699046">
+    <Enter/>
+    <Notification
+      name="NotifyAgent"
+      pattern="notification">
+      <Init><![CDATA[Workflow.setupActivity(Activity)]]></Init>
+    </Notification>
+    <Go
+      desc=""
+      id="Done"
+      layoutid="14916950"
+      nextStep="Done"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="创建活动已接收"/>
+    <StepLocalization
+      locale="de"
+      name="Erhaltene Aktivität erstellen"/>
+    <StepLocalization
+      locale="es"
+      name="Crear actividad recibida"/>
+    <StepLocalization
+      locale="pt"
+      name="Criar atividade recebida"/>
+    <StepLocalization
+      locale="fr"
+      name="Créer activité reçue"/>
+    <StepLocalization
+      locale="ru"
+      name="Создать полученную задачу"/>
+    <StepLocalization
+      locale="ja"
+      name="作成アクティビティを受信しました"/>
+    <StepLocalization
+      locale="it"
+      name="Crea attività ricevuta"/>
+    <StepLocalization
+      locale="nl"
+      name="Activiteit aanmaken ontvangen"/>
+  </AutoStep>
+  <AutoStep
+    desc="Order MV Rs"
+    id="OrderMVRs"
+    layoutid="9410616">
+    <Enter><![CDATA[Workflow.orderMVRs()]]></Enter>
+    <Go
+      desc=""
+      id="DefaultOutcome"
+      layoutid="11125920"
+      nextStep="FirstCheckMVRsStatus"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="订购汽车驾驶记录"/>
+    <StepLocalization
+      locale="de"
+      name="MVRs anfordern"/>
+    <StepLocalization
+      locale="es"
+      name="Ordenar MV Rs"/>
+    <StepLocalization
+      locale="pt"
+      name="Solicitar registros de veículos"/>
+    <StepLocalization
+      locale="fr"
+      name="Commander des Rapports Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Заказать досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MV Rs の注文"/>
+    <StepLocalization
+      locale="it"
+      name="Richiedi MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="CRB-uittreksels order"/>
+  </AutoStep>
+  <AutoStep
+    desc="First Check MV Rs Status"
+    id="FirstCheckMVRsStatus"
+    layoutid="22054243">
+    <Enter><![CDATA[Workflow.checkMVRStatus()]]></Enter>
+    <Go
+      desc=""
+      id="GetMVRData"
+      if="Workflow.anyMVRsReady()"
+      layoutid="27221778"
+      nextStep="FirstGetMVRData"/>
+    <Go
+      desc=""
+      id="BeforeShortWait"
+      layoutid="3169230"
+      nextStep="BeforeShortWait"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="首次查看汽车驾驶记录状态"/>
+    <StepLocalization
+      locale="de"
+      name="Erste Prüfung MVR-Status"/>
+    <StepLocalization
+      locale="es"
+      name="Primera comprobación de estado MV Rs"/>
+    <StepLocalization
+      locale="pt"
+      name="Primeira verificação do status do registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Première vérification de l'état Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Первая проверка статуса досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MV Rs ステータスの 1 回目のチェック"/>
+    <StepLocalization
+      locale="it"
+      name="Prima verifica stato MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="Eerste controle status CRB-uittreksels"/>
+  </AutoStep>
+  <AutoStep
+    desc="First Get MVR Data"
+    id="FirstGetMVRData"
+    layoutid="24557507">
+    <Enter><![CDATA[Workflow.getMVRData()]]></Enter>
+    <Go
+      desc=""
+      id="CreateActivity"
+      if="Workflow.receivedAllMVRs()"
+      layoutid="30971920"
+      nextStep="CreateActivityReceived"/>
+    <Go
+      desc=""
+      id="BeforeShortWait"
+      layoutid="10976486"
+      nextStep="BeforeShortWait"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="首次获取汽车驾驶记录数据"/>
+    <StepLocalization
+      locale="de"
+      name="Erster Erhalt MVR-Daten"/>
+    <StepLocalization
+      locale="es"
+      name="Primera obtención de datos MVR"/>
+    <StepLocalization
+      locale="pt"
+      name="Primeiro obtenção de dados do registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Première obtention des données Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Первое получение данных досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MVR データの 1 回目の取得"/>
+    <StepLocalization
+      locale="it"
+      name="Prima acquisizione dati MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="Eerste opvraging CRB-gegevens"/>
+  </AutoStep>
+  <ManualStep
+    desc="Before Short Wait"
+    id="BeforeShortWait"
+    layoutid="13270187">
+    <Timeout
+      desc=""
+      id="Timeout"
+      layoutid="29285819"
+      nextStep="ShortWait"
+      timeDelta="15m"/>
+    <Trigger
+      desc=""
+      id="WaitForMVRs"
+      layoutid="1317291"
+      nextStep="ShortWait"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="在短暂等待前"/>
+    <StepLocalization
+      locale="de"
+      name="Vor kurzer Wartezeit"/>
+    <StepLocalization
+      locale="es"
+      name="Anterior a la espera breve"/>
+    <StepLocalization
+      locale="pt"
+      name="Antes de breve espera"/>
+    <StepLocalization
+      locale="fr"
+      name="Avant attente courte"/>
+    <StepLocalization
+      locale="ru"
+      name="Перед кратким ожиданием"/>
+    <StepLocalization
+      locale="ja"
+      name="短期間の待機前"/>
+    <StepLocalization
+      locale="it"
+      name="Prima di attesa breve"/>
+    <StepLocalization
+      locale="nl"
+      name="Vóór kort wachten"/>
+  </ManualStep>
+  <ManualStep
+    desc="Before Order"
+    id="BeforeOrder"
+    layoutid="3337416">
+    <Trigger
+      desc=""
+      id="OrderMVRs"
+      layoutid="10731062"
+      nextStep="OrderMVRs"/>
+    <Trigger
+      desc=""
+      id="Cancel"
+      layoutid="19205542"
+      nextStep="Done"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="在订购前"/>
+    <StepLocalization
+      locale="de"
+      name="Vor Anforderung"/>
+    <StepLocalization
+      locale="es"
+      name="Anterior al orden"/>
+    <StepLocalization
+      locale="pt"
+      name="Antes da solicitação"/>
+    <StepLocalization
+      locale="fr"
+      name="Avant commande"/>
+    <StepLocalization
+      locale="ru"
+      name="Перед заказом"/>
+    <StepLocalization
+      locale="ja"
+      name="注文前"/>
+    <StepLocalization
+      locale="it"
+      name="Prima di ordine"/>
+    <StepLocalization
+      locale="nl"
+      name="Vóór order"/>
+  </ManualStep>
+  <AutoStep
+    desc="Third Check MVR Status"
+    id="ThirdCheckMVRStatus"
+    layoutid="22901654">
+    <Enter><![CDATA[Workflow.checkMVRStatus()]]></Enter>
+    <Go
+      desc=""
+      id="GetMVRData"
+      if="Workflow.anyMVRsReady()"
+      layoutid="10549121"
+      nextStep="ThirdGetMVRData"/>
+    <Go
+      desc=""
+      id="Done"
+      layoutid="12077003"
+      nextStep="Done"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="第三次查看汽车驾驶记录状态"/>
+    <StepLocalization
+      locale="de"
+      name="Dritte Prüfung MVR-Status"/>
+    <StepLocalization
+      locale="es"
+      name="Tercera comprobación de estado MVR"/>
+    <StepLocalization
+      locale="pt"
+      name="Terceira verificação do status do registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Troisième vérification de l'état Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Третья проверка статуса досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MVR ステータスの 3 回目のチェック"/>
+    <StepLocalization
+      locale="it"
+      name="Terza verifica stato MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="Derde controle status CRB-uittreksel"/>
+  </AutoStep>
+  <AutoStep
+    desc="Third Get MVR Data"
+    id="ThirdGetMVRData"
+    layoutid="25112736">
+    <Enter><![CDATA[Workflow.getMVRData()]]></Enter>
+    <Go
+      desc=""
+      id="CreateActivityReceived"
+      if="Workflow.receivedAllMVRs()"
+      layoutid="26610858"
+      nextStep="CreateActivityReceived"/>
+    <Go
+      desc=""
+      id="Done"
+      layoutid="19041475"
+      nextStep="Done"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="第三次获取汽车驾驶记录数据"/>
+    <StepLocalization
+      locale="de"
+      name="Dritter Erhalt MVR-Daten"/>
+    <StepLocalization
+      locale="es"
+      name="Tercera obtención de datos MVR"/>
+    <StepLocalization
+      locale="pt"
+      name="Terceira obtenção de dados do registro de veículo"/>
+    <StepLocalization
+      locale="fr"
+      name="Troisième obtention des données Rapport Véhicules"/>
+    <StepLocalization
+      locale="ru"
+      name="Третье получение данных досье водителя"/>
+    <StepLocalization
+      locale="ja"
+      name="MVR データの 3 回目の取得"/>
+    <StepLocalization
+      locale="it"
+      name="Terza acquisizione dati MVR"/>
+    <StepLocalization
+      locale="nl"
+      name="Derde opvraging CRB-gegevens"/>
+  </AutoStep>
+  <Layout>
+    <BoxUI
+      height="4"
+      layoutid="28714143"
+      width="10"
+      x="-16"
+      y="-3"/>
+    <BoxUI
+      height="4"
+      layoutid="18818826"
+      width="17"
+      x="-28"
+      y="-44"/>
+    <ArrowUI
+      layoutid="15683536"
+      visible="true">
+      <PointUI
+        x="-51"
+        y="-56"/>
+      <PointUI
+        x="-51"
+        y="-49"/>
+    </ArrowUI>
+    <BoxUI
+      height="5"
+      layoutid="24240915"
+      width="20"
+      x="-28"
+      y="-34"/>
+    <ArrowUI
+      layoutid="10520239"
+      visible="true">
+      <PointUI
+        x="-18"
+        y="-29"/>
+      <PointUI
+        x="-18"
+        y="-24"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="33488071"
+      width="11"
+      x="-24"
+      y="-24"/>
+    <ArrowUI
+      layoutid="20456960"
+      visible="true">
+      <PointUI
+        x="-24"
+        y="-23"/>
+      <PointUI
+        x="-37"
+        y="-23"/>
+      <PointUI
+        x="-37"
+        y="-31"/>
+      <PointUI
+        x="-28"
+        y="-31"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="19387083"
+      width="18"
+      x="-1"
+      y="-33"/>
+    <ArrowUI
+      layoutid="3227795"
+      visible="true">
+      <PointUI
+        x="12"
+        y="-29"/>
+      <PointUI
+        x="12"
+        y="-14"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="10699046"
+      width="19"
+      x="6"
+      y="-14"/>
+    <ArrowUI
+      layoutid="14916950"
+      visible="true">
+      <PointUI
+        x="14"
+        y="-10"/>
+      <PointUI
+        x="14"
+        y="-1"/>
+      <PointUI
+        x="-6"
+        y="-1"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="25271702"
+      visible="true">
+      <PointUI
+        x="-8"
+        y="-31"/>
+      <PointUI
+        x="-1"
+        y="-31"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="31134873"
+      visible="true">
+      <PointUI
+        x="-20"
+        y="-40"/>
+      <PointUI
+        x="-20"
+        y="-34"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="6707638"
+      visible="true">
+      <PointUI
+        x="4"
+        y="-29"/>
+      <PointUI
+        x="4"
+        y="-22"/>
+      <PointUI
+        x="-13"
+        y="-22"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="6328131"
+      visible="true">
+      <PointUI
+        x="-33"
+        y="-65"/>
+      <PointUI
+        x="-51"
+        y="-60"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="9410616"
+      width="14"
+      x="-48"
+      y="-72"/>
+    <ArrowUI
+      layoutid="11125920"
+      visible="true">
+      <PointUI
+        x="-41"
+        y="-68"/>
+      <PointUI
+        x="-41"
+        y="-63"/>
+    </ArrowUI>
+    <BoxUI
+      height="5"
+      layoutid="22054243"
+      width="19"
+      x="-50"
+      y="-63"/>
+    <ArrowUI
+      layoutid="3169230"
+      visible="true">
+      <PointUI
+        x="-50"
+        y="-61"/>
+      <PointUI
+        x="-54"
+        y="-61"/>
+      <PointUI
+        x="-54"
+        y="-42"/>
+      <PointUI
+        x="-49"
+        y="-42"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="24557507"
+      width="15"
+      x="-49"
+      y="-53"/>
+    <ArrowUI
+      layoutid="10976486"
+      visible="true">
+      <PointUI
+        x="-41"
+        y="-49"/>
+      <PointUI
+        x="-41"
+        y="-44"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="13270187"
+      width="15"
+      x="-49"
+      y="-44"/>
+    <ArrowUI
+      layoutid="29285819"
+      visible="true">
+      <PointUI
+        x="-34"
+        y="-44"/>
+      <PointUI
+        x="-28"
+        y="-44"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="1317291"
+      visible="true">
+      <PointUI
+        x="-34"
+        y="-41"/>
+      <PointUI
+        x="-28"
+        y="-41"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="27221778"
+      visible="true">
+      <PointUI
+        x="-41"
+        y="-58"/>
+      <PointUI
+        x="-41"
+        y="-53"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="30971920"
+      visible="true">
+      <PointUI
+        x="-34"
+        y="-51"/>
+      <PointUI
+        x="23"
+        y="-51"/>
+      <PointUI
+        x="23"
+        y="-14"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="3337416"
+      width="14"
+      x="-68"
+      y="-72"/>
+    <ArrowUI
+      layoutid="10731062"
+      visible="true">
+      <PointUI
+        x="-54"
+        y="-70"/>
+      <PointUI
+        x="-48"
+        y="-70"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="19205542"
+      visible="true">
+      <PointUI
+        x="-61"
+        y="-68"/>
+      <PointUI
+        x="-61"
+        y="0"/>
+      <PointUI
+        x="-16"
+        y="0"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="6149728"
+      visible="true">
+      <PointUI
+        x="-5"
+        y="-3"/>
+      <PointUI
+        x="4"
+        y="-3"/>
+      <PointUI
+        x="4"
+        y="0"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="26583257"
+      visible="true">
+      <PointUI
+        x="-24"
+        y="-21"/>
+      <PointUI
+        x="-37"
+        y="-21"/>
+      <PointUI
+        x="-37"
+        y="-14"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="22901654"
+      width="19"
+      x="-45"
+      y="-14"/>
+    <ArrowUI
+      layoutid="10549121"
+      visible="true">
+      <PointUI
+        x="-26"
+        y="-12"/>
+      <PointUI
+        x="-20"
+        y="-12"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="25112736"
+      width="17"
+      x="-20"
+      y="-14"/>
+    <ArrowUI
+      layoutid="26610858"
+      visible="true">
+      <PointUI
+        x="-3"
+        y="-12"/>
+      <PointUI
+        x="6"
+        y="-12"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="19041475"
+      visible="true">
+      <PointUI
+        x="-11"
+        y="-10"/>
+      <PointUI
+        x="-11"
+        y="-3"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="12077003"
+      visible="true">
+      <PointUI
+        x="-35"
+        y="-10"/>
+      <PointUI
+        x="-35"
+        y="-2"/>
+      <PointUI
+        x="-16"
+        y="-2"/>
+    </ArrowUI>
+  </Layout>
+</Workflow>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    disableUserCustomization="true"
+    id="HOPCostChangeDetailLV"
+    stretch="true">
+    <Require
+      name="line"
+      type="entity.HOPLine"/>
+    <Require
+      name="costChanges"
+      type="java.util.List&lt;entity.HOPTransaction&gt;"/>
+    <RowSetRef
+      def="HOPCostChangeDetailRowSet(line.Branch, costChanges)"
+      id="CostChangeDetailRow"/>
+  </ListViewPanel>
+</PCF>

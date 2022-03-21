@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="HOPWindstormOrHailCoverageExclusion"
+  coverageCategory="z1hhgd8n6nji0albb2m28ahhbq9"
+  exclusionSubtype="HOPDwellingExcl"
+  existence="Electable"
+  lookupTableName="HOPDwellingExcl"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="1200"
+  public-id="zt2gg2bpmg9au89d3g8rdfr72a9"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</ExclusionPattern>

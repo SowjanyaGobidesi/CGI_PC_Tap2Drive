@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="AggLimitsLocationProject"
+  conditionSubtype="GeneralLiabilityCond"
+  coverageCategory="GLDesignated"
+  existence="Electable"
+  lookupTableName="GLCond"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="AggLimitsLocationProject"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <GenericCovTermPattern
+      codeIdentifier="AggLimitLocProjectDescription"
+      coverageColumn="StringTerm1"
+      lookupTableName="GLCovTerm"
+      modelType="Other"
+      priority="2"
+      public-id="AggLimitLocProjectDescription"
+      required="true"/>
+    <TypekeyCovTermPattern
+      codeIdentifier="AggLimitApplicability"
+      coverageColumn="ChoiceTerm1"
+      lookupTableName="GLCovTerm"
+      priority="1"
+      public-id="AggLimitApplicability"
+      required="true"
+      typelist="AggregateLimits"/>
+  </CovTerms>
+</ConditionPattern>

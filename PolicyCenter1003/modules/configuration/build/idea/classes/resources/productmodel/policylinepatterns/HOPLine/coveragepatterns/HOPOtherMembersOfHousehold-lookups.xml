@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<import>
+  <ConditionLookup public-id="zd1juc74kp60da2l7mqbikh5ej9">
+    <Availability>Available</Availability>
+    <ConditionPatternCode>zbtjeorlj3icresdsmqolgac40b</ConditionPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2010-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </ConditionLookup>
+</import>

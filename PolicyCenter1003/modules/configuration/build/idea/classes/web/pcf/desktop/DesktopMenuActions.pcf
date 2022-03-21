@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    flatten="true"
+    id="DesktopMenuActions">
+    <MenuItem
+      id="DesktopMenuActions_Create"
+      label="DisplayKey.get(&quot;Web.DesktopMenuActions.Create&quot;)"
+      shortcut="C">
+      <MenuItem
+        action="NewSubmission.go()"
+        id="DesktopMenuActions_NewSubmission"
+        label="DisplayKey.get(&quot;Web.DesktopMenuActions.NewSubmission&quot;)"
+        shortcut="B"
+        visible="perm.System.createsubmission and !gw.api.web.desktop.data.FederatedDataUIHelper.IsFederated"/>
+      <MenuItem
+        action="FederatedClusterForNewSubmissionForward.push()"
+        id="DesktopMenuActions_FederatedNewSubmission"
+        label="DisplayKey.get(&quot;Web.DesktopMenuActions.NewSubmission&quot;)"
+        shortcut="B"
+        visible="perm.System.createsubmission and gw.api.web.desktop.data.FederatedDataUIHelper.IsFederated"/>
+      <MenuItem
+        action="NewAccount.go()"
+        id="DesktopMenuActions_NewAccount"
+        available="gw.api.web.desktop.data.FederatedDataUIHelper.IsDefault and perm.Account.create"
+        label="DisplayKey.get(&quot;Web.Account.NewAccount&quot;)"/>
+      <MenuItem
+        action="FederatedClusterForNewAccountForward.push()"
+        id="DesktopMenuActions_FederatedNewAccount"
+        available="gw.api.web.desktop.data.FederatedDataUIHelper.IsFederated and perm.Account.create"
+        label="DisplayKey.get(&quot;Web.Account.NewAccount&quot;)"/>
+      <MenuItem
+        action="LoadFactorsPopup.push()"
+        id="DesktopMenuActions_LoadAndVacation"
+        label="DisplayKey.get(&quot;Web.LoadAndVacation&quot;)"
+        shortcut="O"/>
+    </MenuItem>
+  </MenuActions>
+</PCF>

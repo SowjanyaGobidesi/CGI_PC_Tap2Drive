@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="SubmissionActionsMenuItemSet">
+    <Require
+      name="submission"
+      type="Submission"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <MenuItem
+      action="policyPeriod.SubmissionProcess.withdrawJob(); policyPeriod.Bundle.commit()"
+      confirmMessage="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.ConfirmWithdraw&quot;)"
+      id="Withdraw"
+      label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.Withdraw&quot;)"
+      visible="policyPeriod.SubmissionProcess.canWithdrawJob().Okay"/>
+    <MenuItem
+      action="DeclineReasonPopup.push(submission, policyPeriod, null)"
+      id="Decline"
+      label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.Decline&quot;)"
+      visible="policyPeriod.SubmissionProcess.canDeclineJob().Okay"/>
+    <MenuItem
+      action="NotTakenReasonPopup.push(submission, policyPeriod, null)"
+      id="NotTakenJob"
+      label="DisplayKey.get(&quot;Job.Operation.NotTaking&quot;)"
+      visible="policyPeriod.SubmissionProcess.canNotTakeJob().Okay"/>
+  </MenuItemSet>
+</PCF>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PaymentsPlanInputSet"
+    mode="ReportingPlan">
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Policy.Payment.PremiumReportPlans&quot;)"/>
+    <RangeInput
+      editable="true"
+      id="PremiumReportPlan"
+      label="DisplayKey.get(&quot;Web.Policy.Payment.PremiumReportPlan&quot;)"
+      optionLabel="VALUE.Name"
+      required="true"
+      value="policyPeriodBillingInstructionsManager.ReportingPlanChoice"
+      valueType="gw.plugin.billing.ReportingPlanData"
+      valueRange="policyPeriodBillingInstructionsManager.ReportingPlans">
+      <PostOnChange/>
+    </RangeInput>
+    <TextInput
+      id="DepositDefault"
+      label="DisplayKey.get(&quot;Web.Policy.Payment.DepositDefault&quot;)"
+      value="policyPeriodBillingInstructionsManager.ReportingDefaultDepositPct"
+      valueType="java.math.BigDecimal"/>
+    <TextInput
+      editable="perm.PolicyPeriod.overridebilling"
+      id="DepositOverride"
+      label="DisplayKey.get(&quot;Web.Policy.Payment.DepositOverridePct&quot;)"
+      requestValidationExpression="!(VALUE &lt; 0 || VALUE &gt; 100) ? null : DisplayKey.get(&quot;Web.Policy.Payment.DepositOverride.OutOfRange&quot;)"
+      value="policyPeriodBillingInstructionsManager.DepositOverridePct"
+      valueType="java.math.BigDecimal">
+      <PostOnChange
+        onChange="policyPeriodBillingInstructionsManager.calculateAndSetDepositAmountOnReporting()"/>
+    </TextInput>
+    <MonetaryAmountInput
+      id="DepositAmount"
+      label="DisplayKey.get(&quot;Web.Policy.Payment.DepositAmt&quot;)"
+      value="policyPeriodBillingInstructionsManager.DepositAmount"/>
+  </InputSet>
+</PCF>

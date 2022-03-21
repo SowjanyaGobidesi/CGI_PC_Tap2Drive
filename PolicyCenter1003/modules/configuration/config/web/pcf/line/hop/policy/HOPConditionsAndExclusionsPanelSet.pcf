@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="HOPConditionsAndExclusionsPanelSet">
+    <Require
+      name="hopLine"
+      type="productmodel.HOPLine"/>
+    <Require
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      name="HOPClausePanelSetHelper"
+      type="gw.web.line.hop.policy.HOPClausePanelSetHelper"/>
+    <PanelRow>
+      <PanelColumn>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.Conditions&quot;)"/>
+          <DetailViewPanel>
+            <Variable
+              initialValue="HOPClausePanelSetHelper.getLineConditionPatterns(hopLine, openForEdit)"
+              name="lineConditionPatterns"
+              recalculateOnRefresh="true"
+              type="gw.api.productmodel.ConditionPattern[]"/>
+            <Variable
+              initialValue="HOPClausePanelSetHelper.getDwellingConditionPatterns(dwelling, openForEdit)"
+              name="dwellingConditionPatterns"
+              recalculateOnRefresh="true"
+              type="gw.api.productmodel.ConditionPattern[]"/>
+            <InputColumn>
+              <InputIterator
+                elementName="dwellingConditionPattern"
+                id="dwellingConditionPatternIterator"
+                value="dwellingConditionPatterns"
+                valueType="gw.api.productmodel.ConditionPattern[]">
+                <IteratorSort
+                  sortBy="dwellingConditionPattern.Priority"
+                  sortOrder="1"/>
+                <InputSetRef
+                  def="CoverageInputSet(dwellingConditionPattern, dwelling, openForEdit)"
+                  mode="dwellingConditionPattern.CodeIdentifier"/>
+              </InputIterator>
+              <InputIterator
+                elementName="lineConditionPattern"
+                id="lineConditionPatternIterator"
+                value="lineConditionPatterns"
+                valueType="gw.api.productmodel.ConditionPattern[]">
+                <IteratorSort
+                  sortBy="lineConditionPattern.Priority"
+                  sortOrder="1"/>
+                <InputSetRef
+                  def="CoverageInputSet(lineConditionPattern, hopLine, openForEdit)"
+                  mode="lineConditionPattern.CodeIdentifier"/>
+              </InputIterator>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </PanelColumn>
+      <PanelColumn>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.Exclusions&quot;)"/>
+          <DetailViewPanel>
+            <Variable
+              initialValue="HOPClausePanelSetHelper.getLineExclusionPatterns(hopLine, openForEdit)"
+              name="lineExclusionPatterns"
+              recalculateOnRefresh="true"
+              type="gw.api.productmodel.ExclusionPattern[]"/>
+            <Variable
+              initialValue="HOPClausePanelSetHelper.getDwellingExclusionPatterns(dwelling, openForEdit)"
+              name="dwellingExclusionPatterns"
+              recalculateOnRefresh="true"
+              type="gw.api.productmodel.ExclusionPattern[]"/>
+            <InputColumn>
+              <InputIterator
+                elementName="dwellingExclusionPattern"
+                id="dwellingExclusionPatternIterator"
+                value="dwellingExclusionPatterns"
+                valueType="gw.api.productmodel.ExclusionPattern[]">
+                <IteratorSort
+                  sortBy="dwellingExclusionPattern.Priority"
+                  sortOrder="1"/>
+                <InputSetRef
+                  def="CoverageInputSet(dwellingExclusionPattern, dwelling, openForEdit)"
+                  mode="dwellingExclusionPattern.CodeIdentifier"/>
+              </InputIterator>
+              <InputIterator
+                elementName="lineExclusionPattern"
+                id="lineExclusionPatternIterator"
+                value="lineExclusionPatterns"
+                valueType="gw.api.productmodel.ExclusionPattern[]">
+                <IteratorSort
+                  sortBy="lineExclusionPattern.Priority"
+                  sortOrder="1"/>
+                <InputSetRef
+                  def="CoverageInputSet(lineExclusionPattern, hopLine, openForEdit)"
+                  mode="lineExclusionPattern.CodeIdentifier"/>
+              </InputIterator>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </PanelColumn>
+    </PanelRow>
+  </PanelSet>
+</PCF>

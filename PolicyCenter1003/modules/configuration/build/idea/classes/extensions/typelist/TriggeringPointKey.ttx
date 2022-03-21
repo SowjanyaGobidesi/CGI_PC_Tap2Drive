@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Unique key identifying a TriggeringPoint, used when invoking Business Rules"
+  name="TriggeringPointKey">
+  <typecode
+    code="Reinsurance"
+    desc="Triggers at Reinsurance"
+    name="Reinsurance">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="UWHold"
+    desc="Triggers at UWHold"
+    name="UWHold">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="RegulatoryHold"
+    desc="Triggers at RegulatoryHold"
+    name="RegulatoryHold">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="MVR"
+    desc="Triggers at MVR"
+    name="MVR">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typefilter
+    desc="Checking sets associated with UWRules"
+    name="UWRuleCheckingSetFilter">
+    <include
+      code="PreQuote"/>
+    <include
+      code="PreRateRelease"/>
+    <include
+      code="PreQuoteRelease"/>
+    <include
+      code="PreBind"/>
+    <include
+      code="PreIssuance"/>
+    <include
+      code="Renewal"/>
+    <include
+      code="Manual"/>
+    <include
+      code="MVR"/>
+    <include
+      code="PolicyRenewalAPI"/>
+    <include
+      code="Question"/>
+    <include
+      code="Referral"/>
+    <include
+      code="RegulatoryHold"/>
+    <include
+      code="upgrade"/>
+    <include
+      code="Reinsurance"/>
+    <include
+      code="UWHold"/>
+    <include
+      code="All"/>
+  </typefilter>
+</typelistextension>

@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.FederatedDataContacts_dir
+
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("GroupUser")
+internal class GroupUser {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis GroupUser &&
+        (messageContext.EventName == GroupUser.GROUPUSERADDED_EVENT
+            || messageContext.EventName == GroupUser.GROUPUSERCHANGED_EVENT
+            || messageContext.EventName == GroupUser.GROUPUSERREMOVED_EVENT)
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createGroupUserAssignmentMessage(messageContext)
+/*end00rule*/
+  }
+}

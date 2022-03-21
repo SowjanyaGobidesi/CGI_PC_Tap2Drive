@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="DocumentTemplateSearchPopup"
+    returnType="gw.plugin.document.IDocumentTemplateDescriptor"
+    title="DisplayKey.get(&quot;Web.TabBar.Search.DocumentTemplates&quot;)">
+    <LocationEntryPoint
+      signature="DocumentTemplateSearchPopup(policyPeriod : PolicyPeriod, account : Account, documentCreationInfo : gw.document.DocumentCreationInfo)"/>
+    <LocationEntryPoint
+      signature="DocumentTemplateSearchPopup(symbolProvider : gw.document.SymbolProvider)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      name="documentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Variable
+      name="symbolProvider"
+      type="gw.document.SymbolProvider"/>
+    <Screen
+      id="DocumentTemplateSearchScreen">
+      <Toolbar/>
+      <!-- <EditButtons
+        editVisible="false"
+        updateVisible="false"/> -->
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultCachingEnabled="false"
+        resultsName="documentTemplateSearchResultsList"
+        search="searchCriteria.performSearch(symbolProvider != null ? symbolProvider : documentCreationInfo)"
+        searchCriteria="createSearchCriteria()"
+        searchCriteriaType="entity.DocumentTemplateSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="entity.DocumentTemplateSearchResults[]">
+        <PanelRef
+          def="DocumentTemplateSearchDV(searchCriteria)"/>
+        <PanelRef
+          def="DocumentTemplateSearchResultsLV(documentTemplateSearchResultsList)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function createSearchCriteria() : DocumentTemplateSearchCriteria {
+      var sc = new DocumentTemplateSearchCriteria()
+      if (documentCreationInfo != null && documentCreationInfo.DocumentTemplateDescriptor != null) {
+        sc.Language = gw.api.util.LocaleUtil.toLanguageType(documentCreationInfo.DocumentTemplateDescriptor.Language)
+      }
+      return sc
+    }]]></Code>
+  </Popup>
+</PCF>

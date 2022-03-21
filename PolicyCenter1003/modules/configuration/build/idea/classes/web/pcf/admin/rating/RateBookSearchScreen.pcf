@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="RateBookSearchScreen">
+    <Require
+      name="initialRateBook"
+      type="RateBook"/>
+    <Require
+      name="displayImportResults"
+      type="boolean"/>
+    <Toolbar>
+      <ToolbarButton
+        available="not gw.pcf.rating.flow.RateBookSearchScreenUIHelper.GenerationInProgress"
+        id="RateBookSearchScreen_GenerateJarButton"
+        label="DisplayKey.get(&quot;Web.Rating.RateBooks.GenerateRatingJar&quot;)"
+        action="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.generate()"
+        showConfirmMessage="false"
+        visible="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value"/>
+      <ToolbarButton
+        available="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.Path != null"
+        id="RateBookSearchScreen_DownloadJarButton"
+        label="DisplayKey.get(&quot;Web.Rating.RateBooks.DownloadRatingJar&quot;)"
+        action="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.download()"
+        download="true"
+        tooltip="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.DownloadJARTooltip"
+        visible="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value"/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn
+        hasBorders="true"
+        refreshOnProgressComplete="true">
+        <ProgressInput
+          id="JarGenerationProgressBar"
+          labelAbove="true"
+          percentage="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.CompletedPercentage"
+          status="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.ProgressBarStatus"
+          visible="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value and gw.pcf.rating.flow.RateBookSearchScreenUIHelper.GenerationInProgress"/>
+        <ButtonInput
+          align="left"
+          available="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value and gw.pcf.rating.flow.RateBookSearchScreenUIHelper.GenerationInProgress"
+          id="CancelJarGeneration"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Rating.RateBooks.CancelRatingJarGeneration&quot;)"
+          action="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.cancel()"
+          visible="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value and gw.pcf.rating.flow.RateBookSearchScreenUIHelper.GenerationInProgress"/>
+        <DateInput
+          dateFormat="short"
+          id="JARGenerationDate"
+          label="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.ProgressSectionLabel"
+          timeFormat="long"
+          value="gw.pcf.rating.flow.RateBookSearchScreenUIHelper.Canceled ? gw.pcf.rating.flow.RateBookSearchScreenUIHelper.LastGenerationStartDate : gw.pcf.rating.flow.RateBookSearchScreenUIHelper.LastGeneratedJarDate"
+          visible="gw.api.system.PCConfigParameters.EnableRateRoutinesJar.Value and not gw.pcf.rating.flow.RateBookSearchScreenUIHelper.GenerationInProgress and (gw.pcf.rating.flow.RateBookSearchScreenUIHelper.Canceled or gw.pcf.rating.flow.RateBookSearchScreenUIHelper.Path != null)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <SearchPanel
+      criteriaName="searchCriteria"
+      resultsName="rateBooks"
+      search="searchCriteria.performSearch()"
+      searchCriteria="new gw.rating.rtm.query.RateBookSearchCriteria()"
+      searchCriteriaType="gw.rating.rtm.query.RateBookSearchCriteria"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;entity.RateBook&gt;">
+      <PanelRef
+        def="RateBookSearchDV(searchCriteria)"/>
+      <PanelRef
+        def="RateBookPanelSet(rateBooks, initialRateBook)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+      </PanelRef>
+    </SearchPanel>
+  </Screen>
+</PCF>

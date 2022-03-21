@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="UWCompanyFilteredLookup">
+  <implementsInterface
+    iface="gw.pc.productmodel.entity.UWCompanyFilteredLookup"
+    impl="com.guidewire.pc.domain.productmodel.impl.UWCompanyFilteredLookupImpl"/>
+  <typekey
+    desc="The underwriting company for which this lookup applies, or null if the lookup is not restricted by underwriting company"
+    name="UWCompanyCode"
+    nullok="true"
+    typelist="UWCompanyCode"/>
+  <fulldescription><![CDATA[Delegate for availability lookup entities where UWCompany is an optional restriction.]]></fulldescription>
+</delegate>

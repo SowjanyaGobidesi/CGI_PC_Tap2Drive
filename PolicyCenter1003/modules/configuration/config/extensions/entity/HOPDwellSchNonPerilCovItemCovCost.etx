@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="HOPDwellSchNonPerilCovItemCovCost">
+  <implementsInterface
+    iface="gw.lob.hop.financials.HOPCostMethods"
+    impl="gw.lob.hop.financials.HOPDwellSchCovItemCovCostMethodsImpl"/>
+</extension>

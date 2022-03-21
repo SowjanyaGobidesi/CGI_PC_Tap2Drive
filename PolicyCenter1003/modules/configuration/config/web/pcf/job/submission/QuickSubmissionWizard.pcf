@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <JobWizard
+    acceleratedMenuActions="MultiQuoteAcceleratedMenuActions(submission, policyPeriod, jobWizardHelper)"
+    canEdit="(not job.Complete) and (perm.Submission.edit(submission))"
+    canVisit="perm.Submission.view(submission)"
+    desc="The main Wizard for submitting a quick Policy."
+    id="QuickSubmissionWizard"
+    independentStepsTitle="DisplayKey.get(&quot;Web.PolicyFile.ToolsMenuTitle&quot;)"
+    independentStepsTitleIcon="&quot;tools_nav&quot;"
+    independentStepsTitleIconType="svgFileName"
+    infoBar="JobWizardInfoBar(submission, policyPeriod)"
+    initialStep="jobWizardHelper.getInitialWizardStepId( policyPeriod )"
+    isDraftOnEnter="true"
+    jobType="Submission"
+    menuActions="WizardMenuActions(jobWizardHelper,submission,policyPeriod)"
+    onConcurrentDataChange="CurrentLocation.cancel(); JobForward.go(job)"
+    parent="JobForward(submission)"
+    subtitle="policyPeriod.Status.DisplayName"
+    title="DisplayKey.get(&quot;Web.SubmissionWizard.Title&quot;, submission.JobNumber)">
+    <LocationEntryPoint
+      signature="QuickSubmissionWizard(submission : Submission, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="submission"
+      type="Submission"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; policyPeriod.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="openForEditInit.get()"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <Variable
+      initialValue="submission"
+      name="job"
+      type="entity.Submission"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Variable
+      initialValue="policy.Product.PublicID"
+      name="productCode"
+      type="String"/>
+    <Variable
+      initialValue="new gw.api.web.job.JobWizardHelper(CurrentLocation)"
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policy.Product.getAvailableQuestionSetsByType(QuestionSetType.TC_PREQUAL,policyPeriod).Count &gt; 0"
+      name="preQualNecessary"
+      type="boolean"/>
+    <WizardStepGroup
+      id="LOBWizardStepGroup"
+      label="DisplayKey.get(&quot;Web.Wizard.LineWizardStepGroup&quot;)">
+      <WizardStepSetRef
+        def="LineQuickWizardStepSet(job, policyPeriod, jobWizardHelper, openForEdit)"
+        mode="productCode"/>
+    </WizardStepGroup>
+    <JobWizardStep
+      allowFinish="false"
+      id="ViewQuote"
+      onEnter="gw.lob.pa.PAWizardStepHelper.onViewQuoteStepEnter(policyPeriod, jobWizardHelper)"
+      screen="QuickSubmission_QuoteScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.ViewQuote&quot;)"
+      visible="!policyPeriod.MultiLine"/>
+    <WizardStepSetRef
+      def="JobWizardToolsMenuWizardStepSet(jobWizardHelper, policyPeriod)"/>
+  </JobWizard>
+</PCF>

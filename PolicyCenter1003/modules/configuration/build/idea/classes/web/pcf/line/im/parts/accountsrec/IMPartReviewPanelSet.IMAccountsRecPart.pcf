@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMPartReviewPanelSet"
+    mode="IMAccountsRecPart">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Variable
+      initialValue="imLine.IMAccountsRecPart"
+      name="accountsRecPart"
+      type="IMAccountsRecPart"/>
+    <PanelRef
+      visible="accountsRecPart.IMAccountsRecPartCovs.Count &gt; 0">
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable&quot;)"/>
+      <PanelSet>
+        <PanelRef
+          def="CoverageSummaryLV(accountsRecPart.IMAccountsRecPartCovs?.toList() as java.util.List&lt;gw.api.domain.Clause&gt;, accountsRecPart)"/>
+      </PanelSet>
+    </PanelRef>
+    <PanelRef
+      def="IMARItemDV(accountsRecPart, false, null)"
+      visible="!accountsRecPart.IMAccountsReceivables.IsEmpty">
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Policy.IM.ARScheduledItems&quot;)"/>
+    </PanelRef>
+  </PanelSet>
+</PCF>

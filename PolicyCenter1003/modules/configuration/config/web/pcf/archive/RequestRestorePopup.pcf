@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="RequestRestorePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Archive.RequestRestorePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="RequestRestorePopup(policyTerm : PolicyTerm)"/>
+    <Variable
+      name="policyTerm"
+      type="PolicyTerm"/>
+    <Variable
+      initialValue="policyTerm.createRestoreRequest(gw.plugin.util.CurrentUserUtil.getCurrentUser().getUser(), &quot;&quot;, true)"
+      name="restoreRequest"
+      type="PolicyTermRestoreRequest"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Archive.RequestRestorePopup.RestoreButtonLabel&quot;)"/>
+      </Toolbar>
+      <PanelSet>
+        <DetailViewPanel
+          visible="perm.PolicyPeriod.restorefromarchive">
+          <InputColumn>
+            <TextAreaInput
+              editable="true"
+              id="ReasonText"
+              label="DisplayKey.get(&quot;Web.Archive.RequestRestorePopup.RestoreReasonLabel&quot;)"
+              numRows="8"
+              value="restoreRequest.Reason"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelSet>
+    </Screen>
+  </Popup>
+</PCF>

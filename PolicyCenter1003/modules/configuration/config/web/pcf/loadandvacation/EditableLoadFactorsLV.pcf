@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableLoadFactorsLV">
+    <Require
+      name="groupUserList"
+      type="GroupUser[]"/>
+    <RowIterator
+      editable="true"
+      elementName="groupUser"
+      value="groupUserList"
+      valueType="entity.GroupUser[]">
+      <Row>
+        <AltUserCell
+          id="LoadFactor_User"
+          label="DisplayKey.get(&quot;Web.LoadAndVacation.EditableLoadFactorsLV.User&quot;)"
+          sortOrder="1"
+          value="groupUser.User"/>
+        <TextCell
+          editable="true"
+          id="LoadFactor"
+          label="DisplayKey.get(&quot;Web.LoadAndVacation.EditableLoadFactorsLV.LoadFactor&quot;)"
+          sortOrder="2"
+          value="groupUser.LoadFactor"
+          valueType="java.lang.Integer"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

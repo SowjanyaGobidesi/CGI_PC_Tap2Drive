@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    id="JobWizardInfoBar">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <InfoBarElement
+      icon="job.Icon"
+      iconColor="job.Subtype == typekey.Job.TC_CANCELLATION ? gw.api.web.color.GWColor.THEME_ALERT_ERROR : null"
+      iconType="svgFileName"
+      id="JobLabel"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.JobStatus&quot;, job.DisplayType,policyPeriod.Status)"/>
+    <InfoBarElement
+      action="WorkflowDetail.go(policyPeriod.ActiveWorkflow)"
+      id="WorkflowLabel"
+      value="DisplayKey.get(&quot;Web.Wizard.InfoBar.WorkflowStatus&quot;, policyPeriod.ActiveWorkflow.State == TC_ACTIVE ? policyPeriod.ActiveWorkflow.ActiveState.DisplayName : policyPeriod.ActiveWorkflow.State.DisplayName )"
+      visible="policyPeriod.hasActiveWorkflow()"/>
+    <InfoBarElement
+      icon="policyPeriod.Policy.Product.Icon"
+      iconType="svgFileName"
+      id="LOBLabel"
+      label="policyPeriod.Policy.Product"/>
+    <InfoBarElement
+      id="EffectiveDate"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.EffectiveDate&quot;, gw.api.util.StringUtil.formatDate(policyPeriod.EditEffectiveDate, &quot;short&quot;))"
+      visible="policyPeriod.EditEffectiveDate != null"/>
+    <InfoBarElement
+      id="AccountName"
+      label="DisplayKey.get(&quot;Web.JobWizard.InfoBar.PrimaryNamedInsured&quot;)"
+      value="policyPeriod.PrimaryNamedInsured.DisplayName"
+      visible="policyPeriod.PrimaryNamedInsured != null"/>
+    <InfoBarElement
+      action="AccountFileForward.go(job.Policy.Account)"
+      id="AccountNumber"
+      label="DisplayKey.get(&quot;Web.JobWizard.InfoBar.AccountNumber&quot;)"
+      value="job.Policy.Account.AccountNumber"/>
+    <InfoBarElement
+      action="if (job.LatestPeriod.PolicyNumberAssigned) PolicyFileForward.go(job.LatestPeriod.PolicyNumber, job.LatestPeriod.EditEffectiveDate)"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.PolicyNumber&quot;)"
+      value="job.LatestPeriod.PolicyNumberDisplayString"
+      visible="gw.web.job.JobWizardInfoBarHelper.shouldDisplayPolicyNumber(job)"/>
+    <InfoBarElement
+      id="Underwriter"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.Underwriter&quot;)"
+      value="job.getUnderwriter()"
+      visible="job.getUnderwriter() != null"/>
+    <InfoBarElement
+      id="EditLock"
+      value="getLockedForUWReviewLabel()"
+      visible="policyPeriod.UWLocked"/>
+    <Code><![CDATA[function getLockedForUWReviewLabel() : String {
+  if (job.SideBySide) {
+    return DisplayKey.get("Web.Wizard.InfoBar.JobEditLock")
+  } else {
+    return DisplayKey.get("Web.Wizard.InfoBar.EditLock")
+  }
+}]]></Code>
+  </InfoBar>
+</PCF>

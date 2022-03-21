@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  desc="Non-persistent entity used as wrapper for PolicyPeriod to be able use multiple PolicyPeriod in DocumentSearchCriteria"
+  xmlns="http://guidewire.com/datamodel"
+  entity="DocumentSearchPolicyPeriodWrapper">
+  <foreignkey
+    fkentity="DocumentSearchCriteria"
+    name="DocumentSearchCriteria"
+    nullok="true"/>
+  <foreignkey
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="true"/>
+</nonPersistentEntity>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="Lookup">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"/>
+  <column
+    desc="The first day, inclusive, the rule is effective"
+    name="StartEffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The last day, exclusive, the rule is effective"
+    name="EndEffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="StartEffectiveDate"
+    operator="LE"
+    secondcolumnname="EndEffectiveDate"/>
+  <fulldescription><![CDATA[Delegate defining the base, non-negotiable fields, all lookup entities must have.]]></fulldescription>
+  <column
+    desc="The code of the LookupTable that contains this lookup"
+    name="LookupTableCode"
+    nullok="true"
+    type="patterncode"/>
+</delegate>

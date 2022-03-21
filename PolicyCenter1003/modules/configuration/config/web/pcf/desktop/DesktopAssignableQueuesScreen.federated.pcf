@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="DesktopAssignableQueuesScreen"
+    mode="federated">
+    <Variable
+      initialValue="{}"
+      name="processedActivities"
+      type="Set&lt;String&gt;"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.DesktopAssignableQueues&quot;)"/>
+    <Toolbar>
+      <ToolbarInput
+        id="DesktopActivities_LateRefreshInfo"
+        value="DisplayKey.get('Web.Activity.FederatedData.Processing')"
+        valueType="String"
+        visible="!processedActivities.Empty"/>
+      <ToolbarButton
+        action="assignFirstToMe()"
+        available="!gw.api.util.MulticlusterAssignableQueueUtil.isSelectedQueueEmpty(CurrentLocation)"
+        id="AssignFirstButton"
+        label="DisplayKey.get(&quot;Web.DesktopAssignableQueues.AssignFirstToMe&quot;)"
+        shortcut="A"/>
+      <CheckedValuesToolbarButton
+        allCheckedRowsAction="assignSelectedToMe(CheckedValues)"
+        flags="any assignableActivity"
+        id="AssignSelectedButton"
+        iterator="FederatedDesktopAssignableQueuesLV.FederatedDesktopAssignableQueuesLV"
+        label="DisplayKey.get(&quot;Web.DesktopAssignableQueues.AssignSelectedToMe&quot;)"
+        shortcut="S"
+        visible="perm.Activity.pickfromqueue"/>
+      <ToolbarDivider/>
+    </Toolbar>
+    <PanelRef
+      def="FederatedDesktopAssignableQueuesLV(processedActivities)"/>
+    <Code><![CDATA[uses gw.api.web.desktop.data.activity.ActivityDTO
+    //This is just an example implementation of late refresh handling - the items that are still being processed by federated data are being highlighted until you refresh the page.
+    //Customer might choose to mark them otherwise, or even force the refresh after some period of time.
+    public function assignSelectedToMe(checkedValues: ActivityDTO[]) {
+      processedActivities.addAll(checkedValues.map(\elt -> elt.PublicId).toSet())
+      gw.api.util.MulticlusterAssignableQueueUtil.Instance.assignActivitiesFromQueue(checkedValues)
+    }
+    
+    public function assignFirstToMe() {
+      processedActivities.add(gw.api.util.MulticlusterAssignableQueueUtil.Instance.assignFirstActivity(CurrentLocation))
+    }
+    ]]></Code>
+  </Screen>
+</PCF>

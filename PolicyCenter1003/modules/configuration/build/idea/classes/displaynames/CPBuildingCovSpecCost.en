@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Entity
+  name="CPBuildingCovSpecCost">
+  <Columns>
+    <Column
+      beanPath="CPBuildingCovSpecCost.CPBuildingCov"
+      name="coverage"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("Web.Financials.CP.CPBuildingCovSpecCost", coverage)
+  ]]></DisplayName>
+</Entity>

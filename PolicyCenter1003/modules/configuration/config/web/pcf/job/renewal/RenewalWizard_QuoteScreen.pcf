@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="false"
+    id="RenewalWizard_QuoteScreen">
+    <Require
+      name="renewal"
+      type="Renewal"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="new gw.document.DocumentProduction()"
+      name="documentProduction"
+      type="gw.document.DocumentProduction"/>
+    <Variable
+      initialValue="policyPeriod.RepresentativePolicyLines.first()"
+      name="line"
+      type="entity.PolicyLine"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, renewal, jobWizardHelper)"/>
+      <ToolbarButton
+        action="policyPeriod.clickPrintQuoteButton(&quot;RenewalQuote&quot;, &quot;Renewal Quote&quot;)"
+        download="true"
+        id="CreateRenewalQuote"
+        label="DisplayKey.get(&quot;Button.PrintQuote&quot;)"/>
+    </Toolbar>
+    <PanelRef
+      def="WarningsPanelSet(policyPeriod.getWizardQuoteScreenWarnings())"/>
+    <PanelRef
+      def="Quote_SummaryDV(policyPeriod)">
+      <Toolbar/>
+    </PanelRef>
+    <CardViewPanel>
+      <Card
+        id="SubmissionWizard_Quote_CumulativeCard"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.QuoteScreen.Cumulative&quot;)">
+        <PanelRef
+          def="RatingCumulDetailsPanelSet(policyPeriod, jobWizardHelper, isEditable)"
+          mode="line.Pattern.PublicID">
+          <TitleBar
+            title="line.Pattern.DisplayName"
+            visible="policyPeriod.RepresentativePolicyLines.Count &gt; 1"/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

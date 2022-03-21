@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IProtectionClassPlugin"
+  name="IProtectionClassPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.protectionclass.impl.MockProtectionClassPlugin"/>
+</plugin>

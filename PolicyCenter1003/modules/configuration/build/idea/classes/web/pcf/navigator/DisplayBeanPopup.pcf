@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    countsAsWork="false"
+    id="DisplayBeanPopup"
+    title="DisplayKey.get(&quot;Web.DisplayBean.Title&quot;, bean.PublicID)">
+    <LocationEntryPoint
+      signature="DisplayBeanPopup(bean: KeyableBean)"/>
+    <Variable
+      name="bean"
+      type="KeyableBean"/>
+    <Screen
+      id="DisplayBeanScreen">
+      <Toolbar/>
+      <TreeViewPanel
+        id="DisplayBeanPanel">
+        <Variable
+          initialValue="new gw.api.web.util.BeanTreeNode(bean, true)"
+          name="rootBean"
+          type="gw.api.web.util.BeanTreeNode"/>
+        <TreeView
+          canClickElement="element typeis gw.api.web.util.BeanTreeNode"
+          elementLabel="element"
+          elementName="element"
+          id="tree"
+          onClickElement="DisplayBeanPopup.push((element as gw.api.web.util.BeanTreeNode).Bean)"
+          value="rootBean"/>
+      </TreeViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A unit of price for a period of time, not to be broken up any further, for Business Owners money and securities coverage"
+  entity="BOPMoneySecCovCost"
+  supertype="BOPLocationCovCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.bop.financials.BOPCostAdapter"/>
+  <column
+    desc="Whether the money covered is on the premises or off it"
+    name="OnPremises"
+    nullok="true"
+    type="bit"/>
+</subtype>

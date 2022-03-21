@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPDwellingModifierCost"
+  desc="Costs for Dwelling modifiers"
+  supertype="HOPCost">
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.hop.financials.HOPCostAdapter"/>
+  <foreignkey
+    exportable="true"
+    fkentity="HOPDwellingMod"
+    name="HOPDwellingMod"
+    nullok="false"/>
+</subtype>

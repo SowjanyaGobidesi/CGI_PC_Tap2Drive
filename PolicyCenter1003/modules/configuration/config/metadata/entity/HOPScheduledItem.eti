@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="HOPScheduledItem"
+  requiresType="effdated">
+  <fulldescription><![CDATA[A HOP scheduled item]]></fulldescription>
+</delegate>

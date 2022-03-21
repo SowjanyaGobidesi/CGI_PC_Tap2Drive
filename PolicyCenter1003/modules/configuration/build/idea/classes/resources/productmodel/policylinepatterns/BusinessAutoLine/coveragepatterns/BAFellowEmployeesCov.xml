@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="BAFellowEmployeesCov"
+  coverageCategory="BAPFellowEmpGrp"
+  coverageSubtype="BAStateCov"
+  coveredPartyType="ThirdParty"
+  existence="Electable"
+  lookupTableName="BAStateCov"
+  owningEntityType="BAJurisdiction"
+  policyLinePattern="BusinessAutoLine"
+  priority="-1"
+  public-id="BAFellowEmployeesCov"
+  referenceDateByType="DefinedObject">
+  <AvailabilityScript/>
+  <InitializeScript/>
+  <OnRemovalScript/>
+  <CovTerms/>
+</CoveragePattern>

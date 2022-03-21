@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of Additional Covered Property"
+  final="false"
+  name="AdditionalPropertyType">
+  <typecode
+    code="building"
+    desc="Building"
+    name="Building"/>
+  <typecode
+    code="personalproperty"
+    desc="Personal Property"
+    name="Personal Property"/>
+</typelist>

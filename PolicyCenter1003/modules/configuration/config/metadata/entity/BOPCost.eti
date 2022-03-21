@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A BusinessOwners unit of price for a period of time, not to be broken up any further"
+  effDatedBranchType="PolicyPeriod"
+  entity="BOPCost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="bopcost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.bop.financials.BOPCostAdapter"/>
+  <foreignkey
+    fkentity="BusinessOwnersLine"
+    name="BusinessOwnersLine"
+    nullok="false"/>
+  <array
+    arrayentity="BOPTransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Handles numbering of the effdated entities."
+  entity="AutoNumberSequence"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="autonumbersequence"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.sequence.impl.AutoNumberSequenceInternalMethods"
+    impl="com.guidewire.pc.domain.sequence.impl.AutoNumberSequenceImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.sequence.AutoNumberSequencePublicMethods"
+    impl="com.guidewire.pc.domain.sequence.impl.AutoNumberSequenceImpl"/>
+  <column
+    default="0"
+    desc="Last bound index used for this sequence"
+    getterScriptability="hidden"
+    name="LastBoundIndex"
+    nullok="true"
+    setterScriptability="hidden"
+    type="integer"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+</entity>

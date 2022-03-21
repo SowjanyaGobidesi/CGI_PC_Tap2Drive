@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="NewNoteScreen">
+    <Require
+      name="newNoteHelper"
+      type="gw.note.NewNoteHelper"/>
+    <Variable
+      initialValue="gw.api.util.SymbolTableUtil.expandBeans( { &quot;account&quot; -&gt; newNoteHelper.Account, &quot;policy&quot; -&gt; newNoteHelper.Policy, &quot;job&quot; -&gt; newNoteHelper.Job })"
+      name="symbolTable"
+      type="java.util.Map&lt;String,Object&gt;"/>
+    <Toolbar>
+      <ToolbarButton
+        action="if( gw.api.web.note.NoteUtil.createNote(newNoteHelper.Note) ) {gw.api.web.workspace.WorkspaceUtil.closeWorksheetIfActiveAndRefreshTop(CurrentLocation) }"
+        id="NewNoteScreen_UpdateButton"
+        label="DisplayKey.get(&quot;Web.NewNote.Button.Update&quot;)"
+        shortcut="U"/>
+      <ToolbarButton
+        action="gw.api.web.workspace.WorkspaceUtil.closeWorksheetIfActiveAndRefreshTop(CurrentLocation)"
+        id="NewNoteScreen_CancelButton"
+        label="DisplayKey.get(&quot;Web.NewNote.Button.Cancel&quot;)"
+        shortcut="L"/>
+      <ToolbarDivider/>
+      <PickerToolbarButton
+        action="PickNoteTemplatePopup.push(createSearchCriteria())"
+        id="NewNoteWorksheet_UseTemplateButton"
+        label="DisplayKey.get(&quot;Web.Note.UseTemplate&quot;)"
+        onPick="newNoteHelper.Note.useTemplate( PickedValue, symbolTable )"/>
+    </Toolbar>
+    <PanelRef
+      def="NewNoteDV(newNoteHelper)"/>
+    <Code><![CDATA[function createSearchCriteria() : NoteTemplateSearchCriteria {
+      var rtn = new NoteTemplateSearchCriteria()
+      rtn.AvailableSymbols = symbolTable.Keys.join(",")
+      rtn.LOB = newNoteHelper.Policy.Product.PublicID
+      return rtn
+    }]]></Code>
+  </Screen>
+</PCF>

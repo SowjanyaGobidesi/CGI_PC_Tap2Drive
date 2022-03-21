@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A cost that is attached to a specific state."
+  entity="GLStateCost"
+  supertype="GLCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.gl.financials.GLCostAdapter"/>
+  <typekey
+    desc="The jurisdiction that is covered"
+    name="GLState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="The name of the specific cost"
+    name="StateCostType"
+    nullok="true"
+    typelist="GLStateCostType"/>
+</subtype>

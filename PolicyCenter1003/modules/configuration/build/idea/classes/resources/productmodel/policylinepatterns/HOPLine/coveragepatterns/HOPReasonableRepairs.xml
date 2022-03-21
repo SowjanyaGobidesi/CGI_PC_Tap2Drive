@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPReasonableRepairs"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="1500"
+  public-id="zbags5ei5vefn92sf55g2tielv8"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  desc="An availability lookup for HOP coverage term option patterns."
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPCovTermOptLookup"
+  supertype="CovTermOptLookup">
+  <typekey
+    name="CoveragePartType"
+    nullok="true"
+    typefilter="HOPCoveragePartType"
+    typelist="CoveragePartType"></typekey>
+  <typekey
+    name="HOPCoverageForm"
+    nullok="true"
+    typelist="HOPCoverageForm"/>
+</subtype>

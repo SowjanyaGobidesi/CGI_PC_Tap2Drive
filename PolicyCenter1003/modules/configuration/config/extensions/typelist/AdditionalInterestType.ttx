@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Different types of additional interest on a policy line or exposure"
+  name="AdditionalInterestType">
+  <typecode
+    code="CONSALE"
+    desc="Contract of Sale"
+    name="Contract of Sale">
+    <category
+      code="BOPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="CPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LENDLOSS"
+    desc="Lenders Loss Payable"
+    name="Lenders Loss Payable">
+    <category
+      code="BOPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="CPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LESSOR"
+    desc="Lessor"
+    name="Lessor">
+    <category
+      code="BAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="PAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LIEN"
+    desc="Lienholder"
+    name="Lienholder">
+    <category
+      code="BAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="BOPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="PAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="IMSchEquipAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LOSSP"
+    desc="Loss Payee"
+    name="Loss Payee">
+    <category
+      code="BAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="BOPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+    <category
+      code="PAVhcleAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LOSSPAY"
+    desc="Loss Payable"
+    name="Loss Payable">
+    <category
+      code="CPBldgAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="FIRSTMORTGAGEE"
+    desc="First Mortgagee"
+    name="First Mortgagee"
+    priority="10">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="SECONDMORTGAGEE"
+    desc="Second Mortgagee"
+    name="Second Mortgagee"
+    priority="20">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="THIRDMORTGAGEE"
+    desc="Third Mortgagee"
+    name="Third Mortgagee"
+    priority="30">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="ADDITIONALMORTGAGEE"
+    desc="Additional Mortgagee"
+    name="Additional Mortgagee"
+    priority="40">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="CERTHOLDER"
+    desc="Certificate Holder"
+    name="Certificate Holder"
+    priority="50">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="THIRDPARTYDESIGNEE"
+    desc="Third Party Designee"
+    name="Third Party Designee"
+    priority="60">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LANDLORD"
+    desc="Landlord"
+    name="Landlord"
+    priority="70">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+  <typecode
+    code="LEASINGCOMPANY"
+    desc="Leasing Company"
+    name="Leasing Company"
+    priority="80">
+    <category
+      code="HOPDwellAddlInterest"
+      typelist="AddlInterestDetail"/>
+  </typecode>
+</typelistextension>

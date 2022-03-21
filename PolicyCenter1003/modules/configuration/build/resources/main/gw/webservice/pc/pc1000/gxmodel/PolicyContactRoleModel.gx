@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<gx-model type="entity.PolicyContactRole" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="(entity-PolicyAddlInsured).PolicyAdditionalInsuredDetails[].AdditionalInsuredType" type="typekey.AdditionalInsuredType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AccountContactRole" type="entity.AccountContactRole" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc1000.gxmodel.accountcontactrolemodel"/>
+    <include path="Subtype" type="typekey.PolicyContactRole" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

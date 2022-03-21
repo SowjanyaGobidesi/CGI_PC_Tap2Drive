@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="gw.pcf.rating.flow.RateRoutineEntityInstructionPopupHelper.afterEnterEntityPopup(selectedEntity, inScopeUsages)"
+    canEdit="true"
+    id="RateRoutineEntityInstructionPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EditEntityOperand&quot;)">
+    <LocationEntryPoint
+      signature="RateRoutineEntityInstructionPopup(calcStep : CalcStepDefinition )"/>
+    <LocationEntryPoint
+      signature="RateRoutineEntityInstructionPopup(calcStep : CalcStepDefinition, restrictToTargetDataTypes: java.util.Set&lt;gw.lang.reflect.IType&gt;, selectedEntity : CalcRoutineParamName)"/>
+    <Variable
+      name="calcStep"
+      recalculateOnRefresh="true"
+      type="CalcStepDefinition"/>
+    <Variable
+      initialValue="gw.rating.flow.util.TypeMaps.primitiveRateFlowTypes()"
+      name="restrictToTargetDataTypes"
+      type="java.util.Set&lt;gw.lang.reflect.IType&gt;"/>
+    <Variable
+      initialValue="calcStep.InScopeParam"
+      name="selectedEntity"
+      type="CalcRoutineParamName"/>
+    <Variable
+      initialValue="new gw.pcf.rating.flow.RateRoutineEntityInstructionPopupHelper(CurrentLocation, calcStep, restrictToTargetDataTypes as Set&lt;Type&gt;)"
+      name="helper"
+      type="gw.pcf.rating.flow.RateRoutineEntityInstructionPopupHelper"/>
+    <Variable
+      initialValue="helper.calculateInScopeUsages(selectedEntity, textFilter).sortBy(\ i -&gt; i.UserFriendlyPath)"
+      name="inScopeUsages"
+      recalculateOnRefresh="true"
+      type="List&lt;gw.rating.flow.util.InScopeUsage&gt;"/>
+    <Variable
+      initialValue="null"
+      name="textFilter"
+      type="String"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="helper.commitEntitySelection()"
+          id="RateRoutineEntityEditUpdate"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="RateRoutineEntityEditCancel"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Usage"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Usage&quot;)"
+            value="DisplayKey.get(&quot;Web.Policy.RatingWorksheet.Instruction&quot;)"/>
+          <TypeKeyInput
+            editable="true"
+            filter="helper.filterInScopeParamDropDownRange(VALUE)"
+            id="inScopeParamName"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Entity&quot;)"
+            required="true"
+            value="selectedEntity"
+            valueType="typekey.CalcRoutineParamName">
+            <PostOnChange
+              onChange="inScopeUsages = helper.changeSelectEntityTo(selectedEntity);"/>
+          </TypeKeyInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="RateRoutineEntityInstructionLV(calcStep, inScopeUsages.toTypedArray(), helper)">
+        <Toolbar
+          id="DataTypeFilterToolbar">
+          <ToolbarFilter
+            cacheOptions="false"
+            iterator="InScopeUsagesIterator"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.DataTypesFilter&quot;)"
+            name="DataTypesFilter">
+            <ToolbarFilterOption
+              filter="gw.api.util.CoreFilters.ALL"
+              label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.All&quot;)"
+              selectOnEnter="true"/>
+            <ToolbarFilterOptionGroup
+              filters="gw.pcf.rating.flow.RateRoutineEntityPopupHelper.filtersForDataTypes(inScopeUsages, restrictToTargetDataTypes)"/>
+          </ToolbarFilter>
+          <ToolbarInput
+            editable="true"
+            id="RateRoutineInstructionTextFilter"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EntityPopup.TextFilter&quot;)"
+            value="textFilter"
+            valueType="java.lang.String">
+            <PostOnChange/>
+          </ToolbarInput>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

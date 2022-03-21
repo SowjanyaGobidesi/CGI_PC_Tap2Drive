@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="MulticlusterJob"
+    isMultiClusterNav="true"
+    target="PolicyCenter"
+    url="{shardUrl}Job.do">
+    <LocationEntryPoint
+      signature="MulticlusterJob(shardUrl : String, jobNumber : String)"/>
+    <ExitPointParameter
+      locationParam="shardUrl"
+      type="String"
+      urlParam="shardUrl"/>
+    <ExitPointParameter
+      locationParam="jobNumber"
+      type="String"
+      urlParam="JobNumber"/>
+  </ExitPoint>
+</PCF>

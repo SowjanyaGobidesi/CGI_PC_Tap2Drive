@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A BusinessOwners implementation of the RICededPremiumHistory delegate"
+  entity="BOPCededPremiumHistory"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="bopcededpremiumhistory"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumHistory"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    fkentity="BOPCededPremium"
+    name="BOPCededPremium"
+    nullok="false"/>
+</entity>

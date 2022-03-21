@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AgreementCoverageInputSet"
+    mode="nonproportional">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <Variable
+      initialValue="agreement as NonProportionalRIAgreement"
+      name="nonprop"
+      type="entity.NonProportionalRIAgreement"/>
+    <MonetaryAmountInput
+      currency="agreement.Currency"
+      editable="true"
+      formatType="currency"
+      id="AttachmentPoint"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.AttachmentPoint&quot;)"
+      required="true"
+      value="agreement.AttachmentPoint">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="agreement.updateAmountOfCoverageCeded()"/>
+    </MonetaryAmountInput>
+    <CheckBoxInput
+      editable="true"
+      id="attachmentIndexed"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.AttachmentIndexed&quot;)"
+      required="true"
+      value="(agreement as NonProportionalRIAgreement).AttachmentIndexed"/>
+    <MonetaryAmountInput
+      currency="agreement.Currency"
+      editable="true"
+      formatType="currency"
+      id="Limit"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CoverageLimit&quot;)"
+      required="true"
+      value="agreement.CoverageLimit">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="agreement.updateAmountOfCoverageCeded()"/>
+    </MonetaryAmountInput>
+    <CheckBoxInput
+      editable="true"
+      id="LimitIndexed"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.LimitIndexed&quot;)"
+      required="true"
+      value="(agreement as NonProportionalRIAgreement).LimitIndexed"/>
+    <TextInput
+      editable="true"
+      id="CededShare"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CededShare&quot;)"
+      required="true"
+      value="agreement.CededShare"
+      valueType="java.math.BigDecimal">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="agreement.updateAmountOfCoverageCeded()"/>
+    </TextInput>
+    <MonetaryAmountInput
+      currency="agreement.Currency"
+      formatType="currency"
+      id="AmountOfCoverage"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.AmountOfCoverage&quot;)"
+      required="true"
+      value="agreement.AmountOfCoverage"/>
+    <BooleanRadioInput
+      editable="true"
+      id="ApplyOnlyToGrossRetention"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.ApplyOnlyGrossRetention&quot;)"
+      required="true"
+      value="nonprop.ApplyToGrossRetentionOnly"
+      visible="agreement typeis NetExcessOfLossRITreaty or agreement typeis FacNetExcessOfLossRIAgreement"/>
+  </InputSet>
+</PCF>

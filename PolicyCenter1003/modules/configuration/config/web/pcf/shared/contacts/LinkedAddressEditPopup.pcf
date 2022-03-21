@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="LinkedAddressEditPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ContactDetail.LinkedAddress.Edit.Title&quot;)">
+    <LocationEntryPoint
+      signature="LinkedAddressEditPopup(address : Address)"/>
+    <Variable
+      initialValue="null"
+      name="address"
+      type="Address"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarButton
+          action="address.updateLinkedAddresses(); CurrentLocation.commit()"
+          id="UpdateAllButton"
+          label="DisplayKey.get(&quot;Web.ContactDetail.LinkedAddress.Edit.UpdateAll&quot;)"/>
+        <ToolbarButton
+          action="address.unlink(); CurrentLocation.commit()"
+          id="UpdateAndUnlinkButton"
+          label="DisplayKey.get(&quot;Web.ContactDetail.LinkedAddress.Edit.UpdateAndUnlink&quot;)"/>
+        <EditButtons
+          cancelVisible="true"
+          editVisible="false"
+          id="CancelButton"
+          updateVisible="false"/>
+      </Toolbar>
+      <PanelRef
+        def="LinkedAddressContactsLV(address)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.ContactDetail.LinkedAddress.Edit.Contacts&quot;)"/>
+      </PanelRef>
+      <PanelRef
+        editable="true"
+        id="Address">
+        <TitleBar
+          id="EditAddress"
+          title="DisplayKey.get(&quot;Web.ContactDetail.LinkedAddress.Edit.Address&quot;)"/>
+        <DetailViewPanel
+          editable="true">
+          <InputColumn>
+            <InputSetRef
+              def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(address, false, true))"
+              editable="true"/>
+            <TypeKeyInput
+              editable="true"
+              id="AddressType"
+              label="DisplayKey.get(&quot;Web.AddressDetail.AddressType&quot;)"
+              required="true"
+              value="address.AddressType"
+              valueType="typekey.AddressType"/>
+            <TextInput
+              editable="true"
+              id="AddressDescription"
+              label="DisplayKey.get(&quot;Web.AddressDetail.Description&quot;)"
+              value="address.Description"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

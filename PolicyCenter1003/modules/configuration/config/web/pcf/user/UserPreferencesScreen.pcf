@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="UserPreferencesScreen">
+    <Require
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Require
+      name="userBase"
+      type="User"/>
+    <Toolbar>
+      <EditButtons/>
+    </Toolbar>
+    <PanelRef
+      def="UserPrefsDV(userPreferences, userBase)"
+      editable="true"/>
+  </Screen>
+</PCF>

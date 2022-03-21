@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<import>
+  <HOPExclusionLookup public-id="zaqj8qj8epm0gcpcehk841sugqb">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <ExclusionPatternCode>zcrj42qr2tgmfbqohsgr92nrpp9</ExclusionPatternCode>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>IL</State>
+    <UWCompanyCode/>
+  </HOPExclusionLookup>
+</import>

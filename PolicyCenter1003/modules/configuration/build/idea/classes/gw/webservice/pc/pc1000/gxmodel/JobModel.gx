@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Job" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="CreateTime" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="Description" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="JobNumber" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LatestPeriod.PolicyNumber" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LatestPeriod.Status" type="typekey.PolicyPeriodStatus" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="LatestPeriod.TermNumber" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="Policy.Account.AccountNumber" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Policy.Account.PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Policy.ProductCode" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Subtype" type="typekey.Job" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Underwriter.PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

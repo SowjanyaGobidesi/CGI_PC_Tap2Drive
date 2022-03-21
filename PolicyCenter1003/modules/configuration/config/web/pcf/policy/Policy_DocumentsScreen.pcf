@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="Policy_DocumentsScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="CurrentLocation typeis pcf.api.Wizard ? CurrentLocation : null"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      name="docActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <AlertBar
+      id="Policy_DocumentsScreen_DocumentStoreSuspendedWarning"
+      label="DisplayKey.get('Web.DocumentsLV.Button.Asynchronous.DocumentStoreDisabled')"
+      visible="docActionsHelper.ShowDocumentStoreSuspendedWarning"/>
+    <AlertBar
+      id="Policy_DocumentsScreen_IDCSNotEnabledAlertBar"
+      label="DisplayKey.get('Web.ContactDetail.Documents.DocumentManagementSystem.ContentPlugin.Disabled')"
+      visible="not docActionsHelper.ContentSourceEnabled"/>
+    <AlertBar
+      id="Policy_DocumentsScreen_IDCSDownAlertBar"
+      label="DisplayKey.get('Web.ContactDetail.Documents.DocumentManagementSystem.ContentPlugin.Unavailable')"
+      visible="docActionsHelper.ContentSourceEnabled and not docActionsHelper.DocumentContentServerAvailable"/>
+    <AlertBar
+      id="Policy_DocumentsScreen_IDMSDownAlertBar"
+      label="DisplayKey.get('Web.ContactDetail.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable')"
+      visible="docActionsHelper.ShowMetadataServerDownWarning"/>
+    <SearchPanel
+      criteriaName="searchCriteria"
+      resultCachingEnabled="false"
+      resultsName="documents"
+      search="searchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Document&gt;"
+      searchCriteria="return createCriteria()"
+      searchCriteriaType="entity.DocumentSearchCriteria"
+      searchOnEnter="true"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;Document&gt;">
+      <PanelRef
+        def="Policy_DocumentSearchDV(searchCriteria, policyPeriod)"/>
+      <PanelRef
+        def="DocumentsLV(documents, searchCriteria, false)"
+        editable="true">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.PolicyFile.Documents&quot;)"/>
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            checkedRowAction="CheckedValue.Obsolete = true; saveChanges()"
+            flags="all editableDocument,no hidden"
+            id="PolicyFile_Documents_ObsolesceButton"
+            iterator="DocumentsLV.DocumentsLV"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Documents.Obsolesce&quot;)"
+            shortcut="O"/>
+          <CheckedValuesToolbarButton
+            checkedRowAction="CheckedValue.Obsolete = false; saveChanges()"
+            flags="all editableDocument,all hidden"
+            id="PolicyFile_Documents_DeobsolesceButton"
+            iterator="DocumentsLV.DocumentsLV"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Documents.Deobsolesce&quot;)"
+            shortcut="O"
+            visible="searchCriteria.IncludeObsoletes"/>
+          <ToolbarButton
+            available="docActionsHelper.DocumentContentServerAvailable"
+            id="PolicyFile_Documents_NewDocumentButton"
+            label="DisplayKey.get('Web.DocumentsLV.Button.NewDocument')">
+            <MenuItemSetRef
+              def="NewJobDocumentMenuItemSet(policyPeriod)"/>
+          </ToolbarButton>
+          <CheckedValuesToolbarButton
+            available="docActionsHelper.DocumentContentServerAvailable"
+            checkedRowAction="gw.api.web.document.DocumentsHelper.deleteDocument(CheckedValue)"
+            confirmMessage="DisplayKey.get('Web.DocumentsLV.Button.Delete.Confirm')"
+            flags="all canDeleteDocument"
+            id="PolicyFile_Documents_DeleteSelectedDocumentButton"
+            iterator="DocumentsLV.DocumentsLV"
+            label="DisplayKey.get('Web.DocumentsLV.Button.DeleteSelected')"
+            tooltip="DisplayKey.get('Web.DocumentsLV.Button.DeleteSelected.Tooltip')"/>
+          <ToolbarButton
+            action="null"
+            available="docActionsHelper.DocumentContentServerAvailable"
+            id="RefreshAsyncContent"
+            label="DisplayKey.get('Web.DocumentsLV.Button.AsynchronousRefresh')"
+            tooltip="DisplayKey.get('Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip')"
+            visible="docActionsHelper.isShowAsynchronousRefreshAction(documents.toTypedArray())"/>
+          <ToolbarButton
+            action="saveChanges()"
+            hideIfReadOnly="true"
+            id="Save"
+            label="DisplayKey.get(&quot;Button.Save&quot;)"
+            shortcut="S"
+            visible="wizard != null and wizard.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+    <Code><![CDATA[function createCriteria() : DocumentSearchCriteria {
+      var criteria = new DocumentSearchCriteria()
+      criteria.IncludeObsoletes = false
+      criteria.setFixedContextWith(policyPeriod.Policy)
+      criteria.setFixedContextWith(policyPeriod.Policy.Account)
+      return criteria
+    }
+
+    function saveChanges() {
+      if (wizard != null and wizard.InEditMode) {
+        wizard.saveDraft()
+      }
+    }]]></Code>
+  </Screen>
+</PCF>

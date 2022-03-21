@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="PolicyMenuItemSet"
+    mode="PersonalAuto">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <MenuItem
+      action="PolicyFile_PolicyInfo.go(period, asOfDate)"
+      id="PolicyMenuItemSet_PolicyInfo"
+      label="DisplayKey.get(&quot;Web.PolicyFile.PolicyInfo&quot;)"/>
+    <MenuItem
+      action="PolicyFile_PersonalAuto_Drivers.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Drivers"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Drivers&quot;)"/>
+    <MenuItem
+      action="PolicyFile_PersonalAuto_Vehicles.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Vehicles"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Vehicles&quot;)"/>
+    <MenuItem
+      action="PolicyFile_PersonalAuto.go(period, asOfDate)"
+      id="PolicyMenuItemSet_PersonalAuto"
+      label="DisplayKey.get(&quot;Web.Policy.PA.Title&quot;)"/>
+    <MenuItem
+      action="PolicyFile_Pricing.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Pricing"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Pricing&quot;)"/>
+    <MenuItem
+      action="PolicyFile_Forms_PA.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Endorsements"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Endorsements&quot;)"/>
+  </MenuItemSet>
+</PCF>

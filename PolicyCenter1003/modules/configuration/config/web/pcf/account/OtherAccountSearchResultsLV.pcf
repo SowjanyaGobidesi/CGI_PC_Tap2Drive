@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="OtherAccountSearchResultsLV">
+    <Require
+      name="accountSummaries"
+      type="gw.api.database.IQueryBeanResult&lt;AccountSummary&gt;"/>
+    <Require
+      name="currentAccount"
+      type="entity.Account"/>
+    <Require
+      name="searchReason"
+      type="gw.account.AccountSearchReason"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="accountSummary"
+      value="accountSummaries"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.AccountSummary&gt;">
+      <Row>
+        <ButtonCell
+          action="searchReason.invokeOtherAccountSearchResultAction(accountSummary.Account, currentAccount)"
+          id="Select"
+          value="DisplayKey.get(&quot;Web.AccountSearchResults.Select&quot;)"/>
+        <TextCell
+          action="AccountFileDoRetrievalForward.go(accountSummary.AccountNumber)"
+          available="perm.Account.view(accountSummary.Account)"
+          id="AccountNumber"
+          label="DisplayKey.get(&quot;Web.AccountSearchResults.AccountNumber&quot;)"
+          value="accountSummary.AccountNumber"/>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.AccountSearchResults.Name&quot;)"
+          value="accountSummary.AccountHolderName"/>
+        <TextCell
+          enableSort="false"
+          id="Address"
+          label="DisplayKey.get(&quot;Web.AccountSearchResults.Address&quot;)"
+          value="accountSummary.AccountHolderAddress"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

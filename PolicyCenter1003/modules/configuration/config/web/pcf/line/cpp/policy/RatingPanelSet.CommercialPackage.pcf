@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RatingPanelSet"
+    mode="CommercialPackage">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.lob.multiline.CPPQuotePage.cppQuotePageLength(period)"
+      name="pageLength"
+      type="int"/>
+    <Variable
+      initialValue="checkViewMode()"
+      name="viewMode"
+      type="java.lang.String"/>
+    <PanelRef
+      def="CPPRatingCumulPanelSet(period, jobWizardHelper, isEditable)"
+      mode="viewMode">
+      <Toolbar>
+        <ToolbarButton
+          action="viewMode = &quot;drilldown&quot;"
+          available="(viewMode != &quot;drilldown&quot;)"
+          id="compactViewButton"
+          label="DisplayKey.get(&quot;Web.Quote.CompactView&quot;)"/>
+        <ToolbarButton
+          action="viewMode = &quot;scroll&quot;"
+          available="(viewMode != &quot;scroll&quot;) and pageLength &lt; 5000"
+          id="extendedViewButton"
+          label="DisplayKey.get(&quot;Web.Quote.ExtendedView&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+    <Code><![CDATA[function checkViewMode() : String {
+  return (pageLength > 50) ? "drilldown" : "scroll" 
+}]]></Code>
+  </PanelSet>
+</PCF>

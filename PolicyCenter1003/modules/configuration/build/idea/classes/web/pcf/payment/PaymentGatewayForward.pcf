@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    action="new gw.payment.paymentgateway.PaymentGatewayResponseProcessor(paymentGatewayResponse).processPaymentResponseAndRedirect()"
+    id="PaymentGatewayForward">
+    <LocationEntryPoint
+      signature="PaymentGatewayForward(result : String, transactionReference : String, responseMessage : String, transactionAmount : String, originalTransactionID : String)"/>
+    <Variable
+      name="result"
+      type="String"/>
+    <Variable
+      name="transactionReference"
+      type="String"/>
+    <Variable
+      name="responseMessage"
+      type="String"/>
+    <Variable
+      name="transactionAmount"
+      type="String"/>
+    <Variable
+      name="originalTransactionID"
+      type="String"/>
+    <Variable
+      initialValue="gw.payment.paymentgateway.impl.PaymentGatewayResponseBase.builder().result(result).referenceNumber(transactionReference).responseMessage(responseMessage).amount(transactionAmount).originalTransactionID(originalTransactionID).transactionTypeCode(gw.payment.paymentgateway.PaymentGatewayConfig.PaymentTransactionTypeCode).build()"
+      name="paymentGatewayResponse"
+      type="gw.api.payment.paymentgateway.PaymentGatewayResponse"/>
+  </Forward>
+</PCF>

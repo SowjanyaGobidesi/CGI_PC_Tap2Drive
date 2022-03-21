@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    id="ActivityNotesPopup"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Notes&quot;)">
+    <LocationEntryPoint
+      signature="ActivityNotesPopup(activity : Activity, policyPeriod : PolicyPeriod)"/>
+    <LocationEntryPoint
+      signature="ActivityNotesPopup(activity : Activity, account : Account)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="activity"
+      type="Activity"/>
+    <Variable
+      initialValue="gw.web.notes.NoteSearchUtil.createSearchCriteria(account, policyPeriod, activity)"
+      name="noteSearchCriteria"
+      type="entity.NoteSearchCriteria"/>
+    <Variable
+      initialValue="gw.web.notes.NoteSearchUtil.performSearch(noteSearchCriteria, policyPeriod, activity)"
+      name="notes"
+      type="gw.api.database.IQueryBeanResult&lt;entity.Note&gt;"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Screen>
+      <DetailViewPanel
+        id="ActivityNoNotesDV"
+        visible="notes.Count == 0">
+        <InputColumn>
+          <HiddenInput
+            id="ActivityNoNotesInput"
+            value="DisplayKey.get(&quot;Web.Activity.ActivityNoNotes&quot;)"
+            valueType="java.lang.String"/>
+          <Label
+            id="ActivityNoNotesLabel"
+            label="DisplayKey.get(&quot;Web.Activity.ActivityNoNotes&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="NotesLV(notes, true)">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="QuickSubmission_QuoteDetailsPanelSet"
+    mode="PersonalAutoLine">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="period.PersonalAutoLine"
+      name="paLine"
+      type="productmodel.PersonalAutoLine"/>
+    <Variable
+      initialValue="paLine.Vehicles.length &gt; 0 ? paLine.Vehicles[0] : null"
+      name="vehicle1"
+      type="entity.PersonalVehicle"/>
+    <Variable
+      initialValue="paLine.Vehicles.length &gt; 1 ? paLine.Vehicles[1] : null"
+      name="vehicle2"
+      type="entity.PersonalVehicle"/>
+    <PanelRef
+      def="PreferredCoverageCurrencyPanelSet(paLine, openForEdit, jobWizardHelper)"/>
+    <CardViewPanel>
+      <Card
+        id="Coverages"
+        title="DisplayKey.get(&quot;Web.Policy.PA.Coverages&quot;)">
+        <PanelRef
+          def="PersonalAuto_AllVehicleCoveragesDV(paLine, openForEdit)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.PA.AllVehicleCoveragesTitleNoState&quot;)"/>
+        </PanelRef>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.PA.PerVehicleCoveragesTitleNoState&quot;)"/>
+          <PanelRow>
+            <PanelColumn>
+              <DetailViewPanel>
+                <InputColumn>
+                  <Label
+                    label="vehicle1.DisplayName"
+                    visible="vehicle1 != null"/>
+                </InputColumn>
+              </DetailViewPanel>
+              <PanelRef
+                def="PreferredCoverageCurrencyPanelSet(vehicle1, openForEdit, jobWizardHelper)"
+                id="PreferredCurrency1PanelRef"/>
+              <PanelRef
+                def="PersonalAuto_VehicleCoverageDetailDV(vehicle1, openForEdit)"
+                id="Vehicle1Coverages"
+                visible="vehicle1 != null"/>
+              <DetailViewPanel
+                visible="vehicle1 != null">
+                <InputColumn>
+                  <MonetaryAmountInput
+                    formatType="currency"
+                    id="Vehicle1Total"
+                    label="DisplayKey.get(&quot;Web.Policy.PA.PerVehicleTotal&quot;)"
+                    value="vehicle1.TotalCost"/>
+                </InputColumn>
+              </DetailViewPanel>
+            </PanelColumn>
+            <PanelColumn>
+              <DetailViewPanel>
+                <InputColumn>
+                  <Label
+                    label="vehicle2.DisplayName"
+                    visible="vehicle2 != null"/>
+                </InputColumn>
+              </DetailViewPanel>
+              <PanelRef
+                def="PreferredCoverageCurrencyPanelSet(vehicle2, openForEdit, jobWizardHelper)"
+                id="PreferredCurrency2PanelRef"/>
+              <PanelRef
+                def="PersonalAuto_VehicleCoverageDetailDV(vehicle2, openForEdit)"
+                id="Vehicle2Coverages"
+                visible="vehicle2 != null"/>
+              <DetailViewPanel
+                visible="vehicle2 != null">
+                <InputColumn>
+                  <MonetaryAmountInput
+                    formatType="currency"
+                    id="Vehicle2Total"
+                    label="DisplayKey.get(&quot;Web.Policy.PA.PerVehicleTotal&quot;)"
+                    value="vehicle2.TotalCost"/>
+                </InputColumn>
+              </DetailViewPanel>
+            </PanelColumn>
+          </PanelRow>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[function costsForVehicle(vehicle : PersonalVehicle) : java.util.List<PACost> {
+  var vehicleVL = vehicle.VersionList
+  var allCosts = new java.util.ArrayList<PACost>()
+  allCosts.addAll(vehicleVL.Costs.flatMap(\c -> c.AllVersions).toList())
+  allCosts.addAll(vehicleVL.Coverages.flatMap(\c -> c.Costs).flatMap(\c -> c.AllVersions).toList())
+  return allCosts
+}
+function alterCoveragePatternName(name : String, cost : PACost) : String {
+  if (name.contains("PIP") ) {
+    return name + " - " + (cost as PersonalAutoPIPCovCost).PAPIPCovCostType.DisplayName
+  } else {
+    return name
+  }
+}]]></Code>
+  </PanelSet>
+</PCF>

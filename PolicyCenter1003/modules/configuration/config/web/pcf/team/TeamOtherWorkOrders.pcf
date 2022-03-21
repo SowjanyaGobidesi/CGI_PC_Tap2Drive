@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam and teamModel.hasOtherWorkOrdersPage()"
+    id="TeamOtherWorkOrders"
+    title="DisplayKey.get(&quot;Web.Team.WorkOrders&quot;, teamModel.Label, teamModel.getDisplayMode(true), gw.api.domain.statistics.StatsWindowUtil.getOtherWorkOrdersWindow())">
+    <LocationEntryPoint
+      signature="TeamOtherWorkOrders(teamModel : gw.api.web.team.PCTeamModel)"/>
+    <Variable
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <ScreenRef
+      def="TeamOtherWorkOrdersScreen(teamModel)"
+      mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+  </Page>
+</PCF>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<import>
+  <HOPConditionLookup public-id="zjkisjs0rvffrdl76i7p15lkueb">
+    <Availability>Available</Availability>
+    <ConditionPatternCode>zqmi2c4l40olsa7dnghbo59s2o9</ConditionPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPConditionLookup>
+</import>

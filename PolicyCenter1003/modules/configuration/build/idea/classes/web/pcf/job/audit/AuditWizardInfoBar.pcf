@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InfoBar
+    id="AuditWizardInfoBar">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="audit"
+      type="Audit"/>
+    <InfoBarElement
+      icon="audit.Icon"
+      iconType="svgFileName"
+      id="AuditLabel"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.JobStatus&quot;, audit.AuditInformation.AuditScheduleType, policyPeriod.Status)"/>
+    <InfoBarElement
+      icon="policyPeriod.Policy.Product.Icon"
+      iconType="svgFileName"
+      id="LOBLabel"
+      label="policyPeriod.Policy.Product"/>
+    <InfoBarElement
+      id="AccountName"
+      value="policyPeriod.PrimaryNamedInsured.DisplayName"
+      visible="policyPeriod.PrimaryNamedInsured != null"/>
+    <InfoBarElement
+      action="AccountFileForward.go(audit.Policy.Account)"
+      id="AccountNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.AccountNumber&quot;)"
+      value="policyPeriod.Policy.Account.AccountNumber"/>
+    <InfoBarElement
+      action="PolicyFileForward.go(audit.LatestPeriod.PolicyNumber)"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.PolicyNumber&quot;)"
+      value="policyPeriod.PolicyNumberDisplayString"/>
+    <InfoBarElement
+      id="AuditStart"
+      label="DisplayKey.get(&quot;Web.AuditWizard.InfoBar.AuditStart&quot;, gw.api.util.StringUtil.formatDate(audit.AuditInformation.AuditPeriodStartDate,&quot;short&quot;))"/>
+    <InfoBarElement
+      id="AuditEnd"
+      label="DisplayKey.get(&quot;Web.AuditWizard.InfoBar.AuditEnd&quot;, gw.api.util.StringUtil.formatDate(audit.AuditInformation.AuditPeriodEndDate,&quot;short&quot;))"/>
+  </InfoBar>
+</PCF>

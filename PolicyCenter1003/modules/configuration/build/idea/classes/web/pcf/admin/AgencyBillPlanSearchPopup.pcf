@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="AgencyBillPlanSearchPopup"
+    returnType="gw.plugin.billing.AgencyBillPlanSummary"
+    title="DisplayKey.get(&quot;Web.Admin.AgencyBillPlanSearch&quot;)">
+    <LocationEntryPoint
+      signature="AgencyBillPlanSearchPopup(unselectablePlans : String[])"/>
+    <Variable
+      name="unselectablePlans"
+      type="String[]"/>
+    <Screen>
+      <SearchPanel
+        criteriaName="agencyBillPlanSearchCriteria"
+        id="AgencyBillPlanSearchPanel"
+        resultsName="agencyBillPlanSummaries"
+        search="agencyBillPlanSearchCriteria.doSearch()"
+        searchCriteria="return new gw.plugin.billing.AgencyBillPlanSearchCriteria()"
+        searchCriteriaType="gw.plugin.billing.AgencyBillPlanSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.plugin.billing.AgencyBillPlanSummary[]">
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              editable="true"
+              id="PlanName"
+              label="DisplayKey.get(&quot;Web.Admin.AgencyBillPlanSearch.Name&quot;)"
+              value="agencyBillPlanSearchCriteria.PlanName"/>
+            <InputSetRef
+              def="SearchOnlyInputSet()"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <ListViewPanel
+            id="AgencyBillPlanSearchResultsLV">
+            <RowIterator
+              appendPageInfo="true"
+              canPick="not unselectablePlans.contains(agencyBillPlanSummary.Id)"
+              editable="false"
+              elementName="agencyBillPlanSummary"
+              pickValue="agencyBillPlanSummary"
+              type="gw.plugin.billing.AgencyBillPlanSummary"
+              value="agencyBillPlanSummaries"
+              valueType="gw.plugin.billing.AgencyBillPlanSummary[]">
+              <Row>
+                <TextCell
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.Admin.AgencyBillPlanSearch.Name&quot;)"
+                  sortOrder="1"
+                  value="agencyBillPlanSummary.Name"
+                  valueType="java.lang.String"/>              
+                <TextCell
+                  id="Currencies"
+                  label="DisplayKey.get(&quot;Web.Admin.AgencyBillPlanSearch.Currencies&quot;)"
+                  sortOrder="2"
+                  value="agencyBillPlanSummary.Currencies*.DisplayName.join(&quot;, &quot;)"
+                  valueType="java.lang.String"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

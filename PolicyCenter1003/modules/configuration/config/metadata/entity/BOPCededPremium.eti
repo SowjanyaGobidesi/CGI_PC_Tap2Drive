@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A BusinessOwners implementation of the RICededPremium delegate"
+  entity="BOPCededPremium"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="bopcededpremium"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremium"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumAdapter"
+    impl="gw.reinsurance.ceding.BOPCededPremiumAdapter"/>
+  <foreignkey
+    fkentity="BOPCost"
+    name="BOPCost"
+    nonEffDated="true"
+    nullok="false"/>
+  <array
+    arrayentity="BOPCededPremiumTransaction"
+    cascadeDelete="true"
+    name="CedingTransactions"/>
+  <array
+    arrayentity="BOPCededPremiumHistory"
+    cascadeDelete="true"
+    name="CedingHistory"/>
+</entity>

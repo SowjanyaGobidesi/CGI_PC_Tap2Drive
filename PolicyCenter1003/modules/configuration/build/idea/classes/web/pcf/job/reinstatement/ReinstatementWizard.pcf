@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <JobWizard
+    acceleratedMenuActions="BlankAcceleratedMenuActions()"
+    canEdit="(not job.Complete) and perm.Reinstatement.edit(reinstatement)"
+    canVisit="perm.Reinstatement.view(reinstatement)"
+    desc="The main Wizard for a policy reinstatement.  Flow steps within the Wizard are determined by the product model."
+    id="ReinstatementWizard"
+    independentStepsTitle="DisplayKey.get(&quot;Web.PolicyFile.ToolsMenuTitle&quot;)"
+    independentStepsTitleIcon="&quot;tools_nav&quot;"
+    independentStepsTitleIconType="svgFileName"
+    infoBar="ReinstatementWizardInfoBar(reinstatement, policyPeriod)"
+    initialStep="jobWizardHelper.getInitialWizardStepId(policyPeriod)"
+    isDraftOnEnter="true"
+    jobType="Reinstatement"
+    menuActions="WizardMenuActions(jobWizardHelper,reinstatement,policyPeriod)"
+    onConcurrentDataChange="CurrentLocation.cancel(); JobForward.go(job)"
+    parent="JobForward(reinstatement)"
+    subtitle="policyPeriod.Status.DisplayName"
+    title="DisplayKey.get(&quot;Web.ReinstatementWizard.Title&quot;, reinstatement.JobNumber)">
+    <LocationEntryPoint
+      signature="ReinstatementWizard(reinstatement : Reinstatement, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="reinstatement"
+      type="Reinstatement"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="reinstatement.PolicyPeriod"
+      name="reinstatedPolicyPeriod"
+      recalculateOnRefresh="true"
+      type="entity.PolicyPeriod"/>
+    <Variable
+      initialValue="reinstatement"
+      name="job"
+      type="entity.Reinstatement"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Variable
+      initialValue="new gw.api.web.job.JobWizardHelper(CurrentLocation)"
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="!policyPeriod.Promoted and perm.Reinstatement.edit(reinstatement)"
+      name="billingPageEditable"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.billing.PolicyPeriodBillingInstructionsManager()"
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <!-- =================================== WIZARD STEPS =================================== -->
+    <JobWizardStep
+      id="Draft"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="ReinstatementWizard_ReinstatePolicyScreen(reinstatement, policyPeriod, policyPeriod.OpenForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.ReinstatementWizard.Menu.New&quot;)"/>
+    <JobWizardStep
+      id="RiskAnalysis"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="policyPeriod.OpenForEdit"
+      screen="Job_RiskAnalysisScreen(policyPeriod, policyPeriod.OpenForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.Job.Policy.RiskAnalysis&quot;)"
+      visible="perm.System.viewriskevalissues or perm.System.viewriskpriorpolicies or perm.System.viewriskclaims or perm.System.viewriskpriorlosses"/>
+    <JobWizardStep
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewQuote"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="ReinstatementWizard_QuoteScreen(reinstatement, policyPeriod, policyPeriod.OpenForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.ReinstatementWizard.Menu.Quote&quot;)"
+      visible="!policyPeriod.MultiLine"/>
+    <JobWizardStep
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewMultiLineQuote"
+      mode="policy.Product.PublicID"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="ReinstatementWizard_MultiLine_QuoteScreen(reinstatement, policyPeriod, policyPeriod.OpenForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.ReinstatementWizard.Menu.Quote&quot;)"
+      visible="policyPeriod.MultiLine"/>
+    <JobWizardStep
+      allowFinish="false"
+      available="policyPeriod.JobProcess.canViewBillingInfo()"
+      beforeSave="policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod)"
+      id="BillingInfo"
+      onEnter="policyPeriodBillingInstructionsManager.populateFromPolicyPeriod(policyPeriod)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="!policyPeriod.Promoted and perm.Reinstatement.edit(reinstatement)"
+      screen="ReinstatementWizard_PaymentScreen(reinstatement, policyPeriod, billingPageEditable, jobWizardHelper, policyPeriodBillingInstructionsManager)"
+      title="DisplayKey.get(&quot;Web.ReinstatementWizard.Menu.Payment&quot;)"/>
+    <WizardStepSetRef
+      def="JobWizardToolsMenuWizardStepSet(jobWizardHelper, policyPeriod)"/>
+  </JobWizard>
+</PCF>

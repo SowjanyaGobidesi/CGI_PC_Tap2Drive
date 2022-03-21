@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PolicyContactRoleNameInputSet"
+    mode="person|usercontact">
+    <Require
+      name="policyContactRole"
+      type="PolicyContactRole"/>
+    <Variable
+      initialValue="new gw.globalization.PolicyContactRoleNameAdapter(policyContactRole)"
+      name="policyContactRoleAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.PolicyContactRoleNameAdapter"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person&quot;)"/>
+    <InputSetRef
+      def="GlobalPersonNameInputSet(new gw.api.name.RequiredBasicNameOwner(policyContactRoleAdapter))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <DateInput
+      editable="true"
+      id="DateOfBirth"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person.DateOfBirth&quot;)"
+      required="false"
+      value="policyContactRole.DateOfBirth"/>
+    <TypeKeyInput
+      editable="true"
+      id="MaritalStatus"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person.MaritalStatus&quot;)"
+      required="false"
+      value="policyContactRole.MaritalStatus"
+      valueType="typekey.MaritalStatus"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryPhone"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person.PrimaryPhone&quot;)"
+      required="false"
+      value="(policyContactRole.AccountContactRole.AccountContact.Contact as Person).PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType">
+      <PostOnChange/>
+    </TypeKeyInput>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate(policyContactRole.AccountContactRole.AccountContact.Contact, Contact#HomePhone),DisplayKey.get(&quot;Web.ContactDetail.Person.HomePhone&quot;),(policyContactRole.AccountContactRole.AccountContact.Contact as Person).PrimaryPhone == TC_HOME))"
+      editable="true"
+      id="HomePhone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate((policyContactRole.AccountContactRole.AccountContact.Contact as Person), Contact#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Person.WorkPhone&quot;), (policyContactRole.AccountContactRole.AccountContact.Contact as Person).PrimaryPhone == TC_WORK))"
+      id="WorkPhone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate((policyContactRole.AccountContactRole.AccountContact.Contact as Person), Person#CellPhone), DisplayKey.get(&quot;Web.ContactDetail.Person.CellPhone&quot;), (policyContactRole.AccountContactRole.AccountContact.Contact as Person).PrimaryPhone == TC_MOBILE))"
+      editable="true"
+      id="CellPhone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.contact.PersonPhoneOwner(new gw.api.phone.ContactPhoneDelegate((policyContactRole.AccountContactRole.AccountContact.Contact as Person), Contact#FaxPhone), DisplayKey.get(&quot;Web.ContactDetail.Person.FaxPhone&quot;), false))"
+      editable="true"
+      id="FaxPhone"/>
+    <TextInput
+      editable="true"
+      id="EmailAddress1"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person.EmailAddress1&quot;)"
+      value="(policyContactRole.AccountContactRole.AccountContact.Contact as Person).EmailAddress1"/>
+    <TextInput
+      editable="true"
+      id="EmailAddress2"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Person.EmailAddress2&quot;)"
+      value="(policyContactRole.AccountContactRole.AccountContact.Contact as Person).EmailAddress2"/>
+  </InputSet>
+</PCF>

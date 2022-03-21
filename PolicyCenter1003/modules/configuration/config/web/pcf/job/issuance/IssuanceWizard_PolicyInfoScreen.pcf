@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="IssuanceWizard_PolicyInfoScreen">
+    <Require
+      name="issuance"
+      type="Issuance"/>
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="period.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(period, issuance, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(period)"/>
+    <PanelRef
+      def="WarningsPanelSet(period.getWizardWarningMessages())"/>
+    <PanelRef
+      def="IssuanceWizard_PolicyInfoDV(period, issuance, openForEdit)">
+      <Toolbar/>
+    </PanelRef>
+  </Screen>
+</PCF>

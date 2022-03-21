@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<subtype
+  desc="WorkItem to apply the pending contact updates"
+  xmlns="http://guidewire.com/datamodel"
+  entity="PendingContactUpdatesWorkItem"
+  supertype="PendingUpdatesWorkItem">
+  <implementsInterface
+    iface="gw.account.PendingUpdates"
+    impl="gw.account.PendingContactUpdatesWorkItemAdapter"/>
+</subtype>

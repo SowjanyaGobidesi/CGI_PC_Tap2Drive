@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="LocationRisk">
+  <Columns>
+    <Column
+      beanPath="LocationRisk.Location"
+      name="Location"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("EntityName.LocationRisk", Location)]]></DisplayName>
+</Entity>

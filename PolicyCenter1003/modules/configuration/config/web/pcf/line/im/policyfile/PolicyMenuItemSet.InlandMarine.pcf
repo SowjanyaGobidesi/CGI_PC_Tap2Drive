@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="PolicyMenuItemSet"
+    mode="InlandMarine">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="period.IMLine"
+      name="imLine"
+      type="productmodel.IMLine"/>
+    <MenuItem
+      action="PolicyFile_PolicyInfo.go(period, asOfDate)"
+      id="PolicyMenuItemSet_PolicyInfo"
+      label="DisplayKey.get(&quot;Web.PolicyFile.PolicyInfo&quot;)"/>
+    <MenuItem
+      action="PolicyFile_IMBuildingsAndLocations.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Buildings"
+      label="DisplayKey.get(&quot;Web.PolicyFile.BuildingsAndLocations&quot;)"/>
+    <MenuItem
+      action="PolicyFile_AccountsRecPart.go(period, asOfDate)"
+      id="PolicyMenuItemSet_AccountsRecPart"
+      label="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable&quot;)"
+      visible="period.IMLine.IMAccountsRecPart != null"/>
+    <MenuItem
+      action="PolicyFile_ContractorsEquipmentPart.go(period, asOfDate)"
+      id="PolicyMenuItemSet_ContractorsEquipmentPart"
+      label="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipment&quot;)"
+      visible="period.IMLine.ContractorsEquipPart != null"/>
+    <MenuItem
+      action="PolicyFile_IMSignPart.go(period, asOfDate)"
+      id="PolicyMenuItemSet_SignPart"
+      label="DisplayKey.get(&quot;Web.Policy.IM.IMSigns&quot;)"
+      visible="period.IMLine.IMSignPart != null"/>
+    <MenuItem
+      action="PolicyFile_Pricing.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Pricing"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Pricing&quot;)"/>
+    <MenuItem
+      action="PolicyFile_Forms_IM.go(period, asOfDate)"
+      id="PolicyMenuItemSet_Endorsements"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Endorsements&quot;)"/>
+  </MenuItemSet>
+</PCF>

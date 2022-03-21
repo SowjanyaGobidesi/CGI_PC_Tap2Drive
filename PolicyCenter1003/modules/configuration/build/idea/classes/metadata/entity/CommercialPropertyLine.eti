@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Commercial Property Policy line of business."
+  displayName="CP"
+  entity="CommercialPropertyLine"
+  supertype="PolicyLine">
+  <implementsInterface
+    iface="gw.api.domain.LineSpecificLocationContainer"
+    impl="gw.lob.cp.CPSpecificLocationContainer"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.cp.CPLineCoverableModifiableAdapter"/>
+  <implementsEntity
+    name="Modifiable"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifiableAdapter"
+    impl="gw.lob.cp.CPLineCoverableModifiableAdapter"/>
+  <foreignkey
+    desc="Sequence to autonumber cp blanket"
+    fkentity="AutoNumberSequence"
+    name="CPBlanketAutoNumberSeq"
+    nullok="true"/>
+  <array
+    arrayentity="CPBlanket"
+    cascadeDelete="true"
+    desc="CP Blankets on this policy line."
+    name="CPBlankets"
+    owner="true"/>
+  <array
+    arrayentity="CPLocation"
+    desc="Locations on this policy line."
+    name="CPLocations"
+    owner="true"/>
+  <array
+    arrayentity="CPCost"
+    cascadeDelete="true"
+    name="CPCosts"/>
+  <array
+    arrayentity="CPModifier"
+    cascadeDelete="true"
+    desc="Rating inputs for the line."
+    name="CPModifiers"/>
+  <array
+    arrayentity="CommercialPropertyCov"
+    cascadeDelete="true"
+    desc="Line-level coverages for Commercial Property."
+    name="CPLineCoverages"
+    owner="true"/>
+  <array
+    arrayentity="CommercialPropertyExcl"
+    cascadeDelete="true"
+    desc="Line-level exclusions for Commercial Property."
+    name="CPLineExclusions"
+    owner="true"/>
+  <array
+    arrayentity="CommercialPropertyCond"
+    cascadeDelete="true"
+    desc="Line-level conditions for Commercial Property."
+    name="CPLineConditions"
+    owner="true"/>
+</subtype>

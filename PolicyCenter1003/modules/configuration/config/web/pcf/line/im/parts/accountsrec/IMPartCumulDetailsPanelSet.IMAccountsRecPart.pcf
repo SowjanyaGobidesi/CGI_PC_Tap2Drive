@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMPartCumulDetailsPanelSet"
+    mode="IMAccountsRecPart">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Variable
+      initialValue="imLine.VersionList.IMCoverageParts.map( \ i -&gt; i.AllVersions.last() )"
+      name="covPartIterable"
+      type="java.util.List&lt;entity.IMCoveragePart&gt;"/>
+    <Variable
+      initialValue="covPartIterable.firstWhere( \ part -&gt; part typeis IMAccountsRecPart ) as IMAccountsRecPart"
+      name="accountsRecPart"
+      type="entity.IMAccountsRecPart"/>
+    <Variable
+      initialValue="accountsRecPart.VersionList.IMAccountsReceivables.map(\ i -&gt; i.AllVersions.last() ).Count &gt; 0"
+      name="hasScheduledItems"
+      type="boolean"/>
+    <Variable
+      initialValue="accountsRecPart.VersionList.IMAccountsRecPartCovs.flatMap(\ c -&gt; c.Costs).Count &gt; 0"
+      name="hasRecPartCoverages"
+      type="boolean"/>
+    <PanelRef
+      visible="hasScheduledItems or hasRecPartCoverages">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable&quot;)"/>
+      <PanelSet>
+        <PanelRef>
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.IM.ARScheduledItems&quot;)"
+            visible="hasScheduledItems"/>
+          <PanelSet>
+            <PanelIterator
+              elementName="perARItem"
+              value="accountsRecPart.VersionList.IMAccountsReceivables.map(\ i -&gt; i.AllVersions.last() ).toTypedArray()"
+              valueType="entity.IMAccountsReceivable[]">
+              <IteratorSort
+                sortBy="perARItem.AccountsRecNumber"
+                sortOrder="1"/>
+              <PanelRef
+                def="IMCostLV(perARItem.VersionList.Coverages.flatMap(\ cov -&gt; cov.Costs).flatMap(\ c -&gt; c.AllVersions).toList())"
+                visible="perARItem.VersionList.Coverages.flatMap(\ cov -&gt; cov.Costs).Count &gt; 0">
+                <Verbatim
+                  label="perARItem.DisplayName"/>
+              </PanelRef>
+            </PanelIterator>
+          </PanelSet>
+        </PanelRef>
+        <PanelRef
+          def="IMCostLV(accountsRecPart.VersionList.IMAccountsRecPartCovs.flatMap(\ c -&gt; c.Costs).flatMap(\ c -&gt; c.AllVersions).toList())"
+          visible="hasRecPartCoverages">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable.PartLevelCoverages&quot;)"/>
+        </PanelRef>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

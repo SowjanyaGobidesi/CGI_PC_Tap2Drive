@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RateRoutineDV">
+    <Require
+      name="rateroutine"
+      type="CalcRoutineDefinition"/>
+    <Require
+      name="newRateRoutine"
+      type="boolean"/>
+    <Require
+      name="copyVersionType"
+      type="gw.rating.flow.util.CopyVersionType"/>
+    <Require
+      name="highlightedRows"
+      type="java.util.Map&lt;CalcStepDefinition, java.util.List&lt;java.lang.Integer&gt;&gt;"/>
+    <Require
+      name="costDataUsages"
+      type="java.util.List&lt;gw.rating.flow.util.InScopeUsage&gt;"/>
+    <Variable
+      initialValue="new gw.pcf.rating.flow.RateRoutineEditScreenHelper( rateroutine, CurrentLocation )"
+      name="helper"
+      type="gw.pcf.rating.flow.RateRoutineEditScreenHelper"/>
+    <Variable
+      initialValue="helper.getAvailableParamSets()"
+      name="paramSets"
+      recalculateOnRefresh="true"
+      type="List&lt;CalcRoutineParameterSet&gt;"/>
+    <Variable
+      initialValue="false"
+      name="showParamTypes"
+      type="boolean"/>
+    <Variable
+      initialValue="rateroutine.canEditIdentifyingFields()"
+      name="canEditIdentifyingFields"
+      type="boolean"/>
+    <InputColumn>
+      <TextInput
+        editable="canEditIdentifyingFields and copyVersionType != BRANCH"
+        id="Code"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Code&quot;)"
+        required="true"
+        value="rateroutine.Code"/>
+      <TextInput
+        editable="canEditIdentifyingFields or copyVersionType == BRANCH"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Name&quot;)"
+        required="true"
+        value="rateroutine.Name"
+        visible="CurrentLocation.InEditMode"/>
+      <TextInput
+        id="Version"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Version&quot;)"
+        required="true"
+        value="rateroutine.Version"
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Description&quot;)"
+        value="rateroutine.Description"/>
+      <RangeInput
+        confirmMessage="DisplayKey.get(&quot;Web.Rating.RateRoutines.StepRemovalWarning&quot;)"
+        editable="canEditIdentifyingFields"
+        id="RoutineLOB"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.PolicyLine&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Rating.Filter.Generic&quot;)"
+        optionLabel="gw.api.productmodel.PolicyLinePatternLookup.getByPublicID(VALUE) as String"
+        required="false"
+        showConfirmMessage="rateroutine.Steps.Count &gt; 0"
+        value="rateroutine.PolicyLinePatternCode"
+        valueRange="helper.getAllLOBsWithParamSets()"
+        valueType="java.lang.String">
+        <PostOnChange
+          onChange="helper.resetCalcRoutine(true);"/>
+      </RangeInput>
+      <TypeKeyInput
+        align="left"
+        editable="canEditIdentifyingFields or copyVersionType == BRANCH"
+        id="Jurisdiction"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Branch.Jurisdiction&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Rating.Filter.Generic&quot;)"
+        value="rateroutine.Jurisdiction"
+        valueType="typekey.Jurisdiction"/>
+      <RangeInput
+        editable="not rateroutine.isIncludedInAnyRateBook()"
+        id="RoutineParamSet"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.ParameterSet&quot;)"
+        optionLabel="VALUE.Name"
+        required="true"
+        validationExpression="helper.getParamSetValidation()"
+        value="rateroutine.ParameterSet"
+        valueRange="paramSets"
+        valueType="entity.CalcRoutineParameterSet">
+        <PostOnChange
+          onChange="helper.changeParameterSet(highlightedRows)"/>
+      </RangeInput>
+      <ContentInput
+        available="rateroutine.ParameterSet != null"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.Parameters&quot;)">
+        <Link
+          id="ParamInfo"
+          label="helper.getStringForParamTypes()"
+          styleClass="none"
+          tooltip="helper.getHelpStringForParamTypes()"/>
+      </ContentInput>
+      <AltUserInput
+        action="UserDetailPage.go(rateroutine.UpdateUser)"
+        actionAvailable="rateroutine.UpdateUser != null"
+        id="LastUpdatedBy"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.LastUpdatedBy&quot;)"
+        value="rateroutine.UpdateUser"/>
+      <DateInput
+        dateFormat="short"
+        id="LastUpdateTime"
+        label="DisplayKey.get(&quot;Web.Rating.RateRoutines.LastUpdateTime&quot;)"
+        timeFormat="long"
+        value="rateroutine.UpdateTime">
+        <PostOnChange/>
+      </DateInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

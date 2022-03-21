@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="DraftDocumentHandler"
+  name="DraftDocumentHandler">
+  <plugin-gosu
+    gosuclass="gw.integration.document.production.smartcomms.plugin.impl.SmartCommsDraftDocumentHandler"/>
+</plugin>

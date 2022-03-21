@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    acceleratedMenuActions="ArchivedPolicyFileAcceleratedMenuActions(policyPeriod, asOfDate)"
+    id="ArchivedLocationGroup"
+    infoBar="PolicyFileMenuInfoBar(policyPeriod)"
+    parent="PolicyFileForward(policyPeriod.PolicyNumber)"
+    title="DisplayKey.get(&quot;Web.Archive.Locations.Title&quot;)">
+    <LocationEntryPoint
+      signature="ArchivedLocationGroup(policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.EditEffectiveDate"
+      name="asOfDate"
+      type="java.util.Date"/>
+    <LocationRef
+      location="ArchivedPolicyPeriodPage(policyPeriod)"/>
+  </LocationGroup>
+</PCF>

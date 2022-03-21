@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="RegionSearchInputSet"
+    mode="default">
+    <Require
+      name="searchCriteria"
+      type="gw.api.admin.PCZoneSearchCriteria"/>
+    <Require
+      name="policyHold"
+      type="PolicyHold"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Admin.PolicyHold.SearchCriteria&quot;)"/>
+    <RangeInput
+      editable="true"
+      id="Country"
+      label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Country&quot;)"
+      required="false"
+      value="searchCriteria.Country"
+      valueRange="searchCriteria.getPossibleCountries()"
+      valueType="typekey.Country">
+      <PostOnChange
+        onChange="searchCriteria.ZoneType = null; searchCriteria.LinkedZone = null; searchCriteria.FilterZoneName = null"/>
+    </RangeInput>
+    <RangeRadioInput
+      editable="true"
+      id="ZoneType"
+      label="DisplayKey.get(&quot;Web.Admin.PolicyHold.RegionType&quot;)"
+      required="true"
+      value="searchCriteria.ZoneType"
+      valueRange="searchCriteria.getRelevantZoneTypesForCountry()"
+      valueType="typekey.ZoneType">
+      <PostOnChange
+        onChange="searchCriteria.clearFilters()"/>
+    </RangeRadioInput>
+  </InputSet>
+</PCF>

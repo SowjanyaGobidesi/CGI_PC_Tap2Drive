@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="DocumentProductionService"
+  name="DocumentProductionService">
+  <plugin-gosu
+    gosuclass="gw.integration.document.production.smartcomms.plugin.impl.SmartCommsDocumentProductionService"/>
+</plugin>

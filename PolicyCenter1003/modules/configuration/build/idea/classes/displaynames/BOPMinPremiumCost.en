@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Entity
+  name="BOPMinPremiumCost">
+  <Columns/>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("Web.Financials.MinimumPremiumAdjustment")
+  ]]></DisplayName>
+</Entity>

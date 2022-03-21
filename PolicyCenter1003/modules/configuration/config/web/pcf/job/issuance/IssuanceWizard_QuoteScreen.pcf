@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="IssuanceWizard_QuoteScreen">
+    <Require
+      name="issuance"
+      type="Issuance"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="new gw.document.DocumentProduction()"
+      name="documentProduction"
+      type="gw.document.DocumentProduction"/>
+    <Variable
+      initialValue="policyPeriod.RepresentativePolicyLines.first()"
+      name="line"
+      type="entity.PolicyLine"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, issuance, jobWizardHelper)"/>
+      <ToolbarButton
+        action="policyPeriod.clickPrintQuoteButton(&quot;SubmissionQuote&quot;, &quot;Issuance Quote&quot;)"
+        download="true"
+        id="CreateIssuanceQuote"
+        label="DisplayKey.get(&quot;Button.PrintQuote&quot;)"
+        shortcut="P"/>
+    </Toolbar>
+    <PanelRef
+      def="WarningsPanelSet(policyPeriod.getWizardQuoteScreenWarnings())"/>
+    <PanelRef
+      def="Quote_SummaryDV(policyPeriod)">
+      <Toolbar/>
+    </PanelRef>
+    <CardViewPanel>
+      <Card
+        id="IssuanceWizard_Quote_CumulativeCard"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.QuoteScreen.Cumulative&quot;)">
+        <PanelRef
+          def="RatingCumulDetailsPanelSet(policyPeriod, jobWizardHelper, isEditable)"
+          mode="line.Pattern.PublicID">
+          <TitleBar
+            title="line.Pattern.DisplayName"
+            visible="policyPeriod.RepresentativePolicyLines.Count &gt; 1"/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="IssuanceWizard_Quote_TransactionCard"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.QuoteScreen.Transaction&quot;)"
+        visible="true">
+        <PanelRef
+          def="RatingTxDetailsPanelSet(policyPeriod, DisplayKey.get(&quot;Web.Quote.TotalPremLabel.Change&quot;), DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Change&quot;), isEditable, jobWizardHelper)"
+          mode="line.Pattern.PublicID">
+          <TitleBar
+            title="line.Pattern.DisplayName"
+            visible="policyPeriod.RepresentativePolicyLines.Count &gt; 1"/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

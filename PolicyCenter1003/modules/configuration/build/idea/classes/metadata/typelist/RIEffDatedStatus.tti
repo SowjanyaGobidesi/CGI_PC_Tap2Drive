@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The status of the current RIEffDated entity"
+  final="true"
+  name="RIEffDatedStatus">
+  <typecode
+    code="Draft"
+    desc="Draft status, the RIEffDated is associated with a unbound policy period."
+    name="Draft"
+    priority="1"/>
+  <typecode
+    code="Bound"
+    desc="Bound status, the RIEffDated is associated with a bound policy period."
+    name="Bound"
+    priority="2"/>
+</typelist>

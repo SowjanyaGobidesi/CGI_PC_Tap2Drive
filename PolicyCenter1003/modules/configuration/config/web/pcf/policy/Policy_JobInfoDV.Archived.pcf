@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="Policy_JobInfoDV"
+    mode="Archived">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <InputColumn>
+      <DateInput
+        editable="true"
+        id="PeriodEffDate"
+        label="DisplayKey.get(&quot;Web.Job.Policy.Period.EffectiveDate&quot;)"
+        value="job.LatestPeriod.EditEffectiveDate"/>
+      <DateInput
+        id="CreateDate"
+        label="DisplayKey.get(&quot;Web.Job.CreateDate&quot;)"
+        value="job.CreateTime"/>
+      <DateInput
+        id="CloseDate"
+        label="DisplayKey.get(&quot;Web.Job.CloseDate&quot;)"
+        value="job.CloseDate"/>
+      <TextInput
+        id="Status"
+        label="DisplayKey.get(&quot;Web.Job.Status&quot;)"
+        value="job.DisplayStatus"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Job.FileLinks.Title&quot;)"
+        visible="!(job typeis Cancellation)"/>
+      <TextInput
+        action="JobForward.go(job)"
+        id="JobFile"
+        value="DisplayKey.get(&quot;Web.Job.JobFile&quot;)"
+        visible="job.Viewable"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSet
+        visible="job.isComplete() and job.ResultingBoundPeriod!=null">
+        <Label
+          label="DisplayKey.get(&quot;Web.Job.Policy.Period&quot;)"/>
+        <TextInput
+          id="PeriodStatus"
+          label="DisplayKey.get(&quot;Web.Job.Policy.Period.Status&quot;)"
+          value="job.ResultingBoundPeriod.PeriodDisplayStatus"/>
+        <Label
+          label="DisplayKey.get(&quot;Web.Job.Policy.Dates&quot;)"/>
+        <DateInput
+          id="PolicyPerEffDate"
+          label="DisplayKey.get(&quot;Web.Job.Policy.Period.EffectiveDate&quot;)"
+          value="job.ResultingBoundPeriod.PeriodStart"/>
+        <DateInput
+          id="ExpirationDate"
+          label="DisplayKey.get(&quot;Web.Job.Policy.Period.ExpirationDate&quot;)"
+          value="job.ResultingBoundPeriod.PeriodEnd"/>
+      </InputSet>
+      <Label
+        label="DisplayKey.get(&quot;Web.PolicyFile.JobDetails.SubmissionTitle&quot;)"
+        visible="job.Subtype == typekey.Job.TC_SUBMISSION "/>
+      <TextInput
+        action="pcf.PolicyFileForward.go(job.SelectedVersion.PolicyNumber)"
+        id="policyfile"
+        value="DisplayKey.get(&quot;Job.ViewPolicyFileDetails&quot;)"
+        visible="job.Subtype == typekey.Job.TC_SUBMISSION"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

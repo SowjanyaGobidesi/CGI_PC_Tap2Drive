@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    countsAsWork="false"
+    id="CoveragePatternSearchPopup"
+    returnType="gw.api.productmodel.ClausePattern[]"
+    title="searchType == CoveragePatternSearchType.TC_COVERAGE ? DisplayKey.get(&quot;Web.Coverage.SearchPage.Title&quot;, coverable.DisplayName) : DisplayKey.get(&quot;Web.Search.ExclusionAndCondition.Title&quot;, coverable.DisplayName)">
+    <LocationEntryPoint
+      signature="CoveragePatternSearchPopup(coverable : Coverable, searchType : CoveragePatternSearchType, coverageCategories : String[], includeElseExclude : boolean)"/>
+    <Variable
+      name="coverable"
+      type="Coverable"/>
+    <Variable
+      initialValue="coverable.PolicyLine.Pattern"
+      name="policyLinePattern"
+      type="gw.api.productmodel.PolicyLinePattern"/>
+    <Variable
+      name="coverageCategories"
+      type="String[]"/>
+    <Variable
+      name="includeElseExclude"
+      type="boolean"/>
+    <Variable
+      name="searchType"
+      type="CoveragePatternSearchType"/>
+    <Screen
+      id="CoveragePatternSearchScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="coveragePatterns"
+        search="filteredSearchResults(searchCriteria)"
+        searchCriteria="new gw.productmodel.ClausePatternSearchCriteria() { :SearchType = searchType, :PolicyLinePatternCode = coverable.PolicyLine.Pattern.PublicID }"
+        searchCriteriaType="gw.productmodel.ClausePatternSearchCriteria"
+        searchOnEnter="false"
+        searchResultsType="gw.api.productmodel.ClausePattern[]">
+        <PanelRef
+          def="CoveragePatternSearchDV(searchCriteria, policyLinePattern, coverageCategories, includeElseExclude)"/>
+        <PanelRef
+          def="CoveragePatternSearchResultsLV(coveragePatterns)">
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="CurrentLocation.pickValueAndCommit( CheckedValues )"
+              id="AddCoverageButton"
+              iterator="CoveragePatternSearchResultsLV.CoveragePatternSearchResultsLV"
+              label="searchType == CoveragePatternSearchType.TC_COVERAGE ? DisplayKey.get(&quot;Web.Coverage.SearchPage.AddSelectedCoverages&quot;) : DisplayKey.get(&quot;Web.Coverage.SearchPage.AddSelectedExclusionsAndConditions&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function filteredSearchResults(searchCriteria : gw.productmodel.ClausePatternSearchCriteria) : gw.api.productmodel.ClausePattern[] {
+  var results = searchCriteria.performSearch()
+  results = results.where(\ c -> coverable.isCoverageConditionOrExclusionAvailable(c) and coverable.getCoverageConditionOrExclusion(c) == null)
+  
+  if (includeElseExclude) {
+    return results.where(\ c -> coverageCategories.contains(c.CoverageCategory.PublicID))
+  }
+  else {
+    return results.where(\ c -> not coverageCategories.contains(c.CoverageCategory.PublicID))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

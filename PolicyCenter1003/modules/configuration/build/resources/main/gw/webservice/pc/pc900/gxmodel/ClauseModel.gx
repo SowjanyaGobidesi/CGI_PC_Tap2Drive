@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="gw.api.domain.Clause" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="CovTerms[]" type="gw.api.domain.covterm.CovTerm" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.covtermmodel"/>
+    <include path="Pattern.PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

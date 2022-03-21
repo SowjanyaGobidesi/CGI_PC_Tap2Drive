@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Account.viewSubmissionGroup(submissionGroup.Account)"
+    id="SubmissionGroupDetail"
+    parent="UnderwritingFiles(submissionGroup.Account)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.SubmissionGroup.Title&quot;, submissionGroup.Name)">
+    <LocationEntryPoint
+      signature="SubmissionGroupDetail(submissionGroup : SubmissionGroup)"/>
+    <Variable
+      name="submissionGroup"
+      type="SubmissionGroup"/>
+    <Screen
+      id="SubmissionGroupDetailScreen">
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.SubmissionGroup.Info&quot;)"/>
+          <TextInput
+            id="Name"
+            label="DisplayKey.get(&quot;Web.SubmissionGroup&quot;)"
+            value="submissionGroup.Name"/>
+          <TextInput
+            id="NumJobs"
+            label="DisplayKey.get(&quot;Web.SubmissionGroup.NumSubmissions&quot;)"
+            value="submissionGroup.Submissions.length"
+            valueType="java.lang.Integer"/>
+          <MonetaryAmountInput
+            formatType="currency"
+            id="TotalCost"
+            label="DisplayKey.get(&quot;Web.SubmissionGroup.TotalCost&quot;)"
+            value="submissionGroup.AmountSum"/>
+          <DateInput
+            formatType="general"
+            id="FirstEffDate"
+            label="DisplayKey.get(&quot;Web.SubmissionGroup.FirstEffDate&quot;)"
+            value="submissionGroup.Jobs.minBy( \ j -&gt; j.LatestPeriod.EditEffectiveDate ).LatestPeriod.EditEffectiveDate"/>
+          <DateInput
+            id="LastExpDate"
+            label="DisplayKey.get(&quot;Web.SubmissionGroup.LastExpDate&quot;)"
+            value="submissionGroup.Jobs.maxBy( \ j -&gt; j.LatestPeriod.PeriodEnd ).LatestPeriod.PeriodEnd"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <CardViewPanel>
+        <Card
+          id="SubmissionsCard"
+          title="DisplayKey.get(&quot;Web.SubmissionGroup.Submissions&quot;)">
+          <PanelRef
+            def="SubmissionGroupJobsLV(submissionGroup)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="RiskAnalysisCard"
+          title="DisplayKey.get(&quot;Web.RenewalGroup.RiskAnalysis&quot;)">
+          <PanelRef
+            def="JobGroupRiskAnalysisLV( submissionGroup )">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="ActivitiesCard"
+          title="DisplayKey.get(&quot;Web.RenewalGroup.Activities&quot;)">
+          <PanelRef
+            def="DesktopActivitiesLV( Activity.finder.findActivitiesByJobGroup( submissionGroup ) as gw.api.database.IQueryBeanResult&lt;Activity&gt; )">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  desc="A Additional Insured Type value associated with a form pattern coverable."
+  exportable="true"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="FormPatternAdditionalInsuredType"
+  table="formpatternaddlinsured"
+  type="retireable">
+  <foreignkey
+    desc="The form pattern containing this Additional Insured Type"
+    fkentity="FormPattern"
+    name="FormPattern"
+    nullok="false"/>
+  <typekey
+    desc="The Additional Insured Type"
+    name="AdditionalInsuredType"
+    nullok="false"
+    typelist="AdditionalInsuredType"/>
+</entity>

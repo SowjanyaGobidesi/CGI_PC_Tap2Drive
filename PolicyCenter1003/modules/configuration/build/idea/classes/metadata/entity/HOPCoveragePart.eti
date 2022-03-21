@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage Parts for the HOP line"
+  displayName="HOPCoveragePart"
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPCoveragePart"
+  exportable="true"
+  loadable="false"
+  table="hopcoveragepart"
+  type="effdated">
+  <array
+    arrayentity="HOPDwelling"
+    cascadeDelete="true"
+    desc="Dwellings for this Coverage Part"
+    name="HOPDwellings"
+    owner="true"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.hop.HOPCoveragePartCoverableModifiableAdapter"/>
+  <implementsEntity
+    name="Modifiable"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifiableAdapter"
+    impl="gw.lob.hop.HOPCoveragePartCoverableModifiableAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPCoveragePartMatcher"/>
+  <foreignkey
+    fkentity="HOPLine"
+    name="HOPLine"
+    nullok="false"/>
+  <array
+    arrayentity="HOPCoveragePartCov"
+    cascadeDelete="true"
+    desc="Coverages directly attached to the HOPCoveragePart"
+    name="Coverages"
+    owner="true"/>
+  <array
+    arrayentity="HOPCoveragePartExcl"
+    cascadeDelete="true"
+    desc="Exclusions directly attached to the HOPCoveragePart"
+    name="Exclusions"
+    owner="true"/>
+  <array
+    arrayentity="HOPCoveragePartCond"
+    cascadeDelete="true"
+    desc="Conditions directly attached to the HOPCoveragePart"
+    name="Conditions"
+    owner="true"/>
+  <array
+    arrayentity="HOPCoveragePartMod"
+    cascadeDelete="true"
+    desc="Modifiers directly attached to the HOPCoveragePart"
+    name="HOPCoveragePartMods"/>
+  <typekey
+    desc="The type of this coverage part (Rental, Condominium, Dwelling)"
+    name="CoveragePartType"
+    nullok="true"
+    typelist="CoveragePartType"
+    typefilter="HOPCoveragePartType"/>
+</entity>

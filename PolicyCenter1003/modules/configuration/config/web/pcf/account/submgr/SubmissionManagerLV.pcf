@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SubmissionManagerLV">
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="submissions"
+      type="Submission[]"/>
+    <Variable
+      initialValue="gw.job.SubmissionLetterHelper.getDocumentsByPolicyPeriodAndDocType(submissions)"
+      name="docMap"
+      type="java.util.Map"/>
+    <Variable
+      initialValue="gw.job.SubmissionLetterHelper.getSubmissionLettertypes(submissions)"
+      name="submissionLettertypes"
+      type="java.util.Set&lt;String&gt;"/>
+    <Variable
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="submission"
+      pageSize="0"
+      value="submissions"
+      valueType="entity.Submission[]">
+      <Variable
+        initialValue="submission.LatestPeriod"
+        name="policyPeriod"
+        type="entity.PolicyPeriod"/>
+      <Variable
+        initialValue="getConfirmLetter(policyPeriod) "
+        name="confirmLetter"
+        type="entity.Document"/>
+      <Variable
+        initialValue="getDeclinedLetter(policyPeriod)"
+        name="declineLetter"
+        type="entity.Document"/>
+      <Variable
+        initialValue="getNotTakenLetter(policyPeriod)"
+        name="notTakenLetter"
+        type="entity.Document"/>
+      <Variable
+        initialValue="perm.PolicyPeriod.view(policyPeriod)"
+        name="hasViewPermission"
+        type="boolean"/>
+      <ToolbarFilter
+        name="submissionFilter">
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter( DisplayKey.get(&quot;Web.SubmissionManager.Filter.All&quot;), \ x -&gt; true )"/>
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter( DisplayKey.get(&quot;Web.SubmissionManager.Filter.Open&quot;), \ x -&gt; not (x as Submission).Complete )"/>
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter( DisplayKey.get(&quot;Web.SubmissionManager.Filter.Complete&quot;), \ x -&gt; (x as Submission).Complete )"/>
+      </ToolbarFilter>
+      <Row
+        useArchivedStyle="submission.LatestPeriod.Archived"
+        visible="hasViewPermission">
+        <TextCell
+          align="center"
+          enableSort="false"
+          hideChildrenIfReadOnly="false"
+          id="SubmissionActions"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions&quot;)"
+          value="&quot; &quot;">
+          <MenuItemSetRef
+            def="SubmissionActionsMenuItemSet(submission, policyPeriod)"/>
+        </TextCell>
+        <LinkCell
+          id="SubmissionDisplayProduct"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Product&quot;)"
+          sortBy="submission.Policy.Product.DisplayName"
+          wrap="true">
+          <Link
+            icon="policyPeriod.Policy.Product.Icon"
+            iconType="svgFileName"
+            id="Icon"/>
+          <Link
+            id="Spacer"
+            label="&quot; &quot;"/>
+          <Link
+            id="SubmissionProduct"
+            label="submission.Policy.Product.DisplayName"/>
+        </LinkCell>
+        <TextCell
+          action="SubmissionView(submission, policyPeriod)"
+          available="submission.Viewable"
+          id="SubmissionNumber"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.SubmissionNumber&quot;)"
+          sortOrder="1"
+          value="submission.JobNumber"/>
+        <TypeKeyCell
+          id="QuoteType"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.QuoteType&quot;)"
+          value="submission.getQuoteType()"
+          valueType="typekey.QuoteType"/>
+        <DateCell
+          id="EffectiveDate"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.EffectiveDate&quot;)"
+          value="submission.LatestPeriod.EditEffectiveDate"/>
+        <TextCell
+          id="Status"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Status&quot;)"
+          value="submission.DisplayStatus"
+          wrap="true"/>
+        <MonetaryAmountCell
+          footerSumValue="submission.TotalCost == null ? null : submission.TotalCost?.convertAmount(account.PreferredSettlementCurrency)"
+          formatType="currency"
+          id="TotalPremium"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.TotalCost&quot;)"
+          value="submission.TotalCost"/>
+        <LinkCell
+          align="center"
+          id="Actions"
+          label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Letters&quot;)">
+          <Link
+            action="SubmissionConfirmLetter.go(account)"
+            id="ConfirmLetter"
+            label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.ConfirmLetter&quot;)"
+            styleClass="miniButton"
+            visible="gw.job.SubmissionLetterHelper.submissionCanSendLetterType(submissionLettertypes, LetterType.TC_CONFIRMATION, submission, policyPeriod)"/>
+          <Link
+            action="SubmissionRejectLetter.go(TC_DECLINATION, account)"
+            id="DeclineLetter"
+            label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.DeclineLetter&quot;)"
+            styleClass="miniButton"
+            visible="gw.job.SubmissionLetterHelper.submissionCanSendLetterType(submissionLettertypes, LetterType.TC_DECLINATION, submission, policyPeriod)"/>
+          <Link
+            action="SubmissionRejectLetter.go(TC_NOTTAKENACK, account)"
+            id="NotTakenLetter"
+            label="DisplayKey.get(&quot;Web.SubmissionManager.SelectionLV.Actions.NotTakenLetter&quot;)"
+            styleClass="miniButton"
+            visible="gw.job.SubmissionLetterHelper.submissionCanSendLetterType(submissionLettertypes, LetterType.TC_NOTTAKENACK, submission, policyPeriod)"/>
+          <Link
+            action="confirmLetter.downloadContent()"
+            download="inline"
+            icon="&quot;document_confirm&quot;"
+            iconType="svgFileName"
+            id="InternalSubmissionsLV_ConfirmLink"
+            visible="documentsActionsHelper.isDownloadDocumentContentVisible(confirmLetter)"/>
+          <Link
+            action="declineLetter.downloadContent()"
+            download="inline"
+            icon="&quot;document_decline&quot;"
+            iconType="svgFileName"
+            id="InternalSubmissionsLV_DeclineLink"
+            visible="documentsActionsHelper.isDownloadDocumentContentVisible(declineLetter)"/>
+          <Link
+            action="notTakenLetter.downloadContent()"
+            download="inline"
+            icon="&quot;document_not_taken&quot;"
+            iconType="svgFileName"
+            id="InternalSubmissionsLV_NotTakenLink"
+            visible="documentsActionsHelper.isDownloadDocumentContentVisible(notTakenLetter)"/>
+          <Link
+            id="InternalSubmissionsLV_ActionsDisabled"
+            label="documentsActionsHelper.AsynchronousActionsMessage"
+            styleClass="none"
+            visible="documentsActionsHelper.isDocumentPending(confirmLetter) or documentsActionsHelper.isDocumentPending(declineLetter) or documentsActionsHelper.isDocumentPending(notTakenLetter)"/>
+        </LinkCell>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function SubmissionView(sub : Submission, policyPeriod : PolicyPeriod) {
+  if (policyPeriod.Status == TC_NEW) {
+    gw.transaction.Transaction.runWithNewBundle(\ bun -> {
+      policyPeriod = bun.add(policyPeriod)
+      policyPeriod.SubmissionProcess.beginEditing()
+    })
+  }
+  JobForward.go(sub, policyPeriod)
+}
+
+function getConfirmLetter(policyPeriod : PolicyPeriod) : Document {
+  return docMap.get(policyPeriod.ID.toString() + ",confirm_letter") as Document
+}
+
+function getDeclinedLetter(policyPeriod : PolicyPeriod) : Document {
+  return (policyPeriod.Status == PolicyPeriodStatus.TC_DECLINED)
+    ? docMap.get(policyPeriod.ID.toString() + ",decline_letter") as Document
+    : null
+}
+
+function getNotTakenLetter(policyPeriod : PolicyPeriod) : Document {
+  return (policyPeriod.Status == PolicyPeriodStatus.TC_NOTTAKEN)
+    ? docMap.get(policyPeriod.ID.toString() + ",not_taken_letter") as Document
+    : null
+}]]></Code>
+  </ListViewPanel>
+</PCF>

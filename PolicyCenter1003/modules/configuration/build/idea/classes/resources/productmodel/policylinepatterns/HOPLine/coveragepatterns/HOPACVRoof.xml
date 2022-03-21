@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="HOPACVRoof"
+  conditionSubtype="HOPDwellingCond"
+  coverageCategory="z94j696j28oei0bkk2b3eaukjnb"
+  existence="Electable"
+  lookupTableName="HOPDwellingCond"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="400"
+  public-id="zqmi2c4l40olsa7dnghbo59s2o9"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</ConditionPattern>

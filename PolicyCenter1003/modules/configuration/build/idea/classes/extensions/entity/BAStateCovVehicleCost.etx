@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="BAStateCovVehicleCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.ba.financials.BACostMethods" impl="gw.lob.ba.financials.BAStateCovVehicleCostMethodsImpl"/>
+</extension>

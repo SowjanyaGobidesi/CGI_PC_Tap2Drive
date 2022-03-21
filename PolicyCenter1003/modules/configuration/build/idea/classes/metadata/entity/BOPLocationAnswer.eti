@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links location and answer references - answers are persisted text responses to questions in the location ui. Specific to Policy Center"
+  effDatedBranchType="PolicyPeriod"
+  entity="BOPLocationAnswer"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="boplocationanswer"
+  type="effdated">
+  <implementsEntity
+    name="PCAnswerDelegate"/>
+  <foreignkey
+    fkentity="BOPLocation"
+    name="BOPLocation"
+    nullok="false"/>
+</entity>

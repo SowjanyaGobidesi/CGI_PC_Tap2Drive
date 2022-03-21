@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    id="PolicyFile_IMSignPart"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.Policy.IM.IMSigns&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_IMSignPart(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen
+      id="imsignpartScreen">
+      <PanelRef
+        def="IMSignsPanelSet(policyPeriod, policyPeriod.IMLine.IMSignPart, null)"/>
+    </Screen>
+  </Page>
+</PCF>

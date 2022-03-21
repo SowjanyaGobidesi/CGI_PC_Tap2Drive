@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PolicyHoldDetailDV">
+    <Require
+      name="policyHold"
+      type="PolicyHold"/>
+    <Require
+      name="showTimeStamps"
+      type="boolean"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="policyHold.New"
+        id="HoldType"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.HoldType&quot;)"
+        value="policyHold.HoldType"
+        valueType="typekey.UWIssueCheckingSet">
+        <PostOnChange
+          onChange="if(policyHold.Rules.HasElements){policyHold.Rules.each(\ p -&gt; {p.JobDateType = null})};"/>
+      </TypeKeyInput>
+      <TextInput
+        editable="policyHold.New"
+        id="Code"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Code&quot;)"
+        value="policyHold.PolicyHoldCode"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Description&quot;)"
+        value="policyHold.Description"/>
+      <DateInput
+        editable="true"
+        id="StartDate"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.StartDate&quot;)"
+        value="policyHold.StartDate"/>
+      <DateInput
+        editable="true"
+        id="EndDate"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.EndDate&quot;)"
+        validationExpression="policyHold.EndDate &lt; policyHold.StartDate ? DisplayKey.get(&quot;Validation.PolicyHold.HoldEndDateValidation&quot;) : null"
+        value="policyHold.EndDate"/>
+      <AltUserInput
+        action="UserDetailPage.go(policyHold.CreateUser)"
+        actionAvailable="policyHold.CreateUser != null"
+        id="CreatedBy"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.CreatedBy&quot;)"
+        value="policyHold.CreateUser"
+        visible="showTimeStamps"/>
+      <DateInput
+        dateFormat="short"
+        id="CreateTime"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.CreateTime&quot;) "
+        timeFormat="long"
+        value="policyHold.CreateTime"
+        visible="showTimeStamps">
+        <PostOnChange/>
+      </DateInput>
+      <AltUserInput
+        action="UserDetailPage.go(policyHold.UpdateUser)"
+        actionAvailable="policyHold.UpdateUser != null"
+        id="LastUpdatedBy"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.LastUpdatedBy&quot;)"
+        value="policyHold.UpdateUser"
+        visible="showTimeStamps"/>
+      <DateInput
+        dateFormat="short"
+        id="LastUpdateTime"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.LastUpdateTime&quot;)"
+        timeFormat="long"
+        value="policyHold.UpdateTime"
+        visible="showTimeStamps">
+        <PostOnChange/>
+      </DateInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.UWIssueInfo&quot;)"/>
+      <RangeInput
+        available="policyHold.HoldType != null"
+        editable="true"
+        id="UWIssueType"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.UWIssueType&quot;)"
+        value="policyHold.IssueType"
+        valueRange="UWIssueType.finder.findUWIssueTypeByCheckingSet(policyHold.HoldType)"
+        valueType="entity.UWIssueType"/>
+      <TextInput
+        available="policyHold.HoldType != null"
+        editable="true"
+        id="LongDesc"
+        label="DisplayKey.get(&quot;Web.Admin.PolicyHold.LongDesc&quot;)"
+        value="policyHold.UWIssueLongDesc"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

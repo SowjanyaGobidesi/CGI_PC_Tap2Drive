@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    id="CurrentActivitiesAccountListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities')"
+    viewMoreAction="CurrentActivitiesAccountPopup.push(account)"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="helper.ViewMoreVisible">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.account.ActivityHelper(account)"
+      name="helper"
+      recalculateOnRefresh="true"
+      type="gw.api.web.dashboard.ui.account.ActivityHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="activity"
+      value="helper.Activities"
+      valueType="Activity[]">
+      <IteratorSort
+        sortBy="activity.Priority"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="activity.TargetDate"
+        sortOrder="2"/>
+      <Row>
+        <DateCell
+          dateFormat="short"
+          fontColor="activity.UIOverdueColor"
+          id="DueDate"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.DueDate')"
+          value="activity.TargetDate"
+          wrap="false"/>
+        <TextCell
+          action="ActivityForward.go(activity, activity.PolicyPeriod)"
+          available="perm.Activity.view(activity)"
+          grow="true"
+          id="Subject"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Subject')"
+          value="activity.Subject"/>
+        <TypeKeyCell
+          fontColor="activity.UIPriorityColor"
+          id="Priority"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Priority')"
+          value="activity.Priority"
+          valueType="typekey.Priority"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Assigned"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Assigned')"
+          value="activity.AssignedTo"
+          valueType="java.lang.Object"/>
+        <TextCell
+          action="PolicyFileForward.go(activity.Policy.LatestPeriod.PolicyNumber, activity.Policy.LatestPeriod.PeriodStart)"
+          id="Policy"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Policy')"
+          value="activity.Policy.LatestPeriod.PolicyNumber ?: ''"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Product"
+          label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Product')"
+          value="activity.Policy.Product.DisplayName"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

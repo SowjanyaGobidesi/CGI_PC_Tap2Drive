@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="PCAssignable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.assignment.PCAssignablePublicMethods"
+    impl="com.guidewire.pc.domain.assignment.impl.PCAssignableImpl"/>
+  <fulldescription><![CDATA[This delegate contains all the methods that Assignable should have in PolicyCenter.]]></fulldescription>
+  <implementsEntity
+    name="Assignable"/>
+</delegate>

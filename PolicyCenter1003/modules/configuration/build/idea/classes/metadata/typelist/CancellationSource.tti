@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Party that initiated the cancellation"
+  final="false"
+  name="CancellationSource">
+  <typecode
+    code="carrier"
+    desc="Cancellation initiated by carrier"
+    name="Insurer"/>
+  <typecode
+    code="insured"
+    desc="Cancellation initiated by insured"
+    name="Insured"/>
+</typelist>

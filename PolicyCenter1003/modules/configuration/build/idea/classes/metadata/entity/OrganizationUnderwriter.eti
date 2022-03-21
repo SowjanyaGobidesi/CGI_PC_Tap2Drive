@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- An underwriter can be associated with any number of organizations. -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Organizations (insurer, producers, etc) associated with an underwriter"
+  entity="OrganizationUnderwriter"
+  loadable="false"
+  platform="false"
+  table="organizationunderwriter"
+  type="joinarray">
+  <foreignkey
+    columnName="UnderwriterID"
+    deprecated="true"
+    desc="Underwriter."
+    exportable="false"
+    fkentity="User"
+    name="Underwriter"
+    nullok="false"/>
+  <foreignkey
+    columnName="OrganizationID"
+    desc="Organization."
+    exportable="false"
+    fkentity="Organization"
+    name="Organization"
+    nullok="false"/>
+  <index
+    desc="Ensures that there is at most one row per User/Organization combination."
+    name="orgunderwriter1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UnderwriterID"/>
+    <indexcol
+      keyposition="2"
+      name="OrganizationID"/>
+  </index>
+</entity>

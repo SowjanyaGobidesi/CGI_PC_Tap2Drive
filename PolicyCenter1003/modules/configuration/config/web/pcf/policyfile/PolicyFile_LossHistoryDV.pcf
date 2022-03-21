@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PolicyFile_LossHistoryDV">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="policy"
+      type="Policy"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.PolicyFile.PriorHistory.PriorLosses&quot;)"/>
+      <InputSetRef
+        def="LossHistoryInputSet(policyPeriod)"
+        mode="policy.LossHistoryType"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

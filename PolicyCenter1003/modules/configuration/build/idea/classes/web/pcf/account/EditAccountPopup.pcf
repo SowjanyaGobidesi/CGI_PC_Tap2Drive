@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="account.Editable and perm.Account.edit(account)"
+    id="EditAccountPopup"
+    parent="AccountFile_Summary(account)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.EditAccount&quot;)">
+    <LocationEntryPoint
+      signature="EditAccountPopup(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="account.AccountHolderContact"
+      name="contact"
+      recalculateOnRefresh="true"
+      type="entity.Contact"/>
+    <Variable
+      initialValue="contact.PrimaryAddress"
+      name="selectedAddress"
+      recalculateOnRefresh="true"
+      type="entity.Address"/>
+    <Screen
+      id="EditAccountScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="ContactNameInputSet(contact)"
+            mode="contact.Subtype.Code"
+            visible="contact != null"/>
+          <TextInput
+            editable="true"
+            id="Nickname"
+            label="DisplayKey.get(&quot;Web.EditAccount.Nickname&quot;)"
+            value="account.Nickname"/>
+          <TypeKeyInput
+            editable="true"
+            id="PrimaryLanguage"
+            label="DisplayKey.get(&quot;Web.EditAccount.PrimaryLanguage&quot;)"
+            value="account.PrimaryLanguage"
+            valueType="typekey.LanguageType"
+            visible="gw.api.util.LocaleUtil.getAllLanguages().size() &gt; 1"/>
+          <TypeKeyInput
+            editable="true"
+            id="ServiceTier"
+            label="DisplayKey.get(&quot;Web.EditAccount.ServiceTier&quot;)"
+            value="account.ServiceTier"
+            valueType="typekey.CustomerServiceTier"/>
+          <InputDivider/>
+          <InputSetRef
+            def="LinkedAddressInputSet(selectedAddress, contact, null, account, CurrentLocation.InEditMode)"/>
+          <InputSetRef
+            def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(selectedAddress, false, true))"
+            editable="selectedAddress.LinkedAddress == null"
+            visible="contact != null"/>
+          <TypeKeyInput
+            editable="selectedAddress.LinkedAddress == null"
+            id="AddressType"
+            label="DisplayKey.get(&quot;Web.AddressDetail.AddressType&quot;)"
+            required="true"
+            value="selectedAddress.AddressType"
+            valueType="typekey.AddressType"/>
+          <TextInput
+            editable="selectedAddress.LinkedAddress == null"
+            id="AddressDescription"
+            label="DisplayKey.get(&quot;Web.AddressDetail.Description&quot;)"
+            value="selectedAddress.Description"/>
+          <InputDivider/>
+          <InputSetRef
+            def="AccountCurrencyInputSet(account, selectedAddress, false)"
+            editable="account.Editable"
+            id="AccountCurrency"
+            visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+          <InputDivider/>
+          <Label
+            label="DisplayKey.get(&quot;Web.AccountFile.Summary.OfficialIDs&quot;)"
+            visible="contact != null"/>
+          <InputSetRef
+            def="OfficialIDInputSet(contact)"
+            mode="contact.Subtype"
+            visible="contact != null"/>
+          <InputSet
+            visible="account.AccountHolderContact typeis Company">
+            <TypeKeyInput
+              editable="true"
+              id="OrgType"
+              label="DisplayKey.get(&quot;Web.EditAccount.OrgType&quot;)"
+              value="account.AccountOrgType"
+              valueType="typekey.AccountOrgType"/>
+            <IndustryCodeInput
+              domain="typekey.IndustryCodeType.TC_SIC"
+              editable="true"
+              id="IndustryCode"
+              label="DisplayKey.get(&quot;Web.EditAccount.IndustryCode&quot;)"
+              pickLocation="IndustryCodeSearchPopup.push(typekey.IndustryCodeType.TC_SIC)"
+              value="account.IndustryCode"/>
+            <TextInput
+              editable="true"
+              id="DescriptionOfBusiness"
+              label="DisplayKey.get(&quot;Web.EditAccount.DescriptionOfBusiness&quot;)"
+              value="account.BusOpsDesc"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

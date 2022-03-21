@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("UWIssueType Validation Rules")
+@gw.rules.RuleSetDescription("This is the UWIssueType Validation rule set.")
+class UWIssueTypeValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.UWIssueType) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.UWIssueType) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "UWIssueTypeValidationRules", UWIssueTypeValidationRules )
+  }
+}

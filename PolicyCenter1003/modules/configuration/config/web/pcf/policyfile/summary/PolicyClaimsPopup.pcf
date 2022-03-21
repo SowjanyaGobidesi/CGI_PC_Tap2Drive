@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="PolicyClaimsPopup"
+    title="DisplayKey.get('Web.Policy.Claims')">
+    <LocationEntryPoint
+      signature="PolicyClaimsPopup(claimHelper: gw.api.web.dashboard.ui.claims.ClaimHelper)"/>
+    <Variable
+      name="claimHelper"
+      type="gw.api.web.dashboard.ui.claims.ClaimHelper"/>
+    <Screen>
+      <ListViewPanel>
+        <RowSetRef
+          def="PolicyClaimsRowSet(claimHelper)"/>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

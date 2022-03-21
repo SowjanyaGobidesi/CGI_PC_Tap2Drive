@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Coverable"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.CoverablePublicMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverableImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAbstractDomainMethods"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.impl.CoverableInternalMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverableImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"/>
+  <column
+    default="false"
+    desc="Whether or not the initial set of coverages has been created on this Coverable."
+    name="InitialCoveragesCreated"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Whether or not the initial set of exclusions has been created on this Coverable."
+    name="InitialExclusionsCreated"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Whether or not the initial set of conditions has been created on this Coverable."
+    name="InitialConditionsCreated"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Internal field for storing the reference date of this entity on bound policy periods."
+    name="ReferenceDateInternal"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    allowInitialValueForUpgrade="true"
+    desc="Preferred Coverage Currency for coverages associated with this coverable"
+    name="PreferredCoverageCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <fulldescription><![CDATA[
+    Delegate that can be implemented by any entity that coverages can attach to.
+  ]]></fulldescription>
+</delegate>

@@ -1,0 +1,36 @@
+package rules.Validation.UserValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("User Group Validation")
+internal class UserGroupValidation {
+  static function doCondition(user : entity.User) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(user : entity.User, actions : gw.rules.Action) {
+
+/*start00rule*/
+var groupTypes = new java.util.HashSet<GroupType>()
+switch (user.UserType) {
+  case TC_UNDERWRITER:
+    groupTypes.add(TC_BRANCHUW)
+    groupTypes.add(TC_REGIONUW)
+    groupTypes.add(TC_HOMEOFFICEUW)
+    break
+  case TC_ASSISTANT:
+  case TC_PRODUCER:
+    groupTypes.add(TC_PRODUCER)
+    break
+}
+if (groupTypes.size() > 0 and user.AllGroups.countWhere( \ o -> groupTypes.contains( (o as Group).GroupType) ) == 0) {
+  user.reject( null, null, TC_LOADSAVE, DisplayKey.get("Validation.User.UserGroup", user, user.UserType) )
+}
+/*end00rule*/
+
+  }
+}

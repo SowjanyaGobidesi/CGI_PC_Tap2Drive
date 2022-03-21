@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="OrganizationSelection"
+  extendable="true">
+  <foreignkey
+    desc="Organization Wrapper"
+    fkentity="Organization"
+    name="Organization"
+    nullok="true"/>
+  <fulldescription><![CDATA[Non-persistent entity containing a single Organization.]]></fulldescription>
+</nonPersistentEntity>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="CoveragePatternSearchResultsSelectLV">
+    <ExposeIterator
+      valueType="gw.api.productmodel.ClausePattern"
+      widget="CoveragePatternSearchResultsSelectLV"/>
+    <Require
+      name="coveragePatterns"
+      type="gw.api.productmodel.ClausePattern[]"/>
+    <RowIterator
+      editable="true"
+      elementName="pattern"
+      pickValue="pattern.PublicID"
+      value="coveragePatterns"
+      valueType="gw.api.productmodel.ClausePattern[]">
+      <Row>
+        <TextCell
+          id="Coverage"
+          label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Coverage&quot;)"
+          value="pattern.DisplayName"/>
+        <TextCell
+          id="Category"
+          label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+          value="pattern.CoverageCategory.DisplayName"/>
+        <TextCell
+          id="ClauseType"
+          label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+          value="pattern.ClauseName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

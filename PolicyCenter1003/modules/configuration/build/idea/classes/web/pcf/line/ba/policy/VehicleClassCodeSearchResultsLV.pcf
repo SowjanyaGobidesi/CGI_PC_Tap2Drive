@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="VehicleClassCodeSearchResultsLV"
+    stretch="true">
+    <Require
+      name="searchCriteria"
+      type="gw.api.domain.VehicleClassCodeSearchCriteria"/>
+    <Require
+      name="searchResults"
+      type="gw.api.domain.VehicleClassCodeSearchResult[]"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="vehicleClassCodeSearchResult"
+      pickValue="vehicleClassCodeSearchResult"
+      value="searchResults"
+      valueType="gw.api.domain.VehicleClassCodeSearchResult[]">
+      <Row>
+        <TextCell
+          id="ClassCode"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.ClassCode&quot;)"
+          value="vehicleClassCodeSearchResult.Code"
+          wrap="false"/>
+        <TypeKeyCell
+          grow="true"
+          id="Type"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Type&quot;)"
+          value="vehicleClassCodeSearchResult.Type"
+          valueType="typekey.VehicleType"
+          wrap="true"/>
+        <TypeKeyCell
+          grow="true"
+          id="Fleet"
+          label="DisplayKey.get(&quot;Web.Policy.BA.Fleet&quot;)"
+          value="vehicleClassCodeSearchResult.Fleet"
+          valueType="typekey.FleetType"
+          wrap="false"/>
+        <TypeKeyCell
+          id="YearsExperience"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.YearsExperience&quot;)"
+          value="vehicleClassCodeSearchResult.Experience"
+          valueType="typekey.CombinedDriverExp"
+          visible="searchCriteria.VehicleType == VehicleType.TC_PP"
+          wrap="true"/>
+        <TypeKeyCell
+          id="SizeClass"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.SizeClass&quot;)"
+          value="vehicleClassCodeSearchResult.SizeClass"
+          valueType="typekey.VehicleSizeClass"
+          visible="searchCriteria.VehicleType==VehicleType.TC_PUBLICTRANSPORT or searchCriteria.VehicleType==VehicleType.TC_COMMERCIAL"
+          wrap="true"/>
+        <TypeKeyCell
+          grow="true"
+          id="PrimaryUse"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.PrimaryUse&quot;)"
+          value="vehicleClassCodeSearchResult.PrimaryUse"
+          valueType="typekey.VehiclePrimaryUse"
+          visible="searchCriteria.VehicleType != VehicleType.TC_PP"
+          wrap="true"/>
+        <TypeKeyCell
+          grow="true"
+          id="Radius"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Radius&quot;)"
+          value="vehicleClassCodeSearchResult.Radius"
+          valueType="typekey.RadiusCode"
+          visible="searchCriteria.VehicleType != VehicleType.TC_SPECIAL"
+          wrap="false"/>
+        <TypeKeyCell
+          grow="true"
+          id="Industry"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.Industry&quot;)"
+          value="vehicleClassCodeSearchResult.Industry"
+          valueType="typekey.VehicleIndustry"
+          visible="(searchCriteria.VehicleType==VehicleType.TC_COMMERCIAL and searchCriteria.Radius != RadiusCode.TC_200PLUSMILES)"
+          wrap="true"/>
+        <TypeKeyCell
+          id="IndustryUse"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Vehicle.IndustryUse&quot;)"
+          value="vehicleClassCodeSearchResult.IndustryUse"
+          valueType="typekey.VehicleIndustryUse"
+          visible="(searchCriteria.VehicleType==VehicleType.TC_COMMERCIAL and searchCriteria.Radius != RadiusCode.TC_200PLUSMILES)"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    acceleratedMenuActions="PolicyFileAcceleratedMenuActions(policyPeriod, asOfDate)"
+    canVisit="policyPeriod.Promoted"
+    id="PolicyFile"
+    infoBar="PolicyFileMenuInfoBar(policyPeriod)"
+    menuActions="PolicyFileMenuActions(policyPeriod, asOfDate)"
+    menuLinksTitle="DisplayKey.get(&quot;Web.PolicyFile.ToolsMenuTitle&quot;)"
+    menuLinksTitleIcon="&quot;tools_nav&quot;"
+    menuLinksTitleIconType="svgFileName"
+    parent="PolicyAccountForward(policyPeriod.Policy.Account)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.LocationGroup.Title&quot;, policyPeriod.PolicyNumberDisplayString)">
+    <LocationEntryPoint
+      signature="PolicyFile(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <LocationEntryPoint
+      signature="PolicyFile(policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.EditEffectiveDate"
+      name="asOfDate"
+      type="java.util.Date"/>
+    <!-- Pages for all lines of business -->
+    <LocationRef
+      icon="&quot;summary&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get('Web.PolicyFile.PolicySummary.LocationGroup')"
+      location="PolicyFile_Summary(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="true"
+      icon="&quot;audit_schedule&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Audits(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;billing&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Billing(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;contacts&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Contacts(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="true"
+      icon="&quot;participants&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Participants(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;notes&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Notes(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;documents_nav&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Documents(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;policy_transactions&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Jobs(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="true"
+      icon="&quot;risk_analysis&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_RiskAnalysis(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;reinsurance&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Reinsurance(policyPeriod, asOfDate)"/>
+    <LocationRef
+      hideIfDisabled="false"
+      icon="&quot;history&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_History(policyPeriod, asOfDate)"/>
+    <LocationRef
+      icon="&quot;financial_transactions&quot;"
+      iconType="svgFileName"
+      location="PolicyFile_Transactions(policyPeriod, asOfDate)"/>
+  </LocationGroup>
+</PCF>

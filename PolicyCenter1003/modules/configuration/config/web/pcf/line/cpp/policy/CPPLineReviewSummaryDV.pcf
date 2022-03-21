@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CPPLineReviewSummaryDV">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="policyLine.Branch"
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="PrimaryNamedInsured"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.Insured&quot;)"
+        value="policyPeriod.PrimaryNamedInsured.DisplayName"/>
+      <InputSetRef
+        def="PolicyAddressDisplayInputSet(policyPeriod, true)"
+        id="PolicyAddress"/>
+      <DateInput
+        boldLabel="true"
+        id="DateQuoteNeeded"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.DateQuoteNeeded&quot;)"
+        value="policyPeriod.Submission.DateQuoteNeeded"
+        visible="policyPeriod.Job typeis Submission"/>
+    </InputColumn>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="Product"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.Product&quot;)"
+        value="policyPeriod.Policy.Product"
+        valueType="gw.api.productmodel.Product"/>
+      <TextInput
+        boldLabel="true"
+        id="PolicyLine"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.PolicyLine&quot;)"
+        value="policyLine.DisplayName"/>
+      <DateInput
+        boldLabel="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.EffectiveDate&quot;)"
+        value="policyPeriod.PeriodStart"/>
+      <DateInput
+        boldLabel="true"
+        id="ExpirationDate"
+        label="DisplayKey.get(&quot;Web.CommercialPackage.LineReview.ExpirationDate&quot;)"
+        value="policyPeriod.PeriodEnd"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

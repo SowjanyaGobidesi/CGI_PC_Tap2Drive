@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<import>
+  <HOPExclusionLookup public-id="zp5gs5fg4lu8p662rfqq27kf9mb">
+    <Availability>Available</Availability>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <ExclusionPatternCode>zt2gg2bpmg9au89d3g8rdfr72a9</ExclusionPatternCode>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPExclusionLookup>
+  <HOPExclusionLookup public-id="zj2j681o37p5idshej9ac95l9qb">
+    <Availability>Available</Availability>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <ExclusionPatternCode>zt2gg2bpmg9au89d3g8rdfr72a9</ExclusionPatternCode>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPExclusionLookup>
+</import>

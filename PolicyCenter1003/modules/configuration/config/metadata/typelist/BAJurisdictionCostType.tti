@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of cost at the BAJurisdiction level"
+  name="BAJurisdictionCostType">
+  <typecode
+    code="CancelShortRatePenalty"
+    desc="Penalty applied for short-rate cancellations."
+    name="Cancellation Short-Rate Penalty"/>
+  <typecode
+    code="StateTax"
+    desc="State Tax"
+    name="State Tax"
+    priority="2"/>
+</typelist>

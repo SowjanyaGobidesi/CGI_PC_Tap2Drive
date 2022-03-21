@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="Facultative">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.FacultativePublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.FacultativeImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.impl.FacultativeInternalMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.FacultativeImpl"/>
+  <monetaryamount
+    amountColumnName="CededPremium"
+    desc="Defined as an actual amount rather than a rate."
+    name="CededPremium"
+    nullok="true"
+    scaleToCurrency="true"/>
+  <column
+    default="0"
+    desc="True if flat premium is adjusted for each participant."
+    name="FlatPremiumAdjusted"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="0"
+    desc="Additional amount (expressed as % of ceded premium) that should be subtracted from direct premiums when determining the net premium for ceding to other agreements."
+    name="MarkUp"
+    nullok="true"
+    type="longpercentage"/>
+  <fulldescription><![CDATA[Facultative Reinsurance Agreement.]]></fulldescription>
+</delegate>

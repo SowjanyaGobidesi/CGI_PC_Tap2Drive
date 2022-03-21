@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    id="ViewChangeConflictsWorksheet"
+    tabLabel="myTabLabel"
+    title="myTitleLabel">
+    <LocationEntryPoint
+      signature="ViewChangeConflictsWorksheet(handler : gw.job.ApplyChangesResult, myTabLabel : String, myTitleLabel : String)"/>
+    <LocationEntryPoint
+      signature="ViewChangeConflictsWorksheet(handler : gw.job.ApplyChangesResult, myTabLabel : String, myTitleLabel : String, node: gw.api.tree.RowTreeRootNode )"/>
+    <Scope
+      location="JobForward(handler.Branch.Job)"/>
+    <Variable
+      name="handler"
+      type="gw.job.ApplyChangesResult"/>
+    <Variable
+      name="myTabLabel"
+      type="String"/>
+    <Variable
+      name="myTitleLabel"
+      type="String"/>
+    <Variable
+      name="node"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <Screen
+      id="PreemptionConflictScreen">
+      <Variable
+        initialValue="node ?: gw.diff.tree.DiffTree.recalculateRootNodeForPreemptionConflicts(handler.Branch, handler.Conflicts)"
+        name="rootNode"
+        type="gw.api.tree.RowTreeRootNode"/>
+      <Variable
+        initialValue="handler.Branch.Policy.Product.DiffTreeConfig"
+        name="diffTreeConfig"
+        type="java.lang.String"/>
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CloseButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="DifferencesPanelSet(TC_POLICYREVIEW, handler.Branch.BasedOn, handler.Branch, rootNode, diffTreeConfig) "/>
+    </Screen>
+  </Worksheet>
+</PCF>

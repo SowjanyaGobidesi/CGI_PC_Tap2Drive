@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPLineCov">
+  <Columns>
+    <Column
+      beanPath="HOPLineCov.Pattern"
+      name="pattern"/>
+  </Columns>
+  <DisplayName><![CDATA[pattern]]></DisplayName>
+</Entity>

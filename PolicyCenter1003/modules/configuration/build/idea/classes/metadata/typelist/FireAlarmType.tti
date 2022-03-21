@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="FireAlarmType" desc="Fire Alarm Type">
+  <typecode
+    code="none"
+    desc="No fire alarm"
+    name="None"
+    priority="10"/>
+  <typecode
+    code="local"
+    desc="Local fire alarm"
+    name="Alarm - Local"
+    priority="20"/>
+  <typecode
+    code="monitoringcenter"
+    desc="Fire alarm reports to monitoring center"
+    name="Alarm - To Monitoring Center"
+    priority="30"/>
+</typelist>

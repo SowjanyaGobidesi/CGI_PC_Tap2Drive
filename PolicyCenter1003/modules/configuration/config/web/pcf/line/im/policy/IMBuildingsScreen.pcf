@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="IMBuildingsScreen">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="imLine.UnusedLocations"
+      name="unusedLocations"
+      recalculateOnRefresh="true"
+      type="AccountLocation[]"/>
+    <Variable
+      initialValue="10"
+      name="maxLocNum"
+      type="int"/>
+    <Variable
+      initialValue="false"
+      name="allChecked"
+      type="boolean"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="imLine.Branch.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(imLine.Branch, imLine.Branch.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(imLine.Branch)"/>
+    <PanelRef
+      def="OOSEPanelSet(imLine.Branch, jobWizardHelper)"/>
+    <PanelRef
+      def="IMBuildingsAndLocationsLV(imLine, openForEdit, jobWizardHelper)">
+      <Toolbar>
+        <ToolbarButton
+          hideIfReadOnly="true"
+          id="addLocationsTB"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.AddLocation&quot;)"
+          visible="openForEdit">
+          <AddMenuItem
+            id="AddNewLocation"
+            iterator="IMBuildingsAndLocationsLV.IMBuildingsAndLocationsLV"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.CreateNewLocation&quot;)"
+            visible="openForEdit"/>
+          <MenuItem
+            id="addExistingLocations"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.ExistingLocation&quot;)">
+            <MenuItemIterator
+              elementName="unusedLocation"
+              id="UnsedLocationIterator"
+              value="gw.web.policy.LocationDisplayUtil.getLimitedNumberOfSortedLocations(unusedLocations, imLine, maxLocNum)"
+              valueType="entity.AccountLocation[]">
+              <IteratorSort
+                sortBy="unusedLocation.LocationNum"
+                sortOrder="1"/>
+              <MenuItem
+                action="IMLocationPopup.push(imLine, unusedLocation, openForEdit, true)"
+                id="UnassignedAccountLocation"
+                label="unusedLocation.DisplayName"/>
+            </MenuItemIterator>
+            <MenuItem
+              action="MoreIMLocationsPopup.push(imLine.Branch, unusedLocations, openForEdit)"
+              id="AddMoreLocations"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.MoreLocations&quot;)"
+              visible="unusedLocations.Count &gt; maxLocNum"/>
+          </MenuItem>
+        </ToolbarButton>
+        <IteratorButtons
+          addVisible="false"
+          iterator="IMBuildingsAndLocationsLV.IMBuildingsAndLocationsLV"
+          removeConfirmMessage="DisplayKey.get(&quot;Web.Policy.IM.Building.ConfirmRemoveBuilding&quot;)"
+          removeFlags="all removeAvailable"
+          removeLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.RemoveBuildings&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

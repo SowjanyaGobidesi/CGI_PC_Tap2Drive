@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- ===== Financials ===== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A Inland Marine unit of price for a period of time that should not be broken up any further."
+  effDatedBranchType="PolicyPeriod"
+  entity="IMCost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="imcost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.im.financials.IMCostAdapter"/>
+  <foreignkey
+    fkentity="InlandMarineLine"
+    name="InlandMarineLine"
+    nullok="false"/>
+  <array
+    arrayentity="IMTransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

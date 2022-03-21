@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="true"
+    canEdit="true"
+    id="BuildingSearchPopup"
+    returnType="CPBuilding"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.CopyPolicyData.CommercialProperty.Buildings.CopyCoverages.BuildingSearchPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="BuildingSearchPopup(period : PolicyPeriod)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="findAllSelectableBuildings(period)"
+      name="buildings"
+      type="entity.CPBuilding[]"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelVisible="true"
+          editVisible="false"
+          showUpdateConfirmMessage="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <ListViewPanel>
+        <RowIterator
+          checkBoxVisible="false"
+          editable="true"
+          elementName="building"
+          id="buildingIterator"
+          pageSize="20"
+          pickValue="building"
+          value="buildings"
+          valueType="entity.CPBuilding[]">
+          <ToolbarFilter
+            cacheOptions="false"
+            id="BuildingFromFilter"
+            label="DisplayKey.get(&quot;Web.CopyPolicyData.CommercialProperty.Buildings.DisplayLocations&quot;)"
+            name="cPBuildingFilterFrom">
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.CopyPolicyData.CommercialProperty.Buildings.AllLocations&quot;), \ b -&gt; true)"/>
+            <ToolbarFilterOptionGroup
+              filters="(new gw.lob.cp.CPBuildingFilterSet(buildings)).createBuildingFilters()"/>
+          </ToolbarFilter>
+          <Row>
+            <TextCell
+              align="left"
+              id="BuildingDescription"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.Building.Description&quot;)"
+              sortBy="building.DisplayName"
+              value="building"
+              valueType="entity.CPBuilding"/>
+            <TextCell
+              id="BuildingLocation"
+              label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location&quot;)"
+              sortBy="building.CPLocation.Location.LocationNum"
+              value="building.CPLocation"
+              valueType="entity.CPLocation"/>
+            <TextCell
+              align="right"
+              id="BldgLimit"
+              label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BuildingLimit&quot;)"
+              sortBy="building.CPBldgCov.CPBldgCovLimitTerm.Value"
+              value="building.CPBldgCov.CPBldgCovLimitTerm.DisplayValue"/>
+            <TextCell
+              align="right"
+              id="BusPersPropLimit"
+              label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BuildingBPPLimit&quot;)"
+              sortBy="building.CPBPPCov.CPBPPCovLimitTerm.Value"
+              value="building.CPBPPCov.CPBPPCovLimitTerm.DisplayValue"/>
+            <TextCell
+              align="right"
+              id="BusIncome"
+              label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.BusinessIncomeLimit&quot;)"
+              sortBy="building.BusIncomeLimitSum"
+              value="building.BusIncomeLimitSumDisplay"/>
+            <TextCell
+              align="right"
+              id="ExtraExpense"
+              label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.ExtraExpenseLimit&quot;)"
+              sortBy="building.CPBldgExtraExpenseCov.CPBldgExtraExpenseCovLimitTerm.Value"
+              value="building.CPBldgExtraExpenseCov.CPBldgExtraExpenseCovLimitTerm.DisplayValue"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function findAllSelectableBuildings(policyPeriod : PolicyPeriod) :CPBuilding[] {
+  var sortedBuildings : java.util.List<CPBuilding> = {}
+  var sortedLocations = policyPeriod.CPLine.CPLocations.sortBy(\ l -> l.Location.LocationNum)
+  sortedLocations.each(\ l -> sortedBuildings.addAll(l.Buildings.sortBy(\ b -> b.Building.BuildingNum).toList()))
+  return sortedBuildings.toArray(new CPBuilding[sortedBuildings.Count])
+}]]></Code>
+  </Popup>
+</PCF>

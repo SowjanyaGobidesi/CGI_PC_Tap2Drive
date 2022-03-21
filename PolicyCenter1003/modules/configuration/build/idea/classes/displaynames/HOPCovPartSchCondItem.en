@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPCovPartSchCondItem">
+  <Columns>
+    <Column
+      beanPath="HOPCovPartSchCondItem.Schedule"
+      name="schedule"/>
+  </Columns>
+  <DisplayName>schedule.DisplayName</DisplayName>
+</Entity>

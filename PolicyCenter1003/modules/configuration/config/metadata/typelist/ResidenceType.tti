@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="ResidenceType"
+  name="ResidenceType">
+  <typecode
+    code="Fam1"
+    desc="Single Family"
+    name="1 Family Residence"
+    priority="10">
+  </typecode>
+  <typecode
+    code="Fam2"
+    desc="Duplex"
+    name="2 Family Residence"
+    priority="20">
+  </typecode>
+  <typecode
+    code="Fam3"
+    desc="Triplex"
+    name="3 Family Residence"
+    priority="30">
+  </typecode>
+  <typecode
+    code="Fam4"
+    desc="Quadplex"
+    name="4 Family Residence"
+    priority="40">
+  </typecode>
+  <typecode
+    code="Fam5"
+    desc="More than 4"
+    name="5+ Family Residence"
+    priority="50">
+  </typecode>
+  <typecode
+    code="Apartment"
+    desc="Apartment"
+    name="Apartment"
+    priority="60">
+  </typecode>
+  <typecode
+    code="Condo"
+    desc="Condominium"
+    name="Condominium"
+    priority="70">
+  </typecode>
+  <typecode
+    code="Mobile"
+    desc="Mobile Home"
+    name="Mobile Home"
+    priority="100">
+  </typecode>
+</typelist>

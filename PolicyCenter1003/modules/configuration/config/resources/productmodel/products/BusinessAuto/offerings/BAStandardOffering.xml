@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Offering
+  codeIdentifier="BAStandardOffering"
+  priority="10"
+  product="BusinessAuto"
+  public-id="BAStandardOffering"/>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A transaction for the Personal Auto line"
+  effDatedBranchType="PolicyPeriod"
+  entity="PATransaction"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="patransaction"
+  type="effdated">
+  <implementsEntity
+    name="Transaction"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.TransactionAdapter"
+    impl="gw.lob.pa.financials.PATransactionAdapter"/>
+  <foreignkey
+    fkentity="PACost"
+    name="PACost"
+    nonEffDated="true"
+    nullok="false"/>
+  <index
+    desc="Perf covering index for finding transaction by cost and branch."
+    expectedtobecovering="true"
+    name="patransperf2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PACost"/>
+    <indexcol
+      keyposition="2"
+      name="BranchID"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+</entity>

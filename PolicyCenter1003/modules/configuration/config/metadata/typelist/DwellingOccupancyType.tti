@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Dwelling Occupancy Type"
+  name="DwellingOccupancyType">
+  <typecode
+    code="owner"
+    desc="Owner Occupied"
+    name="Owner Occupied"
+    priority="10">
+  </typecode>
+  <typecode
+    code="tenant"
+    desc="Tenant Occupied"
+    name="Tenant Occupied"
+    priority="20">
+  </typecode>
+  <typecode
+    code="vacant"
+    desc="Vacant"
+    name="Vacant"
+    priority="30">
+  </typecode>
+  <typecode
+    code="uoccupied"
+    desc="Unoccupied"
+    name="Unoccupied"
+    priority="40"/>
+  <typecode
+    code="inconst"
+    desc="Under construction"
+    name="Under Construction"
+    priority="50">
+  </typecode>
+</typelist>

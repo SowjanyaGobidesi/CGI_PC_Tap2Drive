@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PremiumsScreenDV"
+    mode="PremiumReport">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="audit"
+      type="Audit"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.Results&quot;, audit.AuditInformation.AuditScheduleType)"/>
+      <MonetaryAmountInput
+        align="right"
+        formatType="currency"
+        id="TotalAuditPremium"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.TotalPremium&quot;)"
+        value="policyPeriod.TotalPremiumRPT"/>
+      <MonetaryAmountInput
+        align="right"
+        formatType="currency"
+        id="TaxAndSurcharge"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.Taxes&quot;)"
+        value="policyPeriod.TaxAndSurchargesRPT"/>
+      <MonetaryAmountInput
+        align="right"
+        formatType="currency"
+        id="TotalAuditCost"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.TotalCost&quot;)"
+        value="policyPeriod.TotalCostRPT"/>
+      <MonetaryAmountInput
+        align="right"
+        formatType="currency"
+        id="PaymentReceived"
+        label="DisplayKey.get(&quot;Web.AuditWizard.PaymentReceived&quot;)"
+        value="audit.PaymentReceived == null ? 0bd.ofCurrency(policyPeriod.PreferredSettlementCurrency) : audit.PaymentReceived"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.Results.AdditionalInfo&quot;)"/>
+      <TextAreaInput
+        editable="true"
+        id="Comment"
+        label="DisplayKey.get(&quot;Web.AuditWizard.Premiums.Summary.Comments&quot;)"
+        numRows="5"
+        value="audit.Description"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="TrendAnalysisInputSet(policyPeriod, false)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

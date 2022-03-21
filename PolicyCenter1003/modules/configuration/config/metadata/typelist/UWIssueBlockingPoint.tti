@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The points at which a UWIssue can block progress of a job.  When checking against a particular blocking point, any issues with a higher priority will be considered to also block, i.e. issues that block at quote will also block at bind.  NonBlocking must always remain at priority 0."
+  name="UWIssueBlockingPoint">
+  <typecode
+    code="Rejected"
+    desc="Indicates that an issue has been rejected."
+    name="Rejected"
+    priority="900"/>
+  <typecode
+    code="BlocksQuote"
+    desc="Indicates that an issue will prevent quoting the PolicyPeriod."
+    name="Blocks Quote"
+    priority="400"/>
+  <typecode
+    code="BlocksRateRelease"
+    desc="Indicates that an issue will prevent releasing a PolicyPeriod rate."
+    name="Blocks Rate Release"
+    priority="350"/>
+  <typecode
+    code="BlocksQuoteRelease"
+    desc="Indicates that an issue will prevent releasing a PolicyPeriod quote."
+    name="Blocks Quote Release"
+    priority="300"/>
+  <typecode
+    code="BlocksBind"
+    desc="Indicates that an issue will prevent binding the PolicyPeriod."
+    name="Blocks Bind"
+    priority="200"/>
+  <typecode
+    code="BlocksIssuance"
+    desc="Indicates that an issue will prevent issuing the PolicyPeriod."
+    name="Blocks Issuance"
+    priority="100"/>
+  <typecode
+    code="NonBlocking"
+    desc="Indicates that an issue will not block progress and is merely informational."
+    name="Non-Blocking"
+    priority="0"/>
+</typelist>

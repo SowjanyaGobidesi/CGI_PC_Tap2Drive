@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://guidewire.com/pc/integration/BillingAPI/entity" targetNamespace="http://guidewire.com/pc/integration/BillingAPI/entity">
+  <xs:element name="FinalAuditInfo" type="FinalAuditInfo"/>
+  <xs:complexType name="FinalAuditInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProducerCodeInfo" type="ProducerCodeInfo"/>
+  <xs:complexType name="ProducerCodeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="PublicID" type="xs:string"/>
+      <xs:element minOccurs="1" name="Code" type="xs:string"/>
+      <xs:element minOccurs="1" name="Active" type="xs:boolean"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CommissionPlanIDs" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Currencies" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CommissionPlanInfos" type="CommissionPlanInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReinstatementInfo" type="ReinstatementInfo"/>
+  <xs:complexType name="ReinstatementInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CommissionPlanInfo" type="CommissionPlanInfo"/>
+  <xs:complexType name="CommissionPlanInfo">
+    <xs:complexContent>
+      <xs:extension base="PlanCurrencyInfo">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="AllowedTiers" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NewProducerCodeInfo" type="NewProducerCodeInfo"/>
+  <xs:complexType name="NewProducerCodeInfo">
+    <xs:complexContent>
+      <xs:extension base="ProducerCodeInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ProducerPublicID" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PCContactInfo" type="PCContactInfo"/>
+  <xs:complexType name="PCContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PublicID" type="xs:string"/>
+      <xs:element minOccurs="1" name="AddressBookUID" type="xs:string"/>
+      <xs:element minOccurs="1" name="ContactType" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" type="xs:string"/>
+      <xs:element minOccurs="0" name="NameKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="FirstNameKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="LastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="LastNameKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="Particle" type="xs:string"/>
+      <xs:element minOccurs="0" name="CellPhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="CellPhoneCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="CellPhoneExtension" type="xs:string"/>
+      <xs:element minOccurs="0" name="FaxPhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="FaxPhoneCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="FaxPhoneExtension" type="xs:string"/>
+      <xs:element minOccurs="0" name="HomePhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="HomePhoneCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="HomePhoneExtension" type="xs:string"/>
+      <xs:element minOccurs="0" name="WorkPhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="WorkPhoneCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="WorkPhoneExtension" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrimaryPhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="EmailAddress1" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Addresses" type="AddressInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AccountNumbers" type="xs:string"/>
+      <xs:element minOccurs="0" name="AccountName" type="xs:string"/>
+      <xs:element minOccurs="0" name="AccountNameKanji" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewInvoiceStream" type="NewInvoiceStream"/>
+  <xs:complexType name="NewInvoiceStream">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="Interval" type="xs:string"/>
+      <xs:element minOccurs="1" name="PaymentMethod" type="xs:string"/>
+      <xs:element minOccurs="1" name="DueDateBilling" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="FirstDayOfMonth" type="xs:int"/>
+      <xs:element minOccurs="0" name="SecondDayOfMonth" type="xs:int"/>
+      <xs:element minOccurs="0" name="DayOfWeek" type="xs:string"/>
+      <xs:element minOccurs="0" name="AnchorDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="PaymentInstrumentID" type="xs:string"/>
+      <xs:element minOccurs="0" name="UnappliedDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="UnappliedFundID" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddressInfo" type="AddressInfo"/>
+  <xs:complexType name="AddressInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="AddressBookUID" type="xs:string"/>
+      <xs:element minOccurs="0" name="Primary" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="AddressLine1" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine1Kanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine2" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine2Kanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="City" type="xs:string"/>
+      <xs:element minOccurs="0" name="CityKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="State" type="xs:string"/>
+      <xs:element minOccurs="0" name="PostalCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="Country" type="xs:string"/>
+      <xs:element minOccurs="0" name="CEDEX" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="CEDEXBureau" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PCPolicyPeriodInfo" type="PCPolicyPeriodInfo"/>
+  <xs:complexType name="PCPolicyPeriodInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TermNumber" type="xs:int"/>
+      <xs:element minOccurs="0" name="PolicyNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="PCPolicyPublicID" type="xs:string"/>
+      <xs:element minOccurs="0" name="TermConfirmed" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlanInfo" type="PlanInfo"/>
+  <xs:complexType name="PlanInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PublicID" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentAllocationPlanInfo" type="PaymentAllocationPlanInfo"/>
+  <xs:complexType name="PaymentAllocationPlanInfo">
+    <xs:complexContent>
+      <xs:extension base="PlanInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PlanCurrencyInfo" type="PlanCurrencyInfo"/>
+  <xs:complexType name="PlanCurrencyInfo">
+    <xs:complexContent>
+      <xs:extension base="PlanInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="Currency" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PolicyChangeInfo" type="PolicyChangeInfo"/>
+  <xs:complexType name="PolicyChangeInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="JurisdictionCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="PeriodStart" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="PeriodEnd" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="PrimaryNamedInsuredContact" type="PCContactInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BillingInstructionInfo" type="BillingInstructionInfo"/>
+  <xs:complexType name="BillingInstructionInfo">
+    <xs:complexContent>
+      <xs:extension base="PCPolicyPeriodInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ChargeInfos" type="ChargeInfo"/>
+          <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="HasScheduledFinalAudit" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="DepositRequirement" type="xs:string"/>
+          <xs:element minOccurs="0" name="OfferNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AcctBillingInstructionInfo" type="AcctBillingInstructionInfo"/>
+  <xs:complexType name="AcctBillingInstructionInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="AccountNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ChargeInfos" type="ChargeInfo"/>
+      <xs:element minOccurs="1" name="Currency" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RenewalInfo" type="RenewalInfo"/>
+  <xs:complexType name="RenewalInfo">
+    <xs:complexContent>
+      <xs:extension base="IssuePolicyInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PriorTermNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="PriorPolicyNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ChargeInfo" type="ChargeInfo"/>
+  <xs:complexType name="ChargeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="Amount" type="xs:string"/>
+      <xs:element minOccurs="1" name="ChargePatternCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="ChargeGroup" type="xs:string"/>
+      <xs:element minOccurs="0" name="WrittenDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="RecaptureUnappliedFundID" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ChargeCommissionRateOverrideInfos" type="ChargeCommissionRateOverrideInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChargeCommissionRateOverrideInfo" type="ChargeCommissionRateOverrideInfo"/>
+  <xs:complexType name="ChargeCommissionRateOverrideInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="Role" type="xs:string"/>
+      <xs:element minOccurs="1" name="Rate" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentPlanInfo" type="PaymentPlanInfo"/>
+  <xs:complexType name="PaymentPlanInfo">
+    <xs:complexContent>
+      <xs:extension base="PlanCurrencyInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Reporting" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="DownPayment" type="xs:decimal"/>
+          <xs:element minOccurs="0" name="Installment" type="xs:decimal"/>
+          <xs:element minOccurs="0" name="Total" type="xs:decimal"/>
+          <xs:element minOccurs="0" name="Notes" type="xs:string"/>
+          <xs:element minOccurs="0" name="InvoiceFrequency" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="AllowedPaymentMethods" type="xs:string"/>
+          <xs:element minOccurs="0" name="BillDateOrDueDateBilling" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PCAccountInfo" type="PCAccountInfo"/>
+  <xs:complexType name="PCAccountInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="AccountNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="AccountName" type="xs:string"/>
+      <xs:element minOccurs="0" name="AccountNameKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="CustomerServiceTier" type="xs:string"/>
+      <xs:element minOccurs="1" name="InsuredIsBilling" type="xs:boolean"/>
+      <xs:element minOccurs="1" name="InsuredContact" type="PCContactInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="BillingContacts" type="PCContactInfo"/>
+      <xs:element minOccurs="0" name="PaymentAllocationPlanPublicID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CancelPolicyInfo" type="CancelPolicyInfo"/>
+  <xs:complexType name="CancelPolicyInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CancellationType" type="xs:string"/>
+          <xs:element minOccurs="0" name="CancellationReason" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PremiumReportInfo" type="PremiumReportInfo"/>
+  <xs:complexType name="PremiumReportInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="AuditPeriodStartDate" type="xs:dateTime"/>
+          <xs:element minOccurs="1" name="AuditPeriodEndDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="PaymentReceived" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CollateralInfo" type="CollateralInfo"/>
+  <xs:complexType name="CollateralInfo">
+    <xs:complexContent>
+      <xs:extension base="AcctBillingInstructionInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CollateralRequirementID" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RewriteInfo" type="RewriteInfo"/>
+  <xs:complexType name="RewriteInfo">
+    <xs:complexContent>
+      <xs:extension base="RenewalInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AgencyBillPlanInfo" type="AgencyBillPlanInfo"/>
+  <xs:complexType name="AgencyBillPlanInfo">
+    <xs:complexContent>
+      <xs:extension base="PlanCurrencyInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="IssuePolicyInfo" type="IssuePolicyInfo"/>
+  <xs:complexType name="IssuePolicyInfo">
+    <xs:complexContent>
+      <xs:extension base="PolicyChangeInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="PaymentPlanPublicId" type="xs:string"/>
+          <xs:element minOccurs="0" name="ModelDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="AssignedRisk" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="UWCompanyCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="BillingMethodCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="ProductCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="ProducerCodeOfRecordId" type="xs:string"/>
+          <xs:element minOccurs="0" name="AltBillingAccountNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="InvoiceStreamId" type="xs:string"/>
+          <xs:element minOccurs="0" name="NewInvoiceStream" type="NewInvoiceStream"/>
+          <xs:element minOccurs="1" name="Currency" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PCProducerInfo" type="PCProducerInfo"/>
+  <xs:complexType name="PCProducerInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="PublicID" type="xs:string"/>
+      <xs:element minOccurs="0" name="ProducerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="ProducerNameKanji" type="xs:string"/>
+      <xs:element minOccurs="0" name="Tier" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrimaryContact" type="PCContactInfo"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AgencyBillPlanIDs" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Currencies" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AgencyBillPlanInfos" type="AgencyBillPlanInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PCNewProducerInfo" type="PCNewProducerInfo"/>
+  <xs:complexType name="PCNewProducerInfo">
+    <xs:complexContent>
+      <xs:extension base="PCProducerInfo">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="PreferredCurrency" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PolicyPeriodGeneralInfo" type="PolicyPeriodGeneralInfo"/>
+  <xs:complexType name="PolicyPeriodGeneralInfo">
+    <xs:complexContent>
+      <xs:extension base="BillingInstructionInfo">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AccountGeneralInfo" type="AccountGeneralInfo"/>
+  <xs:complexType name="AccountGeneralInfo">
+    <xs:complexContent>
+      <xs:extension base="AcctBillingInstructionInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="BillingInstructionDate" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

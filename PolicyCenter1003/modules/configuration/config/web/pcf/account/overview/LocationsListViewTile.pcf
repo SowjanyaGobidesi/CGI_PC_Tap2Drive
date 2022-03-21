@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    id="LocationsListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.Locations')"
+    viewMoreAction="AccountFile_Locations.push(account)"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="locationHelper.ViewMoreVisible">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.location.LocationHelper(account)"
+      name="locationHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.web.dashboard.ui.location.LocationHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="location"
+      value="locationHelper.Locations"
+      valueType="entity.AccountLocation[]">
+      <Row>
+        <TextCell
+          action="AccountFile_Locations.push(account, location)"
+          grow="true"
+          id="name"
+          label="DisplayKey.get('Web.Dashboard.Tile.Locations.Name')"
+          value="locationHelper.getName(location)"/>
+        <TextCell
+          grow="true"
+          id="address"
+          label="DisplayKey.get('Web.Dashboard.Tile.Locations.Address')"
+          value="locationHelper.getAddress(location)"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

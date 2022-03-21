@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ProfessionalDiscount" desc="Professional Discount">
+  <typecode
+    code="Astronomers_Astrophysicists"
+    desc="Astronomers/Astrophysicists"
+    name="Astronomers/Astrophysicists"/>
+  <typecode
+    code="Educators"
+    desc="Educators - Elementary through High School"
+    name="Educators"/>
+  <typecode
+    code="FirstResponders"
+    desc="First Responders"
+    name="First Responders"/>
+  <typecode
+    code="HealthCareProfessionals"
+    desc="Health Care Professionals"
+    name="Health Care Professionals"/>
+  <typecode
+    code="Librarians"
+    desc="Librarians"
+    name="Librarians"/>
+  <typecode
+    code="MaritimeCrew"
+    desc="Maritime Crew"
+    name="Maritime Crew"/>
+  <typecode
+    code="RailRoadTrainCrew"
+    desc="RailRoad Train Crew"
+    name="RailRoad Train Crew"/>
+  <typecode
+    code="SoftwareProfessionals"
+    desc="Software Professionals"
+    name="Software Professionals"/>
+</typelist>

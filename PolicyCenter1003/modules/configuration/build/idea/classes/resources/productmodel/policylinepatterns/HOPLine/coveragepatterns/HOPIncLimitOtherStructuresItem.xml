@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPIncLimitOtherStructuresItem"
+  coverageCategory="z1agog6qchb3edjifpa79drhgn9"
+  coverageSubtype="HOPDwellSchCovItemCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellScheduleItemCov"
+  owningEntityType="HOPDwellScheduleCovItem"
+  policyLinePattern="HOPLine"
+  priority="6900"
+  public-id="z1fhulh3d21qr4o5ktk2e54ndpb"
+  referenceDateByType="PolicyTerm">
+  <CovTerms>
+    <DirectCovTermPattern
+      aggregationModel="po"
+      codeIdentifier="HOPIncLimitOtherStructuresItemLimit"
+      coverageColumn="DirectTerm1"
+      lookupTableName="HOPDwellScheduleItemCovTerm"
+      modelType="Limit"
+      priority="100"
+      public-id="zagjum6b0mkagbks5gmb3gc58vb"
+      required="true"
+      restrictionModel="bld"
+      valueType="money">
+      <LimitsSet/>
+    </DirectCovTermPattern>
+  </CovTerms>
+  <Schedules/>
+</CoveragePattern>

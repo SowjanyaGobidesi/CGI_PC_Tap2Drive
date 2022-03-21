@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ScheduledItemCovTermInput"
+    mode="bit">
+    <Require
+      name="covTerm"
+      type="gw.api.domain.covterm.CovTerm"/>
+    <Variable
+      initialValue="covTerm as gw.api.domain.covterm.GenericCovTerm&lt;Boolean&gt;"
+      name="bitCovTerm"
+      type="gw.api.domain.covterm.GenericCovTerm&lt;Boolean&gt;"/>
+    <BooleanRadioCell
+      editable="true"
+      id="TermValue"
+      required="bitCovTerm.Pattern.Required"
+      value="bitCovTerm.Value"/>
+  </ModalCell>
+</PCF>

@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Key to a RuleContextDefinition"
+  name="RuleContextDefinitionKey">
+  <typecode
+    code="GenericPolicy"
+    name="Generic Policy"
+    desc="Generic rule context for a policy.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PAPolicy"
+    name="Personal Auto Policy"
+    desc="Specific rule context for Personal Auto Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PAPolicyVehicleIterative"
+    name="Personal Auto Policy - For Each Vehicle"
+    desc="Personal Auto Line context, executed for each vehicle.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="PAPolicyDriverIterative"
+    name="Personal Auto Policy - For Each Driver"
+    desc="Personal Auto Line context, executed for each driver.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="CPPolicy"
+    name="Commercial Property Policy"
+    desc="Specific rule context for Commercial Property Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="CPPolicyLocationIterative"
+    name="Commercial Property Policy - For Each Location"
+    desc="Commercial Property Line context, executed for each location.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="CPPolicyBuildingIterative"
+    name="Commercial Property Policy - For Each Building"
+    desc="Commercial Property Line context, executed for each building.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BAPolicy"
+    name="Commercial Auto Policy"
+    desc="Specific rule context for Commercial Auto Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BAPolicyVehicleIterative"
+    name="Commercial Auto Policy - For Each Vehicle"
+    desc="Commercial Auto Line context, executed for each vehicle.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BAPolicyDriverIterative"
+    name="Commercial Auto Policy - For Each Driver"
+    desc="Commercial Auto Line context, executed for each driver.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="WCPolicy"
+    name="Workers' Comp Policy"
+    desc="Specific rule context for Workers' Comp Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="WCPolicyCoveredEmployeeIterative"
+    name="Workers' Comp Policy - For Each WCCoveredEmployee"
+    desc="Workers' Comp Line context, executed for each WCCoveredEmployee.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="GLPolicy"
+    name="General Liability Policy"
+    desc="Specific rule context for General Liability Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="GLPolicyExposureIterative"
+    name="General Liability Policy - For Each Exposure"
+    desc="General Liability Line context, executed for each exposure.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicy"
+    name="Inland Marine Policy"
+    desc="Specific rule context for Inland Marine Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicyLocationIterative"
+    name="Inland Marine Policy - For Each Location"
+    desc="Inland Marine Line context, executed for each location.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicyBuildingIterative"
+    name="Inland Marine Policy - For Each Building"
+    desc="Inland Marine Line context, executed for each building.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicyAccountsReceivableIterative"
+    name="Inland Marine Policy - For Each AccountsReceivable"
+    desc="Inland Marine Line context, executed for each AccountsReceivable.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicyIMSignIterative"
+    name="Inland Marine Policy - For Each IMSign"
+    desc="Inland Marine Line context, executed for each IMSign.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="IMPolicyContractorsEquipmentIterative"
+    name="Inland Marine Policy - For Each ContractorsEquipment"
+    desc="Inland Marine Line context, executed for each ContractorsEquipment.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BOPPolicy"
+    name="Business Owners Policy"
+    desc="Specific rule context for Business Owners Line.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BOPPolicyLocationIterative"
+    name="Business Owners Policy - For Each Location"
+    desc="Business Owners Line context, executed for each location.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="BOPPolicyBuildingIterative"
+    name="Business Owners Policy - For Each Building"
+    desc="Business Owners Line context, executed for each building.">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicy"
+    desc="Specific rule context for Homeowners Line."
+    name="Homeowners Policy">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicyDwellingIterative"
+    desc="Homeowners Line context, executed for each dwelling."
+    name="Homeowners Policy - For Each Dwelling">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicyDwellingHazardIterative"
+    desc="Homeowners Line context, executed for each dwelling hazard."
+    name="Homeowners Policy - For Each Dwelling hazard">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicySchedPersPropertyItemIterative"
+    desc="Homeowners Line context, executed for each scheduled personal property item."
+    name="Homeowners Policy - For Each Scheduled Personal Property Item">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicyDwellingAnimalIterative"
+    desc="Homeowners Line context, executed for each dwelling animal."
+    name="Homeowners Policy - For Each Dwelling animal">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="HOPPolicyCovPartIterative"
+    desc="Homeowners Line context, executed for each coverage part."
+    name="Homeowners Policy - For Each Coverage Part">
+    <category
+      code="UWRule"
+      typelist="Rule"/>
+  </typecode>
+</internaltypelistextension>

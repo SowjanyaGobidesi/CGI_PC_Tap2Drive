@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Account" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include
+      path="AccountNumber"
+      type="java.lang.String"
+      xmlType="xs:string"
+      propertyInclusionType="NORMAL">
+      <label>BasicDocumentModel</label>
+    </include>
+  </includes>
+</gx-model>

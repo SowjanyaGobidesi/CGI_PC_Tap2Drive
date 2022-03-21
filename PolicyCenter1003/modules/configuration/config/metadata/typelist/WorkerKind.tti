@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="What kind of worker?"
+  final="false"
+  name="WorkerKind"/>

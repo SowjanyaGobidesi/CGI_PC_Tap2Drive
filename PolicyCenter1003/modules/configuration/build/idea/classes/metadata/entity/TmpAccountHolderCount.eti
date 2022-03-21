@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to populate column from the AccountHolderCount batch process."
+  entity="TmpAccountHolderCount"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  table="tmpAccountHolderCount"
+  temporary="true"
+  type="nonkeyable">
+  <column
+    desc="Contact ID"
+    exportable="false"
+    name="ID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="Current (possibly incorrect) value of AccountHolderCount, denormed from Contact"
+    exportable="false"
+    name="CurrentValue"
+    nullok="false"
+    type="integer">
+  </column>
+  <column
+    desc="Number of Accounts on which this Contact is the AccountHolder"
+    exportable="false"
+    name="ActualValue"
+    nullok="false"
+    type="integer">
+  </column>
+  <index
+    desc="Improves performance of AccountHolderCountBatchProcess"
+    name="ahcount1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+  </index>
+</entity>

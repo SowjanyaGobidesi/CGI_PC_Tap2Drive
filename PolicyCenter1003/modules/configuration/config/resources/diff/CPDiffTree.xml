@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<DiffTree
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/difftree.xsd">
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyInfo')"
+    sortorder="1">
+    <RootProperties
+      includefromtype="PolicyPeriod"
+      sortorder="1"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyPriNamedInsured', ENTITY.DisplayName)"
+      sortorder="2"
+      type="PolicyPriNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlNamedInsured', ENTITY.DisplayName)"
+      sortorder="3"
+      type="PolicyAddlNamedInsured"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlInterest', ENTITY.DisplayName)"
+      showadds="false"
+      showremoves="false"
+      sortorder="4"
+      type="PolicyAddlInterest"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyBillingContact', ENTITY.DisplayName)"
+      sortorder="5"
+      type="PolicyBillingContact"/>
+    <RootEntity
+      label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddress', ENTITY.AddressType)"
+      sortorder="6"
+      type="PolicyAddress"/>
+    <RootProperties
+      includefromtype="EffectiveDatedFields"
+      sortorder="7"/>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.LocationsAndBuildings')"
+    sortorder="2">
+    <RootEntity
+      sortorder="1"
+      type="CPLocation">
+      <Properties
+        includefromtype="PolicyLocation"
+        parentpath="ENTITY.Branch.CPLine.CPLocations.firstWhere(\ cpl-&gt;cpl.Location==ENTITY)"
+        sortorder="1"/>
+      <Properties
+        includefromtype="CPLocation"
+        parentpath="ENTITY"
+        sortorder="2"/>
+      <Entity
+        parentpath="ENTITY.CPLocation"
+        sortorder="3"
+        type="CPBuilding">
+        <Properties
+          includefromtype="Building"
+          parentpath="ENTITY.Branch.CPLine.CPLocations*.Buildings.firstWhere(\b-&gt;b.Building == ENTITY)"
+          sortorder="1"/>
+        <Properties
+          includefromtype="BuildingImprovement"
+          parentpath="ENTITY.Branch.CPLine.CPLocations*.Buildings.firstWhere(\b-&gt;b.Building == ENTITY.Building)"
+          sortorder="2">
+          <PropertyDisplay
+            label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.BuildingImprovements', ENTITY.BuildingImprType.DisplayName)"
+            propertyname="YearAdded"/>
+        </Properties>
+        <Properties
+          includefromtype="BuildingSide"
+          parentpath="ENTITY.Branch.CPLine.CPLocations*.Buildings.firstWhere(\b-&gt;b.Building == ENTITY.Building)"
+          sortorder="3">
+          <PropertyDisplay
+            label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.BuildingSides', ENTITY.BuildingSideType.DisplayName)"
+            propertyname="Description"/>
+        </Properties>
+        <Properties
+          includefromtype="CPBuilding"
+          parentpath="ENTITY"
+          sortorder="4"/>
+        <SubSection
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Coverages')"
+          sortorder="5">
+          <Entity
+            parentpath="ENTITY.CPBuilding"
+            type="CPBuildingCov"/>
+        </SubSection>
+        <Entity
+          label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlInterestDetail', ENTITY.DisplayName, ENTITY.AdditionalInterestType)"
+          parentpath="ENTITY.CPBuilding"
+          sortorder="6"
+          type="CPBldgAddlInterest">
+          <Properties
+            includefromtype="CPBldgAddlInterest"
+            parentpath="ENTITY">
+            <PropertyDisplay
+              propertyname="AdditionalInterestType"/>
+          </Properties>
+        </Entity>
+      </Entity>
+    </RootEntity>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.CP.Blanket')"
+    sortorder="3">
+    <RootEntity
+      type="CPBlanket">
+      <Properties
+        includefromtype="CPBlanket"
+        parentpath="ENTITY"
+        sortorder="1"/>
+      <Entity
+        parentpath="ENTITY.CPBlanket"
+        sortorder="2"
+        type="entity.CPBlanketCov"/>
+    </RootEntity>
+  </Section>
+  <Section
+    label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.Modifiers')"
+    sortorder="4">
+    <RootEntity
+      type="CPModifier">
+      <Entity
+        parentpath="ENTITY.CPModifier"
+        type="CPRateFactor"/>
+    </RootEntity>
+  </Section>
+</DiffTree>

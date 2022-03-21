@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="It stores the payment information collected from the customer"
+  entity="UpFrontPayment"
+  exportable="true"
+  loadable="false"
+  table="upfrontpayment"
+  type="retireable">
+  <typekey
+    desc="Payment Method"
+    name="PaymentMethod"
+    nullok="false"
+    typelist="UpFrontPaymentMethod"/>
+  <column
+    desc="A reference to the Payment Instrument"
+    name="PaymentInstrument"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="It can be the check number, the receipt number for cash or the reference from the Gateway Payment for electronic payments "
+    name="Reference"
+    nullok="true"
+    type="shorttext"/>
+  <monetaryamount
+    desc="The amount of this payment"
+    name="Amount"
+    nullok="false"/>
+  <foreignkey
+    columnName="JobID"
+    desc="The Job that this payment belongs to"
+    fkentity="Job"
+    name="Job"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <fulldescription>Entity that stores the payment information collected from the customer</fulldescription>
+</entity>

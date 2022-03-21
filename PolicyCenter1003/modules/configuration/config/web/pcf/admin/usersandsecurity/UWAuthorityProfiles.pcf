@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="UWAuthorityProfiles.go()"
+    afterCommit="UWAuthorityProfiles.go()"
+    canEdit="perm.System.authprofileedit"
+    canVisit="perm.System.authprofileview"
+    id="UWAuthorityProfiles"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.UWAuthorityProfile.Title&quot;)">
+    <Variable
+      initialValue="UWAuthorityProfile.finder.findUWAuthorityProfilesOrderedByName()"
+      name="allProfiles"
+      type="gw.api.database.IQueryBeanResult&lt;UWAuthorityProfile&gt;"/>
+    <Variable
+      initialValue="profileUserCount()"
+      name="profileCountMap"
+      type="java.util.Map&lt;gw.pl.persistence.core.Key, java.lang.Integer&gt;"/>
+    <Screen
+      id="ProfilesScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewUWAuthorityProfile.go()"
+          id="NewButton"
+          label="DisplayKey.get(&quot;Web.UWAuthorityProfile.New&quot;)"
+          shortcut="N"
+          visible="perm.System.authprofilecreate"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CloneUWAuthorityProfile.go(CheckedValue)"
+          flags="one profile"
+          id="CloneButton"
+          iterator="ProfilesLV"
+          label="DisplayKey.get(&quot;Web.UWAuthorityProfile.Clone&quot;)"
+          shortcut="C"
+          visible="perm.System.authprofilecreate"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.delete()"
+          confirmMessage="DisplayKey.get(&quot;Web.UWAuthorityProfile.Delete.Warning&quot;)"
+          flags="any profile"
+          id="DeleteButton"
+          iterator="ProfilesLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="L"
+          visible="perm.System.authprofiledelete"/>
+      </Toolbar>
+      <ListViewPanel
+        id="ProfilesLV">
+        <RowIterator
+          editable="false"
+          elementName="profile"
+          hasCheckBoxes="true"
+          value="allProfiles"
+          valueType="gw.api.database.IQueryBeanResult&lt;entity.UWAuthorityProfile&gt;">
+          <ToolbarFlag
+            name="profile"/>
+          <Row>
+            <TextCell
+              action="UWAuthorityProfileDetailPage.push(profile)"
+              actionAvailable="perm.System.authprofileedit"
+              align="left"
+              id="Name"
+              label="DisplayKey.get(&quot;Web.UWAuthorityProfile.Profile.Name&quot;)"
+              value="profile.Name"/>
+            <TextCell
+              id="Description"
+              label="DisplayKey.get(&quot;Web.UWAuthorityProfile.Profile.Description&quot;)"
+              value="profile.Description"/>
+            <TextCell
+              id="UserCount"
+              value="DisplayKey.get(&quot;Web.UWAuthorityProfile.Profile.InUseBy&quot;, profileCountMap[profile.ID])"
+              valueVisible="profileCountMap[profile.ID] &gt; 0"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.api.database.DBFunction
+      uses gw.api.path.Paths
+      uses gw.api.database.QuerySelectColumns
+
+      function profileUserCount(): java.util.Map<gw.pl.persistence.core.Key, java.lang.Integer> {
+        final var USER_AUTHORITY_PROFILE_COUNT = "UserAuthorityProfileCount"
+        final var UW_AUTHORITY_PROFILE_ID = "UWAuthorityProfileID"
+
+        var queryResult = gw.api.database.Query.make(UserAuthorityProfile).select({
+          QuerySelectColumns.pathWithAlias(UW_AUTHORITY_PROFILE_ID, Paths.make(UserAuthorityProfile#UWAuthorityProfile)),
+          QuerySelectColumns.dbFunctionWithAlias(USER_AUTHORITY_PROFILE_COUNT, DBFunction.Count(Paths.make(UserAuthorityProfile#PublicID)))
+        })
+        .transformQueryRow(\ profile -> {
+          return new java.util.HashMap<String, Object>() {
+            "UWAuthProfile" -> profile.getColumn(UW_AUTHORITY_PROFILE_ID),
+            "Count" -> profile.getColumn(USER_AUTHORITY_PROFILE_COUNT)
+          }
+        })
+        return queryResult.toList()
+          .partitionUniquely(\columns -> columns["UWAuthProfile"] as gw.pl.persistence.core.Key)
+          .mapValues(\columns -> gw.api.upgrade.Coercions.makeIntFrom(columns["Count"]))
+          .toAutoMap(\k -> 0)
+      }]]></Code>
+  </Page>
+</PCF>

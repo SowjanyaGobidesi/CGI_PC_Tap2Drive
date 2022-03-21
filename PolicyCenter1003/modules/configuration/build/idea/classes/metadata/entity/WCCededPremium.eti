@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Workers' Comp implementation of the RICededPremium delegate"
+  entity="WCCededPremium"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="wccededpremium"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremium"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumAdapter"
+    impl="gw.reinsurance.ceding.WCCededPremiumAdapter"/>
+  <foreignkey
+    fkentity="WCCost"
+    name="WCCost"
+    nonEffDated="true"
+    nullok="false"/>
+  <array
+    arrayentity="WCCededPremiumTransaction"
+    cascadeDelete="true"
+    name="CedingTransactions"/>
+  <array
+    arrayentity="WCCededPremiumHistory"
+    cascadeDelete="true"
+    name="CedingHistory"/>
+</entity>

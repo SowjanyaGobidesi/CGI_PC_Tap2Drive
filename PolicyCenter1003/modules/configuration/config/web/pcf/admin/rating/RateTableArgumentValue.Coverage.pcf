@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="RateTableArgumentValue"
+    mode="Coverage">
+    <Require
+      name="rateTableArgSrcHelper"
+      type="gw.pcf.rating.rtm.RateTableArgumentSourceHelper"/>
+    <RangeCell
+      editable="true"
+      helpText="return (rateTableArgSrcHelper.AvailableUsages.Empty) ? DisplayKey.get(&quot;Web.Rating.Flow.NoUsages&quot;) : null"
+      id="RateTableArgumentSourceList"
+      optionLabel="VALUE.Label"
+      value="rateTableArgSrcHelper.ArgumentSourceWrapper"
+      valueRange="rateTableArgSrcHelper.AvailableUsages"
+      valueType="gw.rating.rtm.util.AvailableAttributePresenter"/>
+  </ModalCell>
+</PCF>

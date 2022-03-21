@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="ApplyToRenewal"
+    parent="PolicyFile(currentBranch, currentBranch.EditEffectiveDate)"
+    title="DisplayKey.get(&quot;Web.ApplyToRenewal.Title&quot;)">
+    <LocationEntryPoint
+      signature="ApplyToRenewal(currentBranch : PolicyPeriod, futureBranch : PolicyPeriod)"/>
+    <Variable
+      name="currentBranch"
+      type="PolicyPeriod"/>
+    <Variable
+      name="futureBranch"
+      type="PolicyPeriod"/>
+    <Screen
+      editable="true"
+      id="ApplyToRenewalScreen">
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.ApplyToRenewal.Message&quot;, futureBranch.Job.JobNumber)"/>
+      <DetailViewPanel
+        id="ApplyToRenewalDV">
+        <InputColumn>
+          <BulletPointTextInput
+            action="JobForward.go(futureBranch.Job)"
+            id="ViewNewJob"
+            value="DisplayKey.get(&quot;Web.ApplyToRenewal.ViewNewJob&quot;, futureBranch.Job.JobNumber)"
+            visible="true"/>
+          <BulletPointTextInput
+            action="JobForward.go(currentBranch.Job)"
+            id="ViewCurrentJob"
+            value="DisplayKey.get(&quot;Web.ApplyToRenewal.ViewCurrentJob&quot;)"
+            visible="true"/>
+          <BulletPointTextInput
+            action="PolicyFileForward.go(currentBranch.PolicyNumber, currentBranch.EditEffectiveDate)"
+            id="ViewPolicy"
+            value="DisplayKey.get(&quot;Web.ApplyToRenewal.ViewPolicy&quot;, currentBranch.PolicyNumberDisplayString)"
+            visible="true"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

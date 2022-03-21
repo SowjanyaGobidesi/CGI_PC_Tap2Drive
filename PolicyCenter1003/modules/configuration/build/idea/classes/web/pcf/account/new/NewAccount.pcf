@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="true"
+    canVisit="perm.Account.create"
+    id="NewAccount"
+    parent="AccountForward()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.NewSubmissionAccount&quot;)">
+    <LocationEntryPoint
+      signature="NewAccount()"/>
+    <ScreenRef
+      def="NewAccountScreen(false)"/>
+  </Page>
+</PCF>

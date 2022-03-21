@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <JobWizard
+    acceleratedMenuActions="BlankAcceleratedMenuActions()"
+    canEdit="(not job.Complete) and perm.Cancellation.edit(cancellation)"
+    canVisit="perm.Cancellation.view(cancellation)"
+    desc="The main Wizard for a policy cancellation.  Flow steps within the Wizard are determined by the product model."
+    id="CancellationWizard"
+    independentStepsTitle="DisplayKey.get(&quot;Web.PolicyFile.ToolsMenuTitle&quot;)"
+    independentStepsTitleIcon="&quot;tools_nav&quot;"
+    independentStepsTitleIconType="svgFileName"
+    infoBar="CancellationWizardInfoBar(cancellation, policyPeriod)"
+    initialStep="jobWizardHelper.getInitialWizardStepId( policyPeriod )"
+    isDraftOnEnter="true"
+    jobType="Cancellation"
+    menuActions="WizardMenuActions(jobWizardHelper,cancellation,policyPeriod)"
+    onConcurrentDataChange="CurrentLocation.cancel(); JobForward.go(job)"
+    parent="JobForward(cancellation)"
+    subtitle="policyPeriod.Status.DisplayName"
+    title="DisplayKey.get(&quot;Web.CancellationWizard.Title&quot;, cancellation.JobNumber)">
+    <LocationEntryPoint
+      signature="CancellationWizard(cancellation : Cancellation, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="cancellation"
+      type="Cancellation"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; policyPeriod.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="openForEditInit.get()"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <Variable
+      initialValue="cancellation"
+      name="job"
+      type="entity.Cancellation"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Variable
+      initialValue="cancellation.PolicyPeriod"
+      name="canceledPolicyPeriod"
+      recalculateOnRefresh="true"
+      type="entity.PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.api.web.job.JobWizardHelper(CurrentLocation)"
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <!-- =================================== WIZARD STEPS =================================== -->
+    <JobWizardStep
+      id="Entry"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="openForEdit"
+      screen="CancellationWizard_EntryScreen(policyPeriod, cancellation, openForEdit,jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.CancellationWizardMenu.Entry&quot;)"/>
+    <JobWizardStep
+      allowFinish="false"
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewQuote"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="CancellationWizard_QuoteScreen(cancellation, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.CancellationWizardMenu.Confirm&quot;)"
+      visible="!policyPeriod.MultiLine"/>
+    <JobWizardStep
+      allowFinish="false"
+      available="policyPeriod.JobProcess.canViewQuote()"
+      id="ViewMultiLineQuote"
+      mode="policy.Product.PublicID"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="CancellationWizard_MultiLine_QuoteScreen(cancellation, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.CancellationWizardMenu.Confirm&quot;)"
+      visible="policyPeriod.MultiLine"/>
+    <WizardStepSetRef
+      def="JobWizardToolsMenuWizardStepSet(jobWizardHelper, policyPeriod)"/>
+  </JobWizard>
+</PCF>

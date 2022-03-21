@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="ProducersPopup"
+    title="DisplayKey.get('Web.Dashboard.Tile.Producers')">
+    <LocationEntryPoint
+      signature="ProducersPopup(account: Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Screen>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="producerCode"
+          value="account.ProducerCodes"
+          valueType="entity.AccountProducerCode[]">
+          <IteratorSort
+            sortBy="producerCode.ProducerCode.Organization.DisplayName"
+            sortOrder="1"/>
+          <IteratorSort
+            sortBy="producerCode.ProducerCode.Code"
+            sortOrder="2"/>
+          <Row>
+            <TextCell
+              id="Name"
+              label="DisplayKey.get('Web.Dashboard.Tile.Producers.Name')"
+              value="producerCode.ProducerCode.Organization.DisplayName"/>
+            <TextCell
+              id="Code"
+              label="DisplayKey.get('Web.Dashboard.Tile.Producers.Code')"
+              value="producerCode.ProducerCode.Code"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

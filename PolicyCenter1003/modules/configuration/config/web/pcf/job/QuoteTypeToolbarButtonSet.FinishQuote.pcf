@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="QuoteTypeToolbarButtonSet"
+    mode="FinishQuote">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <ToolbarButton
+      action="jobWizardHelper.invalidateIterators(); jobWizardHelper.requestPostRatingQuote(policyPeriod, jobWizardHelper.getQuoteStep(policyPeriod)) "
+      id="FinishQuote"
+      label="DisplayKey.get(&quot;Job.Operation.FinishQuote&quot;)"
+      shortcut="Q"/>
+  </ToolbarButtonSet>
+</PCF>

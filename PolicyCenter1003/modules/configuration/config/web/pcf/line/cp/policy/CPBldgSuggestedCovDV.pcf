@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CPBldgSuggestedCovDV">
+    <Require
+      name="building"
+      type="CPBuilding"/>
+    <Variable
+      initialValue="building.PolicyLine.Pattern.getCoverageCategoryByPublicId(&quot;CPBldgCovCategory&quot;)"
+      name="buildingPropCategory"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="building.PolicyLine.Pattern.getCoverageCategoryByPublicId( &quot;CPBusIncCovCategory&quot; )"
+      name="incomeExpenseCategory"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="building == null ? null : buildingPropCategory.coveragePatternsForEntity(CPBuilding).whereSelectedOrAvailable(building, openForEdit)"
+      name="buildingPropCategoryCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <Variable
+      initialValue="building == null ? null : incomeExpenseCategory.coveragePatternsForEntity(CPBuilding).whereSelectedOrAvailable(building, openForEdit)"
+      name="incomeExpenseCategoryCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <InputColumn>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="bldgAndPropIterator"
+        value="buildingPropCategoryCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, building, openForEdit)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="IncomeAndExpenseIterator"
+        value="incomeExpenseCategoryCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, building, openForEdit)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+    </InputColumn>
+    <Code><![CDATA[function getCovPatterns(category: String): gw.api.productmodel.CoveragePattern[] {
+                    var patterns = building.PolicyLine.Pattern.getCoverageCategoryByPublicId(category).coveragePatternsForEntity(CPBuilding).toList()
+                    return patterns.toTypedArray()
+                }]]></Code>
+  </DetailViewPanel>
+</PCF>

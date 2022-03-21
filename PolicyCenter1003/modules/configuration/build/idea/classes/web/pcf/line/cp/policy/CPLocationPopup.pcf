@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="gw.api.web.PebblesUtil.invalidateIterators(TopLocation, entity.CPLocation)"
+    beforeCommit="riskAssessmentBroker?.acceptRiskAssessmentChanges(cpLocation.Location)"
+    canEdit="openForEdit"
+    countsAsWork="false"
+    id="CPLocationPopup"
+    returnType="CPLocation"
+    startEditing="initialize()"
+    startInEditMode="startInEdit"
+    title="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationInformation.Title&quot;)">
+    <LocationEntryPoint
+      signature="CPLocationPopup(cpLine : CommercialPropertyLine, openForEdit : boolean, startInEdit : boolean, jobWizardHelper : gw.api.web.job.JobWizardHelper)"/>
+    <LocationEntryPoint
+      signature="CPLocationPopup(cpLocation : CPLocation, openForEdit : boolean, startInEdit : boolean, jobWizardHelper : gw.api.web.job.JobWizardHelper)"/>
+    <LocationEntryPoint
+      signature="CPLocationPopup(cpLine : CommercialPropertyLine, acctLocation : AccountLocation, openForEdit : boolean, startInEdit : boolean, jobWizardHelper : gw.api.web.job.JobWizardHelper)"/>
+    <Variable
+      name="cpLocation"
+      type="CPLocation"/>
+    <Variable
+      initialValue="cpLocation.Location.AccountLocation"
+      name="acctLocation"
+      type="AccountLocation"/>
+    <Variable
+      name="cpLine"
+      type="CommercialPropertyLine"/>
+    <Variable
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      name="startInEdit"
+      type="boolean"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;city&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="cityHandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;county&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="countyHandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <Variable
+      initialValue="new gw.api.contact.AddressAutocompleteHandler(&quot;postalcode&quot;,&quot;Country,City,County,State,PostalCode&quot;,true)"
+      name="pchandler"
+      type="gw.api.contact.AddressAutocompleteHandler"/>
+    <Variable
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="new gw.riskassessment.SpotlightInteractiveErrorHandler()"
+      name="errorHandler"
+      type="gw.plugin.policylocation.RiskAssessmentErrorHandler"/>
+    <Variable
+      initialValue="if (cpLocation != null) { return new gw.web.policylocation.riskassessment.LocationRiskAssessmentBroker(cpLocation.Location, errorHandler)} else { return null}"
+      name="riskAssessmentBroker"
+      type="gw.web.policylocation.riskassessment.LocationRiskAssessmentBroker"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          hideIfReadOnly="true"
+          pickValue="cpLocation"/>
+      </Toolbar>
+      <PanelRef
+        def="PreferredCoverageCurrencyPanelSet(cpLocation, openForEdit, jobWizardHelper)"
+        id="PreferredCoverageCurrencySelectorRef"/>
+      <PanelRow>
+        <PanelColumn>
+          <DetailViewPanel
+            id="LocationDetailDV">
+            <InputColumn>
+              <InputSetRef
+                def="LocationDetailInputSet(cpLocation.Location, cpLine.SupportsNonSpecificLocations, openForEdit)"/>
+              <ContentInput
+                visible="gw.riskassessment.SpotlightConfigParameters.shouldShowThumbnailMap() and openForEdit">
+                <Link
+                  action="return // Action required for button to be clicked."
+                  id="RefreshThumbnailMapLink"
+                  label="DisplayKey.get('Web.Policy.LocationContainer.Location.UpdateMap')"
+                  styleClass="miniButton"
+                  visible="gw.riskassessment.SpotlightConfigParameters.shouldShowThumbnailMap() and openForEdit"/>
+              </ContentInput>
+              <Label
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.GeneralInfoTitle&quot;)"/>
+              <TextAreaInput
+                editable="true"
+                id="PrincipleOps"
+                label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building.PrincipleOps&quot;)"
+                labelAbove="true"
+                numRows="6"
+                value="cpLocation.PrincipalOpsDesc"/>
+              <InputDivider/>
+              <TypeKeyInput
+                editable="true"
+                id="FireProtectionClass"
+                label="DisplayKey.get(&quot;Web.Policy.PolicyLocation.FireProtectionClass&quot;)"
+                labelAbove="true"
+                value="cpLocation.Location.FireProtectClass"
+                valueType="typekey.FireProtectClass"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelColumn>
+        <PanelColumn
+          id="SpotlightPanelColumn"
+          visible="gw.api.system.PCConfigParameters.RiskAssessmentIntegrationEnabled.Value and cpLocation.Location.Branch.Policy.Product.Commercial">
+          <PanelRef
+            def="RiskAssessmentPanelSet(cpLocation.Location, riskAssessmentBroker)"/>
+        </PanelColumn>
+      </PanelRow>
+      <DetailViewPanel
+        id="AccountLocationUpToDateDV"
+        visible="cpLocation.CPLine.Branch.Promoted and !cpLocation.Location.isUpToDate()">
+        <InputColumn>
+          <ContentInput
+            boldLabel="true"
+            id="SynchronizedMessage"
+            label="DisplayKey.get('Web.Account.Locations.IsSynchronized.Policy.Message')">
+            <Link
+              action="AccountLocationPopup.push(cpLocation.Location.AccountLocation, cpLocation.CPLine.Branch.Policy.Account, false)"
+              id="SynchronizedLink"
+              label="DisplayKey.get('Web.Account.Locations.IsSynchronized.Policy.Link')"/>
+          </ContentInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.web.policylocation.riskassessment.LocationRiskAssessmentBroker
+
+      function initialize() {
+        if (cpLine != null and cpLocation == null and acctLocation == null) {  // brand new location
+          cpLocation = cpLine.addNewLineSpecificLocation() as CPLocation
+        } else if (cpLocation != null) {  // existing cp location
+          cpLine = cpLocation.CPLine
+        } else if (acctLocation != null and cpLine != null) {  // new cp location for given account location
+          cpLocation = cpLine.addToLineSpecificLocations(acctLocation) as CPLocation
+          cpLocation.Location.TerritoryCodes.each(\tc -> tc.fillWithFirst())
+        } else {
+          throw new gw.api.util.DisplayableException(DisplayKey.get('Web.Account.Locations.UnableToInitialize'))
+        }
+
+        riskAssessmentBroker = new LocationRiskAssessmentBroker(cpLocation.Location, errorHandler)
+      }]]></Code>
+  </Popup>
+</PCF>

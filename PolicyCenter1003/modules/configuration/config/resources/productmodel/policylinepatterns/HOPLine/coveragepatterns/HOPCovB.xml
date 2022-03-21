@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPCovB"
+  coverageCategory="zlmhivp6ab7eq451udqo99aj7la"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="200"
+  public-id="z26h4fbq18l81e5n478v5v07mj8"
+  referenceDateByType="ApplicableObject">
+  <InitializeScript><![CDATA[var covBDirectLimitTerm = HOPCovB.HOPCovBDirectLimitTerm
+var covBPercentLimitTerm = HOPCovB.HOPCovBLimitTerm
+if (HOPCovB.HOPDwelling.HOPCoveragePart.CoveragePartType == CoveragePartType.TC_HOPDWELLING) {
+  var covALimitTerm = HOPCovB.HOPDwelling.HOPCovA.HOPCovALimitTerm
+  if (covALimitTerm.Value != null and covBPercentLimitTerm.OptionValue != null) {
+covBDirectLimitTerm.Value = covALimitTerm.Value * (covBPercentLimitTerm.OptionValue.Value / 100)
+  }
+}
+else {
+  var covCLimitTerm = HOPCovB.HOPDwelling.HOPCovC.HOPCovCDirectLimitTerm
+  if (covCLimitTerm.Value != null and covBPercentLimitTerm.OptionValue != null) {
+covBDirectLimitTerm.Value = covCLimitTerm.Value * (covBPercentLimitTerm.OptionValue.Value / 100)
+  }
+}]]></InitializeScript>
+  <ExistenceScript><![CDATA[var coveragePart = HOPDwelling.HOPCoveragePart
+return coveragePart.CoveragePartType == CoveragePartType.TC_HOPDWELLING ? ExistenceType.TC_REQUIRED : ExistenceType.TC_ELECTABLE]]></ExistenceScript>
+  <CovTerms>
+    <OptionCovTermPattern
+      aggregationModel="po"
+      choiceLookupTableName="HOPDwellingCovOpt"
+      codeIdentifier="HOPCovBLimit"
+      coverageColumn="ChoiceTerm1"
+      lookupTableName="HOPDwellingCovTerm"
+      modelType="Limit"
+      priority="100"
+      public-id="zhtie7v97j1864502v6pu6ru5u8"
+      required="true"
+      restrictionModel="bld"
+      valueType="percent">
+      <DefaultsSet>
+        <CovTermDefault
+          codeIdentifier="zsthkssu1mv567jo8011e2beoub"
+          defaultValue="HOPCovBLimit10"
+          public-id="zsthkssu1mv567jo8011e2beoub"/>
+      </DefaultsSet>
+      <Options>
+        <CovTermOpt
+          codeIdentifier="z7piiv0gkpj2aft9kontbstf8m9"
+          optionCode="HOPCovBLimit5"
+          priority="0"
+          public-id="z7piiv0gkpj2aft9kontbstf8m9"
+          value="5"/>
+        <CovTermOpt
+          codeIdentifier="zb6imkpesgpq33h89fmiccj1ema"
+          optionCode="HOPCovBLimit20"
+          priority="100"
+          public-id="zb6imkpesgpq33h89fmiccj1ema"
+          value="20"/>
+        <CovTermOpt
+          codeIdentifier="zsmhiu9d2ct7n6k22olnjr53kob"
+          optionCode="HOPCovBLimit10"
+          priority="50"
+          public-id="zsmhiu9d2ct7n6k22olnjr53kob"
+          value="10"/>
+      </Options>
+    </OptionCovTermPattern>
+    <DirectCovTermPattern
+      aggregationModel="po"
+      codeIdentifier="HOPCovBDirectLimit"
+      coverageColumn="DirectTerm1"
+      lookupTableName="HOPDwellingCovTerm"
+      modelType="Limit"
+      priority="300"
+      public-id="z4ogou9jlvl0q1jjv8fa4jf2b18"
+      required="true"
+      restrictionModel="bld"
+      valueType="money">
+      <LimitsSet/>
+    </DirectCovTermPattern>
+  </CovTerms>
+  <Schedules/>
+</CoveragePattern>

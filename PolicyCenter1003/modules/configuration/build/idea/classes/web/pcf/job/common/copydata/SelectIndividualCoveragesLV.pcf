@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="true"
+    id="SelectIndividualCoveragesLV">
+    <Require
+      name="coverageCopiers"
+      type="List&lt;gw.coverage.ClausePatternCopier&gt;"/>
+    <RowIterator
+      canPick="false"
+      editable="true"
+      elementName="coverageCopier"
+      id="coverageIterator"
+      pageSize="0"
+      value="coverageCopiers"
+      valueType="java.util.List&lt;gw.coverage.ClausePatternCopier&gt;">
+      <Row>
+        <CheckBoxCell
+          editable="true"
+          id="CoverageCopierShouldCopy"
+          value="coverageCopier.ShouldCopy"/>
+        <TextCell
+          align="left"
+          enableSort="false"
+          id="CoverageDescription"
+          label="DisplayKey.get(&quot;Web.CopyPolicyData.PersonalAuto.Coverages.Coverage.Title&quot;)"
+          value="coverageCopier.Source"
+          valueType="java.lang.Object"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

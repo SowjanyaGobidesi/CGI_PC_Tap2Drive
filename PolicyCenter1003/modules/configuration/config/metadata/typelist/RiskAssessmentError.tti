@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="RiskAssessmentError" desc="Risk Assessment Errors">
+  <typecode
+    code="HttpBadRequest"
+    desc="Risk assessment service reported bad http request"
+    name="Http Bad Request">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="NoResponseEntityFromRiskAssessmentService"
+    desc="No response entity received from risk assessment service"
+    name="No Response Entity From Risk Assessment Service">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="RiskAssessmentAuthenticationFailed"
+    desc="Risk assessment service authentication failed"
+    name="Risk Assessment Authentication Failed">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="RiskAssessmentServiceConnectionRefused"
+    desc="Connection to risk assessment service is refused"
+    name="Risk Assessment Service Connection Refused">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="LacksSingleLocationRiskAssessmentPermission"
+    desc="Insufficient permissions to make single location risk assessment requests"
+    name="Lacks Single Location Risk Assessment Permission">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="LacksMultipleLocationRiskAssessmentPermission"
+    desc="Insufficient permissions to make multiple location risk assessment requests"
+    name="Lacks Multiple Location Risk Assessment Permission">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="NoSelectedRiskProfile"
+    desc="The risk assessment did not send a risk profile code"
+    name="Risk Profile Code Required">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="RiskProfileCodeInvalid"
+    desc="Risk profile Code was not recognized by Risk Assessment"
+    name="Invalid Risk Profile Code">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="InvalidLocation-CoordinatesInvalid"
+    desc="Invalid location latitude"
+    name="Invalid Location Coordinates - Latitude or Longitude Invalid">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="InvalidLocation-CoordinatesOrAddressRequired"
+    desc="There was no address or lat long sent to Risk Assessment"
+    name="Invalid Location - Coordinates Or Address Required">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="InvalidLocationGeocodeableAddress-CouldNotGeocode"
+    desc="The address sent to Risk Assessment could not be parsed"
+    name="Invalid Location Geocodeable Address - Could Not Geocode">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="InvalidJson"
+    desc="Invalid Json"
+    name="Invalid Json">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="ErrorForUnexpectedLocation"
+    desc="Error was returned for a location that was not requested"
+    name="Error for unexpected location">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="UnableToParseJSONErrors"
+    desc="Unable to parse JSON errors"
+    name="Unable to parse JSON errors">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="UnknownErrorCategory"
+    desc="Risk assessment Error found but not configured with a known category"
+    name="Unkown Error Category">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="UnknownErrorCode"
+    desc="Unknown error code, code is not in this typelist"
+    name="Unknown Error Code">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="InvalidLocation-PolicySystemIdRequired"
+    desc="A public ID was not sent to the risk assessment."
+    name="Invalid Location Policy System Id Required">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="NoSelectedLocation"
+    desc="Spotlight interactive there was no pin or selected location"
+    name="No Selected Location">
+    <category
+      code="Location"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="TimeoutContactingParameterService"
+    desc="Timeout contacting Spotlight Interactive parameter service"
+    name="Timeout Contacting Parameter Service">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="ErrorContactingParameterService"
+    desc="Error contacting Spotlight Interactive parameter service"
+    name="Error Contacting Parameter Service">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+  <typecode
+    code="LocationRequired"
+    name="Location Required">
+    <category
+      code="Request"
+      typelist="RiskAssessmentErrorType"/>
+  </typecode>
+</typelist>

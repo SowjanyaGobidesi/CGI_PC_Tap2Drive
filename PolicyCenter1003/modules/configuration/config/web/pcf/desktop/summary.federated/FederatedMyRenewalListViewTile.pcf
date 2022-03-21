@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    hideViewMoreIfShortList="true"
+    id="FederatedMyRenewalListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.MyRenewals')"
+    viewMoreAction="DesktopRenewals.push()"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')">
+    <Require
+      name="user"
+      type="User"/>
+    <RowIterator
+      editable="false"
+      elementName="renewal"
+      type="gw.api.web.desktop.data.renewal.RenewalDTO"
+      value="new gw.api.web.desktop.data.renewal.RenewalFederatedData()"
+      valueType="gw.api.web.desktop.data.FederatedDataIteratorBackingData">
+      <ToolbarFilter
+        name="renewalFilter">
+        <ToolbarFilterOptionGroup
+          filters="gw.api.web.desktop.data.JobDataFilters.activityFilters()"/>
+        <ToolbarFilterOptionGroup
+          filters="gw.api.web.desktop.data.JobDataFilters.producerFilters()"
+          visible="perm.System.viewproducerstyledesktopdetails"/>
+      </ToolbarFilter>
+      <IteratorSort
+        sortBy="renewal.EditEffectiveDate"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          action="FederatedJobForward.push(renewal.JobNumber, renewal.AccountPublicId)"
+          available="renewal.Viewable"
+          id="JobNumber"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.Transaction')"
+          value="renewal.JobNumber"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Insured"
+          action="FederatedContactForward.push(renewal.AccountPublicId, renewal.ContactPublicId)"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.PrimaryInsured')"
+          value="renewal.ContactName"/>
+        <DateCell
+          id="EffectiveDate"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.EffectiveDate')"
+          value="renewal.EditEffectiveDate"
+          wrap="false"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.Status')"
+          sortBy="renewal.StatusPriority, renewal.StatusCode"
+          value="typekey.PolicyPeriodStatus.get(renewal.StatusCode)"
+          valueType="typekey.PolicyPeriodStatus"
+          wrap="false"/>
+        <MonetaryAmountCell
+          enableSort="false"
+          id="Premium"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.Premium')"
+          value="renewal.TotalPremiumRPT.to()"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Product"
+          available="gw.api.web.desktop.data.FederatedJobPermissionHandler.canViewJob(User.util.getCurrentUser(), renewal, SystemPermissionType.TC_VIEWRENEWAL)"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.Product')"
+          sortBy="renewal.PolicyProductCode"
+          value="renewal.PolicyProduct"/>
+        <TextCell
+          grow="true"
+          id="Producer"
+          label="DisplayKey.get('Web.Dashboard.Tile.MyRenewals.Producer')"
+          value="renewal.ProducerDisplayName"
+          valueType="java.lang.String"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="PolicyFile_Transactions_ByCostPopup"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Transactions_ByCostPopup(period : PolicyPeriod)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="partitionCosts()"
+      name="costMap"
+      type="java.util.Map&lt;entity.Cost, java.util.List&lt;entity.Transaction&gt;&gt;"/>
+    <Screen>
+      <Toolbar/>
+      <PanelIterator
+        elementName="cost"
+        value="costMap.Keys.toTypedArray().sortBy(\c -&gt; (c.BranchUntyped as PolicyPeriod).Job.CloseDate)"
+        valueType="entity.Cost[]">
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              boldLabel="true"
+              id="CostName"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Cost&quot;)"
+              value="costMap.get(cost).first().Cost"
+              valueType="entity.Cost"/>
+            <TextInput
+              boldLabel="true"
+              id="Job"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Job&quot;)"
+              value="(cost.BranchUntyped as PolicyPeriod).Job.DisplayType"/>
+            <MonetaryAmountInput
+              boldLabel="true"
+              formatType="currency"
+              id="CostTotal"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.RemainingWrittenTotal&quot;)"
+              value="costMap.get(cost).where(\t -&gt; t.Written).AmountSum(period.PreferredSettlementCurrency)"/>
+            <MonetaryAmountInput
+              boldLabel="true"
+              formatType="currency"
+              id="TotalCharged"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.RemainingChargedTotal&quot;)"
+              value="costMap.get(cost).where(\t -&gt; t.Charged).AmountSum(period.PreferredSettlementCurrency)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="txn"
+            pageSize="0"
+            value="costMap.get(cost).toTypedArray()"
+            valueType="entity.Transaction[]">
+            <IteratorSort
+              sortBy="txn.PostedDate"
+              sortOrder="1"/>
+            <IteratorSort
+              sortBy="txn.EffDate"
+              sortOrder="2"/>
+            <IteratorSort
+              sortBy="txn.ExpDate"
+              sortOrder="3"/>
+            <Row>
+              <DateCell
+                id="EffDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.EffDate&quot;)"
+                value="txn.EffDate"/>
+              <DateCell
+                id="ExpDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.ExpDate&quot;)"
+                value="txn.ExpDate"/>
+              <MonetaryAmountCell
+                id="TxnAmount"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Amount&quot;)"
+                value="txn.AmountBilling"/>
+              <DateCell
+                id="PostedDate"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.PostedDate&quot;)"
+                value="txn.PostedDate"/>
+              <BooleanRadioCell
+                id="Written"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Written&quot;)"
+                value="txn.Written"/>
+              <BooleanRadioCell
+                id="Charged"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Charged&quot;)"
+                value="txn.Charged"/>
+              <BooleanRadioCell
+                id="ToBeAccrued"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.ToBeAccrued&quot;)"
+                value="txn.ToBeAccrued"/>
+              <TextCell
+                id="Job"
+                label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByCost.Job&quot;)"
+                value="((txn as EffDated).BranchUntyped as PolicyPeriod).Job.DisplayType"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelIterator>
+    </Screen>
+    <Code><![CDATA[function partitionCosts() : java.util.Map<Cost,java.util.List<entity.Transaction>> {
+  var postedTransactions = gw.api.domain.financials.TransactionFinder.instance.findPostedTransactions( period )
+  return postedTransactions.partition( \ t -> t.Cost )
+}]]></Code>
+  </Popup>
+</PCF>

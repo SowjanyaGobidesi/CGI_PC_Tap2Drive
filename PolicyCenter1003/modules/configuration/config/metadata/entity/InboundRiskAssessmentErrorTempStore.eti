@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="InboundRiskAssessmentErrorTempStore"
+  extendable="true">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="error associated with risk assessment of OutboundLocationRiskAssessmentTempStore"
+    name="RiskAssessmentError"
+    nullok="false"
+    typelist="RiskAssessmentError"/>
+  <fulldescription>Delegate for entities to hold risk assessment error.</fulldescription>
+</delegate>

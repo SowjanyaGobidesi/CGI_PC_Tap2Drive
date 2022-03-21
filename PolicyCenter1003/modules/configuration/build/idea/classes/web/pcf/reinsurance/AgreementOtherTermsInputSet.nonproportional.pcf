@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AgreementOtherTermsInputSet"
+    mode="nonproportional">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <Variable
+      initialValue="agreement as NonProportionalRIAgreement"
+      name="nonprop"
+      type="entity.NonProportionalRIAgreement"/>
+    <TypeKeyInput
+      editable="true"
+      filter="(agreement as LossDateAttachable).AcceptableAttachmentBasisTypes.contains(VALUE)"
+      id="LossAttachBasis"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.LossAttachBasis&quot;)"
+      value="(agreement as LossDateAttachable).AttachmentBasis"
+      valueType="typekey.AttachmentBasisType"
+      visible="agreement typeis LossDateAttachable">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="nonprop.CalculateCededPremium = !agreement.IsLossDateAttachment"/>
+    </TypeKeyInput>
+    <BooleanRadioInput
+      editable="true"
+      id="CalculateCededPremium"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CalculateCededPremium&quot;)"
+      required="true"
+      value="nonprop.CalculateCededPremium"
+      visible="agreement.IsLossDateAttachment"/>
+    <TypeKeyInput
+      editable="true"
+      id="GNPBasis"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.GNPBasis&quot;)"
+      value="nonprop.GNPSubtotal"
+      valueType="typekey.GNPSubtotalType"/>
+    <InputSet
+      visible="agreement typeis entity.PerRisk">
+      <Variable
+        initialValue="agreement typeis PerRisk ? agreement : null"
+        name="perrisk"
+        type="entity.PerRisk"/>
+      <BooleanRadioInput
+        editable="true"
+        id="CountTowardTotalLimit"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CountTowardTotalLimit&quot;)"
+        required="true"
+        value="(perrisk as PerRisk).CountTowardTotalLimit"/>
+      <MonetaryAmountInput
+        currency="agreement.Currency"
+        editable="true"
+        formatType="currency"
+        id="NotificationThresh"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.NotificationThresh&quot;)"
+        value="(perrisk as PerRisk).NotificationThreshold"/>
+    </InputSet>
+    <TextAreaInput
+      editable="true"
+      id="Comments"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Comments&quot;)"
+      numRows="4"
+      value="agreement.Comments"/>
+  </InputSet>
+</PCF>

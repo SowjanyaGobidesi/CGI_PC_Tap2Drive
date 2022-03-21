@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Container for RIRiskVersionLists "
+  entity="RIRiskVLContainer"
+  loadable="false"
+  table="ririskvlcontainer"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    name="RiskNumber"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <array
+    arrayentity="RIRiskVersionList"
+    name="VersionLists"/>
+  <foreignkey
+    fkentity="Policy"
+    name="Policy"
+    nullok="true"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.RIRiskVLContainerPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIRiskVLContainerImpl"/>
+  <index
+    desc="Unique constraint for RiskNumber in the RIRiskVLContainer"
+    name="UniqueRiskNumber"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RiskNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

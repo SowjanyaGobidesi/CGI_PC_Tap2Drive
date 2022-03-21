@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Circuit Breakers or Fuses"
+  name="BreakerType">
+  <typecode
+    code="CircuitBreaker"
+    desc="Circuit Breaker"
+    name="Circuit Breaker"
+    priority="5">
+  </typecode>
+  <typecode
+    code="Fuses"
+    desc="Fuses"
+    name="Fuses"
+    priority="10">
+  </typecode>
+</typelist>

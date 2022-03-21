@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="FederatedTeamSubmissionsLV">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel as gw.api.web.team.PCFederatedTeamModel"
+      name="pcFederatedTeamModel"
+      type="gw.api.web.team.PCFederatedTeamModel"/>
+    <Variable
+      initialValue="pcFederatedTeamModel.Submissions as gw.api.web.team.federated.TeamFederatedIteratorBackingData"
+      name="submissions"
+      type="gw.api.web.team.federated.TeamFederatedIteratorBackingData"/>
+    <ExposeIterator
+      flags="openWorkOrder"
+      valueType="gw.api.web.desktop.data.JobDTO"
+      widget="SubmissionsIterator"/>
+    <RowIterator
+      appendPageInfo="true"
+      checkBoxVisible="true"
+      editable="false"
+      elementName="submission"
+      hasCheckBoxes="true"
+      id="SubmissionsIterator"
+      type="gw.api.web.desktop.data.submission.SubmissionDTO"
+      value="submissions"
+      valueType="gw.api.web.team.federated.TeamFederatedIteratorBackingData">
+      <ToolbarFilter
+        name="submissionsFilter">
+        <ToolbarFilterOptionGroup
+          filters="new gw.api.web.team.federated.FederatedTeamViewSubmissionFilters().FilterOptions"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="submission.CloseDate == null"
+        name="openWorkOrder"/>
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Insured"
+          label="DisplayKey.get(&quot;Web.DesktopActivitiesLV.AccountHolder&quot;)"
+          value="submission.ContactName"
+          wrap="true"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.CreateDate&quot;)"
+          sortDirection="descending"
+          value="submission.CreationDate"/>
+        <TextCell
+          action="FederatedJobForward.push(submission.JobNumber, submission.AccountPublicId)"
+          id="SubmissionNumber"
+          label="DisplayKey.get(&quot;Web.DesktopSubmissionsLV.SubmissionNumber&quot;)"
+          value="submission.JobNumber"/>
+        <TextCell
+          enableSort="false"
+          id="SubmissionStatus"
+          label="DisplayKey.get(&quot;Web.DesktopSubmissionsLV.SubmissionStatus&quot;)"
+          value="submission.DisplayStatus"/>
+        <TextCell
+          id="Product"
+          label="DisplayKey.get(&quot;Web.DesktopSubmissionsLV.Product&quot;)"
+          sortBy="submission.PolicyProductCode"
+          value="submission.PolicyProduct"
+          wrap="true"/>
+        <TextCell
+          enableSort="false"
+          id="Underwriter"
+          label="DisplayKey.get(&quot;Web.DesktopSubmissionsLV.Underwriter&quot;)"
+          value="submission.UnderwriterDisplayName"
+          wrap="true"/>
+        <TextCell
+          enableSort="false"
+          id="AssignedTo"
+          label="DisplayKey.get(&quot;Web.Team.LV.AssignedTo&quot;)"
+          value="submission.AllAssigned"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

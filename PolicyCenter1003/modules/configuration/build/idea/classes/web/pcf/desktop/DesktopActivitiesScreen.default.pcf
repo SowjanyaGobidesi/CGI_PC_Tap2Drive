@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="DesktopActivitiesScreen"
+    mode="default">
+    <Variable
+      initialValue="Activity.finder.getAssignedToCurrentUser()"
+      name="activities"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;entity.Activity&gt;"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.DesktopActivities&quot;)"/>
+    <AlertBar
+      action="gw.api.web.activity.CanceledActivitiesAlertUtil.goToCanceledActivities()"
+      dismissed="dismissed"
+      id="DesktopActivities_CanceledActivitiesAlertBar"
+      label="DisplayKey.get(&quot;Web.DesktopActivities.CanceledActivitiesAlert&quot;)"/>
+    <PanelRef
+      def="DesktopActivitiesLV(activities)">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.web.activity.ActivityAssignmentPopup(CheckedValues, gw.assignment.AssignmentUtil.DefaultUser))"
+          flags="all canAssignActivity"
+          id="DesktopActivities_AssignButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Assign&quot;)"
+          shortcut="A"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.web.activity.ActivityUtil.skipActivities(CheckedValues)"
+          flags="all canSkipActivity"
+          id="DesktopActivities_SkipButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Skip&quot;)"
+          shortcut="S"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.web.activity.ActivityUtil.completeActivities(CheckedValues)"
+          flags="all canCompleteActivity"
+          id="DesktopActivities_CompleteButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Complete&quot;)"
+          shortcut="O"/>
+        <ToolbarDivider/>
+      </Toolbar>
+    </PanelRef>
+    <Code><![CDATA[
+      property get dismissed() : Boolean {
+        return not gw.api.web.activity.CanceledActivitiesAlertUtil.hasCanceledActivitiesSinceLastDismissed()
+      }
+      property set dismissed(d : Boolean) {
+        if(d) {
+          gw.api.web.activity.CanceledActivitiesAlertUtil.onDismiss()
+        }
+      }
+    ]]></Code>
+  </Screen>
+  
+</PCF>

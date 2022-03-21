@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  UserRoleAssignment  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="User role assignments for Policies."
+  entity="PolicyUserRoleAssignment"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="policyuserroleassign"
+  type="retireable">
+  <implementsEntity
+    name="UserRoleAssignment"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Associated policy."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+  <events/>
+</entity>

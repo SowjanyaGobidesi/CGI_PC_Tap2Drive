@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  RICoverageGroup  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A map entry to map a reinsurance agreement to a RI coverage group type"
+  entity="RICoverageGroup"
+  final="false"
+  loadable="false"
+  table="ricoveragegroup"
+  type="retireable">
+  <typekey
+    desc="The RI coverage group type."
+    name="GroupType"
+    nullok="false"
+    typelist="RICoverageGroupType"/>
+</entity>

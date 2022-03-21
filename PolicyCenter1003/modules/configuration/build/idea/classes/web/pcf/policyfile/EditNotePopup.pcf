@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="EditNotePopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get('Web.Notes.EditNotePopup')">
+    <LocationEntryPoint
+      signature="EditNotePopup(note : Note)"/>
+    <LocationEntryPoint
+      signature="EditNotePopup(note : Note, startInEditMode : boolean)"/>
+    <Variable
+      name="note"
+      type="Note"/>
+    <Variable
+      initialValue="true"
+      name="startInEditMode"
+      type="boolean"/>
+    <ScreenRef
+      def="EditNoteScreen(note)"/>
+  </Popup>
+</PCF>

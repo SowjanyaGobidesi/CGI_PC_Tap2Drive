@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<import>
+  <UWInterventionClassificationCode public-id="pc:z9li2n2lv7kudeud0vcc1m6hsj8">
+    <Code>0124</Code>
+    <ClassIndicator>10</ClassIndicator>
+    <EffectiveDate>2013-10-16 00:00:00.000</EffectiveDate>
+    <ExpirationDate>2017-10-17 00:00:00.000</ExpirationDate>
+  </UWInterventionClassificationCode>
+  <UWInterventionClassificationCode public-id="pc:zjjhab1p3ie0e8h6h1g5pvmuo2b">
+    <Code>0124</Code>
+    <ClassIndicator>12</ClassIndicator>
+    <EffectiveDate>2014-02-15 00:00:00.000</EffectiveDate>
+    <ExpirationDate/>
+  </UWInterventionClassificationCode>
+  <UWInterventionClassificationCode public-id="pc:zlcj6l3sli51oe5bbn5c52fb1pa">
+    <Code>0041</Code>
+    <ClassIndicator>31</ClassIndicator>
+    <EffectiveDate>2017-03-14 00:00:00.000</EffectiveDate>
+    <ExpirationDate>2017-10-16 00:00:00.000</ExpirationDate>
+  </UWInterventionClassificationCode>
+  <UWInterventionClassificationCode public-id="pc:zklimtr2jp4uf53486pgob96c18">
+    <Code>0129</Code>
+    <ClassIndicator>7</ClassIndicator>
+    <EffectiveDate>2017-08-15 00:00:00.000</EffectiveDate>
+    <ExpirationDate/>
+  </UWInterventionClassificationCode>
+</import>

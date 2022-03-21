@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    id="ContactFileInfoBar">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <InfoBarElement
+      icon="&quot;insured&quot;"
+      iconType="svgFileName"
+      id="ContactLabel"
+      label="DisplayKey.get(&quot;Web.ContactFileInfoBar.ContactName&quot;)"/>
+    <InfoBarElement
+      id="ContactName"
+      value="contact.DisplayName"/>
+  </InfoBar>
+</PCF>

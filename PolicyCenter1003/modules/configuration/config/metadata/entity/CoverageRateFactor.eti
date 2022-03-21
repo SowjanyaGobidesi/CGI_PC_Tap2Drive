@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!-- Custom table to store rate factors for coverages -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="Coverage-related factors"
+  entity="CoverageRateFactor"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="covratefactor"
+  type="retireable">
+  <foreignkey
+    desc="Associated logical rate table"
+    fkentity="RateTable"
+    name="RateTable"
+    nullok="false"/>
+  <!-- ======================================== Parameters ======================================== -->
+  <column
+    desc="Coverage Code"
+    name="CovCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Coverage Term Code"
+    name="CovTermCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Coverage Term Option Code"
+    name="CovTermOptCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Jurisdiction"
+    name="Jurisdiction"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <!-- ======================================== Factors ======================================== -->
+  <column
+    desc="Factor"
+    name="Factor"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="10"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+</entity>

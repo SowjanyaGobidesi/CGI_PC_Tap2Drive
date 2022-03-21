@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  entity="PolicyNamedInsured"
+  supertype="PolicyContactRole">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.contact.PolicyNamedInsuredPublicMethods"
+    impl="com.guidewire.pc.domain.contact.impl.PolicyNamedInsuredImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.contact.PolicyNamedInsuredMergeableImpl"/>
+  <array
+    arrayentity="LocationNamedInsured"
+    cascadeDelete="true"
+    desc="The named insured covered at this location."
+    name="LocationNamedInsureds"/>
+  <fulldescription><![CDATA[
+    A person or company directly protected by the policy with full rights and responsibilities.
+  ]]></fulldescription>
+</subtype>

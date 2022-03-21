@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canVisit="policyPeriod.Policy.canViewNotes() and perm.PolicyPeriod.view(policyPeriod) and perm.System.viewpolicyfile and perm.System.noteview"
+    countsAsWork="false"
+    id="PolicyFile_Notes"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Notes&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Notes(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <LocationEntryPoint
+      signature="PolicyFile_Notes(policyPeriod : PolicyPeriod, activity : Activity)"/>
+    <LocationEntryPoint
+      signature="PolicyFile_Notes(policyPeriod : PolicyPeriod, asOfDate : java.util.Date, activity : Activity)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      name="activity"
+      type="Activity"/>
+    <ScreenRef
+      def="Policy_NotesScreen(policyPeriod, activity)"/>
+  </Page>
+</PCF>

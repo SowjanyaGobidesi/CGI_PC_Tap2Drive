@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.pfiledetails"
+    id="PolicyFile_HOPDwelling"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.Name&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_HOPDwelling(policyPeriod : PolicyPeriod, asOfDate : Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="Date"/>
+    <Screen
+      id="PolicyFile_HOPDwellingScreen">
+      <TitleBar/>
+      <Toolbar/>
+      <PanelRef
+        def="HOPDwellingPanelSet(policyPeriod, false, null)"/>
+    </Screen>
+  </Page>
+</PCF>

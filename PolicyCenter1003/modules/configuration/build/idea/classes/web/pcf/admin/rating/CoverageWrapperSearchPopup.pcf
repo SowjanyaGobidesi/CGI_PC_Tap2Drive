@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="CoverageWrapperSearchPopup"
+    returnType="String"
+    title="DisplayKey.get(&quot;Web.Rating.Parameter.Search.CoverageWrapperSearch&quot;)">
+    <LocationEntryPoint
+      signature="CoverageWrapperSearchPopup(PolicyLinePatternCode : String)"/>
+    <Variable
+      name="PolicyLinePatternCode"
+      type="String"/>
+    <Screen>
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultsName="results"
+        search="searchCriteria.doSearch()"
+        searchCriteria="new gw.pcf.rating.flow.CoverageWrapperSearchCriteria(PolicyLinePatternCode)"
+        searchCriteriaType="gw.pcf.rating.flow.CoverageWrapperSearchCriteria"
+        searchResultsType="gw.pc.rating.flow.AvailableCoverageWrapper[]">
+        <DetailViewPanel>
+          <InputColumn>
+            <InputSetRef
+              def="SearchAndResetInputSet()"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef>
+          <Toolbar
+            id="toolbar"/>
+          <ListViewPanel>
+            <RowIterator
+              editable="false"
+              elementName="wrapperClass"
+              pickValue="wrapperClass.WrapperType.Name"
+              value="results"
+              valueType="gw.pc.rating.flow.AvailableCoverageWrapper[]">
+              <Row>
+                <TextCell
+                  id="name"
+                  label="DisplayKey.get(&quot;Web.Rating.Parameter.Search.WrapperName&quot;)"
+                  value="wrapperClass.Name"/>
+                <TextCell
+                  id="type"
+                  label="DisplayKey.get(&quot;Web.Rating.Parameter.Search.WrapperType&quot;)"
+                  value="wrapperClass.WrapperType.Name"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

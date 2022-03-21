@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Repository for Worksheet XML data."
+  entity="WorksheetData"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  lockable="true"
+  platform="false"
+  table="worksheetdata"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <column
+    desc="Contents of the rating worksheet stored as GZIP-compressed XML."
+    name="Data"
+    nullok="true"
+    type="blob"/>
+  <foreignkey
+    fkentity="WorksheetContainer"
+    name="WorksheetContainer"
+    nullok="false"/>
+</entity>

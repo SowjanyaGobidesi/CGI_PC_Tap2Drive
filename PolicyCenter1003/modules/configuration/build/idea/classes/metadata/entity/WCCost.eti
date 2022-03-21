@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- ===== Financials ===== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A WorkersComp unit of price for a period of time that should not be broken up any further."
+  effDatedBranchType="PolicyPeriod"
+  entity="WCCost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="wccost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.wc.financials.WCCostAdapter"/>
+  <column
+    desc="The order in which this cost was rated."
+    name="CalcOrder"
+    nullok="false"
+    type="integer"/>
+  <foreignkey
+    fkentity="WorkersCompLine"
+    name="WorkersCompLine"
+    nullok="false"/>
+  <array
+    arrayentity="WCTransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

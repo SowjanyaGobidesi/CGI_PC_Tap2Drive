@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="JobWizardToolbarButtonSet"
+    mode="Reinstatement">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      initialValue="job as Reinstatement"
+      name="reinstatement"
+      type="Reinstatement"/>
+    <Variable
+      initialValue="policyPeriod.ReinstatementProcess"
+      name="reinstatementProcess"
+      type="gw.job.ReinstatementProcess"/>
+    <Variable
+      initialValue="gw.web.job.JobUIHelper.getQuoteType(policyPeriod)"
+      name="quoteType"
+      recalculateOnRefresh="true"
+      type="gw.web.job.JobUIHelper.QuoteType"/>
+    <ToolbarButton
+      action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;uw_review_approved&quot;), &quot;UWApproval&quot;)"
+      id="Unlock"
+      label="DisplayKey.get(&quot;Job.Operation.ReleaseLock&quot;)"
+      shortcut="K"
+      visible="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod) and reinstatementProcess.canReleaseLock() "/>
+    <ToolbarButtonSetRef
+      mode="quoteType"
+      toolbarButtonSet="QuoteTypeToolbarButtonSet(policyPeriod, jobWizardHelper)"
+      visible="quoteType != null"></ToolbarButtonSetRef>
+    <ToolbarButton
+      action="reinstatementProcess.edit(); wizard.saveDraft(); jobWizardHelper.goToVisibleStep(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.Edit.Confirm&quot;)"
+      id="EditPolicy"
+      label="DisplayKey.get(&quot;Job.Operation.EditWorkOrder&quot;)"
+      shortcut="E"
+      visible="reinstatementProcess.canEdit().Okay"/>
+    <ToolbarButton
+      action="wizard.saveDraft()"
+      hideIfReadOnly="true"
+      id="Draft"
+      label="DisplayKey.get(&quot;Button.SaveDraft&quot;)"
+      shortcut="S"/>
+    <ToolbarButton
+      action="HandlePreemptionPopup.push(wizard, jobWizardHelper, policyPeriod, true)"
+      id="HandlePreemptions"
+      label="DisplayKey.get(&quot;Job.Operation.HandlePreemption&quot;)"
+      shortcut="H"
+      visible="reinstatementProcess.canHandlePreemptions().Okay"/>
+    <ToolbarButton
+      action="jobWizardHelper.applyChangesToFutureBoundRenewal(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.ApplyToRenewal.ConfirmBound&quot;)"
+      id="ResolveWithFutureBoundPeriods"
+      label="DisplayKey.get(&quot;Job.Operation.ApplyToRenewal&quot;)"
+      shortcut="L"
+      visible="policyPeriod.JobProcess.canApplyChangesToFutureBoundRenewal()"/>
+    <ToolbarButton
+      action="jobWizardHelper.applyChangesToFutureUnboundRenewal(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.ApplyToRenewal.ConfirmUnbound&quot;)"
+      id="ResolveWithFutureUnboundPeriods"
+      label="DisplayKey.get(&quot;Job.Operation.ApplyToRenewal&quot;)"
+      shortcut="Y"
+      visible="policyPeriod.JobProcess.canApplyChangesToFutureUnboundRenewal()"/>
+    <ToolbarButton
+      action="jobWizardHelper.requestIssueJob(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.EnterReinstating.Confirm&quot;)"
+      id="Reinstate"
+      label="DisplayKey.get(&quot;Job.Operation.EnterReinstating&quot;)"
+      shortcut="R"
+      visible="reinstatementProcess.canReinstate().Okay"/>
+    <ToolbarButton
+      action="jobWizardHelper.withdraw(policyPeriod); PolicyFileForward.go(policyPeriod.PolicyNumber)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.Withdraw.Confirm&quot;)"
+      id="WithdrawJob"
+      label="DisplayKey.get(&quot;Job.Operation.Withdraw&quot;)"
+      shortcut="W"
+      visible="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod) and reinstatementProcess.canWithdraw().Okay"/>
+  </ToolbarButtonSet>
+</PCF>

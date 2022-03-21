@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="LoadFactorDV">
+    <Require
+      name="group"
+      type="Group"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="GroupLoadFactor"
+        label="DisplayKey.get(&quot;Web.LoadAndVacation.LoadFactorDV.GroupLoadFactor&quot;)"
+        required="true"
+        validationExpression="!(group.LoadFactor &lt; 0 || group.LoadFactor &gt; 100) ? null : DisplayKey.get(&quot;Web.LoadAndVacation.LoadFactorDV.GroupLoadFactor.OutOfRange&quot;)"
+        value="group.LoadFactor"
+        valueType="java.lang.Integer"/>
+      <ListViewInput
+        def="EditableLoadFactorsLV(group.MembersNoSystemUsers)"
+        editable="true"
+        label="DisplayKey.get(&quot;Web.LoadAndVacation.LoadFactorDV.GroupUserLoadFactor&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

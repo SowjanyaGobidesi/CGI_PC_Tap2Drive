@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="SmokeAlarms" desc="">
+  <typecode
+    code="none"
+    desc="None"
+    name="None"
+    priority="10"/>
+  <typecode
+    code="allfloors"
+    desc="Smoke Alarms on All Floors"
+    name="All Floors"
+    priority="20"/>
+  <typecode
+    code="partial"
+    desc="Smoke Alarms but not on All Floors"
+    name="Partial"
+    priority="30"/>
+</typelist>

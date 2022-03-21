@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="AddlInterestDetail" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.api.contact.AddlInterestDetailMethods" impl="gw.api.contact.AddlInterestDetailMethodsDefaultImpl"/>
+</extension>

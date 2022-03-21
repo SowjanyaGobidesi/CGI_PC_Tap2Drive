@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCoverageLookup public-id="z5qj6d7gm301kb7pi1t6c2epc18">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <CoveragePatternCode>zqai6drb846ga0qkobutjcleb2a</CoveragePatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCoverageLookup>
+  <HOPCovTermLookup public-id="z6dj4lsvv6s1b0oggjopap1uqv9">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>z88g4jt7ovvl6eqbn243fl6kttb</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zusiufio2jmuh0en2f56uh8p138">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zbugmd8apaqcl5oc5knc0rd62eb</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermOptLookup public-id="zv4isk15cnkah42udav1b670lq9">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zh0hmun0ihcon6735g1aaq26aua</CovTermOptCode>
+    <CovTermPatternCode>zbugmd8apaqcl5oc5knc0rd62eb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="z29i84rcki4mp85rjqsgf7uh1j9">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zc8hikrbgi9lq1npm7djioigrlb</CovTermOptCode>
+    <CovTermPatternCode>z88g4jt7ovvl6eqbn243fl6kttb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="z8bjq2l3mu8hr0jmju5a5kal1ab">
+    <Availability>Available</Availability>
+    <CovTermOptCode>z6sj8iq0ce89281pojt0eba5nfa</CovTermOptCode>
+    <CovTermPatternCode>z88g4jt7ovvl6eqbn243fl6kttb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="zopjm7u20t6racundfcsfqd7t6b">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zttjq8vus42m22hujo97ktfv1db</CovTermOptCode>
+    <CovTermPatternCode>zbugmd8apaqcl5oc5knc0rd62eb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="z3fha8tvq77fpbjrejqqop5m4ea">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zkrjals5gkfdq8mo9f7f8mp9vka</CovTermOptCode>
+    <CovTermPatternCode>z88g4jt7ovvl6eqbn243fl6kttb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="zhkjsa0jbtgf6f5asmqaimq1nea">
+    <Availability>Available</Availability>
+    <CovTermOptCode>z33ikjvjo4qpp1o99ui9i7c5sd9</CovTermOptCode>
+    <CovTermPatternCode>z88g4jt7ovvl6eqbn243fl6kttb</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+</import>

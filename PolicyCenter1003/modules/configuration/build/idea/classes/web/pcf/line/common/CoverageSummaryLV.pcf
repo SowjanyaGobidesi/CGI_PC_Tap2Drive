@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    alternateEntryStyle="false"
+    disableUserCustomization="true"
+    id="CoverageSummaryLV"
+    stretch="true">
+    <Require
+      name="clauses"
+      type="List&lt;gw.api.domain.Clause&gt;"/>
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Variable
+      initialValue="coverable != null and gw.api.util.CurrencyUtil.isMultiCurrencyMode()?DisplayKey.get(&quot;Web.Policy.CurrencySuffix&quot;, coverable.PreferredCoverageCurrency):&quot;&quot;"
+      name="valueLabel"
+      type="java.lang.String"/>
+    <RowIterator
+      editable="false"
+      elementName="clause"
+      pageSize="0"
+      value="clauses.toArray( new gw.api.domain.Clause[clauses.Count] )"
+      valueType="gw.api.domain.Clause[]">
+      <IteratorSort
+        sortBy="clause.Pattern.CoverageCategory.Priority"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="clause.Pattern.CoverageCategory.PublicID"
+        sortOrder="2"/>
+      <IteratorSort
+        sortBy="clause.Pattern.Priority"
+        sortOrder="3"/>
+      <IteratorSort
+        sortBy="clause.Pattern.PublicID"
+        sortOrder="4"/>
+      <Row
+        useTitleStyle="true">
+        <TextCell
+          align="left"
+          bold="true"
+          enableSort="false"
+          grow="true"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverages.Description&quot;)"
+          value="(clause typeis Coverage) ? DisplayKey.get(&quot;Web.PolicyLine.Coverage&quot;, clause.Pattern) : clause.Pattern"
+          valueType="java.lang.Object"
+          wrap="true"/>
+        <TextCell
+          align="right"
+          enableSort="false"
+          id="Empty"
+          label="DisplayKey.get(&quot;Web.PolicyLine.Coverage.CovTermValue&quot;, valueLabel)"
+          value="empty()"
+          wrap="false"/>
+      </Row>
+      <RowIterator
+        editable="false"
+        elementName="covTerm"
+        pageSize="0"
+        value="clause.CovTerms"
+        valueType="gw.api.domain.covterm.CovTerm[]">
+        <IteratorSort
+          sortBy="covTerm.Pattern.Priority"
+          sortOrder="1"/>
+        <IteratorSort
+          sortBy="covTerm.Pattern.PublicID"
+          sortOrder="2"/>
+        <Row>
+          <TextCell
+            align="left"
+            enableSort="false"
+            grow="true"
+            id="Description"
+            value="covTerm.DisplayName"
+            wrap="true"/>
+          <TextCell
+            align="right"
+            id="term"
+            value="covTerm.DisplayValue"
+            wrap="false"/>
+        </Row>
+      </RowIterator>
+    </RowIterator>
+    <Code><![CDATA[function empty(): String {
+        return ""
+      }]]></Code>
+  </ListViewPanel>
+</PCF>

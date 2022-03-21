@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="UWRulePopup"
+    title="DisplayKey.get('Web.BizRules.UWRulePopup.Title', ruleVersion.Rule.Name)">
+    <LocationEntryPoint
+      signature="UWRulePopup(ruleVersion: RuleVersion, importing: boolean)"/>
+    <Variable
+      name="ruleVersion"
+      type="RuleVersion"/>
+    <Variable
+      name="importing"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RulePageController(ruleVersion, gw.web.bizrules.UWRulesPageHelper.UIConfigs, CurrentLocation, gw.web.bizrules.PCBizRulesDetailsStateHolder.SwitchableModes)"
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Screen>
+      <PanelRef
+        def="UWRulePanelSet(ruleVersion, importing, controller)"/>
+    </Screen>
+  </Popup>
+</PCF>

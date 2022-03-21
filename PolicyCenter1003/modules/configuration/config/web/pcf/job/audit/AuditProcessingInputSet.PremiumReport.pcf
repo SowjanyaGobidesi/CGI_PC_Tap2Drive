@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AuditProcessingInputSet"
+    mode="PremiumReport">
+    <Require
+      name="audit"
+      type="Audit"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.AuditWizard.Processing&quot;)"/>
+    <DateInput
+      id="InitDate"
+      label="DisplayKey.get(&quot;Web.AuditWizard.StartDate&quot;)"
+      value="audit.AuditInformation.InitDate"/>
+    <DateInput
+      editable="perm.Audit.reschedule"
+      id="DueDate"
+      label="DisplayKey.get(&quot;Web.AuditWizard.DueDate&quot;)"
+      value="audit.AuditInformation.DueDate"/>
+    <DateInput
+      editable="true"
+      id="ReceivedDate"
+      label="DisplayKey.get(&quot;Web.AuditWizard.ReceivedDate&quot;)"
+      value="audit.AuditInformation.ReceivedDate"/>
+    <MonetaryAmountInput
+      currency="audit.Currency"
+      editable="true"
+      formatType="currency"
+      id="PaymentReceived"
+      label="DisplayKey.get(&quot;Web.AuditWizard.PaymentReceived&quot;)"
+      value="audit.PaymentReceived"/>
+  </InputSet>
+</PCF>

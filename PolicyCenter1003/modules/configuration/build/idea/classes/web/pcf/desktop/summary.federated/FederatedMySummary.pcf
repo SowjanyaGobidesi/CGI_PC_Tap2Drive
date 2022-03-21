@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions.Instance.Any &amp;&amp; gw.api.web.desktop.data.FederatedDataUIHelper.IsFederated"
+    id="FederatedMySummary"
+    title="DisplayKey.get('Web.Dashboard.Underwriter.Title')">
+    <LocationEntryPoint
+      signature="FederatedMySummary(user: User)"/>
+    <Variable
+      name="user"
+      type="User"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.underwriter.UnderwriterDashboardParameters.Permissions"/>
+    <Screen>
+      <ColumnDashboard
+        id="UnderwriterMySummaryDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="FederatedOverviewDetailViewTile(user)"
+            visible="permissions.AnyJobsOrActivities"/>
+          <TileRef
+            def="FederatedMyActivitiesListViewTile()"
+            visible="permissions.Activities"/>
+          <TileRef
+            def="FederatedMySubmissionsListViewTile(user)"
+            visible="permissions.Submissions"/>
+          <TileRef
+            def="FederatedMyRenewalListViewTile(user)"
+            visible="permissions.Renewals"/>
+          <TileRef
+            def="FederatedChangeRequestsListViewTile(user)"
+            visible="permissions.Other"/>
+          <!--<TileRef-->
+            <!--def="FederatedChangeRequestsListViewTile(user)"-->
+            <!--visible="permissions.Other"/>-->
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

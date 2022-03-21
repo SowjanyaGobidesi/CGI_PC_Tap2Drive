@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  desc="Entity that holds all payment gateway transactions"
+  xmlns="http://guidewire.com/datamodel"
+  entity="PaymentGatewayTransaction"
+  exportable="true"
+  loadable="false"
+  table="paymentgatewaytransaction"
+  type="keyable">
+  <column
+    name="Reference"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <column
+    default="false"
+    name="SaveForFutureUse"
+    nullok="false"
+    type="bit"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <fulldescription>Entity that holds all payment gateway transactions. It helps to confirm processed transactions and
+    recover from unfinished ones.</fulldescription>
+</entity>

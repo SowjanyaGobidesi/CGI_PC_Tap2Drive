@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="PolicyFile_StateInfoDV"
+    selectionName="selectedState"
+    selectionType="BAJurisdiction">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.BusinessAutoLine"
+      name="baLine"
+      type="productmodel.BusinessAutoLine"/>
+    <ListViewPanel
+      id="jurisdictionLV">
+      <RowIterator
+        editable="false"
+        elementName="jurisdiction"
+        value="baLine.GaragingJurisdictions"
+        valueType="entity.BAJurisdiction[]">
+        <Row>
+          <TypeKeyCell
+            id="States"
+            label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.State&quot;)"
+            sortOrder="1"
+            value="jurisdiction.State"
+            valueType="typekey.Jurisdiction"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+    <CardViewPanel>
+      <Card
+        id="CoveragesCard"
+        title="DisplayKey.get(&quot;Web.PolicyLine.Coverages&quot;)">
+        <PanelRef
+          def="BAStateCoveragesPanelSet(selectedState, baLine, false)"/>
+      </Card>
+      <Card
+        id="AdditionalCoveragesCard"
+        title="DisplayKey.get(&quot;Web.Policy.BA.AdditionalCoverages&quot;)">
+        <PanelRef
+          def="AdditionalCoveragesPanelSet(selectedState, baLine.AdditionalCoverageCategories, true)"/>
+      </Card>
+      <Card
+        id="ExclusionsAndConditionsCard"
+        title="DisplayKey.get(&quot;Web.LineWizard.ExclusionsAndConditions&quot;)">
+        <PanelRef
+          def="AdditionalExclusionsAndConditionsPanelSet(selectedState, baLine.AdditionalCoverageCategories, true)"/>
+      </Card>
+      <Card
+        id="ModifierCard"
+        title="DisplayKey.get(&quot;Web.Policy.BA.Modifier&quot;)"
+        visible="policyPeriod.CanViewModifiers">
+        <PanelRef
+          def="BusinessAutoStateModifierPanelSet(baLine, selectedState)"/>
+      </Card>
+    </CardViewPanel>
+  </ListDetailPanel>
+</PCF>

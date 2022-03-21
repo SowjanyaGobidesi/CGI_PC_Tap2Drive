@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <WizardStepSet
+    id="LineWizardStepSet"
+    mode="HOPHomeowners">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <JobWizardStep
+      beforeSave="gw.lob.hop.HOPDwellingValidation.validateDwellingStep(policyPeriod.HOPLine.HOPDwellings.single())"
+      id="HOPDwelling"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="policyPeriod.OpenForEdit"
+      screen="HOPDwellingScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.HOP.HOPDwellingScreen&quot;)"/>
+    <JobWizardStep
+      beforeSave="gw.lob.hop.HOPDwellingValidation.validateDwellingConstructionStep(policyPeriod.HOPLine.HOPDwellings.single())"
+      id="HOPDwellingConstruction"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="policyPeriod.OpenForEdit"
+      screen="HOPDwellingConstructionScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.HOP.HOPDwellingConstructionScreen&quot;)"/>
+    <JobWizardStep
+      beforeSave="gw.lob.hop.HOPCoveragesValidation.validateCoveragesStep(policyPeriod.HOPLine)"
+      id="HOPCoverages"
+      onEnter="gw.web.line.hop.policy.LineWizardStepSet_HOPHomeownersHelper.onEnter(policyPeriod, jobWizardHelper)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="policyPeriod.OpenForEdit"
+      screen="HOPCoveragesScreen(policyPeriod, openForEdit, job, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.HOP.HOPCoveragesScreen&quot;)"/>
+    <JobWizardStep
+      id="Modifiers"
+      onEnter="if (openForEdit) { gw.web.productmodel.ProductModelSyncIssuesHandler.syncModifiers(policyPeriod.HOPLine.AllModifiables, jobWizardHelper)}"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="openForEdit"
+      screen="HOPModifiersScreen(policyPeriod, openForEdit,jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.SubmissionWizardMenu.Modifiers&quot;)"
+      visible="policyPeriod.CanViewModifiers"/>
+  </WizardStepSet>
+</PCF>

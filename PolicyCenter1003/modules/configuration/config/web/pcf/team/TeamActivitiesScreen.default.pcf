@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="TeamActivitiesScreen"
+    mode="default">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel.canViewActivities()"
+      name="canViewActivities"
+      type="boolean"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.Team.Activities&quot;, teamModel.Label, teamModel.getDisplayMode(false), gw.api.domain.statistics.StatsWindowUtil.getActivitiesWindow())"/>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.Team.JobCountToDisplayExceedsMax&quot;, gw.api.system.PCConfigParameters.TeamScreenTabVisibilityRowCountCutoff.Value, &quot;activities&quot;, teamModel.Label)"
+      visible="not canViewActivities"/>
+    <PanelRef
+      def="TeamActivitiesLV(teamModel)"
+      visible="canViewActivities">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.web.activity.ActivityAssignmentPopup(CheckedValues, gw.assignment.AssignmentUtil.DefaultUser))"
+          flags="all canAssignActivity"
+          id="TeamGroupActivities_Assign"
+          iterator="TeamActivitiesLV.TeamActivitiesLV"
+          label="DisplayKey.get(&quot;Web.Team.Activities.Assign&quot;)"
+          shortcut="A"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

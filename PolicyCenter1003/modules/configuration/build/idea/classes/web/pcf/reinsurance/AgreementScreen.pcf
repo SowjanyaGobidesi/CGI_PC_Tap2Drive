@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="AgreementScreen">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <Require
+      name="isInPopup"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.web.reinsurance.AgreementScreenUIHelper(agreement, isInPopup)"
+      name="screenHelper"
+      type="gw.web.reinsurance.AgreementScreenUIHelper"/>
+    <Toolbar>
+      <EditButtons
+        editVisible="(agreement typeis Treaty) ? (perm.System.editreinsuranceprogram and not agreement.Active) or (perm.System.editreinsuranceactiveprogram and agreement.Active) : perm.System.editreinsurancefacagreement"
+        pickValue="isInPopup ? agreement : null"
+        updateVisible="(agreement typeis Treaty) ? (perm.System.editreinsuranceprogram and not agreement.Active) or (perm.System.editreinsuranceactiveprogram and agreement.Active) : perm.System.editreinsurancefacagreement"/>
+      <ToolbarButton
+        action="agreement.validate(); gw.api.util.LocationUtil.addRequestScopedInfoMessage(DisplayKey.get(&quot;Web.Reinsurance.Agreement.Verify.VerificationPasses&quot;)) "
+        hideIfEditable="true"
+        id="ValidateButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Validate&quot;)"
+        visible="agreement typeis Treaty ? perm.System.editreinsuranceprogram : perm.System.editreinsurancefacagreement"/>
+      <ToolbarButton
+        action="NewAgreementPage.go(agreement.Subtype, agreement)"
+        available="not agreement.New "
+        hideIfEditable="true"
+        id="CloneButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Clone&quot;)"
+        visible="agreement typeis Treaty ? perm.System.editreinsuranceprogram : perm.System.editreinsurancefacagreement"/>
+      <ToolbarButton
+        action="screenHelper.makeActive()"
+        available="not agreement.Active"
+        hideIfEditable="true"
+        id="MakeActiveButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.MakeActive&quot;)"
+        visible="agreement typeis Treaty ? perm.System.editreinsuranceprogram : perm.System.editreinsurancefacagreement"/>
+      <ToolbarButton
+        action="screenHelper.delete(); AgreementSearchPage.go()"
+        available="!agreement.Active"
+        hideIfEditable="true"
+        id="DeleteButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Delete&quot;)"
+        visible="agreement typeis Treaty ? perm.System.editreinsuranceprogram : perm.System.editreinsurancefacagreement"/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn>
+        <TextInput
+          editable="true"
+          id="AgreementNumber"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.TreatyNumber&quot;)"
+          required="true"
+          validationExpression="screenHelper.validateAgreementNumberIsUnique()"
+          value="agreement.AgreementNumber"/>
+        <TextInput
+          editable="true"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Name&quot;)"
+          required="true"
+          value="agreement.Name"/>
+        <TypeKeyInput
+          id="Subtype"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Type&quot;)"
+          value="agreement.Subtype"
+          valueType="typekey.RIAgreement"/>
+        <DateInput
+          editable="true"
+          id="EffDate"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.EffectiveDate&quot;)"
+          required="true"
+          value="agreement.EffectiveDate">
+          <PostOnChange
+            onChange="agreement.setEffectiveDateWithDefaultTime(agreement.EffectiveDate)"/>
+        </DateInput>
+        <DateInput
+          editable="true"
+          id="ExpDate"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.ExpirationDate&quot;)"
+          required="true"
+          validationExpression="agreement.ExpirationDate &lt;= agreement.EffectiveDate ? DisplayKey.get(&quot;Web.Reinsurance.Treaty.ExpDateValidation&quot;) : null"
+          value="agreement.ExpirationDate">
+          <PostOnChange
+            onChange="agreement.setExpirationDateWithDefaultTime(agreement.ExpirationDate)"/>
+        </DateInput>
+        <TypeKeyInput
+          id="Status"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Status&quot;)"
+          value="agreement.Status"
+          valueType="typekey.ContractStatus"/>
+        <TypeKeyInput
+          editable="agreement.Status == TC_DRAFT"
+          id="Currency"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Currency&quot;)"
+          required="true"
+          value="agreement.Currency"
+          valueType="typekey.Currency"
+          visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+          <PostOnChange
+            onChange="agreement.resetMonetaryAmounts()"/>
+        </TypeKeyInput>
+        <InputDivider/>
+        <Label
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CoverageHeader&quot;)"/>
+        <InputSetRef
+          def="AgreementCoverageInputSet(agreement)"
+          mode="screenHelper.coverageMode()"/>
+      </InputColumn>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.PremiumAndCommissionsHeader&quot;)"/>
+        <InputSetRef
+          def="AgreementPAndCInputSet(agreement)"
+          mode="agreement.PremiumAndCoverageMode()"/>
+        <TypeKeyInput
+          editable="true"
+          id="PayableBasis"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.PayableBasis&quot;)"
+          value="agreement.PayableBasis"
+          valueType="typekey.PayableBasisType"/>
+        <TextInput
+          editable="not agreement.CommissionAdjusted"
+          format="DisplayKey.get(&quot;Web.Reinsurance.PercentageDisplayFormat&quot;)"
+          id="Commission"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Commission&quot;)"
+          required="true"
+          value="agreement.Commission"
+          valueType="java.math.BigDecimal"/>
+        <ContentInput>
+          <Link
+            action="agreement.CommissionAdjusted = true"
+            hideIfReadOnly="true"
+            id="Adjust"
+            label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AdjustCommissionRates&quot;)"
+            styleClass="miniButton"
+            visible="not agreement.CommissionAdjusted"/>
+          <Link
+            action="agreement.CommissionAdjusted = false"
+            hideIfReadOnly="true"
+            id="UnAdjust"
+            label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.SetCommissionRate&quot;)"
+            styleClass="miniButton"
+            visible="agreement.CommissionAdjusted"/>
+        </ContentInput>
+        <TextInput
+          action="EditContactPopup.push(agreement.Broker, CurrentLocation.InEditMode)"
+          hideChildrenIfReadOnly="false"
+          id="ChangeBrokerContactButton"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Broker&quot;)"
+          value="agreement.Broker == null ? &quot; &quot; : agreement.Broker"
+          valueType="java.lang.Comparable&lt;java.lang.Object&gt;">
+          <PickerMenuItem
+            action="NewContactPopup.push(typekey.ContactType.TC_COMPANY)"
+            id="NewCompany"
+            label="DisplayKey.get(&quot;Web.ContactDetail.NewCompany&quot;)"
+            onPick="agreement.Broker = PickedValue"
+            visible="CurrentLocation.InEditMode"/>
+          <PickerMenuItem
+            action="ContactSearchPopup.push({typekey.Contact.TC_COMPANY})"
+            id="BrokerSearch"
+            label="DisplayKey.get(&quot;Web.Button.FromAddressBook&quot;)"
+            onPick="agreement.Broker = PickedValue"
+            visible="CurrentLocation.InEditMode"/>
+        </TextInput>
+        <InputDivider/>
+        <Label
+          label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.OtherTermsHeader&quot;)"/>
+        <InputSetRef
+          def="AgreementOtherTermsInputSet(agreement)"
+          mode="screenHelper.otherTermMode()"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <CardViewPanel>
+      <Card
+        id="Participants"
+        title="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Participants&quot;)">
+        <PanelRef
+          def="ParticipantsLV(agreement)"
+          editable="true">
+          <Toolbar>
+            <AddButton
+              hideIfReadOnly="true"
+              id="Add"
+              iterator="ParticipantsLV.ParticipantsLV"
+              label="DisplayKey.get(&quot;Button.Add&quot;)">
+              <AddMenuItem
+                conversionExpression="agreement.addParticipant(PickedValue)"
+                id="NewCompany"
+                iterator="ParticipantsLV.ParticipantsLV"
+                label="DisplayKey.get(&quot;Web.ContactDetail.NewCompany&quot;)"
+                pickLocation="NewContactPopup.push(typekey.ContactType.TC_COMPANY)"/>
+              <AddMenuItem
+                conversionExpression="agreement.addParticipant(PickedValue)"
+                id="ParticipantSearch"
+                iterator="ParticipantsLV.ParticipantsLV"
+                label="DisplayKey.get(&quot;Web.Button.FromAddressBook&quot;)"
+                pickLocation="ContactSearchPopup.push({typekey.Contact.TC_COMPANY})"/>
+            </AddButton>
+            <RemoveButton
+              hideIfReadOnly="true"
+              id="Remove"
+              iterator="ParticipantsLV.ParticipantsLV"
+              label="DisplayKey.get(&quot;Button.Remove&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AppliesTo"
+        title="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AppliesTo&quot;)"
+        visible="agreement typeis Treaty">
+        <PanelRef
+          def="RICoverageGroupsPanelSet(agreement)"
+          visible="agreement typeis Treaty"/>
+      </Card>
+    </CardViewPanel>
+    <PanelRef
+      def="LocalizedValuesDV(agreement, { &quot;Name&quot; }, { DisplayKey.get(&quot;Web.Reinsurance.Treaty.Name&quot;) })"/>
+  </Screen>
+</PCF>

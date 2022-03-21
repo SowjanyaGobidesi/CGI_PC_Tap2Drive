@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SubmissionGroupJobsLV">
+    <Require
+      name="submissionGroup"
+      type="SubmissionGroup"/>
+    <RowIterator
+      editable="false"
+      elementName="submission"
+      value="submissionGroup.Submissions"
+      valueType="entity.Submission[]">
+      <Row
+        useArchivedStyle="submission.LatestPeriod.PolicyTerm.CheckArchived">
+        <TextCell
+          id="PolicyType"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.PolicyType&quot;)"
+          value="submission.Policy.Product.Name"/>
+        <TextCell
+          action="JobForward.go(submission)"
+          id="Submission"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.SubmissionNum&quot;)"
+          value="submission.JobNumber"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.Status&quot;)"
+          value="submission.LatestPeriod.Status"
+          valueType="typekey.PolicyPeriodStatus"/>
+        <TextCell
+          action="pcf.PolicyFileForward.go( submission.LatestPeriod, submission.LatestPeriod.EditEffectiveDate)"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.PolicyNum&quot;)"
+          value="submission.LatestPeriod.PolicyNumberDisplayString"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.CreateDate&quot;)"
+          value="submission.CreateTime"/>
+        <DateCell
+          id="CloseDate"
+          label="DisplayKey.get(&quot;Web.SubmissionGroup.CloseDate&quot;)"
+          value="submission.CloseDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Producer selection (part of account setup in a new Submission or Renewal)  ==================================================================== -->
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Producer selection (part of account setup in a new Submission or Renewal)."
+  entity="ProducerSelection"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.impl.ProducerSelectionInternalMethods"
+    impl="com.guidewire.pc.domain.product.impl.ProducerSelectionImpl"/>
+  <column
+    desc="Default Policy Period effective date for new Submissions"
+    name="DefaultPPEffDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Default Base State for new Submissions"
+    name="State"
+    nullok="false"
+    typelist="Jurisdiction"/>
+  <foreignkey
+    desc="Account for new Submissions"
+    fkentity="Account"
+    name="Account"
+    nullok="false"/>
+  <foreignkey
+    desc="The Organization selected as &quot;producer&quot; of a Submission."
+    fkentity="Organization"
+    name="Producer"
+    nullok="false"/>
+  <foreignkey
+    desc="The ProducerCode selected to identify &quot;producer&quot; of a Submission."
+    fkentity="ProducerCode"
+    name="ProducerCode"
+    nullok="false"/>
+</nonPersistentEntity>

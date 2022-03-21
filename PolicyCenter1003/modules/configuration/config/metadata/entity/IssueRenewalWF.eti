@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Workflow for issuing renewals"
+  entity="IssueRenewalWF"
+  supertype="PolicyPeriodWorkflow"/>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="policyPeriod.PolicyTerm.CheckArchived"
+    countsAsWork="false"
+    id="ArchivedPolicyPeriodPage"
+    title="DisplayKey.get('Web.PolicyFile.PolicySummary', policyPeriod.PolicyNumberDisplayString)">
+    <LocationEntryPoint
+      signature="ArchivedPolicyPeriodPage(policyPeriod : PolicyPeriod)"/>
+    <Variable
+    name="policyPeriod"
+    type="PolicyPeriod"/>
+    <Variable
+      initialValue="java.util.Date.CurrentDate"
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.claims.LossRatioHelper.forPolicyPeriod(policyPeriod)"
+      name="lossRatioHelper"
+      type="gw.api.web.dashboard.ui.claims.LossRatioHelper"/>
+    <Screen>
+      <AlertBar
+        allowDismiss="false"
+        available="false"
+        id="ArchivedPeriodWarning"
+        label="DisplayKey.get('Web.Archive.PolicyPeriodLandingPage.Issue', policyPeriod.PeriodStart, policyPeriod.PeriodEnd)"
+        visible="policyPeriod.Archived"/>
+      <ColumnDashboard
+        id="ArchivedPolicySummaryDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="PolicyDetailsDetailViewTile(policyPeriod, asOfDate)"
+            visible="permissions.PolicyDetails"/>
+          <TileRef
+            def="TermFinancialsViewTile(policyPeriod, lossRatioHelper)"
+            visible="permissions.Premium"/>
+          <TileRef
+            def="ClaimsPolicyListViewTile(policyPeriod)"
+            visible="permissions.Claims"/>
+          <TileRef
+            def="PendingPolicyTransactionsListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.PendingPolicyTransactions"/>
+          <TileRef
+            def="CompletedPolicyTransactionsListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.CompletedPolicyTransactions"/>
+        </DashboardColumn>
+        <DashboardColumn>
+          <TileRef
+            def="AccountDetailViewTile(policyPeriod)"
+            visible="permissions.Account"/>
+          <TileRef
+            def="NotesDetailViewTile(gw.api.web.dashboard.ui.note.NoteHelper.forPolicyPeriod(policyPeriod, asOfDate))"
+            visible="permissions.canSeeNotes(policyPeriod)"/>
+          <TileRef
+            def="ProducerDetailViewTile(policyPeriod)"
+            visible="permissions.Producer"/>
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

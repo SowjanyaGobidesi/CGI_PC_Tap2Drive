@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    id="AsyncQuoteValidationReinstatementWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.Validation.ResultsTitle&quot;)"
+    title="DisplayKey.get(&quot;Web.Validation.ResultsTitle&quot;)">
+    <LocationEntryPoint
+      signature="AsyncQuoteValidationReinstatementWorksheet(policyPeriod : PolicyPeriod)"/>
+    <Scope
+      location="ReinstatementWizard(job as Reinstatement, policyPeriod)"/>
+    <Scope
+      location="UWBlockProgressIssuesPopup(job.LatestPeriod)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.Job"
+      name="job"
+      type="Job"/>
+    <ScreenRef
+      def="AsyncQuoteValidationScreen()"/>
+  </Worksheet>
+</PCF>

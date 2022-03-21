@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.polholdedit"
+    canVisit="perm.System.polholdview"
+    id="PolicyHolds"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.PolicyHold.PolicyHolds&quot;)">
+    <Variable
+      initialValue="PolicyHold.finder.findPolicyHolds()"
+      name="policyHolds"
+      type="gw.api.database.IQueryBeanResult&lt;PolicyHold&gt;"/>
+    <Screen
+      id="PolicyHoldsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewPolicyHold.go()"
+          id="PolicyHolds_NewPolicyHoldsButton"
+          label="DisplayKey.get(&quot;Button.Add&quot;)"
+          shortcut="A"
+          visible="perm.System.polholdcreate"/>
+        <CheckedValuesToolbarButton
+          flags="one policyHold"
+          id="CopyPolicyHold"
+          iterator="PolicyHoldsPanelSet.PolicyHoldsLV"
+          label="DisplayKey.get(&quot;Button.CopyPolicyHold&quot;)"
+          visible="perm.System.polholdcreate">
+          <CheckedValuesMenuItem
+            checkedRowAction="NewPolicyHold.go(CheckedValue, false, true)"
+            id="CopyRegions"
+            label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Regions&quot;)"/>
+          <CheckedValuesMenuItem
+            checkedRowAction="NewPolicyHold.go(CheckedValue, true, false)"
+            id="CopyRules"
+            label="DisplayKey.get(&quot;Web.Admin.PolicyHold.Rules&quot;)"/>
+          <CheckedValuesMenuItem
+            checkedRowAction="NewPolicyHold.go(CheckedValue, true, true)"
+            id="CopyRegionsAndRules"
+            label="DisplayKey.get(&quot;Web.Admin.PolicyHold.RegionsAndRules&quot;)"/>
+        </CheckedValuesToolbarButton>
+        <RemoveButton
+          flags="any policyHold"
+          id="PolicyHolds_DeleteButton"
+          iterator="PolicyHoldsPanelSet.PolicyHoldsLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="L"
+          visible="perm.System.polholdelete"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyHoldsPanelSet(policyHolds, true)"/>
+    </Screen>
+  </Page>
+</PCF>

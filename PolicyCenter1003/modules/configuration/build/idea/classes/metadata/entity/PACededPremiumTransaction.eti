@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A PersonalAuto implementation of the RICededPremiumTransaction delegate"
+  entity="PACededPremiumTransaction"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="pacededpremiumtransaction"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumTransaction"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumTxnAdapter"
+    impl="gw.reinsurance.ceding.PACededPremiumTransactionAdapter"/>
+  <foreignkey
+    fkentity="PACededPremium"
+    name="PACededPremium"
+    nullok="false"/>
+  <foreignkey
+    fkentity="PACededPremiumHistory"
+    name="PACededPremiumHistory"
+    nullok="false"/>
+</entity>

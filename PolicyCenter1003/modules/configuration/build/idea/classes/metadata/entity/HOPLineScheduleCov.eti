@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPLineScheduleCov"
+  desc="HOP Line coverage with a schedule"
+  supertype="HOPLineCov">
+  <implementsInterface
+    iface="gw.api.domain.Schedule"
+    impl="gw.lob.hop.schedule.HOPLineScheduleCovImpl"/>
+  <implementsEntity
+    name="ScheduleAutoNumberSequence"/>
+  <array
+    arrayentity="HOPLineScheduleCovItem"
+    cascadeDelete="true"
+    desc="Scheduled Items"
+    name="HOPLineScheduledItems"/>
+</subtype>

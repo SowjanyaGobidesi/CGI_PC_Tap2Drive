@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="helper.commitLookupTableDefinition()"
+    canEdit="perm.System.lookuptableedit"
+    canVisit="perm.System.lookuptableview "
+    id="LookupPopup"
+    startInEditMode="editable"
+    title="editable ? DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.Title.EditLookupTable&quot;) : DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.Title&quot;, existingLookup.TableName)">
+    <LocationEntryPoint
+      signature="LookupPopup(existingLookup : LookupTableDefinition, editable : Boolean)"/>
+    <Variable
+      name="existingLookup"
+      type="LookupTableDefinition"/>
+    <Variable
+      name="editable"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.web.bizrules.LookupUIHelper(existingLookup)"
+      name="helper"
+      type="gw.web.bizrules.LookupUIHelper"/>
+    <Variable
+      initialValue="helper.LookupDefinitionDTO"
+      name="lookupDefDTO"
+      type="gw.lookup.LookupDefinitionDTO"/>
+    <Variable
+      initialValue="existingLookup.IsLookupInUse"
+      name="lookupInUse"
+      type="boolean"/>
+    <Screen
+      id="LookupScreen">
+      <Toolbar>
+        <EditButtons
+          cancelVisible="CurrentLocation.InEditMode "
+          editVisible="perm.System.lookuptableedit"
+          id="EditButtons"
+          updateLabel="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.Update&quot;)"
+          updateVisible="CurrentLocation.InEditMode "/>
+      </Toolbar>
+      <AlertBar
+        dismissed="helper.MessageDismissed"
+        id="ExistenceAlert"
+        label="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.ExistenceDesc&quot;)"
+        showConfirmMessage="true "
+        visible="helper.ShowExistenceMessage and CurrentLocation.InEditMode"/>
+      <AlertBar
+        id="InUseLookupAlert"
+        label="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.EditInUseLookupAlert&quot;, existingLookup.DisplayName, existingLookup.RulesUsingLookup*.Name.join('\n'))"
+        visible="lookupInUse"/>
+      <PanelRef>
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              editable="true"
+              id="LookupName"
+              label="DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.LookupName&quot;)"
+              required="true"
+              value="lookupDefDTO.Name"/>
+            <TextAreaInput
+              editable="true"
+              id="Description"
+              label="DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.Description&quot;)"
+              numRows="4"
+              value="lookupDefDTO.Description"/>
+            <RangeInput
+              editable="not lookupInUse"
+              id="SourceTable"
+              label="DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.LookupTable&quot;)"
+              optionLabel="helper.getOptionLabelForSourceTable(VALUE)"
+              required="true"
+              value="lookupDefDTO.SourceTable"
+              valueRange="gw.plugin.Plugins.get(gw.plugin.lookup.LookupCreationPlugin).AvailableLookupSourceNames"
+              valueType="String">
+              <PostOnChange
+                onChange="helper.populateLookupDefinitionDTOAndColumns()"/>
+            </RangeInput>
+            <TextInput
+              id="LookupTableCode"
+              label="DisplayKey.get(&quot;Web.BizRules.Lookup.SelectLookupPage.LookupTableCode&quot;)"
+              value="lookupDefDTO.TableCode"/>
+            <BooleanRadioInput
+              editable="not lookupInUse"
+              falseLabel="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.ExistenceFalse&quot;)"
+              id="ExistenceButton"
+              label="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.Existence&quot;)"
+              trueLabel="DisplayKey.get(&quot;Web.BizRules.Lookup.LookupPage.ExistenceTrue&quot;)"
+              value="lookupDefDTO.Existence">
+              <PostOnChange
+                onChange="helper.processExistenceState()"/>
+            </BooleanRadioInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <PanelRef
+        def="LookupColumnPanelSet(helper, lookupDefDTO)"
+        editable="not lookupInUse"/>
+    </Screen>
+  </Popup>
+</PCF>

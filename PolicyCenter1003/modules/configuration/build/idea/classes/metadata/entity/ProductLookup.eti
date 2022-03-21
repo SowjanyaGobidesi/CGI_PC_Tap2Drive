@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The Product availability lookup type."
+  entity="ProductLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="productlookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.ProductLookupPublicMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.ProductLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.ProductLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="IndustryCodeDrivenLookup"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <column
+    name="ProductCode"
+    nullok="false"
+    type="patterncode"/>
+</entity>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Foundation Type"
+  name="FoundationType">
+  <typecode
+    code="Slab"
+    desc="Slab"
+    name="Slab"
+    priority="5">
+  </typecode>
+  <typecode
+    code="RaisedSlab"
+    desc="Raised Slab"
+    name="Raised Slab"
+    priority="10">
+  </typecode>
+  <typecode
+    code="PierAndBeam"
+    desc="Pier and Beam"
+    name="Pier and Beam"
+    priority="15">
+  </typecode>
+  <typecode
+    code="CrawlSpace"
+    desc="Crawl Space"
+    name="Crawl Space"
+    priority="20">
+  </typecode>
+  <typecode
+    code="FullBasement"
+    desc="Full Basement"
+    name="Full Basement"
+    priority="25">
+  </typecode>
+</typelist>

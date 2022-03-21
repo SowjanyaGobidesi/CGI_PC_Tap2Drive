@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="HOPComputerRelatedDamageOrInjuryExclusion"
+  coverageCategory="z1hhgd8n6nji0albb2m28ahhbq9"
+  exclusionSubtype="HOPLineExcl"
+  existence="Electable"
+  lookupTableName="HOPLineExcl"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="700"
+  public-id="z6sh4d0oj334q2h4qn72ostqmi8"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+</ExclusionPattern>

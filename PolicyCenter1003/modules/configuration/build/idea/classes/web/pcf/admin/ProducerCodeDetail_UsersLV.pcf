@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ProducerCodeDetail_UsersLV">
+    <Require
+      name="producerCode"
+      type="ProducerCode"/>
+    <RowIterator
+      editable="false"
+      elementName="user"
+      value="producerCode.AllUsers"
+      valueType="entity.User[]">
+      <Row>
+        <AltUserCell
+          action="UserDetailPage.go(user)"
+          id="User"
+          label="DisplayKey.get(&quot;Web.Admin.ProducerCodeDetail.User&quot;)"
+          value="user"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

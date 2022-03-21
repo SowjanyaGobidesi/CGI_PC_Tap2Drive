@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="JobForward.go(policyChange)"
+    afterCommit="JobForward.go(policyChange)"
+    afterEnter="gw.api.web.AutoSaveCacheGateway.clearUnsavedWork()"
+    alwaysInEditMode="true"
+    beforeCommit="policyPeriod.PolicyChangeProcess.changeEditEffectiveDate(effectiveDate)"
+    canEdit="true"
+    id="PolicyChange_ChangeEditEffectiveDate"
+    onConcurrentDataChange="CurrentLocation.cancel(); JobForward.go(policyChange)"
+    parent="JobForward(policyChange)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.PolicyChange.PolicyChangeSummary&quot;)">
+    <LocationEntryPoint
+      signature="PolicyChange_ChangeEditEffectiveDate(policyChange : PolicyChange, policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="policyChange"
+      type="PolicyChange"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.EditEffectiveDate"
+      name="effectiveDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="policyPeriod.EditEffectiveDate"
+      name="oldEffectiveDate"
+      type="java.util.Date"/>
+    <Screen
+      id="EffectiveDateChangeScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.EffectiveDateChange&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="EffectiveDateChangeDV">
+        <InputColumn>
+          <DateInput
+            editable="true"
+            id="EffectiveDate"
+            label="DisplayKey.get(&quot;Web.Job.EffectiveDate&quot;)"
+            required="true"
+            validationExpression="validateEditLocks()"
+            value="effectiveDate">
+            <PostOnChange/>
+          </DateInput>
+          <TextInput
+            editable="true"
+            id="Description"
+            label="DisplayKey.get(&quot;Web.Job.Description&quot;)"
+            value="policyChange.Description"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[/**
+ * Returns an error message listing the active periods that are edit locked, if the user lacks permissions.
+ * Returns null if there are no edit locked periods or if the user has the override permissions.
+ */
+function validateEditLocks() : String {
+  var msg = ""
+  if (not perm.System.editlockoverride) {
+    for (branch in policyPeriod.Job.ActivePeriods) {
+      if (branch.EditLocked) {
+        msg += "\n    "
+        msg += DisplayKey.get("Web.Job.Warning.LacksEditPermissionForVersion", branch.BranchName)
+      }
+    }
+  }
+  return msg.Empty ? null : DisplayKey.get("Web.Job.Warning.CannotChangeEditEffectiveDate", msg)
+}]]></Code>
+  </Page>
+</PCF>

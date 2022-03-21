@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="OrganizationSearchDV">
+    <Require
+      name="searchCriteria"
+      type="OrganizationSearchCriteria"/>
+    <Require
+      name="activeProducersOnly"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.globalization.OrganizationNameSearchAdapter(searchCriteria)"
+      name="organizationNameAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.OrganizationNameSearchAdapter"/>
+    <InputColumn>
+      <InputSetRef
+        def="GlobalContactNameInputSet(new gw.search.OrganizationNameOwner(organizationNameAdapter))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <TypeKeyInput
+        editable="true"
+        filter="(not activeProducersOnly) or VALUE.hasCategory( BusinessTypeCategory.TC_PRODUCER )"
+        id="Type"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.Type&quot;)"
+        value="searchCriteria.Type"
+        valueType="typekey.BusinessType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="AddressOwnerAddressInputSet(new gw.pcf.contacts.AddressAutoFillableOwner(searchCriteria, false))"
+        mode="searchCriteria.Country.Code"/>
+    </InputColumn>
+    <InputColumn>
+      <TypeKeyInput
+        editable="not activeProducersOnly"
+        id="ProducerStatus"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.ProducerStatus&quot;)"
+        value="searchCriteria.ProducerStatus"
+        valueType="typekey.ProducerStatus"/>
+      <TypeKeyInput
+        editable="true"
+        id="Tier"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.Tier&quot;)"
+        value="searchCriteria.Tier"
+        valueType="typekey.Tier"/>
+      <TextInput
+        editable="true"
+        id="ProducerCode"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.ProducerCode&quot;)"
+        value="searchCriteria.ProducerCode"/>
+      <TextInput
+        editable="true"
+        id="BranchCode"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.BranchCode&quot;)"
+        value="searchCriteria.BranchCode"/>
+      <TextInput
+        editable="true"
+        id="PolicyNumber"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.PolicyNumber&quot;)"
+        value="searchCriteria.PolicyNumber"/>
+      <TextInput
+        editable="true"
+        id="AccountNumber"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationSearch.AccountNumber&quot;)"
+        value="searchCriteria.AccountNumber"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

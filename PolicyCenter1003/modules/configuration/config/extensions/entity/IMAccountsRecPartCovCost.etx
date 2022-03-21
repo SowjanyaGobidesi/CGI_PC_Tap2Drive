@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="IMAccountsRecPartCovCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.im.financials.IMCostMethods" impl="gw.lob.im.financials.IMAccountsRecPartCovCostMethodsImpl"/>
+</extension>

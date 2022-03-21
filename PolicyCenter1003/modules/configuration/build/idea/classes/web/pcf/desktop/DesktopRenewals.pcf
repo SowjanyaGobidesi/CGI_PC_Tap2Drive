@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewmyrenewals"
+    id="DesktopRenewals"
+    title="DisplayKey.get(&quot;Web.DesktopRenewals&quot;)">
+    <LocationEntryPoint
+      signature="DesktopRenewals()"/>
+    <Screen
+      id="DesktopRenewalsScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.DesktopRenewals&quot;)"/>
+      <Toolbar/>
+      <PanelRef
+        def="DesktopRenewalsLV()"
+        mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+    </Screen>
+  </Page>
+</PCF>

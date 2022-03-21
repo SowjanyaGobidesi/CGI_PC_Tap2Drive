@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<gx-model type="gw.api.email.Email" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include
+      path="Body"
+      type="java.lang.String"
+      xmlType="xs:string"
+      propertyInclusionType="NORMAL"/>
+    <include
+      path="Subject"
+      type="java.lang.String"
+      xmlType="xs:string"
+      propertyInclusionType="NORMAL"/>
+    <include
+      path="ToRecipients[]"
+      type="gw.api.email.EmailContact"
+      propertyInclusionType="NORMAL"
+      model="gw.integration.document.production.gxmodel.email.emailcontactmodel"/>
+  </includes>
+</gx-model>

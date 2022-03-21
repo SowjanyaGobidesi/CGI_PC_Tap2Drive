@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- LocationGroup for the "Search" tab pages -->
+  <LocationGroup
+    id="Search"
+    title="DisplayKey.get(&quot;Web.Search.LocationGroup.Title&quot;)">
+    <LocationEntryPoint
+      signature="Search()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Policies&quot;)"
+      location="PolicySearch()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.HVQSearch.Policies&quot;)"
+      location="HVQSearch()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Accounts&quot;)"
+      location="AccountSearch()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.ProducerCodes&quot;)"
+      location="ProducerCodeSearch()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Activities&quot;)"
+      location="ActivitySearch()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Contacts&quot;)"
+      location="ContactSearch()"/>
+  </LocationGroup>
+</PCF>

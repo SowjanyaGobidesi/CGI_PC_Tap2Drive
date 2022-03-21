@@ -1,0 +1,36 @@
+package rules.Validation.UWIssueTypeValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+uses java.math.BigDecimal
+
+@gw.rules.RuleName("Verify Value Offset Amount")
+internal class VerifyValueOffsetAmount {
+  static function doCondition(uWIssueType   :   entity.UWIssueType) : boolean {
+/*start00rule*/
+return uWIssueType.Comparator != null and uWIssueType.Comparator != ValueComparator.TC_NONE
+/*end00rule*/
+}
+
+  static function doAction(uWIssueType   :   entity.UWIssueType, actions : gw.rules.Action) {
+/*start00rule*/
+// Ensure that if an assignment type is selected a valid offset amount is also defined
+var assignmentType = uWIssueType.DefaultValueAssignmentType
+var offsetAmount = uWIssueType.DefaultValueOffsetAmount
+if (assignmentType == TC_OFFSETAMOUNT or assignmentType == TC_OFFSETPERCENT) {
+  if (offsetAmount == null) {
+    uWIssueType.rejectField("DefaultValueOffsetAmount",
+        ValidationLevel.TC_LOADSAVE,
+        DisplayKey.get("UWIssueType.Error.MissingOffsetAmount", assignmentType.DisplayName),
+        null, null)
+  } else {
+    if (offsetAmount <= BigDecimal.ZERO) {
+      uWIssueType.rejectField("DefaultValueOffsetAmount",
+          ValidationLevel.TC_LOADSAVE,
+          DisplayKey.get("UWIssueType.Error.InvalidValueOffsetAmount"),
+          null, null)
+    }
+  }
+} 
+/*end00rule*/
+  }
+}

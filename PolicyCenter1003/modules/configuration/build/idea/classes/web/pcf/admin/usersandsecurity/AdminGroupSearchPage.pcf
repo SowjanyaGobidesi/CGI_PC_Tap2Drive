@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Group.viewtree"
+    countsAsWork="false"
+    id="AdminGroupSearchPage"
+    title="DisplayKey.get(&quot;Web.Admin.GroupSearch&quot;)">
+    <Screen
+      id="GroupSearchScreen">
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultsName="groups"
+        search="searchCriteria.validateAndSearch()"
+        searchCriteria="gw.admin.GroupSearchCriteriaEnhancement.createCriteria()"
+        searchCriteriaType="entity.GroupSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Group&gt;">
+        <PanelRef
+          def="AdminGroupSearchDV(searchCriteria)"/>
+        <PanelRef
+          def="GroupSearchResultsLV(groups)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

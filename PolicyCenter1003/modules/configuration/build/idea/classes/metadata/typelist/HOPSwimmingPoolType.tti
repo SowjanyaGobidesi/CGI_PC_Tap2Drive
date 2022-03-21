@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  desc="HOP Swimming Pool Type"
+  name="HOPSwimmingPoolType"
+  xmlns="http://guidewire.com/typelists">
+  <typecode
+    code="AboveGround"
+    desc="Above ground"
+    name="Above Ground"
+    priority="10">
+  </typecode>
+  <typecode
+    code="InGround"
+    desc="In ground"
+    name="In Ground"
+    priority="20">
+  </typecode>
+</typelist>

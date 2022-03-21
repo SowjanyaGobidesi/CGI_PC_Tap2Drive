@@ -1,0 +1,19 @@
+package rules.EventMessage.EventFired_dir.FederatedDataContacts_dir
+
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("Contact")
+internal class Contact {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis Contact &&
+        messageContext.EventName == entity.Contact.CONTACTCHANGED_EVENT
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createContactMessage(messageContext)
+/*end00rule*/
+  }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  desc="WorkItem to apply the pending updates to account-level entities"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="PendingUpdatesWorkItem"
+  table="pendingupdatesworkitem"
+  type="keyable"
+  final="false">
+  <implementsEntity
+    name="WorkItem"/>
+  <column
+    desc="Reference to the account-level entity that contains a set of pending updates that need to be applied."
+    name="Target"
+    nullok="false"
+    type="softentityreference"/>
+  <implementsInterface
+    iface="gw.account.PendingUpdates"/>
+</entity>

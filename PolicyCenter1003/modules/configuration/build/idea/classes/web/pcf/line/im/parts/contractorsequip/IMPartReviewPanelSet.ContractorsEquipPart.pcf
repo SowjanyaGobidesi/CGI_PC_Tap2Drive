@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMPartReviewPanelSet"
+    mode="ContractorsEquipPart">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Variable
+      initialValue="imLine.ContractorsEquipPart"
+      name="contractorsEquipmentPart"
+      type="entity.ContractorsEquipPart"/>
+    <PanelRef
+      visible="contractorsEquipmentPart.ContrEquipPartCovs.Count &gt; 0">
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipments&quot;)"/>
+      <PanelSet>
+        <PanelRef
+          def="CoverageSummaryLV(contractorsEquipmentPart.ContrEquipPartCovs.toList(), contractorsEquipmentPart)"/>
+      </PanelSet>
+    </PanelRef>
+    <PanelRef
+      visible="!imLine.ContractorsEquipPart.ContractorsEquipments.IsEmpty">
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Policy.IM.ContractorsEquipment.ScheduledEquipments&quot;)"/>
+      <PanelSet>
+        <PanelIterator
+          elementName="contractorsEquipment"
+          value="contractorsEquipmentPart.ContractorsEquipments"
+          valueType="entity.ContractorsEquipment[]">
+          <PanelRef
+            def="CoverageSummaryLV(contractorsEquipment.Coverages.toList(), contractorsEquipment)">
+            <Verbatim
+              label="contractorsEquipment.DisplayName"/>
+          </PanelRef>
+        </PanelIterator>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

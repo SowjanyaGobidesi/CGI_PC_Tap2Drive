@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="PaymentsSummaryInputSet">
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Require
+      name="thePeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.web.policy.InstallmentPlanDataRenderHelper(thePeriod.TotalPremiumRPT)"
+      name="renderHelper"
+      type="gw.web.policy.InstallmentPlanDataRenderHelper"/>
+    <Label
+      label="DisplayKey.get('Web.BindSummaryDV.Payments')"/>
+    <TextInput
+      id="Frequency"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.Frequency')"
+      value="renderHelper.renderInstallmentFrequency(policyPeriodBillingInstructionsManager.InstallmentPlan)"/>
+    <ContentInput
+      label="DisplayKey.get('Web.Quote.PremiumSummary.DownPayment')">
+      <Link
+        id="DownPayment"
+        label="renderHelper.renderDownPayment(policyPeriodBillingInstructionsManager.InstallmentPlan)"
+        tooltip="renderHelper.renderDownPaymentDetail(policyPeriodBillingInstructionsManager.InstallmentPlan)"/>
+      <Link
+        icon="&quot;info&quot;"
+        iconType="svgFileName"
+        id="DownPaymentPreviewIcon"
+        tooltip="renderHelper.renderDownPaymentDetail(policyPeriodBillingInstructionsManager.InstallmentPlan)"
+        visible="policyPeriodBillingInstructionsManager.DownPaymentPreviewIconVisible"/>
+    </ContentInput>
+    <ContentInput
+      id="InstallmentsContentInput"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.Installments', renderHelper.renderNumberOfInstallments(policyPeriodBillingInstructionsManager.InstallmentPlan))">
+      <Link
+        id="Installments"
+        label="renderHelper.renderInstallment(policyPeriodBillingInstructionsManager.InstallmentPlan)"
+        tooltip="renderHelper.renderInstallmentDetail(policyPeriodBillingInstructionsManager.InstallmentPlan)"/>
+      <Link
+        icon="&quot;info&quot;"
+        iconType="svgFileName"
+        id="InstallmentPreviewIcon"
+        tooltip="renderHelper.renderInstallmentDetail(policyPeriodBillingInstructionsManager.InstallmentPlan)"
+        visible="policyPeriodBillingInstructionsManager.InstallmentPreviewIconVisible"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="StartRewriteMenuItemSet">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.pcf.policyfile.StartRewriteMenuItemSetUIHelper(period)"
+      name="UIHelper"
+      type="gw.pcf.policyfile.StartRewriteMenuItemSetUIHelper"/>
+    <Variable
+      initialValue="UIHelper.getInForcePeriod()"
+      name="inForcePeriod"
+      recalculateOnRefresh="true"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue=""
+      name="canRewrite"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <MenuItem
+      action="UIHelper.startRewrite(TC_REWRITEFULLTERM, inForcePeriod, CurrentLocation)"
+      confirmMessage="UIHelper.getRewriteMessage(inForcePeriod)"
+      id="RewriteFullTerm"
+      label="DisplayKey.get(&quot;Web.PolicyFile.StartRewrite.FullTerm&quot;)"
+      visible="UIHelper.CanRewriteFullTerm(inForcePeriod)"/>
+    <MenuItem
+      action="UIHelper.startRewrite(TC_REWRITEREMAINDEROFTERM, inForcePeriod, CurrentLocation)"
+      confirmMessage="UIHelper.getRewriteMessage(inForcePeriod)"
+      id="RewriteRemainderOfTerm"
+      label="DisplayKey.get(&quot;Web.PolicyFile.StartRewrite.RemainderOfTerm&quot;)"
+      visible="UIHelper.CanRewriteRemainderOfTermTerm(inForcePeriod)"/>
+    <MenuItem
+      action="UIHelper.startRewrite(TC_REWRITENEWTERM, inForcePeriod, CurrentLocation)"
+      confirmMessage="UIHelper.getRewriteMessage(inForcePeriod)"
+      id="RewriteNewTerm"
+      label="DisplayKey.get(&quot;Web.PolicyFile.StartRewrite.NewTerm&quot;)"
+      visible="UIHelper.canRewriteNewTerm(inForcePeriod)"/>
+  </MenuItemSet>
+</PCF>

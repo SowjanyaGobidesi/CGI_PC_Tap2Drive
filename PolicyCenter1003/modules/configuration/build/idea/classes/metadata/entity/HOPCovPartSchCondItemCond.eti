@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  desc="HOP coverage-part condition scheduled item with coverage terms"
+  effDatedBranchType="PolicyPeriod"
+  loadable="false"
+  exportable="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPCovPartSchCondItemCond"
+  table="hopcovpartschconditemcond"
+  type="effdated">
+  <implementsEntity
+    name="PolicyCondition"/>
+  <implementsInterface
+    iface="gw.api.domain.PolicyConditionAdapter"
+    impl="gw.lob.hop.schedule.HOPCovPartSchCondItemCondConditionAdapter"/>
+  <implementsEntity
+    name="ScheduledItemClause"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPCovPartSchCondItemCondMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    fkentity="HOPCovPartSchCondItem"
+    name="HOPCovPartSchCondItem"
+    nullok="false"/>
+</entity>

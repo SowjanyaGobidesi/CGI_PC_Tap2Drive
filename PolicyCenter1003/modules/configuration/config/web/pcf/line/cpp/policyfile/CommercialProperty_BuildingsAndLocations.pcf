@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    id="CommercialProperty_BuildingsAndLocations"
+    parent="CommercialPropertyLinks(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.BuildingsAndLocations&quot;)">
+    <LocationEntryPoint
+      signature="CommercialProperty_BuildingsAndLocations(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <ScreenRef
+      def="PolicyFile_CPBuildingsScreen(period.CPLine, false, null as gw.api.web.job.JobWizardHelper)"
+      id="PolicyFile_CPBuildingsScreen"/>
+  </Page>
+</PCF>

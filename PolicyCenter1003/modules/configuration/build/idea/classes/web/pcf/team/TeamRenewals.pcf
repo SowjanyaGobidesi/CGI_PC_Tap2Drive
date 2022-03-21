@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam and teamModel.hasRenewalsPage()"
+    id="TeamRenewals"
+    title="DisplayKey.get(&quot;Web.Team.Renewals&quot;, teamModel.Label, teamModel.getDisplayMode(true), gw.api.domain.statistics.StatsWindowUtil.getRenewalsWindow())">
+    <LocationEntryPoint
+      signature="TeamRenewals(teamModel : gw.api.web.team.PCTeamModel)"/>
+    <Variable
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <ScreenRef
+      def="TeamRenewalsScreen(teamModel)"
+      mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+
+  </Page>
+</PCF>

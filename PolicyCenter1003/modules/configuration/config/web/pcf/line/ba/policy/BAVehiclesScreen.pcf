@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="BAVehiclesScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.BusinessAutoLine"
+      name="baLine"
+      recalculateOnRefresh="true"
+      type="BusinessAutoLine"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, policyPeriod.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <PanelRef
+      def="BAVehiclesLV(policyPeriod, openForEdit, baLine, true)">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.PolicyLine.VehicleDetail&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addLabel="DisplayKey.get(&quot;Web.LineWizardMenu.Vehicles.CreateVehicle&quot;)"
+          id="BAVehiclesScreenIteratorButtons"
+          iterator="BAVehiclesLV.BAVehiclesLV"
+          removeLabel="DisplayKey.get(&quot;Web.LineWizardMenu.Vehicles.RemoveVehicle&quot;)"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.web.line.ba.policy.BAVehiclesUIHelper.cloneVehicles(CheckedValues, CurrentLocation as pcf.api.Wizard)"
+          hideIfReadOnly="true"
+          id="VehiclesScreen_CloneVehicleButton"
+          iterator="BAVehiclesLV.BAVehiclesLV"
+          label="DisplayKey.get(&quot;Web.Policy.BA.CloneVehicle&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

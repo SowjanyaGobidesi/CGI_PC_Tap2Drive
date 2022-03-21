@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RenewalWizard_PolicyInfoDV">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="renewal"
+      type="Renewal"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.job.AvailableUWCompanies(policyPeriod)"
+      name="availableUWCompanies"
+      type="gw.job.AvailableUWCompanies"/>
+    <InputColumn>
+      <MonetaryAmountInput
+        align="right"
+        boldLabel="true"
+        currency="policyPeriod.PreferredSettlementCurrency"
+        editable="true"
+        formatType="currency"
+        id="estimatedPremiumInput"
+        label="DisplayKey.get(&quot;Web.PolicyPeriod.EstimatedPremium&quot;)"
+        value="policyPeriod.EstimatedPremium"
+        visible="policyPeriod.Policy.Product.ProductType == TC_COMMERCIAL"/>
+      <InputSetRef
+        def="AccountInfoInputSet(policyPeriod)"/>
+      <InputSetRef
+        def="SecondaryNamedInsuredInputSet(policyPeriod)"/>
+      <InputSetRef
+        def="AdditionalNamedInsuredInputSet(policyPeriod, openForEdit)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="PolicyInfoInputSet(policyPeriod, true, false, false)"
+        widgets="UWCompanyInputSet"/>
+      <InputDivider/>
+      <InputSetRef
+        def="PolicyInfoProducerOfRecordInputSet(policyPeriod, ProducerStatusUse.TC_RENEWALOKAY)"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Policy.UWCompanies.Name&quot;)"/>
+      <InputSet
+        id="UWCompanyInputSet">
+        <RangeInput
+          editable="perm.System.multicompquote"
+          id="UWCompany"
+          optionLabel="VALUE.DisplayName"
+          value="policyPeriod.UWCompany"
+          valueRange="availableUWCompanies.Value"
+          valueType="entity.UWCompany"/>
+        <ButtonInput
+          action="policyPeriod.autoSelectUWCompany()"
+          hideIfReadOnly="true"
+          id="AutoSelectUWCompany"
+          value="DisplayKey.get(&quot;Web.Policy.UWCompanies.AutoSelect&quot;)"
+          visible="not perm.System.multicompquote"/>
+      </InputSet>
+      <InputDivider/>
+      <InputSetRef
+        def="PreferredCurrencyInputSet(policyPeriod)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

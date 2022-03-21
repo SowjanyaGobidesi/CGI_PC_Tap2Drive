@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<gx-model type="gw.api.productmodel.QuestionSet" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="DisplayName" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Name" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Priority" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Questions[]" type="gw.api.productmodel.Question" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc1000.gxmodel.questionmodel"/>
+    <include path="QuestionSetType" type="typekey.QuestionSetType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

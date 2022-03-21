@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewteam and teamModel.hasActivitiesPage()"
+    id="TeamActivities"
+    title="DisplayKey.get(&quot;Web.Team.Activities&quot;, teamModel.Label, teamModel.getDisplayMode(false), gw.api.domain.statistics.StatsWindowUtil.getActivitiesWindow())">
+    <LocationEntryPoint
+      signature="TeamActivities(teamModel : gw.api.web.team.PCTeamModel)"/>
+    <Variable
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <ScreenRef
+      def="TeamActivitiesScreen(teamModel)"
+      mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+  </Page>
+</PCF>

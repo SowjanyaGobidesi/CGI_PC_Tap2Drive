@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="AnimalBreed" desc="Animal Breed">
+  <typecode
+    code="Akitas"
+    desc="Akitas"
+    name="Akitas"
+    priority="10">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="BullTerriers"
+    desc="Bull Terriers"
+    name="Bull Terriers"
+    priority="20">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="Chows"
+    desc="Chows"
+    name="Chows"
+    priority="30">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="DobermanPinschers"
+    desc="Doberman Pinschers"
+    name="Doberman Pinschers"
+    priority="40">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="GermanShepherds"
+    desc="German Shepherds"
+    name="German Shepherds"
+    priority="50">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="PitBulls"
+    desc="Pit Bulls"
+    name="Pit Bulls"
+    priority="60">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="Rottweilers"
+    desc="Rottweilers"
+    name="Rottweilers"
+    priority="70">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="StaffordshireBullTerriers"
+    desc="Staffordshire Bull Terriers"
+    name="Staffordshire Bull Terriers"
+    priority="75">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="AMixOfAnyOfTheseBreeds"
+    desc="A mix of any of these breeds"
+    name="A mix of any of these breeds"
+    priority="80">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="WolfHybrids"
+    desc="Wolf Hybrids"
+    name="Wolf Hybrids"
+    priority="90">
+    <category
+      code="Exotic"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="Reptiles"
+    desc="Reptiles"
+    name="Reptiles"
+    priority="100">
+    <category
+      code="Exotic"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="Monkeys"
+    desc="Monkeys"
+    name="Monkeys"
+    priority="110">
+    <category
+      code="Exotic"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="WildCats"
+    desc="Wild Cats"
+    name="Wild Cats"
+    priority="120">
+    <category
+      code="Exotic"
+      typelist="AnimalType"/>
+  </typecode>
+  <typecode
+    code="Other"
+    desc="Other"
+    name="Other"
+    priority="150">
+    <category
+      code="Dog"
+      typelist="AnimalType"/>
+    <category
+      code="Exotic"
+      typelist="AnimalType"/>
+    <category
+      code="Other"
+      typelist="AnimalType"/>
+  </typecode>
+</typelist>

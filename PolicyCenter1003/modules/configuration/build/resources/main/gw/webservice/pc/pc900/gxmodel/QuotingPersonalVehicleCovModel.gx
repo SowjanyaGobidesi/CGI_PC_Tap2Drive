@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.PersonalVehicleCov" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="Costs[]" type="entity.PersonalVehicleCovCost" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.quotingpacovcostmodel"/>
+    <include path="CovTerms[]" type="gw.api.domain.covterm.CovTerm" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.covtermmodel"/>
+    <include path="EffectiveDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="ExpirationDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="PatternCode" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Subtype" type="typekey.PersonalVehicleCov" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

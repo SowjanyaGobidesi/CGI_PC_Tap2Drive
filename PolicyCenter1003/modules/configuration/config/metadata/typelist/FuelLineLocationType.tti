@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Fuel Line Location Type"
+  name="FuelLineLocationType">
+  <typecode
+    code="under"
+    desc="Underground"
+    name="Underground"
+    priority="10">
+  </typecode>
+  <typecode
+    code="through"
+    desc="Through Foundation"
+    name="Through Foundation"
+    priority="20">
+  </typecode>
+</typelist>

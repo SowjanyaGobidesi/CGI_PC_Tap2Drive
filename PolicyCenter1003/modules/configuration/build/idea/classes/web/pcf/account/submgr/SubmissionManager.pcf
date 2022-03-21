@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Account.viewSubmissionGroup(account)"
+    id="SubmissionManager"
+    title="DisplayKey.get(&quot;Web.SubmissionManager.Title&quot;)">
+    <LocationEntryPoint
+      signature="SubmissionManager(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="Job.finder.findSelectedSubmissionsByAccount(account).toTypedArray()"
+      name="submissions"
+      type="Submission[]"/>
+    <Screen
+      id="SubmissionManagerScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.SubmissionManager.Title&quot;)"/>
+      <Toolbar>
+        <ToolbarButton
+          action="NewSubmission.push(account)"
+          id="SubmissionManager_NewSubmission"
+          label="DisplayKey.get(&quot;Web.AccountFile.NewSubmission&quot;)"
+          shortcut="B"
+          visible="account.NewSubmissionVisible"/>
+        <ToolbarButton
+          action="null"
+          id="SubmissionManager_RefreshButton"
+          label="DisplayKey.get(&quot;Button.Refresh&quot;)"/>
+      </Toolbar>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.SubmissionManager.NoSubmissions&quot;)"
+        visible="submissions.length == 0"/>
+      <PanelRef
+        def="SubmissionManagerLV(account, submissions)"/>
+    </Screen>
+  </Page>
+</PCF>

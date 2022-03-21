@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="EditAccountContactPopup"
+    returnType="AccountContact"
+    startInEditMode="true"
+    title="accountContact.Contact.DisplayName">
+    <LocationEntryPoint
+      signature="EditAccountContactPopup(accountContact: AccountContact)"/>
+    <LocationEntryPoint
+      signature="EditAccountContactPopup(accountContact: AccountContact, resolvingConflict : boolean)"/>
+    <LocationEntryPoint
+      signature="EditAccountContactPopup(accountContact: AccountContact, resolvingConflict : boolean, showRolesTab : boolean, showAddressTools : boolean)"/>
+    <Variable
+      name="accountContact"
+      type="AccountContact"/>
+    <Variable
+      initialValue="false"
+      name="resolvingConflict"
+      type="boolean"/>
+    <Variable
+      initialValue="accountContact.Contact"
+      name="contact"
+      recalculateOnRefresh="true"
+      type="entity.Contact"/>
+    <Variable
+      initialValue="true"
+      name="showRolesTab"
+      type="boolean"/>
+    <Variable
+      initialValue="true"
+      name="showAddressTools"
+      type="boolean"/>
+    <Screen
+      editable="true"
+      id="ContactDetailScreen">
+      <Toolbar>
+        <EditButtons
+          pickValue="accountContact"/>
+        <ToolbarButton
+          action="copyFromAddressBook()"
+          confirmMessage="DisplayKey.get(&quot;Web.ContactManager.Info.OverrideWarning&quot;)"
+          id="Sync"
+          label="DisplayKey.get(&quot;Button.Contact.CopyFromAddressBook&quot;)"
+          visible="resolvingConflict"/>
+      </Toolbar>
+      <PanelRef
+        def="AccountContactCV(accountContact,true, showRolesTab)"
+        editable="true"/>
+    </Screen>
+    <Code><![CDATA[function copyFromAddressBook(){
+  contact.syncWithAddressBook()
+  //BundleUtil.evict(contact)
+  CurrentLocation.cancel()
+  EditAccountContactPopup.push(accountContact)
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="NoteTemplateSearchResultLV">
+    <Require
+      name="noteTemplateSearchResultsList"
+      type="NoteTemplateSearchResults[]"/>
+    <RowIterator
+      editable="false"
+      elementName="noteTemplateSearchResults"
+      pickValue="noteTemplateSearchResults"
+      value="noteTemplateSearchResultsList"
+      valueType="entity.NoteTemplateSearchResults[]">
+      <Row>
+        <TextCell
+          id="Template"
+          label="DisplayKey.get(&quot;Web.NoteTemplateSearchResults.Template&quot;)"
+          value="noteTemplateSearchResults.Name"/>
+        <TypeKeyCell
+          id="Topic"
+          label="DisplayKey.get(&quot;Web.NoteTemplateSearchResult.Topic&quot;)"
+          value="noteTemplateSearchResults.Topic"
+          valueType="typekey.NoteTopicType"
+          visible="NoteTopicType.getTypeKeys( false ).Count &gt; 1"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;Web.NoteTemplateSearchResult.Type&quot;)"
+          value="noteTemplateSearchResults.Type"
+          valueType="typekey.NoteType"
+          visible="NoteType.getTypeKeys( false ).Count &gt; 1"/>
+        <TypeKeyCell
+          id="Language"
+          label="DisplayKey.get(&quot;Web.NoteTemplateSearchResult.Language&quot;)"
+          value="noteTemplateSearchResults.Language"
+          valueType="typekey.LanguageType"
+          visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+        <TextCell
+          id="lob"
+          label="DisplayKey.get(&quot;Web.NoteTemplateSearchResults.LOB&quot;)"
+          value="noteTemplateSearchResults.LOBs"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

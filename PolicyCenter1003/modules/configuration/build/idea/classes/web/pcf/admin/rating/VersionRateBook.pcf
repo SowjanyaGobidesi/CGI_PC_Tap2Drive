@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="RateBookDetail.go(rateBookToCopy)"
+    afterCommit="RateBookDetail.go(ratebook)"
+    canEdit="true"
+    canVisit="perm.System.ratebookedit"
+    id="VersionRateBook"
+    parent="RateBookDetail(rateBookToCopy)"
+    startInEditMode="ratebook.isDraft()"
+    title="DisplayKey.get(&quot;Web.Rating.RateBooks.NewRateBookTitle&quot;)">
+    <LocationEntryPoint
+      signature="VersionRateBook(rateBookToCopy : RateBook)"/>
+    <Variable
+      name="rateBookToCopy"
+      type="RateBook"/>
+    <Variable
+      initialValue="rateBookToCopy.versionRateBook()"
+      name="ratebook"
+      type="RateBook"/>
+    <ScreenRef
+      def="RateBookEditScreen(ratebook, false /* isEdit */, gw.rating.rtm.util.RatingUIUtil.RateBookCardTabType.TableCard)"/>
+  </Page>
+</PCF>

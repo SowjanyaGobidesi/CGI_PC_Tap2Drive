@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <WizardStepSet
+    id="LineQuickWizardStepSet"
+    mode="PersonalAuto">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <JobWizardStep
+      id="PAQuickSubmission_Info"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="policyPeriod.OpenForEdit"
+      screen="PAQuickSubmission_InfoScreen(job, policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.QuickQuote.Info&quot;)"/>
+  </WizardStepSet>
+</PCF>

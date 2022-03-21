@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="UserSearchResultsLV"
+    stretch="true">
+    <Require
+      name="users"
+      type="gw.api.database.IQueryBeanResult&lt;User&gt;"/>
+    <Variable
+      initialValue="new gw.web.search.UserSearchResultsLVUIHelper()"
+      name="userSearchResultsLVUIHelper"
+      type="gw.web.search.UserSearchResultsLVUIHelper"/>
+    <RowIterator
+      appendPageInfo="true"
+      canPick="not user.Contact.Obfuscated or perm.System.editobfuscatedusercontact"
+      editable="false"
+      elementName="user"
+      pickValue="user"
+      value="users"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.User&gt;">
+      <Variable
+        initialValue="userSearchResultsLVUIHelper.getSortedGroups(user)"
+        name="groups"
+        type="entity.Group[]"/>
+      <ToolbarFlag
+        name="user"/>
+      <Row>
+        <AltUserCell
+          action="UserDetailPage.go(user)"
+          id="DisplayName"
+          label="DisplayKey.get(&quot;Web.UserSearchResults.DisplayName&quot;)"
+          value="user"
+          wrap="false"/>
+        <TextCell
+          id="Username"
+          label="DisplayKey.get(&quot;Web.UserSearchResults.Username&quot;)"
+          value="user.Credential.UserName"
+          wrap="false"/>
+        <TextCell
+          action="OrganizationDetail.go(user.Organization)"
+          id="Organization"
+          label="DisplayKey.get(&quot;Web.UserSearchResults.Organization&quot;)"
+          value="user.Organization"
+          valueType="entity.Organization"
+          wrap="false"/>
+        <LinkCell
+          grow="true"
+          id="Groups"
+          label="DisplayKey.get(&quot;Web.UserSearchResults.GroupName&quot;)"
+          wrap="true">
+          <LinkIterator
+            elementName="grp"
+            value="groups"
+            valueType="entity.Group[]">
+            <Link
+              action="GroupDetailPage.go(grp)"
+              available="grp.GroupType != TC_ROOT"
+              id="Link"
+              label="grp"/>
+            <Link
+              id="Filler"
+              label="DisplayKey.get(&quot;Web.UserSearchResults.Filler&quot;)"
+              visible="userSearchResultsLVUIHelper.isNotLastEntry(groups, grp)"/>
+          </LinkIterator>
+        </LinkCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

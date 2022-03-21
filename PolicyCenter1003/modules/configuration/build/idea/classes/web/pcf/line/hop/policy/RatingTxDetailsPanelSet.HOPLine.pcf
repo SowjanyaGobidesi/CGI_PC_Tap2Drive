@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RatingTxDetailsPanelSet"
+    mode="HOPLine">
+    <Require
+      name="thePeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="totalPremLabel"
+      type="String"/>
+    <Require
+      name="totalCostLabel"
+      type="String"/>
+    <Require
+      name="revOpenForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="thePeriod.HOPLine"
+      name="line"
+      type="HOPLine"/>
+    <Variable
+      initialValue="line.HOPDwellings?.single()"
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Variable
+      initialValue="new gw.lob.hop.financials.HOPQuoteDisplayUtil(line, false)"
+      name="quoteDisplayUtil"
+      recalculateOnRefresh="true"
+      type="gw.lob.hop.financials.HOPQuoteDisplayUtil"/>
+    <Variable
+      initialValue="quoteDisplayUtil.getBasePremiumCostChangeDetails()"
+      name="basePremiumCostChanges"
+      recalculateOnRefresh="true"
+      type="java.util.List&lt;entity.HOPTransaction&gt;"/>
+    <Variable
+      initialValue="quoteDisplayUtil.getAdjustmentsToBasePremiumCostChangeDetails()"
+      name="adjBasePremiumCostChanges"
+      type="java.util.List&lt;entity.HOPTransaction&gt;"/>
+    <Variable
+      initialValue="quoteDisplayUtil.getOtherPremiumCostChangeDetails()"
+      name="otherPremiumCostChanges"
+      type="java.util.List&lt;entity.HOPTransaction&gt;"/>
+    <Variable
+      initialValue="quoteDisplayUtil.getModificationCostChangeDetails()"
+      name="modifierCostChanges"
+      type="java.util.List&lt;entity.HOPTransaction&gt;"/>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.HOP.HOPQuoteScreen.PolicyType&quot;, line.HOPCoverageParts.single().CoveragePartType.DisplayName, dwelling.CoverageForm.DisplayName)"/>
+      <PanelSet>
+        <PanelRef
+          def="HOPCostChangeDetailLV(line, basePremiumCostChanges)"
+          id="BasePremiumCostChanges"
+          visible="basePremiumCostChanges.HasElements">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.PolicyFile.PolicyLine.HOP.DwellingAddress&quot;, dwelling.DisplayName)"/>
+        </PanelRef>
+        <PanelRef
+          def="HOPCostChangeDetailLV(line, adjBasePremiumCostChanges)"
+          id="AdjBasePremiumCostChanges"
+          visible="adjBasePremiumCostChanges.HasElements">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.HOP.HOPQuoteScreen.AdjustmentsToBasePremium&quot;)"/>
+        </PanelRef>
+        <PanelRef
+          def="HOPCostChangeDetailLV(line, otherPremiumCostChanges)"
+          id="OtherPremiumCostChanges"
+          visible="otherPremiumCostChanges.HasElements">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.HOP.HOPQuoteScreen.OtherPremiums&quot;)"/>
+        </PanelRef>
+        <PanelRef
+          def="HOPCostChangeDetailLV(line, modifierCostChanges)"
+          id="ModifierCostChanges"
+          visible="modifierCostChanges.HasElements">
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.Policy.HOP.HOPQuoteScreen.Modifiers&quot;)"/>
+        </PanelRef>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

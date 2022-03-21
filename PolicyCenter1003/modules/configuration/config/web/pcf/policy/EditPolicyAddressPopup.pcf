@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="period.PolicyAddress.copyFromAddress(tmpAddress);  tmpAddress.remove()"
+    canEdit="true"
+    id="EditPolicyAddressPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail&quot;)">
+    <LocationEntryPoint
+      signature="EditPolicyAddressPopup(period : PolicyPeriod, isNew : boolean)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="isNew"
+      type="boolean"/>
+    <Variable
+      initialValue="initializePolicyAddressAndCreateTmpAddress()"
+      name="tmpAddress"
+      type="Address"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; period.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="period != null ? openForEditInit.get() : CurrentLocation.InEditMode"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet
+            id="PolicyAddressInputSet">
+            <InputSetRef
+              def="AddressInputSet(new gw.pcf.contacts.AddressInputSetAddressOwner(tmpAddress, false, true))"/>
+            <TypeKeyInput
+              editable="true"
+              id="AddressType"
+              label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.AddressType&quot;)"
+              required="true"
+              value="tmpAddress.AddressType"
+              valueType="typekey.AddressType"/>
+            <TextInput
+              editable="true"
+              id="AddressDescription"
+              label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.Description&quot;)"
+              value="tmpAddress.Description"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function initializePolicyAddressAndCreateTmpAddress() : Address {
+  if (isNew) {
+    // we do this here because none of the page before/after triggers occur at the right time
+    var addr = new Address();
+    period.PrimaryNamedInsured.AccountContactRole.AccountContact.Contact.addAddress(addr);
+    period.PolicyAddress.assignToSource(addr);
+  }
+  return period.PolicyAddress.copyToNewAddress()
+}]]></Code>
+  </Popup>
+</PCF>

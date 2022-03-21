@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    desc="Opens the Contact for specified ContactPublicId"
+    id="Contact"
+    location="ContactForward(Contact.findContactByPublicId(contactPublicId))">
+    <EntryPointParameter
+      locationParam="contactPublicId"
+      optional="false"
+      type="String"/>
+  </EntryPoint>
+</PCF>

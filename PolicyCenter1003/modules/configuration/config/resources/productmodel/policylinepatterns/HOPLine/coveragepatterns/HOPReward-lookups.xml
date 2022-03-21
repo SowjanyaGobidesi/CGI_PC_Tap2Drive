@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<import>
+  <CoverageLookup public-id="zuliklb6nfthbe2rana9agu6vm9">
+    <Availability>Available</Availability>
+    <CoveragePatternCode>zuhiksn15sd0g53anl8v0pu45db</CoveragePatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CoverageLookup>
+  <CovTermLookup public-id="zmjgamu6d76aidagbg6crnikvia">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zneh8p1jbds7ud09i345kbu50sa</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermLookup>
+  <CovTermLookup public-id="zhvj217k21fc32hr93c8b8in239">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zfigedt82ie1129tk1tql0j49e8</CovTermPatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermLookup>
+  <CovTermPackLookup public-id="zgsio23a8k04e8l6hfoeeq7m9ka">
+    <Availability>Available</Availability>
+    <CovTermPackCode>zdvjovikrak5ocf78gjvhoptl49</CovTermPackCode>
+    <CovTermPatternCode>zfigedt82ie1129tk1tql0j49e8</CovTermPatternCode>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermPackLookup>
+  <CovTermPackLookup public-id="zegg2prufgtgo14ebpdck09lb6b">
+    <Availability>Available</Availability>
+    <CovTermPackCode>z93h4kjeukibu2v3edt4eua56f9</CovTermPackCode>
+    <CovTermPatternCode>zneh8p1jbds7ud09i345kbu50sa</CovTermPatternCode>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </CovTermPackLookup>
+</import>

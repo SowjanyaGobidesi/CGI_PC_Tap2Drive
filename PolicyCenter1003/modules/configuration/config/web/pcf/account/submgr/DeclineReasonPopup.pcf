@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="gw.web.account.submgr.DeclineReasonPopupUIHelper.declineSubmission(submission, policyPeriod, wizard)"
+    canEdit="true"
+    canVisit="perm.Submission.edit(submission)"
+    countsAsWork="false"
+    id="DeclineReasonPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.DeclinedReasonPopup&quot;)">
+    <LocationEntryPoint
+      signature="DeclineReasonPopup(submission : Submission, policyPeriod : PolicyPeriod, wizard : pcf.api.Wizard)"/>
+    <Variable
+      name="submission"
+      type="Submission"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Screen
+      id="RejectScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Job.Operation.Declining&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="RejectReasonDV(submission, TC_DECLINATION)"/>
+    </Screen>
+  </Popup>
+</PCF>

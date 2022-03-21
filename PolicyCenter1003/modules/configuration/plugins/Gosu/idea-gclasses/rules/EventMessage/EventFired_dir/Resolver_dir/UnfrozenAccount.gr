@@ -1,0 +1,20 @@
+package rules.EventMessage.EventFired_dir.Resolver_dir
+uses gw.api.domain.account.PCAccountTransfer
+uses gw.plugin.multicluster.resolver.ResolverMessageCreationUtil
+uses gw.plugin.multicluster.resolver.dto.ResolverAccountData
+
+@gw.rules.RuleName("Unfrozen Account")
+internal class UnfrozenAccount {
+  static function doCondition(messageContext  :  entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.Root typeis Account
+        and messageContext.EventName == PCAccountTransfer.ACCOUNTUNFROZEN_EVENT
+/*end00rule*/
+}
+
+  static function doAction(messageContext  :  entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    ResolverMessageCreationUtil.createAccountMessage(messageContext)
+/*end00rule*/
+  }
+}

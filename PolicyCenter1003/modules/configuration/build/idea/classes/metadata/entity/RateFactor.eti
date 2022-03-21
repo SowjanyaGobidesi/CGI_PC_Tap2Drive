@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="RateFactor"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.entity.RateFactorPublicMethods"
+    impl="com.guidewire.pc.domain.policy.impl.RateFactorImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.impl.RateFactorInternalMethods"
+    impl="com.guidewire.pc.domain.policy.impl.RateFactorImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.RateFactorAdapter"/>
+  <fulldescription><![CDATA[
+    A rate factor is a risk characteristic and its associated numeric value which might have an impact on premium.
+    As used here rate factors are applied to base premium rather than rates. A common example of rate factors are the
+    components of IRPM (individual risk premium modifier).
+  ]]></fulldescription>
+  <column
+    desc="Credit or debit multiplier for this rate factor. Use the setAssessmentWithinLimits method to set this value within its minimum and maximum."
+    name="Assessment"
+    nullok="false"
+    type="rate"/>
+  <column
+    desc="Additional comment to justify this rate factor"
+    name="Justification"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The pattern used to create this RateFactor that defines its type."
+    name="PatternCode"
+    nullok="false"
+    setterScriptability="hidden"
+    type="patterncode"/>
+</delegate>

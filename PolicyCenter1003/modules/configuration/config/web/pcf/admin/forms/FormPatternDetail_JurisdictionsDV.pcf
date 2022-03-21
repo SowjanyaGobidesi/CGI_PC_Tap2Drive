@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="FormPatternDetail_JurisdictionsDV">
+    <Require
+      name="formPattern"
+      type="FormPattern"/>
+    <Variable
+      initialValue="formPattern.UseInsteadRange"
+      name="useInsteadRange"
+      recalculateOnRefresh="true"
+      type="gw.admin.FormPatternRef[]"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="GroupCode"
+        label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.JurisdictionsDV.GroupCode&quot;)"
+        value="formPattern.InternalGroupCode">
+        <PostOnChange/>
+      </TextInput>
+      <RangeInput
+        editable="true"
+        id="UseInsteadOfForm"
+        label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.JurisdictionsDV.UseInsteadOfForm&quot;)"
+        optionLabel="VALUE == null ? DisplayKey.get(&quot;Java.TextValueWidget.NoneSelected&quot;) : VALUE.DisplayName"
+        value="formPattern.UseInsteadOfFormRef"
+        valueRange="useInsteadRange"
+        valueType="gw.admin.FormPatternRef"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

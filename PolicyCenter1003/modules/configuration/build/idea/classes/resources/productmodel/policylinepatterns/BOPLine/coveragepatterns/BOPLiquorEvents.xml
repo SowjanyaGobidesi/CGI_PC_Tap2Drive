@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="BOPLiquorEvents"
+  coverageCategory="BOPLiquorCat"
+  coverageSubtype="BusinessOwnersCov"
+  coveredPartyType="ThirdParty"
+  existence="Electable"
+  lookupTableName="BOPCov"
+  owningEntityType="BusinessOwnersLine"
+  policyLinePattern="BOPLine"
+  priority="-1"
+  public-id="BOPLiquorEvents"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <GenericCovTermPattern
+      codeIdentifier="LiqLiabEventsDescription"
+      coverageColumn="StringTerm1"
+      lookupTableName="BOPCovTerm"
+      modelType="Other"
+      priority="-1"
+      public-id="LiqLiabEventsDescription"
+      required="true"/>
+    <GenericCovTermPattern
+      codeIdentifier="LiqLiabEventDate"
+      coverageColumn="DateTerm1"
+      lookupTableName="BOPCovTerm"
+      priority="-1"
+      public-id="LiqLiabEventDate"
+      required="true"/>
+  </CovTerms>
+</CoveragePattern>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RejectReasonDV">
+    <Require
+      name="submission"
+      type="Submission"/>
+    <Require
+      name="type"
+      type="LetterType"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        filter="VALUE.hasCategory(type)"
+        id="RejectReason"
+        label="DisplayKey.get(&quot;Web.SubmissionRejectLetterDV.RejectReason&quot;)"
+        required="true"
+        value="submission.RejectReason"
+        valueType="typekey.ReasonCode"/>
+      <TextAreaInput
+        editable="true"
+        id="RejectReasonText"
+        label="DisplayKey.get(&quot;Web.SubmissionRejectLetterDV.RejectReasonText&quot;)"
+        numRows="8"
+        value="submission.RejectReasonText"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

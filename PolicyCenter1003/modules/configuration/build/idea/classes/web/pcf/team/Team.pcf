@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.User.viewteam"
+    id="Team"
+    menuLinks="BlankMenuLinks()"
+    menuTree="TeamMenuTree()"
+    parent="TeamForward(&quot;&quot;, new gw.api.web.team.PCRootTeamModel())"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationRef
+      location="TeamGroup(com.guidewire.pc.web.team.PCTeamModelFactory.getInstance().createRootTeamModel() as gw.api.web.team.PCTeamModel)"/>
+  </LocationGroup>
+</PCF>

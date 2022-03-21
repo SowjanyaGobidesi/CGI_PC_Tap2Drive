@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="CurrentActivitiesPolicyPopup"
+    title="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities')">
+    <LocationEntryPoint
+      signature="CurrentActivitiesPolicyPopup(policyPeriod: PolicyPeriod)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Screen>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="activity"
+          value="policyPeriod.Policy.AllOpenActivities"
+          valueType="gw.api.database.IQueryBeanResult&lt;entity.Activity&gt;">
+          <IteratorSort
+            sortBy="activity.Priority"
+            sortOrder="1"/>
+          <IteratorSort
+            sortBy="activity.TargetDate"
+            sortOrder="2"/>
+          <Row>
+            <DateCell
+              dateFormat="short"
+              id="DueDate"
+              fontColor="activity.UIOverdueColor"
+              label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.DueDate')"
+              value="activity.TargetDate"/>
+            <TextCell
+              action="ActivityForward.go(activity, policyPeriod)"
+              available="perm.Activity.view(activity)"
+              id="Subject"
+              label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Subject')"
+              value="activity.Subject"/>
+            <TypeKeyCell
+              id="Priority"
+              fontColor="activity.UIPriorityColor"
+              label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Priority')"
+              value="activity.Priority"
+              valueType="typekey.Priority"/>
+            <TextCell
+              id="Assigned"
+              label="DisplayKey.get('Web.Dashboard.Tile.CurrentActivities.Assigned')"
+              value="activity.AssignedTo"
+              valueType="java.lang.Object"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

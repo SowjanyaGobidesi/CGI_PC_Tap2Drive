@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Associates a FormPattern with a custom form inference class"
+  entity="CustomFormInference"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  readOnly="true"
+  table="customforminference"
+  type="retireable">
+  <column
+    desc="Code of the FormPattern"
+    name="FormCode"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Inference class of the FormPattern"
+    name="InferenceClass"
+    nullok="false"
+    type="className">
+    <columnParam
+      name="baseClass"
+      value="gw.forms.FormData"/>
+  </column>
+  <index
+    desc="Index ensuring at most one entry per FormPattern. Also used for looking up entries by FormPattern code."
+    name="custu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="FormCode"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

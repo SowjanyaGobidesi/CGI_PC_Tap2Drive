@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  ClassCode Basis ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Lookup table used to find the number of years to request and the stale days when requesting Motor Vehicle Record data"
+  entity="MVRConfig"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="mvrconfig"
+  type="retireable">
+  <typekey
+    desc="The state or jurisdiction where the company has been licensed to sell insurance."
+    name="Jurisdiction"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="Code of the underwriting company"
+    name="UWCompanyCode"
+    nullok="true"
+    typelist="UWCompanyCode"/>
+  <column
+    desc="Number of years to request (3, 5, 7, 10)"
+    name="YearsToRequest"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Calendar days after which the MVR is considered stale (default 90)"
+    name="StaleDays"
+    nullok="false"
+    type="integer"/>
+  <!-- Enforce state/uw-company uniqueness and speeds up search -->
+  <index
+    desc="Ensures that Jurisdiction/UWCompany pair values are unique and speeds up the search."
+    name="StateUWCompany"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Jurisdiction"/>
+    <indexcol
+      keyposition="2"
+      name="UWCompanyCode"/>
+    <indexcol
+      keyposition="3"
+      name="retired"/>
+  </index>
+</entity>

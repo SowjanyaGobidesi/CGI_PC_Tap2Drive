@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="HVQSearch_ResultsLV"
+    stretch="true">
+    <Require
+      name="searchResults"
+      type="List&lt; gw.quoting.QuoteSummarySearchResult &gt;"/>
+    <ExposeIterator
+      valueType="gw.quoting.QuoteSummarySearchResult"
+      widget="QuoteStoreSummaryIterator"/>
+    <Variable
+      initialValue="new gw.web.search.HVQSearchUIHelper()"
+      name="searchHelper"
+      type="gw.web.search.HVQSearchUIHelper"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="quoteStoreSummary"
+      id="QuoteStoreSummaryIterator"
+      type="gw.quoting.QuoteSummarySearchResult"
+      value="searchResults"
+      valueType="java.util.List&lt; gw.quoting.QuoteSummarySearchResult &gt;">
+      <Row>
+        <LinkCell
+          align="left"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.SubmissionNumber&quot;)">
+          <Link
+            action="HVQAccountSearchPopup.push(quoteStoreSummary)"
+            id="LinkToQuoteConversion"
+            label="DisplayKey.get(&quot;Web.HVQSearch.Results.ConvertToSubmission&quot;)"
+            styleClass="miniButton"
+            visible="quoteStoreSummary.FromQuoteStore"/>
+          <Link
+            action="JobForward.go(searchHelper.toSubmission(quoteStoreSummary.SubmissionNumber))"
+            id="LinkExistingQuote"
+            label="quoteStoreSummary.SubmissionNumber"
+            styleClass="bold"
+            visible="not quoteStoreSummary.FromQuoteStore"/>
+        </LinkCell>
+        <TextCell
+          id="QuoteId"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.QuoteId&quot;)"
+          value="quoteStoreSummary.QuoteKey.PolicyQuoteID"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.PrimaryNamedInsured&quot;)"
+          value="quoteStoreSummary.Name"/>
+        <TextCell
+          id="EmailAddress"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.EmailAddress&quot;)"
+          value="quoteStoreSummary.Email"
+          wrap="false"/>
+        <TextCell
+          id="WorkPhone"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.Phone&quot;)"
+          value="quoteStoreSummary.WorkPhone"
+          wrap="false"/>
+        <TextCell
+          id="Origin"
+          label="DisplayKey.get(&quot;Web.HVQSearch.Results.Origin.QuoteOrigin&quot;)"
+          value="searchHelper.quoteOrigin(quoteStoreSummary.FromQuoteStore)"
+          wrap="false"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

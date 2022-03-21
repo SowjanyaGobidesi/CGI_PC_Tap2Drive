@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="DocumentMetadataEditDV"
+    mode="default">
+    <Require
+      name="documentDetailsApplicationHelper"
+      type="gw.document.DocumentDetailsApplicationHelper"/>
+    <Require
+      name="fromTemplate"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.document.DocumentDetailsInfo(documentDetailsApplicationHelper.Documents[0])"
+      name="documentDetailsInfo"
+      type="gw.document.DocumentDetailsInfo"/>
+    <InputColumn>
+      <InputSetRef
+        def="DocumentMetadataInputSet(documentDetailsApplicationHelper, fromTemplate)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

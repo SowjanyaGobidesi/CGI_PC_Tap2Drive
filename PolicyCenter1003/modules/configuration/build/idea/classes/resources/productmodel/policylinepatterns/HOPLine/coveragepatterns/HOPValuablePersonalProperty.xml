@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPValuablePersonalProperty"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPLineScheduleCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPLineCov"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="3500"
+  public-id="zc1jk38ardj581cfmn0e395i758"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPCovScheduleValuables"
+      public-id="HOPCovScheduleValuables"
+      required="true"
+      priority="0"
+      scheduledItemType="HOPLineScheduleCovItem">
+      <ScheduledItemClauseLinkages>
+        <ScheduledItemClauseLink
+          codeIdentifier="HOPScheduleValuablePersonalPropertyItemCoverage"
+          public-id="HOPScheduleValuablePersonalPropertyItemCoverage"
+          linkedClausePattern="zc9iqhupesj0fbpvo8ltn4526b8"/>
+      </ScheduledItemClauseLinkages>
+    </ClauseSchedulePattern>
+  </Schedules>
+</CoveragePattern>

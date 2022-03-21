@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="ExcludeDesigOperations"
+  coverageCategory="GLDesignated"
+  exclusionSubtype="GeneralLiabilityExcl"
+  existence="Electable"
+  lookupTableName="GLExcl"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="ExcludeDesigOperations"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <GenericCovTermPattern
+      codeIdentifier="DesigLocation"
+      coverageColumn="StringTerm1"
+      lookupTableName="GLCovTerm"
+      priority="-1"
+      public-id="DesigLocation"
+      required="true"/>
+    <GenericCovTermPattern
+      codeIdentifier="ExcludedOp"
+      coverageColumn="StringTerm2"
+      lookupTableName="GLCovTerm"
+      priority="-1"
+      public-id="ExcludedOp"
+      required="true"/>
+  </CovTerms>
+</ExclusionPattern>

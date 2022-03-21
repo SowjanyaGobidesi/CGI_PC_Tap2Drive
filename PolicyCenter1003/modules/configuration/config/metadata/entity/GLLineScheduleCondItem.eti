@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="GL Line level Condition scheduled item"
+  effDatedBranchType="PolicyPeriod"
+  entity="GLLineScheduleCondItem"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="gllineschedconditem"
+  type="effdated">
+  <implementsEntity
+    name="GLScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.gl.GLLineScheduleCondItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.gl.GLLineScheduleCondItemCoverableAdapter"/>
+  <foreignkey
+    fkentity="GLLineScheduleCond"
+    name="Schedule"
+    nullok="false"/>
+</entity>

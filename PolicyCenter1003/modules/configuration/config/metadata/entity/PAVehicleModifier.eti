@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A vehicle-level modifier for Personal Auto"
+  effDatedBranchType="PolicyPeriod"
+  entity="PAVehicleModifier"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="pavehmodifier"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.pa.PAVehicleModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.pa.PAVehicleModifierMatcher"/>
+  <foreignkey
+    fkentity="PersonalVehicle"
+    name="PAVehicle"
+    nullok="false"/>
+  <array
+    arrayentity="PAVehicleRateFactor"
+    cascadeDelete="true"
+    desc="Individual components of the rating factor"
+    name="PAVehicleRateFactors"
+    owner="false"/>
+</entity>

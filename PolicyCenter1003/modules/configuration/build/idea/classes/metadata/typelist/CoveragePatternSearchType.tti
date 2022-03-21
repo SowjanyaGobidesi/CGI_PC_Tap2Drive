@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="To be used in ClausePatternSearchCriteria to search for specific clause's subtypes."
+  final="false"
+  name="CoveragePatternSearchType">
+  <typecode
+    code="Coverage"
+    desc="Search for Coverages"
+    name="Coverage"/>
+  <typecode
+    code="Exclusion"
+    desc="Search for Exclusions"
+    name="Exclusion"/>
+  <typecode
+    code="Condition"
+    desc="Search for Conditions"
+    name="Condition"/>
+  <typecode
+    code="ExclCond"
+    desc="Search for Exclusions and Conditions"
+    name="Exclusion and Condition"/>
+</typelist>

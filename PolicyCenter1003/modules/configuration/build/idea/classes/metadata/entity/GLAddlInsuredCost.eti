@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The cost for an additional insured."
+  entity="GLAddlInsuredCost"
+  supertype="GLCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.gl.financials.GLCostAdapter"/>
+  <foreignkey
+    fkentity="PolicyAddlInsured"
+    name="AdditionalInsured"
+    nullok="false"/>
+</subtype>

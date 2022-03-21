@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- ===== IM Transactions ===== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A transaction for the Inland Marine line"
+  effDatedBranchType="PolicyPeriod"
+  entity="IMTransaction"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="imtransaction"
+  type="effdated">
+  <implementsEntity
+    name="Transaction"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.TransactionAdapter"
+    impl="gw.lob.im.financials.IMTransactionAdapter"/>
+  <foreignkey
+    desc="The cost this transaction modifies."
+    fkentity="IMCost"
+    name="IMCost"
+    nonEffDated="true"
+    nullok="false"/>
+</entity>

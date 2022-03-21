@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<import>
+  <IneligibleDogBreed public-id="pc:zncho02haku1r4bfd68rl8lh8k9">
+    <DogBreed>Doberman Pinschers</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:zj7ha9g96agjg1vooj3i3m93i29">
+    <DogBreed>Presa Canarios</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:z4pguv3qfa6j40ps37dc0dr08ra">
+    <DogBreed>Chows</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:z0ug8o7rvtf3dfao94j14ag9fc8">
+    <DogBreed>American Pit Bull Terriers</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:zajj81sjtpbf3e2lqb41jr8qmsb">
+    <DogBreed>Rottweilers</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:z4hhe9kuh09j4aqja2ngqnup109">
+    <DogBreed>American Staffordshire Terriers</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:zcog8trorm9hr6n97rfv84h46ea">
+    <DogBreed>Wolf Hybrids</DogBreed>
+  </IneligibleDogBreed>
+  <IneligibleDogBreed public-id="pc:zt4jq65qhvp3j2b9lheg6kqavp8">
+    <DogBreed>Staffordshire Bull Terriers</DogBreed>
+  </IneligibleDogBreed>
+</import>

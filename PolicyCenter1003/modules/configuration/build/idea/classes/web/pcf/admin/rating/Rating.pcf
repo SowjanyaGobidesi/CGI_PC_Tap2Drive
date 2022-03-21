@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.System.ratebookview and gw.api.system.PCConfigParameters.RatingModuleOn()"
+    id="Rating"
+    title="DisplayKey.get(&quot;Web.Rating&quot;)">
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Rating.RateBooks&quot;)"
+      location="RateBooks()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.WizardLabel&quot;)"
+      location="ImpactTestingWizard()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Rating.RateTableDefinitions&quot;)"
+      location="RateTableDefinitions()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Rating.Flow&quot;)"
+      location="RateRoutines()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Rating.ParameterSets&quot;)"
+      location="ParameterSetsPage()"/>
+  </LocationGroup>
+</PCF>

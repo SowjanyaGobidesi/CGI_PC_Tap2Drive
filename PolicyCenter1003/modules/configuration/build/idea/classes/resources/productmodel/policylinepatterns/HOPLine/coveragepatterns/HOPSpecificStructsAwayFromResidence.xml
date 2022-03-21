@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CoveragePattern
+  codeIdentifier="HOPSpecificStructsAwayFromResidence"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingScheduleCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="6500"
+  public-id="zo8jgu75d357q794cno84vh0338"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPSpecificStructsAwayFromResidenceSched"
+      mostDescriptiveProperty="HOPSpecificStructsAwayFromResidenceSchedDescLocation"
+      priority="0"
+      public-id="HOPSpecificStructsAwayFromResidenceSched"
+      required="true"
+      scheduledItemType="HOPDwellScheduleCovItem">
+      <ScheduledItemClauseLinkages>
+        <ScheduledItemClauseLink
+          codeIdentifier="HOPSpecificStructsAwayFromResidenceSchedCovLink"
+          linkedClausePattern="zh5j85vgpge8n6saji15tsonl8b"
+          public-id="HOPSpecificStructsAwayFromResidenceSchedCovLink"/>
+      </ScheduledItemClauseLinkages>
+      <ScheduledItemProperties>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPSpecificStructsAwayFromResidenceSchedDescLocation"
+          column="StringCol1"
+          priority="0"
+          propertyName="Description"
+          public-id="HOPSpecificStructsAwayFromResidenceSchedDescLocation"
+          required="false"/>
+      </ScheduledItemProperties>
+    </ClauseSchedulePattern>
+  </Schedules>
+</CoveragePattern>

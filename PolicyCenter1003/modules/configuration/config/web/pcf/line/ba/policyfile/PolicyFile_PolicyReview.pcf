@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.pfiledetails"
+    id="PolicyFile_PolicyReview"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.PolicyReview&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_PolicyReview(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen
+      id="PolicyFile_PolicyReviewScreen">
+      <TitleBar/>
+      <Toolbar/>
+      <CardViewPanel
+        hideTabIfSingle="true"
+        id="ReviewSummaryCV">
+        <Card
+          id="LineSummary"
+          title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.Card.Summary&quot;)">
+          <PanelIterator
+            elementName="line"
+            value="policyPeriod.Lines"
+            valueType="entity.PolicyLine[]">
+            <PanelRef
+              def="PolicyLineSummaryPanelSet(line, null)"
+              mode="line.Pattern.PublicID">
+              <TitleBar
+                title="line.DisplayName"
+                visible="policyPeriod.Lines.Count &gt; 1"/>
+            </PanelRef>
+          </PanelIterator>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

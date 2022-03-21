@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<Offering
+  codeIdentifier="CPPPremium"
+  priority="20"
+  product="CommercialPackage"
+  public-id="CPPPremium">
+  <AvailabilityScript><![CDATA[if ( !(gw.api.upgrade.Coercions.makePBooleanFrom(PolicyPeriod.getAnswerValue( gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffSprinkle") ))) ) { return false}
+
+if ( gw.api.upgrade.Coercions.makePBooleanFrom(PolicyPeriod.getAnswerValue( gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffAccountsReceivable") ))
+  and PolicyPeriod.getAnswerValue(gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffDuplicated")) != null 
+  and (gw.api.upgrade.Coercions.makePIntFrom(PolicyPeriod.getAnswerValue(gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffDuplicated")))) < 60 ) { return false }
+
+if ( gw.api.upgrade.Coercions.makePBooleanFrom(PolicyPeriod.getAnswerValue( gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffFlammable") )) ) { return false}
+
+if ( gw.api.upgrade.Coercions.makePBooleanFrom(PolicyPeriod.getAnswerValue( gw.api.upgrade.PCCoercions.makeProductModel<gw.api.productmodel.Question>("CPPoffLawsuits") )) ) { return false}
+
+return true]]></AvailabilityScript>
+  <PolicyLineSelections>
+    <PolicyLineSelection
+      codeIdentifier="zu2jm8mdi5e4l7ap9glbt3ksud9"
+      enabled="true"
+      policyLineCode="GLLine"
+      public-id="zu2jm8mdi5e4l7ap9glbt3ksud9">
+      <CoverageSelections>
+        <CoverageSelection
+          codeIdentifier="zslhcumo6am0q6020pljlit59pb"
+          coverageCode="GLCGLCov"
+          enabled="true"
+          public-id="zslhcumo6am0q6020pljlit59pb">
+          <CovTermSelections>
+            <OptionCovTermSelection
+              codeIdentifier="zuahqsh2qt6rafqk41fuaumcp09"
+              covTermCode="GLCGLBILimit"
+              enabled="true"
+              public-id="zuahqsh2qt6rafqk41fuaumcp09">
+              <CovTermOptSelections>
+                <CovTermOptSelection
+                  codeIdentifier="z72iql2om28radcdt0mecatinta"
+                  covTermOptCode="za3jg23r1cujk8g9pi27nsp6l2a"
+                  enabled="false"
+                  public-id="z72iql2om28radcdt0mecatinta"/>
+              </CovTermOptSelections>
+            </OptionCovTermSelection>
+            <OptionCovTermSelection
+              codeIdentifier="ze7h48u13eji780ouev2672rkm8"
+              covTermCode="GLCGLOccLimit"
+              enabled="true"
+              public-id="ze7h48u13eji780ouev2672rkm8">
+              <CovTermOptSelections>
+                <CovTermOptSelection
+                  codeIdentifier="zb8gev1os004c48nt65rn0urme8"
+                  covTermOptCode="zvejq3lgdn0lc5127e37ftv76q8"
+                  enabled="false"
+                  public-id="zb8gev1os004c48nt65rn0urme8"/>
+              </CovTermOptSelections>
+            </OptionCovTermSelection>
+            <OptionCovTermSelection
+              codeIdentifier="zbsh6k6ni9re7d3ivjfn91baasa"
+              covTermCode="GLCGLPDLimit"
+              enabled="true"
+              public-id="zbsh6k6ni9re7d3ivjfn91baasa">
+              <CovTermOptSelections>
+                <CovTermOptSelection
+                  codeIdentifier="zvmigtvr3auk1a5ibapm8m9ua8b"
+                  covTermOptCode="zs4io756u2ld77qoobdm2mbak68"
+                  enabled="false"
+                  public-id="zvmigtvr3auk1a5ibapm8m9ua8b"/>
+              </CovTermOptSelections>
+            </OptionCovTermSelection>
+          </CovTermSelections>
+        </CoverageSelection>
+        <CoverageSelection
+          codeIdentifier="z9ghifj1k0d3s6sop6kck3nqd6b"
+          coverageCode="GLDeductible"
+          enabled="true"
+          public-id="z9ghifj1k0d3s6sop6kck3nqd6b">
+          <CovTermSelections>
+            <OptionCovTermSelection
+              codeIdentifier="zdbj0huqv2jcj5gfn4hjjif4kp8"
+              covTermCode="GLCSLDeductible"
+              enabled="false"
+              public-id="zdbj0huqv2jcj5gfn4hjjif4kp8"/>
+          </CovTermSelections>
+        </CoverageSelection>
+      </CoverageSelections>
+    </PolicyLineSelection>
+  </PolicyLineSelections>
+</Offering>

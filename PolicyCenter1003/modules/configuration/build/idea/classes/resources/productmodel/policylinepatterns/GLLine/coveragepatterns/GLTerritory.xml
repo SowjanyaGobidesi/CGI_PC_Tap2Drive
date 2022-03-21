@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="GLTerritory"
+  conditionSubtype="GeneralLiabilityCond"
+  coverageCategory="GLOther"
+  existence="Electable"
+  lookupTableName="GLCond"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="GLTerritory"
+  referenceDateByType="DefinedObject">
+  <CovTerms>
+    <GenericCovTermPattern
+      codeIdentifier="NamedCountries"
+      coverageColumn="StringTerm1"
+      lookupTableName="GLCovTerm"
+      priority="-1"
+      public-id="NamedCountries"
+      required="false"/>
+    <TypekeyCovTermPattern
+      codeIdentifier="TerritoryDefinition"
+      coverageColumn="ChoiceTerm1"
+      defaultValue="Worldwide"
+      lookupTableName="GLCovTerm"
+      priority="99"
+      public-id="TerritoryDefinition"
+      required="true"
+      typelist="TerritoryDefinition"/>
+  </CovTerms>
+</ConditionPattern>

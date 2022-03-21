@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A property (datamodel field) of a coverable associated with a form pattern and its selected clause."
+  entity="FormPatternCoverableProperty"
+  exportable="true"
+  loadable="false"
+  table="formpatterncovprop"
+  type="retireable">
+  <column
+    desc="The coverable's property name."
+    name="Name"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The data type of the coverable's property."
+    name="DataType"
+    nullok="false"
+    type="mediumtext"/>
+  <foreignkey
+    desc="The form pattern associated with this coverable property."
+    fkentity="FormPattern"
+    name="FormPattern"
+    nullok="false"/>
+</entity>

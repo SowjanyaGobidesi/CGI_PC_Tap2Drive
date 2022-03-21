@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="IM Location"
+  displayName="IM Location"
+  effDatedBranchType="PolicyPeriod"
+  entity="IMLocation"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="imlocation"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.domain.LineSpecificLocation"
+    impl="gw.lob.im.IMSpecificLocation"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.im.IMLocationCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.im.IMLocationMatcher"/>
+  <foreignkey
+    fkentity="InlandMarineLine"
+    name="IMLine"
+    nullok="false"/>
+  <foreignkey
+    desc="Location of inland marine exposure, e.g., one or more buildings."
+    exportable="true"
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="false"
+    setterScriptability="all"/>
+  <array
+    arrayentity="IMBuilding"
+    cascadeDelete="true"
+    desc="Buildings on this location"
+    name="Buildings"
+    owner="false"/>
+</entity>

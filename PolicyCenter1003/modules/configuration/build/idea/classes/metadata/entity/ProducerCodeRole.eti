@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The producer code to role availability relationship."
+  entity="ProducerCodeRole"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="producercoderole"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.ProducerCodeRolePublicMethods"
+    impl="com.guidewire.pc.domain.product.impl.ProducerCodeRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pc.domain.product.impl.ProducerCodeRoleImpl"/>
+  <foreignkey
+    columnName="ProducerCodeID"
+    desc="The ProducerCode."
+    fkentity="ProducerCode"
+    name="ProducerCode"
+    nullok="false"/>
+  <foreignkey
+    columnName="RoleID"
+    desc="Security role granted to the producer code."
+    fkentity="Role"
+    name="Role"
+    nullok="false"/>
+  <index
+    desc="Ensures that the ProducerCode/Role join rows are unique."
+    name="pcoderoleu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ProducerCodeID"/>
+    <indexcol
+      keyposition="2"
+      name="RoleID"/>
+  </index>
+</entity>

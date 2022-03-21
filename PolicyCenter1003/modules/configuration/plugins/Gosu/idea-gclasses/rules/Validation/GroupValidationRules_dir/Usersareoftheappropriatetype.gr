@@ -1,0 +1,48 @@
+package rules.Validation.GroupValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("Users are of the appropriate type")
+internal class Usersareoftheappropriatetype {
+  static function doCondition(group : entity.Group) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(group : entity.Group, actions : gw.rules.Action) {
+
+/*start00rule*/
+var userTypes = new java.util.HashSet<UserType>()
+switch (group.GroupType) {
+  case TC_BRANCHUW:
+  case TC_REGIONUW:
+  case TC_HOMEOFFICEUW:
+    userTypes.add(TC_UNDERWRITER)
+    break
+  case TC_PRODUCER:
+    userTypes.add(TC_PRODUCER)
+    userTypes.add(TC_ASSISTANT)
+    break
+}
+if (userTypes.size() > 0) {
+  var invalidUsers = new java.util.HashSet<User>()
+  var sup = group.Supervisor
+  if (sup != null and not userTypes.contains( sup.UserType )) {
+    invalidUsers.add(sup)  
+  }
+  for (gu in group.Users) {
+    if (not userTypes.contains(gu.User.UserType)) {
+      invalidUsers.add(gu.User)
+    }
+  }
+  if (invalidUsers.size() > 0) {
+    group.reject( null, null, TC_LOADSAVE, DisplayKey.get("Validation.Group.UserTypes", group, group.GroupType, invalidUsers) )
+  }
+}
+/*end00rule*/
+
+  }
+}

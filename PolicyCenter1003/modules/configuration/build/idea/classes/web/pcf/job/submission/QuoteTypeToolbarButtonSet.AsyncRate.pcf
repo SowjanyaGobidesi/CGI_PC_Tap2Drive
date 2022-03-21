@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="QuoteTypeToolbarButtonSet"
+    mode="AsyncRate">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <ToolbarButton
+      action="jobWizardHelper.invalidateIterators(); jobWizardHelper.startAsyncRateProcess(policyPeriod)"
+      confirmMessage="DisplayKey.get(&quot;Job.Operation.RateAsync.Confirm&quot;)"
+      id="AsyncRate"
+      label="DisplayKey.get(&quot;Job.Operation.Rate&quot;)"
+      shortcut="Q"/>
+  </ToolbarButtonSet>
+</PCF>

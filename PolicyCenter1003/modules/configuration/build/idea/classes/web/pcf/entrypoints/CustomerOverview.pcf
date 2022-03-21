@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    id="CustomerOverview"
+    location="CustomerOverviewForward(PublicID, Phone)">
+    <EntryPointParameter
+      locationParam="PublicID"
+      optional="true"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="Phone"
+      optional="true"
+      type="String"/>
+  </EntryPoint>
+</PCF>

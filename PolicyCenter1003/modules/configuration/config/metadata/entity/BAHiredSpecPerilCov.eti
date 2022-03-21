@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Hired Auto Specified Causes of Loss"
+  displayName="Hired Auto Specified Causes of Loss"
+  entity="BAHiredSpecPerilCov"
+  supertype="BAStateCov">
+  <typekey
+    desc="Cause of loss"
+    name="HiredCauseOfLoss"
+    nullok="true"
+    typelist="SpecifiedCauseOfLoss"/>
+</subtype>

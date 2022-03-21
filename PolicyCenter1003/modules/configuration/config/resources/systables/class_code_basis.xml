@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.guidewire.com/cc/import/cc_import.xsd">
+  <ClassCodeBasis public-id="demo_sample:1">
+    <Auditable>true</Auditable>
+    <Code>Admissions - per $1000</Code>
+    <Description language="de">Zulassungen</Description>
+    <Description language="en_US">Admissions</Description>
+    <Description language="es">Admisiones</Description>
+    <Description language="fr">Admissions</Description>
+    <Description language="it">Accessi</Description>
+    <Description language="ja">入会金</Description>
+    <Description language="nl">Toegangsprijzen</Description>
+    <Description language="pt">Admissões</Description>
+    <Description language="ru">Условия приема</Description>
+    <Description language="zh_CN">管理费</Description>
+    <Name language="de">Zulassungen – pro 1.000 $</Name>
+    <Name language="en_US">Admissions - per $1000</Name>
+    <Name language="es">Aceptaciones - por $1000</Name>
+    <Name language="fr">Admissions - par tranche de 1000 $</Name>
+    <Name language="it">Accessi - per $ 1000</Name>
+    <Name language="ja">入会金 - 1000 ドルあたり</Name>
+    <Name language="nl">Toegangsprijzen: per $ 1.000</Name>
+    <Name language="pt">Admissões - por R$ 1.000</Name>
+    <Name language="ru">Условия приема – на $1 000</Name>
+    <Name language="zh_CN">入场费 - 每人$1000</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:10">
+    <Auditable>true</Auditable>
+    <Code>Payroll - per $1000</Code>
+    <Description language="de">Personalausgaben</Description>
+    <Description language="en_US">Payroll</Description>
+    <Description language="es">Nómina</Description>
+    <Description language="fr">Feuille de salaire</Description>
+    <Description language="it">Retribuzione</Description>
+    <Description language="ja">給与</Description>
+    <Description language="nl">Salarisadministratie</Description>
+    <Description language="pt">Folha de pagamento</Description>
+    <Description language="ru">Расходы на персонал</Description>
+    <Description language="zh_CN">工资</Description>
+    <Name language="de">Gehaltskosten - je 1.000 $</Name>
+    <Name language="en_US">Payroll - per $1000</Name>
+    <Name language="es">Nómina - por $1.000</Name>
+    <Name language="fr">Paie - par tranche de 1000 $</Name>
+    <Name language="it">Retribuzione - per $ 1000</Name>
+    <Name language="ja">給与 - 1000 ドルあたり</Name>
+    <Name language="nl">Loonsom: per $ 1.000</Name>
+    <Name language="pt">Folha de pagamento - por R$ 1.000</Name>
+    <Name language="ru">Расходы на персонал – на $1000</Name>
+    <Name language="zh_CN">工资 - 每人$1000</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:11">
+    <Auditable>false</Auditable>
+    <Code>Building Value - per $100</Code>
+    <Description language="de">Gebäudewert</Description>
+    <Description language="en_US">Building Value</Description>
+    <Description language="es">Valor del edificio</Description>
+    <Description language="fr">Valeur immobilière</Description>
+    <Description language="it">Valore dell'edificio</Description>
+    <Description language="ja">建物価額</Description>
+    <Description language="nl">Waarde gebouw</Description>
+    <Description language="pt">Valor do imóvel</Description>
+    <Description language="ru">Увеличение ценности</Description>
+    <Description language="zh_CN">建筑物价值</Description>
+    <Name language="de">Gebäudewert - je 100 $</Name>
+    <Name language="en_US">Building Value - per $100</Name>
+    <Name language="es">Valor del edificio - por $100</Name>
+    <Name language="fr">Valeur de construction - par tranche de 100 $</Name>
+    <Name language="it">Valore dell'edificio - per $ 100</Name>
+    <Name language="ja">建物価格 - 100 ドルあたり</Name>
+    <Name language="nl">Waarde gebouw: per $ 100</Name>
+    <Name language="pt">Valor do imóvel - por R$ 100</Name>
+    <Name language="ru">Увеличение ценности - на $100</Name>
+    <Name language="zh_CN">房屋价值 - 每人$100</Name>
+    <RateFactor>1.0000</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:12">
+    <Auditable>false</Auditable>
+    <Code>Liability Limit</Code>
+    <Description language="de">Haftpflichtlimit</Description>
+    <Description language="en_US">Liability Limit</Description>
+    <Description language="es">Límite de responsabilidad</Description>
+    <Description language="fr">Limite de responsabilité</Description>
+    <Description language="it">Massimale responsabilità civile</Description>
+    <Description language="ja">賠償責任限度額</Description>
+    <Description language="nl">Aansprakelijkheidslimiet</Description>
+    <Description language="pt">Limite de responsabilidade civil</Description>
+    <Description language="ru">Лимит ответственности</Description>
+    <Description language="zh_CN">责任险限额</Description>
+    <Name language="de">Haftungslimit</Name>
+    <Name language="en_US">Liability Limit</Name>
+    <Name language="es">Límite de responsabilidad</Name>
+    <Name language="fr">Limite de responsabilité</Name>
+    <Name language="it">Massimale responsabilità civile</Name>
+    <Name language="ja">賠償責任限度額</Name>
+    <Name language="nl">Aansprakelijkheidslimiet</Name>
+    <Name language="pt">Limite de responsabilidade civil</Name>
+    <Name language="ru">Лимит ответственности</Name>
+    <Name language="zh_CN">责任险限额</Name>
+    <RateFactor>0.0100</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:2">
+    <Auditable>false</Auditable>
+    <Code>Area - per Acre</Code>
+    <Description language="de">Bereich in Acre</Description>
+    <Description language="en_US">Area in Acres</Description>
+    <Description language="es">Área en acres</Description>
+    <Description language="fr">Surface en acres</Description>
+    <Description language="it">Area in acri (4047 m²)</Description>
+    <Description language="ja">面積（エーカー単位）</Description>
+    <Description language="nl">Oppervlakte in acres</Description>
+    <Description language="pt">Área em hectares</Description>
+    <Description language="ru">Площадь в акрах</Description>
+    <Description language="zh_CN">面积（英亩）</Description>
+    <Name language="de">Bereich - je Acre</Name>
+    <Name language="en_US">Area - per Acre</Name>
+    <Name language="es">Área - por acre</Name>
+    <Name language="fr">Superficie - par hectare</Name>
+    <Name language="it">Area - per acro</Name>
+    <Name language="ja">領域 - 1 エーカーあたり</Name>
+    <Name language="nl">Oppervlakte: per acre</Name>
+    <Name language="pt">Área - por hectare</Name>
+    <Name language="ru">Площадь – на один акр</Name>
+    <Name language="zh_CN">区域 - 每英亩</Name>
+    <RateFactor>1.0000</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:3">
+    <Auditable>true</Auditable>
+    <Code>Area - per 1000 sq ft</Code>
+    <Description language="de">Bereich in qm</Description>
+    <Description language="en_US">Area in sq ft</Description>
+    <Description language="es">Área en pies cuadrados</Description>
+    <Description language="fr">Surface en pieds carrés</Description>
+    <Description language="it">Area in metri quadri</Description>
+    <Description language="ja">面積（平方フィート単位）</Description>
+    <Description language="nl">Oppervlakte in vierkante voet</Description>
+    <Description language="pt">Área em metros quadrados</Description>
+    <Description language="ru">Площадь в кв. футах</Description>
+    <Description language="zh_CN">面积（平方英尺）</Description>
+    <Name language="de">Bereich - je 1.000 Quadratfuß</Name>
+    <Name language="en_US">Area - per 1000 sq ft</Name>
+    <Name language="es">Área - por 1.000 pies cuadrados</Name>
+    <Name language="fr">Superficie - par tranche de 1000 pieds carrés</Name>
+    <Name language="it">Area - per 1000 metri quadri</Name>
+    <Name language="ja">領域 - 1000 平方フィートあたり</Name>
+    <Name language="nl">Oppervlakte: per 1.000 vierkante voet</Name>
+    <Name language="pt">Área - por 100 metros quadrados</Name>
+    <Name language="ru">Площадь - за 1 000 кв. футов</Name>
+    <Name language="zh_CN">区域 - 每 1000 平方英尺</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:4">
+    <Auditable>true</Auditable>
+    <Code>Cost - per $1000</Code>
+    <Description language="de">Kosten</Description>
+    <Description language="en_US">Cost</Description>
+    <Description language="es">Costo</Description>
+    <Description language="fr">Coût</Description>
+    <Description language="it">Costo</Description>
+    <Description language="ja">コスト</Description>
+    <Description language="nl">Kosten</Description>
+    <Description language="pt">Custo</Description>
+    <Description language="ru">Стоимость</Description>
+    <Description language="zh_CN">成本</Description>
+    <Name language="de">Kosten - je 1.000 $</Name>
+    <Name language="en_US">Cost - per $1000</Name>
+    <Name language="es">Costo - por $1.000</Name>
+    <Name language="fr">Coût - par tranche de 1000 $</Name>
+    <Name language="it">Costi - per $ 1000</Name>
+    <Name language="ja">費用 - 1000 ドルあたり</Name>
+    <Name language="nl">Kosten: per $ 1.000</Name>
+    <Name language="pt">Custo - por R$ 1.000</Name>
+    <Name language="ru">Стоимость – на $1 000</Name>
+    <Name language="zh_CN">成本 - 每人$1000</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:5">
+    <Auditable>true</Auditable>
+    <Code>Op. Expense - per $1000</Code>
+    <Description language="de">Betriebskosten</Description>
+    <Description language="en_US">Op. Expense</Description>
+    <Description language="es">Gasto operativo</Description>
+    <Description language="fr">Dépense d'exploitation</Description>
+    <Description language="it">Spesa opzionale</Description>
+    <Description language="ja">運営費</Description>
+    <Description language="nl">OPEX</Description>
+    <Description language="pt">Despesas op.</Description>
+    <Description language="ru">Оп. Расходы</Description>
+    <Description language="zh_CN">经营费用</Description>
+    <Name language="de">Betriebskosten - je 1.000 $</Name>
+    <Name language="en_US">Op. Expense - per $1000</Name>
+    <Name language="es">Gastos ops. - por $1.000</Name>
+    <Name language="fr">Dépenses de fonctionnement - par tranche de 1000 $</Name>
+    <Name language="it">Costi di gestione - per $ 1000</Name>
+    <Name language="ja">運営費 - 1000 ドルあたり</Name>
+    <Name language="nl">OPEX: per $ 1.000</Name>
+    <Name language="pt">Despesas op. - por R$ 1.000</Name>
+    <Name language="ru">Оп. Расходы – на $1000</Name>
+    <Name language="zh_CN">经营费用 - 每人$1000</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:6">
+    <Auditable>true</Auditable>
+    <Code>Payroll - per $100</Code>
+    <Description language="de">Personalausgaben</Description>
+    <Description language="en_US">Payroll</Description>
+    <Description language="es">Nómina</Description>
+    <Description language="fr">Feuille de salaire</Description>
+    <Description language="it">Retribuzione</Description>
+    <Description language="ja">給与</Description>
+    <Description language="nl">Salarisadministratie</Description>
+    <Description language="pt">Folha de pagamento</Description>
+    <Description language="ru">Расходы на персонал</Description>
+    <Description language="zh_CN">工资</Description>
+    <Name language="de">Gehaltskosten - je 100 $</Name>
+    <Name language="en_US">Payroll - per $100</Name>
+    <Name language="es">Nómina - por $100</Name>
+    <Name language="fr">Paie - par tranche de 100 $</Name>
+    <Name language="it">Retribuzione - per $ 100</Name>
+    <Name language="ja">給与 - 100 ドルあたり</Name>
+    <Name language="nl">Loonsom: per $ 100</Name>
+    <Name language="pt">Folha de pagamento - por R$ 100</Name>
+    <Name language="ru">Расходы на персонал – на $100</Name>
+    <Name language="zh_CN">工资 - 每人$100</Name>
+    <RateFactor>0.0100</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:7">
+    <Auditable>true</Auditable>
+    <Code>Per Capita</Code>
+    <Description language="de">Pro Kopf</Description>
+    <Description language="en_US">Per Capita</Description>
+    <Description language="es">Per cápita</Description>
+    <Description language="fr">Par tête</Description>
+    <Description language="it">Pro capite</Description>
+    <Description language="ja">1 人あたり</Description>
+    <Description language="nl">Per hoofd</Description>
+    <Description language="pt">Per capita</Description>
+    <Description language="ru">На одного человека</Description>
+    <Description language="zh_CN">人均</Description>
+    <Name language="de">Pro Kopf</Name>
+    <Name language="en_US">Per capita</Name>
+    <Name language="es">Per cápita</Name>
+    <Name language="fr">Par tête</Name>
+    <Name language="it">Pro capite</Name>
+    <Name language="ja">1 人あたり</Name>
+    <Name language="nl">Per hoofd</Name>
+    <Name language="pt">Per capita</Name>
+    <Name language="ru">На одного человека</Name>
+    <Name language="zh_CN">人均</Name>
+    <RateFactor>1.0000</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:8">
+    <Auditable>true</Auditable>
+    <Code>Sales - per $1000</Code>
+    <Description language="de">Vertrieb</Description>
+    <Description language="en_US">Sales</Description>
+    <Description language="es">Ventas</Description>
+    <Description language="fr">Ventes</Description>
+    <Description language="it">Vendite</Description>
+    <Description language="ja">営業</Description>
+    <Description language="nl">Verkoop</Description>
+    <Description language="pt">Vendas</Description>
+    <Description language="ru">Продажи</Description>
+    <Description language="zh_CN">销售</Description>
+    <Name language="de">Umsatz - je 1.000 $</Name>
+    <Name language="en_US">Sales - per $1000</Name>
+    <Name language="es">Ventas - por $1.000</Name>
+    <Name language="fr">Ventes - par tranche de 1000 $</Name>
+    <Name language="it">Vendite - per $ 1000</Name>
+    <Name language="ja">売上 - 1000 ドルあたり</Name>
+    <Name language="nl">Verkoop: per $ 1.000</Name>
+    <Name language="pt">Vendas - por R$ 1.000</Name>
+    <Name language="ru">Продажи – на $1 000</Name>
+    <Name language="zh_CN">销售 - 每人$1000</Name>
+    <RateFactor>0.0010</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="demo_sample:9">
+    <Auditable>false</Auditable>
+    <Code>Units - Each</Code>
+    <Description language="de">Einheiten - jede</Description>
+    <Description language="en_US">Units - Each</Description>
+    <Description language="es">Unidades - cada</Description>
+    <Description language="fr">Unités - Chacune</Description>
+    <Description language="it">Unità - Ciascuna</Description>
+    <Description language="ja">ユニット - 1 つあたり</Description>
+    <Description language="nl">Eenheden: per stuk</Description>
+    <Description language="pt">Unidades - cada</Description>
+    <Description language="ru">Единицы – каждая</Description>
+    <Description language="zh_CN">单位 - 每个</Description>
+    <Name language="de">Einheiten - jede</Name>
+    <Name language="en_US">Units - Each</Name>
+    <Name language="es">Unidades - cada</Name>
+    <Name language="fr">Unités - Chacune</Name>
+    <Name language="it">Unità - Ciascuna</Name>
+    <Name language="ja">ユニット - 1 つあたり</Name>
+    <Name language="nl">Eenheden: per stuk</Name>
+    <Name language="pt">Unidades - cada</Name>
+    <Name language="ru">Единицы – каждая</Name>
+    <Name language="zh_CN">单位 - 每个</Name>
+    <RateFactor>1.0000</RateFactor>
+  </ClassCodeBasis>
+  <ClassCodeBasis public-id="wKgJLo3TWlEAAAAA">
+    <Auditable>false</Auditable>
+    <Code>FD Apparatus - Each</Code>
+    <Description language="de">Feuerwehrgeräte</Description>
+    <Description language="en_US">FD Apparatus</Description>
+    <Description language="es">Equipo de FD</Description>
+    <Description language="fr">Équipement d'incendie</Description>
+    <Description language="it">Apparato vigili del fuoco</Description>
+    <Description language="ja">消防車両</Description>
+    <Description language="nl">Brandweerauto</Description>
+    <Description language="pt">Aparato de Corpo de Bombeiros</Description>
+    <Description language="ru">Аппарат FD</Description>
+    <Description language="zh_CN">FD设备</Description>
+    <Name language="de">Feuerwehrgeräte - jede</Name>
+    <Name language="en_US">FD Apparatus - Each</Name>
+    <Name language="es">Aparato FD - cada</Name>
+    <Name language="fr">Appareil FD - Chaque</Name>
+    <Name language="it">Apparato vigili del fuoco - Ciascuno</Name>
+    <Name language="ja">消防設備 - 1 つあたり</Name>
+    <Name language="nl">Brandweerauto: per stuk</Name>
+    <Name language="pt">Aparato de Corpo de Bombeiros - cada</Name>
+    <Name language="ru">Аппарат FD – каждый</Name>
+    <Name language="zh_CN">FD设备 - 每个</Name>
+    <RateFactor>1.0000</RateFactor>
+  </ClassCodeBasis>
+</import>

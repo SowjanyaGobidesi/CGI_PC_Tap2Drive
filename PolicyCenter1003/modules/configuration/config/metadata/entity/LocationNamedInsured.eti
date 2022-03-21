@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An named insured on a location on a policy."
+  effDatedBranchType="PolicyPeriod"
+  entity="LocationNamedInsured"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="locationnamedinsured"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.policy.LocationNamedInsuredCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.policy.LocationNamedInsuredMatcher"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.account.EffDatedDefaultMergeableImpl"/>
+  <foreignkey
+    fkentity="PolicyNamedInsured"
+    name="NamedInsured"
+    nullok="false"/>
+  <foreignkey
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RatingCumulDetailsPanelSet"
+    mode="WorkersCompLine">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="period.WorkersCompLine.Costs.cast(WCCost)"
+      name="lineCosts"
+      recalculateOnRefresh="true"
+      type="java.util.Set&lt;entity.WCCost&gt;"/>
+    <Variable
+      initialValue="lineCosts.partition(\ c -&gt; c.JurisdictionState).toAutoMap(\ st -&gt; java.util.Collections.emptySet&lt;WCCost&gt;())"
+      name="partitionCosts"
+      recalculateOnRefresh="true"
+      type="java.util.Map&lt;typekey.Jurisdiction, java.util.Set&lt;entity.WCCost&gt;&gt;"/>
+    <Variable
+      initialValue="period.WorkersCompLine.RepresentativeJurisdictions.sortBy(\ juris -&gt; juris.State)"
+      name="jurisdictions"
+      recalculateOnRefresh="true"
+      type="entity.WCJurisdiction[]"/>
+    <PanelRef
+      def="RatingOverrideButtonDV(period, period.WorkersCompLine, jobWizardHelper, CurrentLocation.InEditMode)"
+      id="RatingOverrideButtonDV"/>
+    <PanelIterator
+      elementName="jurisdiction"
+      value="jurisdictions"
+      valueType="entity.WCJurisdiction[]">
+      <IteratorSort
+        sortBy="jurisdictions"
+        sortOrder="1"/>
+      <Variable
+        initialValue="partitionCosts.get(jurisdiction.State)"
+        name="stateCosts"
+        recalculateOnRefresh="true"
+        type="java.util.Set&lt;entity.WCCost&gt;"/>
+      <Variable
+        initialValue="jurisdiction.RatingPeriods"
+        name="ratingPeriods"
+        recalculateOnRefresh="true"
+        type="java.util.List&lt;gw.lob.wc.rating.WCRatingPeriod&gt;"/>
+      <PanelRef
+        visible="stateCosts.HasElements">
+        <TitleBar
+          title="jurisdiction.DisplayName"
+          visible="jurisdictions.Count &gt; 1"/>
+        <PanelSet
+          id="JurisdictionPanelSet">
+          <PanelIterator
+            elementName="ratingPeriod"
+            value="ratingPeriods.toTypedArray()"
+            valueType="gw.lob.wc.rating.WCRatingPeriod[]">
+            <Variable
+              initialValue="stateCosts.byRatingPeriod(ratingPeriod)"
+              name="periodCosts"
+              recalculateOnRefresh="true"
+              type="java.util.Set&lt;entity.WCCost&gt;"/>
+            <PanelRef
+              visible="!periodCosts.Empty"
+              def="StateCostsLV(periodCosts.getStandardPremiums(period.PreferredSettlementCurrency))">
+              <Verbatim
+                label="standardPremLabel(ratingPeriods.Count &gt; 1, ratingPeriod)"/>
+            </PanelRef>
+          </PanelIterator>
+          <PanelRef
+            def="StateCostsLV(stateCosts.toSet().getOtherPremiumAndSurcharges(period.PreferredSettlementCurrency))">
+            <Verbatim
+              label="DisplayKey.get(&quot;Web.SubmissionWizard.Quote.WC.OtherPremiumAndTax&quot;)"/>
+          </PanelRef>
+        </PanelSet>
+      </PanelRef>
+    </PanelIterator>
+    <PanelRef
+      id="GrandTotalPanel">
+      <TitleBar
+        id="grandTotalTitle"
+        title="DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Total2&quot;, gw.api.util.CurrencyUtil.renderAsCurrency(lineCosts.AmountSum(period.PreferredSettlementCurrency)))"/>
+      <DetailViewPanel>
+        <InputColumn/>
+      </DetailViewPanel>
+    </PanelRef>
+    <Code><![CDATA[function standardPremLabel(splitPeriod : boolean, ratingPeriod : gw.lob.wc.rating.WCRatingPeriod) : String {
+      if (splitPeriod) {
+        return DisplayKey.get("Web.Quote.WC.StandardPremium.SplitPeriod", gw.api.util.StringUtil.formatDate(ratingPeriod.RatingStart, "short"),
+          gw.api.util.StringUtil.formatDate(ratingPeriod.RatingEnd, "short"))
+      } else {
+        return DisplayKey.get("Web.Quote.WC.StandardPremium.OnePeriod")
+      }
+    }
+
+    function sortedDates(jurisdiction : WCJurisdiction) : java.util.Date[] {
+      var rpsds = jurisdiction.getSortedRPSDs().toList().map(\r -> r.StartDate)
+      rpsds.add(period.PeriodStart)
+      java.util.Collections.sort(rpsds)
+      return rpsds.toTypedArray()
+    }]]></Code>
+  </PanelSet>
+</PCF>

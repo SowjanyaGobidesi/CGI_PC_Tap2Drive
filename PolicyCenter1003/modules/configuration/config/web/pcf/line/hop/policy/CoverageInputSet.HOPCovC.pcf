@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CoverageInputSet"
+    mode="HOPCovC">
+    <Require
+      name="coveragePattern"
+      type="gw.api.productmodel.ClausePattern"/>
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="coverable as HOPDwelling"
+      name="dwelling"
+      type="HOPDwelling"/>
+    <Variable
+      initialValue="dwelling.HOPCoveragePart"
+      name="coveragePart"
+      type="HOPCoveragePart"/>
+    <Variable
+      name="HOPCoverageInputSetHelper"
+      type="gw.web.line.hop.policy.HOPCoverageInputSetHelper"/>
+    <HiddenInput
+      id="CovPatternDisplayName"
+      value="coveragePattern.DisplayName"
+      valueType="java.lang.String"/>
+    <InputGroup
+      allowToggle="coveragePattern.allowToggle(coverable)"
+      alwaysShowCheckbox="true"
+      childrenVisible="coverable.getCoverageConditionOrExclusion(coveragePattern) != null"
+      id="CovPatternInputGroup"
+      label="coveragePattern.DisplayName"
+      onToggle="coverable.setCoverageConditionOrExclusionExists(coveragePattern, VALUE)">
+      <RangeInput
+        editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovC.HOPCovCLimitTerm)"
+        id="HOPCovCLimit"
+        label="dwelling.HOPCovC.HOPCovCLimitTerm.DisplayName"
+        required="dwelling.HOPCovC.HOPCovCLimitTerm.Pattern.Required"
+        value="dwelling.HOPCovC.HOPCovCLimitTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovC.HOPCovCLimitTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovCLimitType&gt;"
+        visible="dwelling.HOPCovC.HasHOPCovCLimitTerm">
+        <PostOnChange
+          deferUpdate="false"
+          onChange="HOPCoverageInputSetHelper.onCovCLimitChange(dwelling)"/>
+      </RangeInput>
+      <TextInput
+        editable="openForEdit and coveragePart.CoveragePartType != CoveragePartType.TC_HOPDWELLING"
+        id="HOPCovCDirectLimit"
+        inputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertFromString(VALUE)"
+        label="dwelling.HOPCovC.HOPCovCDirectLimitTerm.DisplayName"
+        outputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertToString(VALUE)"
+        required="dwelling.HOPCovC.HOPCovCDirectLimitTerm.Pattern.Required"
+        validationExpression="gw.pcf.coverage.CovTermDirectInputSetHelper.validate(dwelling.HOPCovC.HOPCovCDirectLimitTerm)"
+        value="dwelling.HOPCovC.HOPCovCDirectLimitTerm.Value"
+        valueType="java.math.BigDecimal"
+        visible="dwelling.HOPCovC.HasHOPCovCDirectLimitTerm">
+        <PostOnChange
+          deferUpdate="false"
+          onChange="HOPCoverageInputSetHelper.onCovCDirectLimitChange(dwelling)"/>
+      </TextInput>
+      <RangeInput
+        editable="openForEdit and coveragePart.CoveragePartType != CoveragePartType.TC_HOPDWELLING and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovC.HOPCovCCauseOfLossTerm)"
+        id="HOPCovCCauseOfLoss"
+        label="dwelling.HOPCovC.HOPCovCCauseOfLossTerm.DisplayName"
+        required="dwelling.HOPCovC.HOPCovCCauseOfLossTerm.Pattern.Required"
+        value="dwelling.HOPCovC.HOPCovCCauseOfLossTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovC.HOPCovCCauseOfLossTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovCCauseOfLossType&gt;"
+        visible="dwelling.HOPCovC.HasHOPCovCCauseOfLossTerm">
+        <PostOnChange/>
+      </RangeInput>
+      <RangeInput
+        editable="openForEdit and dwelling.CoverageForm != HOPCoverageForm.TC_HO2 and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovC.HOPCovCValuationTerm)"
+        id="HOPCovCValuationMethod"
+        label="dwelling.HOPCovC.HOPCovCValuationTerm.DisplayName"
+        required="dwelling.HOPCovC.HOPCovCValuationTerm.Pattern.Required"
+        value="dwelling.HOPCovC.HOPCovCValuationTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovC.HOPCovCValuationTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovCValuationType&gt;"
+        visible="dwelling.HOPCovC.HasHOPCovCValuationTerm">
+        <PostOnChange/>
+      </RangeInput>
+      <PostOnChange/>
+      <RangeInput
+        editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovC.HOPCovCSelfStorageUnitsTerm)"
+        id="HOPCovCSelfStorageUnits"
+        label="dwelling.HOPCovC.HOPCovCSelfStorageUnitsTerm.DisplayName"
+        required="dwelling.HOPCovC.HOPCovCSelfStorageUnitsTerm.Pattern.Required"
+        value="dwelling.HOPCovC.HOPCovCSelfStorageUnitsTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovC.HOPCovCSelfStorageUnitsTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovCSelfStorageUnitsType&gt;"
+        visible="dwelling.HOPCovC.HasHOPCovCSelfStorageUnitsTerm">
+        <PostOnChange/>
+      </RangeInput>
+      <RangeInput
+        editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(dwelling.HOPCovC.HOPCovCOtherResidenceTerm)"
+        id="HOPCovCOtherResidence"
+        label="dwelling.HOPCovC.HOPCovCOtherResidenceTerm.DisplayName"
+        required="dwelling.HOPCovC.HOPCovCOtherResidenceTerm.Pattern.Required"
+        value="dwelling.HOPCovC.HOPCovCOtherResidenceTerm.OptionValue"
+        valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(dwelling.HOPCovC.HOPCovCOtherResidenceTerm, openForEdit)"
+        valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionHOPCovCOtherResidenceType&gt;"
+        visible="dwelling.HOPCovC.HasHOPCovCOtherResidenceTerm">
+        <PostOnChange/>
+      </RangeInput>
+    </InputGroup>
+  </InputSet>
+</PCF>

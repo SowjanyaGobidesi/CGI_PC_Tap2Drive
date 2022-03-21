@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue of items on which to perform ceding calculations."
+  entity="RICedingProgramChange"
+  final="true"
+  loadable="false"
+  table="ricedingprogramchange"
+  type="keyable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    desc="WorkItem that owns this program change."
+    fkentity="RIProgramChangeCedingWorkItem"
+    name="WorkItem"
+    nullok="false"/>
+  <foreignkey
+    desc="Program that changed to create the related work item."
+    fkentity="RIProgram"
+    name="Program"
+    nullok="false"/>
+</entity>

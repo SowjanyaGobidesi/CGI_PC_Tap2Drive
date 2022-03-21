@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="RateBook">
+  <column
+    desc="Tag used for grouping RateBooks; used in RateBook lookup relaxation ordering."
+    name="BookGroup"
+    nullok="true"
+    type="shorttext"/>
+</extension>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewPolicyDocumentMenuItemSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="docActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <MenuItem
+      action="NewDocumentsLinkedWorksheet.goInWorkspace(policyPeriod)"
+      available="perm.System.doccreate"
+      id="PolicyPeriodNewDocumentMenuItemSet_Linked"
+      label="DisplayKey.get(&quot;Web.Policy.NewDocuments.Linked&quot;)"/>
+    <MenuItem
+      action="docActionsHelper.goInNewDocumentFromTemplateWorksheet(policyPeriod)"
+      available="perm.System.doccreate"
+      id="PolicyPeriodNewDocumentMenuItemSet_Template"
+      label="DisplayKey.get(&quot;Web.Policy.NewDocument.Template&quot;)"/>
+  </MenuItemSet>
+</PCF>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="RuleValidationInfoCell"
+    mode="uwrule">
+    <Require
+      name="rule"
+      type="Rule"/>
+    <FormatCell
+      align="center"
+      id="ValidityIcons">
+      <ContentInput
+        align="center"
+        visible="rule != null">
+        <Link
+          icon="&quot;alert&quot;"
+          iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+          iconType="svgFileName"
+          id="Invalid"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.InvalidIcon')"
+          visible="rule.Valid == Boolean.FALSE and not (rule as UWRule).ExternallyManaged"/>
+        <Link
+          icon="&quot;ext_managed_uw_rule&quot;"
+          iconType="svgFileName"
+          id="ExternallyManaged"
+          tooltip="DisplayKey.get('Web.BizRules.UWRules.RuleIsNotManagedByBusinessRulesFrameworkIcon')"
+          visible="(rule as UWRule).ExternallyManaged"/>
+        <Link
+          icon="&quot;runstatus_unknown&quot;"
+          iconType="svgFileName"
+          iconColor="gw.api.web.color.GWColor.THEME_ACTION_NEUTRAL"
+          id="Unknown"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.UnknownIcon')"
+          visible="rule.Valid == null and not (rule as UWRule).ExternallyManaged"/>
+        <Link
+          icon="&quot;completed&quot;"
+          iconType="svgFileName"
+          id="Valid"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.ValidIcon')"
+          visible="rule.Valid == Boolean.TRUE and not (rule as UWRule).ExternallyManaged"/>
+      </ContentInput>
+    </FormatCell>
+  </ModalCell>
+</PCF>

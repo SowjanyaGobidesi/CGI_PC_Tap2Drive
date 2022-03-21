@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="BCPayment"
+    popup="true"
+    target="BillingCenter"
+    url="{billingSystemURL}/Payment.do">
+    <LocationEntryPoint
+      signature="BCPayment(billingSystemURL: String, moneyReceivedID: String)"/>
+    <ExitPointParameter
+      locationParam="billingSystemURL"
+      type="String"
+      urlParam="billingSystemURL"/>
+    <ExitPointParameter
+      locationParam="moneyReceivedID"
+      type="String"
+      urlParam="moneyReceivedID"/>
+  </ExitPoint>
+</PCF>

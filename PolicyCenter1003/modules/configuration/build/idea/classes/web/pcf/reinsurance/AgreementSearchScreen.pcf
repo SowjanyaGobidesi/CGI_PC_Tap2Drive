@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="AgreementSearchScreen">
+    <SearchPanel
+      criteriaName="criteria"
+      resultsName="searchResults"
+      search="criteria.performSearch()"
+      searchCriteria="gw.reinsurance.search.AgreementSearchCriteria.forAllAgreements()"
+      searchCriteriaType="gw.reinsurance.search.AgreementSearchCriteria"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;RIAgreement&gt;">
+      <PanelRef
+        def="AgreementSearchDV(criteria)"/>
+      <PanelRef
+        def="AgreementSearchResultsLV(searchResults, true /*in search page*/)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions( &quot;AgreementSearchResultsLV&quot; )"
+            id="PrintMe"
+            label="DisplayKey.get(&quot;Web.PolicySearch.Export&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="gw.web.admin.ReinsuranceUIHelper.makeAllCheckedAgreementsActive(CheckedValues)"
+            flags="any draft"
+            id="AgreementSearchResult_MakeActiveButton"
+            iterator="AgreementSearchResultsLV.AgreementSearchResultsLV"
+            label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.MakeActive&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+  </Screen>
+</PCF>

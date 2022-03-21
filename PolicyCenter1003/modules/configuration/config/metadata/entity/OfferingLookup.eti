@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The Offering availability lookup type."
+  entity="OfferingLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="offeringlookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.OfferingLookupPublicMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.OfferingLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.OfferingLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="IndustryCodeDrivenLookup"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <column
+    name="OfferingCode"
+    nullok="false"
+    type="patterncode"/>
+</entity>

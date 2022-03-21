@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="Audit" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.api.job.JobMethods" impl="gw.api.job.AuditJobMethods"/>
+</extension>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="TerritoryCodeInputSet"
+    visible="polLocation.TerritoryCodes.length != 0 and !polLocation.Branch.HasWorkersComp and polLocation.Country.UsesTerritoryCodes">
+    <Require
+      name="polLocation"
+      type="entity.PolicyLocation"/>
+    <ContentInput>
+      <Link
+        action="polLocation.TerritoryCodes.each(\ c -&gt; c.fillWithFirst())"
+        hideIfReadOnly="true"
+        id="AutofillLink"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.TerritoryCode.Autofill&quot;)"
+        styleClass="miniButton"/>
+    </ContentInput>
+    <InputIterator
+      elementName="territoryCode"
+      value="polLocation.TerritoryCodes"
+      valueType="entity.TerritoryCode[]">
+      <IteratorSort
+        sortBy="territoryCode.PolicyLinePattern.Priority"
+        sortOrder="1"/>
+      <PickerInput
+        available="polLocation.State != null"
+        editable="true"
+        id="TerritoryCode"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.TerritoryCode&quot;, territoryCode.PolicyLinePattern.DisplayName)"
+        pickLocation="TerritoryCodeSearchPopup.push(polLocation.Branch, territoryCode)"
+        required="true"
+        validationExpression="territoryCode.prelimValidate()"
+        value="territoryCode.Code"
+        valueType="java.lang.String"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

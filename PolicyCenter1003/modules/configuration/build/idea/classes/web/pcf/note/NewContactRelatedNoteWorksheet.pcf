@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.Note.create"
+    id="NewContactRelatedNoteWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get('Web.NewNote.Tab')"
+    title="DisplayKey.get('Web.NewNote.Title')">
+    <LocationEntryPoint
+      signature="NewContactRelatedNoteWorksheet(contact: Contact)"/>
+    <Scope
+      location="ContactFile(contact)"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="gw.note.NewNoteHelper.forContact(contact)"
+      name="newNoteHelper"
+      type="gw.note.NewNoteHelper"/>
+    <ScreenRef
+      def="NewNoteScreen(newNoteHelper)"/>
+  </Worksheet>
+</PCF>

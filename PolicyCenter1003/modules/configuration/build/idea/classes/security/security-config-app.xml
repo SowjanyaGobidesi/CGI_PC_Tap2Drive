@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SecurityConfig
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../security-config.xsd">
+
+  <!--
+  ===============================                 Account        ==================================
+  -->
+
+  <AccountProducerCodeHandler permKey="createForProducerCode" external="true"/>
+
+  <AccountProducerCodeHandler permKey="newSubmission" external="true"/>
+
+  <AccountProducerCodeHandler permKey="view" external="true"/>
+
+  <!--
+  ===============================            Activity          ====================================
+  -->
+
+  <OptionalObjectHandler entity="Activity" permKey="own" internal="true"
+      desc="Permission to own an activity.  A user has permission to own an activity if they can edit activities and can view the target object"
+      noPermissionDisplayKey="Java.Error.Permission.Activity.Own">
+    <Handler code="com.guidewire.pc.domain.activity.impl.OwnPCActivityPermissionHandler"/>
+    <SystemPermType code="actown"/>
+  </OptionalObjectHandler>
+
+  <OptionalObjectHandler entity="Activity" permKey="view" internal="true"
+      desc="Permission to view an activity.  A user has permission to own an activity if they can edit activities and can view the target object"
+      noPermissionDisplayKey="Java.Error.Permission.Activity.View">
+    <Handler code="com.guidewire.pc.domain.activity.impl.ViewPCActivityPermissionHandler"/>
+    <SystemPermType code="actview"/>
+  </OptionalObjectHandler>
+
+  <ObjectHandler entity="Activity" permKey="edit" internal="true">
+    <Handler code="com.guidewire.pc.domain.activity.impl.EditPCActivityPermissionHandler"/>
+  </ObjectHandler>
+
+  <!--
+  ===============================         PolicyPeriod         ==================================
+  -->
+
+  <PolicyPeriodProducerCodeHandler permKey="view" external="true"/>
+
+  <PolicyPeriodProducerCodeHandler permKey="bind" external="true"/>
+
+  <StaticHandler entity="PolicyPeriod" permKey="resetquotinglock" external="true"/>
+
+  <!--
+  ===============================             Job                ==================================
+  -->
+
+  <JobProducerCodeHandler jobType="Job" permKey="view" external="true"/>
+
+  <StaticHandler entity="Audit" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Cancellation" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Issuance" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="PolicyChange" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Reinstatement" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Renewal" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Submission" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="Rewrite" permKey="view" external="true"/>
+
+  <JobProducerCodeHandler jobType="RewriteNewAccount" permKey="view" external="true"/>
+
+  <!--
+  ===============================        Organization        ==================================
+  -->
+
+  <ObjectHandler entity="Organization" permKey="delete" internal="true">
+    <Handler code="com.guidewire.pc.domain.community.impl.OrganizationDeletePermissionHandler"/>
+  </ObjectHandler>
+  <ObjectHandler entity="Organization" permKey="edit" internal="true">
+    <Handler code="com.guidewire.pc.domain.community.impl.OrganizationEditPermissionHandler"/>
+  </ObjectHandler>
+  <ObjectHandler entity="Organization" permKey="editagency" internal="true">
+    <Handler code="com.guidewire.pc.domain.community.impl.OrganizationEditAgencyPermissionHandler"/>
+  </ObjectHandler>
+  <ObjectHandler entity="Organization" permKey="editbasic" internal="true">
+    <Handler code="com.guidewire.pc.domain.community.impl.OrganizationEditBasicPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Organization" permKey="create" desc="Permission to create an organization" internal="true">
+    <SystemPermType code="orgcreate"/>
+  </StaticHandler>
+  <StaticHandler entity="Organization" permKey="search" desc="Permission to search for organizations" internal="true">
+    <SystemPermType code="orgsearch"/>
+  </StaticHandler>
+
+  <!--
+  ===============================        ProducerCode        ==================================
+  -->
+
+  <StaticHandler entity="ProducerCode" permKey="create" desc="Permission to create a producer code." internal="true">
+    <SystemPermType code="prodcodecreate"/>
+  </StaticHandler>
+
+  <!-- Business Rules -->
+  <OptionalObjectHandler entity="Rule" permKey="view" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.ViewRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="edit" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.EditRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="create" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.CreateRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="delete" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.EditRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="deploy" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.DeployRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="import" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.ImportRulePermissionHandler"/>
+  </OptionalObjectHandler>
+  <OptionalObjectHandler entity="Rule" permKey="approve" internal="true">
+    <Handler code="com.guidewire.bizrules.domain.security.ApproveRulePermissionHandler"/>
+  </OptionalObjectHandler>
+
+  <!--
+  ===============================        Documents        ==================================
+  -->
+
+  <ObjectHandler entity="Document" permKey="edit" internal="true">
+    <Handler code="com.guidewire.pc.system.security.impl.PCDocumentEditPermissionHandler.Wrap"/>
+  </ObjectHandler>
+  <ObjectHandler entity="Document" permKey="delete" internal="true">
+    <Handler code="com.guidewire.pc.system.security.impl.PCDocumentDeletePermissionHandler.Wrap"/>
+  </ObjectHandler>
+
+</SecurityConfig>

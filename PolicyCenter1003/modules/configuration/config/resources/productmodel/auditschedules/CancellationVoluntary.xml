@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SingleAuditSchedulePattern
+  auditMethod="Voluntary"
+  codeIdentifier="CancellationVoluntary"
+  dueBusinessDayAdjustment="NextBusinessDay"
+  dueDelayAmount="15"
+  dueDelayDirection="After"
+  dueDelayUnit="CalendarDays"
+  initBusinessDayAdjustment="NextBusinessDay"
+  initDelayAmount="0"
+  initDelayDirection="Before"
+  initDelayUnit="CalendarDays"
+  public-id="CancellationVoluntary"
+  type="FinalAudit"/>

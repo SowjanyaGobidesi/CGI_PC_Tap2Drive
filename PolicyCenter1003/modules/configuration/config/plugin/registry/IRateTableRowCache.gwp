@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IRateTableRowCache"
+  name="IRateTableRowCache">
+  <plugin-gosu
+    gosuclass="gw.rating.rtm.query.RateTableRowCache"/>
+</plugin>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="Clause"
+  requiresType="effdated">
+  <fulldescription>
+    Common interface for Coverages, Exclusions, and PolicyConditions.
+  </fulldescription>
+  <implementsInterface
+    iface="gw.api.domain.Clause"/>
+  <implementsInterface
+    iface="gw.api.domain.ClauseAdapter"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.impl.ClauseInternal"/>
+</delegate>

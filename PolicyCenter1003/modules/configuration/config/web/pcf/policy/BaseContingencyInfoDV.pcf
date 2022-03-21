@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BaseContingencyInfoDV">
+    <Require
+      name="contingency"
+      type="entity.Contingency"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="ContingencyTitle"
+        label="DisplayKey.get('Web.Contingency.Title')"
+        required="true"
+        value="contingency.Title"/>
+      <TextAreaInput
+        editable="true"
+        id="ContingencyDescription"
+        label="DisplayKey.get('Web.Contingency.Description')"
+        numRows="5"
+        required="true"
+        value="contingency.Description"/>
+      <TypeKeyInput
+        editable="true"
+        id="ContingencyAction"
+        label="DisplayKey.get('Web.Contingency.Action')"
+        required="true"
+        value="contingency.Action"
+        valueType="typekey.ContingencyAction">
+        <PostOnChange
+          onChange="contingency.updateActionStartDate()"/>
+      </TypeKeyInput>
+      <DateInput
+        editable="true"
+        id="ContingencyDueDate"
+        label="DisplayKey.get('Web.Contingency.DueDate')"
+        required="true"
+        value="contingency.DueDate">
+        <PostOnChange
+          onChange="contingency.updateActionStartDate()"/>
+      </DateInput>
+    </InputColumn>
+    <InputColumn>
+      <TypeKeyInput
+        id="ContingencyStatus"
+        label="DisplayKey.get('Web.Contingency.Status')"
+        value="contingency.Status"
+        valueType="typekey.ContingencyStatus"
+        visible="not contingency.New"/>
+      <ContentInput
+        visible="not contingency.New">
+        <Link
+          action="contingency.resolveContingency(); contingency.Bundle.commit()"
+          id="Resolve"
+          label="DisplayKey.get('Web.Contingency.Resolve')"
+          styleClass="bigButton"
+          visible="not contingency.New and (contingency.Status == ContingencyStatus.TC_PENDING) "/>
+        <Link
+          action="contingency.waiveContigency(); contingency.Bundle.commit()"
+          id="Waive"
+          label="DisplayKey.get('Web.Contingency.Waive')"
+          styleClass="bigButton"
+          visible="not contingency.New and (contingency.Status == ContingencyStatus.TC_PENDING) "/>
+      </ContentInput>
+      <TextInput
+        id="CreatedUser"
+        label="DisplayKey.get('Web.Contingency.CreatedUser')"
+        value="contingency.CreateUser"
+        valueType="entity.User"
+        visible="not contingency.New"/>
+      <DateInput
+        id="CreatedDate"
+        label="DisplayKey.get('Web.Contingency.CreatedDate')"
+        value="contingency.CreateTime"
+        visible="not contingency.New"/>
+      <TextInput
+        id="ClosedUser"
+        label="DisplayKey.get('Web.Contingency.ClosedUser')"
+        value="contingency.CloseUser"
+        valueType="entity.User"
+        visible="contingency.Status != ContingencyStatus.TC_PENDING"/>
+      <DateInput
+        id="ClosedDate"
+        label="DisplayKey.get('Web.Contingency.ClosedDate')"
+        value="contingency.CloseDate"
+        visible="contingency.Status != ContingencyStatus.TC_PENDING"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

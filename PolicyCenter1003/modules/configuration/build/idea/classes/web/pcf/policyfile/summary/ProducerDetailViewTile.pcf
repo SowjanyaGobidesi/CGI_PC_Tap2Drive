@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewTile
+    id="ProducerDetailViewTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.Producer')">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <TileInputColumn>
+      <TextInput
+        id="ProducerOfRecord"
+        label="DisplayKey.get('Web.Dashboard.Tile.Producer.ProducerOfRecord')"
+        value="DisplayKey.get('Web.Dashboard.Tile.Producer.ProducerOfRecord.Value', policyPeriod.ProducerCodeOfRecord.Organization, policyPeriod.ProducerCodeOfRecord.Code, policyPeriod.ProducerCodeOfRecord.Description?:'')"/>
+      <TextInput
+        id="ProducerOfService"
+        label="DisplayKey.get('Web.Dashboard.Tile.Producer.ProducerOfService')"
+        value="DisplayKey.get('Web.Dashboard.Tile.Producer.ProducerOfService.Value', policyPeriod.ProducerOfRecord, policyPeriod.EffectiveDatedFields.ProducerCode.Code, policyPeriod.EffectiveDatedFields.ProducerCode.Description?:'')"/>
+    </TileInputColumn>
+  </DetailViewTile>
+</PCF>

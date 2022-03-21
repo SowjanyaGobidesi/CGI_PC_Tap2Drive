@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="BasicContactInfoInputSet"
+    mode="company">
+    <Require
+      name="searchCriteria"
+      type="ContactSearchCriteria"/>
+    <Variable
+      initialValue="new gw.globalization.ContactSearchCriteriaNameAdapter(searchCriteria)"
+      name="searchCriteriaAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.ContactSearchCriteriaNameAdapter"/>
+    <InputSetRef
+      def="GlobalContactNameInputSet(new gw.search.BasicNameOwner(searchCriteriaAdapter))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <CheckBoxInput
+      editable="true"
+      id="CompanyNameExact"
+      label="DisplayKey.get(&quot;Web.AccountSearch.CompanyNameExactMatch&quot;)"
+      required="false"
+      value="searchCriteria.KeywordExact"/>
+    <TextInput
+      editable="true"
+      id="TaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.TaxID.EIN&quot;)"
+      value="searchCriteria.TaxID"/>
+    <TextInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Java.PhoneUtil.Example.ToolTip&quot;, User.util.CurrentUser.UserDefaultPhoneCountry, gw.api.util.PhoneUtil.getExampleNumberWithExtension(User.util.CurrentUser.UserDefaultPhoneCountry))"
+      id="PhoneNumber"
+      label="DisplayKey.get(&quot;Web.Account.Locations.WorkPhone&quot;)"
+      required="false"
+      value="searchCriteria.Phone"/>
+  </InputSet>
+</PCF>

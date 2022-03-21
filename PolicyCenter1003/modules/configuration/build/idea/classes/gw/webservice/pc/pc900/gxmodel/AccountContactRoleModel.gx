@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.AccountContactRole" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="(entity-Driver).DateCompletedTrainingClass" type="java.util.Date" propertyInclusionType="NORMAL" xmlType="xs:dateTime"/>
+    <include path="(entity-Driver).GoodDriverDiscount" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="(entity-Driver).NumberofAccidents" type="typekey.NumberOfAccidents" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-Driver).NumberofViolations" type="typekey.NumberOfAccidents" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-Driver).Student" type="java.lang.Boolean" propertyInclusionType="NORMAL" xmlType="xs:boolean"/>
+    <include path="(entity-Driver).TrainingClassType" type="typekey.TrainingClassType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-Driver).YearLicensed" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="(entity-NamedInsured).BusOpsDescription" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-NamedInsured).IndustryCode.Code" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-NamedInsured).OrgType" type="java.lang.String" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="(entity-OwnerOfficer).RelationshipTitle" type="typekey.Relationship" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="AccountContact.Contact" type="entity.Contact" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.contactmodel"/>
+    <include path="Subtype" type="typekey.AccountContactRole" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+  </includes>
+</gx-model>

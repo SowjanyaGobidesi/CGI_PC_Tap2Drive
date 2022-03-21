@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<subtype
+  displayName="UW Rule"
+  xmlns="http://guidewire.com/datamodel"
+  entity="UWRule"
+  final="true"
+  supertype="Rule"
+  desc="Underwriter BizRules entity">
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.pc.domain.bizrules.impl.UWRuleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.pc.domain.bizrules.impl.UWRuleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.bizrules.UWRulePublicMethods"
+    impl="com.guidewire.pc.domain.bizrules.impl.UWRuleImpl"/>
+  <foreignkey
+    desc="The Underwriter Issue Type associated to this Rule"
+    fkentity="UWIssueType"
+    name="UWIssueType"
+    nullok="false"/>
+  <column
+    default="false"
+    name="ExternallyManaged"
+    nullok="false"
+    type="bit"/>
+</subtype>

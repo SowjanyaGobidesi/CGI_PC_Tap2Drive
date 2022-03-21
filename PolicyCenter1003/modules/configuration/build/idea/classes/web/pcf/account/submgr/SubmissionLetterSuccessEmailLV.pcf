@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SubmissionLetterSuccessEmailLV">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="Job.finder.findSelectedSubmissionsByAccount(account).toCollection().toTypedArray()"
+      name="submissions"
+      type="Submission[]"/>
+    <RowIterator
+      editable="false"
+      elementName="producer"
+      pageSize="0"
+      value="AllProducers"
+      valueType="entity.User[]">
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.SubmissionLetterSuccessEmailLV.Name&quot;)"
+          sortOrder="1"
+          value="producer.Contact"
+          valueType="entity.UserContact"/>
+        <TextCell
+          formatType="email"
+          id="Email1"
+          label="DisplayKey.get(&quot;Web.SubmissionLetterSuccessEmailLV.Email1&quot;)"
+          value="producer.Contact.EmailAddress1"/>
+        <TextCell
+          formatType="email"
+          id="Email2"
+          label="DisplayKey.get(&quot;Web.SubmissionLetterSuccessEmailLV.Email2&quot;)"
+          value="producer.Contact.EmailAddress2"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[property get AllProducers() : User[] {
+    return submissions*.RoleAssignments
+                           .where( \ u -> u.Role == TC_PRODUCER and u.AssignedUser != null)
+                           .map( \ u -> u.AssignedUser )
+                           .toSet()?.toTypedArray()
+  }]]></Code>
+  </ListViewPanel>
+</PCF>

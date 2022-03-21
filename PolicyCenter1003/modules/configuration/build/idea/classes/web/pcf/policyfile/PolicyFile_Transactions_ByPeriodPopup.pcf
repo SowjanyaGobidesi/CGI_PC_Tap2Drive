@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="PolicyFile_Transactions_ByPeriodPopup"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByPeriod&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Transactions_ByPeriodPopup(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar/>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="repPeriod"
+          pageSize="0"
+          value="findRepresentativePeriods()"
+          valueType="entity.PolicyPeriod[]">
+          <Row>
+            <DateCell
+              id="PeriodStart"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.PeriodStart&quot;)"
+              value="repPeriod.PeriodStart"/>
+            <DateCell
+              id="PeriodEnd"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.PeriodEnd&quot;)"
+              value="repPeriod.PeriodEnd"/>
+            <DateCell
+              id="CancellationDate"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.CancellationDate&quot;)"
+              value="repPeriod.CancellationDate"/>
+            <TextCell
+              action="PolicyFile_Transactions_ByCostKeyPopup.push(repPeriod)"
+              id="ByCostKey"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ViewByCostKey&quot;)"
+              value="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ViewByCostKey&quot;)"/>
+            <TextCell
+              action="PolicyFile_Transactions_ByCostPopup.push(repPeriod)"
+              id="ByCost"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ViewByCost&quot;)"
+              value="DisplayKey.get(&quot;Web.PolicyFile.Transactions.ByJob.ViewByCost&quot;)"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function findRepresentativePeriods() : entity.PolicyPeriod[] {
+  return period.Policy.BoundPeriods.where(\p -> p.MostRecentModel).orderBy(\p -> p.PeriodStart)?.toTypedArray()
+}]]></Code>
+  </Popup>
+</PCF>

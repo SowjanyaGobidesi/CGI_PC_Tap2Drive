@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="AddressReplacement">
+  <column-override
+    name="MergedPublicID">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </column-override>
+  <foreignkey-override
+    name="ReplacementAddress">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </foreignkey-override>
+</extension>

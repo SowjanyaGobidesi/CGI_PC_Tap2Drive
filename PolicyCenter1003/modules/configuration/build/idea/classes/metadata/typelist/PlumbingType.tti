@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Plumbing Type"
+  name="PlumbingType">
+  <typecode
+    code="copper"
+    desc="Copper"
+    name="Copper"
+    priority="10">
+  </typecode>
+  <typecode
+    code="galv"
+    desc="Galvanized"
+    name="Galvanized"
+    priority="20">
+  </typecode>
+  <typecode
+    code="pvc"
+    desc="PVC"
+    name="PVC"
+    priority="30"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="40">
+  </typecode>
+</typelist>

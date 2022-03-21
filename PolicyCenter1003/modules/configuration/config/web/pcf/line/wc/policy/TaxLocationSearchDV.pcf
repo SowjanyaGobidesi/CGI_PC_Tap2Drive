@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="TaxLocationSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.lob.common.TaxLocationSearchCriteria"/>
+    <Variable
+      initialValue="new gw.globalization.TaxLocationSearchAdapter(searchCriteria)"
+      name="taxLocSearchAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.TaxLocationSearchAdapter"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Code"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.TaxLocationSearchDV.Code&quot;)"
+        value="searchCriteria.Code"/>
+      <InputSetRef
+        def="AddressOwnerAddressInputSet(new gw.pcf.contacts.TaxLocationAddressSearchOwner(taxLocSearchAdapter))"/>
+      <TextInput
+        editable="true"
+        id="TLPrefix"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.TaxLocationSearchDV.TLPrefix&quot;)"
+        value="searchCriteria.TaxLocationPrefix"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.TaxLocationSearchDV.Description&quot;)"
+        value="searchCriteria.Description"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

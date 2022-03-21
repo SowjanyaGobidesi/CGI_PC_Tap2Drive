@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="AccountFile_LocationsLV">
+    <ExposeIterator
+      flags="canChangeActiveStatus,canSetToPrimary,canRemoveLocation"
+      valueType="entity.AccountLocation"
+      widget="AccountFile_LocationsLV"/>
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="selectedLocation"
+      type="AccountLocation"/>
+    <RowIterator
+      editable="true"
+      elementName="location"
+      hasCheckBoxes="true"
+      pickLocation="AccountLocationPopup.push(null, account, CurrentLocation.InEditMode)"
+      value="account.AccountLocations"
+      valueType="entity.AccountLocation[]">
+      <ToolbarFilter
+        name="sampleGosuFilters">
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.Account.Locations.Filter.ShowAll&quot;), \ x -&gt; true)"/>
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.Account.Locations.Filter.ShowActive&quot;), \ x -&gt; (x as AccountLocation).Active == true)"/>
+        <ToolbarFilterOption
+          filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.Account.Locations.Filter.ShowInactive&quot;), \ x -&gt; (x as AccountLocation).Active == false)"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="not location.Primary"
+        name="canChangeActiveStatus"/>
+      <ToolbarFlag
+        condition="not location.Primary and location.Active"
+        name="canSetToPrimary"/>
+      <ToolbarFlag
+        condition="not location.InUse"
+        name="canRemoveLocation"/>
+      <Row
+        editable="true"
+        highlighted="location == selectedLocation">
+        <BooleanRadioCell
+          id="Active"
+          label="DisplayKey.get(&quot;Web.Account.Locations.Active&quot;)"
+          value="location.Active"/>
+        <RadioButtonCell
+          align="center"
+          id="PrimaryLocation"
+          label="DisplayKey.get(&quot;Web.Account.Locations.PrimaryLocation&quot;)"
+          radioButtonGroup="PrimaryLocation"
+          value="location.Primary"/>
+        <TextCell
+          action="AccountLocationPopup.push(location, account, true)"
+          actionAvailable="perm.Account.edit(account)"
+          align="left"
+          id="Loc"
+          label="DisplayKey.get(&quot;Web.Account.Locations.LocNum&quot;)"
+          sortOrder="1"
+          value="location.LocationNum"
+          valueType="java.lang.Integer"/>
+        <CheckBoxCell
+          id="NonSpecific"
+          label="DisplayKey.get(&quot;Web.Account.Locations.NonSpecific&quot;)"
+          value="location.NonSpecific"/>
+        <TextCell
+          action="AccountLocationPopup.push(location, account, true)"
+          actionAvailable="perm.Account.edit(account)"
+          editable="true"
+          id="LocationCode"
+          label="DisplayKey.get(&quot;Web.Account.Locations.LocationCode&quot;)"
+          value="location.LocationCode"/>
+        <TextCell
+          action="AccountLocationPopup.push(location, account, true)"
+          actionAvailable="perm.Account.edit(account)"
+          align="left"
+          id="LocationName"
+          label="DisplayKey.get(&quot;Web.Account.Locations.LocationName&quot;)"
+          value="location.LocationName"/>
+        <TextCell
+          align="left"
+          id="Address"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.CompactAddress&quot;)"
+          value="location.addressString(&quot;,&quot;, false, false)"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

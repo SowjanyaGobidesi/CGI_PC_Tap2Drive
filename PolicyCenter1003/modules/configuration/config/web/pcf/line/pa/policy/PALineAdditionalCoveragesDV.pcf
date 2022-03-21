@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PALineAdditionalCoveragesDV">
+    <Require
+      name="paLine"
+      type="PersonalAutoLine"/>
+    <Require
+      name="includedCoverageCategories"
+      type="String[]"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <InputColumn>
+      <InputSet
+        visible="paLine != null">
+        <InputIterator
+          elementName="category"
+          id="categories"
+          value="includedCoverageCategories"
+          valueType="java.lang.String[]">
+          <InputSet>
+            <Variable
+              initialValue="paLine.Pattern.getCoverageCategoryByPublicId(category).coveragePatternsForEntity(PersonalAutoLine).whereSelectedOrAvailable(paLine, openForEdit)"
+              name="includedCategoryCoveragePatterns"
+              recalculateOnRefresh="true"
+              type="gw.api.productmodel.CoveragePattern[]"/>
+            <InputIterator
+              elementName="coveragePattern"
+              forceRefreshDespiteChangedEntries="true"
+              id="LineCoveragesIterator"
+              value="includedCategoryCoveragePatterns"
+              valueType="gw.api.productmodel.CoveragePattern[]">
+              <InputSetRef
+                def="CoverageInputSet(coveragePattern, paLine, openForEdit)"
+                mode="coveragePattern.PublicID"/>
+            </InputIterator>
+          </InputSet>
+        </InputIterator>
+      </InputSet>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

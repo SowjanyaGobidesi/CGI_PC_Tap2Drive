@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="true"
+    id="AccountFile_RewritePoliciesSelection"
+    parent="AccountFile_AccountSearch(targetAccount, gw.account.AccountSearchReason.RewritePolicies)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.AccountFile.RewritePolicies.Selection&quot;)">
+    <LocationEntryPoint
+      signature="AccountFile_RewritePoliciesSelection(srcAccount : Account, targetAccount : Account)"/>
+    <Variable
+      name="srcAccount"
+      type="Account"/>
+    <Variable
+      name="targetAccount"
+      type="Account"/>
+    <Screen>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="RewriteNewAccount.startRewriteNewAccount(CheckedValues, targetAccount); AccountFile.go(targetAccount)"
+          id="RewritePoliciesButton"
+          iterator="AccountFile_PolicySelectionLV.AccountFile_PolicySelectionLV"
+          label="DisplayKey.get(&quot;Web.AccountFile.RewritePolicies&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.AccountFile.RewritePolicies.SourceAccountLabel&quot;)"/>
+          <TextInput
+            id="AccountNumber"
+            label="DisplayKey.get(&quot;Web.AccountFile.Summary.AccountNumber&quot;)"
+            value="srcAccount.AccountNumber"/>
+          <TextInput
+            id="Name"
+            label="DisplayKey.get(&quot;Web.AccountFile.Summary.Name&quot;)"
+            value="srcAccount.AccountHolderContact.DisplayName"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="AccountFile_PolicySelectionLV(srcAccount.findPolicyPeriodsToRewrite())">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.AccountFile.RewritePolicies.Policies&quot;)"/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

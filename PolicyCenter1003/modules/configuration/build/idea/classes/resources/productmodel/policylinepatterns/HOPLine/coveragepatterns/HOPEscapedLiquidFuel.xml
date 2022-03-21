@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPEscapedLiquidFuel"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="5600"
+  public-id="zb4iiqcl6a21b0grb6aamorc4ca"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

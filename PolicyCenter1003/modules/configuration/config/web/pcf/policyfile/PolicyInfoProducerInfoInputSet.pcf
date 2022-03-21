@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PolicyInfoProducerInfoInputSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="forUseIn"
+      type="ProducerStatusUse"/>
+    <Variable
+      initialValue="policyPeriod.ProducerOfRecord"
+      name="producer"
+      type="entity.Organization"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerOfRecordInfo&quot;)"/>
+    <TextInput
+      id="POROrganization"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.Producer&quot;)"
+      value="policyPeriod.ProducerCodeOfRecord.Organization"
+      valueType="entity.Organization"/>
+    <TextInput
+      id="ProducerCodeOfRecord"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode&quot;)"
+      value="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode.OptionLabel&quot;, policyPeriod.ProducerCodeOfRecord.Code, policyPeriod.ProducerCodeOfRecord.Description != null ? policyPeriod.ProducerCodeOfRecord.Description : &quot;&quot;)"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerOfServiceInfo&quot;)"/>
+    <OrgInput
+      editable="gw.api.web.producer.ProducerUtil.canEditOrganization()"
+      id="Producer"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerOrg&quot;)"
+      pickLocation="OrganizationSearchPopup.push(null, true)"
+      required="true"
+      validationExpression="producer.ProducerStatus == TC_ACTIVE ? null : DisplayKey.get(&quot;Web.ProducerSelection.Error.SuspendedProducer&quot;, producer)"
+      value="producer">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="policyPeriod.EffectiveDatedFields.ProducerCode = null"/>
+    </OrgInput>
+    <RangeInput
+      editable="true"
+      id="ProducerCode"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode&quot;)"
+      optionLabel="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode.OptionLabel&quot;, VALUE.Code, VALUE.Description != null ? VALUE.Description : &quot;&quot;)"
+      required="true"
+      validationExpression="validateProducerCode(policyPeriod.EffectiveDatedFields.ProducerCode)"
+      value="policyPeriod.EffectiveDatedFields.ProducerCode"
+      valueRange="gw.api.web.producer.ProducerUtil.getProducerCodeRange(producer, forUseIn)"
+      valueType="entity.ProducerCode">
+      <MenuItem
+        action="ProducerCodeSearchPopup.push(producer, forUseIn)"
+        id="ProducerCodeSearchMenuIcon"
+        label="DisplayKey.get(&quot;Web.TabBar.Search&quot;)"/>
+      <PostOnChange
+        deferUpdate="false"/>
+    </RangeInput>
+    <Code><![CDATA[function validateProducerCode(pc : ProducerCode) : String {
+  if (forUseIn != null and !pc.ProducerStatus.hasCategory(forUseIn)) {
+    return DisplayKey.get("Web.ProducerSelection.Error.SuspendedProducerCodeOfService", pc)
+  }
+  return null
+}]]></Code>
+  </InputSet>
+</PCF>

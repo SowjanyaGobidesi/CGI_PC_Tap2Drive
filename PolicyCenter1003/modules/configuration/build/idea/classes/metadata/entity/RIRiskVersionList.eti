@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The container for all versions of a RIRisk."
+  entity="RIRiskVersionList"
+  loadable="false"
+  table="ririskversionlist"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.RIRiskVersionListPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIRiskVersionListImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.impl.RIRiskVersionListInternalMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIRiskVersionListImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIRiskVersionListImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.reinsurance.impl.RIRiskVersionListImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <typekey
+    default="Draft"
+    desc="The status of the effdated entity"
+    name="Status"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    typelist="RIEffDatedStatus"/>
+  <column
+    desc="The risk number."
+    name="RiskNumber"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="Effective date of this change."
+    name="EditEffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The cancellation date."
+    name="CancellationDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    desc="Associated Policy Period."
+    fkentity="PolicyPeriod"
+    ignoreforevents="true"
+    name="PolicyPeriod"
+    nullok="true"/>
+  <array
+    arrayentity="RIRisk"
+    cascadeDelete="true"
+    desc="All versions of the RIRisk."
+    name="AllVersionsInternal"
+    owner="true"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="RIAttachmentInclusion"
+    cascadeDelete="true"
+    desc="The exclusions/special acceptances for attached risks."
+    name="AttachmentInclusions"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.reinsurance.dbchecks.PolicyTermBoundRIRiskVersionListDBCheckBuilder"/>
+  <index
+    desc="Finding version lists grouped by RiskNumber"
+    name="ririskversionlist1">
+    <indexcol
+      keyposition="1"
+      name="RiskNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+  <foreignkey
+    fkentity="RIRiskVLContainer"
+    name="Container"
+    nullok="false"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.reinsurance.dbchecks.RIRiskVLContainerDBCheckBuilder"/>
+</entity>

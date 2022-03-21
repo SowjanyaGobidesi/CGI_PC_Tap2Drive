@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Entity
+  name="PolicyLine">
+  <Columns>
+    <Column
+      beanPath="PolicyLine.PatternCode"
+      name="pattern"
+      sortOrder="0"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.productmodel.PolicyLinePatternLookup.getByPublicID(pattern)
+  ]]></DisplayName>
+  <DisplayName
+    type="Validation"><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.PolicyLine.Validation", gw.api.productmodel.PolicyLinePatternLookup.getByPublicID(pattern))
+    
+  ]]></DisplayName>
+</Entity>

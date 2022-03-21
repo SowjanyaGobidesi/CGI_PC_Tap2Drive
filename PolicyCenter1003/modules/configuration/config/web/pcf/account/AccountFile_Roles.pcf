@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    infoBar="AccountFileInfoBar(account)"
+    canEdit="perm.Account.edit(account) and perm.System.editaccountroles"
+    canVisit="perm.Account.view(account) and perm.System.accountroles"
+    id="AccountFile_Roles"
+    parent="AccountFile(account)"
+    title="DisplayKey.get(&quot;Web.AccountFile.Roles.Title&quot;)"
+    validationParameter="account">
+    <LocationEntryPoint
+      signature="AccountFile_Roles(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Screen
+      id="AccountFile_RolesScreen">
+      <Toolbar>
+        <EditButtons/>
+        <IteratorButtons
+          iterator="AccountRolesLV"/>
+      </Toolbar>
+      <ListViewPanel
+        id="AccountRolesLV">
+        <RowIterator
+          checkBoxVisible="assignment.Role != TC_CREATOR"
+          editable="true"
+          elementName="assignment"
+          hasCheckBoxes="true"
+          hideCheckBoxesIfReadOnly="true"
+          toCreateAndAdd="account.createAndAddRoleAssignment()"
+          toRemove="account.removeFromRoleAssignments(assignment)"
+          value="account.RoleAssignments"
+          valueType="entity.AccountUserRoleAssignment[]">
+          <Row
+            editable="assignment.Role != TC_CREATOR">
+            <TypeKeyCell
+              editable="assignment.New"
+              filter="gw.assignment.AssignmentUtil.filterAssignableRoles(account, VALUE)"
+              id="AssignmentRole"
+              label="DisplayKey.get(&quot;Web.Account.Participants.Role&quot;)"
+              required="true"
+              value="assignment.Role"
+              valueType="typekey.UserRole"/>
+            <AltUserCell
+              editable="true"
+              id="AssignedUser"
+              label="DisplayKey.get(&quot;Web.Account.Participants.AssignedUser&quot;)"
+              required="true"
+              validationExpression="assignment.AssignedUser.AllGroups.Empty ? DisplayKey.get(&quot;Web.Account.Participants.UserValidation&quot;) : null"
+              value="assignment.AssignedUserWithUpdate"
+              wrap="true">
+              <PostOnChange/>
+            </AltUserCell>
+            <RangeCell
+              editable="true"
+              id="AssignedGroup"
+              label="DisplayKey.get(&quot;Web.Account.Participants.AssignedGroup&quot;)"
+              required="true"
+              value="assignment.AssignedGroup"
+              valueRange="gw.api.upgrade.Coercions.makeArray&lt;entity.Group&gt;(assignment.AssignedUser.AllGroups)"
+              valueType="entity.Group"
+              wrap="true"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Page>
+</PCF>

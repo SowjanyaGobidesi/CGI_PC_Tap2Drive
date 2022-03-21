@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="CreateAccountFromContactSearchPopup"
+    returnType="Contact"
+    title="DisplayKey.get(&quot;Web.AddressBook.ContactSearchPage.Title&quot;)">
+    <LocationEntryPoint
+      signature="CreateAccountFromContactSearchPopup(accountSearchCriteria : gw.account.AccountSearchCriteria)"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin)"
+      name="contactConfigPlugin"
+      type="gw.plugin.contact.IContactConfigPlugin"/>
+    <Variable
+      initialValue="contactConfigPlugin.getAllowedContactTypesForAccountContactRoleType(typekey.AccountContactRole.TC_ACCOUNTHOLDER)"
+      name="contactTypes"
+      type="ContactType[]"/>
+    <Variable
+      name="accountSearchCriteria"
+      type="gw.account.AccountSearchCriteria"/>
+    <Variable
+      name="forNewSubmission"
+      type="boolean"/>
+    <Variable
+      initialValue="accountSearchCriteria.toContactSearchCriteria()"
+      name="contactSearchCriteria"
+      type="ContactSearchCriteria"/>
+    <ScreenRef
+      def="ContactSearchScreen(availableSubtypes(), contactSearchCriteria, false, false)"/>
+    <Code><![CDATA[public function availableSubtypes() : typekey.Contact[] {
+  var subTypes = contactTypes.map(\ c -> c == TC_COMPANY ?
+      typekey.Contact.TC_COMPANY : typekey.Contact.TC_PERSON)
+      .sortBy(\ c -> c.DisplayName)
+  return subTypes
+  }]]></Code>
+  </Popup>
+</PCF>

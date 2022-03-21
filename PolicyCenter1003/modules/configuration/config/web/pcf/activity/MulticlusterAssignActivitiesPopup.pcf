@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCancel="assignmentPopup.onPopupCancel()"
+    beforeCommit="if(assignmentPopup.SelectionType == AssignmentSelectionType.TC_FROMSEARCH) {assignmentPopup.Picker.setSelection(pickedValue)} assignmentPopup.performAssignment()"
+    canEdit="true"
+    id="MulticlusterAssignActivitiesPopup"
+    returnType="gw.api.assignment.Assignee"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Activity.Assign.Title&quot;)">
+    <LocationEntryPoint
+      signature="MulticlusterAssignActivitiesPopup(assignmentPopup : gw.api.web.activity.MulticlusterActivityAssignmentPopup)"/>
+    <Variable
+      name="assignmentPopup"
+      type="gw.api.web.activity.MulticlusterActivityAssignmentPopup"/>
+    <ScreenRef
+      def="MulticlusterAssignmentPopupScreen(assignmentPopup)"/>
+  </Popup>
+</PCF>

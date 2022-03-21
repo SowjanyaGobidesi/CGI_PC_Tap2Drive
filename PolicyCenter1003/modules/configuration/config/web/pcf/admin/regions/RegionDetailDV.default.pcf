@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RegionDetailDV"
+    mode="default">
+    <Require
+      name="Region"
+      type="Region"/>
+    <Require
+      name="Country"
+      type="Country"/>
+    <Variable
+      name="ZoneType"
+      type="ZoneType"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="zoneType"
+        label="DisplayKey.get(&quot;Web.Admin.RegionDetailDV.RegionType&quot;)"
+        value="ZoneType"
+        valueRange="gw.api.admin.BaseAdminUtil.getRegionZoneTypes(Country)"
+        valueType="typekey.ZoneType">
+        <PostOnChange
+          onChange="Region.FilterCriteria.ZoneType=ZoneType"/>
+      </RangeInput>
+      <ListViewInput
+        def="RegionZonesLV(Region, ZoneType, Country)"
+        editable="true"
+        hideIfReadOnly="true"
+        label="DisplayKey.get(&quot;Web.Admin.RegionsLV.Zones&quot;)"
+        visible="ZoneType != null">
+        <Toolbar
+          visible="true">
+          <IteratorButtons
+            iterator="RegionZonesLV.RegionZonesLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

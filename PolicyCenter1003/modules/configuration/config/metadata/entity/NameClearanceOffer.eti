@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="ProductSelection within the Name Clearance result (join entity)"
+  entity="NameClearanceOffer"
+  exportable="true"
+  extendable="false">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.NameClearanceOfferPublicMethods"
+    impl="com.guidewire.pc.domain.product.impl.NameClearanceOfferImpl"/>
+  <foreignkey
+    columnName="NameClearResultID"
+    desc="Back reference to NameClearanceResult"
+    exportable="false"
+    fkentity="NameClearanceResult"
+    name="NameClearResult"
+    nullok="false"
+    setterScriptability="all"/>
+  <foreignkey
+    columnName="ProductSelectionID"
+    desc="ProductSelection."
+    fkentity="ProductSelection"
+    name="ProductSelection"
+    nullok="false"/>
+</nonPersistentEntity>

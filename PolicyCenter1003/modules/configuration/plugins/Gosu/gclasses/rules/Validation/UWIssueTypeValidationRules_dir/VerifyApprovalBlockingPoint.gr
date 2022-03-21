@@ -1,0 +1,31 @@
+package rules.Validation.UWIssueTypeValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("Verify Approval Blocking Point")
+internal class VerifyApprovalBlockingPoint {
+  static function doCondition(uWIssueType   :   entity.UWIssueType) : boolean {
+/*start00rule*/
+return uWIssueType.BlockingPoint != null and uWIssueType.DefaultApprovalBlockingPoint != null
+/*end00rule*/
+}
+
+  static function doAction(uWIssueType   :   entity.UWIssueType, actions : gw.rules.Action) {
+/*start00rule*/
+// Ensure that the approval point is high enough. It must be Non-Blocking if the blocking point is Non-Blocking; otherwise,
+// it must be at least one level "higher" than the blocking point. "Higher" meaning types with a lower type code prioity value.
+var error = false
+var blockingPoint = uWIssueType.BlockingPoint
+var approvalPoint = uWIssueType.DefaultApprovalBlockingPoint
+if (blockingPoint == UWIssueBlockingPoint.TC_NONBLOCKING) {
+  error = approvalPoint != UWIssueBlockingPoint.TC_NONBLOCKING
+} else {
+  error = approvalPoint.Priority >= blockingPoint.Priority
+}
+if (error) {
+  uWIssueType.reject(ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("UWIssueType.Error.BlockingPoint"),
+      null, null)
+}
+/*end00rule*/
+  }
+}

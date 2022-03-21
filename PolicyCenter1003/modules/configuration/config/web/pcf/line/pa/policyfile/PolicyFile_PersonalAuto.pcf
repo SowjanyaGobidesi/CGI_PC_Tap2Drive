@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.pfiledetails"
+    id="PolicyFile_PersonalAuto"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.Policy.PA.Title&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_PersonalAuto(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen
+      id="PolicyFile_PA_Coverages_Screen">
+      <Variable
+        initialValue="policyPeriod.PersonalAutoLine"
+        name="paLine"
+        type="productmodel.PersonalAutoLine"/>
+      <TitleBar/>
+      <Toolbar/>
+      <PanelRef
+        def="PreferredCoverageCurrencyPanelSet(paLine, false, null)"
+        id="PreferredCoverageCurrencySelectorRef"/>
+      <PanelSet>
+        <CardViewPanel>
+          <Card
+            id="Coverages"
+            title="DisplayKey.get(&quot;Web.Policy.PA.Coverages&quot;)">
+            <PanelRef
+              def="PersonalAuto_AllVehicleCoveragesDV(paLine, false)">
+              <TitleBar
+                title="DisplayKey.get(&quot;Web.Policy.PA.AllVehicleCoveragesTitle&quot;, paLine.BaseState)"/>
+            </PanelRef>
+            <PanelRef
+              def="PAPerVehiclePanelSet(paLine.Branch, false, null)"/>
+          </Card>
+          <Card
+            id="AdditionalCoverages"
+            title="DisplayKey.get(&quot;Web.Policy.PA.AdditionalCoverages&quot;)">
+            <PanelRef
+              def="PALineAdditionalCoveragesDV(paLine, new String[]{&quot;PAMiscGrp&quot;}, false)">
+              <TitleBar
+                title="DisplayKey.get(&quot;Web.Policy.PA.AllVehicleCoveragesTitle&quot;, paLine.BaseState)"/>
+            </PanelRef>
+            <PanelRef
+              def="PAVehicleAdditionalCoveragesDV(paLine, new String[]{&quot;PAMiscGrp&quot;}, false)">
+              <TitleBar
+                title="DisplayKey.get(&quot;Web.Policy.PA.PerVehicleCoveragesTitle&quot;, paLine.BaseState)"/>
+            </PanelRef>
+          </Card>
+          <Card
+            id="exclusionsAndConditionsCard"
+            title="DisplayKey.get(&quot;Web.Policy.PA.ExclusionsAndConditions&quot;)">
+            <PanelRef
+              def="AdditionalExclusionsAndConditionsPanelSet(policyPeriod.PersonalAutoLine, new String[] {&quot;PAPhysDamExcl&quot;, &quot;PALiabExcl&quot;, &quot;PAPhysDamCond&quot;, &quot;PALiabCond&quot;}, true)"
+              id="policyLevelExclusionsAndConditions"/>
+          </Card>
+        </CardViewPanel>
+      </PanelSet>
+    </Screen>
+  </Page>
+</PCF>

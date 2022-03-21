@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Deprecated as of PC10. The gw.webservice.pc.pc900 package will be removed in PC11. Use gw.webservice.pc.pc1000 instead. -->
+<gx-model type="entity.BusinessAutoLine" xmlns="http://guidewire.com/gx" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <includes>
+    <include path="AdditionalInsureds[]" type="entity.PolicyAddlInsured" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.policycontactrolemodel"/>
+    <include path="BALineConditions[]" type="entity.BusinessAutoCond" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.clausemodel"/>
+    <include path="BALineCoverages[]" type="entity.BusinessAutoCov" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.clausemodel"/>
+    <include path="BALineExclusions[]" type="entity.BusinessAutoExcl" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.clausemodel"/>
+    <include path="BAModifiers[]" type="entity.BAModifier" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.modifiermodel"/>
+    <include path="Drivers[]" type="entity.CommercialDriver" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.commercialdrivermodel"/>
+    <include path="Fleet" type="typekey.FleetType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Jurisdictions[]" type="entity.BAJurisdiction" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.bajurisdictionmodel"/>
+    <include path="NumAddInsured" type="java.lang.Integer" propertyInclusionType="NORMAL" xmlType="xs:int"/>
+    <include path="PolicyType" type="typekey.BAPolicyType" propertyInclusionType="NORMAL" xmlType="xs:string"/>
+    <include path="Vehicles[]" type="entity.BusinessVehicle" propertyInclusionType="NORMAL" model="gw.webservice.pc.pc900.gxmodel.businessvehiclemodel"/>
+  </includes>
+</gx-model>

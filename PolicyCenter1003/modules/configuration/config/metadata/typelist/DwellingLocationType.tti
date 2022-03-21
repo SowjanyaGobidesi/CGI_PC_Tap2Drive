@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Dwelling Location Type"
+  name="DwellingLocationType">
+  <typecode
+    code="city"
+    desc="In City Limits"
+    name="In City Limits"
+    priority="10">
+  </typecode>
+  <typecode
+    code="fire"
+    desc="In Fire District"
+    name="In Fire District"
+    priority="20">
+  </typecode>
+  <typecode
+    code="prot"
+    desc="In protected suburb"
+    name="In Protected Suburb"
+    priority="30">
+  </typecode>
+  <typecode
+    code="unprot"
+    desc="In unprotected Area"
+    name="In Unprotected Area"
+    priority="40">
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="50">
+  </typecode>
+</typelist>

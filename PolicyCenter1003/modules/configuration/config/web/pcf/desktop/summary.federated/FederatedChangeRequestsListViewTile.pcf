@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    hideViewMoreIfShortList="true"
+    id="FederatedChangeRequestsListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests')"
+    viewMoreAction="DesktopOtherWorkOrders.push()"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')">
+    <Require
+      name="user"
+      type="User"/>
+    <RowIterator
+      editable="false"
+      elementName="job"
+      type="gw.api.web.desktop.data.otherworkorders.OtherWorkOrdersDTO"
+      value="new gw.api.web.desktop.data.otherworkorders.OtherWorkOrdersFederatedData(typekey.Job.TC_POLICYCHANGE)"
+      valueType="gw.api.web.desktop.data.FederatedDataIteratorBackingData">
+      <ToolbarFilter
+        name="workOrdersFilter">
+        <ToolbarFilterOptionGroup
+          filters="gw.api.web.desktop.data.JobDataFilters.activityFilters()"/>
+        <ToolbarFilterOptionGroup
+          filters="gw.api.web.desktop.data.JobDataFilters.producerFilters()"
+          visible="perm.System.viewproducerstyledesktopdetails"/>
+      </ToolbarFilter>
+      <IteratorSort
+        sortBy="job.EditEffectiveDate"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          action="FederatedJobForward.push(job.JobNumber, job.AccountPublicId)"
+          available="job.Viewable"
+          id="JobNumber"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Transaction')"
+          value="job.JobNumber"
+          wrap="false"/>
+        <TextCell
+          action="FederatedJobForward.push(job.JobNumber, job.AccountPublicId)"
+          available="job.Viewable"
+          id="Type"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Type')"
+          value="job.DisplayType"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Insured"
+          action="FederatedContactForward.push(job.AccountPublicId, job.ContactPublicId)"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.PrimaryInsured')"
+          value="job.ContactName"/>
+        <DateCell
+          id="EffectiveDate"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.EffectiveDate')"
+          value="job.EditEffectiveDate"
+          wrap="false"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Status')"
+          sortBy="job.StatusPriority, job.StatusCode"
+          value="typekey.PolicyPeriodStatus.get(job.StatusCode)"
+          valueType="typekey.PolicyPeriodStatus"
+          wrap="false"/>
+        <TextCell
+          action="FederatedPolicyForward.push(job.PolicyPublicId, job.PolicyNumber)"
+          id="PolicyNumber"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Policy')"
+          value="job.PolicyNumber"
+          valueType="String"
+          wrap="false"/>
+        <MonetaryAmountCell
+          enableSort="false"
+          id="Premium"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Premium')"
+          value="job.TotalPremiumRPT?.to()"
+          wrap="false"/>
+        <TextCell
+          grow="true"
+          id="Product"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Product')"
+          sortBy="job.PolicyProductCode"
+          value="job.PolicyProduct"/>
+        <TextCell
+          grow="true"
+          id="Producer"
+          label="DisplayKey.get('Web.Dashboard.Tile.ChangeRequests.Producer')"
+          value="job.ProducerDisplayName"
+          valueType="java.lang.String"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

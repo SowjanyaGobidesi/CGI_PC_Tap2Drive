@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMPartReviewPanelSet"
+    mode="IMSignPart">
+    <Require
+      name="imLine"
+      type="InlandMarineLine"/>
+    <Variable
+      initialValue="imLine.IMSignPart"
+      name="imSignPart"
+      type="entity.IMSignPart"/>
+    <PanelRef>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Policy.IM.IMSigns&quot;)"/>
+      <PanelSet>
+        <PanelIterator
+          elementName="sign"
+          id="IMSignsIter"
+          value="imSignPart.IMSigns"
+          valueType="entity.IMSign[]">
+          <IteratorSort
+            sortBy="sign.SignNumber"
+            sortOrder="1"/>
+          <PanelRef
+            def="CoverageSummaryLV(sign.Coverages.toList(), sign)">
+            <Verbatim
+              id="signdisplayname"
+              label="sign.DisplayName"/>
+          </PanelRef>
+        </PanelIterator>
+      </PanelSet>
+    </PanelRef>
+  </PanelSet>
+</PCF>

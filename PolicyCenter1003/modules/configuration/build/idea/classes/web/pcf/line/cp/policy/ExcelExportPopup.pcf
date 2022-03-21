@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    countsAsWork="false"
+    id="ExcelExportPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ExcelExport.Title&quot;)">
+    <LocationEntryPoint
+      signature="ExcelExportPopup(cpLine : CommercialPropertyLine)"/>
+    <Variable
+      name="cpLine"
+      type="CommercialPropertyLine"/>
+    <Variable
+      initialValue="new gw.exportimport.AsynchronousExcelExporter()"
+      name="asynchronousExporter"
+      type="gw.exportimport.AsynchronousExcelExporter"/>
+    <Variable
+      initialValue="false"
+      name="complete"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.exportimport.web.ExportMaskSelection() {:Language = cpLine.Branch.Policy.PrimaryLanguage}"
+      name="maskSelection"
+      type="gw.exportimport.web.ExportMaskSelection"/>
+    <Variable
+      initialValue="false"
+      name="waiting"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="export(true)"
+          available="hasValidExportAndFormat()"
+          download="true"
+          id="ExportSynchronouslyButton"
+          label="DisplayKey.get(&quot;Web.ExcelExport.Export&quot;)"
+          visible="not maskSelection.ExportAllData"/>
+        <ToolbarButton
+          action="export(false)"
+          available="hasValidExportAndFormat()"
+          id="ExportAsynchronouslyButton"
+          label="DisplayKey.get(&quot;Web.ExcelExport.Export&quot;)"
+          visible="maskSelection.ExportAllData"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <RangeInput
+            editable="true"
+            id="Export"
+            label="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.Export&quot;)"
+            required="true"
+            value="maskSelection.MaskData"
+            valueRange="gw.exportimport.web.ExportMaskUtil.MaskData"
+            valueType="gw.exportimport.web.ExportMaskData">
+            <PostOnChange
+              onChange="maskSelection.Format = gw.exportimport.web.ExportMaskUtil.findDefaultMaskDataFormat(maskSelection.MaskData)"/>
+          </RangeInput>
+          <BooleanRadioInput
+            editable="true"
+            falseLabel="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.Template&quot;)"
+            id="AllData"
+            stacked="true"
+            trueLabel="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.All&quot;)"
+            value="maskSelection.ExportAllData">
+            <PostOnChange/>
+          </BooleanRadioInput>
+          <RangeInput
+            editable="true"
+            id="Format"
+            label="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.Format&quot;)"
+            required="true"
+            sortValueRange="false"
+            value="maskSelection.Format"
+            valueRange="gw.exportimport.web.ExportMaskUtil.getFormats(maskSelection.MaskData)"
+            valueType="gw.exportimport.web.ExportMaskDataFormat">
+            <PostOnChange/>
+          </RangeInput>
+          <RangeInput
+            editable="true"
+            id="Language"
+            label="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.Language&quot;)"
+            required="true"
+            value="maskSelection.Language"
+            valueRange="gw.exportimport.web.ExportMaskUtil.SupportedLanguages"
+            valueType="typekey.LanguageType">
+            <PostOnChange/>
+          </RangeInput>
+          <RangeInput
+            editable="true"
+            id="Locale"
+            label="DisplayKey.get(&quot;Web.ExcelExport.MaskSelection.Locale&quot;)"
+            required="true"
+            value="maskSelection.Locale"
+            valueRange="gw.exportimport.web.ExportMaskUtil.SupportedLocales"
+            valueType="typekey.LocaleType">
+            <PostOnChange/>
+          </RangeInput>
+          <ProgressInput
+            actionOnComplete="complete = true"
+            id="ExportProgressBar"
+            label="DisplayKey.get(&quot;Web.ExcelExport.InProgressMessage&quot;)"
+            percentage="asynchronousExporter.Status"
+            status="asynchronousExporter.StatusMessage"
+            visible="waiting and not complete"/>
+          <TextInput
+            id="Padding"
+            value="&quot;&quot;"/>
+          <ButtonInput
+            action="asynchronousExporter.streamExcelFile()"
+            download="true"
+            id="DownloadExcelFileButton"
+            value="DisplayKey.get(&quot;Web.ExcelExport.DownloadExcelFile&quot;)"
+            visible="complete"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        visible="complete">
+        <DetailViewPanel>
+          <InputColumn>
+            <Label
+              id="Test"
+              label="DisplayKey.get(&quot;Web.ExcelExport.DownloadHelpText&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses gw.exportimport.ExcelExporter
+uses gw.exportimport.ExportData
+uses gw.exportimport.web.ExportDataWebFactory
+
+function export(asTemplate : boolean) {
+  var exportData = ExportDataWebFactory.createExportData(cpLine.Branch, maskSelection)
+  if (asTemplate) {
+    new ExcelExporter(exportData).export(true)
+    return
+  }
+  asynchronousExporter.initialize(exportData, asTemplate)
+  asynchronousExporter.execute()
+  complete = false
+  waiting = true
+}
+
+function hasValidExportAndFormat() : boolean {
+  return maskSelection.Format != null and maskSelection.MaskData != null
+}]]></Code>
+  </Popup>
+</PCF>

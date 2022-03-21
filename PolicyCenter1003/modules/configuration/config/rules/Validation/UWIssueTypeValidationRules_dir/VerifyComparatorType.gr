@@ -1,0 +1,22 @@
+package rules.Validation.UWIssueTypeValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("Verify Comparator Type")
+internal class VerifyComparatorType {
+  static function doCondition(uWIssueType   :   entity.UWIssueType) : boolean {
+/*start00rule*/
+return uWIssueType.Comparator != null
+/*end00rule*/
+}
+
+  static function doAction(uWIssueType   :   entity.UWIssueType, actions : gw.rules.Action) {
+/*start00rule*/
+var comparator = uWIssueType.Comparator
+if (comparator == ValueComparator.TC_ANY) {
+  uWIssueType.reject(ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("UWIssueType.Error.AnyComparatorNotAllowed"),
+      null, null)
+} 
+/*end00rule*/
+  }
+}

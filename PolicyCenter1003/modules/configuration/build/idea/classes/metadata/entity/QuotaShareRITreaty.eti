@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="QuotaShareRITreaty"
+  supertype="ProportionalRIAgreement">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.QuotaShareRITreatyPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.QuotaShareRITreatyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.ProportionalRIAgreementPublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.QuotaShareRITreatyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.impl.RIAgreementInternalMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.QuotaShareRITreatyImpl"/>
+  <implementsEntity
+    name="Treaty"/>
+  <implementsEntity
+    name="PerRisk"/>
+  <fulldescription><![CDATA[
+    Quota share reinsurance treaty.  
+  ]]></fulldescription>
+</subtype>

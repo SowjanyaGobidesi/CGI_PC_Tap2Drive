@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.User.viewteam"
+    id="TeamGroup"
+    parent="Team()"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroup(teamModel : gw.api.web.team.PCTeamModel)"/>
+    <Variable
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Summary.Tab&quot;)"
+      location="TeamSummary(teamModel)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Activities.Tab&quot;)"
+      location="TeamActivities(teamModel)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Submissions.Tab&quot;)"
+      location="TeamSubmissions(teamModel)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Renewals.Tab&quot;)"
+      location="TeamRenewals(teamModel)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.WorkOrders.Tab&quot;)"
+      location="TeamOtherWorkOrders(teamModel)"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,31 @@
+package rules.Assignment.GlobalJobAssignmentRules_dir.AssignProducer_dir
+
+@gw.rules.RuleName("Requestor is Producer")
+internal class RequestorisProducer {
+  static function doCondition(job : entity.Job) : boolean {
+    
+/*start00rule*/
+var currentUser: User = User.util.CurrentUser
+return // If the current user is a producer, then that user is assigned to producer role
+(currentUser.UserType==TC_PRODUCER) or
+(currentUser.UserType==TC_ASSISTANT)
+/*end00rule*/
+
+  }
+
+  static function doAction(job : entity.Job, actions : gw.rules.Action) {
+
+/*start00rule*/
+var assignment = job.CurrentRoleAssignment
+var producerCode = job.Policy.ProducerCodeOfService
+var producer = User.util.CurrentUser
+var group = producerCode.getAssignmentGroupFor( producer )
+
+if (group != null and assignment.assign(group, producer )) {
+  gw.assignment.AssignmentUtil.logUserRoleAssignment(assignment, actions as java.lang.String)
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

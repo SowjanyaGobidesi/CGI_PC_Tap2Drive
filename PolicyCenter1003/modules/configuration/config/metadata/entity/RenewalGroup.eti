@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Renewal Group  ==================================================================== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A grouping of Renewal jobs"
+  entity="RenewalGroup"
+  supertype="JobGroup">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.group.RenewalGroupPublicMethods"
+    impl="com.guidewire.pc.domain.job.group.impl.RenewalGroupImpl"/>
+  <array
+    arrayentity="Renewal"
+    desc="The array of renewals in this renewal group."
+    name="Renewals"
+    setterScriptability="doesNotExist"/>
+</subtype>

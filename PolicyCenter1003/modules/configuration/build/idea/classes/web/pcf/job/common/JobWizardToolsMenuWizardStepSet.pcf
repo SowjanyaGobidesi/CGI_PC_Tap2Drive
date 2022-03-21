@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <WizardStepSet
+    id="JobWizardToolsMenuWizardStepSet">
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <JobWizardStep
+      available="policyPeriod.Job.SideBySide and !jobWizardHelper.isInPicker() and !jobWizardHelper.hasActiveWorksheet()"
+      icon="&quot;side_by_side_quoting&quot;"
+      iconType="svgFileName"
+      id="SideBySide"
+      independent="true"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="true"
+      screen="SideBySideScreen(jobWizardHelper, policyPeriod)"
+      title="DisplayKey.get(&quot;Web.Job.SideBySide.Title&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.Job.hasMultiplePeriods()"/>
+    <JobWizardStep
+      icon="&quot;policy_versions&quot;"
+      iconType="svgFileName"
+      id="ManageBranches"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.MultiQuoteWizardMenu.ManageBranches&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="ManageBranchesScreen(jobWizardHelper, policyPeriod)"
+      title="DisplayKey.get(&quot;Web.MultiQuoteWizardMenu.ManageBranches&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.Job.ActivePeriods.Count &gt; 1 and !policyPeriod.Job.Complete"/>
+    <JobWizardStep
+      icon="&quot;notes&quot;"
+      iconType="svgFileName"
+      id="Notes"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Notes&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="Policy_NotesScreen(policyPeriod, null)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.Notes&quot;)"
+      visible="policyPeriod.Policy.canViewNotes() and perm.PolicyPeriod.view(policyPeriod) and perm.System.noteview"/>
+    <JobWizardStep
+      icon="&quot;documents_nav&quot;"
+      iconType="svgFileName"
+      id="Documents"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Documents&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="Policy_DocumentsScreen(policyPeriod)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.Documents&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and perm.System.docview"/>
+    <JobWizardStep
+      icon="&quot;participants&quot;"
+      iconType="svgFileName"
+      id="Participants"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Participants&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="true"
+      screen="ParticipantsScreen(policyPeriod)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.Participants&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and perm.System.viewparticipants"/>
+    <JobWizardStep
+      icon="&quot;policy_versions&quot;"
+      iconType="svgFileName"
+      id="PolicyVersions"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.PolicyVersions&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="ManageBranchesScreen(jobWizardHelper, policyPeriod)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.PolicyVersions&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.Job.ActivePeriods.Count &gt; 1 and policyPeriod.Job.Complete"/>
+    <JobWizardStep
+      icon="&quot;workplan&quot;"
+      iconType="svgFileName"
+      id="Workplan"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Workplan&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="WorkplanScreen(policyPeriod)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.Workplan&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and perm.System.viewworkplan"/>
+    <JobWizardStep
+      icon="&quot;risk_analysis&quot;"
+      iconType="svgFileName"
+      id="RiskEvaluation"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.RiskAnalysis&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="true"
+      screen="Job_RiskAnalysisScreen(policyPeriod, policyPeriod.OpenForEdit, jobWizardHelper )"
+      title="DisplayKey.get(&quot;Web.PolicyFile.RiskAnalysis&quot;)"
+      visible="(jobWizardHelper.isRiskEvaluationVisible(policyPeriod.Job)) and perm.PolicyPeriod.view(policyPeriod) and (perm.System.viewriskevalissues or perm.System.viewriskclaims or perm.System.viewriskpriorpolicies or perm.System.viewriskpriorlosses)"/>
+    <JobWizardStep
+      beforeSave="policyPeriod.RIRiskVersionLists.each(\ v -&gt; v.AllVersions.each(\ r -&gt; gw.reinsurance.risk.RIRiskValidation.validateUI(r)))"
+      icon="&quot;reinsurance&quot;"
+      iconType="svgFileName"
+      id="Reinsurance"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Reinsurance&quot;)"
+      onEnter="policyPeriod.reevalutateAttachments()"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      save="true"
+      screen="PolicyReinsuranceScreen(policyPeriod, policyPeriod.EditEffectiveDate)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.Reinsurance&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and policyPeriod.ValidQuote and policyPeriod.AllReinsurables.HasElements and (!policyPeriod.Promoted or policyPeriod.LatestPeriod == policyPeriod) and policyPeriod.ValidReinsurance"/>
+    <JobWizardStep
+      icon="&quot;history&quot;"
+      iconType="svgFileName"
+      id="History"
+      independent="true"
+      label="DisplayKey.get(&quot;Web.PolicyFile.History&quot;)"
+      onExit="jobWizardHelper.reloadPolicyPeriodIfAsyncQuoteComplete(policyPeriod)"
+      screen="Job_HistoryScreen(policyPeriod, policyPeriod.EditEffectiveDate)"
+      title="DisplayKey.get(&quot;Web.PolicyFile.History&quot;)"
+      visible="perm.PolicyPeriod.view(policyPeriod) and perm.System.viewhist"/>
+  </WizardStepSet>
+</PCF>

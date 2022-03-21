@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PolicyContactRoleNameInputSet"
+    mode="company">
+    <Require
+      name="policyContactRole"
+      type="PolicyContactRole"/>
+    <Variable
+      initialValue="new gw.globalization.PolicyContactRoleNameAdapter(policyContactRole)"
+      name="policyContactRoleAdapter"
+      recalculateOnRefresh="true"
+      type="gw.globalization.PolicyContactRoleNameAdapter"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company&quot;)"/>
+    <InputSetRef
+      def="GlobalContactNameInputSet(new gw.contact.ContactNameNoSummaryOwner(policyContactRoleAdapter))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(policyContactRole.AccountContactRole.AccountContact.Contact, Contact#WorkPhone),DisplayKey.get(&quot;Web.ContactDetail.Company.WorkPhone&quot;) ))"
+      editable="true"
+      id="WorkPhone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.BasicPhoneOwner(new gw.api.phone.ContactPhoneDelegate(policyContactRole.AccountContactRole.AccountContact.Contact, Contact#FaxPhone),DisplayKey.get(&quot;Web.ContactDetail.Company.FaxPhone&quot;)))"
+      editable="true"
+      id="FaxPhone"/>
+    <TextInput
+      editable="true"
+      id="EmailAddress1"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.EmailAddress1&quot;)"
+      value="policyContactRole.AccountContactRole.AccountContact.Contact.EmailAddress1"/>
+    <TextInput
+      editable="true"
+      id="EmailAddress2"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.EmailAddress2&quot;)"
+      value="policyContactRole.AccountContactRole.AccountContact.Contact.EmailAddress2"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="GLContractLiabilityLimitation"
+  conditionSubtype="GeneralLiabilityCond"
+  coverageCategory="GLContractualAll"
+  existence="Electable"
+  lookupTableName="GLCond"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="GLContractLiabilityLimitation"
+  referenceDateByType="DefinedObject"/>

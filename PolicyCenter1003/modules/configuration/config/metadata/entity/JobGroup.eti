@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  JobGroup  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A job group is a grouping of jobs within a single account."
+  entity="JobGroup"
+  exportable="false"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="jobgroup"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.group.JobGroupPublicMethods"
+    impl="com.guidewire.pc.domain.job.group.impl.JobGroupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pc.domain.job.group.impl.JobGroupImpl"/>
+  <column
+    desc="The name of this group."
+    name="Name"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    desc="The account of this job group."
+    fkentity="Account"
+    name="Account"
+    nullok="false"/>
+  <index
+    desc="Ensures that JobGroup names are unique."
+    name="jobgroupu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Name"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

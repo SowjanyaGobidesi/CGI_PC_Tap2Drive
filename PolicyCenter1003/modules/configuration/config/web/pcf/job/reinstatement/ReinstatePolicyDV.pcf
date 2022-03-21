@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ReinstatePolicyDV">
+    <Require
+      name="reinstatement"
+      type="Reinstatement"/>
+    <Variable
+      initialValue="reinstatement.PolicyPeriod"
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <InputColumn>
+      <InputSetRef
+        def="PolicyInfoInputSet(policyPeriod, true, false, false)"
+        editable="false"
+        widgets="UWCompanyInputSet"/>
+      <InputSet
+        id="UWCompanyInputSet"
+        visible="false"/>
+      <DateInput
+        id="ReinstatementDate"
+        label="DisplayKey.get(&quot;Web.Reinstatement.ReinstatementDate&quot;)"
+        required="true"
+        value="policyPeriod.EditEffectiveDate">
+        <PostOnChange/>
+      </DateInput>
+      <TypeKeyInput
+        editable="true"
+        id="ReasonCode"
+        label="DisplayKey.get(&quot;Web.Reinstatement.ReasonCode&quot;)"
+        required="true"
+        value="reinstatement.ReinstateCode"
+        valueType="typekey.ReinstateCode"/>
+      <TextAreaInput
+        editable="true"
+        id="ReasonDescription"
+        label="DisplayKey.get(&quot;Web.Reinstatement.ReasonDescription&quot;)"
+        numRows="3"
+        value="reinstatement.Description"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

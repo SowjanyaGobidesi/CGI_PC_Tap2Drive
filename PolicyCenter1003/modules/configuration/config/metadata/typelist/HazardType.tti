@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="HazardType" desc="">
+  <typecode
+    code="Property"
+    desc="Property"
+    name="Property"
+    priority="10"/>
+  <typecode
+    code="Liability"
+    desc="Liability"
+    name="Liability"
+    priority="20"/>
+</typelist>

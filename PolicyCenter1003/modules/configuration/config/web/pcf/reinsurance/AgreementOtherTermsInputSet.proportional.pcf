@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AgreementOtherTermsInputSet"
+    mode="proportional">
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <BooleanRadioInput
+      editable="true"
+      id="CountTowardTotalLimit"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.CountTowardTotalLimit&quot;)"
+      required="true"
+      value="(agreement as PerRisk).CountTowardTotalLimit"/>
+    <MonetaryAmountInput
+      currency="agreement.Currency"
+      editable="true"
+      formatType="currency"
+      id="NotificationThresh"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.NotificationThresh&quot;)"
+      value="(agreement as PerRisk).NotificationThreshold"/>
+    <TextAreaInput
+      editable="true"
+      id="Comments"
+      label="DisplayKey.get(&quot;Web.Reinsurance.Treaty.Comments&quot;)"
+      numRows="4"
+      value="agreement.Comments"/>
+  </InputSet>
+</PCF>

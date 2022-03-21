@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="true"
+    id="ContingencyActivitiesLV">
+    <Require
+      name="activities"
+      type="Activity[]"/>
+    <Require
+      name="completionDateVisible"
+      type="boolean"/>
+    <RowIterator
+      editable="false"
+      elementName="activity"
+      pageSize="0"
+      type="entity.Activity"
+      value="activities"
+      valueType="Activity[]">
+      <Row
+        useArchivedStyle="return activity.associatedItemIsArchived();">
+        <BooleanRadioCell
+          icon="&quot;escalated&quot;"
+          iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+          iconType="svgFileName"
+          id="Escalated"
+          tooltip="DisplayKey.get('Web.DesktopActivitiesLV.EscalatedActivityTooltip')"
+          value="activity.Escalated"/>
+        <DateCell
+          id="CompletionDate"
+          label="DisplayKey.get('Web.DesktopActivitiesLV.CompletionDate')"
+          sortDirection="descending"
+          value="activity.CloseDate"
+          visible="completionDateVisible"/>
+        <DateCell
+          id="EscalationDate"
+          label="DisplayKey.get('Web.DesktopActivitiesLV.EscalationDate')"
+          sortDirection="descending"
+          value="activity.EscalationDate"
+          visible="!completionDateVisible"/>
+        <TextCell
+          action="ActivityDetailWorksheet.goInWorkspace(activity, activity.PolicyPeriod)"
+          available="perm.Activity.view(activity)"
+          id="Subject"
+          label="DisplayKey.get('Web.DesktopActivitiesLV.Subject')"
+          value="activity.Subject"
+          wrap="true"/>
+        <TextCell
+          id="AssignedTo"
+          label="DisplayKey.get('Web.DesktopActivitiesLV.AssignedTo')"
+          value="activity.AssignedTo as String"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

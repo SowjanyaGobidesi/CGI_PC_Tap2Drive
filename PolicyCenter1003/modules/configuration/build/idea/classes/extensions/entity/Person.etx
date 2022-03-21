@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="Person">
+  <!--<implementsEntity name="PersonKanjiIndexDelegate"/>-->
+  <typekey-override
+    name="CellPhoneCountry">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <column-override
+    name="CellPhone">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="CellPhoneExtension">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="DateOfBirth">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="FirstName">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </column-override>
+  <column-override
+    name="FormerName">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="LastName">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </column-override>
+  <column-override
+    name="LicenseNumber">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="MiddleName">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="NumDependents">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="NumDependentsU18">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="NumDependentsU25">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    name="Occupation">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <typekey-override
+    name="Gender">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    name="LicenseState">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    name="MaritalStatus">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    name="Prefix">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    name="Suffix">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    name="TaxFilingStatus">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <index desc="Index for search by person last name and first name with denormalized City, State and PostalCode" name="NameAddrDenorm1" unique="true">
+    <indexcol keyposition="1" name="LastNameDenorm"/>
+    <indexcol keyposition="2" name="FirstNameDenorm"/>
+    <indexcol keyposition="3" name="CityDenorm"/>
+    <indexcol keyposition="4" name="State"/>
+    <indexcol keyposition="5" name="PostalCodeDenorm"/>
+    <indexcol keyposition="6" name="Country"/>
+    <indexcol keyposition="7" name="AccountHolderCount"/>
+    <indexcol keyposition="8" name="Subtype"/>
+    <indexcol keyposition="9" name="Retired"/>
+    <indexcol keyposition="10" name="ID"/>
+  </index>
+</extension>

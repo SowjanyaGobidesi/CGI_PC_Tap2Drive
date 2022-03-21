@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    editable="false"
+    id="PolicyAddressDisplayInputSet">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="showLabel"
+      type="boolean"/>
+    <Variable
+      initialValue="period.Archived ? null : new gw.pcf.policysummary.PolicyInfoAddressOwner(new gw.globalization.PolicyAddressAdapter(period.PolicyAddress), showLabel)"
+      name="addressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.AddressOwner"/>
+    <InputSetRef
+      def="GlobalAddressInputSet(addressOwner)"
+      id="globalAddressContainer"
+      mode="addressOwner.SelectedMode"
+      widgets="globalAddressContainer"/>
+    <TypeKeyInput
+      id="AddressType"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.AddressType&quot;)"
+      value="period.PolicyAddress.AddressType"
+      valueType="typekey.AddressType"/>
+    <TextInput
+      id="AddressDescription"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AddressDetail.Description&quot;)"
+      value="period.PolicyAddress.Description"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="WorkflowDetailInputSet"
+    mode="PolicyPeriodWorkflow">
+    <Require
+      name="workflowBase"
+      type="Workflow"/>
+    <Variable
+      initialValue="workflowBase as PolicyPeriodWorkflow"
+      name="workflow"
+      type="PolicyPeriodWorkflow"/>
+    <TextInput
+      action="JobForward.go(workflow.PolicyPeriod.Job)"
+      actionAvailable="(User.util.CurrentUser as User).canView(workflow.PolicyPeriod.Job)"
+      id="JobNumber"
+      label="DisplayKey.get(&quot;Web.Admin.Workflows.JobNumber&quot;)"
+      value="workflow.PolicyPeriod.Job.JobNumber"/>
+    <TextInput
+      action="PolicyFileForward.go(workflow.PolicyPeriod, workflow.PolicyPeriod.EditEffectiveDate)"
+      actionAvailable="(User.util.CurrentUser as User).canView( workflow.PolicyPeriod )"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.Admin.Workflows.PolicyNumber&quot;)"
+      value="workflow.PolicyPeriod.PolicyNumberDisplayString"/>
+    <TextInput
+      id="Product"
+      label="DisplayKey.get(&quot;Web.Admin.Workflows.Product&quot;)"
+      value="workflow.PolicyPeriod.Policy.Product"
+      valueType="gw.api.productmodel.Product"/>
+    <TextInput
+      id="MainAccountContact"
+      label="DisplayKey.get(&quot;Web.Admin.Workflows.Insured&quot;)"
+      value="workflow.PolicyPeriod.Policy.Account.AccountHolder"
+      valueType="entity.AccountHolder"/>
+  </InputSet>
+</PCF>

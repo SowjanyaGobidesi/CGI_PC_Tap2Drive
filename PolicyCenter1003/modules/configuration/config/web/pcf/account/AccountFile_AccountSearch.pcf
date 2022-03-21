@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="AccountFile_AccountSearch"
+    parent="AccountFile_Summary(currentAccount)"
+    showUpLink="true"
+    title="DisplayKey.get(searchReason.TitleDisplayKey, currentAccount.AccountNumber)">
+    <LocationEntryPoint
+      signature="AccountFile_AccountSearch(currentAccount : Account, searchReason : gw.account.AccountSearchReason)"/>
+    <Variable
+      name="currentAccount"
+      type="Account"/>
+    <Variable
+      name="searchReason"
+      type="gw.account.AccountSearchReason"/>
+    <ScreenRef
+      def="OtherAccountSearchScreen(currentAccount, searchReason)"/>
+  </Page>
+</PCF>

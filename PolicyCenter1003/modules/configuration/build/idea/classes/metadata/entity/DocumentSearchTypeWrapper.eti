@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  desc="Non-persistent entity used as wrapper for DocumentType to be able use multiple DocumentType in DocumentSearchCriteria"
+  extendable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="DocumentSearchTypeWrapper">
+  <typekey
+    desc="Document Type"
+    name="DocumentType"
+    nullok="true"
+    typelist="DocumentType"/>
+  <foreignkey
+    fkentity="DocumentSearchCriteria"
+    name="DocumentSearchCriteria"
+    nullok="true"/>
+</nonPersistentEntity>

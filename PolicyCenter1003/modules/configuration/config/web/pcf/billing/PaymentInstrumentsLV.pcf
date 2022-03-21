@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="PaymentInstrumentsLV">
+    <Require
+      name="paymentInstruments"
+      type="gw.plugin.billing.BillingPaymentInstrument[]"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <RowIterator
+      editable="true"
+      elementName="paymentInstrument"
+      value="paymentInstruments"
+      valueType="gw.plugin.billing.BillingPaymentInstrument[]">
+      <Row>
+        <RadioButtonCell
+          action="policyPeriodBillingInstructionsManager.PaymentInstrument = paymentInstrument"
+          editable="true"
+          id="PaymentMethod"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InstallmentsPlansLV.Select&quot;)"
+          radioButtonGroup="PaymentMethodsGroup"
+          value="policyPeriodBillingInstructionsManager.PaymentInstrument.PublicID == paymentInstrument.PublicID">
+          <PostOnChange/>
+        </RadioButtonCell>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.PaymentInstrumentsLV.Description&quot;)"
+          value="paymentInstrument.DisplayName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

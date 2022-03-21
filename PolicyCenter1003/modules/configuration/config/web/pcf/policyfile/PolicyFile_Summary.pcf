@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    id="PolicyFile_Summary"
+    canVisit="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions.Instance.canVisitDashboard()"
+    title="DisplayKey.get('Web.PolicyFile.PolicySummary', policyPeriod.PolicyNumberDisplayString)">
+    <LocationEntryPoint
+      signature="PolicyFile_Summary(policyPeriod: PolicyPeriod, asOfDate: java.util.Date, errorMessage: String)"/>
+    <LocationEntryPoint
+      signature="PolicyFile_Summary(policyPeriod: PolicyPeriod, asOfDate: java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      name="errorMessage"
+      type="String"/>
+    <Variable
+      initialValue="gw.web.ErrorConduit.addRequestScopedErrorMessagePassThrough(errorMessage)"
+      name="placeholderUsedToTriggerPassThroughMethod"
+      recalculateOnRefresh="true"
+      type="String"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions.Instance"
+      name="permissions"
+      type="gw.api.web.dashboard.ui.DashboardParameters.PolicySummaryPermissions"/>
+    <Variable
+      initialValue="new gw.pcf.policysummary.PolicySummaryHelper(policyPeriod, asOfDate)"
+      name="policySummaryHelper"
+      type="gw.pcf.policysummary.PolicySummaryHelper"/>
+    <Variable
+      initialValue="gw.api.web.dashboard.ui.claims.LossRatioHelper.forPolicyPeriod(policyPeriod)"
+      name="lossRatioHelper"
+      type="gw.api.web.dashboard.ui.claims.LossRatioHelper"/>
+    <Screen>
+      <AlertBar
+        allowDismiss="false"
+        available="false"
+        id="FutureArchivedTermWarning"
+        label="DisplayKey.get('Web.Job.Warning.ArchivedFutureTerm', asOfDate.ShortFormat)"
+        visible="gw.api.archive.PCArchivingUtil.hasFutureArchivedTerms(policyPeriod)"/>
+      <AlertBar
+        allowDismiss="false"
+        id="PendingPaymentConfirmation"
+        label="DisplayKey.get('Web.PolicyFile.Warnings.PendingPaymentConfirmation')"
+        visible="not policyPeriod.PolicyTerm.Bound and not policyPeriod.Canceled"/>
+      <AlertBar
+        allowDismiss="false"
+        available="false"
+        id="PolicyRewrittenWarning"
+        label="policyPeriod.Policy.RewrittenToNewAccountDestination.Issued ? DisplayKey.get('Web.PolicyFile.Warnings.PolicyRewritten') : DisplayKey.get('Web.PolicyFile.Warnings.PolicyBeingRewritten')"
+        visible="policyPeriod.Policy.RewrittenToNewAccountDestination != null"/>
+      <AlertBar
+        allowDismiss="false"
+        available="false"
+        id="OutstandingContingencyWarning"
+        label="DisplayKey.get('Web.Contingency.Warning.OutstandingContingency')"
+        visible="policyPeriod.Policy.HasOutstandingContingencies"/>
+      <AlertBar
+        allowDismiss="false"
+        available="false"
+        id="PendingCancellationWarning"
+        label="DisplayKey.get('Web.PolicyFile.Summary.PendingCancellation')"
+        visible="policySummaryHelper.PendingCancellationExists"/>
+      <AlertBar
+        id="LossRatioWarning"
+        label="lossRatioHelper.ErrorMessage"
+        visible="lossRatioHelper.ErrorMessage != null"/>
+      <ColumnDashboard
+        id="PolicyOverviewDashboard">
+        <DashboardColumn>
+          <TileRef
+            def="PolicyDetailsDetailViewTile(policyPeriod, asOfDate)"
+            visible="permissions.PolicyDetails"/>
+          <TileRef
+            def="TermFinancialsViewTile(policyPeriod, lossRatioHelper)"
+            visible="permissions.Premium"/>
+          <TileRef
+            def="CurrentActivitiesPolicyListViewTile(policyPeriod)"
+            visible="permissions.CurrentActivities"/>
+          <TileRef
+            def="PendingPolicyTransactionsListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.PendingPolicyTransactions"/>
+          <TileRef
+            def="ClaimsPolicyListViewTile(policyPeriod)"
+            visible="permissions.Claims"/>
+          <TileRef
+            def="CompletedPolicyTransactionsListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.CompletedPolicyTransactions"/>
+          <TileRef
+            def="SplitPolicyListViewTile(policyPeriod)"
+            visible="policyPeriod.Policy.DividedPolicies.HasElements"/>
+        </DashboardColumn>
+        <DashboardColumn>
+          <TileRef
+            def="AccountDetailViewTile(policyPeriod)"
+            visible="permissions.Account"/>
+          <TileRef
+            def="NotesDetailViewTile(gw.api.web.dashboard.ui.note.NoteHelper.forPolicyPeriod(policyPeriod, asOfDate))"
+            visible="permissions.canSeeNotes(policyPeriod)"/>
+          <TileRef
+            def="PolicyBillingSummaryChartTile(new gw.api.web.dashboard.ui.billing.BillingSummaryHelper(policyPeriod))"
+            visible="permissions.BillingSummary"/>
+          <TileRef
+            def="PaymentScheduleListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.PaymentSchedule"/>
+          <TileRef
+            def="PolicyContactListViewTile(policyPeriod, asOfDate)"
+            visible="permissions.canSeeContacts(policyPeriod)"/>
+          <TileRef
+            def="ProducerDetailViewTile(policyPeriod)"
+            visible="permissions.Producer"/>
+        </DashboardColumn>
+      </ColumnDashboard>
+    </Screen>
+  </Page>
+</PCF>

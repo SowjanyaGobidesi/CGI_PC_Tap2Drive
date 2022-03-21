@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="AuditInfoCriteria"
+  exportable="true"
+  extendable="false">
+  <typekey
+    desc="The actual audit method used in auditInformation"
+    name="ActualAuditMethod"
+    nullok="true"
+    typelist="AuditMethod"/>
+  <fulldescription><![CDATA[
+    Deprecated in PC9.0. Please use the PolicyPeriodSearchCriteria, PolicyPeriodQueryBuilder, or AuditInformationQueryBuilder instead.
+  ]]></fulldescription>
+</nonPersistentEntity>

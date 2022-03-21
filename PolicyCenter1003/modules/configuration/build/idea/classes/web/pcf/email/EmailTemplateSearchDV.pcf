@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="EmailTemplateSearchDV">
+    <Require
+      name="emailTemplateSearchCriteria"
+      type="gw.api.email.EmailTemplateSearchCriteria"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Topic"
+        label="DisplayKey.get(&quot;Web.EmailTemplateSearch.Topic&quot;)"
+        value="emailTemplateSearchCriteria.Topic"/>
+      <TypeKeyInput
+        editable="true"
+        id="Language"
+        label="DisplayKey.get(&quot;Web.EmailTemplateSearch.Language&quot;)"
+        value="emailTemplateSearchCriteria.Language"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+      <TextInput
+        editable="true"
+        id="Keywords"
+        label="DisplayKey.get(&quot;Web.EmailTemplateSearch.Keywords&quot;)"
+        value="emailTemplateSearchCriteria.Keywords"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

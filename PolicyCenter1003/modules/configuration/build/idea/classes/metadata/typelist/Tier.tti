@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- EXTERNAL TYPELISTS -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The tier of the organization"
+  final="false"
+  name="Tier"/>

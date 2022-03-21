@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <PanelSet
+    id="IMARPanelSet">
+    <Require
+      name="accountsRecPart"
+      type="IMAccountsRecPart"/>
+    <Require
+      name="openforEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="accountsRecPart.InlandMarineLine.Pattern.getCoverageCategoryByPublicId(&quot;IMARCategory&quot;)"
+      name="accountsReceivableCategory"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="accountsRecPart.InlandMarineLine.Branch"
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <Variable
+      initialValue="accountsRecPart.InlandMarineLine.Pattern.getCoverageCategoryByPublicId(&quot;IMARPartCategory&quot;)"
+      name="accountsRecPartCategory"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <PanelRef
+      def="PreferredCoverageCurrencyPanelSet(accountsRecPart, openforEdit, jobWizardHelper)"
+      id="PreferredCoverageCurrencySelectorRef"/>
+    <PanelRef
+      def="IMARPartLevelInformationDV(accountsRecPart, openforEdit)">
+      <TitleBar
+        id="title1"
+        title="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable.PartLevelInformation&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="IMARItemDV(accountsRecPart, openforEdit, jobWizardHelper)">
+      <TitleBar
+        id="title2"
+        title="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivableCoverages&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="IMARExcludedAccountsDV(accountsRecPart, openforEdit)">
+      <TitleBar
+        id="title3"
+        title="DisplayKey.get(&quot;Web.Policy.IM.AccountsReceivable.ExcludedAccounts&quot;)"/>
+    </PanelRef>
+  </PanelSet>
+</PCF>

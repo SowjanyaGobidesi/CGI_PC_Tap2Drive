@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="BillingContact"
+  supertype="AccountContactRole">
+  <fulldescription><![CDATA[A company (e.g. accounting firm) or person representing an insured entity
+    who would be the primary source of information to resolve billing issues
+    for the account or one of its underlying policies.]]></fulldescription>
+  <implementsEntity
+    name="Extractable"/>
+</subtype>

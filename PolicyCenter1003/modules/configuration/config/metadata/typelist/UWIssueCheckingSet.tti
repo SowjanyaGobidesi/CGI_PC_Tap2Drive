@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Sets of UWIssues which are generated (or re-generated) at the same time. When rule sets are run for a checking set, an issue which is not regenerated is assumed to no longer apply."
+  name="UWIssueCheckingSet">
+  <typecode
+    code="PreQuote"
+    desc="Created before quoting."
+    name="Quote Issues"
+    priority="400">
+    <category
+      code="PreQuote"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="PreRateRelease"
+    desc="Created before releasing a rate."
+    name="Rate Release Issues"
+    priority="350">
+    <category
+      code="PreRateRelease"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="PreQuoteRelease"
+    desc="Created before releasing a quote."
+    name="Quote Release Issues"
+    priority="300">
+    <category
+      code="PreQuoteRelease"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="PreBind"
+    desc="Created before binding."
+    name="Bind Issues"
+    priority="200">
+    <category
+      code="PreBind"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="PreIssuance"
+    desc="Created before issuance."
+    name="Issuance Issues"
+    priority="100">
+    <category
+      code="PreIssuance"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Referral"
+    desc="Created from an UW referral reason."
+    name="Referral"
+    priority="600">
+    <category
+      code="Referral"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Question"
+    desc="Created automatically from a Question."
+    name="Question"
+    priority="700">
+    <category
+      code="Question"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Renewal"
+    desc="Created as part of renewal processing."
+    name="Renewal"
+    priority="500">
+    <category
+      code="Renewal"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Manual"
+    desc="Created manually."
+    name="Manual"
+    priority="800">
+    <category
+      code="Manual"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="Upgrade"
+    desc="Created during DB upgrade."
+    name="Upgrade"
+    priority="900">
+    <category
+      code="Upgrade"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="All"
+    desc="Checked at every blocking point."
+    name="All"
+    priority="10000">
+    <category
+      code="All"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typecode
+    code="PolicyRenewalAPI"
+    desc="Created during PolicyRenewalAPI execution"
+    name="PolicyRenewalAPI"
+    priority="1000">
+    <category
+      code="PolicyRenewalAPI"
+      typelist="TriggeringPointKey"/>
+  </typecode>
+  <typefilter
+    desc="Policy Holds Type Filter"
+    name="PolicyHoldsTypeFilter"/>
+</typelist>

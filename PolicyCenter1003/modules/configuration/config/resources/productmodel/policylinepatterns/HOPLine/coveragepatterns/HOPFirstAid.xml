@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPFirstAid"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPLineCov"
+  coveredPartyType="ThirdParty"
+  existence="Required"
+  lookupTableName="HOPLineCov"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="5200"
+  public-id="zeliiv44ls0fd7s7cdln05s05qa"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules/>
+</CoveragePattern>

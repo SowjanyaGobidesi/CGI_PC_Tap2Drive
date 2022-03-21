@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    editable="false"
+    id="PolicyLineSummaryPanelSet"
+    mode="WorkersCompLine">
+    <Require
+      name="line"
+      type="PolicyLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="line.Branch"
+      name="period"
+      type="entity.PolicyPeriod"/>
+    <Variable
+      initialValue="line as WorkersCompLine"
+      name="wcLine"
+      type="productmodel.WorkersCompLine"/>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.PolicyDetails&quot;)"/>
+      <DetailViewPanel>
+        <Variable
+          initialValue="wcLine.Pattern.getCoverageCategoryByPublicId(&quot;WorkersCompGrp&quot;).coveragePatternsForEntity(WorkersCompLine).where(\ c -&gt; c.DisplayName != &quot;Workers' Comp&quot;).whereSelectedOrAvailable(wcLine, CurrentLocation.InEditMode)"
+          name="wcGroupCoveragePatterns"
+          recalculateOnRefresh="true"
+          type="gw.api.productmodel.CoveragePattern[]"/>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Policy.WC.WCCoveredStates&quot;)"/>
+          <TextInput
+            id="CoveredStates"
+            label="DisplayKey.get(&quot;Web.Policy.WC.CoveredStates&quot;)"
+            value="wcLine.Jurisdictions*.State.join(&quot;,&quot;)"/>
+          <TextInput
+            id="GoverningClass"
+            label="DisplayKey.get(&quot;Web.Policy.WC.GoverningClass&quot;)"
+            value="wcLine.GoverningClass.Code"/>
+          <InputIterator
+            elementName="coveragePattern"
+            forceRefreshDespiteChangedEntries="true"
+            id="WCGrpIterator"
+            value="wcGroupCoveragePatterns"
+            valueType="gw.api.productmodel.CoveragePattern[]">
+            <IteratorSort
+              sortBy="coveragePattern.Priority"
+              sortOrder="1"/>
+            <InputSetRef
+              def="CoverageInputSet(coveragePattern, wcLine, true)"
+              mode="coveragePattern.PublicID"/>
+          </InputIterator>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.WC.StateCoveragesHeader&quot;)"/>
+      <Toolbar/>
+      <ListDetailPanel
+        selectionName="selectedJurisdiction"
+        selectionType="WCJurisdiction">
+        <ListViewPanel
+          available="selectedJurisdiction != null"
+          disableUserCustomization="true"
+          id="PolicyLinePerStateConfig_LV"
+          visible="true">
+          <RowIterator
+            editable="false"
+            elementName="covJuris"
+            value="wcLine.Jurisdictions"
+            valueType="entity.WCJurisdiction[]">
+            <IteratorSort
+              sortBy="covJuris.State.DisplayName"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                id="StateName"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.State&quot;)"
+                value="covJuris.State"
+                valueType="typekey.Jurisdiction"/>
+              <TextCell
+                id="RiskID"
+                label="DisplayKey.get(&quot;Web.Policy.PolicyLine.PerState.OfficialIDs&quot;)"
+                numEntries="5"
+                outputConversion="officialIDOutputConverter(VALUE)"
+                value="getOfficialIDs(covJuris)"
+                valueType="entity.OfficialID[]"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+        <CardViewPanel>
+          <Card
+            id="GeneralInfoCard"
+            title="DisplayKey.get(&quot;Web.Policy.PolicyLine.PerState.Panel.GeneralInfo.Title&quot;)">
+            <PanelRef
+              def="PolicyLinePerStateConfigDV(wcLine, selectedJurisdiction)"/>
+            <PanelRef>
+              <TitleBar
+                title="DisplayKey.get(&quot;Web.Policy.WC.CoveredEmployees&quot;)"/>
+              <DetailViewPanel>
+                <InputColumn>
+                  <InputSetRef
+                    def="WorkersCompClassesInputSet(selectedJurisdiction, wcLine)"/>
+                </InputColumn>
+              </DetailViewPanel>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </PanelRef>
+    <!-- options list -->
+    <PanelRef
+      def="WCOptionsPanelSet(period, false)"/>
+    <!-- forms list -->
+    <PanelRef
+      def="FormsDV(period)">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Policy.Form.FormsLabel&quot;)"/>
+    </PanelRef>
+    <Code><![CDATA[function getOfficialIDs(covJuris : entity.WCJurisdiction) : entity.OfficialID[] {
+  var officialIDs = period.PrimaryNamedInsured.AccountContactRole.AccountContact.Contact.OfficialIDs
+        .where( \ o -> o.State == covJuris.State)
+  return officialIDs
+}
+
+function officialIDOutputConverter(VALUE : entity.OfficialID[]) : String {
+  if (VALUE == null) {return ""}
+  var officialIDValues = VALUE.map(\ id -> id.getOfficialIDValue()!=null ? id.getOfficialIDValue() : "")
+  return officialIDValues.where(\ val -> val!=null).join(",")
+}]]></Code>
+  </PanelSet>
+</PCF>

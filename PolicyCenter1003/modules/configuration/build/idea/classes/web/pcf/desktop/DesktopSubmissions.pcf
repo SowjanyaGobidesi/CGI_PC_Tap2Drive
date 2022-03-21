@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewmysubmissions"
+    id="DesktopSubmissions"
+    title="DisplayKey.get(&quot;Web.DesktopSubmissions&quot;)">
+    <LocationEntryPoint
+      signature="DesktopSubmissions()"/>
+    <Screen
+      id="DesktopSubmissionsScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.DesktopSubmissions&quot;)"/>
+      <Toolbar>
+        <SearchItem
+          afterFailure="if (searchCriteria typeis gw.policy.PolicyPeriodSearchCriteria) searchCriteria.resetForSearchItems(Submission, searchText)"
+          id="SubmissionSearch"
+          label="DisplayKey.get(&quot;Web.TabBar.Policy.SubmissionNumberSearchMenuItem&quot;)"
+          onFailure="PolicySearch.go()"
+          onResult="JobForward.go(result as Job)"
+          search="searchSubmission(searchText)"
+          validationError="DisplayKey.get(&quot;Web.TabBar.Policy.SubmissionNumberSearchMenuItem.Error&quot;, searchText)"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopSubmissionsLV()"
+        mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+    </Screen>
+    <Code><![CDATA[function searchSubmission (searchText : String) : Job{
+  var result = Job.finder.findJobByJobNumber(searchText) 
+  if (result == null or not perm.Job.view(result)) 
+    return null
+  return result
+}]]></Code>
+  </Page>
+</PCF>

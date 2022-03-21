@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Industry code <-> Class code mapping table  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Lookup table for translating industry codes to class codes."
+  entity="IndustryCodeClassCode"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="industrycodeclasscode"
+  type="retireable">
+  <foreignkey
+    columnName="IndustryCodeID"
+    fkentity="IndustryCode"
+    name="IndustryCode"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClassCodeID"
+    fkentity="BOPClassCode"
+    name="ClassCode"
+    nullok="false"/>
+  <column
+    desc="Is this the primary industry code for the class code?"
+    name="PrimaryIndustry"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Is this the primary class code for the industry code?"
+    name="PrimaryClass"
+    nullok="false"
+    type="bit"/>
+</entity>

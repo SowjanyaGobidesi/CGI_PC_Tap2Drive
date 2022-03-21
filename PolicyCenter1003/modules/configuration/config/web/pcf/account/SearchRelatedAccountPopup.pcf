@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="SearchRelatedAccountPopup"
+    returnType="Account"
+    title="DisplayKey.get(&quot;Web.AccountFile.RelatedAccounts.SearchPopup&quot;)">
+    <Variable
+      initialValue="null"
+      name="relatedToAccount"
+      type="Account"/>
+    <Screen>
+      <SearchPanel
+        criteriaName="searchCriteria"
+        maxSearchResults="100"
+        resultsName="accountSummaries"
+        search="searchCriteria.performSearch()"
+        searchCriteria="new gw.account.AccountSearchCriteria() { :Secure = true , :FirstNameExact = false, :LastNameExact = false, :CompanyNameExact = false}"
+        searchCriteriaType="gw.account.AccountSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;AccountSummary&gt;">
+        <PanelRef
+          def="AccountSearchDV(searchCriteria, relatedToAccount)"/>
+        <PanelRef>
+          <Toolbar/>
+          <ListViewPanel
+            id="AccountSearchResultsLV">
+            <RowIterator
+              editable="false"
+              elementName="accountSummary"
+              pickValue="accountSummary.Account"
+              value="accountSummaries"
+              valueType="gw.api.database.IQueryBeanResult&lt;entity.AccountSummary&gt;">
+              <Row>
+                <TextCell
+                  id="AccountNumber"
+                  label="DisplayKey.get(&quot;Web.AccountSearchResults.AccountNumber&quot;)"
+                  value="accountSummary.AccountNumber"/>
+                <TextCell
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.AccountSearchResults.Name&quot;)"
+                  value="accountSummary.AccountHolderName"/>
+                <TextCell
+                  id="Address"
+                  label="DisplayKey.get(&quot;Web.AccountSearchResults.Address&quot;)"
+                  value="accountSummary.AccountHolderAddress"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

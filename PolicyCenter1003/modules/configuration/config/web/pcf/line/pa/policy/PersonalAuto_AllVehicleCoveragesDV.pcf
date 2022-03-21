@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PersonalAuto_AllVehicleCoveragesDV">
+    <Require
+      name="paLine"
+      type="PersonalAutoLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="paLine.Pattern.getCoverageCategoryByPublicId(&quot;PAPLiabGrp&quot;)"
+      name="liabilityCategory"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="paLine.Pattern.getCoverageCategoryByPublicId(&quot;PAPip&quot;)"
+      name="pipCategory"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoverageCategory"/>
+    <Variable
+      initialValue="liabilityCategory.coveragePatternsForEntity(PersonalAutoLine).whereSelectedOrAvailable(paLine, openForEdit)"
+      name="liabilityCategoryCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <Variable
+      initialValue="pipCategory != null ? pipCategory.coveragePatternsForEntity(PersonalAutoLine).whereSelectedOrAvailable(paLine, openForEdit) : null"
+      name="pipCategoryCoveragePatterns"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.CoveragePattern[]"/>
+    <InputColumn>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="PALiabCategoryIterator"
+        value="liabilityCategoryCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, paLine, openForEdit)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+    </InputColumn>
+    <InputColumn>
+      <InputIterator
+        elementName="coveragePattern"
+        forceRefreshDespiteChangedEntries="true"
+        id="PAPipCategoryIterator"
+        value="pipCategoryCoveragePatterns"
+        valueType="gw.api.productmodel.CoveragePattern[]">
+        <IteratorSort
+          sortBy="coveragePattern.Priority"
+          sortOrder="1"/>
+        <InputSetRef
+          def="CoverageInputSet(coveragePattern, paLine, openForEdit)"
+          mode="coveragePattern.PublicID"/>
+      </InputIterator>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

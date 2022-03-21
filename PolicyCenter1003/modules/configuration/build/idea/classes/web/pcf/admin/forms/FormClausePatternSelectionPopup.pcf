@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="formPattern.clearDependentClausePatternSelections()"
+    canEdit="true"
+    canVisit="true"
+    id="FormClausePatternSelectionPopup"
+    returnType="gw.api.productmodel.ClausePattern"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Forms.Generic.GenericClauseSelectionForm&quot;)">
+    <LocationEntryPoint
+      signature="FormClausePatternSelectionPopup(formPattern : FormPattern)"/>
+    <Variable
+      name="formPattern"
+      type="FormPattern"/>
+    <Variable
+      initialValue="CoveragePatternSearchType.TC_COVERAGE"
+      name="searchType"
+      type="CoveragePatternSearchType"/>
+    <Screen
+      editable="true"
+      id="FormPatternClauseScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="clausePatterns"
+        search="searchCriteria.performSearch()"
+        searchCriteria="createSearchCriteria()"
+        searchCriteriaType="gw.productmodel.ClausePatternSearchCriteria"
+        searchResultsType="gw.api.productmodel.ClausePattern[]">
+        <DetailViewPanel>
+          <InputColumn>
+            <RangeRadioInput
+              available="true"
+              editable="true"
+              id="searchType"
+              label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+              required="true"
+              value="searchCriteria.SearchType"
+              valueRange="getAvailableClauseTypes()"
+              valueType="typekey.CoveragePatternSearchType"
+              visible="true"/>
+            <TextInput
+              editable="true"
+              id="Keyword"
+              label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Keyword&quot;)"
+              value="searchCriteria.Keyword"/>
+          </InputColumn>
+          <InputFooterSection>
+            <InputSetRef
+              def="SearchAndResetInputSet()"/>
+          </InputFooterSection>
+        </DetailViewPanel>
+        <PanelRef>
+          <Toolbar/>
+          <ListViewPanel
+            id="ClausePatternSearchResultsLV">
+            <RowIterator
+              editable="true"
+              elementName="pattern"
+              pickValue="pattern"
+              value="clausePatterns"
+              valueType="gw.api.productmodel.ClausePattern[]">
+              <Row>
+                <TextCell
+                  id="Coverage"
+                  label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Coverage&quot;)"
+                  value="pattern.DisplayName"/>
+                <TextCell
+                  id="Category"
+                  label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+                  value="pattern.CoverageCategory.DisplayName"/>
+                <TextCell
+                  id="ClauseType"
+                  label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+                  value="pattern.ClauseName"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function getAvailableClauseTypes() : CoveragePatternSearchType[]{
+  return new CoveragePatternSearchType[]{CoveragePatternSearchType.TC_COVERAGE, 
+    CoveragePatternSearchType.TC_CONDITION, CoveragePatternSearchType.TC_EXCLUSION}
+}
+
+function createSearchCriteria() : gw.productmodel.ClausePatternSearchCriteria {
+  var criteria = new gw.productmodel.ClausePatternSearchCriteria()
+  criteria.SearchType = searchType
+  criteria.PolicyLinePatternCode = formPattern.PolicyLinePatternCode
+  return criteria
+}]]></Code>
+  </Popup>
+</PCF>

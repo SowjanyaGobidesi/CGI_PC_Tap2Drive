@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="LossHistoryTypeSelectDV">
+    <Require
+      name="policy"
+      type="Policy"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Policy.PriorLosses&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="LossHistoryType"
+        label="DisplayKey.get(&quot;Web.Policy.LossHistory.LossHistoryType&quot;)"
+        required="true"
+        value="policy.LossHistoryType"
+        valueType="typekey.LossHistoryType">
+        <PostOnChange/>
+      </TypeKeyInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

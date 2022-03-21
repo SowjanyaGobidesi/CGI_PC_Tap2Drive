@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  BankAccountType  ==================================================================== -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines available types of bank accounts"
+  name="BankAccountType">
+  <typecode
+    code="checking"
+    desc="Checking"
+    name="Checking"/>
+  <typecode
+    code="savings"
+    desc="Savings"
+    name="Savings"/>
+</typelist>

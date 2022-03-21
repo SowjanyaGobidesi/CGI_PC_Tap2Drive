@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundPeriodRiskAssessmentErrorTempStore"
+  desc="Error sent to PC from frontend or backend risk assessment service for request level errors"
+  table="periodraerrortempstore"
+  type="editable">
+  <implementsEntity
+    name="InboundRiskAssessmentErrorTempStore"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="OutboundRATempStore"
+    fkentity="OutboundPeriodRiskAssessmentTempStore"
+    name="OutboundPeriodRiskAssessmentTempStore"
+    nullok="false"/>
+</entity>

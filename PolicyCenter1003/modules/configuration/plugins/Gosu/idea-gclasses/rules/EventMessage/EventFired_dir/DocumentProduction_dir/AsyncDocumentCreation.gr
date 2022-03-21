@@ -1,0 +1,27 @@
+package rules.EventMessage.EventFired_dir.DocumentProduction_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.PCConfigParameters
+uses gw.integration.document.production.smartcomms.plugin.impl.SmartCommsDocumentMessageTransport
+uses gw.integration.document.production.smartcomms.payload.SmartCommsPayloadGenerator
+
+@gw.rules.RuleName("Async Document Creation")
+internal class AsyncDocumentCreation {
+  static function doCondition(messageContext   :   entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.EventName == SmartCommsDocumentMessageTransport.GENERATE_DOCUMENT_MSG
+/*end00rule*/
+}
+
+  static function doAction(messageContext   :   entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+
+    var bindingType = PCConfigParameters.DocumentProductionBindingType.Value
+    if(bindingType != DocumentBindingType.TC_EARLY.Code) {
+      throw new UnsupportedOperationException(DisplayKey.get("DocumentProduction.Error.BindingNotSupported", bindingType))
+    }
+    var document = messageContext.Root as Document
+    var xml = new SmartCommsPayloadGenerator().generatePayload(document)
+    messageContext.createMessage(xml) 
+/*end00rule*/
+  }
+}

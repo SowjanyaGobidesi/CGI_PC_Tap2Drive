@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="valueDelegate.clearDependentValues()"
+    afterEnter="gw.pcf.rating.flow.RateRoutinePopupHelper.afterEnterDateConstantPopup(valueDelegate)"
+    canEdit="true"
+    id="RateRoutineDateConstantPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.EditDateConstantOperand&quot;)">
+    <LocationEntryPoint
+      signature="RateRoutineDateConstantPopup(valueDelegate : CalcStepValueDelegate)"/>
+    <Variable
+      name="valueDelegate"
+      type="CalcStepValueDelegate"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="gw.web.admin.forms.FormsUIHelper.commitPopup(valueDelegate, CurrentLocation)"
+          id="RateRoutineConstantEditUpdate"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="RateRoutineConstantEditCancel"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Usage"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Usage&quot;)"
+            value="gw.pcf.rating.flow.RateRoutineUsageHelper.getValueDelegateUsage(valueDelegate)"/>
+          <DateInput
+            editable="true"
+            id="Date"
+            label="DisplayKey.get(&quot;Web.Rating.Flow.CalcRoutine.Date&quot;)"
+            required="true"
+            value="valueDelegate.DateConstantValueForUI"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

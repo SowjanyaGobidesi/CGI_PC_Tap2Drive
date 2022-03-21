@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="TeamActivitiesScreen"
+    mode="federated">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel.canViewActivities()"
+      name="canViewActivities"
+      type="boolean"/>
+    <Variable
+      initialValue="{}"
+      name="processedActivities"
+      type="Set&lt;String&gt;"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.Team.Activities&quot;, teamModel.Label, teamModel.getDisplayMode(false), gw.api.domain.statistics.StatsWindowUtil.getActivitiesWindow())"/>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.Team.JobCountToDisplayExceedsMax&quot;, gw.api.system.PCConfigParameters.TeamScreenTabVisibilityRowCountCutoff.Value, &quot;activities&quot;, teamModel.Label)"
+      visible="not canViewActivities"/>
+    <PanelRef
+      def="FederatedTeamActivitiesLV(teamModel)"
+      visible="canViewActivities">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="MulticlusterAssignActivitiesPopup.push(
+              gw.api.web.activity.MulticlusterActivityAssignmentPopup.newInstance(CheckedValues, gw.assignment.AssignmentUtil.DefaultUser, \ -&gt; processedActivities.clear()))"
+          flags="all canAssignActivity"
+          id="TeamGroupActivities_Assign"
+          iterator="FederatedTeamActivitiesLV.FederatedTeamActivitiesLV"
+          label="DisplayKey.get(&quot;Web.Team.Activities.Assign&quot;)"
+          shortcut="A"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

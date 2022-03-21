@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Auditable"
+  requiresType="effdated">
+  <column
+    desc="The audited amount"
+    name="AuditedAmount"
+    nullok="true"
+    type="integer"/>
+  <fulldescription><![CDATA[
+    Delegate that can be implemented for things that are auditable.
+  ]]></fulldescription>
+</delegate>

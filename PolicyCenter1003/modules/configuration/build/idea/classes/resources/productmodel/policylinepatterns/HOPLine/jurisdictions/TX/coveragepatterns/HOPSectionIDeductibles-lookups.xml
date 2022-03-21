@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCovTermOptLookup public-id="z0igcb99vnvkuedpv80s7e1n6ua">
+    <Availability>Available</Availability>
+    <CovTermOptCode>z6siq4s1mrhhj85dke4ondbnn68</CovTermOptCode>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <HOPCoverageForm/>
+    <CoveragePartType/>
+    <Currency/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="z3ghak3tllr9kfsh52escesicqb">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zulg45ct6q32qcp8jv2sjlqcqea</CovTermOptCode>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <HOPCoverageForm/>
+    <CoveragePartType/>
+    <Currency/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="zhghkk0i4d28raf134opu65t98a">
+    <Availability>Available</Availability>
+    <CovTermOptCode>z1vhsmaiavbtq6nfs44di3ae738</CovTermOptCode>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <HOPCoverageForm/>
+    <CoveragePartType/>
+    <Currency/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermLookup public-id="z7nime1hhi2mc2kpc9klbvjujeb">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zstg2klko7ch86k99lc0u4ic5f8">
+    <Availability>Unavailable</Availability>
+    <CovTermPatternCode>zfvimq6hie4hr27sr3r4gfu8pnb</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zl0jcqerffkid3qnneuhjmr8eaa">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zcfha2d7ecctg3q4etobo1e1mf9">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zhrimvo454hpp3o6sbrhm4vthga">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zpbhoiumut2dk7dsff5ao5nro59</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>TX</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+</import>

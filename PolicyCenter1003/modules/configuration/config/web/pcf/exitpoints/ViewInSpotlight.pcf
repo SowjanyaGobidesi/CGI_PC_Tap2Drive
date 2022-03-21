@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="ViewInSpotlight"
+    url="{spotlightSystemBaseURL}/#/v1/urlPrefix/{policySystemServerURLPrefix}/paramsUrlFragment/{encodedParamUrl}/returnUrlFragment/{encodedReturnUrl}">
+    <LocationEntryPoint
+      signature="ViewInSpotlight(spotlightSystemBaseURL : String, policySystemServerURLPrefix : String, encodedParamUrl : String, encodedReturnUrl : String)"/>
+    <ExitPointParameter
+      locationParam="spotlightSystemBaseURL"
+      type="String"/>
+    <ExitPointParameter
+      locationParam="policySystemServerURLPrefix"
+      type="String"/>
+    <ExitPointParameter
+      locationParam="encodedReturnUrl"
+      type="String"/>
+    <ExitPointParameter
+      locationParam="encodedParamUrl"
+      type="String"/>
+  </ExitPoint>
+</PCF>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<QuestionSet
+  answerContainerType="entity.PolicyPeriod"
+  codeIdentifier="BOPOffering"
+  lookupTableName="PeriodQuestionSetLookup"
+  priority="-1"
+  public-id="BOPOffering"
+  questionSetType="offering">
+  <Questions>
+    <Question
+      blockingAction="warnuser"
+      codeIdentifier="BasedInBC"
+      correctAnswer="false"
+      defaultAnswer="false"
+      lookupTableName="PeriodQuestionLookup"
+      priority="-1"
+      public-id="BasedInBC"
+      questionFormat="BooleanRadio"
+      questionType="Boolean"
+      required="true"/>
+    <Question
+      codeIdentifier="PartnersAlliance"
+      defaultAnswer="false"
+      lookupTableName="PeriodQuestionLookup"
+      priority="-1"
+      public-id="PartnersAlliance"
+      questionFormat="BooleanRadio"
+      questionType="Boolean"
+      required="true"/>
+  </Questions>
+</QuestionSet>

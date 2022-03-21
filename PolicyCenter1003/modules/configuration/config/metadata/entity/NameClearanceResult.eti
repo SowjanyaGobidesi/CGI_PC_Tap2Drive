@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Name clearance / product offerings  ==================================================================== -->
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Result of a Name Clearance call"
+  entity="NameClearanceResult"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.product.NameClearanceResultPublicMethods"
+    impl="com.guidewire.pc.domain.product.impl.NameClearanceResultImpl"/>
+  <column
+    default="false"
+    desc="If true, a product not included in the ProductOffers is assumed to be available; if false then unavailable."
+    name="OtherProdsAvail"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="NameClearanceOffer"
+    cascadeDelete="true"
+    exportable="true"
+    name="Offers"/>
+</nonPersistentEntity>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="LicenseInputSet"
+    mode="default">
+    <Require
+      name="policyContactRole"
+      type="PolicyContactRole"/>
+    <Require
+      name="address"
+      type="Address"/>
+    <Variable
+      initialValue="policyContactRole.AccountContactRole.AccountContact.Contact"
+      name="contact"
+      recalculateOnRefresh="true"
+      type="entity.Contact"/>
+    <TextInput
+      editable="true"
+      id="LicenseNumber"
+      label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LicenseNumber&quot;)"
+      required="false"
+      value="(contact as Person).LicenseNumber"/>
+    <TypeKeyInput
+      editable="true"
+      id="LicenseState"
+      label="DisplayKey.get(&quot;Web.PolicyLine.Drivers.LicenseState&quot;)"
+      required="false"
+      value="(contact as Person).LicenseState"
+      valueType="typekey.Jurisdiction"/>
+  </InputSet>
+</PCF>

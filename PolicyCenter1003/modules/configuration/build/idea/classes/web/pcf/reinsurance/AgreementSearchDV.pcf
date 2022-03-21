@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AgreementSearchDV">
+    <Require
+      name="criteria"
+      type="gw.reinsurance.search.AgreementSearchCriteria"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="AgreementNumber"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AgreementNumber&quot;)"
+        value="criteria.AgreementNumber"/>
+      <TextInput
+        editable="true"
+        id="AgreementName"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Name&quot;)"
+        value="criteria.AgreementName"/>
+      <InputDivider/>
+      <DateInput
+        editable="true"
+        id="EffectiveOn"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.EffectiveOn&quot;)"
+        value="(criteria as gw.reinsurance.search.FacultativeSearchCriteria).EffectiveOn"
+        visible="criteria typeis gw.reinsurance.search.FacultativeSearchCriteria"/>
+      <InputSetRef
+        def="EffectivePeriodInputSet(criteria.EffectivePeriod)"
+        visible="not (criteria typeis gw.reinsurance.search.FacultativeSearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="AgreementType"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AgreementType&quot;)"
+        value="criteria.AgreementType"
+        valueRange="criteria.AvailableSubtypes"
+        valueType="typekey.RIAgreement"/>
+      <TypeKeyInput
+        editable="criteria.SearchAll"
+        id="Arrangement"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Arrangement&quot;)"
+        value="criteria.ArrangementType"
+        valueType="typekey.ArrangementType"/>
+      <TypeKeyInput
+        editable="true"
+        id="CoverageGroup"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.CoverageGroup&quot;)"
+        value="criteria.CoverageGroup"
+        valueType="typekey.RICoverageGroupType"/>
+      <TypeKeyInput
+        editable="true"
+        id="Status"
+        label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.Status&quot;)"
+        value="criteria.Status"
+        valueType="typekey.ContractStatus"/>
+      <TypeKeyInput
+        editable="true"
+        id="Currency"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Currency&quot;)"
+        value="criteria.Currency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSet
+        id="SearchAndResetInputSet">
+        <InputSetRef
+          def="SearchLinksInputSet(true, true)"/>
+      </InputSet>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

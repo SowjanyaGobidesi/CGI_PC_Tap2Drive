@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.FederatedData_dir
+
+uses gw.plugin.multicluster.federateddata.FederatedDataMessageCreationUtil
+
+@gw.rules.RuleName("Account")
+internal class Account {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis Account &&
+        (messageContext.EventName == entity.Account.ACCOUNTADDED_EVENT
+            || messageContext.EventName == entity.Account.ACCOUNTCHANGED_EVENT
+            || messageContext.EventName == entity.Account.ACCOUNTREMOVED_EVENT)
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    FederatedDataMessageCreationUtil.createAccountMessage(messageContext)
+/*end00rule*/
+  }
+}

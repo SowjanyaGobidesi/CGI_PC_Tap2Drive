@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Workflow for timeouts"
+  entity="TimeoutWF"
+  supertype="PolicyPeriodWorkflow">
+  <column
+    desc="The callback function name to call when the timeout is over"
+    name="FunctionToCall"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The date and time at which the workflow should wakeup"
+    name="WakeupTime"
+    nullok="false"
+    type="datetime"/>
+</subtype>

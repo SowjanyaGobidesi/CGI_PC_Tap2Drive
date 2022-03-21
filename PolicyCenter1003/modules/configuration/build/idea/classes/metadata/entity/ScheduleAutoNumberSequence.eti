@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="ScheduleAutoNumberSequence">
+  <foreignkey
+    desc="Sequence to autonumber schedule items"
+    fkentity="AutoNumberSequence"
+    name="ScheduleAutoNumberSeq"
+    nullok="true"/>
+  <fulldescription><![CDATA[A delegate for entities that are auto numbered.]]></fulldescription>
+</delegate>

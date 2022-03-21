@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.viewpolicyfile and perm.System.viewhist"
+    countsAsWork="false"
+    id="PolicyFile_History"
+    title="DisplayKey.get(&quot;Web.PolicyFile.History&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_History(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar/>
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="policyHistorySearch"
+        resultsName="phResults"
+        search="policyHistorySearch.performSearch()"
+        searchCriteria="getSearchCriteria()"
+        searchCriteriaType="gw.history.HistorySearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;History&gt;">
+        <PanelRef
+          def="HistoryScreenDV(policyHistorySearch,policyHistorySearch.getRelatedToSearchCriteriaForPolicy(policyPeriod.Policy))"/>
+        <ListViewPanel
+          id="HistoryScreenResultsLV">
+          <RowIterator
+            editable="false"
+            elementName="result"
+            value="phResults"
+            valueType="gw.api.database.IQueryBeanResult&lt;entity.History&gt;">
+            <Row
+              useArchivedStyle="gw.pcf.ArchiveHelper.getArchivedStyle(result.Job)">
+              <TextCell
+                enableSort="false"
+                id="History_Type1"
+                label="DisplayKey.get(&quot;Web.History.Type&quot;)"
+                value="result.CustomType.DisplayName"/>
+              <AltUserCell
+                enableSort="false"
+                id="History_User"
+                label="DisplayKey.get(&quot;Web.History.User&quot;)"
+                value="result.User"/>
+              <DateCell
+                dateFormat="short"
+                id="History_EventTimeStamp"
+                label="DisplayKey.get(&quot;Web.History.EventTimeStamp&quot;)"
+                sortDirection="descending"
+                sortOrder="1"
+                timeFormat="short"
+                value="result.EventTimestamp"/>
+              <TextCell
+                id="History_Description"
+                label="DisplayKey.get(&quot;Web.History.Description&quot;)"
+                value="result.Description"
+                wrap="true"/>
+              <TextCell
+                action="JobForward.go(result.Job)"
+                actionAvailable="result.Job != null and result.Job.Viewable"
+                enableSort="false"
+                id="historyjob"
+                label="DisplayKey.get(&quot;Web.History.Job&quot;)"
+                value="result.Job"
+                valueType="entity.Job"/>
+              <TextCell
+                id="OriginalValue"
+                label="DisplayKey.get(&quot;Web.History.OriginalValue&quot;)"
+                value="result.OriginalValue"/>
+              <TextCell
+                id="NewValue"
+                label="DisplayKey.get(&quot;Web.History.NewValue&quot;)"
+                value="result.NewValue"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function getSearchCriteria() : gw.history.HistorySearchCriteria {
+  var sc = new gw.history.HistorySearchCriteria() {:RelatedItem = (policyPeriod.Policy != null)? policyPeriod.Policy: policyPeriod.PolicyTerm}
+  return sc
+  }]]></Code>
+  </Page>
+</PCF>

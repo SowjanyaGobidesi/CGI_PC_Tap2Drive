@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ImpactTestingCreateBaselineScreen">
+    <Require
+      name="testCase"
+      type="ImpactTestingTestCase"/>
+    <Variable
+      initialValue="new gw.pcf.rating.impact.ImpactTestingPrepareUIHelper(testCase)"
+      name="helper"
+      type="gw.pcf.rating.impact.ImpactTestingPrepareUIHelper"/>
+    <Variable
+      initialValue="new gw.rating.impact.ImpactTestPrepFilterSet()"
+      name="filter"
+      type="gw.rating.impact.ImpactTestPrepFilterSet"/>
+    <Variable
+      initialValue="testCase.TestPrepProcessedCount &lt; testCase.Periods.Count and testCase.TestPrepProcessedCount &gt; 0"
+      name="inProgress"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.rating.impact.ImpactBatchUtil.isTestPrepJobBeingProcessed()"
+      name="waiting"
+      type="boolean"/>
+    <Variable
+      initialValue="testCase.TestPrepUnprocessedCount==0 and !waiting"
+      name="completed"
+      type="boolean"/>
+    <Toolbar>
+      <ToolbarButton
+        action="(CurrentLocation as pcf.api.Wizard).previous()"
+        id="BackButton"
+        label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Search.Back&quot;)"
+        visible="(CurrentLocation as pcf.api.Wizard).CurrentStepId != &quot;ChoosePoliciesStep&quot;"/>
+      <ToolbarButton
+        action="(CurrentLocation as pcf.api.Wizard).next()"
+        id="CompleteButton"
+        label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Search.Next&quot;)"
+        visible="completed"/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.CreateBaselineLabel&quot;)  "
+          visible="!waiting and !completed"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.ContinueWithInterruptedTestCase&quot;)"
+          visible="inProgress and !waiting"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <DetailViewPanel>
+      <InputColumn
+        refreshOnProgressComplete="true">
+        <InputDivider
+          visible="!waiting and !completed"/>
+        <TextInput
+          boldValue="true"
+          id="BaselinesConfirmationMessage"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Search.BaselinesConfirmationMessage&quot;)"
+          visible="waiting"/>
+        <InputDivider
+          visible="waiting"/>
+        <ButtonInput
+          action="gw.rating.impact.ImpactBatchUtil.startTestPrepBatchProcess(testCase); waiting = true; completed = false; "
+          align="left"
+          hideIfDisabled="false"
+          id="CreateBaselineButton"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.ExecuteJob&quot;)"
+          visible="!waiting and !completed"/>
+        <ProgressInput
+          id="BaselinesProgressBar"
+          labelAbove="true"
+          percentage="getPercentageAndUpdateWaitFlag()"
+          status="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.ProgressBarStatus&quot;, testCase.TestPrepProcessedCount, testCase.Periods.Count, testCase.TestPrepErrorCount)"
+          visible="waiting"/>
+        <TextInput
+          id="Spacer"
+          value="&quot;&quot;"
+          visible="true"/>
+        <ButtonInput
+          action="gw.rating.impact.ImpactBatchUtil.startTestPrepBatchProcess(testCase, false, true); waiting = true; completed = false; "
+          align="left"
+          hideIfDisabled="false"
+          id="ContinueCreateBaselineButton"
+          labelAbove="true"
+          value="&quot;Continue with Interrupted Baseline Creation&quot;"
+          visible="inProgress and !waiting "/>
+        <ButtonInput
+          action="gw.rating.impact.ImpactBatchUtil.cancelTestPrepBatchProcess(); waiting = false; completed = false; inProgress = true"
+          align="left"
+          hideIfDisabled="false"
+          id="CancelBatchJobButton"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.CancelJob&quot;)"
+          visible="waiting"/>
+        <TextInput
+          boldValue="true"
+          id="CompletetedMessage"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.CompletedLabel&quot;, testCase.TestPrepProcessedCount, testCase.Periods.Count, testCase.TestPrepErrorCount)"
+          visible="completed"/>
+        <TextInput
+          id="Spacer2"
+          value="&quot;&quot;"
+          visible="completed"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      visible="completed">
+      <Toolbar>
+        <ToolbarFilter
+          cacheOptions="false"
+          id="tbFilter"
+          iterator="periodList"
+          label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.FilterLabel&quot;)"
+          name="filterSet">
+          <ToolbarFilterOption
+            filter="filter.AllFilter"
+            label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.FilterShowAll&quot;)"
+            selectOnEnter="true"/>
+          <ToolbarFilterOption
+            filter="filter.SuccessFilter"
+            label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.FilterShowSucceeded&quot;)"
+            visible="testCase.TestPrepErrorCount &gt; 0"/>
+          <ToolbarFilterOption
+            filter="filter.FailureFilter"
+            label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.FilterShowFailed&quot;)"
+            visible="testCase.TestPrepErrorCount &gt; 0"/>
+        </ToolbarFilter>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.rating.impact.ImpactBatchUtil.startTestPrepBatchProcess(testCase, true); waiting = true; completed = false;"
+          available="testCase.TestPrepErrorCount &gt; 0"
+          confirmMessage="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.RecoverJobConfirm&quot;)"
+          id="tbReprocessErrors"
+          label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.RecoverJob&quot;)"/>
+        <ToolbarButton
+          action="gw.rating.impact.ImpactBatchUtil.startTestPrepBatchProcess(testCase); waiting = true; completed = false;"
+          confirmMessage="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.ReExecuteJobConfirm&quot;)"
+          id="tbRecreateBaseline"
+          label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.ReExecuteJob&quot;)"/>
+      </Toolbar>
+      <ListViewPanel
+        disableUserCustomization="true"
+        stretch="true">
+        <RowIterator
+          canPick="false"
+          editable="false"
+          elementName="period"
+          id="periodList"
+          value="testCase.Periods"
+          valueType="entity.ImpactTestingPolicyPeriod[]">
+          <Row>
+            <BooleanRadioCell
+              action="ImpactTestingPolicyPeriodPopup.push(period)"
+              grow="true"
+              icon="period.TestPrepResult == ImpactTestingPrepResult.TC_SUCCESS ? &quot;circle_checkmark&quot; : &quot;circle_x&quot;"
+              iconColor="period.TestPrepResult == ImpactTestingPrepResult.TC_SUCCESS ? gw.api.web.color.GWColor.THEME_ALERT_SUCCESS : gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+              iconType="svgFileName"
+              iconLabel="period.TestPrepErrorMessage != null ? DisplayKey.get(&quot;Web.Rating.ImpactTesting.Prepare.ErrorHoverText&quot;, period.TestPrepResult.DisplayName) : &quot;&quot;"
+              id="baselineIconCol"
+              showHeaderIcon="false"
+              value="true"
+              valueType="boolean"/>
+            <TextCell
+              action="JobForward.go(period.OriginalPeriod.Job)"
+              confirmMessage="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodSummary.ExitingImpactTestingWizardConfirmationMsg&quot;)"
+              grow="true"
+              id="originalPeriodPolicyNumberCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodPolicyNumber&quot;)"
+              showConfirmMessage="true"
+              value="period.PolicyNumber"
+              wrap="false"/>
+            <TextCell
+              id="originalPeriodTermCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodTerm&quot;)"
+              value="period.OriginalPeriod.TermNumber"
+              valueType="java.lang.Integer"
+              wrap="false"/>
+            <TextCell
+              grow="true"
+              id="originalPeriodProductCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodProduct&quot;)"
+              value="gw.rating.rtm.util.ProductModelUtils.lineStyleProductDisplay(period.OriginalPeriod.Policy.Product)"
+              wrap="false"/>
+            <TextCell
+              grow="true"
+              id="originalPeriodProducerCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodProducer&quot;)"
+              sortBy="period.OriginalPeriod.Policy.ProducerCodeOfService.Code"
+              value="period.OriginalPeriod.Policy.ProducerCodeOfService"
+              valueType="entity.ProducerCode"/>
+            <TypeKeyCell
+              grow="true"
+              id="originalPeriodJurisdictionCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodJurisdiction&quot;)"
+              value="period.OriginalPeriod.BaseState"
+              valueType="typekey.Jurisdiction"
+              wrap="false"/>
+            <DateCell
+              grow="true"
+              id="originalPeriodEffectiveCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodEffective&quot;)"
+              value="period.OriginalPeriod.PeriodStart"
+              wrap="false"/>
+            <DateCell
+              grow="true"
+              id="originalPeriodExpirationCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.OrigPeriodExpiration&quot;)"
+              value="period.OriginalPeriod.PeriodEnd"
+              wrap="false"/>
+            <TextCell
+              action="ImpactTestingPolicyPeriodOverviewPopup.push(period, period.BaselinePeriod)"
+              actionAvailable="period.TestPrepResult == ImpactTestingPrepResult.TC_SUCCESS"
+              grow="true"
+              id="baselinePeriodCol"
+              label="DisplayKey.get(&quot;Web.Rating.ImpactTesting.PeriodList.BaselinePeriod&quot;)"
+              value="period.BaselinePeriod?.Job.JobNumber"
+              wrap="false"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+    <Code><![CDATA[function getPercentageAndUpdateWaitFlag() : int{
+  
+  var percentage = testCase.TestPrepPercentComplete
+  if (percentage == 100) {
+    // Reload the test case here coz Impact Testing is asynchronous, it will cause CDCE
+    testCase = gw.api.database.Query.make(ImpactTestingTestCase).compare(ImpactTestingTestCase#ID, Equals, testCase.ID).select().single()
+    waiting = false
+    completed = true
+    inProgress = false
+  } else {
+    // must check this so that we detect the case where the batch job is no longer processing.
+    waiting = gw.rating.impact.ImpactBatchUtil.isTestPrepJobBeingProcessed()
+  }
+    
+  return percentage
+}]]></Code>
+  </Screen>
+</PCF>

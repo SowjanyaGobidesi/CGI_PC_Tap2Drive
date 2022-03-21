@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewActivityMenuItemSet">
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="policy"
+      type="Policy"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <MenuItemIterator
+      elementName="categoryMenuItem"
+      value="gw.web.activity.NewActivityMenuUIHelper.createMenuItems(account, policy, policyPeriod)"
+      valueType="gw.api.activity.ActivityPatternMenuCategory[]">
+      <MenuItem
+        id="NewActivityMenuItemSet_Category"
+        label="categoryMenuItem.Category == null ? DisplayKey.get(&quot;Java.NewActivity.NoCategory&quot;) : categoryMenuItem.Category.DisplayName">
+        <MenuItemIterator
+          elementName="pattern"
+          value="categoryMenuItem.Patterns.where(\ pat -&gt; not pat.AutomatedOnly)"
+          valueType="entity.ActivityPattern[]">
+          <MenuItem
+            action="gw.web.activity.NewActivityMenuUIHelper.goInWorkspace(account, policy, policyPeriod, pattern)"
+            id="item"
+            label="pattern.Subject == null ? DisplayKey.get(&quot;Java.NewActivity.NoSubject&quot;) : pattern.Subject"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </MenuItemIterator>
+  </MenuItemSet>
+</PCF>

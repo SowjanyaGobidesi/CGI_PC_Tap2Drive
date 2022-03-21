@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PersonalMotorVehicleRecordsDV">
+    <Require
+      name="mvrOrder"
+      type="gw.api.motorvehiclerecord.IMVROrder"/>
+    <Require
+      name="policyDriver"
+      type="PolicyDriver"/>
+    <Variable
+      initialValue="(mvrOrder != null and mvrOrder.MVRData.first() != null) ? mvrOrder.MVRData.first() : null"
+      name="mainMVR"
+      recalculateOnRefresh="true"
+      type="gw.api.motorvehiclerecord.IMVRData"/>
+    <Variable
+      initialValue="mainMVR == null ? null : mainMVR.Licenses.firstWhere(\ l -&gt; l.PrimaryLicense)"
+      name="primaryLicense"
+      recalculateOnRefresh="true"
+      type="gw.api.motorvehiclerecord.IMVRLicense"/>
+    <InputColumn
+      minWidth="0px">
+      <InputSet
+        visible="mvrOrder.OrderStatus != typekey.MVRStatus.TC_RECEIVED or mvrOrder.MVRResponse == typekey.MVRResponse.TC_NOTFOUND">
+        <Label
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.NoRecordsOnFile&quot;)"
+          visible="mvrOrder == null"/>
+        <Label
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.WaitingForMVRs&quot;)"
+          visible="driverHasMVRStatus(MVRStatus.TC_ORDERED)"/>
+        <Label
+          id="MVRsNotFound"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.MVRsNotFound&quot;)"
+          visible="mvrOrder.MVRResponse == typekey.MVRResponse.TC_NOTFOUND"/>
+      </InputSet>
+    </InputColumn>
+    <InputColumn>
+      <InputSet
+        visible="driverHasMVRStatus(MVRStatus.TC_RECEIVED) and not (mvrOrder.MVRResponse == MVRResponse.TC_NOTFOUND)">
+        <TextInput
+          id="Name"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Name&quot;)"
+          value="getDriverName()"
+          visible="true"/>
+        <DateInput
+          id="DOB1"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.DOB&quot;)"
+          value="mainMVR.DateOfBirth"
+          visible="true"/>
+        <TypeKeyInput
+          id="Gender"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.Gender&quot;)"
+          value="mainMVR.Gender"
+          valueType="typekey.GenderType"/>
+        <TextInput
+          id="LicenseNumber"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseNumber&quot;)"
+          value="primaryLicense.LicenseNumber"/>
+        <TypeKeyInput
+          id="LicenseState"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseState&quot;)"
+          value="primaryLicense.LicenseState"
+          valueType="typekey.State"/>
+        <TextInput
+          id="LicenseClass"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseClass&quot;)"
+          value="primaryLicense.LicenseClass"/>
+      </InputSet>
+    </InputColumn>
+    <InputColumn>
+      <InputSet
+        visible="driverHasMVRStatus(MVRStatus.TC_RECEIVED) and not (mvrOrder.MVRResponse == MVRResponse.TC_NOTFOUND)">
+        <TextInput
+          id="LicenseStatus"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseStatus&quot;)"
+          value="primaryLicense.LicenseStatus"/>
+        <DateInput
+          id="LicenseOriginalIssuance"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseOriginalIssuance&quot;)"
+          value="primaryLicense.OriginallyIssued"/>
+        <DateInput
+          id="LicenseCurrentIssuance"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseCurrentIssuance&quot;)"
+          value="primaryLicense.IssuedDate"/>
+        <DateInput
+          id="LicenseExpiration"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseExpiration&quot;)"
+          value="primaryLicense.ExpireDate"/>
+        <DateInput
+          id="LicenseReinstatement"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.License.LicenseReinstatement&quot;)"
+          value="primaryLicense.ReinstateDate"/>
+      </InputSet>
+    </InputColumn>
+    <InputColumn>
+      <InputSet
+        visible="driverHasMVRStatus(MVRStatus.TC_RECEIVED) and not (mvrOrder.MVRResponse == MVRResponse.TC_NOTFOUND)">
+        <TextInput
+          id="YearsRequested"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.YearsRequested&quot;)"
+          value="mainMVR.YearsRequested"
+          valueType="java.lang.Integer"
+          visible="true"/>
+        <DateInput
+          id="ReportDate"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.ReportDate&quot;)"
+          value="mainMVR.ReportDate"
+          visible="true"/>
+        <DateInput
+          dateFormat="short"
+          id="RequestedDate"
+          label="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.RequestedDate&quot;)"
+          timeFormat="short"
+          value="mvrOrder.ReportRequestedDate"
+          visible="true"/>
+      </InputSet>
+      <ButtonInput
+        action="DriverMVRInfoPopup.push({mvrOrder})"
+        id="MVRReportButton"
+        value="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.MVRReportDetails&quot;)"
+        visible="driverHasMVRStatus(MVRStatus.TC_RECEIVED) and not (mvrOrder.MVRResponse == MVRResponse.TC_NOTFOUND)"/>
+    </InputColumn>
+    <Code><![CDATA[function getDriverName() : String{
+  var mvr : gw.api.motorvehiclerecord.IMVRData
+  var driverName : String
+  if(mvrOrder != null and mvrOrder.MVRData.first() != null){
+    mvr = mvrOrder.MVRData.first()
+    
+    driverName = mvr.getFirstName() + " "
+    if(mvr.getMiddleName().length != 0){
+      driverName += mvr.getMiddleName() + " "
+    }
+    driverName += mvr.getLastName()
+  }
+  return driverName
+}
+
+function driverHasMVRStatus(status: MVRStatus): boolean{
+  return policyDriver.PolicyDriverMVR.OrderStatus == status
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

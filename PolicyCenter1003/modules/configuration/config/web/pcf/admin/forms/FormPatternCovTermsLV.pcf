@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    available="true"
+    editable="true"
+    id="FormPatternCovTermsLV">
+    <Require
+      name="formPattern"
+      type="FormPattern"/>
+    <ExposeIterator
+      flags="formPatternCovTerm"
+      valueType="entity.FormPatternCovTerm"
+      widget="FormPatternCovTermsLV"/>
+    <RowIterator
+      editable="true"
+      elementName="FormPatternCovTerm"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="0"
+      toRemove="formPattern.removeFormPatternCovTerm(FormPatternCovTerm) "
+      value="formPattern.FormPatternCovTerms"
+      valueType="entity.FormPatternCovTerm[]">
+      <ToolbarFlag
+        name="formPatternCovTerm"/>
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.FormPatternCovTermsLV.Name&quot;)"
+          value="FormPatternCovTerm.Name"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.FormPatternCovTermsLV.Description&quot;)"
+          value="FormPatternCovTerm.Description"/>
+        <TextCell
+          id="Code"
+          label="DisplayKey.get(&quot;Web.Admin.FormPatternDetail.FormPatternCovTermsLV.Code&quot;)"
+          value="FormPatternCovTerm.CodeIdentifier"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

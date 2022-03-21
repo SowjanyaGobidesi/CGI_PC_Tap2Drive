@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="DwellingAnimal">
+  <Columns>
+    <Column
+      beanPath="DwellingAnimal.AnimalType.DisplayName"
+      name="type"/>
+    <Column
+      beanPath="DwellingAnimal.AnimalBreed.DisplayName"
+      name="breed"/>
+  </Columns>
+  <DisplayName>gw.api.locale.DisplayKey.get("Web.Policy.HOP.HOPDwellingAnimals.Display", type, breed)</DisplayName>
+</Entity>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="JobWizardBillingToolbarButtonSet"
+    mode="RewriteNewAccount">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      initialValue="job as RewriteNewAccount"
+      name="rewriteNewAccount"
+      recalculateOnRefresh="true"
+      type="RewriteNewAccount"/>
+    <Variable
+      initialValue="policyPeriod.RewriteNewAccountProcess"
+      name="rewriteNewAccountProcess"
+      type="gw.job.RewriteNewAccountProcess"/>
+    <ToolbarButton
+      action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;uw_review_approved&quot;),&quot;UWApproval&quot;)"
+      id="Unlock"
+      label="DisplayKey.get('Job.Operation.ReleaseLock')"
+      shortcut="K"
+      visible="rewriteNewAccountProcess.canReleaseLock()"/>
+    <ToolbarButton
+      action="jobWizardHelper.requestQuote(policyPeriod, jobWizardHelper.getQuoteStep(policyPeriod))"
+      id="QuoteOrReview"
+      label="DisplayKey.get('Job.Operation.Quote')"
+      shortcut="Q"
+      visible="rewriteNewAccountProcess.canRequestQuote().Okay"/>
+    <ToolbarButton
+      action="rewriteNewAccountProcess.edit(); policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod); wizard.saveDraft(); jobWizardHelper.goToVisibleStep(policyPeriod)"
+      confirmMessage="DisplayKey.get('Job.Operation.Edit.Confirm')"
+      id="EditPolicy"
+      label="DisplayKey.get('Job.Operation.EditWorkOrder')"
+      shortcut="E"
+      visible="rewriteNewAccountProcess.canEdit().Okay"/>
+    <ToolbarButton
+      action="if (jobWizardHelper.revalidateModel()) {policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod) wizard.saveDraft()}"
+      hideIfReadOnly="true"
+      id="Draft"
+      label="DisplayKey.get('Button.SaveDraft')"
+      shortcut="S"/>
+    <ToolbarButton
+      action="jobWizardHelper.startIssueProcess(policyPeriod, policyPeriodBillingInstructionsManager)"
+      confirmMessage="DisplayKey.get('Job.Operation.IssuePolicy.Confirm')"
+      id="BindRewriteNewAccount"
+      label="DisplayKey.get('Job.Operation.IssuePolicy')"
+      shortcut="I"
+      visible="rewriteNewAccountProcess.canRewriteNewAccount().Okay"/>
+    <ToolbarButton
+      action="wizard.saveDraft(); jobWizardHelper.withdrawInNewBundle(policyPeriod); wizard.cancel(); JobComplete.go(rewriteNewAccount, policyPeriod);"
+      confirmMessage="DisplayKey.get('Job.Operation.Withdraw.Confirm')"
+      id="WithdrawJob"
+      label="DisplayKey.get('Job.Operation.Withdraw')"
+      shortcut="W"
+      visible="rewriteNewAccountProcess.canWithdraw().Okay"/>
+  </ToolbarButtonSet>
+</PCF>

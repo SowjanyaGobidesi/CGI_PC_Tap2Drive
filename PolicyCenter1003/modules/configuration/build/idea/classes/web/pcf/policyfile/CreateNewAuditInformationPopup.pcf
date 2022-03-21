@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="CreateNewAuditInformationPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Audits.AddNewAudit&quot;)">
+    <LocationEntryPoint
+      signature="CreateNewAuditInformationPopup(policyPeriod : PolicyPeriod)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.auditTypesAvailableToAdd()"
+      name="availableAuditTypes"
+      type="List&lt;AuditScheduleType&gt;"/>
+    <Variable
+      initialValue="availableAuditTypes.first()"
+      name="selectedType"
+      type="AuditScheduleType"/>
+    <Variable
+      initialValue="policyPeriod.suggestedAuditDateRange(selectedType)"
+      name="suggestedDateRange"
+      type="List&lt;java.util.Date&gt;"/>
+    <Variable
+      initialValue="suggestedDateRange.first()"
+      name="auditStartDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="suggestedDateRange.last()"
+      name="auditEndDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="auditEndDate"
+      name="processStartDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="auditEndDate.addMonths(1)"
+      name="dueDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="null"
+      name="selectedMethod"
+      type="AuditMethod"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="scheduleNewAudit()"
+          id="UpdateButton"
+          label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+        <EditButtons
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TypeKeyInput
+            id="AuditTypeReadOnly"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditType&quot;)"
+            value="selectedType"
+            valueType="typekey.AuditScheduleType"
+            visible="availableAuditTypes.Count == 1"/>
+          <RangeInput
+            editable="true"
+            id="AuditTypeList"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditType&quot;)"
+            value="selectedType"
+            valueRange="availableAuditTypes"
+            valueType="typekey.AuditScheduleType"
+            visible="availableAuditTypes.Count &gt; 1"/>
+          <DateInput
+            editable="selectedType == TC_PREMIUMREPORT"
+            id="AuditStartDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditPeriodStartDate&quot;)"
+            value="auditStartDate"/>
+          <DateInput
+            editable="selectedType == TC_PREMIUMREPORT"
+            id="AuditEndDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditPeriodEndDate&quot;)"
+            value="auditEndDate"/>
+          <DateInput
+            editable="true"
+            id="ProcessStartDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.ProcessStartDate&quot;)"
+            value="processStartDate"/>
+          <DateInput
+            editable="true"
+            id="DueDate"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.DueDate&quot;)"
+            value="dueDate"/>
+          <TypeKeyInput
+            editable="true"
+            id="AuditMethodList"
+            label="DisplayKey.get(&quot;Web.PolicyFile.Audits.AuditMethod&quot;)"
+            required="true"
+            value="selectedMethod"
+            valueType="typekey.AuditMethod"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses java.lang.Exception
+
+function scheduleNewAudit() {
+  try {
+    if (selectedType == TC_FINALAUDIT) {
+      policyPeriod.FinalAuditOption = TC_YES
+    }
+    gw.job.audit.AuditScheduler.scheduleNewAudit(policyPeriod,
+                                                 auditStartDate, auditEndDate,
+                                                 processStartDate, dueDate,
+                                                 selectedType, selectedMethod,
+                                                 selectedType == TC_PREMIUMREPORT)
+    CurrentLocation.commit()
+  }
+  catch (e : Exception) {
+    throw new gw.api.util.DisplayableException(e.Message)
+  }
+}]]></Code>
+  </Popup>
+</PCF>

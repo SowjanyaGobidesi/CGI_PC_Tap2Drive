@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Key to a RuleAction"
+  name="RuleActionKey">
+  <typecode
+    code="AddUWIssue"
+    desc="Creates and adds a Underwriter Issue"
+    name="AddUWIssue"/>
+</internaltypelistextension>

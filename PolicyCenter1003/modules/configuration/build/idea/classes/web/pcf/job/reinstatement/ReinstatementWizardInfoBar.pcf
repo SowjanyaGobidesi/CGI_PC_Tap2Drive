@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InfoBar
+    id="ReinstatementWizardInfoBar">
+    <Require
+      name="reinstatement"
+      type="Reinstatement"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <InfoBarElement
+      icon="reinstatement.Icon"
+      iconType="svgFileName"
+      id="ReinstatementLabel"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.JobStatus&quot;, reinstatement.DisplayType,policyPeriod.Status)"/>
+    <InfoBarElement
+      icon="policyPeriod.Policy.Product.Icon"
+      iconType="svgFileName"
+      id="LOBLabel"
+      label="policyPeriod.Policy.Product"/>
+    <InfoBarElement
+      id="EffectiveDate"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.EffectiveDate&quot;, gw.api.util.StringUtil.formatDate(policyPeriod.EditEffectiveDate,&quot;short&quot;))"/>
+    <InfoBarElement
+      id="AccountName"
+      value="policyPeriod.PrimaryNamedInsured.DisplayName"/>
+    <InfoBarElement
+      action="AccountFileForward.go(reinstatement.Policy.Account)"
+      id="AccountNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.AccountNumber&quot;)"
+      value="reinstatement.Policy.Account.AccountNumber"/>
+    <InfoBarElement
+      action="PolicyFileForward.go(reinstatement.LatestPeriod.PolicyNumber)"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.PolicyNumber&quot;)"
+      value="reinstatement.LatestPeriod.PolicyNumberDisplayString"/>
+    <InfoBarElement
+      id="Underwriter"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.Underwriter&quot;)"
+      value="reinstatement.Underwriter"
+      visible="reinstatement.Underwriter != null"/>
+  </InfoBar>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="HOPCosmeticDamageExclusion"
+  coverageCategory="z1hhgd8n6nji0albb2m28ahhbq9"
+  exclusionSubtype="HOPDwellingExcl"
+  existence="Electable"
+  lookupTableName="HOPDwellingExcl"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="800"
+  public-id="z5cisimhgo3869grkj5kijck6n8"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</ExclusionPattern>

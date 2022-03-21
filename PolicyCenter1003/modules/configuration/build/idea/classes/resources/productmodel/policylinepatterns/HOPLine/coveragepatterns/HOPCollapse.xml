@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPCollapse"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="3100"
+  public-id="zdtga636fmshibrnrfu1h5s7cvb"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

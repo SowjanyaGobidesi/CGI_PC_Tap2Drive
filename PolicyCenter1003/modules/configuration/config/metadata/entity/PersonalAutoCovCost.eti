@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A taxable unit of price for a period of time, not to be broken up any further, for a line-level Personal Auto coverage"
+  entity="PersonalAutoCovCost"
+  supertype="PACoveragePremium">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.pa.financials.PACostAdapter"/>
+  <foreignkey
+    fkentity="PersonalAutoCov"
+    name="PersonalAutoCov"
+    nullok="false"/>
+  <foreignkey
+    fkentity="PersonalVehicle"
+    name="PersonalVehicle"
+    nullok="false"/>
+</subtype>

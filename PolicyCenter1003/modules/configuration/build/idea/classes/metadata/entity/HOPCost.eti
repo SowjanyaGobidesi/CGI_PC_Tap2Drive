@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A unit of premium or other cost (taxes, fees, etc.) for the Homeowners line."
+  effDatedBranchType="PolicyPeriod"
+  entity="HOPCost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="hopcost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.hop.financials.HOPCostAdapter"/>
+  <foreignkey
+    fkentity="HOPLine"
+    name="HOPLine"
+    nullok="false"/>
+  <array
+    arrayentity="HOPTransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+  <typekey
+    desc="Premium type for Homeowners"
+    name="HOPPremiumType"
+    nullok="false"
+    typelist="HOPPremiumType"/>
+  <typekey
+    desc="Is this cost row a basic premium or a modification premium ?"
+    name="Modification"
+    nullok="true"
+    typelist="Modification"/>
+</entity>

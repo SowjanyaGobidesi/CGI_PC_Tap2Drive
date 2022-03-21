@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The length the uw approval is valid."
+  name="UWApprovalDurationType">
+  <typecode
+    code="NextChange"
+    desc="Valid until next change."
+    name="Next Change"
+    priority="0"/>
+  <typecode
+    code="EndOfTerm"
+    desc="Valid until end of term."
+    name="End Of Term"
+    priority="1"/>
+  <typecode
+    code="OneYear"
+    desc="Valid for one year from the effective date of the current job."
+    name="One Year"
+    priority="2"/>
+  <typecode
+    code="ThreeYears"
+    desc="Valid for three years from the effective date of the current job"
+    name="Three Years"
+    priority="3"/>
+  <typecode
+    code="Rescinded"
+    desc="Valid until rescinded."
+    name="Rescinded"
+    priority="4"/>
+</typelist>

@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="WCOptionCardPanelSet"
+    mode="FederalLiability">
+    <Require
+      name="wcLine"
+      type="WorkersCompLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="wcLine.Branch.Job.NewTerm"
+      name="isNewTerm"
+      type="boolean"/>
+    <Variable
+      initialValue="wcLine.WCFedEmpLiabCov "
+      name="liabCov"
+      type="productmodel.WCFedEmpLiabCov"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSet
+          id="WCFederalLiabilityInputSet">
+          <RangeInput
+            editable="true"
+            id="GoverningAct"
+            label="liabCov.FedEmpLiabActTerm.DisplayName"
+            required="true"
+            value="liabCov.FedEmpLiabActTerm.Value"
+            valueRange="liabCov.FedEmpLiabActTerm?.Pattern.OrderedAvailableValues"
+            valueType="typekey.FedEmpLiabAct">
+            <PostOnChange
+              deferUpdate="false"/>
+          </RangeInput>
+          <RangeInput
+            editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(liabCov.WCFedEmpLiabLimitTerm)"
+            id="FedEmpLiabLimit"
+            label="liabCov.WCFedEmpLiabLimitTerm.DisplayName"
+            required="true"
+            sortValueRange="false"
+            value="liabCov.WCFedEmpLiabLimitTerm.OptionValue"
+            valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(liabCov.WCFedEmpLiabLimitTerm, openForEdit)"
+            valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionWCFedEmpLiabLimitType&gt;"/>
+          <RangeInput
+            editable="openForEdit and gw.web.productmodel.ChoiceCovTermUtil.isEditable(liabCov.WCFedEmpLiabLimitTerm)"
+            id="FELADiseaseLimit"
+            label="liabCov.FELADiseaseTerm.DisplayName"
+            required="true"
+            sortValueRange="false"
+            value="liabCov.FELADiseaseTerm.OptionValue"
+            valueRange="gw.web.productmodel.ChoiceCovTermUtil.getModelValueRange(liabCov.FELADiseaseTerm, openForEdit)"
+            valueType="gw.api.productmodel.CovTermOpt&lt;productmodel.OptionFELADiseaseType&gt;"/>
+          <RangeInput
+            editable="true"
+            id="Program"
+            label="liabCov.WCFedEmpLiabCovProgramTerm.DisplayName"
+            required="true"
+            value="liabCov.WCFedEmpLiabCovProgramTerm.Value"
+            valueRange="liabCov.WCFedEmpLiabCovProgramTerm?.Pattern.OrderedAvailableValues"
+            valueType="typekey.FedEmpLiabProgram">
+            <PostOnChange
+              deferUpdate="false"/>
+          </RangeInput>
+          <RangeInput
+            editable="true"
+            id="GoverningLaw2"
+            label="liabCov.WCFedEmpLiabilityLawTerm.DisplayName"
+            required="true"
+            value="liabCov.WCFedEmpLiabilityLawTerm.Value"
+            valueRange="liabCov.WCFedEmpLiabilityLawTerm?.Pattern.OrderedAvailableValues"
+            valueType="typekey.SpecialCov"
+            visible="wcLine.WCFedEmpLiabCov.WCFedEmpLiabCovProgramTerm.Value.Code == &quot;ProgramII&quot;"/>
+          <Label
+            label="DisplayKey.get(&quot;Web.Policy.WC.FederalLiability.Classes&quot;)"/>
+          <ListViewInput
+            editable="true"
+            id="test"
+            labelAbove="true">
+            <Toolbar>
+              <IteratorButtons
+                iterator="BasisScalableEUs"/>
+            </Toolbar>
+            <ListViewPanel
+              id="WCLine_WCCovEmpLV"
+              stretch="true">
+              <RowIterator
+                autoAdd="false"
+                editable="true"
+                elementName="exposure"
+                hasCheckBoxes="true"
+                hideCheckBoxesIfReadOnly="true"
+                id="BasisScalableEUs"
+                numEntriesRequired="0"
+                numEntriesToAdd="1"
+                toCreateAndAdd="makeEU()"
+                toRemove="removeEU(exposure)"
+                type="entity.windowed.WCFedCoveredEmployeeVersionList"
+                validationLabel="DisplayKey.get(&quot;Web.Policy.WC.CovEmp&quot;)"
+                value="wcLine.WCFedCoveredEmployeeVLs.toArray()"
+                valueType="java.lang.Object[]">
+                <Variable
+                  initialValue="exposure.AllVersions[0]"
+                  name="firstBasis"
+                  recalculateOnRefresh="true"
+                  type="WCFedCoveredEmployee"/>
+                <Variable
+                  initialValue="exceptFirstBases(exposure)"
+                  name="additionalBases"
+                  recalculateOnRefresh="true"
+                  type="WCFedCoveredEmployee[]"/>
+                <Variable
+                  initialValue="isNewTerm ? null :firstBasis.BasedOn.ClassCode"
+                  name="previousWCClassCode"
+                  type="WCClassCode"/>
+                <Row>
+                  <RangeCell
+                    align="left"
+                    editable="true"
+                    grow="true"
+                    id="Loc"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.Loc&quot;)"
+                    required="true"
+                    sortOrder="1"
+                    value="firstBasis.LocationWM"
+                    valueRange="wcLine.Branch.PolicyLocations"
+                    valueType="entity.PolicyLocation">
+                    <PostOnChange
+                      deferUpdate="false"/>
+                  </RangeCell>
+                  <PickerCell
+                    align="right"
+                    editable="firstBasis.LocationWM.State != null"
+                    id="ClassCode"
+                    inputConversion="findFirstMatchingClassCode(VALUE, gw.api.util.JurisdictionMappingUtil.getJurisdiction(firstBasis.LocationWM), wcLine.WCFedEmpLiabCov.FedEmpLiabActTerm.Value.Code, previousWCClassCode)"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.ClassCode&quot;)"
+                    outputConversion="VALUE == null ? &quot;&quot; : (VALUE).Code"
+                    pickLocation="WCClassCodeSearchPopup.push(typekey.WCClassCodeFederalDomains.get(wcLine.WCFedEmpLiabCov.FedEmpLiabActTerm.Value.Code), firstBasis.LocationWM, wcLine, previousWCClassCode)"
+                    required="true"
+                    sortOrder="2"
+                    value="firstBasis.ClassCode"
+                    valueType="entity.WCClassCode"
+                    wrap="false">
+                    <PostOnChange
+                      deferUpdate="false"/>
+                  </PickerCell>
+                  <TextCell
+                    grow="true"
+                    id="Description"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.Description&quot;)"
+                    value="firstBasis.ClassCode.Classification"/>
+                  <TextCell
+                    align="right"
+                    editable="true"
+                    id="NumEmployees"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.NumEmployees&quot;)"
+                    value="firstBasis.NumEmployees"
+                    valueType="java.lang.Integer"
+                    wrap="false"/>
+                  <CheckBoxCell
+                    editable="true"
+                    id="IfAnyExposure"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.IfAnyExposure&quot;)"
+                    value="firstBasis.IfAnyExposureAndClearBasisAmount">
+                    <PostOnChange
+                      deferUpdate="false"/>
+                  </CheckBoxCell>
+                  <TextCell
+                    align="right"
+                    editable="true"
+                    enableSort="false"
+                    id="AnnualRenum"
+                    label="DisplayKey.get(&quot;Web.Policy.WC.CovEmp.AnnualRenum&quot;)"
+                    required="true"
+                    value="firstBasis.BasisAmount"
+                    valueType="java.lang.Integer"
+                    valueVisible="!firstBasis.IfAnyExposureAndClearBasisAmount"
+                    wrap="false"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+    <Code><![CDATA[function makeEU() : entity.windowed.WCFedCoveredEmployeeVersionList {
+  var eu = wcLine.createAndAddWCFedCoveredEmployee()
+  return eu.VersionList
+}
+
+function exceptFirstBases(eu: entity.windowed.WCFedCoveredEmployeeVersionList): WCFedCoveredEmployee[] {
+  var array = eu.AllVersions?.toTypedArray()
+  return gw.api.util.ArrayUtil.subArray(array, 1, array.Count) as WCFedCoveredEmployee[]
+}
+
+function removeEU(eu: entity.windowed.WCFedCoveredEmployeeVersionList) {
+  var basis = eu.AllVersions[0]
+  basis.getSlice(basis.EffectiveDate).remove()
+}
+
+function findFirstMatchingClassCode(code : String, refDateState : Jurisdiction, wcDomain: String, peviousCode : WCClassCode) : WCClassCode{
+  var classCode = wcLine.firstMatchingClassCode( code, refDateState, wcDomain, peviousCode )
+  if (classCode == null) {
+    gw.api.util.LocationUtil.addRequestScopedErrorMessage(DisplayKey.get("Java.ClassCodePickerWidget.WCInvalidCode", code, refDateState))
+  }
+  return classCode
+}]]></Code>
+  </PanelSet>
+</PCF>

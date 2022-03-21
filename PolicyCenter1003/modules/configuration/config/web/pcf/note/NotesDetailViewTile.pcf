@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewTile
+    id="NotesDetailViewTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.Notes')"
+    viewMoreAction="noteHelper.pushViewMore()"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="noteHelper.ViewMoreVisible">
+    <Require
+      name="noteHelper"
+      type="gw.api.web.dashboard.ui.note.NoteHelper"/>
+    <TileActions>
+      <TileAction
+        available="gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance.CanAddNote and noteHelper.CanAddNewNote"
+        id="NewNote"
+        action="noteHelper.goInNewNote()"
+        label="DisplayKey.get('Web.Dashboard.Tile.Notes.NewNote')"/>
+    </TileActions>
+    <TileInputColumn>
+      <TextInput
+        action="noteHelper.pushViewMore()"
+        id="NoteTopicLabel0"
+        label="noteHelper.dateAndTimeFormat(0)"
+        visible="noteHelper.isNoteAvailable(0)"
+        value="noteHelper.RecentNotes[0].Topic.DisplayName"/>
+      <TextInput
+        id="NoteBody0"
+        labelAbove="true"
+        visible="noteHelper.isNoteAvailable(0)"
+        value="noteHelper.truncatedBody(0)"/>
+      <TextInput
+        id="NoteRelatedTo0"
+        label="DisplayKey.get('Web.Dashboard.Tile.Notes.RelatedTo', noteHelper.relatedTo(0).TypeName)"
+        visible="noteHelper.isRelatedToVisible(0)"
+        value="noteHelper.truncatedRelatedTo(0)"/>
+      <InputDivider
+        visible="noteHelper.isNoteAvailable(1)"/>
+      <TextInput
+        action="noteHelper.pushViewMore()"
+        id="NoteTopicLabel1"
+        label="noteHelper.dateAndTimeFormat(1)"
+        visible="noteHelper.isNoteAvailable(1)"
+        value="noteHelper.RecentNotes[1].Topic.DisplayName"/>
+      <TextInput
+        id="NoteBody1"
+        labelAbove="true"
+        visible="noteHelper.isNoteAvailable(1)"
+        value="noteHelper.truncatedBody(1)"/>
+      <TextInput
+        id="NoteRelatedTo1"
+        label="DisplayKey.get('Web.Dashboard.Tile.Notes.RelatedTo', noteHelper.relatedTo(1).TypeName)"
+        visible="noteHelper.isRelatedToVisible(1)"
+        value="noteHelper.truncatedRelatedTo(1)"/>
+      <InputDivider
+        visible="noteHelper.isNoteAvailable(2)"/>
+      <TextInput
+        action="noteHelper.pushViewMore()"
+        id="NoteTopicLabel2"
+        label="noteHelper.dateAndTimeFormat(2)"
+        visible="noteHelper.isNoteAvailable(2)"
+        value="noteHelper.RecentNotes[2].Topic.DisplayName"/>
+      <TextInput
+        id="NoteBody2"
+        labelAbove="true"
+        visible="noteHelper.isNoteAvailable(2)"
+        value="noteHelper.truncatedBody(2)"/>
+      <TextInput
+        id="NoteRelatedTo2"
+        label="DisplayKey.get('Web.Dashboard.Tile.Notes.RelatedTo', noteHelper.relatedTo(2).TypeName)"
+        visible="noteHelper.isRelatedToVisible(2)"
+        value="noteHelper.truncatedRelatedTo(2)"/>
+    </TileInputColumn>
+  </DetailViewTile>
+</PCF>

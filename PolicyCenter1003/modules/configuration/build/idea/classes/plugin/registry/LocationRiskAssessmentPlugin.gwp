@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<plugin
+  name="LocationRiskAssessmentPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.policylocation.SpotlightLocationRiskAssessmentPlugin">
+    <param
+      name="Username"
+      value="${SpotlightUsername}"/>
+    <param
+      name="Password"
+      value="${SpotlightPassword}"/>
+  </plugin-gosu>
+</plugin>

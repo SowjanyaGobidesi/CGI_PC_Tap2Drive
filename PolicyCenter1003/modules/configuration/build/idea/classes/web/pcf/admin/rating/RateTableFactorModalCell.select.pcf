@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ModalCell
+    id="RateTableFactorModalCell"
+    mode="select">
+    <Require
+      name="cell"
+      type="gw.rating.rtm.domain.table.RateTableCell"/>
+    <Require
+      name="valueProvider"
+      type="gw.rating.rtm.valueprovider.RateTableCellValueProvider"/>
+    <Require
+      name="valueRequired"
+      type="boolean"/>
+    <RangeCell
+      available="cell.checkAvailable(valueProvider)"
+      bold="true"
+      editable="true"
+      fontColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+      id="ValueCell"
+      noneSelectedLabel="DisplayKey.get(&quot;Web.Rating.RateFactors.Any&quot;)"
+      optionLabel="cell.getOptionalLabel(valueProvider, VALUE)"
+      required="valueRequired"
+      sortValueRange="false"
+      value="cell.Value"
+      valueRange="cell.getValueRange(valueProvider)"
+      valueType="java.lang.Comparable&lt;java.lang.Object&gt;"/>
+  </ModalCell>
+</PCF>

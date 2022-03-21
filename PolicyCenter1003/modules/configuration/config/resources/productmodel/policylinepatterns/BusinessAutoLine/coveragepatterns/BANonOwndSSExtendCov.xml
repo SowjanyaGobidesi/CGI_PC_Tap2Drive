@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="BANonOwndSSExtendCov"
+  coverageCategory="BAPNonownedSSGrp"
+  coverageSubtype="BAStateCov"
+  coveredPartyType="ThirdParty"
+  existence="Electable"
+  lookupTableName="BAStateCov"
+  owningEntityType="BAJurisdiction"
+  policyLinePattern="BusinessAutoLine"
+  priority="-1"
+  public-id="BANonOwndSSExtendCov"
+  referenceDateByType="DefinedObject">
+  <AvailabilityScript><![CDATA[return BAJurisdiction.NonOwnedCoverageSelected
+    
+  ]]></AvailabilityScript>
+  <InitializeScript/>
+  <OnRemovalScript/>
+  <CovTerms/>
+</CoveragePattern>

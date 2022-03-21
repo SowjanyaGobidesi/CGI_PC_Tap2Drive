@@ -1,0 +1,28 @@
+package rules.Validation.UserValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("User External Validation")
+internal class UserExternalValidation {
+  static function doCondition(user : entity.User) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(user : entity.User, actions : gw.rules.Action) {
+/*start00rule*/
+    // Validate the different cases around the external user flag.
+
+    //An external user cannot have a carrier organization
+    if (user.ExternalUser and user.Organization.Carrier) {
+      user.reject( TC_LOADSAVE, DisplayKey.get("Validation.User.ExternalUserCannotBeFromCarrier"), null, null )
+    }
+
+    //An internal user cannot have any organization other than one from a carrier organization
+    if (!user.ExternalUser and !user.Organization.Carrier){
+      user.reject(TC_LOADSAVE, DisplayKey.get("Validation.User.InternalUserCannotBeFromExternalOrg"), null, null)
+    }
+/*end00rule*/
+  }
+}

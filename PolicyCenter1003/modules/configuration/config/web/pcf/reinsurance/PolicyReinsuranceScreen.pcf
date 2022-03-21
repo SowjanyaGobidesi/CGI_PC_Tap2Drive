@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="PolicyReinsuranceScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.reinsurance.IReinsurancePlugin)"
+      name="plugin"
+      type="gw.plugin.reinsurance.IReinsurancePlugin"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <PanelRef
+      def="PolicyReinsuranceCV(policyPeriod, asOfDate)">
+      <Toolbar>
+        <ToolbarButton
+          action="gw.web.admin.ReinsuranceUIHelper.saveDraft(policyPeriod, wizard)"
+          hideIfReadOnly="true"
+          id="Save"
+          label="DisplayKey.get(&quot;Button.Save&quot;)"
+          shortcut="S"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

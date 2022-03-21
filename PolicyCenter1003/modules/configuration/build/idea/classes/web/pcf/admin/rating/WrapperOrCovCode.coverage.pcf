@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="WrapperOrCovCode"
+    mode="coverage">
+    <Require
+      name="parameter"
+      type="CalcRoutineParameter"/>
+    <Require
+      name="parameterSet"
+      type="CalcRoutineParameterSet"/>
+    <Require
+      name="helper"
+      type="gw.pcf.rating.flow.RatingParameterSetScreenHelper"/>
+    <Variable
+      initialValue="gw.api.productmodel.PolicyLinePatternLookup.getByPublicID(parameterSet.PolicyLinePatternCode)"
+      name="linePattern"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.PolicyLinePattern"/>
+    <PickerCell
+      editable="true"
+      freeInputEnabled="false"
+      helpText="DisplayKey.get(&quot;Web.Rating.Parameter.CoveragePattern.HelpText&quot;)"
+      id="ParameterCoveragePattern"
+      outputConversion="linePattern.getCoveragePatternByPublicId(VALUE).Name"
+      pickLocation="CoveragePatternSearchByLinePatternPopup.push(linePattern, CoveragePatternSearchType.TC_COVERAGE)"
+      validationExpression="helper.validateCoverageParameter( linePattern, parameter )"
+      value="parameter.CoveragePattern"
+      valueType="java.lang.String"
+      wrap="true"/>
+  </ModalCell>
+</PCF>

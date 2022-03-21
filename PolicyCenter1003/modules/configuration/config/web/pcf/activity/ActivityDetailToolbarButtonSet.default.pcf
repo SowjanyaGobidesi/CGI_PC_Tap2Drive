@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="ActivityDetailToolbarButtonSet"
+    mode="default">
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Require
+      name="note"
+      type="Note"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <ToolbarButton
+      action="if(gw.api.web.activity.ActivityUtil.createActivity(activity, note)) gw.api.web.workspace.WorkspaceUtil.closeWorksheetIfActiveAndRefreshTop(CurrentLocation)"
+      hideIfReadOnly="true"
+      id="ActivityDetailToolbarButtons_UpdateButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Update&quot;)"/>
+    <ToolbarButton
+      action="AssignActivitiesPopup.push(new gw.api.web.activity.ActivityAssignmentPopup(new Activity[]{activity}, gw.assignment.AssignmentUtil.DefaultUser))"
+      hideIfEditable="true"
+      id="ActivityDetailToolbarButtons_AssignButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Assign&quot;)"
+      visible="activity.canAssign()"/>
+    <ToolbarButton
+      action="gw.api.web.activity.ActivityUtil.skipActivity(activity, note); gw.api.web.workspace.WorkspaceUtil.closeWorksheetIfActiveAndRefreshTop(CurrentLocation)"
+      hideIfReadOnly="true"
+      id="ActivityDetailToolbarButtons_SkipButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Skip&quot;)"
+      visible="activity.canSkip()"/>
+    <ToolbarButton
+      action="gw.api.web.activity.ActivityUtil.completeActivity(activity, note); gw.api.web.workspace.WorkspaceUtil.closeWorksheetIfActiveAndRefreshTop(CurrentLocation)"
+      hideIfReadOnly="true"
+      id="ActivityDetailToolbarButtons_CompleteButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.Complete&quot;)"
+      visible="(activity.canComplete()) and (activity.canRecur() == false)"/>
+    <ToolbarButton
+      action="gw.web.activity.ActivityDetailUIHelper.completeActivity(activity, note, policyPeriod, CurrentLocation)"
+      hideIfReadOnly="true"
+      id="ActivityDetailToolbarButtons_CompleteCreateButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.CompleteCreate&quot;)"
+      visible="(activity.canComplete()) and (activity.canRecur() == true)"/>
+    <EditButtons
+      updateVisible="false"/>
+    <ToolbarButton
+      action="CurrentLocation.cancel()"
+      hideIfEditable="true"
+      id="ActivityDetailToolbarButtons_CloseButton"
+      label="DisplayKey.get(&quot;Button.CloseWorksheet&quot;)"/>
+    <ToolbarButton
+      action="RenewalGroupDetail.goInMain(activity.RenewalGroup)"
+      hideIfReadOnly="true"
+      id="ActivityDetailToolbarButtons_RenewalGroupButton"
+      label="DisplayKey.get(&quot;Web.ActivityDetail.Button.RenewalGroup&quot;)"
+      visible="activity.RenewalGroup != null"/>
+  </ToolbarButtonSet>
+</PCF>

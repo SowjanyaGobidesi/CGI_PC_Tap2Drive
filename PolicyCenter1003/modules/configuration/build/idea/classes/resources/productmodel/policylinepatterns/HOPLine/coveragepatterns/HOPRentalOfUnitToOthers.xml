@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="HOPRentalOfUnitToOthers"
+  conditionSubtype="HOPDwellingCond"
+  coverageCategory="z94j696j28oei0bkk2b3eaukjnb"
+  existence="Electable"
+  lookupTableName="HOPDwellingCond"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="300"
+  public-id="zb6h6c469lfch616h0vthd9huaa"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+  <Schedules/>
+</ConditionPattern>

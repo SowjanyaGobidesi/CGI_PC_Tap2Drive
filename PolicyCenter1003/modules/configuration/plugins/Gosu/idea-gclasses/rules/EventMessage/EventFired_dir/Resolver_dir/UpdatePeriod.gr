@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.Resolver_dir
+
+uses gw.plugin.multicluster.resolver.ResolverMessageCreationUtil
+
+@gw.rules.RuleName("Update Period")
+internal class UpdatePeriod {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis PolicyPeriod and (
+        messageContext.EventName == PolicyPeriod.CREATEPERIOD_EVENT
+            || messageContext.EventName == PolicyPeriod.RENEWPERIOD_EVENT
+            || messageContext.EventName == PolicyPeriod.REWRITEPERIOD_EVENT)
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    ResolverMessageCreationUtil.createPolicyPeriodMessage(messageContext)
+/*end00rule*/
+  }
+}

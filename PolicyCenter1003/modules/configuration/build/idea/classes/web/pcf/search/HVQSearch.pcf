@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="gw.api.system.PCConfigParameters.HVQEnabled.getValue()"
+    countsAsWork="false"
+    hideLeftNavIfEmpty="true"
+    id="HVQSearch"
+    title="DisplayKey.get(&quot;Web.HVQSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="HVQSearch()"/>
+    <LocationEntryPoint
+      signature="HVQSearch(errorMessage : String)"/>
+    <LocationEntryPoint
+      signature="HVQSearch(defaultQuoteKey : gw.api.quoting.QuoteKey)"/>
+    <Variable
+      name="errorMessage"
+      type="String"/>
+    <Variable
+      initialValue="gw.web.ErrorConduit.addRequestScopedErrorMessagePassThrough(errorMessage)"
+      name="placeholderUsedToTriggerPassThroughMethod"
+      recalculateOnRefresh="true"
+      type="String"/>
+    <Variable
+      name="defaultQuoteKey"
+      type="gw.api.quoting.QuoteKey"/>
+    <ScreenRef
+      def="HVQSearchScreen(defaultQuoteKey)"/>
+  </Page>
+</PCF>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactTag">
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.api.obfuscation.UnsupportedObfuscator"/>
+  <implementsEntity
+    name="Obfuscatable"/>
+  <typekey-override
+    name="Type">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </typekey-override>
+  <foreignkey-override
+    name="Contact">
+    <tag
+      name="PersonalData"
+      value="ObfuscateUnique"/>
+  </foreignkey-override>
+</extension>

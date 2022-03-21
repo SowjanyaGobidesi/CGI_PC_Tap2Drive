@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCoverageLookup public-id="zirhe1mn7hbm8dhqu7prsppm5aa">
+    <Availability>Available</Availability>
+    <CoveragePartType/>
+    <CoveragePatternCode>zilgk228c95qt3ob6v9s6na08ab</CoveragePatternCode>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCoverageLookup>
+  <HOPCovTermLookup public-id="zjpjanm546ei7dss7b88dcaidm8">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>z4ti6io51subg14r1j2vdh6if89</CovTermPatternCode>
+    <CoveragePartType/>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermOptLookup public-id="z9hje2vq871ru4ks4bbe2ihhho9">
+    <Availability>Available</Availability>
+    <CovTermOptCode>zr8h4fja2l5ee634f8hqs2tgi6a</CovTermOptCode>
+    <CovTermPatternCode>z4ti6io51subg14r1j2vdh6if89</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+  <HOPCovTermOptLookup public-id="zb6j4d9jd964b2ur50optgh490a">
+    <Availability>Available</Availability>
+    <CovTermOptCode>z25j6ekntue3ndq17l68d2j2he9</CovTermOptCode>
+    <CovTermPatternCode>z4ti6io51subg14r1j2vdh6if89</CovTermPatternCode>
+    <CoveragePartType/>
+    <Currency>usd</Currency>
+    <EndEffectiveDate/>
+    <JobType/>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State/>
+    <UWCompanyCode/>
+  </HOPCovTermOptLookup>
+</import>

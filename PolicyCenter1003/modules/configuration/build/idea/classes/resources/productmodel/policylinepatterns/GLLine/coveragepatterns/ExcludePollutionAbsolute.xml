@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ExclusionPattern
+  codeIdentifier="ExcludePollutionAbsolute"
+  coverageCategory="GLPollutionAll"
+  exclusionSubtype="GeneralLiabilityExcl"
+  existence="Electable"
+  lookupTableName="GLExcl"
+  owningEntityType="GeneralLiabilityLine"
+  policyLinePattern="GLLine"
+  priority="-1"
+  public-id="ExcludePollutionAbsolute"
+  referenceDateByType="DefinedObject"/>

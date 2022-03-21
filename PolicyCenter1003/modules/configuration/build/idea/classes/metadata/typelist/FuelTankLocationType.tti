@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Fuel Tank Location Type"
+  name="FuelTankLocationType">
+  <typecode
+    code="IAGMF"
+    desc="Indoor - Masonry Floor"
+    name="Indoor - Masonry Floor"
+    priority="10">
+  </typecode>
+  <typecode
+    code="IAGNMF"
+    desc="Indoor - No Masonry Floor"
+    name="Indoor - No Masonry Floor"
+    priority="20">
+  </typecode>
+  <typecode
+    code="OAG"
+    desc="Outdoor Above Ground"
+    name="Outdoor Above Ground"
+    priority="30">
+  </typecode>
+  <typecode
+    code="OBG"
+    desc="Outdoor Below Ground"
+    name="Outdoor Below Ground"
+    priority="40">
+  </typecode>
+</typelist>

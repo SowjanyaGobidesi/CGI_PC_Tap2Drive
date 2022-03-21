@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="QuickSubmission_QuoteScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.RepresentativePolicyLines.first()"
+      name="line"
+      type="PolicyLine"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, policyPeriod.Job, jobWizardHelper)"/>
+      <ToolbarButton
+        action="policyPeriod.printDocument(&quot;SubmissionQuote&quot;, &quot;Submission Quote&quot;, gw.api.web.document.DocumentsHelper.PrintQuoteParameters)"
+        download="true"
+        id="PrintQuote"
+        label="DisplayKey.get(&quot;Button.PrintQuote&quot;)"
+        shortcut="P"
+        visible="policyPeriod.ValidQuote"/>
+    </Toolbar>
+    <PanelSet>
+      <PanelRef
+        def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            boldLabel="true"
+            id="PolicyPeriod"
+            label="DisplayKey.get(&quot;Web.Job.Policy.Period.PolicyPeriod&quot;)"
+            value="gw.api.util.StringUtil.formatDate(policyPeriod.PeriodStart,&quot;short&quot;) + &quot; - &quot; + gw.api.util.StringUtil.formatDate(policyPeriod.PeriodEnd,&quot;short&quot;)"/>
+          <RangeInput
+            boldLabel="true"
+            editable="true"
+            filter="VALUE.isOfferingAvailable(policyPeriod)"
+            id="OfferingSelection"
+            label="DisplayKey.get(&quot;Web.Job.Offering.Selection&quot;)"
+            required="policyPeriod.Policy.Product.OfferingRequired"
+            value="policyPeriod.Offering"
+            valueRange="policyPeriod.Policy.Product.Offerings"
+            valueType="gw.api.productmodel.Offering">
+            <PostOnChange
+              onChange="policyPeriod.editIfRatedOrQuotedAndForceSync()"/>
+          </RangeInput>
+          <ButtonInput
+            action="policyPeriod.editIfRatedOrQuotedAndForceSync()"
+            available="openForEdit"
+            id="SyncButton"
+            value="DisplayKey.get(&quot;Web.Policy.PA.SyncButton&quot;)"/>
+        </InputColumn>
+        <InputColumn>
+          <MonetaryAmountInput
+            align="right"
+            boldLabel="true"
+            formatType="currency"
+            id="TotalPremium"
+            label="DisplayKey.get(&quot;Web.Quote.TotalPremLabel.Total&quot;)"
+            value="policyPeriod.TotalPremiumRPT"/>
+          <MonetaryAmountInput
+            align="right"
+            boldLabel="true"
+            formatType="currency"
+            id="Taxes"
+            label="DisplayKey.get(&quot;Web.Quote.PremiumSummary.Taxes&quot;)"
+            value="(policyPeriod.TotalCostRPT == null) ? null : policyPeriod.TaxAndSurchargesRPT"/>
+          <MonetaryAmountInput
+            align="right"
+            boldLabel="true"
+            formatType="currency"
+            id="TotalCost"
+            label="DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Total&quot;)"
+            value="policyPeriod.TotalCostRPT"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="QuickSubmission_QuoteDetailsPanelSet(policyPeriod, jobWizardHelper, openForEdit)"
+        mode="line.Pattern.CodeIdentifier">
+        <TitleBar
+          title="line.Pattern.DisplayName"
+          visible="policyPeriod.RepresentativePolicyLines.Count &gt; 1"/>
+      </PanelRef>
+    </PanelSet>
+  </Screen>
+</PCF>

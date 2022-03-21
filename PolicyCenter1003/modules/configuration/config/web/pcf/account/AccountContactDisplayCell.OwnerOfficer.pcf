@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="AccountContactDisplayCell"
+    mode="OwnerOfficer">
+    <Require
+      name="acctContactRole"
+      type="AccountContactRole"/>
+    <FormatCell
+      id="details">
+      <ContentInput
+        visible="CurrentLocation.InEditMode">
+        <Link
+          action="AccountContactRolePopup.push(acctContactRole)"
+          id="editContactRole"
+          label="DisplayKey.get(&quot;Web.Account.Contact.Edit&quot;)"
+          styleClass="miniButton"/>
+      </ContentInput>
+      <TextInput
+        editable="true"
+        id="Relationship"
+        inputConversion="typekey.Relationship.get(VALUE)"
+        label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.Relationship&quot;)"
+        value="(acctContactRole as OwnerOfficer).RelationshipTitle"
+        valueType="typekey.Relationship"/>
+    </FormatCell>
+  </ModalCell>
+</PCF>

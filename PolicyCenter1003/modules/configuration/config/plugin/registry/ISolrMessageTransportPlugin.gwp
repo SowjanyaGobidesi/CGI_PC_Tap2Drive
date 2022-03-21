@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ISolrMessageTransportPlugin"
+  name="ISolrMessageTransportPlugin">
+  <plugin-gosu
+    disabled="true"
+    gosuclass="gw.solr.PCSolrMessageTransportPlugin">
+    <param
+      name="debug"
+      value="true"/>
+    <param
+      name="commitImmediately"
+      value="false"/>
+    <param name="consistencyCacheSize" value="2500"/>
+    <param name="consistencyCacheExpirationSeconds" value="300"/>
+  </plugin-gosu>
+</plugin>

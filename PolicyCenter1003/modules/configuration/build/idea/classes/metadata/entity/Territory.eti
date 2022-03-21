@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Non-persistent entity wrapper for a Territory"
+  entity="Territory"
+  extendable="true">
+</nonPersistentEntity>

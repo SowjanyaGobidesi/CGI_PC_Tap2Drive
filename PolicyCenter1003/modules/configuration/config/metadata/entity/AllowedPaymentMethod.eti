@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Member element for PaymentPlanSummary's list of supported payment methods."
+  entity="AllowedPaymentMethod"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="allowedpaymentmethod"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <typekey
+    desc="Payment Method"
+    getterScriptability="hidden"
+    name="PaymentMethod"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="AccountPaymentMethod"/>
+  <foreignkey
+    columnName="PaymentPlan"
+    desc="The payment plan summary"
+    exportasid="true"
+    fkentity="PaymentPlanSummary"
+    getterScriptability="hidden"
+    name="PaymentPlan"
+    nullok="true"
+    setterScriptability="hidden"/>
+</entity>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="InvoiceStreamsLV">
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <RowIterator
+      editable="true"
+      elementName="stream"
+      value="policyPeriodBillingInstructionsManager.InvoiceStreams"
+      valueType="gw.plugin.billing.BillingInvoiceStreamInfo[]">
+      <Row
+        editable="true">
+        <RadioButtonCell
+          action="policyPeriodBillingInstructionsManager.InvoiceStreamCode = stream.PublicID"
+          align="center"
+          editable="true"
+          id="InvoiceStream"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InstallmentsPlansLV.Select&quot;)"
+          radioButtonGroup="InvoiceStreamsGroup"
+          required="true"
+          value="policyPeriodBillingInstructionsManager.InvoiceStreamCode == stream.PublicID ">
+          <PostOnChange/>
+        </RadioButtonCell>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.Description&quot;)"
+          sortOrder="1"
+          value="stream.Description"
+          wrap="true"/>
+        <TextCell
+          id="Payment"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.Payment&quot;)"
+          sortOrder="1"
+          value="stream.PaymentInstrumentName"/>
+        <TextCell
+          id="Invoice"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.Invoice&quot;)"
+          value="stream.DueDateBilling ? DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.DueDate&quot;) : DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.InvoiceDate&quot;)"/>
+        <TextCell
+          id="Days"
+          label="DisplayKey.get(&quot;Web.Policy.Payment.InvoiceStreamsLV.Days&quot;)"
+          value="stream.Days"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

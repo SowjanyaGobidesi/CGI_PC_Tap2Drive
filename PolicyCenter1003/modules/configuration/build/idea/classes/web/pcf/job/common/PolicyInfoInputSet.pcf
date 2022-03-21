@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="openForEditInit.get()"
+    id="PolicyInfoInputSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="showWrittenDate"
+      type="boolean"/>
+    <Require
+      name="showRewriteLinks"
+      type="boolean"/>
+    <Require
+      name="showSplitSource"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.util.concurrent.LocklessLazyVar.make(\ -&gt; policyPeriod.OpenForEdit)"
+      name="openForEditInit"
+      recalculateOnRefresh="true"
+      type="gw.util.concurrent.LocklessLazyVar&lt;java.lang.Boolean&gt;"/>
+    <Variable
+      initialValue="policyPeriod.PeriodStart"
+      name="effectiveDate"
+      recalculateOnRefresh="true"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="policyPeriod.TermType"
+      name="termType"
+      type="typekey.TermType"/>
+    <Variable
+      initialValue="policyPeriod.Policy.RewrittenToNewAccountSource"
+      name="rewriteSourcePolicy"
+      type="Policy"/>
+    <Variable
+      initialValue="policyPeriod.Policy.DividedSourcePolicy"
+      name="dividedSourcePolicy"
+      type="Policy"/>
+    <ReferencedWidget
+      widget="UWCompanyInputSet"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.PolicyPeriod&quot;)"/>
+    <!-- Changing the term type updates the expiration date -->
+    <RangeInput
+      editable="policyPeriod.CanUpdatePeriodDates"
+      id="TermType"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.TermType&quot;)"
+      required="true"
+      value="termType"
+      valueRange="gw.pcf.job.PolicyInfoHelper.getTermTypes(policyPeriod)"
+      valueType="typekey.TermType">
+      <PostOnChange
+        onChange="policyPeriod.TermType = termType"/>
+    </RangeInput>
+    <TextInput
+      id="TermNumber"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.TermNumber&quot;)"
+      value="policyPeriod.TermNumber"
+      valueType="java.lang.Integer"/>
+    <!-- Changing the effective date updates the expiration date when the term type is not "short" -->
+    <DateInput
+      editable="!(policyPeriod.Job typeis PolicyChange) and policyPeriod.CanUpdatePeriodDates"
+      id="EffectiveDate"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.EffectiveDate&quot;)"
+      required="true"
+      validationExpression="gw.policy.PolicyPeriodValidation.validateDateForRewriteNewAccount(policyPeriod) "
+      value="effectiveDate">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="gw.pcf.job.PolicyInfoHelper.setPeriodDates(policyPeriod, effectiveDate, termType)"/>
+    </DateInput>
+    <!-- Changing the expiration date updates the term type -->
+    <DateInput
+      editable="gw.pcf.job.PolicyInfoHelper.isExpirationDateEditable(policyPeriod, termType)"
+      id="ExpirationDate"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.ExpirationDate&quot;)"
+      required="true"
+      validationExpression="gw.policy.PolicyPeriodValidation.validatePeriodEndDoesNotOverlapRewrittenNewAccountPolicy(policyPeriod) "
+      value="policyPeriod.PeriodEnd">
+      <PostOnChange
+        onChange="termType = policyPeriod.TermType"/>
+    </DateInput>
+    <DateInput
+      editable="perm.System.editwrittendate"
+      id="WrittenDate"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.WrittenDate&quot;)"
+      required="true"
+      value="policyPeriod.WrittenDate"
+      visible="showWrittenDate"/>
+    <DateInput
+      dateFormat="short"
+      editable="perm.System.editrateasofdate and not(policyPeriod.JobProcess typeis gw.job.NewTermProcess)"
+      id="RateAsOfDate"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.RateAsOfDate&quot;)"
+      required="not(policyPeriod.JobProcess typeis gw.job.NewTermProcess)"
+      timeFormat="long"
+      validationExpression="policyPeriod.RateAsOfDate.beforeOrEqual(java.util.Date.CurrentDate) ? null : DisplayKey.get(&quot;Web.Rating.Errors.FutureRateAsOfDate&quot;)"
+      value="policyPeriod.RateAsOfDate">
+      <PostOnChange
+        deferUpdate="false"/>
+    </DateInput>
+    <TypeKeyInput
+      editable="true"
+      id="BaseState"
+      label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyInfo.BaseState&quot;)"
+      required="policyPeriod.Lines.hasMatch(\ line -&gt; line.BaseStateRequired)"
+      value="policyPeriod.BaseState"
+      valueType="typekey.Jurisdiction"
+      visible="gw.web.policy.PolicyInfoUIHelper.getBaseStateVisibility(policyPeriod)">
+      <PostOnChange
+        deferUpdate="false"/>
+    </TypeKeyInput>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryLanguage"
+      label="DisplayKey.get(&quot;Web.EditAccount.PrimaryLanguage&quot;)"
+      value="policyPeriod.Policy.PrimaryLanguage"
+      valueType="typekey.LanguageType"
+      visible="gw.api.util.LocaleUtil.getAllLanguages().size() &gt; 1 and policyPeriod.Reinstatement == null"/>
+    <TextInput
+      action="if (perm.PolicyPeriod.view(rewriteSourcePolicy.LatestBoundPeriod)) {pcf.PolicyFileForward.go(rewriteSourcePolicy.LatestBoundPeriod.PolicyNumber)}"
+      id="RewrittenSourcePolicy"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Summary.RewrittenSourcePolicy&quot;)"
+      value="DisplayKey.get(&quot;Web.PolicyFile.Summary.PolicyNumOnAccount&quot;, rewriteSourcePolicy.LatestBoundPeriod.PolicyNumber, rewriteSourcePolicy.Account.AccountNumber)"
+      visible="rewriteSourcePolicy != null and showRewriteLinks"/>
+    <TextInput
+      action="pcf.PolicyFileForward.go(dividedSourcePolicy.LatestBoundPeriod.PolicyNumber)"
+      id="DividedSourcePolicy"
+      label="DisplayKey.get(&quot;Web.PolicyFile.Summary.DividedSourcePolicy&quot;)"
+      value="DisplayKey.get(&quot;Web.PolicyFile.Summary.PolicyNumOnAccount&quot;, dividedSourcePolicy.LatestBoundPeriod.PolicyNumberDisplayString, dividedSourcePolicy.Account.AccountNumber)"
+      visible="dividedSourcePolicy != null and showSplitSource"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Admin.AffinityGroup&quot;)"/>
+    <PickerInput
+      editable="true"
+      id="AffinityGroup"
+      inputConversion="gw.web.policy.PolicyInfoUIHelper.performAffinityGroupSearch(VALUE, policyPeriod)"
+      label="DisplayKey.get(&quot;Web.Admin.AffinityGroup.Name&quot;)"
+      pickLocation="AffinityGroupSearchPopup.push(policyPeriod)"
+      required="false"
+      value="policyPeriod.PolicyTerm.AffinityGroup"
+      valueType="entity.AffinityGroup"/>
+  </InputSet>
+</PCF>

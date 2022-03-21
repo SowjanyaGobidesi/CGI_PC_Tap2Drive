@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <TileInputSet
+    id="ContactDetailsTileInputSet"
+    mode="person|usercontact">
+    <Require
+      name="accountDetailsTileHelper"
+      type="gw.api.web.dashboard.ui.account.AccountDetailHelper"/>
+    <Variable
+      initialValue="(accountDetailsTileHelper.Account.AccountHolderContact as Person)"
+      name="person"
+      type="Person"/>
+    <PrivacyInput
+      id="SSN"
+      encryptionExpression="gw.api.privacy.EncryptionMaskExpressions.maskTaxId(person.SSNOfficialID)"
+      inputMask="'###-##-####'"
+      label="DisplayKey.get('Web.Dashboard.Tile.AccountDetails.SSN')"
+      value="person.SSNOfficialID"/>
+  </TileInputSet>
+</PCF>

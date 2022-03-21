@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IssuanceWizard_ReviewSummaryDV">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="issuance"
+      type="Issuance"/>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="PrimaryNamedInsured"
+        label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.Insured&quot;)"
+        value="policyPeriod.PrimaryNamedInsured.DisplayName"/>
+      <InputSetRef
+        def="PolicyAddressDisplayInputSet(policyPeriod, true)"
+        id="PolicyAddress"/>
+    </InputColumn>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="Product"
+        label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.Product&quot;)"
+        value="policyPeriod.Policy.Product"
+        valueType="gw.api.productmodel.Product"/>
+      <DateInput
+        boldLabel="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.EffectiveDate&quot;)"
+        value="policyPeriod.PeriodStart"/>
+      <DateInput
+        boldLabel="true"
+        id="ExpirationDate"
+        label="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.ExpirationDate&quot;)"
+        value="policyPeriod.PeriodEnd"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

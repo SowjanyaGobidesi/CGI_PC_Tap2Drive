@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="SmartCommsDocumentMessageTransport">
+  <plugin-gosu
+    gosuclass="gw.integration.document.production.smartcomms.plugin.impl.SmartCommsDocumentMessageTransport"/>
+</plugin>

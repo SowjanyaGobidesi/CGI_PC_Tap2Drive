@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="Loyalty" desc="Loyalty">
+  <typecode
+    code="1year"
+    desc="1 Year"
+    name="1 Year"/>
+  <typecode
+    code="2years"
+    desc="2 Years"
+    name="2 Years"/>
+  <typecode
+    code="3years"
+    desc="3 Years"
+    name="3 Years"/>
+  <typecode
+    code="4years"
+    desc="4 Years"
+    name="4 Years"/>
+  <typecode
+    code="5years_plus"
+    desc="5 Years +"
+    name="5 Years Plus"/>
+</typelist>

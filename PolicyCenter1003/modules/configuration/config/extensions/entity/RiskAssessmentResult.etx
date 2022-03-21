@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="RiskAssessmentResult">
+  <column
+    desc="Flood Score of Policy Location"
+    name="FloodScore"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Flood Risk: Unknown, Low, Medium, High"
+    name="FloodRisk"
+    nullok="true"
+    type="shorttext"/>
+</extension>

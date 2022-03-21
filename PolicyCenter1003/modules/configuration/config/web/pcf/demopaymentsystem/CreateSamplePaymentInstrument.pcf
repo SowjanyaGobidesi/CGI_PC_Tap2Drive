@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="true"
+    countsAsWork="false"
+    id="CreateSamplePaymentInstrument"
+    parent="WizardExit()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Demo.PaymentSystem&quot;)">
+    <LocationEntryPoint
+      signature="CreateSamplePaymentInstrument(returnURL : String, jobNumber : String, accountNumber : String, accountHolderName : String, add1 : String, add2 : String, city : String, state : String, zip : String)"/>
+    <Variable
+      name="jobNumber"
+      type="String"/>
+    <Variable
+      name="accountNumber"
+      type="String"/>
+    <Variable
+      name="accountHolderName"
+      type="String"/>
+    <Variable
+      name="add1"
+      type="String"/>
+    <Variable
+      name="add2"
+      type="String"/>
+    <Variable
+      name="city"
+      type="String"/>
+    <Variable
+      name="state"
+      type="String"/>
+    <Variable
+      name="zip"
+      type="String"/>
+    <Variable
+      name="returnURL"
+      type="String"/>
+    <Variable
+      initialValue="java.util.Date.CurrentDate.Time as String"
+      name="token"
+      type="String"/>
+    <Screen>
+      <Variable
+        initialValue="AccountPaymentMethod.TC_CREDITCARD"
+        name="paymentMethod"
+        type="typekey.AccountPaymentMethod"/>
+      <Toolbar>
+        <ToolbarButton
+          action="FinishPaymentInstrument.push(returnURL, jobNumber, accountNumber, paymentMethod.Code, token)"
+          id="OKButton"
+          label="DisplayKey.get(&quot;Web.Demo.PaymentSystem.Toolbar.OK&quot;)"/>
+        <ToolbarButton
+          action="FinishPaymentInstrument.push(returnURL, jobNumber, accountNumber, &quot;&quot;, &quot;&quot;)"
+          id="CancelButton"
+          label="DisplayKey.get(&quot;Web.Demo.PaymentSystem.Toolbar.Cancel&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <Variable
+          name="creditCardExpDate"
+          type="java.util.Date"/>
+        <Variable
+          initialValue="gw.pcf.demopaymentsystem.CreateSamplePaymentInstrumentHelper.initAddress(add1, add2, city, state, zip)"
+          name="address"
+          type="Address"/>
+        <InputColumn>
+          <TextInput
+            id="jobNumber"
+            label="DisplayKey.get(&quot;Web.Demo.PaymentSystem.JobNumber&quot;)"
+            required="true"
+            value="jobNumber"/>
+          <RangeInput
+            editable="true"
+            id="paymentMethod"
+            label="DisplayKey.get(&quot;Web.Demo.PaymentSystem.PaymentMethod&quot;)"
+            required="true"
+            value="paymentMethod"
+            valueRange="{AccountPaymentMethod.TC_ACH, AccountPaymentMethod.TC_CREDITCARD}"
+            valueType="typekey.AccountPaymentMethod">
+            <PostOnChange/>
+          </RangeInput>
+          <InputSetRef
+            def="PaymentMethodInputSet(accountHolderName, address)"
+            mode="paymentMethod.Code"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

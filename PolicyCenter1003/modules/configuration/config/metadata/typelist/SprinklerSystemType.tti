@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Sprinkler System Type"
+  name="SprinklerSystemType">
+  <typecode
+    code="none"
+    desc="None"
+    name="None"
+    priority="10">
+  </typecode>
+  <typecode
+    code="full"
+    desc="Full"
+    name="Full"
+    priority="20">
+  </typecode>
+  <typecode
+    code="partial"
+    desc="Partial"
+    name="Partial"
+    priority="30">
+  </typecode>
+</typelist>

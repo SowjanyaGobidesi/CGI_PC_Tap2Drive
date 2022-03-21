@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<import>
+  <HOPCovTermLookup public-id="zkpgi8r99392k3t50as46k4vpsb">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="z8qjcbsenj5hpfa3r34i6otsqj9">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zmrgkk4un2tvn403t0abcin9k5a">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zm7g2sosoafsv74h974bld972ta</CovTermPatternCode>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="zrjiqstknp6jv7m93ij0ushutpa">
+    <Availability>Unavailable</Availability>
+    <CovTermPatternCode>zfvimq6hie4hr27sr3r4gfu8pnb</CovTermPatternCode>
+    <CoveragePartType>hopdwelling</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="z4hhcpe5sg9babmheonsntb2pqb">
+    <Availability>Unavailable</Availability>
+    <CovTermPatternCode>zfvimq6hie4hr27sr3r4gfu8pnb</CovTermPatternCode>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+  <HOPCovTermLookup public-id="z40g4a3647dg65ke4u7j27bi548">
+    <Availability>Available</Availability>
+    <CovTermPatternCode>zj8ik0gtjuev47mdmkj29th5jt9</CovTermPatternCode>
+    <CoveragePartType>hopcondo</CoveragePartType>
+    <EndEffectiveDate/>
+    <JobType/>
+    <PolicyLinePatternCode>HOPLine</PolicyLinePatternCode>
+    <StartEffectiveDate>2001-01-01 00:00:00.000</StartEffectiveDate>
+    <State>NJ</State>
+    <UWCompanyCode/>
+  </HOPCovTermLookup>
+</import>

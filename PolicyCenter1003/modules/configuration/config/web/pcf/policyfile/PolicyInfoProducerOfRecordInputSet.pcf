@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="PolicyInfoProducerOfRecordInputSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="forUseIn"
+      type="ProducerStatusUse"/>
+    <Variable
+      initialValue="false"
+      name="producerChanged"
+      type="boolean"/>
+    <Variable
+      initialValue="assignProducer()"
+      name="producer"
+      recalculateOnRefresh="true"
+      type="Organization"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerOfRecordInfo&quot;)"/>
+    <OrgInput
+      editable="gw.api.web.producer.ProducerUtil.canEditOrganization()"
+      id="Producer"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerOrg&quot;)"
+      onPick="producerChanged = true"
+      pickLocation="OrganizationSearchPopup.push(null, true)"
+      required="true"
+      validationExpression="producer.ProducerStatus == TC_ACTIVE ? null : DisplayKey.get(&quot;Web.ProducerSelection.Error.SuspendedProducer&quot;, producer)"
+      value="producer">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="policyPeriod.EffectiveDatedFields.ProducerCode = null; producerChanged = true"/>
+    </OrgInput>
+    <RangeInput
+      editable="true"
+      id="ProducerCode"
+      label="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode&quot;)"
+      optionLabel="DisplayKey.get(&quot;Web.ProducerSelection.ProducerCode.OptionLabel&quot;, VALUE.Code, VALUE.Description != null ? VALUE.Description : &quot;&quot;)"
+      required="true"
+      validationExpression="validateProducerCode(policyPeriod.EffectiveDatedFields.ProducerCode)"
+      value="policyPeriod.EffectiveDatedFields.ProducerCode"
+      valueRange="producer == null ? null : gw.api.web.producer.ProducerUtil.getProducerCodeRange(producer, forUseIn)"
+      valueType="entity.ProducerCode">
+      <PostOnChange
+        deferUpdate="false"
+        onChange="policyPeriod.ProducerCodeOfRecord = policyPeriod.EffectiveDatedFields.ProducerCode;"/>
+    </RangeInput>
+    <Code><![CDATA[function validateProducerCode(pc : ProducerCode) : String {
+  if (forUseIn != null and !pc.ProducerStatus.hasCategory(forUseIn)) {
+    return DisplayKey.get("Web.ProducerSelection.Error.SuspendedProducerCode", pc)
+  }
+  return null
+}
+
+function assignProducer() : Organization {
+  if (producerChanged) {
+    return producer
+  }
+  return policyPeriod.ProducerOfRecord
+}]]></Code>
+  </InputSet>
+</PCF>

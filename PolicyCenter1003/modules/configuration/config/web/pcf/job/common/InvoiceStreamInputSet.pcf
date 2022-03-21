@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="InvoiceStreamInputSet">
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Require
+      name="thePeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.web.policy.InstallmentPlanDataRenderHelper(thePeriod.TotalPremiumRPT)"
+      name="renderHelper"
+      type="gw.web.policy.InstallmentPlanDataRenderHelper"/>
+    <Label
+      label="DisplayKey.get('Web.BindSummaryDV.Invoicing')"/>
+    <TextInput
+      id="InvoiceFrequency"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.Frequency')"
+      value="renderHelper.renderInvoiceStreamInterval(policyPeriodBillingInstructionsManager)"/>
+    <TextInput
+      id="FixInvoicesBy"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.FixInvoicesBy')"
+      value="renderHelper.renderInvoiceStreamDueDate(policyPeriodBillingInstructionsManager)"/>
+    <TextInput
+      id="DayOfMonth"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.InvoicingDays')"
+      value="renderHelper.renderInvoiceStreamDays(policyPeriodBillingInstructionsManager)"/>
+    <TextInput
+      id="PayUsing"
+      label="DisplayKey.get('Web.Quote.PremiumSummary.PayUsing')"
+      value="renderHelper.renderInvoiceStreamPaymentInstrument(policyPeriodBillingInstructionsManager)"/>
+  </InputSet>
+</PCF>

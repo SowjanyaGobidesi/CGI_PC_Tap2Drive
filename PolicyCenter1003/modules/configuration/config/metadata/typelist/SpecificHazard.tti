@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="SpecificHazard" desc="Hazard Type">
+  <typecode
+    code="fireplace"
+    desc="Fireplace"
+    name="Fireplace"
+    priority="10"/>
+  <typecode
+    code="woodstove"
+    desc="Woodstove"
+    name="Woodstove"
+    priority="20"/>
+  <typecode
+    code="floodzone"
+    desc="Flood Zone"
+    name="Flood Zone"
+    priority="30"/>
+  <typecode
+    code="brushzone"
+    desc="Brush Zone"
+    name="Brush Zone"
+    priority="40"/>
+  <typecode
+    code="forestfirezone"
+    desc="Forest Fire Zone"
+    name="Forest Fire Zone"
+    priority="50"/>
+  <typecode
+    code="landslidezone"
+    desc="Landslide Zone"
+    name="Landslide Zone"
+    priority="60"/>
+  <typecode
+    code="tidalwater"
+    desc="Tidal Water"
+    name="Tidal Water"
+    priority="70"/>
+</typelist>

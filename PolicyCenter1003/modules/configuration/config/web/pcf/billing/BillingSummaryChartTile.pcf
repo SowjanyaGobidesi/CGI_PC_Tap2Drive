@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ChartTile
+    id="BillingSummaryChartTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.BillingSummary')"
+    viewMoreAction="billingSummaryHelper.ViewMore()"
+    viewMoreLabel="DisplayKey.get('Web.Dashboard.Tile.BillingSummary.ViewAccountBilling')"
+    viewMoreVisible="billingSummaryHelper.ViewMore != null">
+    <Require
+      name="billingSummaryHelper"
+      type="gw.api.web.dashboard.ui.billing.BillingSummaryHelper"/>
+    <Variable
+      initialValue="billingSummaryHelper.SummaryChartColors"
+      name="summaryChartColors"
+      type="List&lt;gw.api.web.color.GWColor&gt;"/>
+    <TileActions
+      id="OpenBilling"
+      dropdownButtonLabel="DisplayKey.get('Web.Dashboard.Tile.BillingSummary.OpenBilling')">
+      <TileActionIterator
+        value="billingSummaryHelper.BillingHandlers"
+        valueType="gw.api.web.dashboard.ui.billing.OpenBillingHandler[]"
+        elementName="billingHandler">
+        <TileAction
+          action="billingHandler.openInBillng()"
+          visible="billingSummaryHelper.OpenInBillingSystemAvailable and gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance.ViewInBillingCenter"
+          label="billingHandler.ActionLabel"/>
+      </TileActionIterator>
+    </TileActions>
+    <TileChartPanel
+      allowSeriesToggling="false"
+      type="Pie"
+      visible="billingSummaryHelper.DisplayChart">
+      <DataSeries
+        categoryLabel="value.Label"
+        dataValueType="gw.api.web.dashboard.ui.billing.BillingSummaryChartEntry"
+        dataValues="billingSummaryHelper.BillingSummaryData"
+        fillColor="summaryChartColors"
+        strokeColor="summaryChartColors"
+        value="value.Amount"/>
+    </TileChartPanel>
+    <TileInputColumn
+      labelWidth="8em">
+      <TextInput
+        boldValue="true"
+        id="AccountLabel0"
+        value="billingSummaryHelper.accountLabel(0)"
+        visible="billingSummaryHelper.Payments.length > 1"/>
+      <TextInput
+        action="billingSummaryHelper.viewNextInvoiceInBillingCenter(0)"
+        actionAvailable=" billingSummaryHelper.nextInvoiceAvailable(0)"
+        align="right"
+        id="NextInvoice0"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.NextInvoice')"
+        value="billingSummaryHelper.formattedNextInvoice(0)"
+        visible="billingSummaryHelper.entryAvailable(0)"/>
+      <TextInput
+        action="billingSummaryHelper.viewLastPaymentInBillingCenter(0)"
+        actionAvailable=" billingSummaryHelper.lastPaymentAvailable(0)"
+        align="right"
+        id="LastPayment0"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.LastPayment')"
+        value="billingSummaryHelper.formattedLastPayment(0)"
+        visible="billingSummaryHelper.entryAvailable(0)"/>
+
+      <TextInput
+        boldValue="true"
+        id="AccountLabel1"
+        value="billingSummaryHelper.accountLabel(1)"
+        visible="billingSummaryHelper.entryAvailable(1)"/>
+      <TextInput
+        action="billingSummaryHelper.viewNextInvoiceInBillingCenter(1)"
+        actionAvailable=" billingSummaryHelper.nextInvoiceAvailable(1)"
+        align="right"
+        id="NextInvoice1"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.NextInvoice')"
+        value="billingSummaryHelper.formattedNextInvoice(1)"
+        visible="billingSummaryHelper.entryAvailable(1)"/>
+      <TextInput
+        action="billingSummaryHelper.viewLastPaymentInBillingCenter(1)"
+        actionAvailable=" billingSummaryHelper.lastPaymentAvailable(1)"
+        align="right"
+        id="LastPayment1"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.LastPayment')"
+        value="billingSummaryHelper.formattedLastPayment(1)"
+        visible="billingSummaryHelper.entryAvailable(1)"/>
+
+      <TextInput
+        boldValue="true"
+        id="AccountLabel2"
+        value="billingSummaryHelper.accountLabel(2)"
+        visible="billingSummaryHelper.entryAvailable(2)"/>
+      <TextInput
+        action="billingSummaryHelper.viewNextInvoiceInBillingCenter(2)"
+        actionAvailable=" billingSummaryHelper.nextInvoiceAvailable(2)"
+        align="right"
+        id="NextInvoice2"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.NextInvoice')"
+        value="billingSummaryHelper.formattedNextInvoice(2)"
+        visible="billingSummaryHelper.entryAvailable(2)"/>
+      <TextInput
+        action="billingSummaryHelper.viewLastPaymentInBillingCenter(2)"
+        actionAvailable=" billingSummaryHelper.lastPaymentAvailable(2)"
+        align="right"
+        id="LastPayment2"
+        label="DisplayKey.get('Web.Dashboard.Tile.Payments.LastPayment')"
+        value="billingSummaryHelper.formattedLastPayment(2)"
+        visible="billingSummaryHelper.entryAvailable(2)"/>
+    </TileInputColumn>
+  </ChartTile>
+</PCF>

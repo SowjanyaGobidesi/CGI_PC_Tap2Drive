@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="AvailabilityLookup">
+  <fulldescription><![CDATA[Delegate defining the base, non-negotiable fields, all availability lookup entities must have.]]></fulldescription>
+  <implementsEntity
+    name="Lookup"/>
+  <typekey
+    desc="Specifies whether this lookup is an inclusion or exclusion for the entity whose availability is being computed"
+    name="Availability"
+    nullok="false"
+    typelist="AvailabilityType"/>
+</delegate>

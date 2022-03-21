@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Coverage"
+  requiresType="effdated"
+  setterScriptability="hidden">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.CoveragePublicMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverageAbstractDomainMethods"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.impl.CoverageInternalMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageImpl"/>
+  <implementsEntity
+    name="Clause"/>
+  <implementsInterface
+    iface="gw.api.domain.Clause"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverageAdapter"/>
+  <column
+    desc="The pattern defining what kind of Coverage this is"
+    name="PatternCode"
+    nullok="false"
+    required="true"
+    setterScriptability="hidden"
+    type="patterncode"/>
+  <column
+    desc="Internal field for storing the reference date of coverages on bound policy periods. Normally the ReferenceDate property should be used instead."
+    name="ReferenceDateInternal"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="datetime"/>
+  <typekey
+    desc="Currency associated with the coverage"
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <fulldescription><![CDATA[
+    A coverage is specific cause of loss or insurable object within a single PolicyLine. This table contains coverage (boolean) and coverage attribute information spanning policyline. Policyline is differentiated by approximately 5 dozen sub-type entities.
+  ]]></fulldescription>
+</delegate>

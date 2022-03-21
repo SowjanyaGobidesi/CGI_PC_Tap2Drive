@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwellingScheduleCond">
+  <Columns>
+    <Column
+      beanPath="HOPDwellingScheduleCond.Pattern"
+      name="pattern"/>
+  </Columns>
+  <DisplayName>pattern</DisplayName>
+</Entity>

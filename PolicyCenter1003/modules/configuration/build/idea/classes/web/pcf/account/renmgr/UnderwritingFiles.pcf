@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Account.viewRenewalGroup(account)"
+    id="UnderwritingFiles"
+    title="DisplayKey.get(&quot;Web.UnderwritingFiles.Title&quot;)"
+    validateOnBundleCommit="false">
+    <LocationEntryPoint
+      signature="UnderwritingFiles(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="account.JobGroups"
+      name="jobGroups"
+      recalculateOnRefresh="true"
+      type="entity.JobGroup[]"/>
+    <Screen
+      id="RenewalManagerScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.UnderwritingFiles.Title&quot;)"/>
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.UnderwritingFiles.NoWorkOrders&quot;)"
+        visible="jobGroups.Count == 0"/>
+      <ListViewPanel
+        id="RenewalManagerLV"
+        visible="jobGroups.Count &gt; 0">
+        <RowIterator
+          editable="false"
+          elementName="jobGroup"
+          value="account.JobGroups"
+          valueType="entity.JobGroup[]">
+          <ToolbarFilter
+            name="jobGroupCompleteFilter">
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.All&quot;), \ x -&gt; true)"/>
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.Open&quot;), \ x -&gt; (x as JobGroup).Jobs.hasMatch( \ r -&gt; not r.Complete))"/>
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.Complete&quot;), \ x -&gt; not (x as JobGroup).Jobs.hasMatch( \ r -&gt; not r.Complete))"/>
+          </ToolbarFilter>
+          <ToolbarFilter
+            name="jobGroupTypeFilter">
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.SubmissionAndRenewal&quot;), \ x -&gt; true)"/>
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.SubmissionOnly&quot;), \ x -&gt; (x typeis SubmissionGroup))"/>
+            <ToolbarFilterOption
+              filter="new gw.api.filters.StandardBeanFilter(DisplayKey.get(&quot;Web.UnderwritingFiles.Filter.RenewalOnly&quot;), \ x -&gt; (x typeis RenewalGroup))"/>
+          </ToolbarFilter>
+          <Row>
+            <TextCell
+              action="goToSpecificJobGroupDetail(jobGroup)"
+              id="GroupName"
+              label="DisplayKey.get(&quot;Web.UnderwritingFiles.GroupName&quot;)"
+              value="jobGroup.Name"/>
+            <DateCell
+              id="FirstRenewalDate"
+              label="DisplayKey.get(&quot;Web.UnderwritingFiles.FirstEffectiveDate&quot;)"
+              value="jobGroup.FirstJobDate"/>
+            <DateCell
+              id="LastRenewalDate"
+              label="DisplayKey.get(&quot;Web.UnderwritingFiles.LastEffectiveDate&quot;)"
+              value="jobGroup.LastJobDate"/>
+            <TypeKeyCell
+              id="WorkOrderType"
+              label="DisplayKey.get(&quot;Web.UnderwritingFiles.WorkOrderType&quot;)"
+              value="jobGroup.Subtype"
+              valueType="typekey.JobGroup"/>
+            <TextCell
+              id="NumJobs"
+              label="DisplayKey.get(&quot;Web.UnderwritingFiles.NumJobs&quot;)"
+              value="jobGroup.NumJobs"
+              valueType="java.lang.Integer"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function goToSpecificJobGroupDetail(jobGroup : JobGroup) {
+  if(jobGroup typeis RenewalGroup) {
+    RenewalGroupDetail.go(jobGroup)
+  }
+  else if(jobGroup typeis SubmissionGroup) {
+    SubmissionGroupDetail.go(jobGroup)
+  }
+  else {
+    throw DisplayKey.get("Web.UnderwritingFiles.UnrecognizedJobGroup", typeof jobGroup)
+  }
+}]]></Code>
+  </Page>
+</PCF>

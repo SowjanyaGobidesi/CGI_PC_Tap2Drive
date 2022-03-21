@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewmyqueues"
+    id="DesktopAssignableQueues"
+    title="DisplayKey.get(&quot;Web.DesktopAssignableQueues&quot;)">
+    <LocationEntryPoint
+      signature="DesktopAssignableQueues()"/>
+    <ScreenRef
+      def="DesktopAssignableQueuesScreen()"
+      mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()"/>
+  </Page>
+</PCF>

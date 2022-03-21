@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <ModalCell
+    id="RateTableModalCell"
+    mode="multiselect">
+    <Require
+      name="cell"
+      type="gw.rating.rtm.domain.table.RateTableCell"/>
+    <Require
+      name="valueProvider"
+      type="gw.rating.rtm.valueprovider.RateTableCellValueProvider"/>
+    <Require
+      name="valueRequired"
+      type="boolean"/>
+    <Variable
+      initialValue="cell as gw.rating.rtm.domain.table.MultiSelectCell"
+      name="multiSelectCell"
+      type="gw.rating.rtm.domain.table.MultiSelectCell"/>
+    <TextCell
+      available="cell.checkAvailable(valueProvider)"
+      hideChildrenIfReadOnly="false"
+      id="ValueCell"
+      outputConversion="multiSelectCell.displayMultiValue(valueProvider)"
+      value="multiSelectCell.getValueCheckedByAllowedValues(valueProvider)">
+      <MenuItemIterator
+        elementName="name"
+        value="multiSelectCell.getMenuValues(valueProvider).cast(String)"
+        visible="CurrentLocation.InEditMode"
+        valueType="java.util.List&lt;java.lang.String&gt;">
+        <MenuItem
+          action="cell.toggle(name)"
+          checked="cell.isChecked(name)"
+          id="Item"
+          label="name"/>
+      </MenuItemIterator>
+    </TextCell>
+  </ModalCell>
+</PCF>

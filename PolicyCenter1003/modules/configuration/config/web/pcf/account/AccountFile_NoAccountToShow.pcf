@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="AccountFile_NoAccountToShow"
+    parent="AccountFile(null)"
+    title="DisplayKey.get(&quot;Web.Account.NoAccountToShow&quot;)">
+    <Screen
+      id="AccountFile_NoAccountToShowScreen">
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.Account.NoAccountToShow.Message&quot;)"/>
+    </Screen>
+  </Page>
+</PCF>

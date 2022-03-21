@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="UserSearchScreen">
+    <SearchPanel
+      criteriaName="searchCriteria"
+      resultsName="users"
+      search="searchCriteria.validateAndSearch()"
+      searchCriteria="new UserSearchCriteria() {:Organization = User.util.CurrentUser.Producer}"
+      searchCriteriaType="entity.UserSearchCriteria"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;User&gt;">
+      <PanelRef
+        def="UserSearchDV(searchCriteria, false, false)"/>
+      <PanelRef
+        def="UserSearchResultsLV(users)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </SearchPanel>
+  </Screen>
+</PCF>

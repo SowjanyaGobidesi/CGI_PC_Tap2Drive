@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The Question lookup type."
+  entity="QuestionLookup"
+  exportable="true"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  setterScriptability="hidden"
+  table="questionlookup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.QuestionLookupPublicMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.QuestionLookupImpl"/>
+  <implementsEntity
+    name="ProductModelDelegate"/>
+  <implementsEntity
+    name="AvailabilityLookup"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.impl.LookupInternalMethods"
+    impl="com.guidewire.pc.domain.productmodel.impl.QuestionLookupImpl"/>
+  <implementsEntity
+    name="StateDrivenLookup"/>
+  <implementsEntity
+    name="JobTypeFilteredLookup"/>
+  <column
+    name="QuestionCode"
+    nullok="false"
+    type="patterncode"/>
+</entity>

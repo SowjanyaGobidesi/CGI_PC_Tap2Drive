@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="AuditPremiumDetailsPanelSet"
+    mode="WorkersCompLine">
+    <Require
+      name="auditInfo"
+      type="AuditInformation"/>
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="auditInfo.IsPremiumReport"
+      name="isPremiumReport"
+      type="boolean"/>
+    <Variable
+      initialValue="auditInfo.IsFinalAudit"
+      name="isFinalAudit"
+      type="boolean"/>
+    <Variable
+      initialValue="period.WorkersCompLine.Costs.cast( WCCost )"
+      name="lineCosts"
+      recalculateOnRefresh="true"
+      type="java.util.Set&lt;WCCost&gt;"/>
+    <Variable
+      initialValue="lineCosts.partition( \ c -&gt; c.JurisdictionState ).mapValues(\i -&gt; i.toSet()).toAutoMap( \ st -&gt; java.util.Collections.emptySet&lt;WCCost&gt;() )"
+      name="partitionCosts"
+      recalculateOnRefresh="true"
+      type="java.util.Map&lt;typekey.Jurisdiction, java.util.Set&lt;WCCost&gt;&gt;"/>
+    <Variable
+      initialValue="period.WorkersCompLine.RepresentativeJurisdictions"
+      name="jurisdictions"
+      recalculateOnRefresh="true"
+      type="WCJurisdiction[]"/>
+    <PanelIterator
+      elementName="jurisdiction"
+      value="jurisdictions"
+      valueType="entity.WCJurisdiction[]">
+      <IteratorSort
+        sortBy="jurisdictions"
+        sortOrder="1"/>
+      <Variable
+        initialValue="partitionCosts.get(jurisdiction.State)"
+        name="stateCosts"
+        recalculateOnRefresh="true"
+        type="java.util.Set&lt;WCCost&gt;"/>
+      <Variable
+        initialValue="jurisdiction.AuditRatingPeriods"
+        name="ratingPeriods"
+        recalculateOnRefresh="true"
+        type="java.util.List&lt;gw.lob.wc.rating.WCRatingPeriod&gt;"/>
+      <PanelRef
+        visible="not stateCosts.Empty">
+        <TitleBar
+          title="jurisdiction.DisplayName"
+          visible="jurisdictions.Count &gt; 1"/>
+        <PanelSet
+          id="JurisdictionPanelSet">
+          <PanelIterator
+            elementName="ratingPeriod"
+            value="ratingPeriods.toTypedArray()"
+            valueType="gw.lob.wc.rating.WCRatingPeriod[]">
+            <Variable
+              initialValue="stateCosts.byRatingPeriod( ratingPeriod )"
+              name="periodCosts"
+              recalculateOnRefresh="true"
+              type="java.util.Set&lt;WCCost&gt;"/>
+            <PanelRef
+              visible="not periodCosts.Empty">
+              <DetailViewPanel
+                id="PeriodDetailDV">
+                <InputColumn>
+                  <Label
+                    label="gw.pcf.job.audit.AuditDetailsUIHelper.standardPremiumLabel(isFinalAudit, ratingPeriods.Count &gt; 1, ratingPeriod)"/>
+                  <ListViewInput
+                    def="AuditRateCostDetailLV(isPremiumReport, periodCosts, ratingPeriod)"
+                    labelAbove="true">
+                    <Toolbar/>
+                  </ListViewInput>
+                </InputColumn>
+              </DetailViewPanel>
+            </PanelRef>
+          </PanelIterator>
+          <PanelRef>
+            <DetailViewPanel
+              id="StateSummaryDetailDV">
+              <Variable
+                initialValue="jurisdiction.WCLine.BasedOn.Costs.cast( WCCost ).where( \ w -&gt; w.JurisdictionState==jurisdiction.State ).toSet()"
+                name="basedOnStateCosts"
+                recalculateOnRefresh="true"
+                type="java.util.Set&lt;WCCost&gt;"/>
+              <InputColumn>
+                <Label
+                  label="DisplayKey.get(&quot;Web.SubmissionWizard.Quote.WC.OtherPremiumAndTax&quot;)"/>
+                <ListViewInput
+                  def="AuditRateCostDetailStateLV(isPremiumReport, stateCosts, basedOnStateCosts, jurisdiction)"
+                  labelAbove="true">
+                  <Toolbar/>
+                </ListViewInput>
+              </InputColumn>
+            </DetailViewPanel>
+          </PanelRef>
+        </PanelSet>
+      </PanelRef>
+    </PanelIterator>
+    <PanelRef
+      id="GrandTotalPanel">
+      <TitleBar
+        id="grandTotalTitle"
+        title="DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Total2&quot;, lineCosts.AmountSum(period.PreferredSettlementCurrency))"/>
+      <DetailViewPanel>
+        <InputColumn/>
+      </DetailViewPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

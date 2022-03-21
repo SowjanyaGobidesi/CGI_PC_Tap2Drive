@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="CoverageSymbolGroup">
+  <Columns>
+    <Column
+      beanPath="CoverageSymbolGroup.PatternCode"
+      name="Code"
+      sortOrder="0"/>
+  </Columns>
+  <DisplayName><![CDATA[
+Code
+    
+  ]]></DisplayName>
+  <DisplayName
+    type="Validation"><![CDATA[
+gw.api.locale.DisplayKey.get("EntityName.CoverageSymbolGroup.Validation", Code)
+    
+  ]]></DisplayName>
+</Entity>

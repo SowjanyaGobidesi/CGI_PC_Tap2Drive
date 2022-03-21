@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPDwellingNonPerilCovCost"
+  desc="Non peril coverage cost for dwelling"
+  supertype="HOPDwellingCovCost">
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.hop.financials.HOPCostAdapter"/>
+</subtype>

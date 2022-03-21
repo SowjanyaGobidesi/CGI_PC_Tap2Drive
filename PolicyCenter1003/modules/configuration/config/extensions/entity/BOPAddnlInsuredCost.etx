@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="BOPAddnlInsuredCost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.bop.financials.BOPCostMethods" impl="gw.lob.bop.financials.BOPAddnlInsuredCostMethodsImpl"/>
+</extension>

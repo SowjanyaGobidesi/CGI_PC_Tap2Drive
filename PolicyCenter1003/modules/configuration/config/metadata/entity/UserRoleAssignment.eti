@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="UserRoleAssignment">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.assignment.UserRoleAssignmentPublicMethods"
+    impl="com.guidewire.pc.domain.assignment.impl.UserRoleAssignmentImpl"/>
+  <fulldescription><![CDATA[User role assignments for Accounts, Policies, or Jobs (exclusive).]]></fulldescription>
+  <implementsEntity
+    name="UserRoleAssignmentDelegate"/>
+</delegate>

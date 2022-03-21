@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ChartTile
+    id="PolicyBillingSummaryChartTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.BillingSummary')">
+    <Require
+      name="billingSummaryHelper"
+      type="gw.api.web.dashboard.ui.billing.BillingSummaryHelper"/>
+    <Variable
+      initialValue="billingSummaryHelper.SummaryChartColors"
+      name="summaryChartColors"
+      type="List&lt;gw.api.web.color.GWColor&gt;"/>
+    <TileActions
+      id="OpenBilling"
+      dropdownButtonLabel="DisplayKey.get('Web.Dashboard.Tile.BillingSummary.OpenBilling')">
+      <TileActionIterator
+        value="billingSummaryHelper.BillingHandlers"
+        valueType="gw.api.web.dashboard.ui.billing.OpenBillingHandler[]"
+        elementName="billingHandler">
+        <TileAction
+          action="billingHandler.openInBillng()"
+          visible="billingSummaryHelper.OpenInBillingSystemAvailable and gw.api.web.dashboard.ui.DashboardParameters.AccountOverviewPermissions.Instance.ViewInBillingCenter"
+          label="billingHandler.ActionLabel"/>
+      </TileActionIterator>
+    </TileActions>
+    <TileChartPanel
+      allowSeriesToggling="false"
+      type="Pie"
+      visible="billingSummaryHelper.DisplayChart">
+      <DataSeries
+        categoryLabel="value.Label"
+        dataValueType="gw.api.web.dashboard.ui.billing.BillingSummaryChartEntry"
+        dataValues="billingSummaryHelper.BillingSummaryData"
+        fillColor="summaryChartColors"
+        strokeColor="summaryChartColors"
+        value="value.Amount"/>
+    </TileChartPanel>
+  </ChartTile>
+</PCF>

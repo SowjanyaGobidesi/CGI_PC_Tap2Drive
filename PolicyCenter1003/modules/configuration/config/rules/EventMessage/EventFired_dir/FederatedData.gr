@@ -1,0 +1,19 @@
+package rules.EventMessage.EventFired_dir
+
+uses gw.api.system.PCConfigParameters
+uses gw.plugin.multicluster.federateddata.v1.FederatedDataPlugin
+
+@gw.rules.RuleName("Federated Data")
+internal class FederatedData {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.DestID == FederatedDataPlugin.MAIN_DEST_ID and PCConfigParameters.EnableFederatedData.Value
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+ 
+/*end00rule*/
+  }
+}

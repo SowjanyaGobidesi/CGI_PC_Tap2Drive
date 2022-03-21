@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<delegate
+  extendable="true"
+  xmlns="http://guidewire.com/datamodel"
+  name="RiskAssessmentResult">
+  <column
+    desc="Unparsed risk assessment information"
+    name="UnparsedRiskAssessmentResponse"
+    nullok="false"
+    type="longtext"/>
+  <column
+    desc="Latitude and longitude of this location, represented as an instance of SpatialPoint."
+    loadable="false"
+    name="SpatialPoint"
+    nullok="true"
+    type="spatialpoint"/>
+  <column
+    desc="Risk Profile Code"
+    name="RiskProfileCode"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Reference to report of how risk assessment took place"
+    name="SnapshotReportURL"
+    nullok="true"
+    type="longtext"/>
+  <column
+    desc="The datetime of when assessment is handed back to Policy Center"
+    name="AssessmentDate"
+    nullok="false"
+    type="datetime"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.riskassessment.RiskAssessmentResultPublicMethods"
+    impl="com.guidewire.pc.domain.riskassessment.impl.RiskAssessmentResultImpl"/>
+  <fulldescription>Risk Assessable holds Risk Assessment Fields.</fulldescription>
+</delegate>

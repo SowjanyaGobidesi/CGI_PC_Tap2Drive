@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    allowGoOrPush="true"
+    id="FederatedActivityForward">
+    <LocationEntryPoint
+      signature="FederatedActivityForward(activityPublicId:java.lang.String, accountPublicId: java.lang.String, activityId:java.lang.String)"/>
+    <Variable
+      name="activityPublicId"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="Activity.finder.findActivityByPublicId(activityPublicId)"
+      name="activityEntity"
+      type="entity.Activity"/>
+    <Variable
+      name="accountPublicId"
+      type="java.lang.String"/>
+    <Variable
+      name="activityId"
+      type="String"/>
+    <ForwardCondition
+      action="ActivityForward.go(activityEntity, activityEntity.PolicyPeriod)"
+      condition="activityEntity!=null"/>
+    <ForwardCondition
+      action="gw.api.web.desktop.data.ResolverRedirectHelper.activityForward(accountPublicId, activityId)"
+      condition="activityEntity==null"/>
+  </Forward>
+</PCF>

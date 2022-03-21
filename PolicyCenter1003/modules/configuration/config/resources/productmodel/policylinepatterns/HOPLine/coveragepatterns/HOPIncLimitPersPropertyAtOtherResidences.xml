@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CoveragePattern
+  codeIdentifier="HOPIncLimitPersPropertyAtOtherResidences"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingScheduleCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="6100"
+  public-id="zbkhgt4jvb1i76oglrok2qsnq09"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+  <Schedules>
+    <ClauseSchedulePattern
+      codeIdentifier="HOPIncLimitPersPropertyAtOtherResidencesSched"
+      mostDescriptiveProperty="HOPIncLimitPersPropertyAtOtherResidencesSchedLocation"
+      priority="0"
+      public-id="HOPIncLimitPersPropertyAtOtherResidencesSched"
+      required="true"
+      scheduledItemType="HOPDwellScheduleCovItem">
+      <ScheduledItemClauseLinkages>
+        <ScheduledItemClauseLink
+          codeIdentifier="HOPIncLimitPersPropertyAtOtherResidencesSchedCovLink"
+          linkedClausePattern="zm8igrhpt3bfg2lvdnl5lf0iat9"
+          public-id="HOPIncLimitPersPropertyAtOtherResidencesSchedCovLink"/>
+      </ScheduledItemClauseLinkages>
+      <ScheduledItemProperties>
+        <ScheduledItemPropertyPattern
+          codeIdentifier="HOPIncLimitPersPropertyAtOtherResidencesSchedLocation"
+          column="StringCol1"
+          priority="0"
+          propertyName="LocationOfResidence"
+          public-id="HOPIncLimitPersPropertyAtOtherResidencesSchedLocation"
+          required="false"/>
+      </ScheduledItemProperties>
+    </ClauseSchedulePattern>
+  </Schedules>
+</CoveragePattern>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  AccountSummary  ==================================================================== -->
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Encapsulates the &quot;summary&quot; or &quot;header&quot; fields needed to display the results of an Account search."
+  entity="AccountSummary"
+  exportable="true"
+  extendable="true"
+  primaryEntity="Account">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.account.AccountSummaryPublicMethods"
+    impl="com.guidewire.pc.domain.account.impl.AccountSummaryImpl"/>
+  <viewEntityColumn
+    name="AccountNumber"
+    path="AccountNumber"/>
+  <viewEntityLink
+    name="Account"
+    path="ID"/>
+  <viewEntityName
+    name="AccountHolderName"
+    path="AccountHolderContact"/>
+  <viewEntityName
+    name="AccountHolderAddress"
+    path="AccountHolderContact.PrimaryAddress"/>
+  <viewEntityTypekey
+    name="AccountStatus"
+    path="AccountStatus"/>
+</viewEntity>

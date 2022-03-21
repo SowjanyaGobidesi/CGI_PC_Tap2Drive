@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    id="DemoPaymentGatewayPage"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.UpFrontPayment.Demo.DemoPaymentGateway')">
+    <LocationEntryPoint
+      signature="DemoPaymentGatewayPage(amount : java.math.BigDecimal, jobNumber : String)"/>
+    <Variable
+      name="amount"
+      type="java.math.BigDecimal"/>
+    <Variable
+      name="jobNumber"
+      type="String"/>
+    <ScreenRef
+      def="DemoPaymentGatewayScreen(amount, jobNumber)"/>
+  </Page>
+</PCF>

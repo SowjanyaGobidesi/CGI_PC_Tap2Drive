@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- ListView that displays the results of a Group search that allows the user to
+    select one of the results by clicking on the appropriate "Select" button. -->
+  <ListViewPanel
+    id="GroupSearchPickerResultsLV">
+    <Require
+      name="groupList"
+      type="gw.api.database.IQueryBeanResult&lt;Group&gt;"/>
+    <Require
+      name="excludeGroup"
+      type="Group"/>
+    <!-- Row visible="(ExcludeGroup == null ? true : group != ExcludeGroup and not ExcludeGroup.isAncestor(group))" -->
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="group"
+      pickValue="group"
+      value="groupList?.where(\g -&gt; ShowGroup(g))"
+      valueType="java.util.List&lt;entity.Group&gt;">
+      <Row>
+        <AltGroupCell
+          id="Web_GroupSearchResults_Name"
+          label="DisplayKey.get(&quot;Web.GroupSearchResults.Name&quot;)"
+          sortOrder="1"
+          value="group"/>
+        <AltGroupCell
+          id="Web_GroupSearchResults_ParentGroup"
+          label="DisplayKey.get(&quot;Web.GroupSearchResults.ParentGroup&quot;)"
+          value="group.Parent"/>
+        <TextCell
+          enableSort="false"
+          id="Web_GroupSearchResults_Organization"
+          label="DisplayKey.get(&quot;Web.GroupSearchResults.Organization&quot;)"
+          value="group.Organization"
+          valueType="entity.Organization"/>
+        <TypeKeyCell
+          id="Web_GroupSearchResults_Type"
+          label="DisplayKey.get(&quot;Web.GroupSearchResults.Type&quot;)"
+          value="group.GroupType"
+          valueType="typekey.GroupType"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function ShowGroup( CurrentGroup : Group ) : Boolean
+{
+  return ( excludeGroup == null || (CurrentGroup != excludeGroup and not excludeGroup.isAncestor( CurrentGroup )) )
+}]]></Code>
+  </ListViewPanel>
+</PCF>

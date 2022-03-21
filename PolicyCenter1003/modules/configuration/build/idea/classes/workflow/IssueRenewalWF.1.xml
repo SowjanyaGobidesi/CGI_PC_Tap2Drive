@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow
+  subtype="IssueRenewalWF"
+  version="1">
+  <Context/>
+  <Start
+    firstStep="EmptyStep"/>
+  <Outcome
+    desc="This workflow is currently not in use. "
+    id="EmptyStep"
+    layoutid="31272318">
+    <Enter/>
+    <StepLocalization
+      locale="zh_CN"
+      name="此工作流当前未在使用。"/>
+    <StepLocalization
+      locale="de"
+      name="Dieser Arbeitsablauf wird zurzeit nicht verwendet. "/>
+    <StepLocalization
+      locale="es"
+      name="Este flujo de trabajo no se está utilizando."/>
+    <StepLocalization
+      locale="pt"
+      name="Este fluxo de trabalho não está em uso no momento. "/>
+    <StepLocalization
+      locale="fr"
+      name="Ce workflow n'est pas utilisé actuellement."/>
+    <StepLocalization
+      locale="ru"
+      name="Этот бизнес-процесс сейчас не используется."/>
+    <StepLocalization
+      locale="ja"
+      name="このワークフローは現在使用されていません。"/>
+    <StepLocalization
+      locale="it"
+      name="Questo flusso di lavoro non è attualmente in uso. "/>
+    <StepLocalization
+      locale="nl"
+      name="Deze workflow wordt momenteel niet gebruikt."/>
+  </Outcome>
+  <Layout>
+    <BoxUI
+      height="4"
+      layoutid="31272318"
+      width="10"
+      x="-35"
+      y="-57"/>
+    <ArrowUI
+      layoutid="19947240">
+      <PointUI
+        x="-37"
+        y="-53"/>
+      <PointUI
+        x="-24"
+        y="-45"/>
+    </ArrowUI>
+  </Layout>
+</Workflow>

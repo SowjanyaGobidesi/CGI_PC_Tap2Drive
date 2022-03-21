@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="JobWizardBillingToolbarButtonSet"
+    mode="Issuance">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Variable
+      initialValue="CurrentLocation as pcf.api.Wizard"
+      name="wizard"
+      type="pcf.api.Wizard"/>
+    <Variable
+      initialValue="job as Issuance"
+      name="issuance"
+      type="Issuance"/>
+    <Variable
+      initialValue="policyPeriod.IssuanceProcess"
+      name="issuanceProcess"
+      type="gw.job.IssuanceProcess"/>
+    <ToolbarButton
+      action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;uw_review_approved&quot;), &quot;UWApproval&quot;)"
+      id="Unlock"
+      label="DisplayKey.get('Job.Operation.ReleaseLock')"
+      shortcut="K"
+      visible="issuanceProcess.canReleaseLock()"/>
+    <ToolbarButton
+      action="jobWizardHelper.requestQuote(policyPeriod, jobWizardHelper.getQuoteStep(policyPeriod))"
+      id="QuoteOrReview"
+      label="DisplayKey.get('Job.Operation.Quote')"
+      shortcut="Q"
+      visible="issuanceProcess.canRequestQuote().Okay"/>
+    <ToolbarButton
+      action="issuanceProcess.edit(); wizard.saveDraft(); jobWizardHelper.goToVisibleStep(policyPeriod)"
+      confirmMessage="DisplayKey.get('Job.Operation.Edit.Confirm')"
+      id="EditPolicy"
+      label="DisplayKey.get('Job.Operation.EditWorkOrder')"
+      shortcut="E"
+      visible="issuanceProcess.canEdit().Okay"/>
+    <ToolbarButton
+      action="if (jobWizardHelper.revalidateModel()) {policyPeriodBillingInstructionsManager.saveStateToPolicyPeriod(policyPeriod) wizard.saveDraft()}"
+      hideIfReadOnly="true"
+      id="Draft"
+      label="DisplayKey.get('Button.SaveDraft')"
+      shortcut="S"/>
+    <ToolbarButton
+      action="jobWizardHelper.startIssueProcess(policyPeriod, policyPeriodBillingInstructionsManager)"
+      confirmMessage="DisplayKey.get('Job.Operation.IssuePolicy.Confirm')"
+      id="Issue"
+      label="DisplayKey.get('Job.Operation.IssuePolicy')"
+      shortcut="I"
+      visible="issuanceProcess.canIssue().Okay"/>
+    <ToolbarButton
+      action="jobWizardHelper.withdraw(policyPeriod); JobComplete.go(issuance, policyPeriod);"
+      confirmMessage="DisplayKey.get('Job.Operation.Withdraw.Confirm')"
+      id="WithdrawJob"
+      label="DisplayKey.get('Job.Operation.Withdraw')"
+      shortcut="W"
+      visible="issuanceProcess.canWithdraw().Okay"/>
+  </ToolbarButtonSet>
+</PCF>

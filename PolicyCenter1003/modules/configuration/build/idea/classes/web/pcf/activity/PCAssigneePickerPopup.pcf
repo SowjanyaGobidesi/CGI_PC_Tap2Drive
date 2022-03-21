@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="PCAssigneePickerPopup"
+    returnType="gw.api.assignment.Assignee"
+    title="DisplayKey.get(&quot;Web.AssigneePicker.Title&quot;)">
+    <LocationEntryPoint
+      signature="PCAssigneePickerPopup(AssigneePicker : gw.api.assignment.AssigneePicker)"/>
+    <Variable
+      name="AssigneePicker"
+      type="gw.api.assignment.AssigneePicker"/>
+    <Screen
+      id="AssigneePickerScreen">
+      <SearchPanel
+        criteriaName="SearchCriteria"
+        resultsName="SearchResult"
+        search="SearchCriteria.performSearch()"
+        searchCriteria="createSearchCriteria()"
+        searchCriteriaType="gw.api.assignment.AssignmentSearchCriteria"
+        searchResultsType="gw.api.assignment.AssignmentSearchResult">
+        <PanelRef
+          def="AssignmentSearchDV(gw.api.upgrade.Coercions.makeArray&lt;typekey.AssignmentSearchType&gt;(AssigneePicker.AllowedAssignmentSearchTypes), SearchResult, SearchCriteria)"/>
+        <PanelRef
+          def="PCAssignmentUserLV(SearchResult.Users)"
+          visible="SearchCriteria.SearchType == TC_USER">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="PCAssignmentGroupLV(SearchResult.Groups)"
+          visible="SearchCriteria.SearchType == TC_GROUP">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="PCAssignmentQueueLV(SearchResult.Queues)"
+          visible="SearchCriteria.SearchType == TC_QUEUE">
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.api.system.ExternalUserAccessMode
+
+function createSearchCriteria() : gw.api.assignment.AssignmentSearchCriteria {
+  var criteria = new gw.api.assignment.AssignmentSearchCriteria()
+  if (ExternalUserAccessMode.isFullyRestricted() && User.util.CurrentUser.ExternalUser) {
+    criteria.UserCriteria.Organization = User.util.CurrentUser.Organization
+    criteria.GroupCriteria.Organization = User.util.CurrentUser.Organization
+  }
+  criteria.GroupCriteria.ExcludeRootGroup = true
+  return criteria
+}]]></Code>
+  </Popup>
+</PCF>

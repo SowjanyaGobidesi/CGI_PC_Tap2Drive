@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Types of underwriting issues."
+  entity="UWIssueType"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  table="uwissuetype"
+  type="retireable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.pc.domain.community.impl.UWIssueTypeImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.community.UWIssueTypePublicMethods"
+    impl="com.guidewire.pc.domain.community.impl.UWIssueTypeImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.pc.domain.community.impl.UWIssueTypeImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.pc.domain.community.impl.UWIssueTypeImpl"/>
+  <column
+    desc="The concise name of the issue type, used to identify the issue within rules."
+    name="Code"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    deprecated="true"
+    desc="The more human-readable name of the issue type."
+    name="Name"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="uwisstype_name"/>
+  </column>
+  <column
+    deprecated="true"
+    desc="The more human-readable description of the issue type."
+    name="Description"
+    nullok="true"
+    type="mediumtext">
+    <localization
+      nullok="true"
+      tableName="uwisstype_desc"/>
+  </column>
+  <typekey
+    default="None"
+    desc="The comparator to use with this issue"
+    name="Comparator"
+    nullok="false"
+    typefilter="Allowed_UWIssueType"
+    typelist="ValueComparator"/>
+  <typekey
+    default="Unformatted"
+    desc="The type of the formatter to be used for issue and grant values of this issue type"
+    name="ValueFormatterType"
+    nullok="false"
+    typelist="ValueFormatterType"/>
+  <typekey
+    default="NonBlocking"
+    desc="The point at which this issue should block progress of a job"
+    name="BlockingPoint"
+    nullok="false"
+    typelist="UWIssueBlockingPoint"/>
+  <typekey
+    default="PreQuote"
+    desc="The point at which issues of this type are created."
+    name="CheckingSet"
+    nullok="false"
+    typelist="UWIssueCheckingSet"/>
+  <column
+    default="false"
+    desc="Whether or not this issue defines an automatically approvable issue."
+    name="AutoApprovable"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="true"
+    desc="Default value for the edit before bind flag"
+    name="DefaultEditBeforeBind"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    default="Rescinded"
+    desc="Default value for the duration type"
+    name="DefaultDurationType"
+    nullok="false"
+    typelist="UWApprovalDurationType"/>
+  <typekey
+    default="NonBlocking"
+    desc="Default point to which an approval can advance this job."
+    name="DefaultApprovalBlockingPoint"
+    nullok="false"
+    typelist="UWIssueBlockingPoint"/>
+  <typekey
+    desc="Specifies the mechanism by which a default value is assigned to the &quot;Reference Value&quot;"
+    name="DefaultValueAssignmentType"
+    nullok="true"
+    typelist="UWValueAssignmentType"/>
+  <column
+    desc="The numeric amount of offset to apply to the original &quot;Reference Value&quot; in order compute a default value for the approval.  This value is ignored when the &quot;DefaultValueAssignmentType&quot; is &quot;Fixed&quot;"
+    name="DefaultValueOffsetAmount"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <typekey
+    desc="Currency to be used for the DefaultValueOffsetAmount if the comparator is a MonetaryAmount one and the DefaultValueAssignmentType is OffsetAmount."
+    name="DefaultValueOffsetCurrency"
+    nullok="true"
+    typelist="Currency"/>
+  <onetoone
+    cascadeDelete="true"
+    desc="The corresponding UWRule for this UWIssue"
+    fkentity="UWRule"
+    name="UWRule"
+    nullok="true"/>
+  <implementsEntity
+    name="Validatable"/>
+</entity>

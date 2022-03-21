@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="PolicyAddlInterestPanelSet"
+    mode="CPBldgAddlInterest">
+    <Require
+      name="policyAddlInterest"
+      type="PolicyAddlInterest"/>
+    <Variable
+      initialValue="policyAddlInterest.Branch.CPLine"
+      name="cpLine"
+      type="productmodel.CPLine"/>
+    <ListViewPanel>
+      <Variable
+        initialValue="cpLine.getDefaultContainerForAddlInterest()"
+        name="defaultBuilding"
+        type="entity.CPBuilding"/>
+      <RowIterator
+        canPick="false"
+        checkBoxVisible="false"
+        editable="true"
+        elementName="addlInterestDetail"
+        id="cpAddlInterestIterator"
+        pageSize="0"
+        value="policyAddlInterest.AdditionalInterestDetails.whereTypeIs(CPBldgAddlInterest)"
+        valueType="entity.CPBldgAddlInterest[]">
+        <IteratorSort
+          sortBy="addlInterestDetail.CPBuilding.Building.BuildingNum"
+          sortOrder="1"/>
+        <IteratorSort
+          sortBy="addlInterestDetail.CPBuilding.CPLocation.Location.LocationNum"
+          sortOrder="2"/>
+        <Row>
+          <RangeCell
+            id="CPBuilding"
+            label="DisplayKey.get(&quot;Web.Policy.CP.Location.Building&quot;)"
+            optionLabel="VALUE.BuildingLocationDisplay"
+            required="true"
+            value="addlInterestDetail.CPBuilding"
+            valueRange="policyAddlInterest.Branch.CPLine.CPLocations*.Buildings"
+            valueType="entity.CPBuilding"/>
+          <TypeKeyCell
+            editable="true"
+            id="AdditionalInterestType"
+            label="DisplayKey.get(&quot;Web.Policy.AdditionalInterest.Type&quot;)"
+            required="true"
+            value="addlInterestDetail.AdditionalInterestType"
+            valueType="typekey.AdditionalInterestType"/>
+          <BooleanRadioCell
+            editable="true"
+            id="CertRequired"
+            label="DisplayKey.get(&quot;Web.Policy.AdditionalInterest.CertificateRequired&quot;)"
+            value="addlInterestDetail.CertRequired"/>
+          <TextCell
+            editable="true"
+            id="ContractNumber"
+            label="DisplayKey.get(&quot;Web.Policy.AdditionalInterest.ContractNumber&quot;)"
+            value="addlInterestDetail.ContractNumber"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+    <Code><![CDATA[
+function getFilteredBuildingsList(buildings : CPBuilding[]) {
+  
+}
+      
+    ]]></Code>
+  </PanelSet>
+</PCF>

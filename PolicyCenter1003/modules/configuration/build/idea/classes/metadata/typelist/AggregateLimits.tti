@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="AggregateLimits"
+  name="AggregateLimits">
+  <typecode
+    code="Location"
+    desc="Location"
+    name="Location"
+    priority="1"/>
+  <typecode
+    code="Project"
+    desc="Project"
+    name="Project"
+    priority="2"/>
+</typelist>

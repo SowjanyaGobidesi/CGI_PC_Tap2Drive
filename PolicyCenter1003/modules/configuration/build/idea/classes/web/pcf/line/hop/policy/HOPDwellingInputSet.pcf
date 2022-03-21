@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="HOPDwellingInputSet">
+    <Require
+      name="openForEdit"
+      type="java.lang.Boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="dwelling"
+      type="entity.HOPDwelling"/>
+    <Variable
+      initialValue="dwelling.Branch"
+      name="policyPeriod"
+      type="entity.PolicyPeriod"/>
+    <Variable
+      initialValue="dwelling.HOPCoveragePart.HOPLine"
+      name="line"
+      type="entity.HOPLine"/>
+    <Variable
+      initialValue="policyPeriod.getUnassignedAccountLocations(line.SupportsNonSpecificLocations)"
+      name="unusedLocations"
+      recalculateOnRefresh="true"
+      type="java.util.List&lt;entity.AccountLocation&gt;"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.SectionName&quot;)"/>
+    <RangeInput
+      editable="dwelling.CanEditLocation"
+      id="Location"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.LocationName&quot;)"
+      value="dwelling.Location"
+      valueRange="policyPeriod.PolicyLocations"
+      valueType="entity.PolicyLocation">
+      <PickerMenuItem
+        action="LocationPopup.push(null, null, policyPeriod, openForEdit, true, line.SupportsNonSpecificLocations)"
+        id="NewDwellingLocation"
+        label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.NewLocation&quot;)"
+        onPick="gw.web.line.hop.policy.LineWizardStepSet_HOPHomeownersHelper.onDwellingLocationSelected(dwelling, PickedValue, jobWizardHelper)"/>
+      <PickerMenuItem
+        action="LocationPopup.push(null, dwelling.Location, policyPeriod, openForEdit, true, line.SupportsNonSpecificLocations)"
+        id="EditDwellingLocation"
+        label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.EditLocation&quot;)"
+        onPick="gw.web.line.hop.policy.LineWizardStepSet_HOPHomeownersHelper.onDwellingLocationSelected(dwelling, PickedValue, jobWizardHelper)"/>
+      <PostOnChange
+        onChange="gw.web.line.hop.policy.LineWizardStepSet_HOPHomeownersHelper.onDwellingLocationChanged(dwelling, jobWizardHelper)"/>
+      <MenuItem
+        id="AddExistingLocations"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.ExistingLocation&quot;)">
+        <MenuItemIterator
+          elementName="unusedLocation"
+          id="UnusedLocationIterator"
+          value="unusedLocations"
+          valueType="java.util.List&lt;entity.AccountLocation&gt;">
+          <IteratorSort
+            sortBy="unusedLocation.LocationNum"
+            sortOrder="1"/>
+          <PickerMenuItem
+            action="LocationPopup.push(unusedLocation, null, policyPeriod, openForEdit, true, policyPeriod.HOPLine.SupportsNonSpecificLocations)"
+            id="UnusedLocation"
+            label="unusedLocation.DisplayName"
+            onPick="gw.web.line.hop.policy.LineWizardStepSet_HOPHomeownersHelper.onDwellingLocationSelected(dwelling, PickedValue, jobWizardHelper)"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </RangeInput>
+    <InputSetRef
+      def="TerritoryCodeInputSet(dwelling.Location)"/>
+    <TypeKeyInput
+      editable="true"
+      id="LocationType"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.LocationType&quot;)"
+      value="dwelling.DwellingLocation"
+      valueType="typekey.DwellingLocationType"/>
+    <TypeKeyInput
+      editable="true"
+      id="ResidenceType"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.ResidenceType&quot;)"
+      value="dwelling.ResidenceType"
+      valueType="typekey.ResidenceType"/>
+    <MonetaryAmountInput
+      currency="dwelling.PreferredCoverageCurrency"
+      editable="true"
+      formatType="currency"
+      id="ReplacementCost"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.EstimatedReplacementCost&quot;)"
+      value="dwelling.ReplacementCost"/>
+    <TextInput
+      editable="true"
+      id="NumberOfUnitsBetweenFirewall"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.NumberOfUnitsBetweenFirewall&quot;)"
+      value="dwelling.UnitsNumber"
+      valueType="java.lang.Integer"/>
+    <TextInput
+      editable="true"
+      id="NumberOfInsuredUnits"
+      label="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwelling.NumberOfInsuredUnits&quot;)"
+      value="dwelling.InsuredUnits"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

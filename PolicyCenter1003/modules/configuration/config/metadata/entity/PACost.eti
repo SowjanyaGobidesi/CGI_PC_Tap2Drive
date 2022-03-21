@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- ===== Costs ===== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A PersonalAuto unit of price for a period of time that should not be broken up any further."
+  effDatedBranchType="PolicyPeriod"
+  entity="PACost"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="pacost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.pa.financials.PACostAdapter"/>
+  <foreignkey
+    fkentity="PersonalAutoLine"
+    name="PersonalAutoLine"
+    nullok="false"/>
+  <array
+    arrayentity="PATransaction"
+    cascadeDelete="true"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

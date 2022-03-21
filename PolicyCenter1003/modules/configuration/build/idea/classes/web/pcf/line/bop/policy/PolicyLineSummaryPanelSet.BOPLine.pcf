@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="PolicyLineSummaryPanelSet"
+    mode="BOPLine">
+    <Require
+      name="line"
+      type="PolicyLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="line as BusinessOwnersLine"
+      name="bopline"
+      type="entity.BusinessOwnersLine"/>
+    <!-- Line-level clauses -->
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.PolicyReview.PolicyDetails&quot;)"/>
+      <PanelSet>
+        <DetailViewPanel
+          id="LineDV">
+          <InputColumn>
+            <Label
+              label="DisplayKey.get(&quot;Web.Policy.BOP.Quote.Coverages.Line.Title&quot;)"/>
+            <ListViewInput
+              def="CoverageSummaryLV((bopline).BOPLineCoverages.toList(), bopline)"
+              labelAbove="true">
+              <Toolbar/>
+            </ListViewInput>
+            <Label
+              label="DisplayKey.get(&quot;Web.Policy.Coverages.Exclusions&quot;)"
+              visible="not bopline.BOPLineExclusions.IsEmpty"/>
+            <ListViewInput
+              def="CoverageSummaryLV(bopline.BOPLineExclusions.toList(), bopline)"
+              id="ExclusionSummaryLV"
+              labelAbove="true"
+              visible="not bopline.BOPLineExclusions.IsEmpty">
+              <Toolbar/>
+            </ListViewInput>
+            <Label
+              label="DisplayKey.get(&quot;Web.Policy.Coverages.PolicyConditions&quot;)"
+              visible="not bopline.BOPLineConditions.IsEmpty"/>
+            <ListViewInput
+              def="CoverageSummaryLV(bopline.BOPLineConditions.toList(), bopline)"
+              id="ConditionSummaryLV"
+              labelAbove="true"
+              visible="not bopline.BOPLineConditions.IsEmpty">
+              <Toolbar/>
+            </ListViewInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelSet>
+    </PanelRef>
+    <!-- Each location is displayed in a separate Panel -->
+    <PanelIterator
+      elementName="bopLocation"
+      value="(line as BOPLine).BOPLocations"
+      valueType="entity.BOPLocation[]">
+      <IteratorSort
+        sortBy="bopLocation.Location.LocationNum"
+        sortOrder="1"/>
+      <DetailViewPanel
+        id="LocationsDV">
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Policy.BOP.Quote.Location.Title&quot;, bopLocation.Location.LocationNum, bopLocation.Location.CompactName)"/>
+          <InputDivider/>
+          <ListViewInput
+            def="CoverageSummaryLV(bopLocation.SortedCoverages.toList(), bopLocation)"
+            labelAbove="true">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <!-- Each building is displayed in a separate DetailView -->
+      <DetailViewPanel
+        id="BuildingsDV">
+        <InputColumn>
+          <InputIterator
+            elementName="bOPBuildingEU"
+            value="bopLocation.Buildings"
+            valueType="entity.BOPBuilding[]">
+            <IteratorSort
+              sortBy="bOPBuildingEU.Building.BuildingNum"
+              sortOrder="1"/>
+            <ContentInput
+              id="LinkToBuilding"
+              boldValue="true"
+              labelAbove="true">
+              <Link
+                action="BOPBuildingPopup.push(line as BOPLine, bopLocation, bOPBuildingEU, false, false, jobWizardHelper)"
+                id="BuildingDetails"
+                label="DisplayKey.get(&quot;Web.Policy.BOP.Quote.Building.Title&quot;, bOPBuildingEU.Building.BuildingNum)"/>
+            </ContentInput>
+            <ListViewInput
+              def="CoverageSummaryLV(bOPBuildingEU.SortedCoverages.toList(), bOPBuildingEU)"
+              labelAbove="true">
+              <Toolbar/>
+            </ListViewInput>
+          </InputIterator>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelIterator>
+  </PanelSet>
+</PCF>

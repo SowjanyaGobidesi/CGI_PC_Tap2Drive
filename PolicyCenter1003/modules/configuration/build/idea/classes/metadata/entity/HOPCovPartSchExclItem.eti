@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  effDatedBranchType="PolicyPeriod"
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPCovPartSchExclItem"
+  desc="HOP Coverage Part level exclucion schedule item"
+  table="hopcovpartschexclitem"
+  type="effdated">
+  <implementsEntity
+    name="HOPScheduledItem"/>
+  <implementsEntity
+    name="ScheduledItem"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"
+    impl="gw.lob.hop.schedule.HOPCovPartScheduleExclItemCoverableAdapter"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.hop.schedule.HOPCovPartScheduleExclItemCoverableAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPCovPartSchExclItemMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    fkentity="HOPCovPartScheduleExcl"
+    name="Schedule"
+    nullok="false"/>
+  <onetoone
+    cascadeDelete="true"
+    desc="The exclusion that applies to this scheduled item"
+    fkentity="HOPCovPartSchExclItemExcl"
+    name="ScheduledItemClause"
+    nullok="true"/>
+</entity>

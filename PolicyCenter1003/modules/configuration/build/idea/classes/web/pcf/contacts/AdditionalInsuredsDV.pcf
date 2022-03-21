@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AdditionalInsuredsDV">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="displayLabel"
+      type="boolean"/>
+    <Require
+      name="additionalInformationVisible"
+      type="boolean"/>
+    <Variable
+      initialValue="null"
+      name="existingAdditionalInsureds"
+      recalculateOnRefresh="true"
+      type="AccountContactView[]"/>
+    <Variable
+      initialValue="null"
+      name="otherContacts"
+      recalculateOnRefresh="true"
+      type="AccountContactView[]"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin)"
+      name="contactConfigPlugin"
+      type="gw.plugin.contact.IContactConfigPlugin"/>
+    <Variable
+      initialValue="new gw.pcf.contacts.AdditionalInsuredsDVUIHelper()"
+      name="helper"
+      type="gw.pcf.contacts.AdditionalInsuredsDVUIHelper"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured&quot;)"
+        visible="displayLabel"/>
+      <ListViewInput
+        editable="!(policyLine.Branch.Job typeis Submission) or perm.System.editsubmission"
+        labelAbove="true">
+        <Toolbar>
+          <AddButton
+            hideIfReadOnly="true"
+            id="AddContactsButton"
+            iterator="AdditionalInsuredLV"
+            label="DisplayKey.get(&quot;Web.Contact.Add&quot;)"
+            subMenuOnDemand="true">
+            <AddMenuItemIterator
+              elementName="contactType"
+              value="contactConfigPlugin.getAllowedContactTypesForPolicyContactRoleType(typekey.PolicyContactRole.TC_POLICYADDLINSURED)"
+              valueType="typekey.ContactType[]">
+              <IteratorSort
+                sortBy="contactType.DisplayName"
+                sortOrder="1"/>
+              <AddMenuItem
+                id="ContactType"
+                iterator="AdditionalInsuredLV"
+                label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, contactType)"
+                pickLocation="NewAdditionalInsuredPopup.push(policyLine, contactType)"/>
+            </AddMenuItemIterator>
+            <AddMenuItem
+              conversionExpression="policyLine.addNewAdditionalInsuredDetailForContact(PickedValue)"
+              id="AddFromSearch"
+              iterator="AdditionalInsuredLV"
+              label="DisplayKey.get(&quot;Web.Policy.Contact.FromAddressBook&quot;)"
+              pickLocation="ContactSearchPopup.push(TC_ADDITIONALINSURED)"/>
+            <AddMenuItem
+              id="AddExistingContact"
+              iterator="AdditionalInsuredLV"
+              label="DisplayKey.get(&quot;Web.Policy.Contact.AddExisting&quot;, PolicyAddlInsured.Type.TypeInfo.DisplayName)"
+              visible="true">
+              <AddMenuItemIterator
+                elementName="additionalInsured"
+                id="ContactOfSameType"
+                value="getExistingAdditionalInsureds()"
+                valueType="entity.AccountContactView[]">
+                <IteratorSort
+                  sortBy="additionalInsured.DisplayName"
+                  sortOrder="1"/>
+                <AddMenuItem
+                  id="ExistingAdditionalInsured"
+                  iterator="AdditionalInsuredLV"
+                  label="additionalInsured"
+                  toCreateAndAdd="policyLine.addNewAdditionalInsuredDetailForContact(additionalInsured.AccountContact.Contact)"/>
+              </AddMenuItemIterator>
+            </AddMenuItem>
+            <AddMenuItem
+              id="AddOtherContact"
+              iterator="AdditionalInsuredLV"
+              label="DisplayKey.get(&quot;Web.Policy.Contact.AddOtherContacts&quot;)"
+              visible="getOtherContacts().Count &gt; 0">
+              <AddMenuItemIterator
+                elementName="otherContact"
+                id="ContactOfOtherType"
+                value="getOtherContacts()"
+                valueType="entity.AccountContactView[]">
+                <IteratorSort
+                  sortBy="otherContact.DisplayName"
+                  sortOrder="1"/>
+                <AddMenuItem
+                  id="OtherContact"
+                  iterator="AdditionalInsuredLV"
+                  label="otherContact"
+                  toCreateAndAdd="policyLine.addNewAdditionalInsuredDetailForContact(otherContact.AccountContact.Contact)"/>
+              </AddMenuItemIterator>
+            </AddMenuItem>
+          </AddButton>
+          <IteratorButtons
+            addVisible="false"
+            id="IteratorButtons"
+            iterator="AdditionalInsuredLV"/>
+        </Toolbar>
+        <ListViewPanel
+          id="AdditionalInsuredLV">
+          <RowIterator
+            checkBoxVisible="openForEdit"
+            editable="true"
+            elementName="additionalInsuredDetail"
+            hasCheckBoxes="true"
+            hideCheckBoxesIfReadOnly="true"
+            toRemove="additionalInsuredDetail.PolicyAddlInsured.removeDetail(additionalInsuredDetail)"
+            value="policyLine.AdditionalInsureds*.PolicyAdditionalInsuredDetails"
+            valueType="entity.PolicyAddlInsuredDetail[]">
+            <IteratorSort
+              sortBy="additionalInsuredDetail.PolicyAddlInsured"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                action="EditPolicyContactRolePopup.push(additionalInsuredDetail.PolicyAddlInsured, openForEdit)"
+                id="Name"
+                label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.Name&quot;)"
+                value="additionalInsuredDetail.PolicyAddlInsured"
+                valueType="entity.PolicyAddlInsured"/>
+              <TypeKeyCell
+                editable="true"
+                id="Type"
+                label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.Type&quot;)"
+                required="true"
+                value="additionalInsuredDetail.AdditionalInsuredType"
+                valueType="typekey.AdditionalInsuredType">
+                <PostOnChange
+                  deferUpdate="false"
+                  onChange="helper.onAdditionalInsuredTypeChange(additionalInsuredDetail)"/>
+              </TypeKeyCell>
+              <TypeKeyCell
+                id="AdditionalInformationType"
+                label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.AdditionalInformationRequired&quot;)"
+                value="additionalInsuredDetail.additionalInformationType(additionalInsuredDetail.AdditionalInsuredType)"
+                valueType="AdditionalInformationType"
+                visible="additionalInformationVisible"/>
+              <TextCell
+                align="left"
+                editable="helper.additionalInformationRequired(additionalInsuredDetail)"
+                id="AdditionalInformation"
+                label="DisplayKey.get(&quot;Web.LineWizard.AdditionalInsured.AdditionalInformation&quot;)"
+                value="additionalInsuredDetail.AdditionalInformation"
+                visible="additionalInformationVisible"></TextCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+    </InputColumn>
+    <Code><![CDATA[function getExistingAdditionalInsureds() : AccountContactView[] {
+  if (existingAdditionalInsureds == null) {
+    existingAdditionalInsureds = policyLine.ExistingAdditionalInsureds.asViews()
+  }
+  return existingAdditionalInsureds
+}
+
+function getOtherContacts() : AccountContactView[] {
+  if (otherContacts == null) {
+    otherContacts = policyLine.AdditionalInsuredOtherCandidates.asViews()
+  }
+  return otherContacts
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

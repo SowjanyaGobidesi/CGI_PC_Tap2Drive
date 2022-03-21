@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Dwelling Usage"
+  name="DwellingUsage">
+  <typecode
+    code="primary"
+    desc="Primary"
+    name="Primary"
+    priority="10">
+  </typecode>
+  <typecode
+    code="secondary"
+    desc="Secondary"
+    name="Secondary"
+    priority="20">
+  </typecode>
+  <typecode
+    code="seasonal"
+    desc="Seasonal"
+    name="Seasonal"
+    priority="30">
+  </typecode>
+  <typecode
+    code="rental"
+    desc="Rental Property"
+    name="Rental Property"
+    priority="40">
+  </typecode>
+</typelist>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canEdit="perm.System.editpolicyroles"
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.viewpolicyfile and perm.System.viewparticipants"
+    id="PolicyFile_Participants"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Participants&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Participants(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="policyPeriod.Policy"
+      name="policy"
+      type="entity.Policy"/>
+    <Screen
+      editable="true"
+      id="PolicyFileParticipantsScreen">
+      <Toolbar>
+        <EditButtons/>
+        <IteratorButtons
+          iterator="ParticipantsLV"/>
+      </Toolbar>
+      <ListViewPanel
+        id="ParticipantsLV">
+        <RowIterator
+          checkBoxVisible="assignment.Role != TC_CREATOR"
+          editable="true"
+          elementName="assignment"
+          hasCheckBoxes="true"
+          hideCheckBoxesIfReadOnly="true"
+          toCreateAndAdd="policy.createAndAddRoleAssignment()"
+          toRemove="policy.removeFromRoleAssignments(assignment)"
+          value="policy.RoleAssignments"
+          valueType="entity.PolicyUserRoleAssignment[]">
+          <Row
+            editable="assignment.Role != TC_CREATOR">
+            <TypeKeyCell
+              editable="assignment.New"
+              filter="gw.assignment.AssignmentUtil.filterAssignableRoles( policy, VALUE )"
+              id="AssignmentRole"
+              label="DisplayKey.get(&quot;Web.JobRoles.Role&quot;)"
+              required="true"
+              unique="true"
+              value="assignment.Role"
+              valueType="typekey.UserRole"/>
+            <AltUserCell
+              editable="true"
+              id="AssignedUser"
+              label="DisplayKey.get(&quot;Web.JobRoles.AssignedUser&quot;)"
+              required="true"
+              value="assignment.AssignedUser"/>
+            <RangeCell
+              editable="true"
+              id="AssignedGroup"
+              label="DisplayKey.get(&quot;Web.Account.Participants.AssignedGroup&quot;)"
+              required="true"
+              value="assignment.AssignedGroup"
+              valueRange="gw.api.upgrade.Coercions.makeArray&lt;entity.Group&gt;(assignment.AssignedUser.AllGroups)"
+              valueType="entity.Group"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Page>
+</PCF>

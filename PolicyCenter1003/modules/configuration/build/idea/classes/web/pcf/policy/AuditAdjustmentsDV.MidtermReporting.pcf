@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AuditAdjustmentsDV"
+    mode="MidtermReporting">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <InputColumn>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.BillingAuditDV.Audits&quot;)"
+        visible="policyPeriod.IsAuditable"/>
+      <TypeKeyInput
+        id="FinalAudit"
+        label="DisplayKey.get(&quot;Web.BillingAuditDV.FinalAudit&quot;)"
+        value="policyPeriodBillingInstructionsManager.FinalAuditOptionChoice"
+        valueType="typekey.FinalAuditOption"
+        visible="policyPeriod.IsAuditable"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

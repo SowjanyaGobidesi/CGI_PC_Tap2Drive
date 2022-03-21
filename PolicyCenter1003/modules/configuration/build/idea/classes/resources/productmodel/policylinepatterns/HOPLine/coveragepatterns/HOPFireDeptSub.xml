@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ConditionPattern
+  codeIdentifier="HOPFireDeptSub"
+  conditionSubtype="HOPLineCond"
+  coverageCategory="z94j696j28oei0bkk2b3eaukjnb"
+  existence="Electable"
+  lookupTableName="HOPLineCond"
+  owningEntityType="HOPLine"
+  policyLinePattern="HOPLine"
+  priority="200"
+  public-id="z1jg2crrqf62jansntd859612e9"
+  referenceDateByType="PolicyTerm">
+  <CovTerms/>
+</ConditionPattern>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="DesktopActivitiesScreen"
+    mode="federated">
+    <Variable
+      initialValue="{}"
+      name="processedActivities"
+      type="Set&lt;String&gt;"/>
+    <!-- Activities that are being processed will be highlighted until the page is refreshed, to mark that their state on the UI might be outdated 
+         and need to be refreshed when federated data service finishes processing. Please consider adding any custom mechanisms depending on customer's needs.-->
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.DesktopActivities&quot;)"/>
+    <AlertBar
+      action="gw.api.web.activity.CanceledActivitiesAlertUtil.goToCanceledActivities()"
+      dismissed="dismissed"
+      id="DesktopActivities_CanceledActivitiesAlertBar"
+      label="DisplayKey.get(&quot;Web.DesktopActivities.CanceledActivitiesAlert&quot;)"/>
+    <PanelRef
+      def="FederatedDesktopActivitiesLV(processedActivities)">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="openAssignmentPopup(CheckedValues)"
+          flags="all canAssignActivity"
+          id="DesktopActivities_AssignButton"
+          iterator="FederatedDesktopActivitiesLV.FederatedDesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Assign&quot;)"
+          shortcut="A"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="skipActivities(CheckedValues)"
+          flags="all canSkipActivity"
+          id="DesktopActivities_SkipButton"
+          iterator="FederatedDesktopActivitiesLV.FederatedDesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Skip&quot;)"
+          shortcut="S"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="completeActivities(CheckedValues)"
+          flags="all canCompleteActivity"
+          id="DesktopActivities_CompleteButton"
+          iterator="FederatedDesktopActivitiesLV.FederatedDesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.ActivitySearch.Results.Complete&quot;)"
+          shortcut="O"/>
+        <ToolbarInput
+          id="DesktopActivities_LateRefreshInfo"
+          value="DisplayKey.get('Web.Activity.FederatedData.Processing')"
+          valueType="String"
+          visible="!processedActivities.Empty"/>
+        <ToolbarDivider/>
+      </Toolbar>
+    </PanelRef>
+    <Code><![CDATA[uses gw.api.web.desktop.data.activity.ActivityDTO
+
+    //This is just an example implementation of late refresh handling - the items that are still being processed by federated data are being highlighted until you refresh the page.
+    //Customer might choose to mark them otherwise, or even force the refresh after some period of time.
+    public function onPopupCancel() {
+      processedActivities.clear()
+    }
+    
+    public function openAssignmentPopup(checkedValues : ActivityDTO[]) {
+      addProcessedActivities(checkedValues)
+      MulticlusterAssignActivitiesPopup.push(
+        gw.api.web.activity.MulticlusterActivityAssignmentPopup.newInstance(checkedValues, gw.assignment.AssignmentUtil.DefaultUser, \ -> onPopupCancel()))
+    }
+    
+    public function skipActivities(checkedValues : ActivityDTO[]) {
+      addProcessedActivities(checkedValues)
+      gw.api.web.activity.FederatedActivityUtil.skipActivities(checkedValues)
+    }
+
+    public function completeActivities(checkedValues : ActivityDTO[]) {
+      addProcessedActivities(checkedValues)
+      gw.api.web.activity.FederatedActivityUtil.completeActivities(checkedValues)
+    }
+    
+    property get dismissed() : Boolean {
+      return not gw.api.web.activity.FederatedCanceledActivitiesAlertUtil.hasCanceledActivitiesSinceLastDismissed()
+    }
+
+    property set dismissed(d : Boolean) {
+      if (d) {
+        gw.api.web.activity.CanceledActivitiesAlertUtil.onDismiss()
+      }
+    }
+    function addProcessedActivities(checkedValues : ActivityDTO[]) {
+      processedActivities.addAll(checkedValues.map(\elt -> elt.PublicId).toSet())
+    }
+    ]]></Code>
+  </Screen>
+</PCF>

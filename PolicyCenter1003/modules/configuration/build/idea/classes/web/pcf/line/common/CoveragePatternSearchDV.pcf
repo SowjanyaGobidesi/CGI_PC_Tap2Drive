@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CoveragePatternSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.productmodel.ClausePatternSearchCriteria"/>
+    <Require
+      name="policyLinePattern"
+      type="gw.api.productmodel.PolicyLinePattern"/>
+    <Require
+      name="categories"
+      type="String[]"/>
+    <Require
+      name="includeElseExclude"
+      type="boolean"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="CoverageCategory"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Coverage.SearchPage.NoneSelectedLabel&quot;)"
+        value="searchCriteria.CoverageCategory"
+        valueRange="filterCategories()"
+        valueType="gw.api.productmodel.CoverageCategory"/>
+      <TextInput
+        editable="true"
+        id="Keyword"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Keyword&quot;)"
+        value="searchCriteria.Keyword"/>
+      <RangeRadioInput
+        editable="true"
+        id="SearchType"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+        required="true"
+        value="searchCriteria.SearchType"
+        valueRange="{ CoveragePatternSearchType.TC_EXCLCOND, CoveragePatternSearchType.TC_CONDITION, CoveragePatternSearchType.TC_EXCLUSION }"
+        valueType="typekey.CoveragePatternSearchType"
+        visible="searchCriteria.SearchType != CoveragePatternSearchType.TC_COVERAGE"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+    <Code><![CDATA[function filterCategories() : java.util.List<gw.api.productmodel.CoverageCategory> {
+  if (includeElseExclude) {
+    return policyLinePattern.CoverageCategories.where( \ c -> categories.contains( c.PublicID ) ).toList()
+  }
+  else {
+    return policyLinePattern.CoverageCategories.where( \ c -> !categories.contains( c.PublicID ) ).toList()
+  }
+}
+]]></Code>
+  </DetailViewPanel>
+</PCF>

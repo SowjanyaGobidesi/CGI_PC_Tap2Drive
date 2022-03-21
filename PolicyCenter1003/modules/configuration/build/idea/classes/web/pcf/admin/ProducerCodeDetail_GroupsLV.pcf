@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ProducerCodeDetail_GroupsLV">
+    <Require
+      name="producerCode"
+      type="ProducerCode"/>
+    <RowIterator
+      editable="false"
+      elementName="groupProducerCode"
+      value="producerCode.GroupProducerCodes.where( \ g -&gt; g.Group.GroupType != TC_ROOT )"
+      valueType="entity.GroupProducerCode[]">
+      <Row>
+        <AltGroupCell
+          action="GroupDetailPage.go(groupProducerCode.Group)"
+          id="Group"
+          label="DisplayKey.get(&quot;Web.Admin.ProducerCodeDetail.Group&quot;)"
+          value="groupProducerCode.Group"/>
+        <TextCell
+          action="OrganizationDetail.go(groupProducerCode.Group.Organization)"
+          id="Organization"
+          label="DisplayKey.get(&quot;Web.Admin.ProducerCodeDetail.Organization&quot;)"
+          value="groupProducerCode.Group.Organization"
+          valueType="entity.Organization"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

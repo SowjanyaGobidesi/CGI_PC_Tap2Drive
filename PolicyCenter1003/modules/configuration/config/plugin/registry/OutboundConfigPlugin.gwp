@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="OutboundConfigPlugin">
+  <plugin-java
+    javaclass="com.guidewire.outboundfile.plugin.OutboundConfigPlugin">
+    <param
+      name="externalConfigFileLocation"
+      value="/tmp/guidewire/outbound/config/OutboundFileConfiguration.xml"/>
+    <param
+      name="updateExisting"
+      value="false"/>
+  </plugin-java>
+</plugin>

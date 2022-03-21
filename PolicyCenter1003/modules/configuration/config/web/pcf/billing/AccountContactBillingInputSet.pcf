@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AccountContactBillingInputSet">
+    <Require
+      name="account"
+      type="entity.Account"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Require
+      name="preferredSettlementCurrency"
+      type="typekey.Currency"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin)"
+      name="contactConfigPlugin"
+      type="gw.plugin.contact.IContactConfigPlugin"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.billing.IBillingSystemPlugin)"
+      name="billingSystemPlugin"
+      type="gw.plugin.billing.IBillingSystemPlugin"/>
+    <TextInput
+      available="openForEdit"
+      hideChildrenIfReadOnly="false"
+      id="AltBillingAccount"
+      label="DisplayKey.get(&quot;Web.Policy.Billing.AltBillingAccount&quot;)"
+      outputConversion="gw.billing.PolicyPeriodBillingInstructionsManager.formatAccount(VALUE)"
+      required="policyPeriodBillingInstructionsManager.AlternateBillerRequired"
+      value="policyPeriodBillingInstructionsManager.AltBillingAccountNumber"
+      visible="policyPeriodBillingInstructionsManager.AlternateBillerVisible">
+      <PickerMenuItem
+        action="AccountSearchPopup.push()"
+        id="Search"
+        label="DisplayKey.get(&quot;Button.Search&quot;)"
+        onPick="policyPeriodBillingInstructionsManager.AltBillingAccountNumber = PickedValue.AccountNumber"
+        visible="openForEdit and policyPeriodBillingInstructionsManager.EnableAccountSearchPopup"/>
+      <PickerMenuItem
+        action="BillingAccountSearchPopup.push(preferredSettlementCurrency)"
+        id="SearchBillingAccount"
+        label="DisplayKey.get(&quot;Button.Search&quot;)"
+        onPick="policyPeriodBillingInstructionsManager.AltBillingAccountNumber = PickedValue"
+        visible="openForEdit and policyPeriodBillingInstructionsManager.EnableBillingAccountSearchPopup"/>
+      <MenuItem
+        id="SubAccounts"
+        label="DisplayKey.get(&quot;Web.Policy.Billing.BillingSubAccounts&quot;)"
+        subMenuOnDemand="true"
+        visible="openForEdit and policyPeriodBillingInstructionsManager.SubAccountsVisible">
+        <MenuItemIterator
+          elementName="subAccount"
+          value="policyPeriodBillingInstructionsManager?.SubAccounts"
+          valueType="gw.plugin.billing.BillingAccountSearchResult[]">
+          <MenuItem
+            action="if (subAccount.AccountNumber.HasContent) {policyPeriodBillingInstructionsManager.AltBillingAccountNumber = subAccount.AccountNumber}"
+            available="subAccount.AccountNumber.HasContent"
+            id="SubAccount"
+            label="subAccount.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        action="policyPeriodBillingInstructionsManager.AltBillingAccountNumber = null"
+        id="Remove"
+        label="DisplayKey.get(&quot;Web.Generic.Remove&quot;)"
+        visible="policyPeriodBillingInstructionsManager.AltBillingAccountNumber != null and openForEdit"/>
+      <PostOnChange/>
+    </TextInput>
+    <TextInput
+      action="EditAccountContactPopup.push(policyPeriodBillingInstructionsManager.getAccountContactForBilling(account))"
+      actionAvailable="policyPeriodBillingInstructionsManager.HasAccountContactForBilling"
+      available="openForEdit"
+      hideChildrenIfReadOnly="false"
+      id="ChangeBillingContactButton"
+      label="DisplayKey.get(&quot;Web.Policy.BillingContact.Name&quot;)"
+      value="policyPeriodBillingInstructionsManager.getAccountContactForBilling(account)"
+      valueType="entity.AccountContact"
+      visible="policyPeriodBillingInstructionsManager.BillingContactVisible">
+      <MenuItemIterator
+        elementName="typeOfContact"
+        value="contactConfigPlugin.getAllowedContactTypesForPolicyContactRoleType(TC_POLICYBILLINGCONTACT)"
+        valueType="typekey.ContactType[]">
+        <IteratorSort
+          sortBy="typeOfContact.DisplayName"
+          sortOrder="1"/>
+        <PickerMenuItem
+          action="NewAccountContactPopup.push(account, typekey.AccountContactRole.TC_BILLINGCONTACT, typeOfContact)"
+          id="contactType"
+          label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, typeOfContact)"
+          onPick="policyPeriodBillingInstructionsManager.AccountContactForBilling = PickedValue "
+          visible="openForEdit"/>
+      </MenuItemIterator>
+      <PickerMenuItem
+        action="ContactSearchPopup.push(TC_BILLINGCONTACT)"
+        id="BillingABContactAdder"
+        label="DisplayKey.get(&quot;Web.Button.FromAddressBook&quot;)"
+        onPick="policyPeriodBillingInstructionsManager.getOrCreateAccountContact(PickedValue, account)"
+        visible="openForEdit"/>
+      <MenuItem
+        id="ExistingBillingContact"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.ExistingBillingContacts&quot;)"
+        subMenuOnDemand="true"
+        visible="openForEdit">
+        <MenuItemIterator
+          elementName="billingContactExistingCandidate"
+          id="UnassignedAccountContactIterator"
+          value="policyPeriodBillingInstructionsManager.getBillingContacts(account)"
+          valueType="entity.AccountContact[]">
+          <IteratorSort
+            sortBy="billingContactExistingCandidate.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="policyPeriodBillingInstructionsManager.AccountContactForBilling = billingContactExistingCandidate"
+            id="UnassignedAccountContact"
+            label="billingContactExistingCandidate"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="OtherExistingContact"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.OtherContacts&quot;)"
+        subMenuOnDemand="true"
+        visible="openForEdit">
+        <MenuItemIterator
+          elementName="billingContactOtherCandidate"
+          id="UnassignedContactIterator"
+          value="policyPeriodBillingInstructionsManager.getNonBillingContacts(account)"
+          valueType="entity.AccountContact[]">
+          <IteratorSort
+            sortBy="billingContactOtherCandidate.DisplayName"
+            sortOrder="1"/>
+          <MenuItem
+            action="policyPeriodBillingInstructionsManager.AccountContactForBilling = billingContactOtherCandidate"
+            id="UnassignedContact"
+            label="billingContactOtherCandidate"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        action="policyPeriodBillingInstructionsManager.AccountContactForBilling = null"
+        id="Remove"
+        label="DisplayKey.get(&quot;Web.Generic.Remove&quot;)"
+        visible="policyPeriodBillingInstructionsManager.HasAccountContactForBilling and openForEdit"/>
+    </TextInput>
+  </InputSet>
+</PCF>

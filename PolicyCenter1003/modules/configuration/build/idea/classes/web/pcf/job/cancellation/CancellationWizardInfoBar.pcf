@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InfoBar
+    id="CancellationWizardInfoBar">
+    <Require
+      name="cancellation"
+      type="Cancellation"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <InfoBarElement
+      icon="cancellation.Icon"
+      iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+      iconType="svgFileName"
+      id="CancellationLabel"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.JobStatus&quot;, cancellation.DisplayType,policyPeriod.Status)"/>
+    <InfoBarElement
+      icon="policyPeriod.Policy.Product.Icon"
+      iconType="svgFileName"
+      id="LOBLabel"
+      label="policyPeriod.Policy.Product"/>
+    <InfoBarElement
+      id="EffectiveDate"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.EffectiveDate&quot;, gw.api.util.StringUtil.formatDate(policyPeriod.EditEffectiveDate,&quot;short&quot;))"/>
+    <InfoBarElement
+      id="AccountName"
+      value="policyPeriod.PrimaryNamedInsured.DisplayName"/>
+    <InfoBarElement
+      action="AccountFileForward.go(cancellation.Policy.Account)"
+      id="AccountNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.AccountNumber&quot;)"
+      value="cancellation.Policy.Account.AccountNumber"/>
+    <InfoBarElement
+      action="PolicyFileForward.go(cancellation.LatestPeriod.PolicyNumber)"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.PolicyNumber&quot;)"
+      value="cancellation.LatestPeriod.PolicyNumberDisplayString"/>
+    <InfoBarElement
+      id="Underwriter"
+      label="DisplayKey.get(&quot;Web.Wizard.InfoBar.Underwriter&quot;)"
+      value="cancellation.Underwriter"
+      visible="cancellation.Underwriter != null"/>
+  </InfoBar>
+</PCF>

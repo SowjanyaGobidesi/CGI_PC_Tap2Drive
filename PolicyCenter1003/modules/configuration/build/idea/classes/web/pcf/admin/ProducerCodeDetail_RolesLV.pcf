@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ProducerCodeDetail_RolesLV">
+    <ExposeIterator
+      valueType="entity.ProducerCodeRole"
+      widget="ProducerCodeDetail_RolesLV"/>
+    <Require
+      name="producerCode"
+      type="ProducerCode"/>
+    <Variable
+      initialValue="producerCode.getAvailableRoles()"
+      name="producerCodeRoles"
+      type="Role[]"/>
+    <RowIterator
+      editable="true"
+      elementName="producerCodeRole"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="producerCode.addToProducerCodeRoles(producerCodeRole); producerCodeRoles = producerCode.getAvailableRoles()"
+      toRemove="producerCode.removeFromProducerCodeRoles(producerCodeRole)"
+      value="producerCode.ProducerCodeRoles"
+      valueType="entity.ProducerCodeRole[]">
+      <Row>
+        <RangeCell
+          action="RoleDetailPage.go(producerCodeRole.Role)"
+          actionAvailable="not CurrentLocation.InEditMode"
+          editable="true"
+          id="RoleName"
+          label="DisplayKey.get(&quot;Web.Admin.ProducerCodeDetail.Roles.Name&quot;)"
+          required="true"
+          unique="true"
+          value="producerCodeRole.Role"
+          valueRange="producerCodeRoles"
+          valueType="entity.Role">
+          <PostOnChange
+            deferUpdate="false"/>
+        </RangeCell>
+        <TextCell
+          id="RoleDescription"
+          label="DisplayKey.get(&quot;Web.Admin.ProducerCodeDetail.Roles.Description&quot;)"
+          value="producerCodeRole.Role.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="BABobtailLiabCov"
+  coverageCategory="BAPOwnedLiabGrp"
+  coverageSubtype="BusinessAutoCov"
+  coveredPartyType="ThirdParty"
+  existence="Suggested"
+  lookupTableName="BACov"
+  owningEntityType="BusinessAutoLine"
+  policyLinePattern="BusinessAutoLine"
+  priority="50"
+  public-id="BABobtailLiabCov"
+  referenceDateByType="DefinedObject">
+  <CovTerms/>
+</CoveragePattern>

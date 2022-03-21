@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  PolicyPeriod  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Tracks references from one term to another for use in archiving / retrieve."
+  entity="CrossTermLink"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="crosstermlink"
+  type="retireable">
+  <column
+    desc="Type of the from and to entities"
+    name="LinkType"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Public ID of the owner of the cross term link"
+    name="Owner"
+    nullok="false"
+    type="publicid"/>
+  <column
+    desc="Public ID of the target of the cross term link"
+    name="Target"
+    nullok="false"
+    type="publicid"/>
+  <foreignkey
+    archivingOwner="target"
+    desc="Branch of the link owner"
+    fkentity="PolicyPeriod"
+    name="OwningBranch"
+    nullok="false"/>
+</entity>

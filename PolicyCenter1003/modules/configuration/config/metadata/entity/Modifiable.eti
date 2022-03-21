@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="Modifiable"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.impl.ModifiableInternalMethods"
+    impl="com.guidewire.pc.domain.policy.impl.ModifiableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.ModifiablePublicMethods"
+    impl="com.guidewire.pc.domain.policy.impl.ModifiableImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifiableAdapter"/>
+  <fulldescription><![CDATA[
+    Delegate that can be implemented by any entity that has modifiers.
+  ]]></fulldescription>
+</delegate>

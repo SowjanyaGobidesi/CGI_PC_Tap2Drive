@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPDwellSchExclItemExcl">
+  <Columns>
+    <Column
+      beanPath="HOPDwellSchExclItemExcl.HOPDwellScheduleExclItem.Schedule"
+      name="schedule"/>
+  </Columns>
+  <DisplayName>schedule.DisplayName</DisplayName>
+</Entity>

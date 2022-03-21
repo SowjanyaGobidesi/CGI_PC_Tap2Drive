@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="PaymentGatewayPlugin"
+  name="PaymentGatewayPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.paymentgateway.StandAlonePaymentGatewayPlugin"></plugin-gosu>
+</plugin>

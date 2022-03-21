@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="AdditionalNamedInsuredInputSet">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin)"
+      name="contactConfigPlugin"
+      type="gw.plugin.contact.IContactConfigPlugin"/>
+    <Variable
+      initialValue="null"
+      name="unassignedAdditionalNamedInsureds"
+      recalculateOnRefresh="true"
+      type="AccountContactView[]"/>
+    <Variable
+      initialValue="null"
+      name="otherContacts"
+      recalculateOnRefresh="true"
+      type="AccountContactView[]"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Policy.Contact.NamedInsureds&quot;)"/>
+    <ListViewInput
+      editable="true"
+      labelAbove="true">
+      <Toolbar>
+        <AddButton
+          hideIfReadOnly="true"
+          id="AddContactsButton"
+          iterator="NamedInsuredsLV"
+          label="DisplayKey.get(&quot;Web.Contact.Add&quot;)"
+          subMenuOnDemand="true"
+          visible="openForEdit">
+          <AddMenuItemIterator
+            elementName="contactType"
+            value="contactConfigPlugin.getAllowedContactTypesForPolicyContactRoleType(TC_POLICYADDLNAMEDINSURED)"
+            valueType="typekey.ContactType[]">
+            <IteratorSort
+              sortBy="contactType.DisplayName"
+              sortOrder="1"/>
+            <AddMenuItem
+              id="ContactType"
+              iterator="NamedInsuredsLV"
+              label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, contactType)"
+              pickLocation="NewAdditionalNamedInsuredPopup.push(period, contactType)"/>
+          </AddMenuItemIterator>
+          <AddMenuItem
+            conversionExpression="period.addNewPolicyAddlNamedInsuredForContact(PickedValue)"
+            id="AddFromSearch"
+            iterator="NamedInsuredsLV"
+            label="DisplayKey.get(&quot;Web.Policy.Contact.FromAddressBook&quot;)"
+            pickLocation="ContactSearchPopup.push(TC_NAMEDINSURED)"/>
+          <AddMenuItem
+            id="AddExistingContact"
+            iterator="NamedInsuredsLV"
+            label="DisplayKey.get(&quot;Web.Policy.Contact.AddExisting&quot;, PolicyAddlNamedInsured.Type.TypeInfo.DisplayName)"
+            visible="true">
+            <AddMenuItemIterator
+              elementName="namedInsured"
+              id="ContactOfSameType"
+              value="getUnassignedAdditionalNamedInsureds()"
+              valueType="entity.AccountContactView[]">
+              <IteratorSort
+                sortBy="namedInsured.DisplayName"
+                sortOrder="1"/>
+              <AddMenuItem
+                id="ExistingAdditionalNamedInsured"
+                iterator="NamedInsuredsLV"
+                label="namedInsured"
+                toCreateAndAdd="period.addNewPolicyAddlNamedInsuredForContact(namedInsured.AccountContact.Contact)"/>
+            </AddMenuItemIterator>
+            <AddMenuItem
+              id="AddAll"
+              iterator="NamedInsuredsLV"
+              label="DisplayKey.get(&quot;Web.Account.Contact.AddAll&quot;)"
+              toCreateAndAdd="period.addAllExistingAdditionalNamedInsureds()"
+              visible="unassignedAdditionalNamedInsureds.length &gt; 0"/>
+          </AddMenuItem>
+          <AddMenuItem
+            id="AddOtherContact"
+            iterator="NamedInsuredsLV"
+            label="DisplayKey.get(&quot;Web.Policy.Contact.AddOtherContacts&quot;)"
+            visible="getOtherContacts().Count &gt; 0">
+            <AddMenuItemIterator
+              elementName="otherContact"
+              id="ContactOfOtherType"
+              value="getOtherContacts()"
+              valueType="entity.AccountContactView[]">
+              <IteratorSort
+                sortBy="otherContact.DisplayName"
+                sortOrder="1"/>
+              <AddMenuItem
+                id="OtherContact"
+                iterator="NamedInsuredsLV"
+                label="otherContact"
+                toCreateAndAdd="period.addNewPolicyAddlNamedInsuredForContact(otherContact.AccountContact.Contact)"/>
+            </AddMenuItemIterator>
+          </AddMenuItem>
+        </AddButton>
+        <IteratorButtons
+          id="ANIIteratorButtons"
+          iterator="NamedInsuredsLV"/>
+      </Toolbar>
+      <ListViewPanel
+        id="NamedInsuredsLV">
+        <RowIterator
+          editable="openForEdit"
+          elementName="additionalNamedInsured"
+          hasCheckBoxes="true"
+          hideCheckBoxesIfReadOnly="true"
+          toRemove="period.removePolicyNamedInsured(additionalNamedInsured)"
+          value="period.PolicyContactRoles.whereTypeIs(PolicyAddlNamedInsured)"
+          valueType="entity.PolicyAddlNamedInsured[]">
+          <Variable
+            initialValue="gw.api.util.JurisdictionMappingUtil.getJurisdiction(additionalNamedInsured.AccountContactRole.AccountContact.Contact.PrimaryAddress)"
+            name="referenceState"
+            type="Jurisdiction"/>
+          <Variable
+            initialValue="referenceState == null ? period.EditEffectiveDate : period.getReferenceDateForCurrentJob(referenceState)"
+            name="referenceDate"
+            type="java.util.Date"/>
+          <Variable
+            initialValue="period.Job.NewTerm ? null : additionalNamedInsured.IndustryCode"
+            name="previousIndustryCode"
+            type="IndustryCode"/>
+          <IteratorSort
+            sortBy="additionalNamedInsured"
+            sortOrder="1"/>
+          <Row
+            editable="openForEdit">
+            <TextCell
+              action="EditPolicyContactRolePopup.push(additionalNamedInsured, openForEdit)"
+              id="Name"
+              label="DisplayKey.get(&quot;Web.Policy.NamedInsured.NameOnly&quot;)"
+              value="additionalNamedInsured"
+              valueType="entity.PolicyAddlNamedInsured"/>
+            <TextCell
+              editable="true"
+              id="Relationship"
+              label="DisplayKey.get(&quot;Web.SubmissionWizard.NamedInsured.Relationship&quot;)"
+              value="additionalNamedInsured.Relationship"
+              wrap="true"/>
+            <!-- IndustryCode is visible on commercial policies CC-52306 -->
+            <IndustryCodeCell
+              domain="typekey.IndustryCodeType.TC_SIC"
+              editable="true"
+              id="IndustryCode"
+              label="DisplayKey.get(&quot;Web.SubmissionWizard.NamedInsured.IndustryCode&quot;)"
+              pickLocation="IndustryCodeSearchPopup.push(typekey.IndustryCodeType.TC_SIC, referenceDate, previousIndustryCode)"
+              referenceDate="referenceDate"
+              value="(additionalNamedInsured.AccountContactRole as NamedInsured).IndustryCode"
+              valueVisible="additionalNamedInsured.AccountContactRole.AccountContact.Company"
+              visible="period.Policy.Product.isContactTypeSuitableForProductAccountType(Company)"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+    <Code>function getUnassignedAdditionalNamedInsureds() : AccountContactView[] {
+  if (unassignedAdditionalNamedInsureds == null) {
+    unassignedAdditionalNamedInsureds = period.UnassignedAdditionalNamedInsureds.asViews()
+  }
+  return unassignedAdditionalNamedInsureds
+}
+function getOtherContacts() : AccountContactView[] {
+  if (otherContacts == null) {
+    otherContacts = period.AdditionalNamedInsuredOtherCandidates.asViews()
+  }
+    return otherContacts
+}</Code>
+  </InputSet>
+</PCF>

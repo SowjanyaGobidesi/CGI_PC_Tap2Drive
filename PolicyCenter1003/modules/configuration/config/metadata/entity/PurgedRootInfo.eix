@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="PurgedRootInfo">
+  <column
+    desc="Attribute name related to the purged root."
+    name="AttributeName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The value of the attribute name for the purged root."
+    name="AttributeValue"
+    nullok="true"
+    type="shorttext"/>
+</internalExtension>

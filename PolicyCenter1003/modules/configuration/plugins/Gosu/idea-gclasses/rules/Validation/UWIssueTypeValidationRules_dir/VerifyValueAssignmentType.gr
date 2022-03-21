@@ -1,0 +1,26 @@
+package rules.Validation.UWIssueTypeValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("Verify Value Assignment Type")
+internal class VerifyValueAssignmentType {
+  static function doCondition(uWIssueType   :   entity.UWIssueType) : boolean {
+/*start00rule*/
+return uWIssueType.Comparator != null and uWIssueType.Comparator != ValueComparator.TC_NONE
+/*end00rule*/
+}
+
+  static function doAction(uWIssueType   :   entity.UWIssueType, actions : gw.rules.Action) {
+/*start00rule*/
+// Ensure that an assignment type is defined if either of the numeric comparators is chosen
+var comparison = uWIssueType.Comparator
+var assignmentType = uWIssueType.DefaultValueAssignmentType
+if ((comparison == TC_NUMERIC_GE or comparison == TC_NUMERIC_LE or comparison == TC_MONETARY_GE or
+    comparison == TC_MONETARY_LE) and assignmentType == null) {
+  uWIssueType.rejectField("DefaultValueAssignmentType",
+      ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("UWIssueType.Error.InvalidAssignmentValueType"),
+      null, null)
+} 
+/*end00rule*/
+  }
+}

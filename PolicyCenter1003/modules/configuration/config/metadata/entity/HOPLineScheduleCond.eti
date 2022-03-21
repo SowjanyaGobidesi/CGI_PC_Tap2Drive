@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPLineScheduleCond"
+  desc="HOP Line condition with a schedule"
+  supertype="HOPLineCond">
+  <implementsInterface
+    iface="gw.api.domain.Schedule"
+    impl="gw.lob.hop.schedule.HOPLineScheduleCondImpl"/>
+  <implementsEntity
+    name="ScheduleAutoNumberSequence"/>
+  <array
+    arrayentity="HOPLineScheduleCondItem"
+    cascadeDelete="true"
+    desc="Scheduled Items"
+    name="HOPLineScheduledItems"/>
+</subtype>

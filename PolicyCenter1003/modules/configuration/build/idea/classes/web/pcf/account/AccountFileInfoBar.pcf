@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    id="AccountFileInfoBar">
+    <Require
+      name="account"
+      type="Account"/>
+    <InfoBarElement
+      icon="&quot;insured&quot;"
+      iconType="svgFileName"
+      id="AccountLabel"
+      label="DisplayKey.get(&quot;Web.AccountFileInfoBar.AccountName&quot;)"/>
+    <InfoBarElement
+      id="AccountName"
+      value="account.AccountHolderContact.DisplayName"/>
+    <InfoBarElement
+      id="Account"
+      label="DisplayKey.get(&quot;Web.AccountFileInfoBar.AccountNumber&quot;)"
+      value="account.AccountNumber"/>
+  </InfoBar>
+</PCF>

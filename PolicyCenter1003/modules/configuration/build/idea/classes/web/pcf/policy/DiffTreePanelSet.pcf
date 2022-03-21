@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="DiffTreePanelSet">
+    <Require
+      name="branchName1"
+      type="String"/>
+    <Require
+      name="branchName2"
+      type="String"/>
+    <Require
+      name="rootNode"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <Variable
+      initialValue="rootNode != null and rootNode.NumChildren &gt; 0"
+      name="differencesExist"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <CardViewPanel>
+      <Card
+        id="ComparisonDiffTree"
+        title="DisplayKey.get(&quot;Web.ComparisonPanelSet.SliceChanges&quot;, branchName1, branchName2)"
+        visible="differencesExist">
+        <PanelRef>
+          <Toolbar/>
+          <ListViewPanel
+            disableUserCustomization="true"
+            id="DiffTreePanelLV">
+            <RowTree
+              contentType="gw.api.diff.node.IDiffTreeNode"
+              elementName="node"
+              id="DiffTree"
+              value="rootNode">
+              <Row
+                id="DiffTreeNode"
+                useTitleStyle="node.IsTitle">
+                <TextCell
+                  enableSort="false"
+                  id="item"
+                  label="DisplayKey.get(&quot;Web.ComparisonPanelSet.Item&quot;)"
+                  value="node.Label"/>
+                <TextCell
+                  align="center"
+                  enableSort="false"
+                  id="value1"
+                  label="branchName1"
+                  minWidth="25em"
+                  value="node.Value1"/>
+                <TextCell
+                  align="center"
+                  enableSort="false"
+                  id="value2"
+                  label="DisplayKey.get(&quot;Web.Differences.LOB.Common.DiffTreePreemptionLabel&quot;, branchName2)"
+                  minWidth="25em"
+                  value="node.Value2"/>
+              </Row>
+            </RowTree>
+          </ListViewPanel>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </PanelSet>
+</PCF>

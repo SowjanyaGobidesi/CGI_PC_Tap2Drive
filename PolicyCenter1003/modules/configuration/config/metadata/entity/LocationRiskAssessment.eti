@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<entity
+  autoSplit="false"
+  effDatedBranchType="PolicyPeriod"
+  exportable="true"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="LocationRiskAssessment"
+  desc="Risk assessment result of a policy location"
+  table="locationriskassessment"
+  type="effdated">
+  <foreignkey
+    fkentity="PolicyLocation"
+    name="PolicyLocation"
+    nullok="false"/>
+  <implementsEntity
+    name="RiskAssessmentResult"/>
+  <column
+    desc="Hash of fields used to assess this location"
+    name="InputChecksum"
+    nullok="false"
+    type="shorttext"/>
+  <implementsInterface
+    iface="gw.riskassessment.LocationRiskAssessmentPublicMethods"
+    impl="gw.riskassessment.LocationRiskAssessmentImpl"/>
+</entity>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A modifier for Business Vehicles"
+  effDatedBranchType="PolicyPeriod"
+  entity="BusinessVehicleModifier"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="bavehiclemodifier"
+  type="effdated">
+  <implementsEntity
+    name="Modifier"/>
+  <implementsInterface
+    iface="gw.api.domain.ModifierAdapter"
+    impl="gw.lob.ba.BusinessVehicleModifierAdapter"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.ba.BusinessVehicleModifierMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    desc="The Business Vehicle for which this modifier applies"
+    fkentity="BusinessVehicle"
+    name="Vehicle"
+    nullok="false"/>
+</entity>

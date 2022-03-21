@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Entity
+  name="AccountingContact">
+  <Columns/>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("entity.AccountingContact")
+    
+  ]]></DisplayName>
+</Entity>

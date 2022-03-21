@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="(perm.User.DevAllAccess or perm.System.internaltools)"
+    id="PolicyFile_Transactions"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Transactions.FinancialTransactions&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Transactions(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <BulletPointTextInput
+            action="PolicyFile_Transactions_AllPopup.push(period, asOfDate)"
+            id="AllTransactions"
+            value="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions&quot;)"/>
+          <BulletPointTextInput
+            action="PolicyFile_Transactions_ByJobPopup.push(period, asOfDate)"
+            id="ByJob"
+            value="DisplayKey.get(&quot;Web.PolicyFile.Transactions.TransactionsByJob&quot;)"/>
+          <BulletPointTextInput
+            action="PolicyFile_Transactions_ByPeriodPopup.push(period, asOfDate)"
+            id="ByPeriod"
+            value="DisplayKey.get(&quot;Web.PolicyFile.Transactions.TransactionsByPeriod&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

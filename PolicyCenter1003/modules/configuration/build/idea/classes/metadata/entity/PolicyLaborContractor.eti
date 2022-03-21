@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="PolicyLaborContractor"
+  supertype="WCLaborContact">
+  <fulldescription><![CDATA[
+    The insured entity that provides employees on a long term basis to work
+    at/for a third party business entity.
+
+  ]]></fulldescription>
+</subtype>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="editScreen"
+    id="RewriteWizard_PaymentScreen">
+    <Require
+      name="rewrite"
+      type="Rewrite"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="editScreen"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="policyPeriodBillingInstructionsManager"
+      type="gw.billing.PolicyPeriodBillingInstructionsManager"/>
+    <Variable
+      initialValue="editScreen ? &quot;Editable&quot; : &quot;ReadOnly&quot;"
+      name="canEdit"
+      type="java.lang.String"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardBillingToolbarButtonSet(policyPeriod, rewrite, jobWizardHelper, policyPeriodBillingInstructionsManager)"/>
+    </Toolbar>
+    <AlertBar
+      allowDismiss="false"
+      id="AltAccountAlert"
+      label="DisplayKey.get(&quot;Web.Policy.Payment.WarnNoAltAccountSelected&quot;)"
+      showConfirmMessage="false"
+      visible="policyPeriodBillingInstructionsManager.MissingRequiredAltBillingAccount"/>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <PanelRef
+      def="BindSummaryDV(policyPeriod, policyPeriodBillingInstructionsManager, false)"
+      mode="policyPeriodBillingInstructionsManager.PaymentMethodChoice"/>
+    <PanelRef
+      def="BillingAdjustmentsPanelSet(policyPeriod, policyPeriodBillingInstructionsManager)"
+      mode="canEdit"/>
+    <PanelRef
+      def="AuditAdjustmentsDV(policyPeriod, policyPeriodBillingInstructionsManager)"
+      mode="canEdit"/>
+  </Screen>
+</PCF>

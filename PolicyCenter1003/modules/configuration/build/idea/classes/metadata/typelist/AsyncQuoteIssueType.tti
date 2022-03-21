@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="AsyncQuoteIssueType" desc="All possible message types caused by asynchronous quoting">
+  <typecode
+    code="Info"
+    desc="Info message"
+    name="Info"/>
+  <typecode
+    code="Warning"
+    desc="Warning message"
+    name="Warning"></typecode>
+  <typecode
+    code="Error"
+    desc="Error message"
+    name="Error"></typecode>
+  <typecode
+    code="DisplayableException"
+    desc="DisplayableException issue. This type of issue halts the quote process."
+    name="DisplayableException"/>
+</typelist>

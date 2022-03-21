@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Entity
+  name="FormPatternLookup">
+  <Columns/>
+  <DisplayName><![CDATA[gw.api.locale.DisplayKey.get("EntityName.FormPatternLookup")]]></DisplayName>
+</Entity>

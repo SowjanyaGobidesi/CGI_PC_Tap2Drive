@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  admin="true"
+  loadable="false"
+  table="outboundlocratempstore"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundLocationRiskAssessmentTempStore"
+  desc="Temporary entity for saving location data sent to risk assessment service"
+  type="editable">
+  <column
+    loadable="false"
+    name="SpatialPoint"
+    nullok="true"
+    type="spatialpoint"/>
+  <array
+    arrayentity="OutboundReinsurableRiskAssessmentTempStore"
+    desc="Reinsurables of this outbound risk assessment temp store"
+    name="OutboundReinsurableRiskAssessmentTempStore"
+    owner="true"/>
+  <onetoone
+    fkentity="InboundLocationRiskAssessmentTempStore"
+    name="InboundLocationRiskAssessmentTempStore"
+    nullok="true"
+    owner="true"/>
+  <foreignkey
+    fkentity="PolicyLocation"
+    name="PolicyLocation"
+    nonEffDated="true"
+    nullok="true"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <foreignkey
+    columnName="OutboundPeriodRATempStore"
+    fkentity="OutboundPeriodRiskAssessmentTempStore"
+    name="OutboundPeriodRiskAssessmentTempStore"
+    nullok="false"/>
+  <array
+    arrayentity="InboundLocationRiskAssessmentErrorTempStore"
+    desc="errors encountered after OutboundLocationRiskAssessmentTempStore is sent to risk assessment service"
+    name="InboundLocationRiskAssessmentErrorTempStore"
+    owner="true"/>
+</entity>

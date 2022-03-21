@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="UserDetailPage.go(user)"
+    afterCommit="UserDetailPage.go(user)"
+    canEdit="perm.User.edit and User.util.CurrentUser.isInternalUserOrBelongsToOrganization(user.Organization)"
+    canVisit="perm.User.view and User.util.CurrentUser.isInternalUserOrBelongsToOrganization(user.Organization)"
+    id="UserDetailPage"
+    parent="Admin(user.Organization)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.UserDetail&quot;, user.DisplayName)">
+    <LocationEntryPoint
+      signature="UserDetailPage(user : User)"/>
+    <Variable
+      name="user"
+      type="User"/>
+    <ScreenRef
+      def="UserDetailScreen(user)"/>
+  </Page>
+</PCF>

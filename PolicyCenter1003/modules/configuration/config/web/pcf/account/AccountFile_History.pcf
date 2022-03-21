@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    infoBar="AccountFileInfoBar(account)"
+    canVisit="perm.Account.view(account) and perm.System.accounthistory"
+    id="AccountFile_History"
+    title="DisplayKey.get(&quot;Web.AccountFile.History.Title&quot;)">
+    <LocationEntryPoint
+      signature="AccountFile_History(account : Account)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Screen>
+      <Toolbar/>
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="historySearchCriteria"
+        resultsName="results"
+        search="historySearchCriteria.performSearch()"
+        searchCriteria="new gw.history.HistorySearchCriteria(){:RelatedItem = account}"
+        searchCriteriaType="gw.history.HistorySearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;History&gt;">
+        <PanelRef
+          def="HistoryScreenDV(historySearchCriteria,historySearchCriteria.getRelatedToSearchCriteriaForAccount(account)) "/>
+        <ListViewPanel
+          stretch="true">
+          <RowIterator
+            editable="false"
+            elementName="result"
+            value="results"
+            valueType="gw.api.database.IQueryBeanResult&lt;entity.History&gt;">
+            <Row
+              useArchivedStyle="gw.pcf.ArchiveHelper.getArchivedStyle(result.Job)">
+              <TextCell
+                enableSort="false"
+                id="History_Type1"
+                label="DisplayKey.get(&quot;Web.History.Type&quot;)"
+                value="result.CustomType.DisplayName"
+                wrap="false"/>
+              <AltUserCell
+                enableSort="false"
+                id="History_User"
+                label="DisplayKey.get(&quot;Web.History.User&quot;)"
+                value="result.User"
+                wrap="false"/>
+              <DateCell
+                dateFormat="short"
+                id="History_EventTimestamp"
+                label="DisplayKey.get(&quot;Web.History.EventTimeStamp&quot;)"
+                sortDirection="descending"
+                sortOrder="1"
+                timeFormat="short"
+                value="result.EventTimestamp"
+                wrap="false"/>
+              <TextCell
+                grow="true"
+                id="History_Description"
+                label="DisplayKey.get(&quot;Web.History.Description&quot;)"
+                value="result.Description"
+                wrap="true"/>
+              <TextCell
+                enableSort="false"
+                id="historypolicy"
+                label="DisplayKey.get(&quot;Web.History.Product&quot;)"
+                value="result.PolicyTerm.Policy.Product"
+                valueType="gw.api.productmodel.Product"
+                wrap="false"/>
+              <TextCell
+                action="PolicyFileForward.go(result.PolicyTerm.getPeriodAsOf(result.EventTimestamp).PolicyNumber, result.EventTimestamp)"
+                actionAvailable="result.PolicyTerm != null and result.PolicyTerm.getPeriodAsOf(result.EventTimestamp).PolicyNumberAssigned"
+                enableSort="false"
+                id="historypolicyNumber"
+                label="DisplayKey.get(&quot;Web.History.Policy&quot;)"
+                value="result.PolicyTerm.PolicyNumberDisplayString"
+                wrap="false"/>
+              <TextCell
+                action="JobForward.go(result.Job)"
+                actionAvailable="result.Job != null"
+                enableSort="false"
+                id="historyjob"
+                label="DisplayKey.get(&quot;Web.History.Job&quot;)"
+                value="result.Job"
+                valueType="entity.Job"
+                wrap="false"/>
+              <TextCell
+                grow="true"
+                id="OriginalValue"
+                label="DisplayKey.get(&quot;Web.History.OriginalValue&quot;)"
+                value="result.OriginalValue"
+                wrap="true"/>
+              <TextCell
+                grow="true"
+                id="NewValue"
+                label="DisplayKey.get(&quot;Web.History.NewValue&quot;)"
+                value="result.NewValue"
+                wrap="true"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

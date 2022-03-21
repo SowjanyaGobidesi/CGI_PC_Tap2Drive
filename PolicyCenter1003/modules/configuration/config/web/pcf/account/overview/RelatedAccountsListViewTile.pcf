@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewTile
+    id="RelatedAccountsListViewTile"
+    stretch="true"
+    title="DisplayKey.get('Web.Dashboard.Tile.RelatedAccounts')"
+    viewMoreAction="AccountFile_RelatedAccounts.go(account)"
+    viewMoreLabel="DisplayKey.get('Web.Tile.ViewAll')"
+    viewMoreVisible="relatedAccountHelper.ViewMoreVisible">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.account.RelatedAccountHelper(account)"
+      name="relatedAccountHelper"
+      type="gw.api.web.dashboard.ui.account.RelatedAccountHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="relatedAccount"
+      value="relatedAccountHelper.RelatedAccounts"
+      valueType="entity.Account[]">
+      <Row>
+        <TextCell
+          grow="true"
+          id="accountName"
+          label="DisplayKey.get('Web.Dashboard.Tile.RelatedAccounts.Name')"
+          value="relatedAccount.AccountHolderContactNameAndNick"/>
+        <TextCell
+          action="AccountFileDoRetrievalForward.go(relatedAccount.AccountNumber)"
+          grow="true"
+          id="accountNumber"
+          label="DisplayKey.get('Web.Dashboard.Tile.RelatedAccounts.Number')"
+          value="relatedAccount.AccountNumber"/>
+      </Row>
+    </RowIterator>
+  </ListViewTile>
+</PCF>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The cost for a state-level PIP coverage on a particular business vehicle."
+  entity="BAStateCovVehiclePIPCost"
+  supertype="BAStateCovVehicleCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.ba.financials.BACostAdapter"/>
+  <typekey
+    name="BAStateCovPIPCostType"
+    nullok="false"
+    typelist="BAStateCovPIPCostType"/>
+</subtype>

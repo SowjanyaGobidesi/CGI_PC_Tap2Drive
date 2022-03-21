@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam and teamModel.hasSummaryPage()"
+    id="TeamSummary"
+    title="DisplayKey.get(&quot;Web.Team.Summary&quot;, teamModel.Label, teamModel.LastCalculated)">
+    <LocationEntryPoint
+      signature="TeamSummary(teamModel : gw.api.web.team.PCTeamModel)"/>
+    <Variable
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Screen
+      id="TeamSummaryScreen">
+      <Variable
+        initialValue="typekey.TeamStatsType.TC_BYROLE"
+        name="statsType"
+        type="typekey.TeamStatsType"/>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Team.Summary&quot;,  teamModel.Label, teamModel.LastCalculated )"/>
+      <PanelSet
+        classList="pc-full-width">
+        <PanelRef
+          def="TeamSummaryLV(teamModel, statsType)"
+          mode="gw.api.web.desktop.data.FederatedDataUIHelper.mode()">
+          <Toolbar>
+            <ToolbarInput
+              id="viewJobsLabel"
+              value="DisplayKey.get(&quot;Web.Team.Summary.ViewJobs&quot;)"
+              valueType="java.lang.String"/>
+            <ToolbarRangeInput
+              editable="true"
+              id="TeamSummaryStatsType"
+              required="true"
+              value="statsType"
+              valueRange="typekey.TeamStatsType.getTypeKeys(false)"
+              valueType="typekey.TeamStatsType">
+              <PostOnChange/>
+            </ToolbarRangeInput>
+          </Toolbar>
+        </PanelRef>
+      </PanelSet>
+    </Screen>
+  </Page>
+</PCF>

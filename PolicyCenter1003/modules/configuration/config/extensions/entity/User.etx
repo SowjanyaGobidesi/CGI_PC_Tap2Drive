@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="User">
+  <column-override
+    desc="User's department within the company."
+    name="Department"
+    nullok="true"
+    type="shorttext">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    desc="User's job title."
+    name="JobTitle"
+    nullok="true"
+    type="shorttext">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <column-override
+    desc="User's session timeout value in seconds"
+    name="SessionTimeoutSecs"
+    nullok="true"
+    type="integer">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <foreignkey-override
+    desc="Settings for this user (formerly known as preferences)."
+    name="UserSettings"
+    nullok="true"
+    triggersValidation="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </foreignkey-override>
+  <typekey-override
+    desc="User's preferred language."
+    name="Language"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    desc="User's preferred locale."
+    name="Locale"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    desc="User's default country"
+    name="DefaultCountry"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    desc="User's time zone."
+    name="TimeZone"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    default="atwork"
+    desc="The vacation status of this user."
+    name="VacationStatus"
+    nullok="false">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    desc="Experience level of the user."
+    name="ExperienceLevel"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <typekey-override
+    desc="User's default phone country"
+    name="DefaultPhoneCountry"
+    nullok="true">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.personaldata.obfuscation.UserDefaultObfuscator"/>
+</extension>

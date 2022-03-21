@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="not policyPeriod.Locked"
+    id="Job_RiskAnalysisScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="gw.riskassessment.PolicyLocationsRiskAssessmentRequestor.isLocationsRiskAssessmentInProgress(policyPeriod)"
+      name="RiskEvaluationInProgress"
+      type="Boolean"/>
+    <TitleBar/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        editable="openForEdit"
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, policyPeriod.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <AlertBar
+      id="QuoteRequestedAlert"
+      label="DisplayKey.get(&quot;Web.JobWizard.QuoteInProgressAlert&quot;)"
+      visible="gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+    <AlertBar
+      id="RiskEvaluationInProgressAlert"
+      label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.MultiLocationRiskEvalInProgressAlert&quot;)"
+      visible="RiskEvaluationInProgress"/>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <PanelRef
+      editable="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)">
+      <Toolbar>
+        <ToolbarButton
+          action="NewManualUWIssuePopup.push(policyPeriod)"
+          available="!(policyPeriod.Job.Subtype == typekey.Job.TC_AUDIT || policyPeriod.Job.Subtype == typekey.Job.TC_CANCELLATION)"
+          hideIfReadOnly="true"
+          id="AddManualIssue"
+          label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.AddManualIssue&quot;)"
+          visible="perm.System.createmanualuwissue and !gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+        <ToolbarButton
+          action="NewContingencyPopup.push(policyPeriod)"
+          hideIfReadOnly="true"
+          id="AddNewContingencyButton"
+          label="DisplayKey.get('Web.Policy.AddNewContingency')"
+          visible="!gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+        <ToolbarButton
+          action="UWActivityPopup.push(policyPeriod, ActivityPattern.finder.getActivityPatternByCode(&quot;approve_general&quot;), &quot;UWRequest&quot;)"
+          hideIfReadOnly="true"
+          id="RequestApproval"
+          label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.RequestApproval&quot;)"
+          visible="!gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+        <ToolbarButton
+          action="policyPeriod.JobProcess.setPostUWRequestChanges(); policyPeriod.Bundle.commit()"
+          hideIfReadOnly="true"
+          id="LockForReview"
+          label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.LockForReview&quot;)"
+          visible="!policyPeriod.EditLocked and perm.System.editlockoverride"/>
+        <ToolbarButton
+          action="RiskEvaluationInProgress = true; gw.riskassessment.PolicyLocationsRiskAssessmentRequestor.enqueueForLocationsRiskAssessment(policyPeriod)"
+          available="openForEdit and not RiskEvaluationInProgress"
+          hideIfReadOnly="true"
+          id="MultiLocationRiskEval"
+          label="DisplayKey.get(&quot;Web.Policy.EvaluationIssues.MultiLocationRiskEval&quot;)"
+          tooltip="RiskEvaluationInProgress ? DisplayKey.get(&quot;Web.Policy.EvaluationIssues.MultiLocationRiskEvalInProgressToolTip&quot;) : DisplayKey.get(&quot;Web.Policy.EvaluationIssues.MultiLocationRiskEvalToolTip&quot;)"
+          visible="gw.api.system.PCConfigParameters.RiskAssessmentIntegrationEnabled.Value and gw.api.system.PCConfigParameters.MultipleLocationRiskAssessmentEnabled.Value and not (policyPeriod.Job typeis Reinstatement) and openForEdit"/>
+      </Toolbar>
+      <CardViewPanel
+        id="RiskAnalysisCV">
+        <Card
+          id="EvaluationIssuesCard"
+          title="DisplayKey.get(&quot;Web.Policy.EvaluationIssues&quot;)"
+          visible="perm.System.viewriskevalissues">
+          <PanelRef
+            def="RiskEvaluationPanelSet(policyPeriod, not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod))"/>
+        </Card>
+		<Card
+          id="ContingenciesCard"
+          title="DisplayKey.get('Web.Contingency.Contingencies')">
+          <PanelRef
+            def="ContingencyPanelSet(policyPeriod)"
+            editable="false"
+            visible="not policyPeriod.Policy.Contingencies.IsEmpty"/>
+        </Card>
+        <Card
+          id="PriorPolicyCard"
+          title="DisplayKey.get(&quot;Web.Policy.PriorHistory.PriorPolicies&quot;)"
+          visible="perm.System.viewriskpriorpolicies">
+          <PanelRef
+            def="PriorHistoryDV(policyPeriod)"
+            editable="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+        </Card>
+        <Card
+          id="ClaimsCard"
+          title="DisplayKey.get(&quot;Web.Policy.Claims&quot;)"
+          visible="perm.System.viewriskclaims and not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)">
+          <SearchPanel
+            cachingEnabled="false"
+            criteriaName="claimSearchCriteria"
+            resultsName="claimSet"
+            search="return performSearch(claimSearchCriteria)"
+            searchCriteria="policyPeriod.getNewClaimSearchCriteria(policyPeriod.Job.Subtype != typekey.Job.TC_SUBMISSION)"
+            searchCriteriaType="gw.losshistory.ClaimSearchCriteria"
+            searchOnEnter="false"
+            searchResultsType="ClaimSet">
+            <DetailViewPanel>
+              <InputColumn>
+                <PickerInput
+                  conversionExpression="(PickedValue as PolicyPeriodSummary).PolicyNumber"
+                  editable="true"
+                  freeInputEnabled="false"
+                  id="PolicyNumberPicker"
+                  label="DisplayKey.get(&quot;Web.Policy.RiskAnalysis.ClaimSearch.PolicyNumber&quot;)"
+                  pickLocation="PolicySearchPopup.push()"
+                  value="claimSearchCriteria.PolicyNumber"
+                  valueType="java.lang.String"
+                  visible="policyPeriod.Job.Subtype == typekey.Job.TC_SUBMISSION"/>
+                <DateCriterionChoiceInput
+                  editable="true"
+                  id="DateRangeForClaimSearch"
+                  label="DisplayKey.get(&quot;Web.Policy.RiskAnalysis.ClaimSearch.Date&quot;)"
+                  required="false"
+                  value="claimSearchCriteria.DateCriteria"
+                  valueType="entity.DateCriteria"/>
+              </InputColumn>
+              <InputFooterSection>
+                <InputSetRef
+                  def="SearchAndResetInputSet()"/>
+              </InputFooterSection>
+            </DetailViewPanel>
+            <ListDetailPanel
+              selectionName="selectedClaim"
+              selectionType="Claim">
+              <PanelRef
+                def="ClaimsLV(claimSet.Claims, claimSet==null ? new gw.losshistory.ClaimPolicyPeriodFilterSet(null) : claimSet.retrieveClaimFilter(), policyPeriod.PreferredSettlementCurrency)">
+                <Toolbar/>
+              </PanelRef>
+              <PanelRef
+                def="ClaimDetailsCV(selectedClaim,false)"
+                editable="false"
+                visible="selectedClaim != null"/>
+            </ListDetailPanel>
+          </SearchPanel>
+        </Card>
+        <Card
+          id="LossHistoryCard"
+          title="DisplayKey.get(&quot;Web.Policy.PriorLosses&quot;)"
+          visible="perm.System.viewriskpriorlosses">
+          <PanelRef
+            def="LossHistoryTypeSelectDV(policyPeriod.Policy)"
+            editable="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="LossHistoryInputSet(policyPeriod)"
+                editable="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"
+                mode="policyPeriod.Policy.LossHistoryType"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </Card>
+        <Card
+          id="MotorVehicleRecord"
+          title="DisplayKey.get(&quot;Web.PersonalAuto.MotorVehicleRecord.MotorVehicleRecords&quot;)"
+          visible="policyPeriod.PersonalAutoLineExists">
+          <PanelRef
+            def="MotorVehicleRecordSummary(policyPeriod)"
+            editable="not gw.web.job.JobUIHelper.isQuoteRequestInProgress(policyPeriod)"/>
+        </Card>
+      </CardViewPanel>
+    </PanelRef>
+    <Code><![CDATA[function performSearch(claimSearchCriteria : gw.losshistory.ClaimSearchCriteria) : ClaimSet {
+        if (policyPeriod.Job.Subtype == typekey.Job.TC_SUBMISSION) {
+          claimSearchCriteria.Policy = null
+        } else {
+          claimSearchCriteria.Policy = policyPeriod.Policy
+          claimSearchCriteria.PolicyNumber = policyPeriod.PolicyNumber
+        }
+        if ( claimSearchCriteria.PolicyNumber == null || claimSearchCriteria.PolicyNumber.length == 0) {
+          throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Policy.RiskAnalysis.ClaimSearch.Error.PolicyNumberRequired"))
+        }
+        return claimSearchCriteria.performSearch()
+      }]]></Code>
+  </Screen>
+</PCF>

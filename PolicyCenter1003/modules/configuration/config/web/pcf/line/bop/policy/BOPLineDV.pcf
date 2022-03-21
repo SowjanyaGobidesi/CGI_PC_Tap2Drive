@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BOPLineDV">
+    <Require
+      name="policyLine"
+      type="PolicyLine"/>
+    <Variable
+      initialValue="policyLine as BOPLine"
+      name="bopLine"
+      type="productmodel.BOPLine"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="SmallBusinessType"
+        label="DisplayKey.get(&quot;Web.Policy.BOP.SmallBusinessType&quot;)"
+        required="true"
+        value="bopLine.SmallBusinessType"
+        valueType="typekey.SmallBusinessType">
+        <PostOnChange
+          onChange="gw.web.productmodel.ProductModelSyncIssuesHandler.syncCoverages({bopLine}, jobWizardHelper)"/>
+      </TypeKeyInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

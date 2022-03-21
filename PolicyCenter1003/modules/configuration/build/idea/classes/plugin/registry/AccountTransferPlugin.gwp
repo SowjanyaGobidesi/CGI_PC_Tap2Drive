@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="AccountTransferPlugin"
+  name="AccountTransferPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.sharding.PCAccountTransferPlugin"/>
+</plugin>

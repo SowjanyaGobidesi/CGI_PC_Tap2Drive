@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="CopyPolicyDataSearch_ResultsLV"
+    mode="Policy">
+    <Require
+      name="searchResults"
+      type="gw.api.database.IQueryBeanResult&lt;PolicyPeriodSummary&gt;"/>
+    <Require
+      name="destPeriod"
+      type="PolicyPeriod"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="policyPeriodSummary"
+      pickValue="policyPeriodSummary"
+      value="searchResults"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.PolicyPeriodSummary&gt;">
+      <Row
+        useArchivedStyle="policyPeriodSummary.TermArchived">
+        <ButtonCell
+          action="selectPolicyPeriod(policyPeriodSummary)"
+          available="!policyPeriodSummary.TermArchived"
+          id="SelectButtonCell"
+          value="DisplayKey.get(&quot;Web.CopyPolicyData.Search.Result.SelectButtonLabel&quot;)"/>
+        <TextCell
+          action="goToPolicyPeriod(policyPeriodSummary)"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.PolicyNumber&quot;)"
+          sortBy="policyPeriodSummary.PolicyNumber"
+          value="policyPeriodSummary.PolicyNumberDisplayString"/>
+        <TextCell
+          id="PrimaryNamedInsured"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.PrimaryNamedInsured&quot;)"
+          value="policyPeriodSummary.InsuredDisplayName"/>
+        <TextCell
+          available="perm.System.viewaccount"
+          id="AccountNumber"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.AccountNumber&quot;)"
+          value="policyPeriodSummary.AccountNumber"/>
+        <TextCell
+          enableSort="false"
+          id="PolicyPeriodStatus"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.PolicyPeriodStatus&quot;)"
+          value="policyPeriodSummary.PeriodDisplayStatus"/>
+        <DateCell
+          id="EffectiveDate"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.EffectiveDate&quot;)"
+          value="policyPeriodSummary.PeriodStart"/>
+        <DateCell
+          id="ExpirationDate"
+          label="DisplayKey.get(&quot;Web.PolicySearch.Results.ExpirationDate&quot;)"
+          value="policyPeriodSummary.PeriodEnd"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function goToPolicyPeriod (policyPeriodSummary : PolicyPeriodSummary) {
+  var period = policyPeriodSummary.fetchPolicyPeriod()
+  if (policyPeriodSummary.PolicyNumberAssigned) {
+    PolicyFileForward.go(period, policyPeriodSummary.EditEffectiveDate)
+  }
+}
+
+function selectPolicyPeriod(policyPeriodSummary : PolicyPeriodSummary) {
+  var latestPeriod = policyPeriodSummary.Job.LatestPeriod
+  var sliceDate = latestPeriod.PeriodEnd.addSeconds(-1)
+  CopyPolicyDataDetailPopup.push(destPeriod, latestPeriod.getSlice(sliceDate), sliceDate, false) 
+}]]></Code>
+  </ListViewPanel>
+</PCF>

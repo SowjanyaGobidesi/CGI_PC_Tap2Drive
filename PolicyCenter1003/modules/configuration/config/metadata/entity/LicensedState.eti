@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Licensed State  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The state, policy type and segment a UWCompany is eligible to insure."
+  entity="LicensedState"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="licensedstate"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.policy.LicensedStatePublicMethods"
+    impl="com.guidewire.pc.domain.policy.impl.LicensedStateImpl"/>
+  <implementsEntity
+    name="SimpleEffDated"/>
+  <column
+    desc="The relative price factor for this state."
+    name="PriceFactor"
+    nullok="false"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="4"/>
+  </column>
+  <typekey
+    desc="Market segment for this state and product type."
+    name="Segment"
+    nullok="false"
+    typelist="Segment"/>
+  <typekey
+    desc="The state where the company has been licensed to sell insurance."
+    name="State"
+    nullok="false"
+    typelist="Jurisdiction"/>
+  <column
+    desc="Product that the underwriting company is licensed for a particular state."
+    name="ProductCode"
+    nullok="false"
+    type="patterncode"/>
+  <foreignkey
+    columnName="UWCompanyID"
+    desc="Each licensedState belongs to one UWCompany."
+    fkentity="UWCompany"
+    name="UWCompany"
+    nullok="false"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.policy.dbchecks.LicensedStateDBCheckBuilder"/>
+  <index
+    desc="Perf index for licensed state lookups."
+    expectedtobecovering="true"
+    name="licensedstatep1"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="State"/>
+    <indexcol
+      keyposition="2"
+      name="ProductCode"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="EffectiveDate"/>
+    <indexcol
+      keyposition="5"
+      name="ExpirationDate"/>
+    <indexcol
+      keyposition="6"
+      name="UWCompanyID"/>
+  </index>
+</entity>

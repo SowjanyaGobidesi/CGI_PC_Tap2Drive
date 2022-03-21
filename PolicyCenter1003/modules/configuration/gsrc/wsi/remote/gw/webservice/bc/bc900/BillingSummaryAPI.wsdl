@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary" xmlns:pogo10="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod" xmlns:pogo2="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings" xmlns:pogo3="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord" xmlns:pogo4="http://guidewire.com/bc/typekey" xmlns:pogo5="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary" xmlns:pogo6="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary" xmlns:pogo7="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus" xmlns:pogo8="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo" xmlns:pogo9="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI" name="BillingSummaryAPI" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <!-- retrieveAccountBillingSummary(String) : BCPCAccountBillingSummary[] -->
+      <xs:element name="retrieveAccountBillingSummary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNumber" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveAccountBillingSummaryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo:BCPCAccountBillingSummary"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SOAPException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="BadIdentifierException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RequiredFieldException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- retrievePolicyBillingSummary(String, int) : PolicyBillingSummary -->
+      <xs:element name="retrievePolicyBillingSummary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+            <xs:element name="termNumber" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrievePolicyBillingSummaryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo6:PolicyBillingSummary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrievePeriodsBilledToAccount(String) : DisplayablePolicyPeriod[] -->
+      <xs:element name="retrievePeriodsBilledToAccount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNumber" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrievePeriodsBilledToAccountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo10:DisplayablePolicyPeriod"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrievePeriodsForAccount(String) : DisplayablePolicyPeriod[] -->
+      <xs:element name="retrievePeriodsForAccount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNumber" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrievePeriodsForAccountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo10:DisplayablePolicyPeriod"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrieveInvoicesForAccount(String) : PCInvoiceInfo[] -->
+      <xs:element name="retrieveInvoicesForAccount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNumber" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveInvoicesForAccountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo8:PCInvoiceInfo"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:complexType name="BCPCAccountBillingSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountName" type="xs:string"/>
+          <xs:element minOccurs="0" name="AccountNameKanji" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="BilledOutstandingCurrent" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="BilledOutstandingPastDue" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="BilledOutstandingTotal" type="xs:string"/>
+          <xs:element minOccurs="0" name="BillingSettings" type="pogo2:AccountBillingSettings"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CollateralChargesBilled" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CollateralChargesPastDue" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CollateralChargesUnbilled" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CollateralHeld" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CollateralRequirement" type="xs:string"/>
+          <xs:element minOccurs="0" name="Currency" type="pogo4:Currency"/>
+          <xs:element minOccurs="0" name="Delinquent" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="PrimaryPayer" type="pogo5:ContactSummary"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="UnappliedFundsTotal" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="UnbilledTotal" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="AccountBillingSettings">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="InvoiceDeliveryMethod" type="xs:string"/>
+          <xs:element minOccurs="0" name="PaymentInstrumentRecord" type="pogo3:PaymentInstrumentRecord"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="PaymentInstrumentRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Detail" type="xs:string"/>
+          <xs:element minOccurs="0" name="DisplayName" type="xs:string"/>
+          <xs:element minOccurs="0" name="OneTime" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="PaymentMethod" type="pogo4:PaymentMethod"/>
+          <xs:element minOccurs="0" name="PublicID" type="xs:string"/>
+          <xs:element minOccurs="0" name="Token" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/typekey">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:simpleType name="PaymentMethod">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ach"/>
+          <xs:enumeration value="cash"/>
+          <xs:enumeration value="check"/>
+          <xs:enumeration value="creditcard"/>
+          <xs:enumeration value="misc"/>
+          <xs:enumeration value="responsive"/>
+          <xs:enumeration value="accountunapplied"/>
+          <xs:enumeration value="producerunapplied"/>
+          <xs:enumeration value="wire"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="usd"/>
+          <xs:enumeration value="eur"/>
+          <xs:enumeration value="gbp"/>
+          <xs:enumeration value="cad"/>
+          <xs:enumeration value="aud"/>
+          <xs:enumeration value="rub"/>
+          <xs:enumeration value="jpy"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="ContactSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" type="xs:string"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+          <xs:element minOccurs="0" name="Phone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="PolicyBillingSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AltBillingAccount" type="xs:string"/>
+          <xs:element minOccurs="0" name="Archived" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="BillingStatus" type="pogo7:DisplayableBillingStatus"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="CurrentOutstanding" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="DepositRequirement" type="xs:string"/>
+          <xs:element minOccurs="0" name="InvoiceStream" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Invoices">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo8:PCInvoiceInfo"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Paid" type="xs:string"/>
+          <xs:element minOccurs="0" name="PaymentPlanName" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Periods">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="PolicyTermInfos">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo9:PolicyTermInfo"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Retrieved" type="xs:boolean"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="TotalCharges" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="WrittenOff" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="DisplayableBillingStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BillingMethodCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="Delinquent" type="xs:boolean"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="PastDue" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="TotalBilled" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Unbilled" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="PCInvoiceInfo">
+        <xs:sequence>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Amount" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Billed" type="xs:string"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="InvoiceDate" type="xs:dateTime"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="InvoiceDueDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="InvoiceNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="InvoiceStream" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Paid" type="xs:string"/>
+          <xs:element minOccurs="0" name="PaidStatus" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="PastDue" type="xs:string"/>
+          <xs:element minOccurs="0" name="Status" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="Unpaid" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="PolicyTermInfo">
+        <xs:sequence>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="EffectiveDate" type="xs:dateTime"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="ExpirationDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="PolicyNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="TermNumber" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayablePolicyPeriod">
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyTermInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PCInvoiceInfo"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/DisplayableBillingStatus"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/PolicyBillingSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/bc/typekey"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/bc/bc900/PaymentInstrumentRecord"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/AccountBillingSettings"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/webservice/policycenter/bc900/BCPCAccountBillingSummary"/>
+      <xs:complexType name="DisplayablePolicyPeriod">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AltBillingAccount" type="xs:string"/>
+          <xs:element minOccurs="0" name="BillingStatus" type="pogo7:DisplayableBillingStatus"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="EffectiveDate" type="xs:dateTime"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="ExpirationDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="InvoiceStream" type="xs:string"/>
+          <xs:element minOccurs="0" name="OwningAccount" type="xs:string"/>
+          <xs:element minOccurs="0" name="PCPolicyPublicID" type="xs:string"/>
+          <xs:element minOccurs="0" name="PolicyNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="Product" type="xs:string"/>
+          <xs:element minOccurs="0" name="TermNumber" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="BillingSummaryAPIPortType">
+    <wsdl:operation name="retrieveAccountBillingSummary">
+      <wsdl:input message="tns:retrieveAccountBillingSummary" name="retrieveAccountBillingSummary"/>
+      <wsdl:output message="tns:retrieveAccountBillingSummaryResponse" name="retrieveAccountBillingSummaryResponse"/>
+      <!-- If communication error or any other problem occurs. -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If no account exists with the given account number -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If required parameter is missing. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicyBillingSummary">
+      <wsdl:input message="tns:retrievePolicyBillingSummary" name="retrievePolicyBillingSummary"/>
+      <wsdl:output message="tns:retrievePolicyBillingSummaryResponse" name="retrievePolicyBillingSummaryResponse"/>
+      <!-- If communication error or any other problem occurs. -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If no policy exists with the given policy number & term number -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If required parameter is missing. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsBilledToAccount">
+      <wsdl:input message="tns:retrievePeriodsBilledToAccount" name="retrievePeriodsBilledToAccount"/>
+      <wsdl:output message="tns:retrievePeriodsBilledToAccountResponse" name="retrievePeriodsBilledToAccountResponse"/>
+      <!-- If communication error or any other problem occurs. -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If no account exists with the given account number -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If required parameter is missing. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsForAccount">
+      <wsdl:input message="tns:retrievePeriodsForAccount" name="retrievePeriodsForAccount"/>
+      <wsdl:output message="tns:retrievePeriodsForAccountResponse" name="retrievePeriodsForAccountResponse"/>
+      <!-- If communication error or any other problem occurs. -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If no account exists with the given account number -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If required parameter is missing. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveInvoicesForAccount">
+      <wsdl:input message="tns:retrieveInvoicesForAccount" name="retrieveInvoicesForAccount"/>
+      <wsdl:output message="tns:retrieveInvoicesForAccountResponse" name="retrieveInvoicesForAccountResponse"/>
+      <!-- If communication error or any other problem occurs. -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If no account exists with the given account number -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If required parameter is missing. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BillingSummaryAPISoap12Binding" type="tns:BillingSummaryAPIPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="retrieveAccountBillingSummary">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveAccountBillingSummary">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveAccountBillingSummaryResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicyBillingSummary">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrievePolicyBillingSummary">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePolicyBillingSummaryResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsBilledToAccount">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrievePeriodsBilledToAccount">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePeriodsBilledToAccountResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsForAccount">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrievePeriodsForAccount">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePeriodsForAccountResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveInvoicesForAccount">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveInvoicesForAccount">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveInvoicesForAccountResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BillingSummaryAPISoap11Binding" type="tns:BillingSummaryAPIPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="retrieveAccountBillingSummary">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveAccountBillingSummary">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveAccountBillingSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicyBillingSummary">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrievePolicyBillingSummary">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePolicyBillingSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsBilledToAccount">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrievePeriodsBilledToAccount">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePeriodsBilledToAccountResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePeriodsForAccount">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrievePeriodsForAccount">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePeriodsForAccountResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveInvoicesForAccount">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveInvoicesForAccount">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveInvoicesForAccountResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BillingSummaryAPI">
+    <wsdl:port binding="tns:BillingSummaryAPISoap12Binding" name="BillingSummaryAPISoap12Port">
+      <soap12:address location="http://localhost:8580/bc/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI"/>
+      <gwwsdl:address location="${bc}/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:BillingSummaryAPISoap11Binding" name="BillingSummaryAPISoap11Port">
+      <soap11:address location="http://localhost:8580/bc/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI/soap11"/>
+      <gwwsdl:address location="${bc}/ws/gw/webservice/policycenter/bc900/BillingSummaryAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="retrieveAccountBillingSummary">
+    <wsdl:part element="tns:retrieveAccountBillingSummary" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveAccountBillingSummaryResponse">
+    <wsdl:part element="tns:retrieveAccountBillingSummaryResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"/>
+  </wsdl:message>
+  <wsdl:message name="BadIdentifierException">
+    <wsdl:part element="tns:BadIdentifierException" name="BadIdentifierException"/>
+  </wsdl:message>
+  <wsdl:message name="RequiredFieldException">
+    <wsdl:part element="tns:RequiredFieldException" name="RequiredFieldException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePolicyBillingSummary">
+    <wsdl:part element="tns:retrievePolicyBillingSummary" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePolicyBillingSummaryResponse">
+    <wsdl:part element="tns:retrievePolicyBillingSummaryResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePeriodsBilledToAccount">
+    <wsdl:part element="tns:retrievePeriodsBilledToAccount" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePeriodsBilledToAccountResponse">
+    <wsdl:part element="tns:retrievePeriodsBilledToAccountResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePeriodsForAccount">
+    <wsdl:part element="tns:retrievePeriodsForAccount" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePeriodsForAccountResponse">
+    <wsdl:part element="tns:retrievePeriodsForAccountResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveInvoicesForAccount">
+    <wsdl:part element="tns:retrieveInvoicesForAccount" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveInvoicesForAccountResponse">
+    <wsdl:part element="tns:retrieveInvoicesForAccountResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

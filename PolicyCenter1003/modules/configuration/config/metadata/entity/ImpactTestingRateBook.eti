@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Join table for ImpactTestingTestCase and RateBook"
+  entity="ImpactTestingRateBook"
+  exportable="false"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="impacttestingratebook"
+  type="joinarray">
+  <foreignkey
+    desc="The ImpactTestingTestCase which is related to this RateBook."
+    fkentity="ImpactTestingTestCase"
+    name="ImpactTestingTestCase"
+    nullok="false"/>
+  <foreignkey
+    desc="The RateBook which is related to this ImpactTestingTestCase."
+    fkentity="RateBook"
+    name="RateBook"
+    nullok="false"/>
+</entity>

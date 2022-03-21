@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  effDatedBranchType="PolicyPeriod"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="HOPDwellSchCovItemCov"
+  desc="HOP Dwelling coverage scheduled item with coverage terms"
+  table="hopdwellschcovitemcov"
+  type="effdated"
+  exportable="true"
+  final="false">
+  <implementsEntity
+    name="Coverage"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverageAdapter"
+    impl="gw.lob.hop.schedule.HOPDwellSchCovItemCovCoverageAdapter"/>
+  <implementsEntity
+    name="ScheduledItemClause"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.hop.HOPDwellSchCovItemCovMatcher"/>
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <foreignkey
+    fkentity="HOPDwellScheduleCovItem"
+    name="HOPDwellScheduleCovItem"
+    nullok="false"/>
+  <array
+    arrayentity="HOPDwellSchCovItemCovCost"
+    cascadeDelete="true"
+    name="HOPDwellSchCovItemCovCosts"
+    owner="false"/>
+</entity>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="ExcelImportPopup"
+    returnType="org.apache.poi.xssf.usermodel.XSSFWorkbook"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Rating.Import.Title&quot;)">
+    <Variable
+      name="testPath"
+      type="java.lang.String"/>
+    <Variable
+      name="importFile"
+      type="gw.api.web.WebFile"/>
+    <Screen>
+      <PanelRef
+        id="fileUpdate">
+        <Toolbar>
+          <EditButtons
+            editVisible="false"
+            pickValue="readExcelFile()"
+            showUpdateConfirmMessage="false"
+            updateLabel="DisplayKey.get(&quot;Web.Rating.Import.OK&quot;)"/>
+        </Toolbar>
+        <DetailViewPanel>
+          <InputColumn
+            id="inputColumn">
+            <FileInput
+              editable="true"
+              id="inputFile"
+              required="testPath == null"
+              value="importFile"/>
+            <HiddenInput
+              editable="true"
+              id="HiddenTestInput"
+              value="testPath"
+              valueType="java.lang.String"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code>uses java.lang.RuntimeException
+uses gw.api.util.DisplayableException
+uses org.apache.poi.xssf.usermodel.XSSFWorkbook
+
+function readExcelFile() : XSSFWorkbook {
+  try {
+    if (importFile != null) {
+      return new XSSFWorkbook(importFile.InputStream)
+    } else {
+      return overrideWorkbookFromTestPathFile()
+    }
+  } catch (e : RuntimeException) {
+    throw new DisplayableException(DisplayKey.get("Web.Rating.Errors.InvalidExcelFile"))
+  }
+}
+
+function overrideWorkbookFromTestPathFile() : XSSFWorkbook {
+  var inputFile = new java.io.File(testPath)
+  //noinspection IOResourceOpenedButNotSafelyClosed An object using this stream is returned by the function
+  var inputStream = new java.io.FileInputStream(inputFile)
+  return new XSSFWorkbook(inputStream)
+}</Code>
+  </Popup>
+</PCF>

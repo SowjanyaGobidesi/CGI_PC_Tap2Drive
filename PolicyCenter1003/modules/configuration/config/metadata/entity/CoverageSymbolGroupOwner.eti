@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="CoverageSymbolGroupOwner">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.impl.CoverageSymbolGroupOwnerInternalMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageSymbolGroupOwnerImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.coverage.CoverageSymbolGroupOwnerPublicMethods"
+    impl="com.guidewire.pc.domain.coverage.impl.CoverageSymbolGroupOwnerImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverageSymbolGroupOwnerAbstractDomainMethods"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverageSymbolGroupAdapter"/>
+  <fulldescription><![CDATA[
+    Delegate that can be implemented by any entity that has CoverageSymbolGroups.
+  ]]></fulldescription>
+</delegate>

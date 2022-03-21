@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SingleAuditSchedulePattern
+  auditMethod="Physical"
+  codeIdentifier="ExpirationPhysical"
+  dueBusinessDayAdjustment="NextBusinessDay"
+  dueDelayAmount="45"
+  dueDelayDirection="After"
+  dueDelayUnit="CalendarDays"
+  initBusinessDayAdjustment="NextBusinessDay"
+  initDelayAmount="30"
+  initDelayDirection="Before"
+  initDelayUnit="CalendarDays"
+  public-id="ExpirationPhysical"
+  type="FinalAudit"/>

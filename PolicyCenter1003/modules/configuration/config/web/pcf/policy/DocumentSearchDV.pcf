@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="DocumentSearchDV">
+    <Require
+      name="searchCriteria"
+      type="DocumentSearchCriteria"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.Name&quot;)"
+        value="searchCriteria.NameOrID"/>
+      <RangeInput
+        editable="true"
+        id="RelatedTo"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.RelatedTo&quot;)"
+        optionLabel="Note.getLevelDisplayString(VALUE)"
+        sortValueRange="false"
+        value="searchCriteria.RelatedTo"
+        valueRange="relatedToSearchCriteriaOptions()"
+        valueType="java.lang.Object"/>
+      <TypeKeyInput
+        editable="true"
+        id="Status"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.Status&quot;)"
+        value="searchCriteria.Status"
+        valueType="typekey.DocumentStatusType"/>
+      <TypeKeyInput
+        editable="true"
+        id="Language"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.Language&quot;)"
+        value="searchCriteria.Language"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+    </InputColumn>
+    <InputColumn>
+      <DateInput
+        editable="true"
+        id="DateFrom"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.DateFrom&quot;)"
+        value="searchCriteria.DateFrom"/>
+      <DateInput
+        editable="true"
+        id="DateTo"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.DateTo&quot;)"
+        value="searchCriteria.DateTo"/>
+      <TextInput
+        editable="true"
+        id="Author"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.Author&quot;)"
+        value="searchCriteria.Author"/>
+      <BooleanRadioInput
+        editable="true"
+        id="IncludeObsoletes"
+        label="DisplayKey.get(&quot;Web.DocumentSearch.IncludeObsoletes&quot;)"
+        value="searchCriteria.IncludeObsoletes"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+    <Code><![CDATA[function relatedToSearchCriteriaOptions() : Object[] {
+  if (policyPeriod != null) {
+    return searchCriteria.getRelatedToOptionsForPolicyFile(policyPeriod)
+  } else {
+    return searchCriteria.getRelatedToOptionsForAccount()
+  }
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

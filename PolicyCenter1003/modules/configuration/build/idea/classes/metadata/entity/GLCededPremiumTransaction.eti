@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A GeneralLiability implementation of the RICededPremiumTransaction delegate"
+  entity="GLCededPremiumTransaction"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="glcededpremiumtransaction"
+  type="retireable">
+  <implementsEntity
+    name="RICededPremiumTransaction"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="gw.api.reinsurance.RICededPremiumTxnAdapter"
+    impl="gw.reinsurance.ceding.GLCededPremiumTransactionAdapter"/>
+  <foreignkey
+    fkentity="GLCededPremium"
+    name="GLCededPremium"
+    nullok="false"/>
+  <foreignkey
+    fkentity="GLCededPremiumHistory"
+    name="GLCededPremiumHistory"
+    nullok="false"/>
+</entity>

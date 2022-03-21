@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="MulticlusterAccount"
+    isMultiClusterNav="true"
+    target="PolicyCenter"
+    url="{clusterUrl}AccountFile.do">
+    <LocationEntryPoint
+      signature="MulticlusterAccount(clusterUrl : String, accountNumber : String)"/>
+    <ExitPointParameter
+      locationParam="clusterUrl"
+      type="String"
+      urlParam="clusterUrl"/>
+    <ExitPointParameter
+      locationParam="accountNumber"
+      type="String"
+      urlParam="AccountNumber"/>
+  </ExitPoint>
+</PCF>

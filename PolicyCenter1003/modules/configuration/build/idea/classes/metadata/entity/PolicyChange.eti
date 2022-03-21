@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  PolicyChange Job  ==================================================================== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Policy change process"
+  displayName="Policy Change"
+  entity="PolicyChange"
+  supertype="Job">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.PolicyChangePublicMethods"
+    impl="com.guidewire.pc.domain.job.impl.PolicyChangeImpl"/>
+  <events/>
+</subtype>

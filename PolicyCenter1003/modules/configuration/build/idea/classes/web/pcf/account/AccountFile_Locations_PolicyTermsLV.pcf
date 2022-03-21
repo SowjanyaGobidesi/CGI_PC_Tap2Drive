@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="AccountFile_Locations_PolicyTermsLV">
+    <Require
+      name="accountLocation"
+      type="AccountLocation"/>
+    <Variable
+      initialValue="accountLocation.BoundPeriods"
+      name="issuedPolicies"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;PolicyPeriodSummary&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="policyPeriodSummary"
+      value="issuedPolicies"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.PolicyPeriodSummary&gt;">
+      <ToolbarFilter
+        name="filters">
+        <ToolbarFilterOption
+          filter="new gw.api.web.policy.ViewablePolicyPeriodQueryFilter()"
+          selectOnEnter="true"/>
+      </ToolbarFilter>
+      <Row
+        useArchivedStyle="policyPeriodSummary.TermArchived">
+        <TextCell
+          action="retrievePolicy(policyPeriodSummary)"
+          available="perm.PolicyPeriod.view(policyPeriodSummary) "
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.PolicyTermsLV.PolicyNumber&quot;)"
+          sortBy="policyPeriodSummary.PolicyNumber"
+          styleClass="none"
+          value="policyPeriodSummary.PolicyNumberDisplayString"/>
+        <TextCell
+          id="Product"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.PolicyTermsLV.Product&quot;)"
+          sortOrder="1"
+          value="policyPeriodSummary.Product.Description"/>
+        <TextCell
+          enableSort="false"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.PolicyTermsLV.Status&quot;)"
+          value="policyPeriodSummary.PeriodDisplayStatus"/>
+        <DateCell
+          id="EffectiveDate"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.PolicyTermsLV.EffectiveDate&quot;)"
+          value="policyPeriodSummary.PeriodStart"/>
+        <DateCell
+          id="ExpirationDate"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.PolicyTermsLV.ExpirationDate&quot;)"
+          value="policyPeriodSummary.PeriodEnd"/>
+        <TextCell
+          enableSort="false"
+          id="WorkOrderType"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.WorkOrdersLV.WorkOrderType&quot;)"
+          value="policyPeriodSummary.Job.DisplayType"/>
+        <TextCell
+          id="WorkOrderNumber"
+          label="DisplayKey.get(&quot;Web.AccountFile.Summary.WorkOrdersLV.WorkOrderNumber&quot;)"
+          value="policyPeriodSummary.Job.JobNumber"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function retrievePolicy(policyPeriodSummary : PolicyPeriodSummary){
+        PolicyFileForward.go(policyPeriodSummary.PolicyNumber, policyPeriodSummary.EditEffectiveDate)
+}
+
+function availablePolicyPeriod(policyPeriodSummary : PolicyPeriodSummary) : boolean {
+  return (perm.PolicyPeriod.view(policyPeriodSummary) && (!policyPeriodSummary.TermArchived))
+}]]></Code>
+  </ListViewPanel>
+</PCF>

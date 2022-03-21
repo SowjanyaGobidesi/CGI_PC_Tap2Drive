@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="ContactForward">
+    <LocationEntryPoint
+      signature="ContactForward()"/>
+    <LocationEntryPoint
+      signature="ContactForward(contact : Contact)"/>
+    <Variable
+      initialValue="gw.api.web.contact.ContactForwardUtil.getMostRecentContact()"
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="gw.pcf.contacts.ContactFowardValidator.checkForError(contact)"
+      name="error"
+      type="String"/>
+    <ForwardCondition
+      action="ContactSearch.go(error)"
+      condition="contact == null"/>
+    <ForwardCondition
+      action="ContactFile_Summary.go(contact)"
+      condition="perm.System.viewaccountholderinfo and gw.pcf.contacts.ContactFileAccountHolderUIHelper.canViewAccountInfo(contact)"/>
+    <ForwardCondition
+      action="ContactFile_Details.go(contact)"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="PolicySecNamedInsured"
+  supertype="PlcyNonPriNamedInsured">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.contact.PolicySecNamedInsuredPublicMethods"
+    impl="com.guidewire.pc.domain.contact.impl.PolicySecNamedInsuredImpl"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.contact.SingletonPolicyContactRoleMergeableImpl"/>
+  <fulldescription><![CDATA[
+    The non-primary person directly protected by the policy with full rights and responsibilities.
+    Out of the box, the secondary named insured role is only used in Personal Auto.
+  ]]></fulldescription>
+</subtype>

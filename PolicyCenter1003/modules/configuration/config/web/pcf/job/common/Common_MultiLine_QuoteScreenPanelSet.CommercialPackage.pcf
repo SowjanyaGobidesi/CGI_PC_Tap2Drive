@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="Common_MultiLine_QuoteScreenPanelSet"
+    mode="CommercialPackage">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="isEditable"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="showTransactionCard"
+      type="boolean"/>
+    <PanelRef
+      def="WarningsPanelSet(policyPeriod.getWizardQuoteScreenWarnings())"/>
+    <PanelRef
+      def="Quote_SummaryDV(policyPeriod)">
+      <Toolbar/>
+    </PanelRef>
+    <CardViewPanel>
+      <Card
+        id="JobWizard_Quote_CumulativeCard"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.QuoteScreen.Cumulative&quot;)">
+        <PanelRef
+          def="RatingPanelSet(policyPeriod, jobWizardHelper, isEditable)"
+          mode="policyPeriod.Policy.ProductCode">
+          <TitleBar
+            title="policyPeriod.Policy.Product.DisplayName"
+            visible="policyPeriod.RepresentativePolicyLines.Count &gt; 1"/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="JobWizard_Quote_TransactionCard"
+        title="DisplayKey.get(&quot;Web.SubmissionWizard.QuoteScreen.Transaction&quot;)"
+        visible="showTransactionCard">
+        <PanelIterator
+          elementName="linePattern"
+          id="tx"
+          value="policyPeriod.Policy.Product.LinePatterns"
+          valueType="gw.api.productmodel.PolicyLinePattern[]">
+          <IteratorSort
+            sortBy="linePattern.Priority"
+            sortOrder="1"/>
+          <PanelRef
+            def="RatingTxDetailsPanelSet(policyPeriod, DisplayKey.get(&quot;Web.Quote.TotalPremLabel.Change&quot;), DisplayKey.get(&quot;Web.Quote.TotalCostLabel.Change&quot;), isEditable, jobWizardHelper)"
+            mode="linePattern.PublicID"/>
+        </PanelIterator>
+      </Card>
+    </CardViewPanel>
+  </PanelSet>
+</PCF>

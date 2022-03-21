@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- ===== Lookups for PA ===== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="PersonalVehicle Coverage Lookup Table."
+  entity="PAVehicleCovLookup"
+  supertype="CoverageLookup">
+  <typekey
+    name="VehicleType"
+    nullok="true"
+    typelist="VehicleType"/>
+</subtype>

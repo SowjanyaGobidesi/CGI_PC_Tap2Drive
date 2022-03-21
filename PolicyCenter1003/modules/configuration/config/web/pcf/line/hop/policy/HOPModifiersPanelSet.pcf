@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    editable="openForEdit"
+    id="HOPModifiersPanelSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="policyPeriod.HOPLine.Modifiers"
+      name="lineModifiers"
+      type="Modifier[]"/>
+    <Variable
+      initialValue="policyPeriod.HOPLine.HOPDwellings.single().Modifiers"
+      name="dwellingModifiers"
+      type="Modifier[]"/>
+    <PanelRow>
+      <PanelColumn>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingModifiers.Policy&quot;)"/>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="HOPModifiersInputSet(lineModifiers, policyPeriod)"
+                id="LineModifiers"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </PanelColumn>
+      <PanelColumn>
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Policy.HOP.HOPDwellingModifiers.Dwelling&quot;)"/>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="HOPModifiersInputSet(dwellingModifiers, policyPeriod)"
+                id="DwellingModifiers"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </PanelColumn>
+    </PanelRow>
+  </PanelSet>
+</PCF>

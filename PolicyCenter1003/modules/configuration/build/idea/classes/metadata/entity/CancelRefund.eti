@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- Lookup table to look for premium calculation method of cancellation given a reason -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Lookup table for refund calculation for cancellation base on reason supplied by user"
+  entity="CancelRefund"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="cancelrefund"
+  type="retireable">
+  <implementsEntity
+    name="SimpleEffDated"/>
+  <typekey
+    desc="Reason for cancellation"
+    name="ReasonCode"
+    nullok="false"
+    typelist="ReasonCode"/>
+  <typekey
+    desc="Refund calculation method"
+    name="CalculationMethod"
+    nullok="false"
+    typelist="CalculationMethod"/>
+</entity>

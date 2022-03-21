@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <LocationGroup
+    id="InlandMarineLinks"
+    parent="PolicyFile(policyPeriod,asOfDate) "
+    title="DisplayKey.get(&quot;Web.PolicyFile.CommercialPackage.InlandMarine&quot;)">
+    <LocationEntryPoint
+      signature="InlandMarineLinks(policyPeriod : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="policyPeriod.EditEffectiveDate"
+      name="asOfDate"
+      type="java.util.Date"/>
+    <LocationRef
+      location="InlandMarine_BuildingsAndLocations(policyPeriod, asOfDate)"/>
+    <LocationRefIterator
+      elementName="part"
+      value="policyPeriod.IMLine.IMCoverageParts.sortBy( \ part -&gt; part.Subtype.DisplayName )"
+      valueType="entity.IMCoveragePart[]">
+      <LocationRef
+        location="InlandMarine_PolicyFilePart(policyPeriod, asOfDate, part)"/>
+    </LocationRefIterator>
+  </LocationGroup>
+</PCF>

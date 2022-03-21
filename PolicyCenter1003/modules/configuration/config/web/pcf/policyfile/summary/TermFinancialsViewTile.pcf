@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewTile
+    id="TermFinancialsViewTile"
+    title="DisplayKey.get('Web.Dashboard.Tile.TermFinancials')"
+    viewMoreVisible="false">
+    <Require
+      name="period"
+      type="PolicyPeriod"/>
+    <Require
+      name="lossRatioHelper"
+      type="gw.api.web.dashboard.ui.claims.LossRatioHelper"/>
+    <Variable
+      initialValue="new gw.api.web.dashboard.ui.policy.PremiumHelper(period)"
+      name="helper"
+      type="gw.api.web.dashboard.ui.policy.PremiumHelper"/>
+    <Variable
+      initialValue="period.reportingTrendSynopsis(true)"
+      name="synopsis"
+      type="gw.job.audit.ReportingTrendSynopsis"/>
+    <TileActions>
+      <TileAction
+        action="lossRatioHelper.recalculateLossRatio()"
+        available="not period.Archived"
+        id="RecalculateLossRatio"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.RecalculateLossRatio')"/>
+    </TileActions>
+    <PerformanceIndicatorRow
+      id="Indicators">
+      <PerformanceIndicator
+        id="TotalPremium"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.TotalPremium')"
+        maxLabelWidth="88"
+        value="helper.TotalPremium"
+        valueType="gw.pl.currency.MonetaryAmount"/>
+      <PerformanceIndicator
+        id="TaxesAndFees"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.TaxesAndFees')"
+        maxLabelWidth="88"
+        value="helper.TaxesAndFees"
+        valueType="gw.pl.currency.MonetaryAmount"/>
+      <PerformanceIndicator
+        id="EarnedPremium"
+        label="helper.EarnedPremiumLabel"
+        maxLabelWidth="88"
+        value="helper.EarnedPremium"
+        valueType="gw.pl.currency.MonetaryAmount"
+        visible="not period.Archived"/>
+      <PerformanceIndicator
+        id="TotalIncurred"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.TotalIncurred')"
+        maxLabelWidth="88"
+        value="helper.TotalIncurred"
+        valueType="gw.pl.currency.MonetaryAmount"
+        visible="not period.Archived"/>
+      <PerformanceIndicator
+        id="LossRatio"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.LossRatio', helper.LossRatioCalculationDate)"
+        maxLabelWidth="88"
+        value="helper.LossRatio"
+        valueType="String"
+        visible="not period.Archived"/>
+    </PerformanceIndicatorRow>
+    <TileInputColumn>
+      <Label
+        id="TrendAnalysisLabel"
+        label="DisplayKey.get('Web.AuditWizard.TrendAnalysis')"
+        visible="helper.IsPremiumReporting"/>
+      <MonetaryAmountInput
+        formatType="currency"
+        id="TotalEstimatedPremium"
+        label="DisplayKey.get('Web.AuditWizard.TotalEstimatedPremium')"
+        value="synopsis.TotalEstimatedPremium"
+        visible="helper.IsPremiumReporting"/>
+      <MonetaryAmountInput
+        formatType="currency"
+        id="TotalReportedPremium"
+        label="DisplayKey.get('Web.AuditWizard.TotalReportedPremium')"
+        value="synopsis.TotalReportedPremium"
+        visible="helper.IsPremiumReporting"/>
+      <Label
+        id="EarnedPremiumLines1"
+        label="DisplayKey.get('Web.Dashboard.Tile.TermFinancials.EarnedPremium')"
+        visible="period.MultiLine"/>
+      <MonetaryAmountInput
+        id="CommercialLine1"
+        label="helper.CommercialLines[1].Key"
+        value="helper.CommercialLines[1].Value"
+        visible="period.MultiLine and helper.CommercialLines.length > 1"/>
+    </TileInputColumn>
+    <TileInputColumn>
+      <TextInput
+        formatType="percentagePoints"
+        id="PremiumRatio"
+        label="DisplayKey.get('Web.AuditWizard.PremiumRatio')"
+        value="synopsis.PremiumRatio"
+        valueType="java.math.BigDecimal"
+        visible="helper.IsPremiumReporting"/>
+      <TextInput
+        formatType="general"
+        id="DaysReported"
+        label="DisplayKey.get('Web.AuditWizard.DaysReported')"
+        value="synopsis.DaysReported"
+        valueType="java.lang.Integer"
+        visible="helper.IsPremiumReporting"/>
+      <TextInput
+        id="IncludesEBURorNot"
+        label="DisplayKey.get('Web.Policy.IncludesEBUR')"
+        value="helper.IncludesEarnedButUnreportedText"
+        visible="helper.IsPremiumReporting"/>
+      <MonetaryAmountInput
+        id="CommercialLine0"
+        label="helper.CommercialLines[0].Key"
+        value="helper.CommercialLines[0].Value"
+        visible="period.MultiLine and helper.CommercialLines.length > 0"/>
+      <MonetaryAmountInput
+        id="CommercialLine2"
+        label="helper.CommercialLines[2].Key"
+        value="helper.CommercialLines[2].Value"
+        visible="period.MultiLine and helper.CommercialLines.length > 2"/>
+    </TileInputColumn>
+  </DetailViewTile>
+</PCF>

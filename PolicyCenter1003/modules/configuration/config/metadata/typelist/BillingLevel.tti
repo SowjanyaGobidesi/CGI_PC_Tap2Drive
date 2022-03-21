@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="BillingLevel" desc="Billing Level ">
+  <typecode
+    code="Account"
+    desc="All charges can share invoice streams and default unapplied"
+    name="Account"
+    priority="1"/>
+  <typecode
+    code="PolicyDefaultUnapplied"
+    desc="Policies cannot share invoice streams but do share default unapplied"
+    name="Policy (Separate Funds by Account)"
+    priority="2"/>
+  <typecode
+    code="PolicyDesignatedUnapplied"
+    desc="Policies cannot share invoice streams and use their own designated unapplieds"
+    name="Policy (Separate Funds by Policy)"
+    priority="3"/>
+  <typefilter
+    desc="Account Billing Level"
+    name="Account">
+    <include
+      code="Account"/>
+  </typefilter>
+  <typefilter
+    desc="Policy Billing Level"
+    name="Policy">
+    <include
+      code="PolicyDefaultUnapplied"/>
+    <include
+      code="PolicyDesignatedUnapplied"/>
+  </typefilter>
+</typelist>

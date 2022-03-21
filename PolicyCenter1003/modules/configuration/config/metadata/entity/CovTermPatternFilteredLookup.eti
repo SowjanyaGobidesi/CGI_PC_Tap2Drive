@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="CovTermPatternFilteredLookup">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.DenormLookupInitialisable"/>
+  <column
+    desc="The covterm pattern code for which this lookup applies"
+    name="CovTermPatternCode"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="patterncode"/>
+  <fulldescription><![CDATA[Delegate for availability lookup entities where covterm pattern code is a required restriction.]]></fulldescription>
+</delegate>

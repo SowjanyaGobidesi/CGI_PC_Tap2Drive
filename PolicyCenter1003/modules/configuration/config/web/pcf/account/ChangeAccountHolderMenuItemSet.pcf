@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ChangeAccountHolderMenuItemSet">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new gw.api.ui.ChangeAccountHolderHelper(account)"
+      name="changeAccountHolderHelper"
+      type="gw.api.ui.ChangeAccountHolderHelper"/>
+    <MenuItem
+      action="ChangeAccountHolderToNewContactPopup.push(account, typekey.ContactType.TC_PERSON)"
+      id="ChangeToPerson"
+      label="DisplayKey.get('Web.ContactDetail.NewPerson')"/>
+    <MenuItem
+      action="ChangeAccountHolderToNewContactPopup.push(account, typekey.ContactType.TC_COMPANY)"
+      id="ChangeToCompany"
+      label="DisplayKey.get('Web.ContactDetail.NewCompany')"/>
+    <MenuItemDivider/>
+    <MenuItemIterator
+      elementName="accountContact"
+      id="ContactIterator"
+      value="account.ActiveAccountContacts.subtract({account.AccountHolder.AccountContact}).toTypedArray()"
+      valueType="entity.AccountContact[]">
+      <IteratorSort
+        sortBy="accountContact"
+        sortOrder="1"/>
+      <MenuItem
+        action="changeAccountHolderHelper.changeAccountHolderToContact(accountContact.Contact)"
+        id="UnassignedContact"
+        label="accountContact"/>
+    </MenuItemIterator>
+    <MenuItemDivider/>
+    <PickerMenuItem
+      action="ContactSearchPopup.push(TC_ACCOUNTHOLDER)"
+      id="Search"
+      label="DisplayKey.get('Web.Button.FromAddressBook')"
+      onPick="changeAccountHolderHelper.changeAccountHolderToContact(PickedValue)"/>
+  </MenuItemSet>
+</PCF>

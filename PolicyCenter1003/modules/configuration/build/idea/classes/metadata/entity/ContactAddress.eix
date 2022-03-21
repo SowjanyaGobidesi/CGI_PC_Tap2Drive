@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactAddress">
+  <implementsEntity
+    name="Extractable"/>
+  <column desc="Application assigned ID used as ABUID when ABUID is null" name="ExternalID" type="shorttext" nullok="true"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="gw.contactaddress.ContactAddressLifeCycleImpl"/>
+  <dbcheckbuilder
+    className="com.guidewire.pc.domain.contact.dbchecks.ContactAddressABUIDDBCheckBuilder"/>
+</internalExtension>

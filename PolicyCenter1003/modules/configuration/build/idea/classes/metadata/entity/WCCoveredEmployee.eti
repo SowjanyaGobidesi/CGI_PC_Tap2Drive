@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Workers' Comp Federal Covered Employee"
+  entity="WCCoveredEmployee"
+  supertype="WCCoveredEmployeeBase">
+  <array
+    arrayentity="WCCovEmpCost"
+    cascadeDelete="true"
+    name="Costs"/>
+</subtype>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Associates a vehicle and a driver in Personal Auto"
+  effDatedBranchType="PolicyPeriod"
+  entity="VehicleDriver"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="vehicledriver"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.pa.VehicleDriverCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.pa.VehicleDriverMatcher"/>
+  <implementsInterface
+    iface="gw.api.domain.account.Mergeable"
+    impl="gw.contact.VehicleDriverMergeableImpl"/>
+  <column
+    default="100"
+    desc="The percentage this driver drives the vehicle"
+    name="PercentageDriven"
+    nullok="false"
+    type="integer"/>
+  <foreignkey
+    fkentity="PersonalVehicle"
+    name="Vehicle"
+    nullok="false"/>
+  <foreignkey
+    fkentity="PolicyDriver"
+    name="PolicyDriver"
+    nullok="false"/>
+</entity>

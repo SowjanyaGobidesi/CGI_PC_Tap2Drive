@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPExtendedResidenceTheft"
+  coverageCategory="zjnigin1e25i36v3n0m34ll1c99"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Electable"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="4900"
+  public-id="zc9i82cntebm2a97javsujkqk7b"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

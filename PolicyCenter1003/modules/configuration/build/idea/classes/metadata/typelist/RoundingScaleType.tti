@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Rounding scale applied to calculations in the Rate Routine."
+  final="false"
+  name="RoundingScaleType"/>

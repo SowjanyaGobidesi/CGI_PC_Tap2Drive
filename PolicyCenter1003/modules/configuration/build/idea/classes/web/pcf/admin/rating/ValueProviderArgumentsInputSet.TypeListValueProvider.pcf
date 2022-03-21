@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ValueProviderArgumentsInputSet"
+    mode="TypeListValueProvider">
+    <Require
+      name="valueProviderProxy"
+      type="gw.rating.rtm.valueprovider.CustomValueProviderData"/>
+    <Require
+      name="advancedEdit"
+      type="boolean"/>
+    <Require
+      name="columnDefinition"
+      type="RateTableColumn"/>
+    <RangeInput
+      editable="advancedEdit"
+      id="ArgumentView"
+      label="DisplayKey.get(&quot;Web.Rating.RateTableDefinition.Argument&quot;)"
+      optionLabel="VALUE.remove(gw.rating.rtm.util.RatingUIUtil.TypekeyPrefix)"
+      required="true"
+      validationExpression="valueProviderProxy.validateTypelistArguments()"
+      value="valueProviderProxy.SingleArgument"
+      valueRange="gw.rating.rtm.util.RatingUIUtil.getAllTypekeyNames()"
+      valueType="java.lang.String"
+      visible="(CurrentLocation.InEditMode)">
+      <PostOnChange
+        onChange="valueProviderProxy.createValueProviderString()"/>
+    </RangeInput>
+    <TextInput
+      editable="advancedEdit"
+      id="ArgumentViewReadOnly"
+      label="DisplayKey.get(&quot;Web.Rating.RateTableDefinition.Argument&quot;)"
+      outputConversion="VALUE.remove(gw.rating.rtm.util.RatingUIUtil.TypekeyPrefix)"
+      required="true"
+      value="valueProviderProxy.SingleArgument"
+      visible="not (CurrentLocation.InEditMode)"/>
+  </InputSet>
+</PCF>

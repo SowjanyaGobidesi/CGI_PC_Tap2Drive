@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.Resolver_dir
+uses gw.api.domain.account.PCAccountTransfer
+uses gw.plugin.multicluster.resolver.ResolverMessageCreationUtil
+uses gw.plugin.multicluster.resolver.dto.ResolverPoliciesData
+
+
+@gw.rules.RuleName("Unfrozen Policy")
+internal class UnfrozenPolicy {
+  static function doCondition(messageContext  :  entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.Root typeis Policy
+        and messageContext.EventName == PCAccountTransfer.POLICYUNFROZEN_EVENT
+/*end00rule*/
+}
+
+  static function doAction(messageContext  :  entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    ResolverMessageCreationUtil.createPolicyMessage(messageContext)
+/*end00rule*/
+  }
+}

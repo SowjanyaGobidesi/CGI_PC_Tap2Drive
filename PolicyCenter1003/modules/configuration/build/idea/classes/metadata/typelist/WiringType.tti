@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Wiring Type"
+  name="WiringType">
+  <typecode
+    code="copper"
+    desc="Copper Wiring"
+    name="Copper"
+    priority="10">
+  </typecode>
+  <typecode
+    code="aluminum"
+    desc="Aluminum Wiring"
+    name="Aluminum"
+    priority="20">
+  </typecode>
+  <typecode
+    code="KnobAndTube"
+    desc="Knob and Tube"
+    name="Knob &amp; Tube"
+    priority="30">
+  </typecode>
+</typelist>

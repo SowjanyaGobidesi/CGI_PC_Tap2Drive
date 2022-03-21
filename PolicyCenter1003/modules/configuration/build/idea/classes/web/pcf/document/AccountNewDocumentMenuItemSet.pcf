@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="AccountNewDocumentMenuItemSet">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <MenuItem
+      action="AccountNewDocumentsLinkedWorksheet.goInWorkspace(account)"
+      id="AccountNewDocumentMenuItemSet_Linked"
+      label="DisplayKey.get(&quot;Web.AccountFile.NewDocuments.Linked&quot;)"/>
+    <MenuItem
+      action="documentsActionsHelper.goInAccountNewDocumentFromTemplateWorksheet(account)"
+      available="documentsActionsHelper.DocumentTemplateActionsAvailable"
+      id="AccountNewDocumentMenuItemSet_Template"
+      label="DisplayKey.get(&quot;Web.AccountFile.NewDocument.Template&quot;)"/>
+  </MenuItemSet>
+</PCF>

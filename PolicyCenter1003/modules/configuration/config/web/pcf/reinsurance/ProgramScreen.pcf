@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="ProgramScreen">
+    <Require
+      name="program"
+      type="RIProgram"/>
+    <Variable
+      initialValue="gw.web.admin.ReinsuranceUIHelper.updateImpliedNetRetention(program)"
+      name="impliedNetRetention"
+      type="gw.pl.currency.MonetaryAmount"/>
+    <Variable
+      initialValue="program.agreementCurrenciesAreConsistent()"
+      name="currenciesAreConsistent"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Toolbar>
+      <ToolbarButton
+        action="gw.web.admin.ReinsuranceUIHelper.updateActiveProgram(program, CurrentLocation)"
+        id="UpdateActive"
+        label="DisplayKey.get(&quot;Button.Update&quot;)"
+        visible="perm.System.editreinsuranceactiveprogram and program.Active and CurrentLocation.InEditMode"/>
+      <EditButtons
+        editVisible="(perm.System.editreinsuranceprogram and not program.Active) or (perm.System.editreinsuranceactiveprogram and program.Active)"
+        updateVisible="perm.System.editreinsuranceprogram and not program.Active"/>
+      <ToolbarButton
+        action="program.validate(); gw.api.util.LocationUtil.addRequestScopedInfoMessage(DisplayKey.get(&quot;Web.Reinsurance.Program.Validation.VerificationPasses&quot;))"
+        hideIfEditable="true"
+        id="VerifyButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Validate&quot;)"
+        visible="perm.System.editreinsuranceprogram"/>
+      <ToolbarButton
+        action="gw.web.admin.ReinsuranceUIHelper.makeActive(program)"
+        available="!program.Active "
+        hideIfEditable="true"
+        id="MakeActiveButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.MakeActive&quot;)"
+        visible="perm.System.editreinsuranceprogram"/>
+      <ToolbarButton
+        action="gw.web.admin.ReinsuranceUIHelper.delete(program); ProgramSearchPage.go()"
+        available="!program.Active"
+        hideIfEditable="true"
+        id="DeleteButton"
+        label="DisplayKey.get(&quot;Web.Reinsurance.Agreement.Delete&quot;)"
+        visible="perm.System.editreinsuranceprogram"/>
+    </Toolbar>
+    <DetailViewPanel
+      id="ProgramDV">
+      <InputColumn>
+        <TextInput
+          editable="true"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.Name&quot;)"
+          required="true"
+          value="program.Name"/>
+        <DateInput
+          editable="program.Status == TC_DRAFT"
+          id="EffectiveDate"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.EffectiveDate&quot;)"
+          required="true"
+          validationExpression="program.EffectiveDate &lt;= program.ExpirationDate ? null : DisplayKey.get(&quot;Web.Reinsurance.Validation.EffectiveAfterExpiration&quot;)"
+          value="program.EffectiveDate">
+          <PostOnChange
+            deferUpdate="false"
+            onChange="program.setEffectiveDateWithDefaultTime(program.EffectiveDate)"/>
+        </DateInput>
+        <DateInput
+          editable="true"
+          id="ExpirationDate"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.ExpirationDate&quot;)"
+          required="true"
+          validationExpression="program.ExpirationDate &lt; program.EffectiveDate ? DisplayKey.get(&quot;Web.Reinsurance.Treaty.ExpDateValidation&quot;) : null"
+          value="program.ExpirationDate">
+          <PostOnChange
+            deferUpdate="false"
+            onChange="program.setExpirationDateWithDefaultTime(program.ExpirationDate)"/>
+        </DateInput>
+        <TypeKeyInput
+          id="Status"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.Status&quot;)"
+          value="program.Status"
+          valueType="typekey.ContractStatus"/>
+        <TypeKeyInput
+          editable="program.Status == TC_DRAFT"
+          id="Currency"
+          label="DisplayKey.get(&quot;Web.Reinsurance.Program.Currency&quot;)"
+          required="true"
+          value="program.Currency"
+          valueType="typekey.Currency"
+          visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+          <PostOnChange
+            onChange="gw.web.admin.ReinsuranceUIHelper.updateCurrency(program); impliedNetRetention = null"/>
+        </TypeKeyInput>
+      </InputColumn>
+      <InputColumn>
+        <MonetaryAmountInput
+          currency="program.Currency"
+          editable="true"
+          formatType="currency"
+          id="TargetNetRetention"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.TargetNetRetention&quot;)"
+          value="program.TargetMaxRetention"/>
+        <MonetaryAmountInput
+          currency="program.Currency"
+          editable="true"
+          formatType="currency"
+          id="SingleRiskMaximum"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.SingleRiskMaximum&quot;)"
+          value="program.SingleRiskMaximum"/>
+        <ButtonInput
+          action="impliedNetRetention = program.calculateImpliedNetRetention()"
+          align="left"
+          available="currenciesAreConsistent"
+          hideIfDisabled="false"
+          id="RecalcImpliedNetRetention"
+          value="DisplayKey.get(&quot;Web.Reinsurance.Program.RecalcButton&quot;)"
+          visible="perm.System.editreinsuranceprogram"/>
+        <MonetaryAmountInput
+          formatType="currency"
+          id="ImpliedRetention"
+          label="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.ImpliedNetRetention&quot;)"
+          value="impliedNetRetention"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <CardViewPanel>
+      <Card
+        id="Treaties"
+        title="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Treaties&quot;)">
+        <PanelRef
+          def="TreatiesLV(program, true /*per risk*/)"
+          editable="true"
+          id="PerRisk">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.PerRisk&quot;)"/>
+          <Toolbar>
+            <AddButton
+              hideIfReadOnly="true"
+              id="Add"
+              iterator="PerRisk.TreatiesLV"
+              label="DisplayKey.get(&quot;Button.Add&quot;)"
+              pickLocation="AgreementSearchPopup.push(1, program.Currency, program.Treaties)"/>
+            <RemoveButton
+              hideIfReadOnly="true"
+              id="Remove"
+              iterator="PerRisk.TreatiesLV"
+              label="DisplayKey.get(&quot;Button.Remove&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="TreatiesLV(program, false/*aggregate*/)"
+          editable="true"
+          id="Aggregate">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Aggregate&quot;)"/>
+          <Toolbar>
+            <AddButton
+              hideIfReadOnly="true"
+              id="Add"
+              iterator="Aggregate.TreatiesLV"
+              label="DisplayKey.get(&quot;Button.Add&quot;)"
+              pickLocation="AgreementSearchPopup.push(2, program.Currency, program.Treaties)"/>
+            <RemoveButton
+              hideIfReadOnly="true"
+              id="Remove"
+              iterator="Aggregate.TreatiesLV"
+              label="DisplayKey.get(&quot;Button.Remove&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AppliesTo"
+        title="DisplayKey.get(&quot;Web.Reinsurance.Agreement.AppliesTo&quot;)">
+        <PanelRef
+          def="RICoverageGroupsPanelSet(program)"/>
+      </Card>
+    </CardViewPanel>
+    <PanelRef
+      def="LocalizedValuesDV(program, { &quot;Name&quot; }, { DisplayKey.get(&quot;Web.Reinsurance.NewProgram.Input.Name&quot;) })"/>
+  </Screen>
+</PCF>

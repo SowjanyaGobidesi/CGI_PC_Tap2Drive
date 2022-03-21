@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="LocationsPanelSet">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="supportsNonSpecificLocation"
+      type="boolean"/>
+    <Variable
+      initialValue="policyPeriod.getUnassignedAccountLocations(supportsNonSpecificLocation)"
+      name="unassignedAccountLocations"
+      recalculateOnRefresh="true"
+      type="java.util.List&lt;entity.AccountLocation&gt;"/>
+    <PanelRef>
+      <Toolbar>
+        <IteratorButtons
+          addLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.CreateNewLocation&quot;)"
+          iterator="LocationsEdit_LV"
+          removeConfirmMessage="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.RemoveLocationWarning&quot;)"
+          removeFlags="all removable"
+          showRemoveConfirmMessage="policyPeriod.Lines.where(\ p -&gt; p.PolicyLocationCanBeRemovedWithoutRemovingAssociatedRisks).HasElements"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="policyPeriod.PrimaryLocation = CheckedValue"
+          flags="one canSetToPrimary"
+          id="setToPrimary"
+          iterator="LocationsEdit_LV"
+          label="DisplayKey.get(&quot;Web.AccountFile.Locations.SetAsPrimary&quot;)"/>
+        <ToolbarButton
+          available="unassignedAccountLocations.Count &gt; 0"
+          hideIfReadOnly="true"
+          id="addLocationButton"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.AddExistingAccountLocation&quot;)">
+          <MenuItemIterator
+            elementName="unassignedAccountLocation"
+            id="UnassignedAccountLocationIterator"
+            value="unassignedAccountLocations"
+            valueType="java.util.List&lt;entity.AccountLocation&gt;">
+            <IteratorSort
+              sortBy="unassignedAccountLocation.LocationNum"
+              sortOrder="1"/>
+            <MenuItem
+              action="LocationPopup.push(unassignedAccountLocation, null, policyPeriod, openForEdit, true, supportsNonSpecificLocation);"
+              id="UnassignedAccountLocation"
+              label="unassignedAccountLocation"/>
+          </MenuItemIterator>
+        </ToolbarButton>
+        <ToolbarButton
+          action="policyPeriod.addLocations(unassignedAccountLocations)"
+          available="unassignedAccountLocations.Count &gt; 0"
+          hideIfReadOnly="true"
+          id="addAllLocationsButton"
+          label="DisplayKey.get(&quot;Web.Policy.LocationContainer.AddAllExistingAccountLocations&quot;)"/>
+      </Toolbar>
+      <ListDetailPanel
+        id="LocationsEdit_DP"
+        selectionName="selectedLocation"
+        selectionType="PolicyLocation">
+        <ListViewPanel
+          id="LocationsEdit_LV">
+          <RowIterator
+            editable="true"
+            elementName="location"
+            hasCheckBoxes="true"
+            hideCheckBoxesIfReadOnly="true"
+            numEntriesRequired="1"
+            pickLocation="LocationPopup.push(null, null, policyPeriod, openForEdit, true, supportsNonSpecificLocation)"
+            toRemove="policyPeriod.removeLocation(location)"
+            validationLabel="DisplayKey.get(&quot;Web.Policy.LocationContainer.Locations&quot;)"
+            value="policyPeriod.PolicyLocations"
+            valueType="entity.PolicyLocation[]">
+            <ToolbarFlag
+              condition="!location.PrimaryLoc"
+              name="removable"/>
+            <ToolbarFlag
+              condition="!location.PrimaryLoc"
+              name="canSetToPrimary"/>
+            <Row>
+              <!-- postOnChange is required on the Primary Location button to enable the
+restriction on removing the primary location -->
+              <RadioButtonCell
+                align="center"
+                id="PrimaryLocation"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.PrimaryLocation&quot;)"
+                radioButtonGroup="PrimaryLocation"
+                validationExpression="policyPeriod.PrimaryLocation != null ? null : DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.PrimaryLocationError.SelectAtleastOne&quot;)"
+                value="location == policyPeriod.PrimaryLocation"/>
+              <TextCell
+                action="LocationPopup.push(null, location, policyPeriod, openForEdit, true, supportsNonSpecificLocation)"
+                align="left"
+                id="Loc"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocNum&quot;)"
+                sortOrder="1"
+                value="location.LocationNum"
+                valueType="java.lang.Integer"/>
+              <CheckBoxCell
+                id="NonSpecificLocation"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.NonSpecificLocation&quot;)"
+                value="location.AccountLocation.NonSpecific"/>
+              <TextCell
+                action="LocationPopup.push(null, location, policyPeriod, openForEdit, true, supportsNonSpecificLocation)"
+                align="left"
+                id="LocationCode"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationCode&quot;)"
+                value="location.AccountLocation.LocationCode"
+                wrap="true"/>
+              <TextCell
+                action="LocationPopup.push(null, location, policyPeriod, openForEdit, true, supportsNonSpecificLocation)"
+                align="left"
+                id="LocationName"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.LocationName&quot;)"
+                value="location.AccountLocation.LocationName"
+                wrap="true"/>
+              <TextCell
+                action="LocationPopup.push(null, location, policyPeriod, openForEdit, true, supportsNonSpecificLocation)"
+                align="left"
+                id="Address"
+                label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.CompactAddress&quot;)"
+                value="location.addressString(&quot;,&quot;, false, false)"
+                wrap="true"/>
+              <BooleanRadioCell
+                id="InSync"
+                label="DisplayKey.get(&quot;Web.Account.Locations.IsSynchronized&quot;)"
+                value="location.isUpToDate()"
+                visible="policyPeriod.Promoted"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+        <PanelRef
+          available="selectedLocation != null"
+          def="PreferredCoverageCurrencyPanelSet(selectedLocation?.getCoverableLocation(policyPeriod), false, null)"
+          id="PreferredCoverageCurrencySelectorRef"
+          visible="selectedLocation != null and selectedLocation?.getCoverableLocation(policyPeriod)!= null"/>
+        <PanelRef
+          def="LocationDetailCV(selectedLocation, false, supportsNonSpecificLocation)"
+          editable="false"
+          visible="policyPeriod.PolicyLocations.Count &gt; 0 and selectedLocation != null"/>
+      </ListDetailPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

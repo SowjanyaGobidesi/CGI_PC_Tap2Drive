@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Garage Type"
+  name="GarageType">
+  <typecode
+    code="None"
+    desc="No Garage"
+    name="No Garage"
+    priority="10">
+  </typecode>
+  <typecode
+    code="Attached-1"
+    desc="Attached Garage - 1 Car"
+    name="Attached Garage - 1 Car"
+    priority="20">
+  </typecode>
+  <typecode
+    code="Attached-2"
+    desc="Attached Garage - 2 Car"
+    name="Attached Garage - 2 Car"
+    priority="30">
+  </typecode>
+  <typecode
+    code="Attached-3"
+    desc="Attached Garage - 3 Car"
+    name="Attached Garage - 3 Car"
+    priority="40">
+  </typecode>
+  <typecode
+    code="Attached-4"
+    desc="Attached Garage - 4+ Cars"
+    name="Attached Garage - 4+ Cars"
+    priority="50">
+  </typecode>
+  <typecode
+    code="Detached-1"
+    desc="Detached Garage - 1 Car"
+    name="Detached Garage - 1 Car"
+    priority="60">
+  </typecode>
+  <typecode
+    code="Detached-2"
+    desc="Detached Garage - 2 Car"
+    name="Detached Garage - 2 Car"
+    priority="70">
+  </typecode>
+  <typecode
+    code="Detached-3"
+    desc="Detached Garage - 3 Car"
+    name="Detached Garage - 3 Car"
+    priority="80">
+  </typecode>
+  <typecode
+    code="Detached-4"
+    desc="Detached Garage - 4+ Cars"
+    name="Detached Garage - 4+ Cars"
+    priority="90">
+  </typecode>
+</typelist>

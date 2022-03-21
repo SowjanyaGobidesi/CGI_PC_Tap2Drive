@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.workflowview"
+    countsAsWork="false"
+    id="WorkflowSearch"
+    title="DisplayKey.get(&quot;Web.Admin.WorkflowSearch.Title&quot;)">
+    <Screen
+      id="WorkflowSearchScreen">
+      <SearchPanel
+        clearInvisibleInputs="true"
+        criteriaName="searchCriteria"
+        resultsName="workflows"
+        search="searchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Workflow&gt;"
+        searchCriteria="new WorkflowSearchCriteria()"
+        searchCriteriaType="entity.WorkflowSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Workflow&gt;">
+        <PanelRef
+          def="WorkflowsDV(searchCriteria)"/>
+        <PanelRef
+          def="WorkflowSearchResultPanelSet(workflows, searchCriteria)"
+          mode="gw.pcf.WorkflowHelper.getWorkflowSubtype(searchCriteria.Workflowtype)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Admin.Workflows.Results&quot;)"/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

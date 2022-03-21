@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="RenewalGroupJobsLV">
+    <Require
+      name="renewalGroup"
+      type="RenewalGroup"/>
+    <RowIterator
+      editable="false"
+      elementName="renewal"
+      value="renewalGroup.Renewals"
+      valueType="entity.Renewal[]">
+      <Row
+        useArchivedStyle="renewal.LatestPeriod.PolicyTerm.CheckArchived">
+        <TextCell
+          id="PolicyType"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.PolicyType&quot;)"
+          value="renewal.Policy.Product.Name"/>
+        <TextCell
+          action="JobForward.go(renewal)"
+          id="Renewal"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.RenewalNum&quot;)"
+          value="renewal.JobNumber"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.Status&quot;)"
+          value="renewal.LatestPeriod.Status"
+          valueType="typekey.PolicyPeriodStatus"/>
+        <TextCell
+          action="pcf.PolicyFileForward.go( renewal.LatestPeriod, renewal.LatestPeriod.EditEffectiveDate )"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.PolicyNum&quot;)"
+          value="renewal.LatestPeriod.PolicyNumberDisplayString"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.CreateDate&quot;)"
+          value="renewal.CreateTime"/>
+        <DateCell
+          id="CloseDate"
+          label="DisplayKey.get(&quot;Web.RenewalGroup.CloseDate&quot;)"
+          value="renewal.CloseDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

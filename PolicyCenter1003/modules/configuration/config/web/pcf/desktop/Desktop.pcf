@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- LocationGroup for the "Desktop" tab pages -->
+  <LocationGroup
+    id="Desktop"
+    menuActions="DesktopMenuActions()"
+    title="DisplayKey.get(&quot;Web.Desktop.LocationGroup.Title&quot;)">
+    <LocationEntryPoint
+      signature="Desktop()"/>
+    <LocationRef
+      icon="&quot;summary&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get('Web.Dashboard.Underwriter.LocationGroup.Title')"
+      location="Underwriter_MySummary(User.util.CurrentUser)"/>
+    <LocationRef
+      icon="&quot;summary&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get('Web.Dashboard.Underwriter.LocationGroup.Title')"
+      location="FederatedMySummary(User.util.CurrentUser)"/>
+    <LocationRef
+      icon="&quot;activities&quot;"
+      iconType="svgFileName"
+      location="DesktopActivities()"/>
+    <LocationRef
+      icon="&quot;accounts&quot;"
+      iconType="svgFileName"
+      location="DesktopAccounts()"/>
+    <LocationRef
+      icon="&quot;submissions_nav&quot;"
+      iconType="svgFileName"
+      location="DesktopSubmissions()"/>
+    <LocationRef
+      icon="&quot;renewals&quot;"
+      iconType="svgFileName"
+      location="DesktopRenewals()"/>
+    <LocationRef
+      icon="&quot;change_requests&quot;"
+      iconType="svgFileName"
+      location="DesktopOtherWorkOrders()"/>
+    <LocationRef
+      icon="&quot;queues&quot;"
+      iconType="svgFileName"
+      location="DesktopAssignableQueues()"/>
+  </LocationGroup>
+</PCF>

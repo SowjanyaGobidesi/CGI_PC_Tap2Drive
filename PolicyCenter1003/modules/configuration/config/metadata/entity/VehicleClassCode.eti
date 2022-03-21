@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  VehicleClassCode  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Primary Vehicle Class Code is a composite value derived from fleet status, type of vehicle, gross vehicle weight and radius of operation. "
+  entity="VehicleClassCode"
+  exportable="true"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="true"
+  table="vehicleclasscode"
+  type="retireable">
+  <column
+    desc="The Class Code"
+    name="Code"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="Years of experience for drivers of a vehicle"
+    name="Experience"
+    nullok="true"
+    typelist="CombinedDriverExp"/>
+  <typekey
+    desc="Fleet designation."
+    name="Fleet"
+    nullok="true"
+    typelist="FleetType"/>
+  <typekey
+    desc="Primary use of the vehicle."
+    name="PrimaryUse"
+    nullok="true"
+    typelist="VehiclePrimaryUse"/>
+  <typekey
+    desc="Distance operated from point of principle garaging."
+    name="Radius"
+    nullok="true"
+    typelist="RadiusCode"/>
+  <typekey
+    desc="Size class of the vehicle."
+    name="SizeClass"
+    nullok="true"
+    typelist="VehicleSizeClass"/>
+  <typekey
+    desc="Type of the vehicle."
+    name="Type"
+    nullok="false"
+    typelist="VehicleType"/>
+  <index
+    desc="Ensures that Codes are unique among vehicle class codes."
+    name="ccu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Code"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

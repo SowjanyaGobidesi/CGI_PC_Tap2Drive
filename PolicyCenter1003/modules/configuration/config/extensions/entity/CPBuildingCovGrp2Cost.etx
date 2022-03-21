@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension entityName="CPBuildingCovGrp2Cost" xmlns="http://guidewire.com/datamodel">
+  <implementsInterface iface="gw.lob.cp.financials.CPCostMethods" impl="gw.lob.cp.financials.CPBuildingCovCostMethodsImpl"/>
+</extension>

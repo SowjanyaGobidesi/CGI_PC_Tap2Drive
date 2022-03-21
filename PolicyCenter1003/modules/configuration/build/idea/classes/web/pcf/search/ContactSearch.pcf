@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="ContactSearch"
+    title="DisplayKey.get(&quot;Web.ContactSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="ContactSearch(errorMessage : String)"/>
+    <LocationEntryPoint
+      signature="ContactSearch()"/>
+    <LocationEntryPoint
+      signature="ContactSearch(initialSearchCriteria : ContactSearchCriteria, searchOnEnter : Boolean)"/>
+    <Variable
+      initialValue="null"
+      name="errorMessage"
+      type="String"/>
+    <Variable
+      initialValue="gw.web.ErrorConduit.addRequestScopedErrorMessagePassThrough(errorMessage)"
+      name="placeholderUsedToTriggerPassThroughMethod"
+      recalculateOnRefresh="true"
+      type="String"/>
+    <Variable
+      name="initialSearchCriteria"
+      type="ContactSearchCriteria"/>
+    <Variable
+      initialValue="false"
+      name="searchOnEnter"
+      type="Boolean"/>
+    <ScreenRef
+      def="ContactSearchScreen({typekey.Contact.TC_COMPANY, typekey.Contact.TC_PERSON}, initialSearchCriteria, true, searchOnEnter)"/>
+  </Page>
+</PCF>

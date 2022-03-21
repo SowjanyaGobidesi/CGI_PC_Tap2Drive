@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="PolicyLinePatternFilteredLookup">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.productmodel.DenormLookupInitialisable"/>
+  <column
+    desc="The policy line pattern code for which this lookup applies"
+    name="PolicyLinePatternCode"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="patterncode"/>
+  <fulldescription><![CDATA[Delegate for availability lookup entities where policy line pattern code is a required restriction.]]></fulldescription>
+</delegate>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="LossDateAttachable">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.reinsurance.LossDateAttachablePublicMethods"
+    impl="com.guidewire.pc.domain.reinsurance.impl.LossDateAttachableImpl"/>
+  <typekey
+    default="LossDateWritten"
+    desc="Defines how applicable reinsurance agreements are determined at the time of ceding premiums or recovering on losses."
+    name="AttachmentBasis"
+    nullok="false"
+    typelist="AttachmentBasisType"/>
+  <fulldescription><![CDATA[Delegate for Reinsurance Agreements which can have AttachmentBasis of RILossDateAttachment.]]></fulldescription>
+</delegate>

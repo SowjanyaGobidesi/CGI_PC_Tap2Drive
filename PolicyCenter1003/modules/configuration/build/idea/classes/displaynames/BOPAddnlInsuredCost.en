@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="BOPAddnlInsuredCost">
+  <Columns>
+    <Column
+      beanPath="BOPAddnlInsuredCost.AdditionalInsured"
+      displayName="true"
+      name="addInsured"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("Web.Financials.BOP.AdditionalInsuredFlatCharge",  addInsured )
+  ]]></DisplayName>
+</Entity>

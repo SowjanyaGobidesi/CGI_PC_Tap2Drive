@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="ScheduledItem"
+  requiresType="effdated">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.schedule.ScheduledItemPublicMethods"
+    impl="com.guidewire.pc.domain.schedule.impl.ScheduledItemImpl"/>
+  <implementsInterface
+    iface="gw.api.productmodel.ScheduledItemAdapter"/>
+  <fulldescription><![CDATA[A scheduled item]]></fulldescription>
+  <column
+    desc="Schedule number"
+    name="ScheduleNumber"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="String field1"
+    getterScriptability="doesNotExist"
+    name="StringCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="String field2"
+    getterScriptability="doesNotExist"
+    name="StringCol2"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="String field3"
+    getterScriptability="doesNotExist"
+    name="StringCol3"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="String field4"
+    getterScriptability="doesNotExist"
+    name="StringCol4"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="Integer field1"
+    getterScriptability="doesNotExist"
+    name="IntCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="integer"/>
+  <column
+    desc="Positive integer field1"
+    getterScriptability="doesNotExist"
+    name="PosIntCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="positiveinteger"/>
+  <column
+    desc="Boolean Field1"
+    getterScriptability="doesNotExist"
+    name="BoolCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="bit"/>
+  <column
+    desc="Boolean Field2"
+    getterScriptability="doesNotExist"
+    name="BoolCol2"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="bit"/>
+  <column
+    desc="Date Field"
+    getterScriptability="doesNotExist"
+    name="DateCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="dateonly"/>
+  <column
+    desc="typekey column field1"
+    getterScriptability="doesNotExist"
+    name="TypeKeyCol1"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="patterncode"/>
+  <column
+    desc="typekey column field2"
+    getterScriptability="doesNotExist"
+    name="TypeKeyCol2"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="patterncode"/>
+  <foreignkey
+    desc="NamedInsured"
+    fkentity="PolicyNamedInsured"
+    name="NamedInsured"
+    nullok="true"/>
+  <foreignkey
+    desc="Policy Location"
+    fkentity="PolicyLocation"
+    name="PolicyLocation"
+    nullok="true"/>
+</delegate>

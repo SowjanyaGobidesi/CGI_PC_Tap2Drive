@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.ViewProductModelInfo or perm.User.DevAllAccess"
+    countsAsWork="false"
+    id="ProductModelInfo"
+    parent="ServerTools()"
+    title="DisplayKey.get(&quot;Web.ServerTools.ProductModelInfo.Title&quot;)">
+    <LocationEntryPoint
+      signature="ProductModelInfo()"/>
+    <Variable
+      initialValue="new gw.api.tools.UpgradeInfoPageHelper()"
+      name="Page"
+      type="gw.api.tools.UpgradeInfoPageHelper"/>
+    <Screen
+      id="ProductModelInfoScreen">
+      <DetailViewPanel
+        id="ProductModelInfoDV">
+        <InputColumn>
+          <ButtonInput
+            action="gw.api.tools.ProductModelToolsUtil.reloadAvailability(); gw.api.util.LocationUtil.addRequestScopedInfoMessage(DisplayKey.get(&quot;Web.ServerTools.ProductModelInfo.Reload.Successful&quot;))"
+            align="center"
+            available="!Page.isRollingUpgradeInProgress()"
+            hideIfDisabled="false"
+            id="Reload"
+            value="DisplayKey.get(&quot;Web.ServerTools.ProductModelInfo.Reload&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

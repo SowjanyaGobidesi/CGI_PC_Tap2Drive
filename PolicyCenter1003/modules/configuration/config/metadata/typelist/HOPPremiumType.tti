@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="HOPPremiumType" desc="Premium type for Homeowners">
+  <typecode
+    code="basepremium"
+    desc="Base premium"
+    name="Base Premium"
+    priority="10"/>
+  <typecode
+    code="adjustmenttobasepremium"
+    desc="Adjustment to base premium"
+    name="Adjustment to Base Premium"
+    priority="20"/>
+  <typecode
+    code="otherpremium"
+    desc="Other premium"
+    name="Other Premium"
+    priority="30"/>
+</typelist>

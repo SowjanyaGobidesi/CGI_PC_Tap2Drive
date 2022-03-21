@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <RowSet
+    id="AuditRateCostDetailAggRowSet">
+    <Require
+      name="isPremiumReport"
+      type="boolean"/>
+    <Require
+      name="aggCost"
+      type="WCJurisdictionCost"/>
+    <Require
+      name="basedOnAggCost"
+      type="WCJurisdictionCost"/>
+    <Variable
+      initialValue="basedOnAggCost == null ? 0bd.ofCurrency(aggCost.Branch.PreferredSettlementCurrency) : basedOnAggCost.ActualTermAmountBilling"
+      name="basedOnTermAmt"
+      type="gw.pl.currency.MonetaryAmount"/>
+    <Row
+      id="AggCostRow"
+      visible="not aggCost.ActualAmountBilling.IsZero">
+      <EmptyCell
+        id="empty"/>
+      <TextCell
+        id="ClassCode"
+        value="aggCost.ClassCode"/>
+      <TextCell
+        id="Description"
+        value="aggCost.Description"/>
+      <TextCell
+        align="right"
+        id="EstBasis"
+        value="basedOnAggCost == null ? null : (basedOnAggCost.Basis == 0 ? &quot;&quot; : basedOnAggCost.Basis.DisplayValue)"
+        visible="not isPremiumReport"/>
+      <TextCell
+        align="right"
+        id="Basis"
+        value="aggCost.Basis == 0 ? &quot;&quot; : aggCost.Basis.DisplayValue"/>
+      <TextCell
+        align="right"
+        id="Rate"
+        value="aggCost.ActualAdjRate == 0 ? &quot;&quot; : aggCost.ActualAdjRate.DisplayValue"/>
+      <MonetaryAmountCell
+        align="right"
+        formatType="currency"
+        id="EstPremium"
+        value="basedOnTermAmt"
+        visible="not isPremiumReport"/>
+      <MonetaryAmountCell
+        align="right"
+        formatType="currency"
+        id="TermAmount"
+        value="aggCost.ActualTermAmountBilling"/>
+      <MonetaryAmountCell
+        align="right"
+        formatType="currency"
+        id="Difference"
+        value="aggCost.ActualTermAmountBilling - basedOnTermAmt"
+        visible="not isPremiumReport"/>
+    </Row>
+  </RowSet>
+</PCF>

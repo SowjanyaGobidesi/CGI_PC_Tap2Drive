@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Commercial Property Blanket for combining CP coverages into a blanket"
+  displayName="CP Blanket"
+  effDatedBranchType="PolicyPeriod"
+  entity="CPBlanket"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="cpblanket"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.lob.cp.CPBlanketCopier"/>
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.lob.cp.CPBlanketCoverableAdapter"/>
+  <column
+    desc="The blanket number"
+    name="CPBlanketNum"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Description of the blanket"
+    name="CPBlanketDescription"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Name of the Building Coverage Pattern when BlanketType is single coverage"
+    name="CPBuildingCovName"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Identifies the combinations used in the blanket"
+    name="BlanketType"
+    nullok="false"
+    typefilter="CPBlanketType"
+    typelist="BlanketType"/>
+  <typekey
+    desc="For Direct Loss or Time Element."
+    name="BlanketGroupType"
+    nullok="false"
+    typelist="BlanketGroupType"/>
+  <foreignkey
+    fkentity="CPLocation"
+    name="CPLocation"
+    nullok="true"/>
+  <foreignkey
+    fkentity="CommercialPropertyLine"
+    name="CPLine"
+    nullok="false"/>
+  <array
+    arrayentity="CPBlanketCov"
+    cascadeDelete="true"
+    desc="Blanket coverages that apply directly to this blanket."
+    name="Coverages"
+    owner="true"/>
+  <array
+    arrayentity="CPBuildingCov"
+    cascadeDelete="false"
+    desc="Building coverages that apply directly to this blanket."
+    name="BuildingCoverages"
+    owner="false"/>
+</entity>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="PolicyFile_Transactions_AllPopup"
+    parent="PolicyFile(period, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllFinancialTransactions&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_Transactions_AllPopup(period : PolicyPeriod, asOfDate : java.util.Date)"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar/>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="txn"
+          pageSize="0"
+          value="findPostedTransactions( )"
+          valueType="entity.Transaction[]">
+          <IteratorSort
+            sortBy="txn.PostedDate"
+            sortOrder="1"/>
+          <IteratorSort
+            sortBy="txn.EffDate"
+            sortOrder="2"/>
+          <IteratorSort
+            sortBy="txn.ExpDate"
+            sortOrder="3"/>
+          <Row>
+            <DateCell
+              id="EffDate"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.EffDate&quot;)"
+              value="txn.EffDate"/>
+            <DateCell
+              id="ExpDate"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.ExpireDate&quot;)"
+              value="txn.ExpDate"/>
+            <MonetaryAmountCell
+              id="TxnAmount"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.Amount&quot;)"
+              value="txn.AmountBilling"/>
+            <DateCell
+              id="PostedDate"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.PostedDate&quot;)"
+              value="txn.PostedDate"/>
+            <BooleanRadioCell
+              id="Written"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.Written&quot;)"
+              value="txn.Written"/>
+            <BooleanRadioCell
+              id="Charged"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.Charged&quot;)"
+              value="txn.Charged"/>
+            <BooleanRadioCell
+              id="ToBeAccrued"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.ToBeAccrued&quot;)"
+              value="txn.ToBeAccrued"/>
+            <TextCell
+              id="Job"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.Job&quot;)"
+              value="gw.web.policy.PolicyTransactionsUIHelper.getJob(txn)"/>
+            <TextCell
+              id="Cost"
+              label="DisplayKey.get(&quot;Web.PolicyFile.Transactions.AllTransactions.Cost&quot;)"
+              value="txn.Cost"
+              valueType="entity.Cost"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function findPostedTransactions() : entity.Transaction[] {
+  return period.Policy.Periods.flatMap(\p -> gw.api.domain.financials.TransactionFinder.instance.findPostedTransactions(p)).toSet().toTypedArray()
+}]]></Code>
+  </Popup>
+</PCF>

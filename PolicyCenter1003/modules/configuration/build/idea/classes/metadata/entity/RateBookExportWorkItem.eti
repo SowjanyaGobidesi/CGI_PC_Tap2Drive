@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RateBookExportWorkItem"
+  desc="WorkItem to process ratebook export in Excel or XML"
+  table="rbexportworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    fkentity="RateBook"
+    name="RateBook"
+    nullok="false"/>
+  <typekey
+    desc="The type of export for this rate book"
+    name="RateBookExportType"
+    nullok="false"
+    typelist="RateBookExportType"/>
+  <typekey
+    desc="The current locale when this rate book was exported"
+    name="LocaleType"
+    nullok="false"
+    typelist="LocaleType"/>
+  <typekey
+    desc="The current language when this rate book was exported"
+    name="LanguageType"
+    nullok="false"
+    typelist="LanguageType"/>
+
+</entity>

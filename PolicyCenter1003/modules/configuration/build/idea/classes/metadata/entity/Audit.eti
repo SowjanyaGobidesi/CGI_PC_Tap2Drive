@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Audit process"
+  displayName="Audit"
+  entity="Audit"
+  supertype="Job">
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.AuditPublicMethods"
+    impl="com.guidewire.pc.domain.job.impl.AuditImpl"/>
+  <monetaryamount
+    amountColumnName="PaymentReceived"
+    desc="The amount of any payment received, e.g. deposit when binding, or payment with premium report"
+    name="PaymentReceived"
+    nullok="true"/>
+  <foreignkey
+    columnName="AuditInformationID"
+    desc="The audit information pertaining to this audit job"
+    fkentity="AuditInformation"
+    name="AuditInformation"
+    nullok="false"/>
+</subtype>

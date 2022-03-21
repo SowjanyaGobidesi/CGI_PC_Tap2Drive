@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The method by which an entity should be archived."
+  final="false"
+  name="ArchiveMethod">
+  <typecode
+    code="Standard"
+    desc="The entity is to be sent to the standard archive."
+    name="Standard"/>
+  <typecode
+    code="Purge"
+    desc="The entity is to be removed from the system, permanently and unrecoverably."
+    name="Purge"/>
+</typelist>

@@ -1,0 +1,23 @@
+package rules.Renewal.RenewalAutoUpdate_dir
+
+uses gw.api.upgrade.PCCoercions
+uses gw.api.productmodel.Product
+
+@gw.rules.RuleName("Workers Comp")
+internal class WorkersComp {
+  static function doCondition(policyPeriod : entity.PolicyPeriod) : boolean {
+    
+/*start00rule*/
+return policyPeriod.Policy.Product == PCCoercions.makeProductModel<Product>("WorkersComp")
+/*end00rule*/
+
+  }
+
+  static function doAction(policyPeriod : entity.PolicyPeriod, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

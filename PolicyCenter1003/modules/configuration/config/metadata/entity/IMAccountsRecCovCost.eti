@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Costs for an inland marine accounts receivable coverage"
+  entity="IMAccountsRecCovCost"
+  supertype="IMAccountsRecPartCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.lob.im.financials.IMAccountsRecCovCostAdapter"/>
+  <foreignkey
+    fkentity="IMAccountsRecCov"
+    name="IMAccountsRecCov"
+    nullok="false"/>
+</subtype>

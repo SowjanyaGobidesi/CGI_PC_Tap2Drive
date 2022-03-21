@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Letters  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Record of a business letter that has been sent for one or more Jobs"
+  entity="Letter"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="letter"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <implementsEntity
+    name="FrozenSetMember"/>
+  <implementsInterface
+    iface="com.guidewire.pc.domain.job.LetterPublicMethods"
+    impl="com.guidewire.pc.domain.job.impl.LetterImpl"/>
+  <typekey
+    desc="What kind of letter"
+    name="Type"
+    nullok="false"
+    typelist="LetterType"/>
+  <array
+    arrayentity="JobLetter"
+    arrayfield="Letter"
+    cascadeDelete="true"
+    desc="What Jobs are associated with this Letter."
+    exportable="false"
+    name="JobLetters"
+    owner="true"/>
+  <events/>
+</entity>

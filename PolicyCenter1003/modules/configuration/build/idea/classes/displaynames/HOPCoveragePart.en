@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPCoveragePart">
+  <Columns>
+    <Column
+      beanPath="HOPCoveragePart.CoveragePartType.DisplayName"
+      name="name"/>
+  </Columns>
+  <DisplayName><![CDATA[name]]></DisplayName>
+</Entity>

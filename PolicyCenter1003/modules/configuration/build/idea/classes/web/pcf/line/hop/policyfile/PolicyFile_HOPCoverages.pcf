@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.web.PebblesUtil.addWebMessages(CurrentLocation, policyPeriod.PolicyFileMessages)"
+    canVisit="perm.PolicyPeriod.view(policyPeriod) and perm.System.pfiledetails"
+    id="PolicyFile_HOPCoverages"
+    parent="PolicyFile(policyPeriod, asOfDate)"
+    title="DisplayKey.get(&quot;Web.PolicyFile.HOP.PolicyFile_HOPCoverages&quot;)">
+    <LocationEntryPoint
+      signature="PolicyFile_HOPCoverages(policyPeriod : PolicyPeriod, asOfDate : Date)"/>
+    <Variable
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      name="asOfDate"
+      type="Date"/>
+    <Screen
+      id="PolicyFile_HOPCoveragesScreen">
+      <Variable
+        initialValue="policyPeriod.HOPLine.HOPDwellings?.first()"
+        name="dwelling"
+        type="HOPDwelling"/>
+      <TitleBar/>
+      <Toolbar/>
+      <PanelRef
+        def="CoveragePartSelectionDV(policyPeriod)"
+        mode="policyPeriod.Policy.Product.CodeIdentifier"/>
+      <CardViewPanel>
+        <Card
+          id="HOPMainCoverages"
+          title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.MainCoverages&quot;)">
+          <PanelRef
+            def="HOPMainCoveragesPanelSet(policyPeriod.HOPLine, dwelling, false)"/>
+        </Card>
+        <Card
+          id="HOPAdditionalCoverages"
+          title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.AdditionalCoverages&quot;)">
+          <PanelRef
+            def="HOPAdditionalCoveragesPanelSet(policyPeriod.HOPLine, dwelling, false)"/>
+        </Card>
+        <Card
+          id="HOPOptionalCoverages"
+          title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.OptionalCoverages&quot;)">
+          <PanelRef
+            def="HOPOptionalCoveragesPanelSet(policyPeriod.HOPLine, dwelling, false)"/>
+        </Card>
+        <Card
+          id="HOPConditionsAndExclusions"
+          title="DisplayKey.get(&quot;Web.Policy.HOP.HOPCoveragesScreen.ConditionsAndExclusions&quot;)">
+          <PanelRef
+            def="HOPConditionsAndExclusionsPanelSet(policyPeriod.HOPLine, dwelling, false)"/>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

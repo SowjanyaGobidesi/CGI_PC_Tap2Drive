@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="FederatedTeamRenewalsLV">
+    <Require
+      name="teamModel"
+      type="gw.api.web.team.PCTeamModel"/>
+    <Variable
+      initialValue="teamModel as gw.api.web.team.PCFederatedTeamModel"
+      name="pcFederatedTeamModel"
+      type="gw.api.web.team.PCFederatedTeamModel"/>
+    <Variable
+      initialValue="pcFederatedTeamModel.Renewals as gw.api.web.team.federated.TeamFederatedIteratorBackingData"
+      name="renewals"
+      type="gw.api.web.team.federated.TeamFederatedIteratorBackingData"/>
+    <ExposeIterator
+      flags="openWorkOrder"
+      name="RenewalsIterator"
+      valueType="gw.api.web.desktop.data.JobDTO"
+      widget="RenewalsIterator"/>
+    <RowIterator
+      appendPageInfo="true"
+      checkBoxVisible="true"
+      editable="false"
+      elementName="renewal"
+      hasCheckBoxes="true"
+      id="RenewalsIterator"
+      type="gw.api.web.desktop.data.renewal.RenewalDTO"
+      value="renewals"
+      valueType="gw.api.web.team.federated.TeamFederatedIteratorBackingData">
+      <ToolbarFilter
+        name="renewalsFilter">
+        <ToolbarFilterOptionGroup
+          filters="new gw.api.web.team.federated.FederatedTeamViewRenewalFilters().FilterOptions"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="renewal.CloseDate == null"
+        name="openWorkOrder"/>
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Insured"
+          label="DisplayKey.get(&quot;Web.DesktopActivitiesLV.AccountHolder&quot;)"
+          value="renewal.ContactName"/>
+        <DateCell
+          id="CreateDate"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.CreateDate&quot;)"
+          sortDirection="descending"
+          value="renewal.CreationDate"/>
+        <TextCell
+          enableSort="false"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Status&quot;)"
+          value="renewal.DisplayStatus"/>
+        <TextCell
+          action="FederatedJobForward.push(renewal.JobNumber, renewal.AccountPublicId)"
+          id="Product"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Product&quot;)"
+          sortBy="renewal.PolicyProductCode"
+          value="renewal.PolicyProduct"/>
+        <TextCell
+          enableSort="false"
+          id="Underwriter"
+          label="DisplayKey.get(&quot;Web.DesktopJobsLV.Underwriter&quot;)"
+          value="renewal.UnderwriterDisplayName"/>
+        <TextCell
+          enableSort="false"
+          id="AssignedTo"
+          label="DisplayKey.get(&quot;Web.Team.LV.AssignedTo&quot;)"
+          value="renewal.AllAssigned"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

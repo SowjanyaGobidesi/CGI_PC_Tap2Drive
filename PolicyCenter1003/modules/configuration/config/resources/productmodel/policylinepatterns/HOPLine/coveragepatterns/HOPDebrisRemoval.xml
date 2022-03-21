@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CoveragePattern
+  codeIdentifier="HOPDebrisRemoval"
+  coverageCategory="zu0gku5nuu5g45vmscne6r2j51b"
+  coverageSubtype="HOPDwellingCov"
+  coveredPartyType="FirstParty"
+  existence="Required"
+  lookupTableName="HOPDwellingCov"
+  owningEntityType="HOPDwelling"
+  policyLinePattern="HOPLine"
+  priority="1300"
+  public-id="z2cjsu8d7ldr23ojbnc6es16ti9"
+  referenceDateByType="ApplicableObject">
+  <CovTerms/>
+</CoveragePattern>

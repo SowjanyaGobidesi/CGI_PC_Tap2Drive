@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="IndustryCodeSearchResultsLV"
+    stretch="true">
+    <Require
+      name="industryCodes"
+      type="gw.api.database.IQueryBeanResult&lt;IndustryCode&gt;"/>
+    <RowIterator
+      appendPageInfo="true"
+      editable="false"
+      elementName="industryCode"
+      pickValue="industryCode"
+      value="industryCodes"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.IndustryCode&gt;">
+      <Row>
+        <TextCell
+          id="Code"
+          label="DisplayKey.get(&quot;Web.IndustryCodeSearch.Code&quot;)"
+          value="industryCode.Code"
+          wrap="false"/>
+        <TextCell
+          align="left"
+          grow="true"
+          id="Classification"
+          label="DisplayKey.get(&quot;Web.IndustryCodeSearch.Classification&quot;)"
+          value="industryCode.Classification"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

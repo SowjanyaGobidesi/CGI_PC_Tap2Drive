@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Category for override sources, e.g. user or automated process"
+  final="false"
+  name="OverrideSourceCategory">
+  <typecode
+    code="user"
+    desc="User input"
+    name="User"/>
+  <typecode
+    code="auto"
+    desc="Automatic process"
+    name="Auto"/>
+</typelist>

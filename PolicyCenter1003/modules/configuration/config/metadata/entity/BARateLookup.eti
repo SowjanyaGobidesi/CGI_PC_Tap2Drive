@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- ===== Lookups for BA ===== -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="BA Rate Factor Lookup Table."
+  entity="BARateLookup"
+  supertype="RateFactorLookup">
+  <typekey
+    desc="The policy type of this lookup"
+    name="PolicyType"
+    nullok="true"
+    typelist="BAPolicyType"/>
+</subtype>

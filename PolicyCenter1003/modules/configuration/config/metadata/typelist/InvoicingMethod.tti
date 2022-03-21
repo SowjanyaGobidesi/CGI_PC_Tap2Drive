@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="InvoicingMethod" desc="The different invoicing methods for a PolicyPeriod ">
+  <typecode
+    code="DefaultBilling"
+    desc="Default billing"
+    name="Default Billing"/>
+  <typecode
+    code="CustomBilling"
+    desc="Invoicing specified by values for Custom Billing"
+    name="Custom Billing"/>
+  <typecode
+    code="OverriddenInvoiceStream"
+    desc="Invoicing specified by values for Invoice Stream Override"
+    name="Overridden Invoice Stream"/>
+</typelist>

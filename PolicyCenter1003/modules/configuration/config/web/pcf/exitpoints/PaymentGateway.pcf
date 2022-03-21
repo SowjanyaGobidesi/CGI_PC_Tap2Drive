@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="PaymentGateway"
+    url="{paymentGatewayURL}">
+    <LocationEntryPoint
+      signature="PaymentGateway(paymentGatewayURL : String, secureToken : String, secureTokenId : String)"/>
+    <ExitPointParameter
+      locationParam="paymentGatewayURL"
+      type="String"
+      urlParam="paymentGatewayURL"/>
+    <ExitPointParameter
+      locationParam="secureToken"
+      type="String"
+      urlParam="SECURETOKEN"/>
+    <ExitPointParameter
+      locationParam="secureTokenId"
+      type="String"
+      urlParam="SECURETOKENID"/>
+  </ExitPoint>
+</PCF>

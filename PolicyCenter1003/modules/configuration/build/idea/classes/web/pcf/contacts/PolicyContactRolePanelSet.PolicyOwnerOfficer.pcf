@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="PolicyContactRolePanelSet"
+    mode="PolicyOwnerOfficer">
+    <Require
+      name="policyContactRole"
+      type="PolicyContactRole"/>
+    <Variable
+      initialValue="policyContactRole as PolicyOwnerOfficer"
+      name="policyOwnerOfficer"
+      type="entity.PolicyOwnerOfficer"/>
+    <PanelRef>
+      <TitleBar
+        id="OwnerOfficerTitle"
+        title="DisplayKey.get(&quot;Web.Policy.OwnerOfficer&quot;)"/>
+      <DetailViewPanel
+        id="OwnerOfficerInfoDV">
+        <InputColumn>
+          <TypeKeyInput
+            editable="true"
+            id="Include"
+            label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.Include&quot;)"
+            required="true"
+            value="policyOwnerOfficer.Included"
+            valueType="typekey.Inclusion">
+            <PostOnChange/>
+          </TypeKeyInput>
+          <RangeInput
+            align="left"
+            editable="true"
+            id="State"
+            label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.State&quot;)"
+            required="true"
+            value="policyOwnerOfficer.State"
+            valueRange="policyOwnerOfficer.Branch.WorkersCompLine.Jurisdictions.map(\j -&gt; j.State)"
+            valueType="typekey.Jurisdiction">
+            <PostOnChange/>
+          </RangeInput>
+          <RangeInput
+            editable="(policyOwnerOfficer.Included == Inclusion.TC_INCL) and (policyOwnerOfficer.State != null) and policyOwnerOfficer.Branch.WorkersCompLine.getClassCodesForWCCoveredEmployees(gw.api.util.StateJurisdictionMappingUtil.getStateMappingForJurisdiction(policyOwnerOfficer.State)).Count &gt; 0"
+            id="ClassCode"
+            label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.ClassCode&quot;)"
+            required="true"
+            value="policyOwnerOfficer.ClassCode"
+            valueRange="policyOwnerOfficer.Branch.WorkersCompLine.getClassCodesForWCCoveredEmployees(gw.api.util.StateJurisdictionMappingUtil.getStateMappingForJurisdiction(policyOwnerOfficer.State))"
+            valueType="entity.WCClassCode"/>
+          <TextInput
+            editable="true"
+            id="Ownership"
+            label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.Ownership&quot;)"
+            value="policyOwnerOfficer.OwnershipPct"
+            valueType="java.lang.Integer"/>
+          <TypeKeyInput
+            editable="true"
+            id="Relationship"
+            label="DisplayKey.get(&quot;Web.Policy.WC.InclExcl.Relationship&quot;)"
+            value="policyOwnerOfficer.RelationshipTitle"
+            valueType="typekey.Relationship"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

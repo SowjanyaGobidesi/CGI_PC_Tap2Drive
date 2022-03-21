@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The relationship between a RateBook and its associated CalcRoutineDefinition entities."
+  entity="RateBookCalcRoutine"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="ratebookcalcroutine"
+  type="joinarray">
+  <foreignkey
+    columnName="RateBookID"
+    desc="The associated RateBook."
+    fkentity="Ratebook"
+    name="RateBook"
+    nullok="false"/>
+  <foreignkey
+    columnName="CalcRoutineDefinitionID"
+    desc="The CalcRoutineDefinition."
+    fkentity="CalcRoutineDefinition"
+    name="CalcRoutineDefinition"
+    nullok="false"/>
+  <index
+    desc="Ensures uniqueness among rate book/calc routine combinations."
+    name="ratebookcroutineu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RateBookID"/>
+    <indexcol
+      keyposition="2"
+      name="CalcRoutineDefinitionID"/>
+  </index>
+</entity>

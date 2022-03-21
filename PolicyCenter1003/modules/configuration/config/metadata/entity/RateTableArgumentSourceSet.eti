@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Describes the argument source set for a Rate Table."
+  entity="RateTableArgumentSourceSet"
+  loadable="false"
+  platform="false"
+  table="ratetableargsourceset"
+  type="retireable">
+  <column
+    default="DEFAULT"
+    desc="The parameter set code"
+    name="Code"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    default="Default"
+    desc="The logical name of the parameter set."
+    name="Name"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="false"
+      tableName="rtass_name_l10n"/>
+  </column>
+  <foreignkey
+    desc="RateTableDefinition"
+    fkentity="RateTableDefinition"
+    name="RateTableDefinition"
+    nullok="false"/>
+  <foreignkey
+    desc="CalcRoutineParameterSet"
+    fkentity="CalcRoutineParameterSet"
+    name="CalcRoutineParameterSet"
+    nullok="false"/>
+  <array
+    arrayentity="RateTableArgumentSource"
+    cascadeDelete="true"
+    desc="The RateTableArgumentSource's using this Param Set"
+    name="RateTableArgumentSources"
+    owner="true"/>
+</entity>

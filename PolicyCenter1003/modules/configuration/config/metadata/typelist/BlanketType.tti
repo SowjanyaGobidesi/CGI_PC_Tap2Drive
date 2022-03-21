@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Blanket Type"
+  final="false"
+  name="BlanketType">
+  <typefilter
+    desc="Types of blanket for commercial property"
+    name="CPBlanketType"/>
+  <typefilter
+    desc="Types of blanket for business owners"
+    name="BOPBlanketType"/>
+</typelist>

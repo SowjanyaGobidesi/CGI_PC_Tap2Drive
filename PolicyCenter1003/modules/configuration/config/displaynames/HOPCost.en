@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Entity
+  name="HOPCost">
+  <Columns>
+    <Column
+      beanPath="HOPCost.Coverage"
+      name="coverage"/>
+    <Column
+      beanPath="HOPCost.HOPPremiumType"
+      name="premiumType"/>
+    <Column
+      beanPath="HOPCost.Modification"
+      name="modification"/>
+    <Column
+      beanPath="HOPCost.NameOfCoverable"
+      name="nameOfCoverable"/>
+  </Columns>
+  <DisplayName><![CDATA[if (coverage != null) {
+  if (premiumType == HOPPremiumType.TC_BASEPREMIUM && modification == Modification.TC_BASE) {
+    return DisplayKey.get("Web.Policy.HOP.Financials.BasePremium")
+  } else if (coverage.OwningCoverable typeis ScheduledItem) {
+    return coverage.OwningCoverable.ScheduledItemEntityLabel
+  } else {
+    return coverage.DisplayName
+  }
+} else {
+  return nameOfCoverable
+}]]></DisplayName>
+</Entity>

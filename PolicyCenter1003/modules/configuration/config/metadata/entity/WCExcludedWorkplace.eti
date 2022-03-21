@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  effDatedBranchType="PolicyPeriod"
+  entity="WCExcludedWorkplace"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="wcexcludedworkplace"
+  type="effdated">
+  <implementsInterface
+    iface="gw.api.copier.EffDatedCopyable"
+    impl="gw.api.copier.EffDatedCopier"/>
+  <implementsInterface
+    iface="gw.api.logicalmatch.EffDatedLogicalMatcher"
+    impl="gw.lob.wc.WCExcludedWorkplaceMatcher"/>
+  <column
+    name="AddressLine1"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="AddressLine2"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="City"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="ExcludedItem"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    name="State"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <foreignkey
+    fkentity="WorkersCompLine"
+    name="WCLine"
+    nullok="false"/>
+  <fulldescription><![CDATA[Defines an exclusion for workplaces.]]></fulldescription>
+</entity>
